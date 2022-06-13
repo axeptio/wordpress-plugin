@@ -10,7 +10,6 @@
     Description: Integrate Axeptio SDK to your Wordpress Website
     Version: 1.0.0
     Author: axeptio
-    Author URI: https://www.axeptio.eu/fr/home
     Licence: GPLv2 or later
     Text Domain: axeptio-wordpress-plugin
     Domain Path: /languages
