@@ -1,14 +1,15 @@
 <?php
-    /**
-    * @package AxeptioWPPlugin
-    */
 
-    /*
+/**
+ * @package AxeptioWPPlugin
+ */
+
+/*
     Plugin Name: Axeptio SDK Integration
     Plugin URI: https://www.axeptio.eu/fr/home
     Description: Integrate Axeptio SDK to your Wordpress Website
     Version: 1.0.0
-    Author: Axeptio
+    Author: axeptio
     Author URI: https://www.axeptio.eu/fr/home
     Licence: GPLv2 or later
     Text Domain: axeptio-wordpress-plugin
@@ -16,7 +17,7 @@
     */
 
 
-    /*
+/*
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public License
     as published by the Free Software Foundation; either version 2
@@ -34,34 +35,36 @@
     Copyright 2005-2015 Automattic, Inc.
     */
 
-    // Security Enhancement
-    if (!defined('ABSPATH')){
-        die;
-    }
+// Security Enhancement
+if (!defined('ABSPATH')) {
+    die;
+}
 
-    defined ('ABSPATH') or die();
+defined('ABSPATH') or die();
 
-    if (!function_exists('add_action')){
-        die();
-    }
+if (!function_exists('add_action')) {
+    die();
+}
 
-    // Plugin Start
-    if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')){
-        require_once dirname(__FILE__) . '/vendor/autoload.php';
-    }
+// Plugin Start
+if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
+    require_once dirname(__FILE__) . '/vendor/autoload.php';
+}
 
-    // Procedural Activation
-    function activate_xpwp_plugin(){
-        Inc\Base\Activate::activate();
-    }
-    register_activation_hook( __FILE__, 'activate_xpwp_plugin' );
+// Procedural Activation
+function activate_xpwp_plugin()
+{
+    Inc\Base\Activate::activate();
+}
+register_activation_hook(__FILE__, 'activate_xpwp_plugin');
 
-    function deactivate_xpwp_plugin(){
-        Inc\Base\Deactivate::deactivate();
-    }
-    register_deactivation_hook( __FILE__, 'deactivate_xpwp_plugin' );
+function deactivate_xpwp_plugin()
+{
+    Inc\Base\Deactivate::deactivate();
+}
+register_deactivation_hook(__FILE__, 'deactivate_xpwp_plugin');
 
-    // Register Services
-    if (class_exists('Inc\\Init')){
-        Inc\Init::register_services();
-    }
+// Register Services
+if (class_exists('Inc\\Init')) {
+    Inc\Init::register_services();
+}
