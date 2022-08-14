@@ -28,11 +28,11 @@ class AdminCallbacks extends BaseController{
 	public function xpwpClientIdSet()
 	{
 		$value = esc_attr( get_option( 'xpwp_client_id' ) );
-		echo '<input type="text" class="regular-text" name="xpwp_client_id" value="' . $value . '" placeholder="">';
+		echo '<input type="text" class="regular-text" name="xpwp_client_id" id ="xpwp_client_id" value="' . $value . '" placeholder="" onchange="loadVersionsOnChange()">';
 	}
 	public function xpwpVersionSet()
 	{
 		$value = esc_attr( get_option( 'xpwp_version' ) );
-		echo '<input type="text" class="regular-text" name="xpwp_version" value="' . $value . '" placeholder="">';
+		echo '<select name="xpwp_version" id="xpwp_version"><option value="' . $value . '">' . $value . '</option></select>';
 	}
 }

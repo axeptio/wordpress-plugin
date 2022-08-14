@@ -103,6 +103,17 @@ class Admin extends BaseController
 					'label_for' => 'xpwp_client_id',
 					'class' => 'example-class'
 				)
+			),
+			array(
+				'id' => 'xpwp_version',
+				'title' => __('Project Version', $this->text_domain),
+				'callback' => array($this->callbacks, 'xpwpVersionSet'),
+				'page' => 'axeptio-wordpress-plugin',
+				'section' => 'xpwp_admin_index',
+				'args' => array(
+					'label_for' => 'xpwp_version',
+					'class' => 'example-class'
+				)
 			)
 		);
 		$this->settings->setFields($args);
