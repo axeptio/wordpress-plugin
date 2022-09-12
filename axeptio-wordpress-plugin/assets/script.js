@@ -1,5 +1,6 @@
 window.axeptioSettings = {
     clientId: sdk_script_vars.clientId,
+    cookiesVersion: sdk_script_vars.version
 };
 
 (function(d,s) {

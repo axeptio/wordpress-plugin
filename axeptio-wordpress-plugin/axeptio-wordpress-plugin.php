@@ -8,7 +8,7 @@
     Plugin Name: Axeptio SDK Integration
     Plugin URI: https://www.axeptio.eu/fr/home
     Description: Integrate Axeptio SDK to your Wordpress Website
-    Version: 1.0.0
+    Version: 1.0.1
     Author: axeptio
     Licence: GPLv2 or later
     Text Domain: axeptio-wordpress-plugin
