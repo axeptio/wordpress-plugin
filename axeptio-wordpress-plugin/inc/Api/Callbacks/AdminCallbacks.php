@@ -18,7 +18,7 @@ class AdminCallbacks extends BaseController{
 	}
 	public function xpwpAdminSection()
 	{
-		echo __('Please enter your automation key here.', $this->text_domain);
+		echo __('Please enter your automation key here.', 'axeptio-wordpress-plugin');
 	}
 	public function xpwpSdkActiveSet()
 	{

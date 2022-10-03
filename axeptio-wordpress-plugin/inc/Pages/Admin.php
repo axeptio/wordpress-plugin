@@ -71,7 +71,7 @@ class Admin extends BaseController
 		$args = array(
 			array(
 				'id' => 'xpwp_admin_index',
-				'title' => __('SDK Settings', $this->text_domain),
+				'title' => __('SDK Settings', 'axeptio-wordpress-plugin'),
 				'callback' => array($this->callbacks, 'xpwpAdminSection'),
 				'page' => 'axeptio-wordpress-plugin'
 			)
@@ -84,7 +84,7 @@ class Admin extends BaseController
 		$args = array(
 			array(
 				'id' => 'xpwp_sdk_active',
-				'title' => __('Activate SDK', $this->text_domain),
+				'title' => __('Activate SDK', 'axeptio-wordpress-plugin'),
 				'callback' => array($this->callbacks, 'xpwpSdkActiveSet'),
 				'page' => 'axeptio-wordpress-plugin',
 				'section' => 'xpwp_admin_index',
@@ -95,7 +95,7 @@ class Admin extends BaseController
 			),
 			array(
 				'id' => 'xpwp_client_id',
-				'title' => __('Project ID', $this->text_domain),
+				'title' => __('Project ID', 'axeptio-wordpress-plugin'),
 				'callback' => array($this->callbacks, 'xpwpClientIdSet'),
 				'page' => 'axeptio-wordpress-plugin',
 				'section' => 'xpwp_admin_index',
@@ -106,7 +106,7 @@ class Admin extends BaseController
 			),
 			array(
 				'id' => 'xpwp_version',
-				'title' => __('Project Version', $this->text_domain),
+				'title' => __('Project Version', 'axeptio-wordpress-plugin'),
 				'callback' => array($this->callbacks, 'xpwpVersionSet'),
 				'page' => 'axeptio-wordpress-plugin',
 				'section' => 'xpwp_admin_index',
