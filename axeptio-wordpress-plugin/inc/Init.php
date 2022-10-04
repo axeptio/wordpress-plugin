@@ -3,7 +3,7 @@
  * @package AxeptioWPPlugin
  */
 
-namespace Inc;
+namespace IncludeAxeptioWordpressPlugin;
 
 final class Init
 {

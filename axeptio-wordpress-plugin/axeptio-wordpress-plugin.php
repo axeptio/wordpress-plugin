@@ -51,17 +51,17 @@ if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
 }
 
 // Procedural Activation
-function activate_xpwp_plugin()
+function axeptio_wordpress_plugin_activate_xpwp_plugin()
 {
     IncludeAxeptioWordpressPlugin\Base\Activate::activate();
 }
-register_activation_hook(__FILE__, 'activate_xpwp_plugin');
+register_activation_hook(__FILE__, 'axeptio_wordpress_plugin_activate_xpwp_plugin');
 
-function deactivate_xpwp_plugin()
+function axeptio_wordpress_plugin_deactivate_xpwp_plugin()
 {
     IncludeAxeptioWordpressPlugin\Base\Deactivate::deactivate();
 }
-register_deactivation_hook(__FILE__, 'deactivate_xpwp_plugin');
+register_deactivation_hook(__FILE__, 'axeptio_wordpress_plugin_deactivate_xpwp_plugin');
 
 // Register Services
 if (class_exists('IncludeAxeptioWordpressPlugin\\Init')) {
