@@ -1,6 +1,6 @@
 <?php 
 /**
- * @package AxeptioWPPlugin
+ * @package AxeptioWordpressPlugin
  */
 namespace IncludeAxeptioWordpressPlugin\Api\Callbacks;
 use IncludeAxeptioWordpressPlugin\Base\BaseController;

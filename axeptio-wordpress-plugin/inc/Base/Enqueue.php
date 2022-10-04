@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package AxeptioWPPlugin
+ * @package AxeptioWordpressPlugin
  */
 namespace IncludeAxeptioWordpressPlugin\Base;
 
@@ -17,15 +17,11 @@ class Enqueue extends BaseController
      * Add sdk js to Wordpress
      */
     public function registerSdkJs() {
-        $escaped_active = esc_attr( get_option( 'xpwp_sdk_active' ) );
-        $escaped_clientId = esc_attr( get_option( 'xpwp_client_id' ) );
-        $escaped_version = esc_attr( get_option( 'xpwp_version' ) );
-
-        if ($escaped_active) {
+        if (esc_attr( get_option( 'xpwp_sdk_active' ) )) {
             wp_enqueue_script('sdk-script', $this->plugin_url . '../assets/script.js');
             wp_localize_script('sdk-script', 'sdk_script_vars', array(
-                    'clientId' => $escaped_clientId,
-                    'version' => $escaped_version
+                    'clientId' => esc_attr( get_option( 'xpwp_client_id' ) ),
+                    'version' => esc_attr( get_option( 'xpwp_version' ) )
                 )
             );
         }
@@ -35,13 +31,10 @@ class Enqueue extends BaseController
      * Add admin logic js to plugin
      */
     public function registerAdminJs() {
-        $escaped_clientId = esc_attr( get_option( 'xpwp_client_id' ) );
-        $escaped_version = esc_attr( get_option( 'xpwp_version' ) );
-
         wp_enqueue_script('sdk-script', $this->plugin_url . '../assets/adminScript.js');
         wp_localize_script('sdk-script', 'sdk_script_vars', array(
-            'clientId' => $escaped_clientId,
-            'version' => $escaped_version
+            'clientId' => esc_attr( get_option( 'xpwp_client_id' ) ),
+            'version' => esc_attr( get_option( 'xpwp_version' ) )
         )
     );
     }

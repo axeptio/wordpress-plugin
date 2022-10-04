@@ -1,7 +1,7 @@
 <?php   
 
 /**
- * @package AxeptioWPPlugin
+ * @package AxeptioWordpressPlugin
  */
 
 namespace IncludeAxeptioWordpressPlugin\Base;
