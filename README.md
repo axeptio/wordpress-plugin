@@ -17,3 +17,9 @@ Integrate Axeptio SDK to your Wordpress Website
 ## Installation
 
 The plugin can be installed directly into your plugins folder "as-is".
+
+## Development
+
+[Plugin Guidelines best practices](https://developer.wordpress.org/plugins/wordpress-org/detailed-plugin-guidelines/)
+
+[Plugin Handbook](https://developer.wordpress.org/plugins/)

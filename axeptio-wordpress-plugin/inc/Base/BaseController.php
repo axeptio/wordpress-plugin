@@ -4,7 +4,7 @@
  * @package AxeptioWPPlugin
  */
 
-namespace Inc\Base;
+namespace IncludeAxeptioWordpressPlugin\Base;
 
 class BaseController
 {

@@ -4,9 +4,9 @@
  * @package AxeptioWPPlugin
  */
 
-namespace Inc\Base;
+namespace IncludeAxeptioWordpressPlugin\Base;
 
-use Inc\Base\BaseController;
+use IncludeAxeptioWordpressPlugin\Base\BaseController;
 
 /**
  * 

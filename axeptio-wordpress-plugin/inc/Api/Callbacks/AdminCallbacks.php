@@ -2,8 +2,8 @@
 /**
  * @package AxeptioWPPlugin
  */
-namespace Inc\Api\Callbacks;
-use Inc\Base\BaseController;
+namespace IncludeAxeptioWordpressPlugin\Api\Callbacks;
+use IncludeAxeptioWordpressPlugin\Base\BaseController;
 
 class AdminCallbacks extends BaseController{
 	// Load Pages

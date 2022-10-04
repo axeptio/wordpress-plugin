@@ -4,11 +4,11 @@
  * @package AxeptioWPPlugin
  */
 
-namespace Inc\Pages;
+namespace IncludeAxeptioWordpressPlugin\Pages;
 
-use \Inc\Base\BaseController;
-use \Inc\Api\SettingsApi;
-use \Inc\Api\Callbacks\AdminCallbacks;
+use \IncludeAxeptioWordpressPlugin\Base\BaseController;
+use \IncludeAxeptioWordpressPlugin\Api\SettingsApi;
+use \IncludeAxeptioWordpressPlugin\Api\Callbacks\AdminCallbacks;
 
 class Admin extends BaseController
 {

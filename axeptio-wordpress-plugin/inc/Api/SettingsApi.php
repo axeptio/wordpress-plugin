@@ -4,7 +4,7 @@
  * @package AxeptioWPPlugin
  */
 
-namespace Inc\Api;
+namespace IncludeAxeptioWordpressPlugin\Api;
 
 class SettingsApi
 {

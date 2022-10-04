@@ -9,12 +9,12 @@ class ComposerStaticInit1cd402ac455ef3138dd82300a3643993
     public static $prefixLengthsPsr4 = array (
         'I' => 
         array (
-            'Inc\\' => 4,
+            'IncludeAxeptioWordpressPlugin\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Inc\\' => 
+        'IncludeAxeptioWordpressPlugin\\' => 
         array (
             0 => __DIR__ . '/../..' . '/inc',
         ),
