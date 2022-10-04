@@ -6,7 +6,7 @@
 
 /*
     Plugin Name: Axeptio SDK Integration
-    Plugin URI: https://www.axeptio.eu/fr/home
+    Plugin URI: https://www.axeptio.eu/
     Description: Integrate Axeptio SDK to your Wordpress Website
     Version: 1.0.1
     Author: axeptio
