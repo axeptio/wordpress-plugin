@@ -10,8 +10,7 @@ final class Init
     public static function get_services(){
         return array(
             \Axpetio\SDKPlugin\Inc\Pages\Admin::class,
-            \Axpetio\SDKPlugin\Inc\Base\Enqueue::class,
-            \Axpetio\SDKPlugin\Inc\Base\ShortCodeTracker::class
+            \Axpetio\SDKPlugin\Inc\Base\Enqueue::class
         );
     }
 
