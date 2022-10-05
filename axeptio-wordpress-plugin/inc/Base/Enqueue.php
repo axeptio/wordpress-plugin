@@ -3,9 +3,9 @@
 /**
  * @package AxeptioWPPlugin
  */
-namespace Inc\Base;
+namespace Axpetio\SDKPlugin\Inc\Base;
 
-use \Inc\Base\BaseController;
+use \Axpetio\SDKPlugin\Inc\Base\BaseController;
 class Enqueue extends BaseController
 {
     public function register(){
@@ -32,7 +32,7 @@ class Enqueue extends BaseController
     }
 
     /**
-     * Add admin logic js to plaugin
+     * Add admin logic js to plugin
      */
     public function registerAdminJs() {
         $clientId = esc_attr( get_option( 'xpwp_client_id' ) );

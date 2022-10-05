@@ -2,8 +2,8 @@
 /**
  * @package AxeptioWPPlugin
  */
-namespace Inc\Api\Callbacks;
-use Inc\Base\BaseController;
+namespace Axpetio\SDKPlugin\Inc\Api\Callbacks;
+use \Axpetio\SDKPlugin\Inc\Base\BaseController;
 
 class AdminCallbacks extends BaseController{
 	// Load Pages
@@ -18,7 +18,7 @@ class AdminCallbacks extends BaseController{
 	}
 	public function xpwpAdminSection()
 	{
-		echo __('Please enter your automation key here.', $this->text_domain);
+		echo esc_attr( __('Please enter your automation key here.', 'axeptio-wordpress-plugin'));
 	}
 	public function xpwpSdkActiveSet()
 	{

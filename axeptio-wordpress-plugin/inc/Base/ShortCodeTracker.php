@@ -4,9 +4,9 @@
  * @package AxeptioWPPlugin
  */
 
-namespace Inc\Base;
+namespace Axpetio\SDKPlugin\Inc\Base;
 
-use Inc\Base\BaseController;
+use \Axpetio\SDKPlugin\Inc\Base\BaseController;
 
 /**
  * 

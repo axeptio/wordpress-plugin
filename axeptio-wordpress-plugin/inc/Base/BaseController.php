@@ -4,7 +4,7 @@
  * @package AxeptioWPPlugin
  */
 
-namespace Inc\Base;
+namespace Axpetio\SDKPlugin\Inc\Base;
 
 class BaseController
 {
@@ -17,6 +17,5 @@ class BaseController
         $this->plugin_path = plugin_dir_path( dirname(__FILE__) );
         $this->plugin_url = plugin_dir_url( dirname(__FILE__) );
         $this->plugin = plugin_basename( dirname(__FILE__) ) . '/axeptio-wordpress-plugin.php';
-        $this->text_domain = 'axeptio-wordpress-plugin';
     }
 }
