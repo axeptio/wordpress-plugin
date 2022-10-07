@@ -5,7 +5,8 @@ Requires at least: Wordpress 5.0
 Tested up to: Wordpress 6.0.2
 Requires PHP: PHP 5.0
 Stable tag: trunk
-License: Open Source
+License: GPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 Axeptio allows you to make your website compliant with GDPR.
 

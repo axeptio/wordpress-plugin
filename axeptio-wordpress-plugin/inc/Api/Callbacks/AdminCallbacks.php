@@ -46,8 +46,7 @@ class AdminCallbacks extends BaseController{
 	}
 	public function xpwpSdkActiveSet()
 	{
-		$escaped_value = esc_attr( get_option( 'xpwp_sdk_active' ) );
-		echo wp_kses('<input type="checkbox" class="regular-text" name="xpwp_sdk_active" value="1" ' . ($escaped_value == 1 ? 'checked' : '') . ' placeholder="">', $this->allowedHtml);
+		echo wp_kses('<input type="checkbox" class="regular-text" name="xpwp_sdk_active" value="1" ' . (esc_attr( get_option( 'xpwp_sdk_active' ) ) == 1 ? 'checked' : '') . ' placeholder="">', $this->allowedHtml);
 	}
 	public function xpwpClientIdSet()
 	{

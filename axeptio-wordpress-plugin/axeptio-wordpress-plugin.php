@@ -12,7 +12,8 @@ namespace Axpetio\SDKPlugin;
     Description: Axeptio allows you to make your website compliant with GDPR.
     Version: 1.0.0
     Author: axeptio
-    Licence: Open Source
+    License: GPLv3
+    License URI: https://www.gnu.org/licenses/gpl-3.0.html
     Text Domain: axeptio-wordpress-plugin
     Domain Path: /languages
     */
