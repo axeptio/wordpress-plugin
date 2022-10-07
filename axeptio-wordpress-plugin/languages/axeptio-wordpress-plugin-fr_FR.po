@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2022-06-09 09:00+0800\n"
-"PO-Revision-Date: 2022-06-09 09:03+0800\n"
+"POT-Creation-Date: 2022-10-07 11:37+0200\n"
+"PO-Revision-Date: 2022-10-07 11:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio-wordpress-plugin.php\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: inc/Api/Callbacks/AdminCallbacks.php:21
+#: inc/Api/Callbacks/AdminCallbacks.php:45
 msgid "Please enter your automation key here."
 msgstr "Veuillez entrer votre clé d’automatisation ici."
 
@@ -37,6 +37,10 @@ msgstr "Activer le SDK"
 #: inc/Pages/Admin.php:98
 msgid "Project ID"
 msgstr "ID du projet"
+
+#: inc/Pages/Admin.php:109
+msgid "Project Version"
+msgstr "Version du projet"
 
 #: inc/templates/admin.php:2
 msgid "Plugin Settings"
@@ -59,14 +63,17 @@ msgid "Axeptio SDK Integration"
 msgstr "Intégration du SDK Axeptio"
 
 #. Plugin URI of the plugin/theme
-#. Author URI of the plugin/theme
-msgid "https://www.axeptio.eu/fr/home"
-msgstr "https://www.axeptio.eu/fr/home"
+msgid "https://www.axeptio.eu/"
+msgstr "https://www.axeptio.eu/fr"
 
 #. Description of the plugin/theme
-msgid "Integrate Axeptio SDK to your Wordpress Website"
-msgstr "Intégrez Axeptio SDK à votre site Wordpress"
+msgid "Axeptio allows you to make your website compliant with GDPR."
+msgstr ""
+"Axeptio vous permet de mettre votre site web en conformité avec le RGPD."
 
 #. Author of the plugin/theme
-msgid "Axeptio"
-msgstr "Axeptio"
+msgid "axeptio"
+msgstr "axeptio"
+
+#~ msgid "Integrate Axeptio SDK to your Wordpress Website"
+#~ msgstr "Intégrez Axeptio SDK à votre site Wordpress"
