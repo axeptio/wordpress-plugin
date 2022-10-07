@@ -46,17 +46,15 @@ class AdminCallbacks extends BaseController{
 	}
 	public function xpwpSdkActiveSet()
 	{
-		$value = esc_attr( get_option( 'xpwp_sdk_active' ) );
-		echo wp_kses('<input type="checkbox" class="regular-text" name="xpwp_sdk_active" value="1" ' . ($value == 1 ? 'checked' : '') . ' placeholder="">', $this->allowedHtml);
+		echo wp_kses('<input type="checkbox" class="regular-text" name="xpwp_sdk_active" value="1" ' . (esc_attr( get_option( 'xpwp_sdk_active' ) ) == 1 ? 'checked' : '') . ' placeholder="">', $this->allowedHtml);
 	}
 	public function xpwpClientIdSet()
 	{
-		$value = esc_attr( get_option( 'xpwp_client_id' ) );
-		echo wp_kses('<input type="text" class="regular-text" name="xpwp_client_id" id ="xpwp_client_id" value="' . $value . '" placeholder="" onchange="loadVersionsOnChange()">', $this->allowedHtml);
+		echo wp_kses('<input type="text" class="regular-text" name="xpwp_client_id" id ="xpwp_client_id" value="' . esc_attr( get_option( 'xpwp_client_id' ) ) . '" placeholder="" onchange="loadVersionsOnChange()">', $this->allowedHtml);
 	}
 	public function xpwpVersionSet()
 	{
-		$value = esc_attr( get_option( 'xpwp_version' ) );
-		echo wp_kses('<select name="xpwp_version" id="xpwp_version"><option value="' . $value . '">' . $value . '</option></select>', $this->allowedHtml);
+		$escaped_value = esc_attr( get_option( 'xpwp_version' ) );
+		echo wp_kses('<select name="xpwp_version" id="xpwp_version"><option value="' . $escaped_value . '">' . $escaped_value . '</option></select>', $this->allowedHtml);
 	}
 }

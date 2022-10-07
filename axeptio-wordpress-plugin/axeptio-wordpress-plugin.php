@@ -8,11 +8,12 @@ namespace Axpetio\SDKPlugin;
 
 /*
     Plugin Name: Axeptio SDK Integration
-    Plugin URI: https://www.axeptio.eu/fr/home
-    Description: Integrate Axeptio SDK to your Wordpress Website
-    Version: 1.0.1
+    Plugin URI: https://www.axeptio.eu/
+    Description: Axeptio allows you to make your website compliant with GDPR.
+    Version: 1.0.0
     Author: axeptio
-    Licence: GPLv2 or later
+    License: GPLv3
+    License URI: https://www.gnu.org/licenses/gpl-3.0.html
     Text Domain: axeptio-wordpress-plugin
     Domain Path: /languages
     */
@@ -34,17 +35,17 @@ if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
 }
 
 // Procedural Activation
-function activate_xpwp_plugin()
+function axeptio_wordpress_plugin_activate_xpwp_plugin()
 {
     \Axpetio\SDKPlugin\Inc\Base\Activate::activate();
 }
-register_activation_hook(__FILE__, __NAMESPACE__ . '\activate_xpwp_plugin');
+register_activation_hook(__FILE__, __NAMESPACE__ . '\axeptio_wordpress_plugin_activate_xpwp_plugin');
 
-function deactivate_xpwp_plugin()
+function axeptio_wordpress_plugin_deactivate_xpwp_plugin()
 {
     \Axpetio\SDKPlugin\Inc\Base\Deactivate::deactivate();
 }
-register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivate_xpwp_plugin');
+register_deactivation_hook(__FILE__, __NAMESPACE__ . '\axeptio_wordpress_plugin_deactivate_xpwp_plugin');
 
 // Register Services
 if (class_exists('\\Axpetio\\SDKPlugin\\Inc\\Init')) {

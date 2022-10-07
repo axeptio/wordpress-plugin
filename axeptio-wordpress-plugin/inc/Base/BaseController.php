@@ -11,7 +11,6 @@ class BaseController
     public $plugin_path;
     public $plugin_url;
     public $plugin_;
-    public $text_domain;
     
     public function __construct(){
         $this->plugin_path = plugin_dir_path( dirname(__FILE__) );
