@@ -3,15 +3,14 @@
  * @package AxeptioWPPlugin
  */
 
-namespace Inc;
+namespace Axpetio\SDKPlugin\Inc;
 
 final class Init
 {
     public static function get_services(){
         return array(
-            Pages\Admin::class,
-            Base\Enqueue::class,
-            Base\ShortCodeTracker::class
+            \Axpetio\SDKPlugin\Inc\Pages\Admin::class,
+            \Axpetio\SDKPlugin\Inc\Base\Enqueue::class
         );
     }
 

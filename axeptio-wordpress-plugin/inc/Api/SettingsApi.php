@@ -4,7 +4,7 @@
  * @package AxeptioWPPlugin
  */
 
-namespace Inc\Api;
+namespace Axpetio\SDKPlugin\Inc\Api;
 
 class SettingsApi
 {

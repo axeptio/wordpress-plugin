@@ -3,7 +3,7 @@
  * @package AxeptioWPPlugin
  */
 
-namespace Inc\Base;
+namespace Axpetio\SDKPlugin\Inc\Base;
 
 class Activate{
 	public static function activate() {

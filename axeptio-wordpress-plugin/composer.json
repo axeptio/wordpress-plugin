@@ -11,6 +11,6 @@
     "minimum-stability": "dev",
     "require": {},
     "autoload": {
-        "psr-4": {"Inc\\": "./inc"}
+        "psr-4": {"Axpetio\\SDKPlugin\\Inc\\": "./inc"}
     }
 }
