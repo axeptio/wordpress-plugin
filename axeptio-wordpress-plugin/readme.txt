@@ -1,10 +1,10 @@
 === Axeptio - Compliant, transparent and fun cookie consent widget ===
 Contributors: axeptio
 Tags: gdpr ,rgpd ,eprivacy ,cookies ,consent ,script ,cmp ,data ,personnal ,widget ,googletagmanager ,consentmanagement
-Requires at least: Wordpress 5.0
-Tested up to: Wordpress 6.0.2
+Requires at least: 5.0
+Tested up to: 6.0
 Requires PHP: PHP 5.0
-Stable tag: trunk
+Stable tag: 1.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
