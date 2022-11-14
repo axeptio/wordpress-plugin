@@ -1,5 +1,5 @@
 # Plugin zip
-axeptio-wordpress-plugin.zip
+axeptio-wordpress-plugin*.zip
 
 # Numerous always-ignore extensions
 *.diff
