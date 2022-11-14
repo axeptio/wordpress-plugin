@@ -1,4 +1,4 @@
-# Axeptio WordPress Plugin
+# Axeptio WordPress Plugin V2
 
 Integrate Axeptio SDK to your Wordpress Website
 
