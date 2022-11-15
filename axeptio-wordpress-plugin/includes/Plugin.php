@@ -227,7 +227,7 @@ class Plugin {
 		foreach ( $this->_plugin_configurations as $configuration ) {
 			// consent has been given for this plugin,
 			// no need to add it to the interception
-			if ( $configuration->authorized ) {
+			if ( isset($configuration->authorized) && $configuration->authorized ) {
 				continue;
 			}
 
@@ -289,7 +289,7 @@ class Plugin {
 			foreach ( $hook->callbacks as $priority => $functions ) {
 				foreach ( $functions as $name => $function ) {
 					$stats[ $filter ][ $name ] = $this->processFunction( $function['function'] );
-					if ( ! is_null( $stats[ $filter ][ $name ]["plugin"] ) ) {
+					if ( isset($stats[ $filter ][ $name ]["plugin"]) && ! is_null( $stats[ $filter ][ $name ]["plugin"] ) ) {
 						$plugins[ $stats[ $filter ][ $name ]["plugin"] ][] = [
 							"filter"   => $filter,
 							"priority" => $priority,
@@ -307,7 +307,7 @@ class Plugin {
 		foreach ( $this->_plugin_configurations as $configuration ) {
 			// consent has been given for this plugin,
 			// no need to add it to the interception
-			if ( $configuration->authorized ) {
+			if ( isset($configuration->authorized) && $configuration->authorized ) {
 				continue;
 			}
 			//
@@ -412,11 +412,19 @@ class Plugin {
 
 			$filename = $reflection->getFileName();
 			$pluginRegExpMatches = [];
+
 			preg_match( '#wp-content[/\\\]plugins[/\\\]([a-zA-Z0-9_-]+)[/\\\]#', $filename, $pluginRegExpMatches );
 
+			if(isset($pluginRegExpMatches[1])) {
+				echo '<pre>';
+				var_dump($filename);
+				var_dump($pluginRegExpMatches);
+				echo '</pre>';
+			}
+			
 			return [
 				'filename' => $filename,
-				'plugin'   => $pluginRegExpMatches[1]
+				'plugin'   => isset($pluginRegExpMatches[1]) ? $pluginRegExpMatches[1] : null
 			];
 		} catch ( ReflectionException $e ) {
 			return [ 'error' => $e->getMessage() ];

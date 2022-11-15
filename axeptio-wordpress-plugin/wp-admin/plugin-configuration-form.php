@@ -113,7 +113,7 @@ $plugins = get_plugins();
 					?>">
                         <label>List of filters</label><br>
                         <textarea class="large-text code"
-                                  name="wp_filter_list"><?= $value['wp_filter_list'] ?></textarea>
+                                  name="wp_filter_list"><?= isset($value['wp_filter_list']) ? $value['wp_filter_list'] : false ?></textarea>
                     </div>
                     <p class="description">
                         Determines if the Axeptio Wordpress plugin will intercept and block the <code>$wp_filters</code>
@@ -150,7 +150,7 @@ $plugins = get_plugins();
 					?>">
                         <label>List of tags</label><br>
                         <textarea class="large-text code" name="shortcode_tags_list">
-                            <?= $value['shortcode_tags_list'] ?>
+                            <?= isset($value['shortcode_tags_list']) ? $value['shortcode_tags_list'] : false ?>
                         </textarea>
                     </div>
                     <p class="description">
@@ -171,7 +171,9 @@ $plugins = get_plugins();
                     <p>
                         <label for="vendor_title">Title</label></p>
                     <p>
-                        <input type="text" id="vendor_title" name="vendor_title" value="<?= $value['vendor_title'] ?>"/>
+                        <input type="text" id="vendor_title" name="vendor_title" 
+                        value="<?= isset($value['vendor_title']) ? $value['vendor_title'] : false ?>"
+                        />
                     </p>
                 </div>
                 <div class="form-field">
@@ -180,7 +182,8 @@ $plugins = get_plugins();
                     </p>
                     <p>
                         <textarea id="vendor_shortDescription"
-                                  name="vendor_shortDescription"><?= $value['vendor_shortDescription'] ?></textarea>
+                                  name="vendor_shortDescription"
+                        ><?= isset($value['vendor_shortDescription']) ? $value['vendor_shortDescription'] : false ?></textarea>
                     </p>
                 </div>
                 <div class="form-field">
@@ -189,7 +192,7 @@ $plugins = get_plugins();
                     </p>
                     <p>
                         <textarea id="vendor_longDescription"
-                                  name="vendor_longDescription"><?= $value['vendor_longDescription'] ?></textarea>
+                                  name="vendor_longDescription"><?= isset($value['vendor_longDescription']) ? $value['vendor_longDescription'] : false ?></textarea>
                     </p>
                 </div>
                 <div class="form-field">
@@ -198,7 +201,7 @@ $plugins = get_plugins();
                     </p>
                     <p>
                         <input type="text" id="vendor_policyUrl" name="vendor_policyUrl"
-                               value="<?= $value['vendor_policyUrl'] ?>"/>
+                               value="<?= isset($value['vendor_policyUrl']) ? $value['vendor_policyUrl'] : false ?>"/>
                     </p>
                 </div>
                 <div class="form-field">
@@ -206,7 +209,7 @@ $plugins = get_plugins();
                         <label for="vendor_image">Image</label>
                     </p>
                     <p>
-                        <input type="text" id="vendor_image" name="vendor_image" value="<?= $value['vendor_image'] ?>"/>
+                        <input type="text" id="vendor_image" name="vendor_image" value="<?= isset($value['vendor_image']) ? $value['vendor_image'] : false ?>"/>
                     </p>
                 </div>
             </td>

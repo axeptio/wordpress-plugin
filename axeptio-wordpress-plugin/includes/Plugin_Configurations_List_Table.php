@@ -18,8 +18,10 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 			$this->_plugins_map[ $key ] = $plugin;
 		};
 
-		foreach ( Admin::instance()->axeptioConfiguration->cookies as $cookie_configuration ) {
-			$this->_axeptio_configurations_map[ $cookie_configuration->identifier ] = $cookie_configuration;
+		if(isset(Admin::instance()->axeptioConfiguration->cookies)) {
+			foreach ( Admin::instance()->axeptioConfiguration->cookies as $cookie_configuration ) {
+				$this->_axeptio_configurations_map[ $cookie_configuration->identifier ] = $cookie_configuration;
+			}
 		}
 	}
 

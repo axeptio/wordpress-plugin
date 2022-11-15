@@ -11,9 +11,11 @@
 use Axeptio\Admin;
 use Axeptio\Plugin;
 
+/*
 const WP_DEBUG = true;
 const WP_DEBUG_DISPLAY = false;
 const WP_DEBUG_LOG = true;
+*/
 
 const AXEPTIO_PLUGIN_FILE = __file__;
 

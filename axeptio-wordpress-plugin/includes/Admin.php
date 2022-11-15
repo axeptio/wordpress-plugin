@@ -181,27 +181,28 @@ class Admin {
 	}
 
 	public function admin_page() {
-
-		if ( $_POST['action'] == 'flush_cache' ) {
-			wp_cache_flush_group( 'axeptio' );
-		}
-		if ( $_POST['action'] == 'settings' ) {
-
-			$current_client_id = get_option( self::OPTION_CLIENT_ID );
-			if ( $current_client_id !== $_POST['client_id'] ) {
-				wp_cache_delete( self::CACHE_AXEPTIO_CONFIGURATION . "_$current_client_id" );
+		if(isset($_POST['action'])) {
+			
+			if ( $_POST['action'] == 'flush_cache' ) {
+				wp_cache_flush_group( 'axeptio' );
 			}
+			if ( $_POST['action'] == 'settings' ) {
 
-			update_option( self::OPTION_CLIENT_ID, $_POST['client_id'] );
-			update_option( self::OPTION_COOKIES_VERSION, $_POST['cookies_version'] );
-			update_option( self::OPTION_TRIGGER_GTM_EVENT, $_POST['trigger_gtm_events'] );
-			update_option( self::OPTION_USER_COOKIES_DURATION, $_POST['user_cookies_duration'] );
-			update_option( self::OPTION_USER_COOKIES_DOMAIN, $_POST['user_cookies_domain'] );
-			update_option( self::OPTION_USER_COOKIES_SECURE, $_POST['user_cookies_secure'] );
-			update_option( self::OPTION_AUTHORIZED_VENDORS_COOKIE_NAME, $_POST['authorized_vendors_cookie_name'] );
-			update_option( self::OPTION_JSON_COOKIE_NAME, $_POST['json_cookie_name'] );
+				$current_client_id = get_option( self::OPTION_CLIENT_ID );
+				if ( $current_client_id !== $_POST['client_id'] ) {
+					wp_cache_delete( self::CACHE_AXEPTIO_CONFIGURATION . "_$current_client_id" );
+				}
+
+				update_option( self::OPTION_CLIENT_ID, $_POST['client_id'] );
+				update_option( self::OPTION_COOKIES_VERSION, $_POST['cookies_version'] );
+				update_option( self::OPTION_TRIGGER_GTM_EVENT, $_POST['trigger_gtm_events'] );
+				update_option( self::OPTION_USER_COOKIES_DURATION, $_POST['user_cookies_duration'] );
+				update_option( self::OPTION_USER_COOKIES_DOMAIN, $_POST['user_cookies_domain'] );
+				update_option( self::OPTION_USER_COOKIES_SECURE, $_POST['user_cookies_secure'] );
+				update_option( self::OPTION_AUTHORIZED_VENDORS_COOKIE_NAME, $_POST['authorized_vendors_cookie_name'] );
+				update_option( self::OPTION_JSON_COOKIE_NAME, $_POST['json_cookie_name'] );
+			}
 		}
-
 		require __DIR__ . "/../wp-admin/settings.php";
 	}
 
@@ -217,7 +218,7 @@ class Admin {
 
 		global $wpdb;
 
-		if ( $_GET['sub'] == 'form' ) {
+		if ( isset( $_GET['sub'] ) && $_GET['sub'] == 'form' ) {
 
 			/**
 			 * Fetching the GET
@@ -233,7 +234,7 @@ class Admin {
 			/**
 			 * Manage the POST
 			 */
-			if ( $_POST['action'] == 'plugin_configuration' ) {
+			if ( isset( $_POST['action'] ) && $_POST['action'] == 'plugin_configuration' ) {
 				$plugin = Admin::getPlugin( $_POST['plugin'] );
 				if ( empty( $plugin ) ) {
 					wp_die( "The specified Plugin '$_POST[plugin]' could not be found" );
