@@ -17,9 +17,9 @@ foreach ( $plugins as $path => &$plugin ) {
 
 ?>
 <div class="wrap">
-    <h1 class="wp-heading-inline">Axeptio Plugins Configurations</h1>
+    <h1 class="wp-heading-inline"><?= __('Axeptio Plugins Configurations', 'axeptio-wordpress-plugin')?></h1>
     <a href="<?= admin_url("admin.php?page=axeptio-plugin-configurations&sub=form") ?>" class="page-title-action aria-button-if-js" role="button" aria-expanded="false">
-        Add New
+    <?= __('Add New', 'axeptio-wordpress-plugin')?>
     </a>
     <hr class="wp-header-end">
     <form action="<?= admin_url("admin.php?page=axeptio-plugin-configurations") ?>" method="post">

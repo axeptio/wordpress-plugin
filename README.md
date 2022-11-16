@@ -55,9 +55,10 @@ docker-compose logs wordpress
 docker-compose run --rm wp-cli install-wp
 ```
 
-Log in to `http://project.test/wp-admin/` with `wordpress` / `wordpress`.
+Log in to
+[docker-compose]: https://docs.docker.com/compose/ `http://axeptio-wordpress-plugin.test/wp-admin/` with `wordpress` / `wordpress`.
 
-Alternatively, you can navigate to `http://project.test/` and manually perform
+Alternatively, you can navigate to `http://axeptio-wordpress-plugin.test/` and manually perform
 the famous five-second install.
 
 ## WP-CLI

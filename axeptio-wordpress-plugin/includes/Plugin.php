@@ -414,14 +414,14 @@ class Plugin {
 			$pluginRegExpMatches = [];
 
 			preg_match( '#wp-content[/\\\]plugins[/\\\]([a-zA-Z0-9_-]+)[/\\\]#', $filename, $pluginRegExpMatches );
-
+/*
 			if(isset($pluginRegExpMatches[1])) {
 				echo '<pre>';
 				var_dump($filename);
 				var_dump($pluginRegExpMatches);
 				echo '</pre>';
 			}
-			
+*/			
 			return [
 				'filename' => $filename,
 				'plugin'   => isset($pluginRegExpMatches[1]) ? $pluginRegExpMatches[1] : null
