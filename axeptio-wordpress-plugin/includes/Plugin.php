@@ -9,15 +9,15 @@ use ReflectionMethod;
 
 /**
  * The Axeptio Plugin Class is managing the interaction
- * between wordpress plugins and the Axeptio JS SDK
+ * between WordPress plugins and the Axeptio JS SDK
  *
  * It uses a list of Plugins' Configurations that are stored
- * in the Wordpress database to decide which plugin needs to
+ * in the WordPress database to decide which plugin needs to
  * be blocked, intercepted or whitelisted.
  *
  * Two types of entry points are used to block the plugins:
  * 1. The $wp_filter global. It's an array that stores all the
- *    callbacks that will be triggered when Wordpress executes
+ *    callbacks that will be triggered when WordPress executes
  *    its hooks. This includes all wp_action, but the wp_enqueue_script
  *    and all their variants.
  * 2. The $shortcode_tags global. It's a list of [custom_tags] that
@@ -26,7 +26,7 @@ use ReflectionMethod;
  *
  * This class is also responsible for loading the Axeptio SDK
  *
- * All the global settings are stored in Wordpress options system,
+ * All the global settings are stored in WordPress options system,
  * including clientId, cookiesVersion, and other.
  *
  * This class loads an additional local JS file (/js/axeptio.js)
@@ -38,9 +38,9 @@ use ReflectionMethod;
 class Plugin {
 
 
-	static private ?Plugin $_instance = null;
+	static private $_instance = null;
 
-	static function instance(): Plugin {
+	static function instance() {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
@@ -48,9 +48,9 @@ class Plugin {
 		return self::$_instance;
 	}
 
-	private array $_plugins_contents = [];
-	private array $_plugins_errors = [];
-	private array $_plugin_configurations = [];
+	private $_plugins_contents = [];
+	private $_plugins_errors = [];
+	private $_plugin_configurations = [];
 
 	public function __construct() {
 		$this->fetchPluginsConfigurations();
@@ -61,7 +61,7 @@ class Plugin {
 	public function fetchPluginsConfigurations() {
 		global $wpdb;
 		$table = Admin::getPluginConfigurationsTable();
-		$rows = $wpdb->get_results( "SELECT * FROM $table" );
+		$rows  = $wpdb->get_results( "SELECT * FROM $table" );
 
 		$axeptio_configuration_id = get_option( Admin::OPTION_COOKIES_VERSION );
 
@@ -153,31 +153,47 @@ class Plugin {
 		);
 
 		// 2. Loading the local JS for interacting with the SDK (adding the step if needed)
-		$wpStep = [
-			// need to put all metadata for this step to work
-			"title"       => "Wordpress step",
-			"subTitle"    => "Subtitle",
-			"message"     => "message",
-			"layout"      => "category",
-			"allowOptOut" => true,
-			"vendors"     => array_values( array_map( function ( $pluginConf ) {
-				$plugin = Admin::getPlugin($pluginConf->plugin);
-				return [
-					"name"             => "wp_$pluginConf->plugin",
-					"title"            => $pluginConf->vendor_title ?: $plugin['Title'],
-					"shortDescription" => $pluginConf->vendor_shortDescription ?: $plugin['Description'],
-					"longDescription"  => $pluginConf->vendor_longDescription,
-					"policyUrl"        => $pluginConf->vendor_policyUrl ?: $plugin['PluginURI'],
-					"image"            => $pluginConf->vendor_image,
-					"type"             => "wordpress plugin"
-				];
-			}, $this->_plugin_configurations ) )
-		];
+		$wordpress_steps = Admin::instance()->fetchWidgetConfigurations( $axeptioSettings['cookiesVersion'] );
+		$wordpress_steps = array_values( array_map( function ( $step ) {
+			return [
+				"title"           => $step["step_title"],
+				"subTitle"        => $step["step_subTitle"],
+				"topTitle"        => $step["step_topTitle"],
+				"message"         => $step["step_message"],
+				"image"           => $step["step_image"],
+				"imageWidth"      => intval( $step["step_imageWidth"] ),
+				"imageHeight"     => intval( $step["step_imageHeight"] ),
+				"disablePaint"    => (bool) $step["step_disablePaint"],
+				"name"            => $step["step_name"],
+				"layout"          => "category",
+				"allowOptOut"     => true,
+				"insert_position" => $step["insert_position"],
+				"position"        => $step["position"],
+			];
+		}, $wordpress_steps ) );
+
+		$wordpress_vendors = array_values( array_map( function ( $pluginConf ) {
+			$plugin = Admin::getPlugin( $pluginConf->plugin );
+
+			return [
+				"name"             => "wp_$pluginConf->plugin",
+				"title"            => $pluginConf->vendor_title ?: $plugin['Title'],
+				"shortDescription" => $pluginConf->vendor_shortDescription ?: $plugin['Description'],
+				"longDescription"  => $pluginConf->vendor_longDescription,
+				"policyUrl"        => $pluginConf->vendor_policyUrl ?: $plugin['PluginURI'],
+				"domain"           => $pluginConf->vendor_domain ?: parse_url( $plugin['PluginURI'], PHP_URL_HOST ),
+				"image"            => $pluginConf->vendor_image,
+				"type"             => "wordpress plugin",
+				"step"             => $pluginConf->cookie_widget_step,
+			];
+		}, $this->_plugin_configurations ) );
+
 		wp_enqueue_script(
 			"axeptio-script",
-			plugins_url( '/js/axeptio.js', AXEPTIO_PLUGIN_FILE ),
+			plugins_url( '/js/axeptio.js', AXEPTIO_PLUGIN_FILE )
 		);
-		wp_localize_script( 'axeptio-script', 'axeptioWordpressStep', $wpStep );
+		wp_localize_script( 'axeptio-script', 'axeptioWordpressSteps', $wordpress_steps );
+		wp_localize_script( 'axeptio-script', 'axeptioWordpressVendors', $wordpress_vendors );
 	}
 
 	// maybe we should make them private
@@ -208,7 +224,7 @@ class Plugin {
 
 		global $shortcode_tags;
 
-		$stats = [];
+		$stats   = [];
 		$plugins = [];
 		foreach ( $shortcode_tags as $tag => $function ) {
 			$stats[ $tag ] = $this->processFunction( $function );
@@ -227,7 +243,7 @@ class Plugin {
 		foreach ( $this->_plugin_configurations as $configuration ) {
 			// consent has been given for this plugin,
 			// no need to add it to the interception
-			if ( isset($configuration->authorized) && $configuration->authorized ) {
+			if ( isset( $configuration->authorized ) && $configuration->authorized ) {
 				continue;
 			}
 
@@ -251,8 +267,9 @@ class Plugin {
 			}
 
 			foreach ( $tags as $tag ) {
-				if($this->shouldContinue($intercepted_plugins[ $plugin ], $tag['name']))
+				if ( $this->shouldContinue( $intercepted_plugins[ $plugin ], $tag['name'] ) ) {
 					continue;
+				}
 				$shortcode_tags[ $tag['name'] ] = $this->wrapTag( $tag['function'], $plugin, $tag['name'] );
 			}
 		}
@@ -260,7 +277,13 @@ class Plugin {
 		return $stats;
 	}
 
-	private function shouldContinue($intercepted_plugin, $name):bool{
+	/**
+	 * @param $intercepted_plugin
+	 * @param $name
+	 *
+	 * @return bool
+	 */
+	private function shouldContinue( $intercepted_plugin, $name ) {
 		// If the  name is found in the $intercepted_plugins list
 		// and the current mode is whitelist, it should be skipped.
 		if ( $intercepted_plugin["mode"] == 'whitelist'
@@ -273,6 +296,7 @@ class Plugin {
 		     && ! in_array( $name, $intercepted_plugin["list"] ) ) {
 			return true;
 		}
+
 		return false;
 	}
 
@@ -283,13 +307,13 @@ class Plugin {
 		 */
 		global $wp_filter;
 
-		$stats = [];
+		$stats   = [];
 		$plugins = [];
 		foreach ( $wp_filter as $filter => $hook ) {
 			foreach ( $hook->callbacks as $priority => $functions ) {
 				foreach ( $functions as $name => $function ) {
 					$stats[ $filter ][ $name ] = $this->processFunction( $function['function'] );
-					if ( isset($stats[ $filter ][ $name ]["plugin"]) && ! is_null( $stats[ $filter ][ $name ]["plugin"] ) ) {
+					if ( isset( $stats[ $filter ][ $name ]["plugin"] ) ) {
 						$plugins[ $stats[ $filter ][ $name ]["plugin"] ][] = [
 							"filter"   => $filter,
 							"priority" => $priority,
@@ -307,7 +331,7 @@ class Plugin {
 		foreach ( $this->_plugin_configurations as $configuration ) {
 			// consent has been given for this plugin,
 			// no need to add it to the interception
-			if ( isset($configuration->authorized) && $configuration->authorized ) {
+			if ( isset( $configuration->authorized ) && $configuration->authorized ) {
 				continue;
 			}
 			//
@@ -332,8 +356,9 @@ class Plugin {
 			foreach ( $configs as $config ) {
 				extract( $config );
 
-				if($this->shouldContinue($intercepted_plugins[ $plugin ], $filter))
+				if ( $this->shouldContinue( $intercepted_plugins[ $plugin ], $filter ) ) {
 					continue;
+				}
 
 				// We decide to prevent admin hooks to be intercepted
 				if ( str_contains( $filter, "admin" ) ) {
@@ -356,17 +381,17 @@ class Plugin {
 	 *
 	 * @param $function
 	 * @param $plugin
-	 * @param $filter
+	 * @param $tag
 	 *
 	 * @return Closure
 	 */
-	private function wrapTag( $function, $plugin, $tag ): Closure {
+	private function wrapTag( $function, $plugin, $tag ) {
 		return function () use ( $function, $plugin, $tag ) {
-			$args = func_get_args();
+			$args   = func_get_args();
 			$return = call_user_func_array( $function, $args );
 
 			// Todo add a placeholder
-			return "<!-- axeptio_blocked $plugin \n{$return}\n-->";
+			return "<!-- axeptio_blocked $plugin \n$return\n-->";
 		};
 	}
 
@@ -383,7 +408,7 @@ class Plugin {
 	 *
 	 * @return Closure
 	 */
-	private function wrapFilter( $function, $plugin, $filter ): Closure {
+	private function wrapFilter( $function, $plugin, $filter ) {
 		return function () use ( $function, $plugin, $filter ) {
 			$args = func_get_args();
 			ob_start();
@@ -402,7 +427,7 @@ class Plugin {
 	 *
 	 * @return array
 	 */
-	private function processFunction( $function ): array {
+	private function processFunction( $function ) {
 		try {
 			if ( is_string( $function ) || $function instanceof Closure ) {
 				$reflection = new ReflectionFunction( $function );
@@ -410,21 +435,14 @@ class Plugin {
 				$reflection = new ReflectionMethod( $function[0], $function[1] );
 			}
 
-			$filename = $reflection->getFileName();
+			$filename            = $reflection->getFileName();
 			$pluginRegExpMatches = [];
 
 			preg_match( '#wp-content[/\\\]plugins[/\\\]([a-zA-Z0-9_-]+)[/\\\]#', $filename, $pluginRegExpMatches );
-/*
-			if(isset($pluginRegExpMatches[1])) {
-				echo '<pre>';
-				var_dump($filename);
-				var_dump($pluginRegExpMatches);
-				echo '</pre>';
-			}
-*/			
+
 			return [
 				'filename' => $filename,
-				'plugin'   => isset($pluginRegExpMatches[1]) ? $pluginRegExpMatches[1] : null
+				'plugin'   => isset( $pluginRegExpMatches[1] ) ? $pluginRegExpMatches[1] : null
 			];
 		} catch ( ReflectionException $e ) {
 			return [ 'error' => $e->getMessage() ];
@@ -441,7 +459,7 @@ class Plugin {
 	 * @todo implement
 	 * @return string
 	 */
-	private function getCookiesVersion(): string {
+	private function getCookiesVersion() {
 		return "not implemented";
 	}
 }

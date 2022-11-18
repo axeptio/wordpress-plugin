@@ -2,6 +2,8 @@
 
 namespace Axeptio;
 
+use stdClass;
+
 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
 class Admin {
@@ -21,11 +23,17 @@ class Admin {
 	const NONCE_NAME = "axeptio_admin";
 	const CACHE_AXEPTIO_CONFIGURATION = "axeptio_client_configuration";
 
-	static private ?Admin $_instance = null;
+	const DEFAULT_WIDGET_CONFIGURATION = [
+		'step_title'    => 'Our site uses plugins',
+		'step_subTitle' => 'they require your consent as well',
+		'step_message'  => "We're using a platform called Wordpress that's using server-side plugins that can place trackers and scripts. We need your approval for running them."
+	];
+
+	static private $_instance = null;
 
 	public $axeptioConfiguration;
 
-	static function instance(): Admin {
+	static function instance() {
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
@@ -33,15 +41,23 @@ class Admin {
 		return self::$_instance;
 	}
 
-	static function getPluginConfigurationsTable(): string {
+	static function getPluginConfigurationsTable() {
 		global $wpdb;
 
 		return "{$wpdb->prefix}axeptio_plugin_configuration";
 	}
 
+
+	static function getWidgetConfigurationsTable() {
+		global $wpdb;
+
+		return "{$wpdb->prefix}axeptio_widget_configuration";
+	}
+
+
 	public static function activate() {
 		global $wpdb;
-		$table = self::getPluginConfigurationsTable();
+		$table           = self::getPluginConfigurationsTable();
 		$charset_collate = $wpdb->get_charset_collate();
 
 		$sql = "CREATE TABLE IF NOT EXISTS $table  (
@@ -64,11 +80,35 @@ class Admin {
 	            `vendor_shortDescription` TEXT NOT NULL,
 	            `vendor_longDescription` TEXT NOT NULL,
 	            `vendor_policyUrl` TEXT NOT NULL,
-	            `vendor_image` TEXT NOT NULL,		               
+	            `vendor_image` TEXT NOT NULL,
+    			`cookie_widget_step` VARCHAR (255) NULL,
 	            PRIMARY KEY  (`plugin`, `axeptio_configuration_id`)
 		    ) $charset_collate;";
 
 		dbDelta( $sql );
+
+
+		$table = self::getWidgetConfigurationsTable();
+		$sql   = "
+			CREATE TABLE IF NOT EXISTS $table (
+			    `axeptio_configuration_id` VARCHAR(24) NOT NULL,
+			    `step_name` VARCHAR(200) DEFAULT 'wordpress',
+			    `insert_position` ENUM('first','after_welcome_step','last') NOT NULL DEFAULT 'after_welcome_step',
+			    `position` INT NOT NULL DEFAULT 0,
+			    `step_title` TEXT NOT NULL,
+			    `step_topTitle` TEXT NULL,
+			    `step_subTitle` TEXT NULL,
+			    `step_image` VARCHAR(200) NULL,
+			    `step_imageHeight` INT NULL,
+			    `step_imageWidth` INT NULL,
+			    `step_message` TEXT,
+			    `step_disablePaint` BOOLEAN NOT NULL DEFAULT 0,
+			    PRIMARY KEY  (`axeptio_configuration_id`, `step_name`)
+			 ) $charset_collate;
+		";
+
+		dbDelta( $sql );
+
 		add_option( self::OPTION_CLIENT_ID, self::DEFAULT_CLIENT_ID );
 		add_option( self::OPTION_DB_VERSION, self::DB_VERSION );
 		add_option( self::OPTION_JSON_COOKIE_NAME, "axeptio_cookies" );
@@ -79,11 +119,23 @@ class Admin {
 	public static function deactivate() {
 	}
 
-	public static function getPluginConfigurationURI( $item ): string {
+	public static function getPluginConfigurationURI( $item ) {
 		$params = build_query( [
 			"page"                     => "axeptio-plugin-configurations",
 			"sub"                      => "form",
 			"plugin"                   => $item["plugin"],
+			"axeptio_configuration_id" => $item["axeptio_configuration_id"],
+		] );
+
+		return admin_url( "admin.php?$params" );
+	}
+
+
+	public static function getWidgetConfigurationURI( $item ) {
+		$params = build_query( [
+			"page"                     => "axeptio-widget-configurations",
+			"sub"                      => "form",
+			"step_name"                => $item["step_name"],
 			"axeptio_configuration_id" => $item["axeptio_configuration_id"],
 		] );
 
@@ -100,7 +152,7 @@ class Admin {
 	 *
 	 * @return array|null
 	 */
-	public static function getPlugin( $plugin ): ?array {
+	public static function getPlugin( $plugin ) {
 		foreach ( get_plugins() as $path => $data ) {
 			$name = ( strpos( $path, '/' ) !== false ) ? dirname( $path ) : basename( $path );
 			if ( $name === $plugin ) {
@@ -114,7 +166,7 @@ class Admin {
 	public function __construct() {
 		// This is used to add client side script to the admin panel
 		// we decide to use the enqueue scripts in order to follow
-		// wordpress recommendation. Doing so, we're able to pass
+		// WordPress recommendation. Doing so, we're able to pass
 		// a nonce that makes sure we're not forging the request from outside
 		add_action( 'admin_enqueue_scripts', [ $this, "enqueue_scripts" ] );
 		add_action( 'wp_ajax_plugin_configurations', [ $this, "ajax_handler" ] );
@@ -167,7 +219,7 @@ class Admin {
 			'Widget Configuration',
 			'Widget Configuration',
 			'manage_options',
-			'axeptio-widget-configuration',
+			'axeptio-widget-configurations',
 			[ $this, "widget_configuration_page" ]
 		);
 		add_submenu_page(
@@ -181,8 +233,8 @@ class Admin {
 	}
 
 	public function admin_page() {
-		if(isset($_POST['action'])) {
-			
+		if ( isset( $_POST['action'] ) ) {
+
 			if ( $_POST['action'] == 'flush_cache' ) {
 				wp_cache_flush_group( 'axeptio' );
 			}
@@ -207,7 +259,64 @@ class Admin {
 	}
 
 	public function widget_configuration_page() {
-		require __DIR__ . "/../wp-admin/widget-configuration.php";
+
+		global $wpdb;
+
+		if ( isset( $_GET['sub'] ) && $_GET['sub'] == 'form' ) {
+
+			/**
+			 * Fetching the GET
+			 */
+			$row_exists = false;
+			if ( isset( $_GET['axeptio_configuration_id'] ) && isset( $_GET['step_name'] ) ) {
+				$value = $this->fetchWidgetConfiguration( $_GET['axeptio_configuration_id'], $_GET['step_name'] );
+				if ( $value ) {
+					$row_exists = true;
+				}
+			}
+
+			/**
+			 * Manage the POST
+			 */
+			if ( isset( $_POST['action'] ) && $_POST['action'] == 'widget_configuration' ) {
+
+				$payload = [
+					"axeptio_configuration_id" => $_POST['cookies_version'],
+					"step_name"                => $_POST['step_name'],
+					"step_title"               => $_POST['step_title'],
+					"step_subTitle"            => $_POST['step_subTitle'],
+					"step_topTitle"            => $_POST['step_topTitle'],
+					"step_message"             => stripslashes_deep( $_POST['step_message'] ),
+					"step_image"               => $_POST['step_image'],
+					"step_imageHeight"         => intval( $_POST['step_image'] ),
+					"step_imageWidth"          => intval( $_POST['step_width'] ),
+					"step_disablePaint"        => $_POST['step_disablePaint'] ? 1 : 0,
+				];
+
+				if ( ! $row_exists ) {
+					$result = $wpdb->insert( self::getWidgetConfigurationsTable(), $payload );
+					// Set the new value for the Form
+					if ( $result !== false ) {
+						$value      = $payload;
+						$row_exists = true;
+					}
+				} else {
+					$result = $wpdb->update( self::getWidgetConfigurationsTable(), $payload, [
+						'axeptio_configuration_id' => $_GET['axeptio_configuration_id'],
+						'step_name'                => $_GET['step_name']
+					] );
+					if ( $result === 1 ) {
+						$value = $payload;
+					}
+				}
+			}
+
+			require __DIR__ . "/../wp-admin/widget-configuration-form.php";
+
+			return;
+		}
+
+		require __DIR__ . "/../wp-admin/widget-configurations.php";
 	}
 
 	/**
@@ -242,37 +351,31 @@ class Admin {
 				$payload = [
 					"plugin"                   => $_POST['plugin'],
 					"axeptio_configuration_id" => $_POST['cookies_version'],
-					"wp_filter_mode"           => $_POST['wp_filter_mode'] ?? 'none',
-					"wp_filter_list"           => $_POST['wp_filter_list'] ?? '',
-					"shortcode_tags_mode"      => $_POST['shortcode_tags_mode'] ?? 'none',
-					"shortcode_tags_list"      => $_POST['shortcode_tags_list'] ?? '',
+					"wp_filter_mode"           => isset( $_POST['wp_filter_mode'] ) ? $_POST['wp_filter_mode'] : 'none',
+					"wp_filter_list"           => isset( $_POST['wp_filter_list'] ) ? $_POST['wp_filter_list'] : '',
+					"shortcode_tags_mode"      => isset( $_POST['shortcode_tags_mode'] ) ? $_POST['shortcode_tags_mode'] : 'none',
+					"shortcode_tags_list"      => isset( $_POST['shortcode_tags_list'] ) ? $_POST['shortcode_tags_list'] : '',
 					"vendor_title"             => $_POST['vendor_title'] ?: '',
 					"vendor_shortDescription"  => $_POST['vendor_shortDescription'] ?: '',
 					"vendor_longDescription"   => $_POST['vendor_longDescription'] ?: '',
 					"vendor_policyUrl"         => $_POST['vendor_policyUrl'] ?: '',
 					"vendor_image"             => $_POST['vendor_image'] ?: '',
+					"cookie_widget_step"       => $_POST['cookie_widget_step'] ?: '',
 				];
 
 				// Persisting in DB
 				$table = self::getPluginConfigurationsTable();
 				if ( ! $row_exists ) {
 					$result = $wpdb->insert( $table, $payload );
-					$params = implode( '&', [
-						"page"                     => "axeptio-plugin-configurations",
-						"sub"                      => "form",
-						"plugin"                   => $payload["plugin"],
-						"axeptio_configuration_id" => $payload["axeptio_configuration_id"],
-					] );
-
 					// Set the new value for the Form
 					if ( $result !== false ) {
-						$value = $payload;
+						$value      = $payload;
 						$row_exists = true;
 					}
 				} else {
 					$result = $wpdb->update( $table, $payload, [
-						"plugin"                   => $payload["plugin"],
-						"axeptio_configuration_id" => $payload["axeptio_configuration_id"]
+						"plugin"                   => $_GET["plugin"],
+						"axeptio_configuration_id" => $_GET["axeptio_configuration_id"]
 					] );
 					if ( $result !== false ) {
 						// Set the new value for the Form
@@ -292,9 +395,9 @@ class Admin {
 	}
 
 	/**
-	 * @return \stdClass[]
+	 * @return stdClass[]
 	 */
-	public function fetchPluginsConfigurations(): array {
+	public function fetchPluginsConfigurations() {
 		global $wpdb;
 		$table = self::getPluginConfigurationsTable();
 
@@ -307,10 +410,10 @@ class Admin {
 		if ( $clientId == self::DEFAULT_CLIENT_ID ) {
 			return;
 		}
-		$key = self::CACHE_AXEPTIO_CONFIGURATION . "_$clientId";
+		$key                        = self::CACHE_AXEPTIO_CONFIGURATION . "_$clientId";
 		$this->axeptioConfiguration = wp_cache_get( $key );
 		if ( ! $this->axeptioConfiguration ) {
-			$json = file_get_contents( "https://client.axept.io/$clientId.json" );
+			$json    = file_get_contents( "https://client.axept.io/$clientId.json" );
 			$decoded = json_decode( $json );
 			wp_cache_add( $key, $decoded, "axeptio", 60 * 60 * 24 );
 			$this->axeptioConfiguration = $decoded;
@@ -334,7 +437,19 @@ class Admin {
 		$query = $wpdb->prepare(
 			"SELECT * FROM $table WHERE `plugin` = %s AND `axeptio_configuration_id` = %s",
 			[ $plugin, $axeptio_configuration_id ]
-		);;
+		);
+
+		return $wpdb->get_row( $query, ARRAY_A );
+	}
+
+	// Make static ?
+	public function fetchWidgetConfiguration( $axeptio_configuration_id, $step_name ) {
+		global $wpdb;
+		$table = self::getWidgetConfigurationsTable();
+		$query = $wpdb->prepare(
+			"SELECT * FROM $table WHERE `axeptio_configuration_id` = %s AND `step_name` = %s",
+			[ $axeptio_configuration_id, $step_name ]
+		);
 
 		return $wpdb->get_row( $query, ARRAY_A );
 	}
@@ -342,7 +457,20 @@ class Admin {
 	public function deletePluginConfiguration( $item ) {
 		global $wpdb;
 		$table = self::getPluginConfigurationsTable();
+
 		return $wpdb->delete( $table, $item );
+	}
+
+	public function fetchWidgetConfigurations( $axeptio_configuration_id = null ) {
+		global $wpdb;
+		$table = self::getWidgetConfigurationsTable();
+
+		$query = is_null( $axeptio_configuration_id ) ? "SELECT * FROM $table" : $wpdb->prepare(
+			"SELECT * FROM $table WHERE `axeptio_configuration_id` = %s",
+			[ $axeptio_configuration_id ]
+		);
+
+		return $wpdb->get_results( $query, ARRAY_A );
 	}
 
 

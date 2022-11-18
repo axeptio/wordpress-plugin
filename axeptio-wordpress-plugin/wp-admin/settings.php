@@ -76,7 +76,7 @@ $admin = Admin::instance();
                 />
             </div>
             <div class="form-field">
-                <label for="user_cookies_duration"><?= __('Domain', 'axeptio-wordpress-plugin')?></label>
+                <label for="user_cookies_domain"><?= __('Domain', 'axeptio-wordpress-plugin')?></label>
                 <input
                         type="text"
                         id="user_cookies_domain"
@@ -122,8 +122,7 @@ $admin = Admin::instance();
 
         function loadVersions(clientId) {
             var select = $('#cookies_version');
-            select.append($("<option></option>").attr("value", "").text(<?= __('Dynamic: let Axeptio SDK decide based on your configuration', 'axeptio-wordpress-plugin')?>)); 
-            <option value=""></option>
+            select.append($("<option></option>").attr("value", "").text(<?= __('Dynamic: let Axeptio SDK decide based on your configuration', 'axeptio-wordpress-plugin')?>));
             jQuery.ajax({
                 type: 'get',
                 dataType: 'json',
@@ -131,7 +130,7 @@ $admin = Admin::instance();
                 success: function (response) {
                     for (let i = 0; i < response.cookies.length; i++) {
                         let title = response.cookies[i].title;
-                        select.append($("<option></option>").attr("value", title).text(title)); 
+                        select.append($("<option></option>").attr("value", title).text(title));
                     }
                 }
             });

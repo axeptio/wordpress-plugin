@@ -4,8 +4,8 @@ namespace Axeptio;
 
 class Plugin_Configurations_List_Table extends \WP_List_Table {
 
-	private array $_plugins_map = [];
-	private array $_axeptio_configurations_map = [];
+	private $_plugins_map = [];
+	private $_axeptio_configurations_map = [];
 
 	public function __construct() {
 		parent::__construct( [
@@ -14,11 +14,11 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 			'ajax'     => false
 		] );
 		foreach ( get_plugins() as $filename => $plugin ) {
-			$key = strpos( $filename, "/" ) === false ? basename( $filename ) : dirname( $filename );
+			$key                        = strpos( $filename, "/" ) === false ? basename( $filename ) : dirname( $filename );
 			$this->_plugins_map[ $key ] = $plugin;
-		};
+		}
 
-		if(isset(Admin::instance()->axeptioConfiguration->cookies)) {
+		if ( isset( Admin::instance()->axeptioConfiguration->cookies ) ) {
 			foreach ( Admin::instance()->axeptioConfiguration->cookies as $cookie_configuration ) {
 				$this->_axeptio_configurations_map[ $cookie_configuration->identifier ] = $cookie_configuration;
 			}
@@ -30,17 +30,17 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 		global $wpdb;
 		$this->process_action();
 		$this->process_bulk_action();
-		$columns = $this->get_columns();
+		$columns  = $this->get_columns();
 		$sortable = $this->get_sortable_columns();
-		$hidden = [];
+		$hidden   = [];
 
 		$this->_column_headers = [
 			$columns,
 			$hidden,
 			$sortable
 		];
-		$table = Admin::getPluginConfigurationsTable();
-		$this->items = $wpdb->get_results( "SELECT * FROM `$table`", ARRAY_A );
+		$table                 = Admin::getPluginConfigurationsTable();
+		$this->items           = $wpdb->get_results( "SELECT * FROM `$table`", ARRAY_A );
 	}
 
 
@@ -51,8 +51,8 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 	private function process_bulk_action() {
 		if ( 'delete' === $this->current_action() ) {
 			foreach ( $_POST['plugin_configuration'] as $item ) {
-				$parts = explode( '/', $item );
-				$plugin = $parts[0];
+				$parts         = explode( '/', $item );
+				$plugin        = $parts[0];
 				$configuration = $parts[1];
 				Admin::instance()->deletePluginConfiguration( [
 					"plugin"                   => $plugin,
@@ -64,25 +64,27 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 	}
 
 
-	public function get_columns(): array {
+	public function get_columns() {
 		return [
 			'cb'                       => '<input type="checkbox" />',
 			'plugin'                   => "Plugin",
 			'axeptio_configuration_id' => "Axeptio Config",
 			'wp_filter'                => "Intercept WP_Filter",
 			'shortcode_tags'           => "Intercept Shortcodes",
-			'vendor'                   => "Vendor"
+			'vendor'                   => "Vendor",
+			'cookie_widget_step'       => "Cookie Widget Step",
+			'actions'                  => "Actions",
 		];
 	}
 
-	function get_bulk_actions(): array {
+	function get_bulk_actions() {
 		return [
 			'delete' => 'Delete'
 		];
 	}
 
 
-	protected function get_sortable_columns(): array {
+	protected function get_sortable_columns() {
 		return [
 			"plugin",
 			"axeptio_configuration_id",
@@ -91,7 +93,7 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 		];
 	}
 
-	protected function column_default( $item, $column_name ): string {
+	protected function column_default( $item, $column_name ) {
 		return (string) $item[ $column_name ];
 	}
 
@@ -110,7 +112,7 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 	 *
 	 * @return string
 	 */
-	public function column_plugin( $item ): string {
+	public function column_plugin( $item ) {
 		if ( ! isset( $this->_plugins_map[ $item["plugin"] ] ) ) {
 			return "<strong>Unknown plugin $item[plugin]</strong>";
 		}
@@ -133,15 +135,28 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 	 *
 	 * @return string
 	 */
-	public function column_vendor( $item ): string {
-		$edit_url = Admin::getPluginConfigurationURI( $item );
-
+	public function column_vendor( $item ) {
 		return "
 			<strong>$item[vendor_title]</strong>
 			<p>$item[vendor_shortDescription]</p>
 			<div class='row-actions visible'>
 				<span><a href='$item[vendor_privacy_policy_url]'>Privacy Policy</a></span> |
-				<span><a href='$edit_url'>Edit Vendor Texts</a></span>
+			</div>
+		";
+	}
+
+	/**
+	 * @param $item
+	 *
+	 * @return string
+	 */
+	public function column_actions($item) {
+
+		$edit_url = Admin::getPluginConfigurationURI( $item );
+
+		return "
+			<div class='row-actions visible'>
+				<span><a href='$edit_url'>Edit</a></span>
 			</div>
 		";
 	}
@@ -153,7 +168,7 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 	 *
 	 * @return string
 	 */
-	public function column_axeptio_configuration_id( $item ): string {
+	public function column_axeptio_configuration_id( $item ) {
 		if ( ! isset( $this->_axeptio_configurations_map[ $item["axeptio_configuration_id"] ] ) ) {
 			return "<strong>No Configuration</strong>";
 		}
@@ -175,7 +190,7 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 	 *
 	 * @return string
 	 */
-	public function column_wp_filter( $item ): string {
+	public function column_wp_filter( $item ) {
 		return $item['wp_filter_mode'];
 	}
 
@@ -186,7 +201,7 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 	 *
 	 * @return string
 	 */
-	public function column_shortcode_tags( $item ): string {
+	public function column_shortcode_tags( $item ) {
 		return $item['shortcode_tags_mode'];
 	}
 

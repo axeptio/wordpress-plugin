@@ -1,11 +1,12 @@
 <?php
 /**
- * Plugin Name: axeptio-wordpress-plugin
+ * Plugin Name: Axeptio Consent Management
  * Plugin URI: https://www.axeptio.eu/
- * Description: Proof Of Concept Axeptio
- * Version: 0.1
- * Author: Romain Bessuges-Meusy
+ * Description: This plugin provides a complete integration of Axeptio and is capable of blocking 3rd party plugins.
+ * Version: 2.0.0
+ * Author: Axeptio
  * Author URI: https://www.axeptio.eu/
+ * Text Domain: axeptio-wordpress-plugin
  **/
 
 use Axeptio\Admin;
@@ -22,6 +23,7 @@ const AXEPTIO_PLUGIN_FILE = __file__;
 require_once __DIR__ . '/includes/Plugin.php';
 require_once __DIR__ . '/includes/Admin.php';
 require_once __DIR__ . '/includes/Plugin_Configurations_List_Table.php';
+require_once __DIR__ . '/includes/Widget_Configurations_List_Table.php';
 
 if (is_admin()) {
 	register_activation_hook(__file__, [Admin::class, 'activate' ]);
