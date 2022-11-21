@@ -410,15 +410,8 @@ class Plugin {
 	 */
 	private function wrapFilter( $function, $plugin, $filter ) {
 		return function () use ( $function, $plugin, $filter ) {
-			$args = func_get_args();
-			ob_start();
-			try {
-				call_user_func_array( $function, $args );
-			} catch ( \Error $e ) {
-				error_log( $e->getMessage() );
-				$this->addError( $plugin, $filter, $e );
-			}
-			$this->addContent( $plugin, $filter, ob_get_clean() );
+			// noop for the moment. ob_start seems to break :
+			// "Cannot use output buffering in output buffering display handlers"
 		};
 	}
 
