@@ -26,6 +26,7 @@ class Admin {
 	const DEFAULT_WIDGET_CONFIGURATION = [
 		'step_title'    => 'Our site uses plugins',
 		'step_subTitle' => 'they require your consent as well',
+		'step_topTitle' => '',
 		'step_message'  => "We're using a platform called Wordpress that's using server-side plugins that can place trackers and scripts. We need your approval for running them."
 	];
 
@@ -212,7 +213,8 @@ class Admin {
 			'Axeptio',
 			'manage_options',
 			'axeptio',
-			[ $this, "admin_page" ]
+			[ $this, "admin_page" ],
+			'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHZpZXdCb3g9IjIxLjg0IDI5Ljc1IDU5LjUzIDM3Ljk4Ij4gICA8cGF0aCBkPSJNMzcuMyA2M2MtLjQuNS0xLjEuNy0xLjguNy0uNiAwLTEuMy0uMy0xLjctLjdMMjIuNiA1MS45Yy0xLS45LTEtMi41LS4xLTMuNXMyLjQtMS4xIDMuNS0uMmMuMSAwIC4xLjEuMS4xbDkuNCA5LjQgMjcuMi0yNy4yYy45LTEgMi41LTEgMy41IDAgLjkgMSAuOSAyLjUgMCAzLjVMMzcuMyA2M3ptMjEuNS04LjRjLTEuMyAwLTIuNC0xLjEtMi40LTIuNCAwLS43LjItMS4zLjctMS43bDE3LjgtMTcuOGMuOS0uOSAyLjQtLjkgMy40IDAgLjkuOS45IDIuNCAwIDMuNEw2MC41IDUzLjljLS40LjQtMSAuNy0xLjcuN004MC43IDYwbC03IDdjLS45LjktMi40IDEtMy40LjEtMS0xLTEtMi41LS4xLTMuNWw3LTdjLjktLjkgMi40LS45IDMuNCAwIDEgMSAxIDIuNS4xIDMuNG0wLTEzLjFMNjcuMSA2MC40Yy0uNC40LTEgLjctMS43LjdzLTEuMi0uMy0xLjctLjdjLS45LS45LS45LTIuNCAwLTMuNGwxMy41LTEzLjZjLjktLjkgMi40LS45IDMuNCAwIDEgMSAxIDIuNi4xIDMuNSIgZmlsbD0iIzIxMjEyMSI+PC9wYXRoPiA8L3N2Zz4K'
 		);
 		add_submenu_page(
 			'axeptio',
@@ -241,18 +243,18 @@ class Admin {
 			if ( $_POST['action'] == 'settings' ) {
 
 				$current_client_id = get_option( self::OPTION_CLIENT_ID );
-				if ( $current_client_id !== $_POST['client_id'] ) {
+				if ( $current_client_id !== esc_attr( $_POST['client_id'] ) ) {
 					wp_cache_delete( self::CACHE_AXEPTIO_CONFIGURATION . "_$current_client_id" );
 				}
 
-				update_option( self::OPTION_CLIENT_ID, $_POST['client_id'] );
-				update_option( self::OPTION_COOKIES_VERSION, $_POST['cookies_version'] );
-				update_option( self::OPTION_TRIGGER_GTM_EVENT, $_POST['trigger_gtm_events'] );
-				update_option( self::OPTION_USER_COOKIES_DURATION, $_POST['user_cookies_duration'] );
-				update_option( self::OPTION_USER_COOKIES_DOMAIN, $_POST['user_cookies_domain'] );
-				update_option( self::OPTION_USER_COOKIES_SECURE, $_POST['user_cookies_secure'] );
-				update_option( self::OPTION_AUTHORIZED_VENDORS_COOKIE_NAME, $_POST['authorized_vendors_cookie_name'] );
-				update_option( self::OPTION_JSON_COOKIE_NAME, $_POST['json_cookie_name'] );
+				update_option( self::OPTION_CLIENT_ID, esc_attr( $_POST['client_id'] ) );
+				update_option( self::OPTION_COOKIES_VERSION, esc_attr( $_POST['cookies_version'] ) );
+				update_option( self::OPTION_TRIGGER_GTM_EVENT, isset( $_POST['trigger_gtm_events'] ) && esc_attr( $_POST['trigger_gtm_events'] ) ? 1 : 0 );
+				update_option( self::OPTION_USER_COOKIES_DURATION, esc_attr( $_POST['user_cookies_duration'] ) );
+				update_option( self::OPTION_USER_COOKIES_DOMAIN, esc_attr( $_POST['user_cookies_domain'] ) );
+				update_option( self::OPTION_USER_COOKIES_SECURE, isset( $_POST['user_cookies_secure'] ) && esc_attr( $_POST['user_cookies_secure'] ) ? 1 : 0 );
+				update_option( self::OPTION_AUTHORIZED_VENDORS_COOKIE_NAME, esc_attr( $_POST['authorized_vendors_cookie_name'] ) );
+				update_option( self::OPTION_JSON_COOKIE_NAME, esc_attr( $_POST['json_cookie_name'] ) );
 			}
 		}
 		require __DIR__ . "/../wp-admin/settings.php";
@@ -281,16 +283,16 @@ class Admin {
 			if ( isset( $_POST['action'] ) && $_POST['action'] == 'widget_configuration' ) {
 
 				$payload = [
-					"axeptio_configuration_id" => $_POST['cookies_version'],
-					"step_name"                => $_POST['step_name'],
-					"step_title"               => $_POST['step_title'],
-					"step_subTitle"            => $_POST['step_subTitle'],
-					"step_topTitle"            => $_POST['step_topTitle'],
-					"step_message"             => stripslashes_deep( $_POST['step_message'] ),
-					"step_image"               => $_POST['step_image'],
-					"step_imageHeight"         => intval( $_POST['step_image'] ),
-					"step_imageWidth"          => intval( $_POST['step_width'] ),
-					"step_disablePaint"        => $_POST['step_disablePaint'] ? 1 : 0,
+					"axeptio_configuration_id" => esc_attr( $_POST['cookies_version'] ),
+					"step_name"                => esc_attr( $_POST['step_name'] ),
+					"step_title"               => esc_attr( $_POST['step_title'] ),
+					"step_subTitle"            => esc_attr( $_POST['step_subTitle'] ),
+					"step_topTitle"            => esc_attr( $_POST['step_topTitle'] ),
+					"step_message"             => stripslashes_deep( wp_kses_post( $_POST['step_message'] ) ),
+					"step_image"               => esc_attr( $_POST['step_image'] ),
+					"step_imageHeight"         => intval( esc_attr( $_POST['step_imageHeight'] ) ),
+					"step_imageWidth"          => intval( esc_attr( $_POST['step_imageWidth'] ) ),
+					"step_disablePaint"        => isset( $_POST['step_disablePaint'] ) && esc_attr( $_POST['step_disablePaint'] ) ? 1 : 0,
 				];
 
 				if ( ! $row_exists ) {
@@ -457,6 +459,13 @@ class Admin {
 	public function deletePluginConfiguration( $item ) {
 		global $wpdb;
 		$table = self::getPluginConfigurationsTable();
+
+		return $wpdb->delete( $table, $item );
+	}
+
+	public function deleteWidgetConfiguration( $item ) {
+		global $wpdb;
+		$table = self::getWidgetConfigurationsTable();
 
 		return $wpdb->delete( $table, $item );
 	}

@@ -17,3 +17,7 @@ wp option update permalink_structure "/%year%/%monthnum%/%postname%/" --skip-the
 
 # install youtube embed: https://wordpress.org/plugins/youtube-embed-plus/
 wp plugin install youtube-embed-plus --activate
+
+# install woocommerce: https://wordpress.org/plugins/woocommerce/
+wp plugin install woocommerce --activate
+

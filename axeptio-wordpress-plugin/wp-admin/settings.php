@@ -122,7 +122,7 @@ $admin = Admin::instance();
 
         function loadVersions(clientId) {
             var select = $('#cookies_version');
-            select.append($("<option></option>").attr("value", "").text(<?= __('Dynamic: let Axeptio SDK decide based on your configuration', 'axeptio-wordpress-plugin')?>));
+            select.append($("<option></option>").attr("value", "").text("<?= __('Dynamic: let Axeptio SDK decide based on your configuration', 'axeptio-wordpress-plugin')?>"));
             jQuery.ajax({
                 type: 'get',
                 dataType: 'json',

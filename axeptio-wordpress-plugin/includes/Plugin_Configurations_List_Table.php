@@ -50,6 +50,7 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 
 	private function process_bulk_action() {
 		if ( 'delete' === $this->current_action() ) {
+
 			foreach ( $_POST['plugin_configuration'] as $item ) {
 				$parts         = explode( '/', $item );
 				$plugin        = $parts[0];
@@ -150,7 +151,7 @@ class Plugin_Configurations_List_Table extends \WP_List_Table {
 	 *
 	 * @return string
 	 */
-	public function column_actions($item) {
+	public function column_actions( $item ) {
 
 		$edit_url = Admin::getPluginConfigurationURI( $item );
 

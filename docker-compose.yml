@@ -40,6 +40,8 @@ services:
     environment:
       MYSQL_DATABASE: ${WORDPRESS_DB_NAME}
       MYSQL_ROOT_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+    ports:
+      - '6606:3306'
     networks:
       - 'back'
   proxy:
@@ -54,8 +56,8 @@ services:
       - '/var/run/docker.sock:/tmp/docker.sock:ro'
 
 networks:
-  front: {}
-  back: {}
+  front: { }
+  back: { }
 
 volumes:
-  wp: {}
+  wp: { }

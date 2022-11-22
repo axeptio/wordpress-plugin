@@ -175,12 +175,20 @@ class Plugin {
 		$wordpress_vendors = array_values( array_map( function ( $pluginConf ) {
 			$plugin = Admin::getPlugin( $pluginConf->plugin );
 
+			/*
+			echo '<pre>';
+			var_dump( $plugin );
+			var_dump( $pluginConf );
+			echo '</pre>';
+			*/
+
 			return [
 				"name"             => "wp_$pluginConf->plugin",
 				"title"            => $pluginConf->vendor_title ?: $plugin['Title'],
 				"shortDescription" => $pluginConf->vendor_shortDescription ?: $plugin['Description'],
 				"longDescription"  => $pluginConf->vendor_longDescription,
 				"policyUrl"        => $pluginConf->vendor_policyUrl ?: $plugin['PluginURI'],
+				// TODO: Vendor Domain
 				"domain"           => $pluginConf->vendor_domain ?: parse_url( $plugin['PluginURI'], PHP_URL_HOST ),
 				"image"            => $pluginConf->vendor_image,
 				"type"             => "wordpress plugin",

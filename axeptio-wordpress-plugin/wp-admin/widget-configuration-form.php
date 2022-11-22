@@ -81,7 +81,8 @@ $admin = Admin::instance();
                 </div>
                 <div class="form-field">
                     <p>
-                        <label for="insert_position"><?= __( 'Insert position', 'axeptio-wordpress-plugin' ) ?></label></p>
+                        <label for="insert_position"><?= __( 'Insert position', 'axeptio-wordpress-plugin' ) ?></label>
+                    </p>
                     <p>
                         <select type="text" id="insert_position" name="insert_position">
 							<?php
@@ -103,7 +104,7 @@ $admin = Admin::instance();
                         <label for="position"><?= __( 'Position', 'axeptio-wordpress-plugin' ) ?></label></p>
                     <p>
                         <input type="number" id="position" name="position"
-                               value="<?= $value['position'] ?: '0' ?>"
+                               value="<?= isset( $value['position'] ) ? esc_attr( $value['position'] ) : '0' ?>"
                         />
                     </p>
                 </div>
@@ -120,7 +121,7 @@ $admin = Admin::instance();
                     <p>
                         <input type="text" id="step_title" name="step_title"
                                placeholder="<?= $ph['step_title'] ?>"
-                               value="<?= $value['step_title'] ?: '' ?>"
+                               value="<?= isset( $value['step_title'] ) ? esc_attr( $value['step_title'] ) : '' ?>"
                         />
                     </p>
                 </div>
@@ -130,7 +131,7 @@ $admin = Admin::instance();
                     <p>
                         <input type="text" id="step_topTitle" name="step_topTitle"
                                placeholder="<?= $ph['step_topTitle'] ?>"
-                               value="<?= $value['step_topTitle'] ?: '' ?>"
+                               value="<?= isset( $value['step_topTitle'] ) ? esc_attr( $value['step_topTitle'] ) : '' ?>"
                         />
                     </p>
                 </div>
@@ -140,7 +141,7 @@ $admin = Admin::instance();
                     <p>
                         <input type="text" id="step_subTitle" name="step_subTitle"
                                placeholder="<?= $ph['step_subTitle'] ?>"
-                               value="<?= $value['step_subTitle'] ?: '' ?>"
+                               value="<?= isset( $value['step_subTitle'] ) ? esc_attr( $value['step_subTitle'] ) : '' ?>"
                         />
                     </p>
                 </div>
@@ -150,7 +151,7 @@ $admin = Admin::instance();
                     <p>
                         <textarea type="text" id="step_message" class="code" rows="5"
                                   placeholder="<?= $ph['step_message'] ?>"
-                                  name="step_message"><?= $value['step_message'] ?: '' ?></textarea>
+                                  name="step_message"><?= isset( $value['step_message'] ) ? wp_kses_post( $value['step_message'] ) : '' ?></textarea>
                     </p>
                 </div>
             </td>
@@ -165,7 +166,7 @@ $admin = Admin::instance();
                         <label for="step_image"><?= __( 'Image URL', 'axeptio-wordpress-plugin' ) ?></label></p>
                     <p>
                         <input type="text" id="step_image" name="step_image"
-                               value="<?= $value['step_image'] ?: '' ?>"
+                               value="<?= isset( $value['step_image'] ) ? esc_attr( $value['step_image'] ) : '' ?>"
                         />
                     </p>
                 </div>
@@ -175,7 +176,7 @@ $admin = Admin::instance();
                     </p>
                     <p>
                         <input type="number" id="step_imageHeight" name="step_imageHeight"
-                               value="<?= $value['step_imageHeight'] ?: '' ?>"
+                               value="<?= isset( $value['step_imageHeight'] ) ? esc_attr( $value['step_imageHeight'] ) : '' ?>"
                         />
                     </p>
                 </div>
@@ -185,7 +186,7 @@ $admin = Admin::instance();
                     </p>
                     <p>
                         <input type="number" id="step_imageWidth" name="step_imageWidth"
-                               value="<?= $value['step_imageWidth'] ?: '' ?>"
+                               value="<?= isset( $value['step_imageWidth'] ) ? esc_attr( $value['step_imageWidth'] ) : '' ?>"
                         />
                     </p>
                 </div>
@@ -196,8 +197,8 @@ $admin = Admin::instance();
                     <p>
                         <input type="checkbox"
                                id="step_disablePaint"
-                               name="step_imageWidth"
-							<?= $value['step_disablePaint'] ? 'checked="checked"' : '' ?> />
+                               name="step_disablePaint"
+							<?= esc_attr( $value['step_disablePaint'] ) ? 'checked="checked"' : '' ?> />
                     </p>
                 </div>
             </td>

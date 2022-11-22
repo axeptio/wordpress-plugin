@@ -95,7 +95,8 @@ $plugins = get_plugins();
                 </label>
             </th>
             <td>
-                <input type="hidden" id="cookie_widget_step" name="cookie_widget_step" value="<?= $value['cookie_widget_step'] ?>" />
+                <input type="hidden" id="cookie_widget_step" name="cookie_widget_step"
+                       value="<?= $value['cookie_widget_step'] ?>"/>
                 <select name="cookie_widget_step_select" id="cookie_widget_step_select"
                         data-value="<?= $value['cookie_widget_step'] ?>"></select>
             </td>
@@ -129,7 +130,7 @@ $plugins = get_plugins();
 					?>">
                         <label><?= __( 'List of filters', 'axeptio-wordpress-plugin' ) ?></label><br>
                         <textarea class="large-text code"
-                                  name="wp_filter_list"><?= isset( $value['wp_filter_list'] ) ? $value['wp_filter_list'] : false ?></textarea>
+                                  name="wp_filter_list"><?= isset( $value['wp_filter_list'] ) ? esc_textarea( $value['wp_filter_list'] ) : false ?></textarea>
                     </div>
                     <p class="description">
 						<?= __( 'Determines if the Axeptio Wordpress plugin will intercept and block the <code>$wp_filters</code>
@@ -167,7 +168,7 @@ $plugins = get_plugins();
 					?>">
                         <label><?= __( 'List of tags', 'axeptio-wordpress-plugin' ) ?></label><br>
                         <textarea class="large-text code" name="shortcode_tags_list">
-                            <?= isset( $value['shortcode_tags_list'] ) ? $value['shortcode_tags_list'] : false ?>
+                            <?= isset( $value['shortcode_tags_list'] ) ? esc_textarea( $value['shortcode_tags_list'] ) : false ?>
                         </textarea>
                     </div>
                     <p class="description">
@@ -201,7 +202,7 @@ $plugins = get_plugins();
                     <p>
                         <textarea id="vendor_shortDescription"
                                   name="vendor_shortDescription"
-                        ><?= isset( $value['vendor_shortDescription'] ) ? $value['vendor_shortDescription'] : false ?></textarea>
+                        ><?= isset( $value['vendor_shortDescription'] ) ? esc_textarea( $value['vendor_shortDescription'] ) : false ?></textarea>
                     </p>
                 </div>
                 <div class="form-field">
@@ -210,7 +211,7 @@ $plugins = get_plugins();
                     </p>
                     <p>
                         <textarea id="vendor_longDescription"
-                                  name="vendor_longDescription"><?= isset( $value['vendor_longDescription'] ) ? $value['vendor_longDescription'] : false ?></textarea>
+                                  name="vendor_longDescription"><?= isset( $value['vendor_longDescription'] ) ? esc_textarea( $value['vendor_longDescription'] ) : false ?></textarea>
                     </p>
                 </div>
                 <div class="form-field">
@@ -248,88 +249,88 @@ $plugins = get_plugins();
     </table>
 </form>
 <script>
-  var widgetConfigurations = <?= json_encode( Admin::instance()->fetchWidgetConfigurations() ) ?>;
-  var axeptioConfiguration = <?= json_encode( Admin::instance()->axeptioConfiguration ) ?>;
+    var widgetConfigurations = <?= json_encode( Admin::instance()->fetchWidgetConfigurations() ) ?>;
+    var axeptioConfiguration = <?= json_encode( Admin::instance()->axeptioConfiguration ) ?>;
 </script>
 <script>
-  jQuery(function ($) {
+    jQuery(function ($) {
 
-    var $cookieWidgetStep = $('#cookie_widget_step_select');
-    var $cookiesVersion = $('#cookies_version');
+        var $cookieWidgetStep = $('#cookie_widget_step_select');
+        var $cookiesVersion = $('#cookies_version');
 
-    $('.select_mode').on('change', function (e) {
-      $('.toggle_list.' + e.target.name).toggleClass('hidden', !(e.target.value.indexOf('list') > -1));
-    });
-
-    $('#plugin_select').on('change', function (e) {
-      $('#vendor_title').attr({placeholder: e.target.selectedOptions[0].dataset.title})
-      $('#vendor_shortDescription').attr({placeholder: e.target.selectedOptions[0].dataset.description})
-      $('#vendor_policyUrl').attr({placeholder: e.target.selectedOptions[0].dataset.uri})
-    });
-
-    function updateCookiesVersionDescription() {
-      var selectedOption = $cookiesVersion[0].selectedOptions[0];
-      $('.description.cookies_version .all').toggleClass('hidden', selectedOption.value !== '');
-      $('.description.cookies_version .selected').toggleClass('hidden', selectedOption.value === '');
-      if (selectedOption.value.value !== '') {
-        $('#axeptio_configuration_identifier').text(selectedOption.dataset.identifier)
-        $('#axeptio_configuration_name').text(selectedOption.dataset.name)
-        $('#axeptio_configuration_language').text(selectedOption.dataset.language)
-      }
-    }
-
-    function updateCookieWidgetSteps() {
-      var selectedOption = $cookiesVersion[0].selectedOptions[0];
-      var identifier = selectedOption.value;
-      var options = [];
-
-      function getOptionLabel(title, subTitle, topTitle, layout, name) {
-        return [topTitle, title, subTitle].filter(function (str) {
-          return !!str
-        }).join(' ') + ' (Layout: ' + layout + ', Name: '+ name +')'
-      }
-
-      axeptioConfiguration.cookies.filter(function (cookieConfig) {
-        return identifier === cookieConfig.identifier || !identifier;
-      }).forEach(function (cookieConfig) {
-        cookieConfig.steps.forEach(function (step) {
-          options.push({
-            label: getOptionLabel(step.title, step.subTitle, step.topTitle, step.layout, step.name),
-            value: step.name
-          })
+        $('.select_mode').on('change', function (e) {
+            $('.toggle_list.' + e.target.name).toggleClass('hidden', !(e.target.value.indexOf('list') > -1));
         });
-      });
 
-      widgetConfigurations.filter(function (widgetConfig) {
-        return widgetConfig.axeptio_configuration_id === '' // widget config is not config scoped
-          || identifier === widgetConfig.axeptio_configuration_id // selected config matches widget config
-          || identifier === '' // no config selected, returning every cookies' configurations
-      }).forEach(function (widgetConfig) {
-        options.push({
-          label: getOptionLabel(widgetConfig.step_title, widgetConfig.step_subTitle, widgetConfig.step_topTitle, 'wordpress', widgetConfig.step_name),
-          value: widgetConfig.step_name
+        $('#plugin_select').on('change', function (e) {
+            $('#vendor_title').attr({placeholder: e.target.selectedOptions[0].dataset.title})
+            $('#vendor_shortDescription').attr({placeholder: e.target.selectedOptions[0].dataset.description})
+            $('#vendor_policyUrl').attr({placeholder: e.target.selectedOptions[0].dataset.uri})
         });
-      });
-      $cookieWidgetStep.empty().append(options.map(function (option) {
-        return $('<option>')
-          .attr('value', option.value)
-          .attr('selected', option.value === $cookieWidgetStep.attr('data-value'))
-          .text(option.label);
-      }));
-    }
 
-    $cookieWidgetStep.on('change', function(e){
-        $('#cookie_widget_step').val(e.target.value)
-    });
+        function updateCookiesVersionDescription() {
+            var selectedOption = $cookiesVersion[0].selectedOptions[0];
+            $('.description.cookies_version .all').toggleClass('hidden', selectedOption.value !== '');
+            $('.description.cookies_version .selected').toggleClass('hidden', selectedOption.value === '');
+            if (selectedOption.value.value !== '') {
+                $('#axeptio_configuration_identifier').text(selectedOption.dataset.identifier)
+                $('#axeptio_configuration_name').text(selectedOption.dataset.name)
+                $('#axeptio_configuration_language').text(selectedOption.dataset.language)
+            }
+        }
 
-    // On cookies version change, we want to allow our user to select a cookie widget step
-    // from the selected cookies version or refer to a widget configuration defined
-    // in the WordPress extension's admin panel.
-    $cookiesVersion.on('change', function () {
-      updateCookiesVersionDescription();
-      updateCookieWidgetSteps();
-    }).trigger('change');
+        function updateCookieWidgetSteps() {
+            var selectedOption = $cookiesVersion[0].selectedOptions[0];
+            var identifier = selectedOption.value;
+            var options = [];
+
+            function getOptionLabel(title, subTitle, topTitle, layout, name) {
+                return [topTitle, title, subTitle].filter(function (str) {
+                    return !!str
+                }).join(' ') + ' (Layout: ' + layout + ', Name: ' + name + ')'
+            }
+
+            axeptioConfiguration.cookies.filter(function (cookieConfig) {
+                return identifier === cookieConfig.identifier || !identifier;
+            }).forEach(function (cookieConfig) {
+                cookieConfig.steps.forEach(function (step) {
+                    options.push({
+                        label: getOptionLabel(step.title, step.subTitle, step.topTitle, step.layout, step.name),
+                        value: step.name
+                    })
+                });
+            });
+
+            widgetConfigurations.filter(function (widgetConfig) {
+                return widgetConfig.axeptio_configuration_id === '' // widget config is not config scoped
+                    || identifier === widgetConfig.axeptio_configuration_id // selected config matches widget config
+                    || identifier === '' // no config selected, returning every cookies' configurations
+            }).forEach(function (widgetConfig) {
+                options.push({
+                    label: getOptionLabel(widgetConfig.step_title, widgetConfig.step_subTitle, widgetConfig.step_topTitle, 'wordpress', widgetConfig.step_name),
+                    value: widgetConfig.step_name
+                });
+            });
+            $cookieWidgetStep.empty().append(options.map(function (option) {
+                return $('<option>')
+                    .attr('value', option.value)
+                    .attr('selected', option.value === $cookieWidgetStep.attr('data-value'))
+                    .text(option.label);
+            }));
+        }
+
+        $cookieWidgetStep.on('change', function (e) {
+            $('#cookie_widget_step').val(e.target.value)
+        });
+
+        // On cookies version change, we want to allow our user to select a cookie widget step
+        // from the selected cookies version or refer to a widget configuration defined
+        // in the WordPress extension's admin panel.
+        $cookiesVersion.on('change', function () {
+            updateCookiesVersionDescription();
+            updateCookieWidgetSteps();
+        }).trigger('change');
 
 
-  })
+    })
 </script>

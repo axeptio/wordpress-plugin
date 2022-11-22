@@ -7,11 +7,14 @@ Integrate Axeptio SDK to your Wordpress Website
 - `.gitignore`. Used to exclude certain files from the repository.
 - `README.md`. The file that you’re currently reading.
 - A `axeptio-wordpress-plugin` directory that contains the source code - a fully executable WordPress plugin.
-  - This folder can be zipped and upload to test on your wordpress installation
+    - This folder can be zipped and upload to test on your wordpress installation
 
 ## Features
 
-- The plugin is based on the [Plugin API](http://codex.wordpress.org/Plugin_API), [Coding Standards](http://codex.wordpress.org/WordPress_Coding_Standards), and [Documentation Standards](https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/).
+- The plugin is based on the [Plugin API](http://codex.wordpress.org/Plugin_API)
+  , [Coding Standards](http://codex.wordpress.org/WordPress_Coding_Standards),
+  and [Documentation Standards](https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/)
+  .
 - All classes, functions, and variables are documented so that you know what you need to change.
 
 ## Installation
@@ -56,7 +59,8 @@ docker-compose run --rm wp-cli install-wp
 ```
 
 Log in to
-[docker-compose]: https://docs.docker.com/compose/ `http://axeptio-wordpress-plugin.test/wp-admin/` with `wordpress` / `wordpress`.
+[docker-compose]: https://docs.docker.com/compose/ `http://axeptio-wordpress-plugin.test/wp-admin/` with `wordpress`
+/ `wordpress`.
 
 Alternatively, you can navigate to `http://axeptio-wordpress-plugin.test/` and manually perform
 the famous five-second install.
@@ -86,12 +90,13 @@ Check if an element of the stack is up:
 docker-compose ps
 ```
 
-If you updated some config file, .env or any docker file and the changes are not showing, recreate volumes and containers with the following options:
+If you updated some config file, .env or any docker file and the changes are not showing, recreate volumes and
+containers with the following options:
 
 ```
 /!\ DATA WILL BE LOST /!\
 
-docker-compose --force-recreate -V
+docker-compose up --force-recreate -V
 ```
 
 Recreate anonymous volumes instead of retrieving data from the previous containers: `--renew-anon-volumes , -V`

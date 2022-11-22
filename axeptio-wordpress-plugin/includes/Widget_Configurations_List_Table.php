@@ -46,10 +46,11 @@ class Widget_Configurations_List_Table extends \WP_List_Table {
 	private function process_bulk_action() {
 		if ( 'delete' === $this->current_action() ) {
 			foreach ( $_POST['widget_configuration'] as $item ) {
-				//todo
+				Admin::instance()->deleteWidgetConfiguration( [
+					"axeptio_configuration_id" => $item
+				] );
 			}
 		}
-
 	}
 
 
