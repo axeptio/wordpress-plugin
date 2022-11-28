@@ -102,3 +102,9 @@ docker-compose up --force-recreate -V
 Recreate anonymous volumes instead of retrieving data from the previous containers: `--renew-anon-volumes , -V`
 
 Recreate containers even if their configuration and image haven't changed: `--force-recreate`
+
+# To Tear Down
+
+```
+docker-compose down --volumes
+```
