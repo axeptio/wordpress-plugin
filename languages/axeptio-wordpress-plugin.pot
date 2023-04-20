@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2023-04-20 17:15+0200\n"
+"POT-Creation-Date: 2023-04-20 17:25+0200\n"
 "PO-Revision-Date: 2023-04-20 17:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -102,7 +102,7 @@ msgid "Yes, I enable the widget on my website."
 msgstr ""
 
 #: templates/admin/fields/main/version.php:7
-msgid "Select a version"
+msgid "Dynamic (Axeptio based)"
 msgstr ""
 
 #: templates/admin/onboarding/account.php:7
