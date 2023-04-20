@@ -4,19 +4,25 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1cd402ac455ef3138dd82300a3643993
+class ComposerStaticInitc35a26fb5048ef0ae4675e6c55e08942
 {
+    public static $files = array (
+        'a89f78115b00a4e280071442ab220fe9' => __DIR__ . '/../..' . '/includes/helpers/helpers.php',
+        '79c479da76b175a4023b661c0614ed20' => __DIR__ . '/../..' . '/includes/helpers/utility.php',
+        'a27da8266b477524edc642155fb08aa1' => __DIR__ . '/../..' . '/includes/core.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
-        'A' => 
+        '\\' => 
         array (
-            'Axpetio\\SDKPlugin\\Inc\\' => 22,
+            '\\Axeptio\\' => 9,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Axpetio\\SDKPlugin\\Inc\\' => 
+        '\\Axeptio\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/inc',
+            0 => __DIR__ . '/../..' . '/includes/classes',
         ),
     );
 
@@ -27,9 +33,9 @@ class ComposerStaticInit1cd402ac455ef3138dd82300a3643993
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1cd402ac455ef3138dd82300a3643993::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1cd402ac455ef3138dd82300a3643993::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit1cd402ac455ef3138dd82300a3643993::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc35a26fb5048ef0ae4675e6c55e08942::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc35a26fb5048ef0ae4675e6c55e08942::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitc35a26fb5048ef0ae4675e6c55e08942::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -39,7 +39,7 @@ Please follow our documentation to configure and test your settings for Axeptio 
 
 1. Upload the entire `Axeptio Plugin` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Look at your admin bar and enjoy using the new links there... (Axeptio SDK) 
+3. Look at your admin bar and enjoy using the new links there... (Axeptio SDK)
 4. Go and manage your widget by adding your project ID...
 
 == Documentation ==
@@ -57,7 +57,7 @@ Axeptio is free to use and always will be up to 200 visitors/month. If your webs
 1. Log into your account and select your project
 2. Select the "Here are our cookies" screen or create it if needed by clicking "New."
 3. Click on "Add a new cookie" > our cookie library appears
-4. Search for your cookie by entering its name 
+4. Search for your cookie by entering its name
 [Add New tag](https://support.axeptio.eu/hc/en-gb/articles/7658814085137-How-to-add-a-new-Cookie-in-my-tags-list-)
 
 = Customize my widget's aspect =
@@ -66,6 +66,13 @@ The idea is to customize the appearance of your widget so that it matches the de
 All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en-gb/articles/4402985038225-Customize-my-widget-s-aspect)
 
 == Changelog ==
+
+### 1.1.0 ###
+
+- New UI
+- Code refactoring
+- New SDK loading method without additional http call (inline code)
+
 ### 1.0.0 ###
 
 First release
