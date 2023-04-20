@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2023-04-19 18:04+0200\n"
-"PO-Revision-Date: 2023-04-19 18:04+0200\n"
+"POT-Creation-Date: 2023-04-20 17:15+0200\n"
+"PO-Revision-Date: 2023-04-20 17:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -19,17 +19,18 @@ msgstr ""
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 "X-Poedit-SearchPathExcluded-2: node_modules\n"
 "X-Poedit-SearchPathExcluded-3: dist\n"
 
-#: axeptio.php:31
+#: axeptio-wordpress-plugin.php:31
 msgid "Unable to activate Axeptio"
 msgstr "Impossible d'activer Axeptio"
 
 #. translators: %1$s: current php version min and %2$s version of php required
-#: axeptio.php:35
+#: axeptio-wordpress-plugin.php:35
 #, php-format
 msgid ""
 "Your server is currently running PHP %1$s. The Axeptio plugin requires at "
@@ -39,38 +40,38 @@ msgstr ""
 "moins PHP %2$s. Veuillez mettre à jour votre version de PHP pour utiliser ce "
 "plugin."
 
-#: axeptio.php:39
+#: axeptio-wordpress-plugin.php:39
 msgid "Return to plugins pages"
 msgstr "Retour à la page des plugins"
 
-#: includes/classes/admin/pages/class-admin-main.php:73
+#: includes/classes/admin/pages/class-admin-main.php:75
 msgid "Axeptio Widget Integration"
 msgstr "Intégration du Widget Axeptio"
 
 #. Plugin Name of the plugin/theme
-#: includes/classes/admin/pages/class-admin-main.php:74
+#: includes/classes/admin/pages/class-admin-main.php:76
 #: templates/admin/onboarding/welcome.php:8 templates/admin/settings-main.php:9
 msgid "Axeptio"
 msgstr "Axeptio"
 
-#: includes/classes/admin/pages/class-admin-main.php:124
+#: includes/classes/admin/pages/class-admin-main.php:126
 #: templates/admin/fields/main/admin-section.php:2
 msgid "Widget settings"
 msgstr "Paramètres de widget"
 
-#: includes/classes/admin/pages/class-admin-main.php:149
+#: includes/classes/admin/pages/class-admin-main.php:151
 msgid "Do you want to enable the widget?"
 msgstr "Voulez-vous activer le widget ?"
 
-#: includes/classes/admin/pages/class-admin-main.php:160
+#: includes/classes/admin/pages/class-admin-main.php:162
 msgid "Project ID"
 msgstr "ID du projet"
 
-#: includes/classes/admin/pages/class-admin-main.php:171
+#: includes/classes/admin/pages/class-admin-main.php:173
 msgid "Options"
 msgstr "Options"
 
-#: includes/classes/admin/pages/class-admin-main.php:182
+#: includes/classes/admin/pages/class-admin-main.php:184
 msgid "Project Version"
 msgstr "Version du projet"
 
@@ -107,6 +108,43 @@ msgstr "Valider"
 msgid "Yes, I enable the widget on my website."
 msgstr "Oui, j'active le widget sur mon site web."
 
+#: templates/admin/fields/main/version.php:7
+msgid "Select a version"
+msgstr "Sélectionner une version"
+
+#: templates/admin/onboarding/account.php:7
+msgid "Don't have a Axeptio account?"
+msgstr "Vous n'avez pas de compte Axeptio ?"
+
+#: templates/admin/onboarding/account.php:10
+msgid "You need an Axeptio account to finish the configuration of this module"
+msgstr ""
+"Vous avez besoin d'un compte Axeptio pour terminer la configuration de ce "
+"module"
+
+#: templates/admin/onboarding/account.php:14
+msgid "I create an account now"
+msgstr "Je crée un compte maintenant"
+
+#: templates/admin/onboarding/account.php:17
+msgid "Learn more"
+msgstr "En savoir plus"
+
+#: templates/admin/onboarding/account.php:23
+msgid "You have already a Axeptio account?"
+msgstr "Vous avez déjà un compte Axeptio ?"
+
+#: templates/admin/onboarding/account.php:26
+msgid ""
+"Go to your personal dashboard to retrieve the project ID you want to use"
+msgstr ""
+"Accédez à votre tableau de bord pour récupérer l'identifiant du projet que "
+"vous souhaitez utiliser"
+
+#: templates/admin/onboarding/account.php:30
+msgid "I login to my account"
+msgstr "Je me connecte à mon compte"
+
 #: templates/admin/onboarding/welcome.php:10
 msgid "Welcome and thank you for installing the Axeptio WordPress extension!"
 msgstr "Bienvenue et merci d'avoir installé l'extension WordPress Axeptio !"
@@ -126,46 +164,13 @@ msgstr ""
 "Avant de commencer, nous vous invitons à configurer les paramètres ci-"
 "dessous !"
 
-#: templates/admin/settings-main.php:10
-msgid "Your Axeptio Settings"
-msgstr "Votre configuration Axeptio"
-
-#: templates/admin/settings-main.php:43
+#: templates/admin/sections/main.php:29
 msgid "How To Integrate Axeptio?"
 msgstr "Comment intégrer Axeptio ?"
 
-#: templates/admin/settings-main.php:57
-msgid "Don't have a Axeptio account?"
-msgstr "Vous n'avez pas de compte Axeptio ?"
-
-#: templates/admin/settings-main.php:60
-msgid "You need an Axeptio account to finish the configuration of this module"
-msgstr ""
-"Vous avez besoin d'un compte Axeptio pour terminer la configuration de ce "
-"module"
-
-#: templates/admin/settings-main.php:64
-msgid "I create an account now"
-msgstr "Je crée un compte maintenant"
-
-#: templates/admin/settings-main.php:67
-msgid "Learn more"
-msgstr "En savoir plus"
-
-#: templates/admin/settings-main.php:73
-msgid "You have already a Axeptio account?"
-msgstr "Vous avez déjà un compte Axeptio ?"
-
-#: templates/admin/settings-main.php:76
-msgid ""
-"Go to your personal dashboard to retrieve the project ID you want to use"
-msgstr ""
-"Accédez à votre tableau de bord pour récupérer l'identifiant du projet que "
-"vous souhaitez utiliser"
-
-#: templates/admin/settings-main.php:80
-msgid "I login to my account"
-msgstr "Je me connecte à mon compte"
+#: templates/admin/settings-main.php:10
+msgid "Your Axeptio Settings"
+msgstr "Votre configuration Axeptio"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.axeptio.eu/"

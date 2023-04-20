@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2023-04-20 11:27+0200\n"
-"PO-Revision-Date: 2023-04-17 07:50+0200\n"
+"Project-Id-Version: Axeptio\n"
+"POT-Creation-Date: 2023-04-20 17:15+0200\n"
+"PO-Revision-Date: 2023-04-20 17:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -13,30 +13,29 @@ msgstr ""
 "X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: axeptio.php\n"
+"X-Poedit-WPHeader: axeptio-wordpress-plugin.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
-"X-Poedit-SearchPathExcluded-2: node_modules\n"
-"X-Poedit-SearchPathExcluded-3: dist\n"
+"X-Poedit-SearchPathExcluded-2: dist\n"
 
-#: axeptio.php:31
+#: axeptio-wordpress-plugin.php:31
 msgid "Unable to activate Axeptio"
 msgstr ""
 
 #. translators: %1$s: current php version min and %2$s version of php required
-#: axeptio.php:35
+#: axeptio-wordpress-plugin.php:35
 #, php-format
 msgid ""
 "Your server is currently running PHP %1$s. The Axeptio plugin requires at "
 "least PHP %2$s. Please upgrade your PHP version to use this plugin."
 msgstr ""
 
-#: axeptio.php:39
+#: axeptio-wordpress-plugin.php:39
 msgid "Return to plugins pages"
 msgstr ""
 
@@ -46,8 +45,7 @@ msgstr ""
 
 #. Plugin Name of the plugin/theme
 #: includes/classes/admin/pages/class-admin-main.php:76
-#: templates/admin/onboarding/welcome.php:8
-#: templates/admin/settings-main.php:9
+#: templates/admin/onboarding/welcome.php:8 templates/admin/settings-main.php:9
 msgid "Axeptio"
 msgstr ""
 
@@ -103,13 +101,16 @@ msgstr ""
 msgid "Yes, I enable the widget on my website."
 msgstr ""
 
+#: templates/admin/fields/main/version.php:7
+msgid "Select a version"
+msgstr ""
+
 #: templates/admin/onboarding/account.php:7
 msgid "Don't have a Axeptio account?"
 msgstr ""
 
 #: templates/admin/onboarding/account.php:10
-msgid ""
-"You need an Axeptio account to finish the configuration of this module"
+msgid "You need an Axeptio account to finish the configuration of this module"
 msgstr ""
 
 #: templates/admin/onboarding/account.php:14
@@ -144,8 +145,7 @@ msgid ""
 msgstr ""
 
 #: templates/admin/onboarding/welcome.php:16
-msgid ""
-"Before you get started, we invite you to configure the settings below!"
+msgid "Before you get started, we invite you to configure the settings below!"
 msgstr ""
 
 #: templates/admin/sections/main.php:29
