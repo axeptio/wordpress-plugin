@@ -40,3 +40,8 @@ dwsync.xml
 intermediate
 .idea
 cache
+
+wp-tests
+
+node_modules/
+vendor/
