@@ -1,0 +1,8 @@
+.buddy-cookie {
+	position: absolute;
+	width: clamp(100px, 20vw, 130px);
+	height: clamp(100px, 20vw, 130px);
+	top: 60%;
+	transform: translateY(-50%);
+	right: 0;
+}

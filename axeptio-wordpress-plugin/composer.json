@@ -9,10 +9,38 @@
     }
   ],
   "minimum-stability": "dev",
-  "require": {},
+  "require": {
+    "php": "^7.4 || ^8.0 || ^8.1"
+  },
+  "scripts": {
+    "run-stan": "vendor/bin/phpstan analyze --memory-limit=2G --no-progress",
+    "install-codestandards": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
+    "phpcs": "phpcs --basepath=.",
+    "phpcs-changed": "./bin/phpcs-changed.sh",
+    "phpcs:fix": "phpcbf"
+  },
   "autoload": {
     "psr-4": {
-      "Axpetio\\SDKPlugin\\Inc\\": "./inc"
+      "\\Axeptio\\": "includes/classes"
+    },
+    "files": [
+      "includes/helpers/helpers.php",
+      "includes/helpers/utility.php",
+      "includes/core.php"
+    ]
+  },
+  "require-dev": {
+    "wp-coding-standards/wpcs": "dev-develop",
+    "rector/rector": "^0.15.0@dev",
+    "szepeviktor/phpstan-wordpress": "dev-master",
+    "phpstan/extension-installer": "1.2.x-dev",
+    "phpcompatibility/phpcompatibility-wp": "dev-master",
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "phpstan/extension-installer": true
     }
   }
 }

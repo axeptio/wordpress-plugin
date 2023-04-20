@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    container_name: axeptio-wordpress-plugin
+    working_dir: /var/www/html/
+    volumes:
+      - ./:/var/www/html
+    environment:
+      PHP_INI_MEMORY_LIMIT: "256M"
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile

@@ -1,0 +1,27 @@
+variables:
+  GIT_SSL_NO_VERIFY: "1"
+  GIT_STRATEGY: clone
+
+cache:
+  paths:
+    - node_modules/
+    - vendor/
+
+stages:
+  - 🧪tests
+
+phpcs:
+  stage: 🧪tests
+  tags:
+    - amphibee
+  image: composer:2
+  script:
+    - composer install
+    - composer run phpcs
+
+eslint:
+  stage: 🧪tests
+  image: node:16.14.0
+  script:
+    - yarn
+    - yarn eslint
