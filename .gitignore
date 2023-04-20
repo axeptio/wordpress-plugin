@@ -42,6 +42,7 @@ intermediate
 cache
 
 wp-tests
+dist/
 
 node_modules/
 vendor/
