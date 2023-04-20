@@ -1,0 +1,9 @@
+.wp-core-ui .axeptio-settings .button {
+	@apply border-gray-300 rounded-md bg-white text-gray-900 ring-gray-300 px-3 py-2 text-sm font-semibold shadow-sm hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2;
+}
+
+.wp-core-ui .axeptio-settings .button.button-primary {
+	@apply bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600;
+}
+
+

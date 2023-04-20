@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Axpetio\\SDKPlugin\\Inc\\' => array($baseDir . '/inc'),
+    '\\Axeptio\\' => array($baseDir . '/includes/classes'),
 );

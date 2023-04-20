@@ -1,0 +1,73 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  DC_ARGS: -paxeptio-wordpress-plugin -f docker-compose.yml
+
+tasks:
+  build:
+    desc: Build containerized application services
+    cmds:
+      - docker-compose {{.DC_ARGS}} up -d --build --remove-orphans --force-recreate
+    silent: true
+
+  restart:
+    desc: Restart the docker application
+    cmds:
+      - task: stop
+      - task: start
+    silent: true
+
+  start:
+    desc: Start the docker application
+    cmds:
+      - docker-compose {{.DC_ARGS}} up -d --remove-orphans
+    silent: true
+
+  stop:
+    desc: Stop the docker application
+    cmds:
+      - docker-compose {{.DC_ARGS}} down
+    silent: true
+
+  logs:
+    desc: View the application logs
+    cmds:
+      - docker-compose {{.DC_ARGS}} logs -f web
+    silent: true
+
+  ssh:
+    desc: SSH to the docker app container (use 'task ssh -- root' to connect as root)
+    cmds:
+      - docker-compose run --rm web sh
+
+  composer-install:
+    desc: Run the installation of the composer packages
+    cmds:
+      - docker-compose run --rm web composer install
+
+  composer-require:
+    desc: Install a composer packages
+    cmds:
+      - docker-compose run --rm web composer {{.ARGS}}
+
+  php-stan:
+    desc: Lint php (WP Coding Standards)
+    cmds:
+      - docker-compose run --rm web composer run run-stan
+      -
+  lint-php:
+    desc: Lint php (WP Coding Standards)
+    cmds:
+      - docker-compose run --rm web composer run phpcs
+
+  fix-php:
+    desc: Fix php (WP Coding Standards)
+    cmds:
+      - docker-compose run --rm web composer run phpcs:fix
+
+  eslint:
+    desc: Lint php (WP Coding Standards)
+    cmds:
+      - yarn eslint assets/js/
