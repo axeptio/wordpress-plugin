@@ -92,22 +92,12 @@ class Admin_Main extends Module {
 		$args = array(
 			array(
 				'option_group' => 'xpwp_settings_group',
-				'option_name'  => 'xpwp_sdk_active',
-				'callback'     => array( $this->callbacks, 'options_group' ),
-			),
-			array(
-				'option_group' => 'xpwp_settings_group',
-				'option_name'  => 'xpwp_client_id',
+				'option_name'  => 'axeptio_settings',
 				'callback'     => array( $this->callbacks, 'options_group' ),
 			),
 			array(
 				'option_group' => 'xpwp_settings_group',
 				'option_name'  => 'xpwp_version_options',
-				'callback'     => array( $this->callbacks, 'options_group' ),
-			),
-			array(
-				'option_group' => 'xpwp_settings_group',
-				'option_name'  => 'xpwp_version',
 				'callback'     => array( $this->callbacks, 'options_group' ),
 			),
 		);

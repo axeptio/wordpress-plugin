@@ -20,5 +20,5 @@
 	<div class="ml-5">
 		<label for="xpwp_sdk_active"><?php echo esc_html__( 'Yes, I enable the widget on my website.', 'axeptio-wordpress-plugin' ); ?></label>
 	</div>
-	<input type="checkbox" @change="activeSDK = !activeSDK" class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0" id="xpwp_sdk_active" name="xpwp_sdk_active" value="1" <?php echo (int) get_option( 'xpwp_sdk_active' ) ? 'checked' : ''; ?> placeholder="">
+	<input type="checkbox" @change="activeSDK = !activeSDK" class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0" id="xpwp_sdk_active" name="axeptio_settings[sdk_active]" value="1" <?php echo (bool) \Axeptio\get_option( 'sdk_active', '0' ) ? 'checked' : ''; ?> placeholder="">
 </div>

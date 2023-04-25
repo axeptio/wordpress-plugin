@@ -11,6 +11,7 @@ use Axeptio\Frontend\Axeptio_Sdk;
 use Axeptio\Compat\AlpineJS_Wpkses;
 use Axeptio\Admin\Settings\Setting_Api;
 use Axeptio\Init\Activate;
+use Axeptio\Init\Activation_Hook;
 use ReflectionClass;
 
 /**
@@ -60,7 +61,7 @@ class Module_Initialization {
 	 */
 	protected function get_classes() {
 		return array(
-			Activate::class,
+			Activation_Hook::class,
 			AlpineJS_Wpkses::class,
 			Admin\Pages\Admin_Main::class,
 			Axeptio_Sdk::class,

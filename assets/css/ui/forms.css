@@ -1,25 +1,24 @@
-.inline-table-row {
-	display: flex;
-	flex-direction: column;
-}
-
-.form-table .inline-table-row th,
-.form-table .inline-table-row td {
-	@apply py-2 px-0 w-full;
-}
-
-#setting-error-settings_updated {
-	@apply rounded-md py-2 px-4 w-full;
-	&.notice-success {
-		@apply bg-green-50;
-	}
-
-	&.notice-error {
-		 @apply bg-red-50;
-	}
-}
-
 #axeptio-app {
+	.form-table .inline-table-row {
+		display: flex;
+		flex-direction: column;
+		th, td {
+			@apply py-2 px-0 w-full;
+		}
+	}
+
+	.notice {
+		@apply rounded-md py-2 px-4 w-full;
+		&.notice-success {
+			 @apply bg-green-50;
+		 }
+
+		&.notice-warning,
+		&.notice-error {
+			 @apply bg-red-50;
+		}
+	}
+
 	input:not(.ring-1):-webkit-autofill,
 	input:not(.ring-1):-webkit-autofill:hover,
 	input:not(.ring-1):-webkit-autofill:focus,

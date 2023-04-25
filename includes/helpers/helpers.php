@@ -7,6 +7,7 @@
 
 namespace Axeptio;
 
+use Axeptio\Models\Settings;
 use Axeptio\Utils\Template;
 
 /**
@@ -46,6 +47,18 @@ function get_current_admin_url(): string {
  */
 function get_logo(): string {
 	return XPWP_URL . 'dist/img/logo.svg';
+}
+
+/**
+ * Get option shortcut
+ *
+ * @param string       $slug          Option slug to retrieve.
+ * @param mixed        $default_value Default value to return if the option is not set.
+ * @param string|false $group   Option group (if false, single value option).
+ * @return false|mixed|null
+ */
+function get_option( string $slug, $default_value = null, $group = 'axeptio_settings' ) {
+	return Settings::get_option( $slug, $default_value, $group );
 }
 
 /**

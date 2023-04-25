@@ -7,6 +7,8 @@
 
 namespace Axeptio\Admin\Pages;
 
+use Axeptio\Models\Settings;
+
 class Admin_Callbacks {
 	/**
 	 * Init
@@ -60,7 +62,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function version_set_options() {
-		\Axeptio\get_template_part( 'admin/fields/main/version-options', array( 'versions' => get_option( 'xpwp_version_options' ) ) );
+		\Axeptio\get_template_part( 'admin/fields/main/version-options', array( 'versions' => Settings::get_option( 'xpwp_version_options', '', false ) ) );
 	}
 
 	/**
@@ -69,7 +71,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function version_set() {
-		\Axeptio\get_template_part( 'admin/fields/main/version', array( 'version' => get_option( 'xpwp_version' ) ) );
+		\Axeptio\get_template_part( 'admin/fields/main/version', array( 'version' => Settings::get_option( 'version', '' ) ) );
 	}
 
 	/**

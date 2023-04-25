@@ -16,12 +16,10 @@
 function xpwp_file_path( $class_name, $prefix, $folder ) {
 	$class_name   = str_replace( $prefix, '', $class_name );
 	$plugin_parts = explode( '\\', $class_name );
-	$name         = array_pop( $plugin_parts );
-	$name         = preg_match( '/^(Interface|Trait)/', $name )
-		? $name . '.php'
-		: 'class-' . $name . '.php';
-	$local_path   = implode( DS, $plugin_parts ) . '/' . $name;
-	$local_path   = strtolower( str_replace( array( '\\', '_' ), array( DS, '-' ), $local_path ) );
+	$name         = 'class-' . array_pop( $plugin_parts ) . '.php';
+
+	$local_path = implode( DS, $plugin_parts ) . '/' . $name;
+	$local_path = strtolower( str_replace( array( '\\', '_' ), array( DS, '-' ), $local_path ) );
 
 	$path = rtrim( $folder, DS ) . DS . $local_path;
 

@@ -8,7 +8,9 @@
 namespace Axeptio;
 
 use Axeptio\Init\Activate;
+use Axeptio\Init\Activation_Hook;
 use Axeptio\ModuleInitialization;
+use Axeptio\Utils\WP_Migration_Manager;
 use \WP_Error;
 use Axeptio\Utility;
 
@@ -21,6 +23,7 @@ use Axeptio\Utility;
 function setup() {
 	$n = fn( $func) => __NAMESPACE__ . "\\$func";
 
+	add_action( 'init', $n( 'migrate' ) );
 	add_action( 'init', $n( 'i18n' ) );
 	add_action( 'init', $n( 'init' ), apply_filters( 'axeptio/init_priority', 8 ) );
 	add_action( 'admin_enqueue_scripts', $n( 'admin_scripts' ) );
@@ -41,6 +44,16 @@ function i18n() {
 	$locale = apply_filters( 'axeptio/plugin_locale', get_locale(), 'axeptio-wordpress-plugin' );
 	load_textdomain( 'axeptio-wordpress-plugin', WP_LANG_DIR . '/axeptio-wordpress-plugin/axeptio-wordpress-plugin-' . $locale . '.mo' );
 	load_plugin_textdomain( 'axeptio-wordpress-plugin', false, plugin_basename( XPWP_PATH ) . '/languages/' );
+}
+
+/**
+ * Run the available migrations.
+ *
+ * @return void
+ */
+function migrate() {
+	$migration_manager = new WP_Migration_Manager();
+	$migration_manager->migrate();
 }
 
 /**
@@ -75,7 +88,7 @@ function init() {
  * @return void
  */
 function activate() {
-	( new Activate() )->maybe_redirect_to_settings_page();
+	( new Activation_Hook() )->maybe_redirect_to_settings_page();
 	// First load the init scripts in case any rewrite functionality is being loaded.
 	init();
 	flush_rewrite_rules();
