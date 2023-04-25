@@ -10,7 +10,7 @@ namespace Axeptio\Init;
 use Axeptio\Module;
 use function Axeptio\get_current_admin_url;
 
-class Activate extends Module {
+class Activation_Hook extends Module {
 
 	/**
 	 * Module can run within the current context.
@@ -29,6 +29,7 @@ class Activate extends Module {
 	public function register() {
 		add_action( 'admin_init', array( $this, 'after_plugin_activation' ) );
 		add_action( 'axeptio/before_main_setting_container', array( $this, 'display_onboarding_panel' ) );
+		$this->run_upgrade_scripts();
 	}
 
 	/**
@@ -38,6 +39,14 @@ class Activate extends Module {
 	 */
 	public function after_plugin_activation() {
 		$this->maybe_redirect_to_settings_page();
+	}
+
+	/**
+	 * Methods to be run after the plugin is activated.
+	 *
+	 * @return void
+	 */
+	public function run_upgrade_scripts() {
 	}
 
 	/**

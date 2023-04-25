@@ -1,11 +1,11 @@
-<input type="hidden" name="xpwp_client_id" x-model="accountID" value="<?php echo esc_attr( get_option( 'xpwp_client_id' ) ); ?>">
+<input type="hidden" name="axeptio_settings[client_id]" x-model="accountID" value="<?php echo esc_attr( get_option( 'xpwp_client_id' ) ); ?>">
 <div class="container relative">
 	<div
 		class="-translate-x-2 ring-0 transition ease-out duration-300 w-full flex items-center justify-between sm:mt-0 sm:flex-auto max-w-sm"
 		:class="{ 'translate-x-0': !showID, '-translate-x-2': showID }"
 	>
 		<input
-			name="accountID"
+			name="axeptio_settings[client_id]"
 			id="xpwp_client_id"
 			x-model="accountID"
 			type="text"
@@ -13,7 +13,7 @@
 			x-bind:disabled="showID"
 			class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:!ring-amber-400 sm:text-sm sm:leading-6"
 			:class="{ 'ring-1 shadow-sm': !showID, 'ring-0 shadow-none': showID }"
-			value="<?php echo esc_attr( get_option( 'xpwp_client_id' ) ); ?>"
+			value="<?php echo esc_attr( \Axeptio\get_option( 'client_id', '' ) ); ?>"
 		>
 		<button
 			type="button"

@@ -4,13 +4,17 @@
 				action="options.php"
 				x-data='accountIDComponent(
 					<?php
-						echo esc_attr(
+
+					use Axeptio\Models\Settings;
+
+
+					echo esc_attr(
 							wp_json_encode(
 								array(
-									'accountID'      => get_option( 'xpwp_client_id', '' ),
-									'optionsJson'    => get_option( 'xpwp_version_options', '' ),
-									'activeSDK'      => (bool) get_option( 'xpwp_sdk_active', '0' ),
-									'selectedOption' => get_option( 'xpwp_version', '' ),
+									'accountID'      => Settings::get_option( 'client_id', '' ),
+									'optionsJson'    => Settings::get_option( 'xpwp_version_options', '', false ),
+									'activeSDK'      => (bool) Settings::get_option( 'sdk_active', '0' ),
+									'selectedOption' => Settings::get_option( 'version', '' ),
 								)
 							)
 						);
