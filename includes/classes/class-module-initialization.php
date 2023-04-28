@@ -7,11 +7,14 @@
 
 namespace Axeptio;
 
+use Axeptio\Admin\Rest\Plugins;
 use Axeptio\Frontend\Axeptio_Sdk;
 use Axeptio\Compat\AlpineJS_Wpkses;
 use Axeptio\Admin\Settings\Setting_Api;
 use Axeptio\Init\Activate;
 use Axeptio\Init\Activation_Hook;
+use Axeptio\Models\Models;
+use Axeptio\Models\Plugins as PluginModel;
 use ReflectionClass;
 
 /**
@@ -61,10 +64,12 @@ class Module_Initialization {
 	 */
 	protected function get_classes() {
 		return array(
+			Models::class,
 			Activation_Hook::class,
 			AlpineJS_Wpkses::class,
 			Admin\Pages\Admin_Main::class,
 			Axeptio_Sdk::class,
+			Plugins::class,
 		);
 	}
 

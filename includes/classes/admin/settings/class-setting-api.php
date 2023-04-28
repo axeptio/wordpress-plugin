@@ -75,10 +75,10 @@ class Setting_Api {
 	/**
 	 * Add admin subpages.
 	 *
-	 * @param string $title Title of the subpage.
+	 * @param string|null $title Title of the subpage.
 	 * @return self
 	 */
-	public function with_subpage( string $title = null ) {
+	public function with_subpage( string $title = null ): Setting_Api {
 		if ( empty( $this->admin_pages ) ) {
 			return $this;
 		}

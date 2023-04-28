@@ -1,0 +1,199 @@
+const instance = function(args) {
+	return {
+		plugins: [],
+		editedPlugin: null,
+		editedPluginHasChanged: false,
+		configurationId: 'all',
+		activeTab: 1,
+		currentPage: 1,
+		forceEditOpen: false,
+		activePlugins: args.active_plugins,
+		totalPages: 1,
+		nonce: args.nonce,
+		isSaving: false,
+		isGetting: false,
+		hookModes: args.hook_modes,
+		projectVersions: args.project_versions,
+		shortcodeTagsModes: args.shortcode_tags_mode,
+		editOpen: false,
+		showDeleteModal: false,
+		pluginToDelete: null,
+
+		fetchPlugins() {
+			this.isGetting = true;
+			const apiUrl = `/wp-json/axeptio/v1/plugins/${this.configurationId}`;
+			fetch(apiUrl, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-WP-Nonce': args.nonce
+				}
+			})
+				.then(response => response.json())
+				.then(data => {
+					this.plugins = data;
+					this.isGetting = false;
+				});
+		},
+
+		openDeleteModal() {
+			this.setForceEditOpen(true);
+			this.showDeleteModal = true;
+		},
+
+		closeDeleteModal() {
+			this.showDeleteModal = false;
+			this.setForceEditOpen(false);
+		},
+
+		confirmDelete(editedPlugin) {
+			this.deletePlugin(editedPlugin);
+		},
+
+		// prevent from close the edit panel when click inside the media selector
+		setForceEditOpen(enabled) {
+			if (enabled) {
+				this.forceEditOpen = true;
+			} else {
+				setTimeout(() => {
+					this.forceEditOpen = false;
+				})
+			}
+		},
+
+		deletePlugin(plugin) {
+			this.isSaving = true;
+			console.log(plugin);
+			const apiUrl = `/wp-json/axeptio/v1/plugins/${this.configurationId}/${plugin.Metas.plugin}`;
+			fetch(apiUrl, {
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-WP-Nonce': this.nonce,
+				},
+				body: JSON.stringify(plugin.Metas)
+			})
+				.then(response => response.json())
+				.then(data => {
+					this.isSaving = false;
+					this.setForceEditOpen(false);
+					this.editOpen = false;
+					this.closeDeleteModal();
+
+					// Met à jour le plugin dans la liste
+					//const index = this.plugins.findIndex(p => p.plugin === data.plugin && p.Metas.axeptio_configuration_id === data.Metas.axeptio_configuration_id);
+					//this.plugins[index] = data;
+				});
+		},
+
+		setHasChanged(value, oldValue) {
+			if (this.editOpen) {
+				this.editedPluginHasChanged = true;
+			}
+		},
+
+		isActive(tab) {
+			return tab === this.activeTab;
+		},
+
+		setActive(value) {
+			this.activeTab = value;
+		},
+
+		editPlugin(plugin) {
+			this.setActive(1);
+			this.editOpen = true;
+      this.editedPlugin = plugin;
+		},
+
+		closePanel() {
+			if (this.forceEditOpen) {
+				return;
+			}
+			this.editOpen = false;
+			if (this.editedPluginHasChanged) {
+				this.fetchPlugins();
+				this.editedPluginHasChanged = false;
+			}
+		},
+
+		initEditedPlugin() {
+			this.editedPlugin = {
+				'Name' : '',
+				'Metas' : {
+					'wp_filter_mode' : '',
+				}
+			};
+		},
+
+		updatePlugin(plugin) {
+			this.isSaving = true;
+			const apiUrl = `/wp-json/axeptio/v1/plugins/${this.configurationId}/${plugin.Metas.plugin}`;
+			fetch(apiUrl, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-WP-Nonce': this.nonce,
+				},
+				body: JSON.stringify(plugin.Metas)
+			})
+				.then(response => response.json())
+				.then(data => {
+					this.isSaving = false;
+					this.editedPluginHasChanged = false;
+					// Met à jour le plugin dans la liste
+					//const index = this.plugins.findIndex(p => p.plugin === data.plugin && p.Metas.axeptio_configuration_id === data.Metas.axeptio_configuration_id);
+					//this.plugins[index] = data;
+				});
+		},
+
+		openMediaSelector() {
+			this.setForceEditOpen(true);
+			const self = this;
+			const custom_uploader = wp.media({
+				title: 'Sélectionner un média',
+				//library: { type: 'all' },
+				button: { text: 'Utiliser ce média' },
+				multiple: false
+			}).on('select', function() {
+				const attachment = custom_uploader.state().get('selection').first().toJSON();
+				self.editedPlugin.Metas.vendor_image = attachment.url;
+				self.setForceEditOpen(false);
+			}).open();
+		},
+
+		localOrGlobalEnabled(plugin) {
+			return this.globalEnabled(plugin) || this.localEnabled(plugin);
+		},
+
+		globalEnabled(plugin) {
+			return plugin.Metas.Parent && plugin.Metas.Parent.enabled && !plugin.Metas.enabled;
+		},
+
+		localEnabled(plugin) {
+			return plugin.Metas.enabled;
+		},
+
+		enableControl(plugin) {
+			plugin.Metas.enabled = !plugin.Metas.enabled;
+			if (
+				plugin.Metas.enabled
+				&& plugin.Metas.vendor_title === ''
+				&& plugin.Metas.vendor_shortDescription === ''
+			) {
+				plugin.Metas.vendor_title = plugin.Name;
+				plugin.Metas.vendor_shortDescription = plugin.Description;
+			}
+			this.updatePlugin(plugin);
+		},
+
+		init() {
+			this.initEditedPlugin();
+			this.fetchPlugins();
+		}
+	};
+}
+
+export default {
+	instance,
+};

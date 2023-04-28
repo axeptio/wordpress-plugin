@@ -1,6 +1,6 @@
 <?php
 /**
- * Main Admin Page
+ * Settings Model
  *
  * @package Axeptio
  */
@@ -42,11 +42,19 @@ class Settings {
 	 *
 	 * @param string $slug Option value to retrieve.
 	 * @param mixed  $value Value to update.
+	 * @param string $group Option group (if false, single value option).
 	 * @return false|mixed|null
 	 */
-	public static function update_option( string $slug, $value ) {
-		$options          = self::get_option( $slug, array() );
-		$options[ $slug ] = $value;
-		return update_option( $slug, $value );
+	public static function update_option( string $slug, $value, string $group = 'axeptio_settings' ) {
+		if ( ! $group ) {
+			self::$options[ $slug ] = $value;
+			return update_option( $slug, $value );
+		}
+
+		self::$options = self::get_option( $group, array(), false );
+
+		self::$options[ $group ][ $slug ] = $value;
+
+		return update_option( $group, self::$options[ $group ] );
 	}
 }

@@ -29,9 +29,16 @@ class Admin_Main extends Module {
 	/**
 	 * Admin page list.
 	 *
-	 * @var $pages
+	 * @var array $pages
 	 */
 	private array $pages = array();
+
+	/**
+	 * Admin subpage list.
+	 *
+	 * @var array $subpages
+	 */
+	private array $subpages = array();
 
 	/**
 	 * Module can run within the current context.
@@ -57,7 +64,10 @@ class Admin_Main extends Module {
 				$this->set_settings();
 				$this->set_sections();
 				$this->set_fields();
-				$this->settings->add_pages( $this->pages )->register();
+				$this->settings
+					->add_pages( $this->pages )
+					->add_sub_pages( $this->subpages )
+					->register();
 
 				add_action( 'axeptio/after_main_settings', array( $this->callbacks, 'display_onboarding_account_panel' ) );
 			}
@@ -79,6 +89,17 @@ class Admin_Main extends Module {
 				'callback'   => array( $this->callbacks, 'admin_dashboard' ),
 				'icon_url'   => XPWP_URL . 'dist/img/icon.png',
 				'position'   => 110,
+			),
+		);
+
+		$this->subpages = array(
+			array(
+				'page_title'  => __( 'Plugin manager', 'axeptio-wordpress-plugin' ),
+				'menu_title'  => __( 'Plugin manager', 'axeptio-wordpress-plugin' ),
+				'capability'  => 'manage_options',
+				'parent_slug' => 'axeptio-wordpress-plugin',
+				'menu_slug'   => 'axeptio-plugin-manager',
+				'callback'    => array( $this->callbacks, 'plugin_manager' ),
 			),
 		);
 	}

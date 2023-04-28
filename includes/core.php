@@ -33,6 +33,16 @@ function setup() {
 	add_filter( 'script_loader_tag', $n( 'script_loader_tag' ), 10, 2 );
 
 	do_action( 'axeptio/loaded' );
+
+	add_action(
+		'init',
+		function() {
+			global $wpdb;
+			$table          = 'axeptio_plugin_configuration';
+			$wpdb->$table   = $wpdb->prefix . $table;
+			$wpdb->tables[] = $table;
+		}
+		);
 }
 
 /**
@@ -155,6 +165,7 @@ function style_url( $stylesheet, $context ) {
  * @return void
  */
 function admin_scripts() {
+	wp_enqueue_media();
 	wp_enqueue_script(
 		'axeptio/main',
 		script_url( 'main', 'admin' ),

@@ -12,7 +12,7 @@
  **/
 
 // Useful global constants.
-define( 'XPWP_VERSION', '1.2' );
+define( 'XPWP_VERSION', '2.0.0' );
 define( 'XPWP_URL', plugin_dir_url( __FILE__ ) );
 define( 'XPWP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'XPWP_BASENAME', plugin_basename( __FILE__ ) );
