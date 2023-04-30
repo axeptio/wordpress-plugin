@@ -10,6 +10,7 @@ namespace Axeptio\Admin\Rest;
 use Axeptio\Models\Plugins as PluginModel;
 use Axeptio\Module;
 use WP_REST_Request;
+use WP_REST_Response;
 
 class Plugins extends Module {
 	/**
@@ -98,14 +99,14 @@ class Plugins extends Module {
 	 * Get the list of plugins.
 	 *
 	 * @param WP_REST_Request $request Request object.
-	 * @return array Array of installed plugins.
+	 * @return WP_REST_Response Array of installed plugins.
 	 */
 	public function update_plugin( WP_REST_Request $request ) {
 		$configuration_id = urldecode( $request->get_param( 'axeptio_configuration_id' ) );
 		$plugin           = $request->get_param( 'plugin' );
 		$metas            = array_diff_key( $request->get_params(), array_flip( array( 'Merged', 'Parent' ) ) );
 
-		PluginModel::find( $plugin, $configuration_id )->update( $metas );
+		$plugin_id = PluginModel::find( $plugin, $configuration_id )->update( $metas );
 
 		return array();
 	}

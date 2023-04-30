@@ -246,8 +246,8 @@ class Plugins {
 	 * @return array
 	 */
 	protected static function fix_metadata_format( array $metas ): array {
-		if ( isset( $metas['wp_filter_mode'] ) ) {
-			$metas['wp_filter_mode'] = intval( $metas['wp_filter_mode'] );
+		if ( isset( $metas['wp_filter_store_output'] ) ) {
+			$metas['wp_filter_store_output'] = intval( $metas['wp_filter_store_output'] );
 		}
 		if ( isset( $metas['enabled'] ) ) {
 			$metas['enabled'] = intval( $metas['enabled'] );
@@ -323,6 +323,10 @@ class Plugins {
 			'plugin'                   => self::get_plugin_id( $plugin_key ),
 			'axeptio_configuration_id' => $configuration_id,
 			'enabled'                  => false,
+			'wp_filter_mode'           => 'none',
+			'wp_filter_list'           => '',
+			'shortcode_tags_mode'      => 'none',
+			'shortcode_tags_list'      => '',
 		);
 	}
 

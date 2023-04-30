@@ -66,7 +66,16 @@
 						<?php esc_html_e( 'List of hooks (action or filter)', 'axeptio-wordpress-plugin' ); ?>
 					</label>
 					<div class="mt-2">
-						<textarea x-model="editedPlugin.Metas.wp_filter_list" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"></textarea>
+						<?php
+						\Axeptio\get_template_part(
+							'admin/fields/plugins/repeater',
+							array(
+								'name'        => 'wp_filter_list',
+								'add_item'    => __( 'Add a hook', 'axeptio-wordpress-plugin' ),
+								'delete_item' => __( 'Delete', 'axeptio-wordpress-plugin' ),
+							)
+							);
+						?>
 					</div>
 					<p class="mt-3 text-xs leading-4 text-gray-600">
 						<?php
@@ -106,7 +115,16 @@
 						<?php esc_html_e( 'List of shortcode Tags', 'axeptio-wordpress-plugin' ); ?>
 					</label>
 					<div class="mt-2">
-						<textarea x-model="editedPlugin.Metas.shortcode_tags_list" id="shortcode-tags-list" rows="3" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"></textarea>
+						<?php
+						\Axeptio\get_template_part(
+							'admin/fields/plugins/repeater',
+							array(
+								'name'        => 'shortcode_tags_list',
+								'add_item'    => __( 'Add a shortcode', 'axeptio-wordpress-plugin' ),
+								'delete_item' => __( 'Delete', 'axeptio-wordpress-plugin' ),
+							)
+							);
+						?>
 					</div>
 					<p class="mt-3 text-xs leading-4 text-gray-600">
 						<?php
