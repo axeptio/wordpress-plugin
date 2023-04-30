@@ -115,7 +115,7 @@ const instance = function( args ) {
 				} );
 		},
 
-		setHasChanged( value, oldValue ) {
+		setHasChanged() {
 			if (this.editOpen) {
 				this.editedPluginHasChanged = true;
 			}
