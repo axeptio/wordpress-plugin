@@ -1,238 +1,239 @@
-const instance = function (args) {
+const instance = function( args ) {
 	const repeaterMethods = {
-		sanitizeArray(originalArray) {
-			return originalArray.filter(function (item) {
-				return item.trim() !== "";
-			});
+		sanitizeArray( originalArray ) {
+			return originalArray.filter( function( item ) {
+				return item.trim() !== '';
+			} );
 		},
 
-		refreshRepeaterFields(plugin = false) {
-			const instance = this;
-			['wp_filter_list', 'shortcode_tags_list'].forEach(fieldSlug => {
-				instance.initRepeaterFields(fieldSlug);
-				instance.updateRepeaterField(fieldSlug);
-			});
+		refreshRepeaterFields() {
+			const self = this;
+			[ 'wp_filter_list', 'shortcode_tags_list' ].forEach( ( fieldSlug ) => {
+				self.initRepeaterFields( fieldSlug );
+				self.updateRepeaterField( fieldSlug );
+			} );
 		},
 
-		getFields(fieldSlug) {
-			return this.fields[fieldSlug];
+		getFields( fieldSlug ) {
+			return this.fields[ fieldSlug ];
 		},
 
-		initRepeaterFields(fieldSlug) {
-			if (this.editedPlugin.Name === "") {
+		initRepeaterFields( fieldSlug ) {
+			if ( this.editedPlugin.Name === '' ) {
 				return;
 			}
-			this.inputRefs[fieldSlug] = [];
-			this.fields[fieldSlug] = this.sanitizeArray(this.editedPlugin.Metas[fieldSlug].split('\n'));
+			this.inputRefs[ fieldSlug ] = [];
+			this.fields[ fieldSlug ] = this.sanitizeArray( this.editedPlugin.Metas[ fieldSlug ].split( '\n' ) );
 
-			if (this.fields[fieldSlug].length === 0 || (this.fields[fieldSlug].length === 1 && this.fields[fieldSlug][0] === "")) {
-				this.fields[fieldSlug].push("");
+			if ( this.fields[ fieldSlug ].length === 0 || ( this.fields[ fieldSlug ].length === 1 && this.fields[ fieldSlug ][ 0 ] === '' ) ) {
+				this.fields[ fieldSlug ].push( '' );
 			}
 		},
 
-		storeRef(fieldSlug, el, index) {
-			this.inputRefs[fieldSlug][index] = el;
-			this.$watch("editedPlugin", () => {
-				this.$nextTick(() => {
-					if (typeof this.inputRefs[fieldSlug] === "undefined") {
-						this.inputRefs[fieldSlug] = [];
+		storeRef( fieldSlug, el, index ) {
+			this.inputRefs[ fieldSlug ][ index ] = el;
+			this.$watch( 'editedPlugin', () => {
+				this.$nextTick( () => {
+					if ( typeof this.inputRefs[ fieldSlug ] === 'undefined' ) {
+						this.inputRefs[ fieldSlug ] = [];
 					}
-					this.inputRefs[fieldSlug][index] = el;
-				});
-			});
+					this.inputRefs[ fieldSlug ][ index ] = el;
+				} );
+			} );
 		},
 
-		addField(fieldSlug, index = this.fields[fieldSlug].length) {
-			this.fields[fieldSlug].splice(index, 0, "");
-			this.$nextTick(() => {
+		addField( fieldSlug, index = this.fields[ fieldSlug ].length ) {
+			this.fields[ fieldSlug ].splice( index, 0, '' );
+			this.$nextTick( () => {
 				this.$refs.scrollContainer.scrollTop = this.$refs.scrollContainer.scrollHeight;
-				this.inputRefs[fieldSlug][index].focus();
-			});
+				this.inputRefs[ fieldSlug ][ index ].focus();
+			} );
 		},
 
-		removeFieldAndFocusPrevious(fieldSlug, index) {
-			if (this.fields[fieldSlug][index] === "") {
-				this.removeField(fieldSlug, index);
-				this.$nextTick(() => {
+		removeFieldAndFocusPrevious( fieldSlug, index ) {
+			if ( this.fields[ fieldSlug ][ index ] === '' ) {
+				this.removeField( fieldSlug, index );
+				this.$nextTick( () => {
 					const previousIndex = index - 1 >= 0 ? index - 1 : 0;
-					this.inputRefs[fieldSlug][previousIndex].focus();
-				});
+					this.inputRefs[ fieldSlug ][ previousIndex ].focus();
+				} );
 			}
 		},
 
-		removeField(fieldSlug, index) {
-			this.fields[fieldSlug].splice(index, 1);
-			if (this.fields[fieldSlug].length === 0) {
-				this.addField(fieldSlug);
+		removeField( fieldSlug, index ) {
+			this.fields[ fieldSlug ].splice( index, 1 );
+			if ( this.fields[ fieldSlug ].length === 0 ) {
+				this.addField( fieldSlug );
 			}
-			this.updateRepeaterField(fieldSlug);
+			this.updateRepeaterField( fieldSlug );
 		},
 
-		updateRepeaterField(fieldSlug) {
-
-			if (typeof this.fields[fieldSlug] === "undefined") {
-				this.fields[fieldSlug] = [];
+		updateRepeaterField( fieldSlug ) {
+			if ( typeof this.fields[ fieldSlug ] === 'undefined' ) {
+				this.fields[ fieldSlug ] = [];
 			}
-			this.editedPlugin.Metas[fieldSlug] = this.fields[fieldSlug].join("\n");
-		}
+			this.editedPlugin.Metas[ fieldSlug ] = this.fields[ fieldSlug ].join( '\n' );
+		},
 	};
 
 	const pluginMethods = {
 		fetchPlugins() {
 			this.isGetting = true;
-			const apiUrl = `/wp-json/axeptio/v1/plugins/${this.configurationId}`;
-			fetch(apiUrl, {
+			const apiUrl = `/wp-json/axeptio/v1/plugins/${ this.configurationId }`;
+			fetch( apiUrl, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					'X-WP-Nonce': args.nonce
-				}
-			})
-				.then(response => response.json())
-				.then(data => {
+					'X-WP-Nonce': args.nonce,
+				},
+			} )
+				.then( ( response ) => response.json() )
+				.then( ( data ) => {
 					this.plugins = data;
 					this.isGetting = false;
-				});
+				} );
 		},
 
-		deletePlugin(plugin) {
+		deletePlugin( plugin ) {
 			this.isSaving = true;
-			const apiUrl = `/wp-json/axeptio/v1/plugins/${this.configurationId}/${plugin.Metas.plugin}`;
-			fetch(apiUrl, {
+			const apiUrl = `/wp-json/axeptio/v1/plugins/${ this.configurationId }/${ plugin.Metas.plugin }`;
+			fetch( apiUrl, {
 				method: 'DELETE',
 				headers: {
 					'Content-Type': 'application/json',
 					'X-WP-Nonce': this.nonce,
 				},
-				body: JSON.stringify(plugin.Metas)
-			})
-				.then(response => response.json())
-				.then(data => {
+				body: JSON.stringify( plugin.Metas ),
+			} )
+				.then( ( response ) => response.json() )
+				.then( ( data ) => {
 					this.isSaving = false;
-					this.setForceEditOpen(false);
+					this.setForceEditOpen( false );
 					this.editOpen = false;
 					this.closeDeleteModal();
-
+					this.editedPlugin.Metas.enabled = 0;
 					// Met à jour le plugin dans la liste
 					//const index = this.plugins.findIndex(p => p.plugin === data.plugin && p.Metas.axeptio_configuration_id === data.Metas.axeptio_configuration_id);
 					//this.plugins[index] = data;
-				});
+				} );
 		},
 
-		setHasChanged(value, oldValue) {
-			if (this.editOpen) {
+		setHasChanged( value, oldValue ) {
+			if ( this.editOpen ) {
 				this.editedPluginHasChanged = true;
 			}
 		},
 
-		isActive(tab) {
+		isActive( tab ) {
 			return tab === this.activeTab;
 		},
 
-		setActive(value) {
+		setActive( value ) {
 			this.activeTab = value;
 		},
 
-		editPlugin(plugin) {
-			this.setActive(1);
+		editPlugin( plugin ) {
+			this.setActive( 1 );
 			this.editOpen = true;
 			this.editedPlugin = plugin;
 			this.refreshRepeaterFields();
 		},
 
-		updatePlugin(plugin) {
+		updatePlugin( plugin ) {
 			this.isSaving = true;
 			this.refreshRepeaterFields();
 
-			const apiUrl = `/wp-json/axeptio/v1/plugins/${this.configurationId}/${plugin.Metas.plugin}`;
-			fetch(apiUrl, {
+			const apiUrl = `/wp-json/axeptio/v1/plugins/${ this.configurationId }/${ plugin.Metas.plugin }`;
+			fetch( apiUrl, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
 					'X-WP-Nonce': this.nonce,
 				},
-				body: JSON.stringify(plugin.Metas)
-			})
-				.then(response => response.json())
-				.then(data => {
+				body: JSON.stringify( plugin.Metas ),
+			} )
+				.then( ( response ) => response.json() )
+				.then( ( data ) => {
 					this.isSaving = false;
 					this.editedPluginHasChanged = false;
 					// Met à jour le plugin dans la liste
 					//const index = this.plugins.findIndex(p => p.plugin === data.plugin && p.Metas.axeptio_configuration_id === data.Metas.axeptio_configuration_id);
 					//this.plugins[index] = data;
-				});
+				} );
 		},
 
 		openMediaSelector() {
-			this.setForceEditOpen(true);
-			const instance = this;
-			const custom_uploader = wp.media({
+			this.setForceEditOpen( true );
+			const self = this;
+			const customUploader = wp.media( {
 				title: 'Sélectionner un média',
-				//library: { type: 'all' },
-				button: {text: 'Utiliser ce média'},
-				multiple: false
-			}).on('select', function () {
-				const attachment = custom_uploader.state().get('selection').first().toJSON();
-				instance.editedPlugin.Metas.vendor_image = attachment.url;
-				instance.setForceEditOpen(false);
-			}).open();
+				button: { text: 'Utiliser ce média' },
+				multiple: false,
+			} ).on( 'select', function() {
+				const attachment = customUploader.state().get( 'selection' ).first().toJSON();
+				self.editedPlugin.Metas.vendor_image = attachment.url;
+				self.setForceEditOpen( false );
+			} ).open();
 		},
 
-		localOrGlobalEnabled(plugin) {
-			return this.globalEnabled(plugin) || this.localEnabled(plugin);
+		localOrGlobalEnabled( plugin ) {
+			return this.globalEnabled( plugin ) || this.localEnabled( plugin );
 		},
 
-		globalEnabled(plugin) {
-			return plugin.Metas.Parent && plugin.Metas.Parent.enabled && !plugin.Metas.enabled;
+		globalEnabled( plugin ) {
+			return plugin.Metas.Parent && plugin.Metas.Parent.enabled && ! plugin.Metas.enabled;
 		},
 
-		localEnabled(plugin) {
+		localEnabled( plugin ) {
 			return plugin.Metas.enabled;
 		},
 
-		enableControl(plugin) {
-			plugin.Metas.enabled = !plugin.Metas.enabled;
+		enableControl( plugin ) {
+			const { Metas, Name, Description } = plugin;
+			Metas.enabled = ! Metas.enabled;
 
-			if (
-				plugin.Metas.enabled
-				&& plugin.Metas.vendor_title === ''
-				&& plugin.Metas.vendor_shortDescription === ''
-			) {
-				plugin.Metas.vendor_title = plugin.Name;
-				plugin.Metas.vendor_shortDescription = plugin.Description;
-			}
+			const defaultMetaValues = {
+				vendor_title: Name,
+				vendor_shortDescription: Description,
+				wp_filter_mode: 'none',
+				wp_filter_list: '',
+				shortcode_tags_mode: 'none',
+				shortcode_tags_list: '',
+			};
 
-			this.updatePlugin(plugin);
+			Object.assign( Metas, defaultMetaValues, Metas.wp_filter_mode === undefined && defaultMetaValues );
+
+			this.updatePlugin( plugin );
 		},
 
 		initEditedPlugin() {
 			this.editedPlugin = {
-				'Name': '',
-				'Metas': {
-					'wp_filter_mode': 'none',
-					'shortcode_tags_mode' : 'none',
-					'wp_filter_list' : '',
-					'shortcode_tags_list' : '',
-				}
+				Name: '',
+				Metas: {
+					wp_filter_mode: 'none',
+					shortcode_tags_mode: 'none',
+					wp_filter_list: '',
+					shortcode_tags_list: '',
+				},
 			};
-		}
+		},
 
 	};
 
 	const deleteModal = {
 		openDeleteModal() {
-			this.setForceEditOpen(true);
+			this.setForceEditOpen( true );
 			this.showDeleteModal = true;
 		},
 
 		closeDeleteModal() {
 			this.showDeleteModal = false;
-			this.setForceEditOpen(false);
+			this.setForceEditOpen( false );
 		},
 
-		confirmDelete(editedPlugin) {
-			this.deletePlugin(editedPlugin);
-		}
+		confirmDelete( editedPlugin ) {
+			this.deletePlugin( editedPlugin );
+		},
 	};
 
 	return {
@@ -261,22 +262,22 @@ const instance = function (args) {
 		fields: [],
 
 		// prevent from close the edit panel when click inside the media selector
-		setForceEditOpen(enabled) {
-			if (enabled) {
+		setForceEditOpen( enabled ) {
+			if ( enabled ) {
 				this.forceEditOpen = true;
 			} else {
-				setTimeout(() => {
+				setTimeout( () => {
 					this.forceEditOpen = false;
-				})
+				} );
 			}
 		},
 
 		closePanel() {
-			if (this.forceEditOpen) {
+			if ( this.forceEditOpen ) {
 				return;
 			}
 			this.editOpen = false;
-			if (this.editedPluginHasChanged) {
+			if ( this.editedPluginHasChanged ) {
 				this.fetchPlugins();
 				this.editedPluginHasChanged = false;
 			}
@@ -285,9 +286,9 @@ const instance = function (args) {
 		init() {
 			this.initEditedPlugin();
 			this.fetchPlugins();
-		}
+		},
 	};
-}
+};
 
 export default {
 	instance,
