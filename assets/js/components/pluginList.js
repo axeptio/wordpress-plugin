@@ -15,64 +15,64 @@ const instance = function( args ) {
 		},
 
 		getFields( fieldSlug ) {
-			return this.fields[fieldSlug];
+			return this.fields[ fieldSlug ];
 		},
 
 		initRepeaterFields( fieldSlug ) {
-			if (this.editedPlugin.Name === '') {
+			if ( this.editedPlugin.Name === '' ) {
 				return;
 			}
-			this.inputRefs[fieldSlug] = [];
-			this.fields[fieldSlug] = this.sanitizeArray( this.editedPlugin.Metas[fieldSlug].split( '\n' ) );
+			this.inputRefs[ fieldSlug ] = [];
+			this.fields[ fieldSlug ] = this.sanitizeArray( this.editedPlugin.Metas[ fieldSlug ].split( '\n' ) );
 
-			if (this.fields[fieldSlug].length === 0 || ( this.fields[fieldSlug].length === 1 && this.fields[fieldSlug][0] === '' )) {
-				this.fields[fieldSlug].push( '' );
+			if ( this.fields[ fieldSlug ].length === 0 || ( this.fields[ fieldSlug ].length === 1 && this.fields[ fieldSlug ][ 0 ] === '' ) ) {
+				this.fields[ fieldSlug ].push( '' );
 			}
 		},
 
 		storeRef( fieldSlug, el, index ) {
-			this.inputRefs[fieldSlug][index] = el;
+			this.inputRefs[ fieldSlug ][ index ] = el;
 			this.$watch( 'editedPlugin', () => {
 				this.$nextTick( () => {
-					if (typeof this.inputRefs[fieldSlug] === 'undefined') {
-						this.inputRefs[fieldSlug] = [];
+					if ( typeof this.inputRefs[ fieldSlug ] === 'undefined' ) {
+						this.inputRefs[ fieldSlug ] = [];
 					}
-					this.inputRefs[fieldSlug][index] = el;
+					this.inputRefs[ fieldSlug ][ index ] = el;
 				} );
 			} );
 		},
 
-		addField( fieldSlug, index = this.fields[fieldSlug].length ) {
-			this.fields[fieldSlug].splice( index, 0, '' );
+		addField( fieldSlug, index = this.fields[ fieldSlug ].length ) {
+			this.fields[ fieldSlug ].splice( index, 0, '' );
 			this.$nextTick( () => {
 				this.$refs.scrollContainer.scrollTop = this.$refs.scrollContainer.scrollHeight;
-				this.inputRefs[fieldSlug][index].focus();
+				this.inputRefs[ fieldSlug ][ index ].focus();
 			} );
 		},
 
 		removeFieldAndFocusPrevious( fieldSlug, index ) {
-			if (this.fields[fieldSlug][index] === '') {
+			if ( this.fields[ fieldSlug ][ index ] === '' ) {
 				this.removeField( fieldSlug, index );
 				this.$nextTick( () => {
 					const previousIndex = index - 1 >= 0 ? index - 1 : 0;
-					this.inputRefs[fieldSlug][previousIndex].focus();
+					this.inputRefs[ fieldSlug ][ previousIndex ].focus();
 				} );
 			}
 		},
 
 		removeField( fieldSlug, index ) {
-			this.fields[fieldSlug].splice( index, 1 );
-			if (this.fields[fieldSlug].length === 0) {
+			this.fields[ fieldSlug ].splice( index, 1 );
+			if ( this.fields[ fieldSlug ].length === 0 ) {
 				this.addField( fieldSlug );
 			}
 			this.updateRepeaterField( fieldSlug );
 		},
 
 		updateRepeaterField( fieldSlug ) {
-			if (typeof this.fields[fieldSlug] === 'undefined') {
-				this.fields[fieldSlug] = [];
+			if ( typeof this.fields[ fieldSlug ] === 'undefined' ) {
+				this.fields[ fieldSlug ] = [];
 			}
-			this.editedPlugin.Metas[fieldSlug] = this.fields[fieldSlug].join( '\n' );
+			this.editedPlugin.Metas[ fieldSlug ] = this.fields[ fieldSlug ].join( '\n' );
 		},
 	};
 
@@ -116,7 +116,7 @@ const instance = function( args ) {
 		},
 
 		setHasChanged() {
-			if (this.editOpen) {
+			if ( this.editOpen ) {
 				this.editedPluginHasChanged = true;
 			}
 		},
@@ -138,7 +138,6 @@ const instance = function( args ) {
 
 		updatePlugin( plugin ) {
 			this.isSaving = true;
-			this.refreshRepeaterFields();
 
 			const apiUrl = `/wp-json/axeptio/v1/plugins/${ this.configurationId }/${ plugin.Metas.plugin }`;
 			fetch( apiUrl, {
@@ -151,11 +150,10 @@ const instance = function( args ) {
 			} )
 				.then( ( response ) => response.json() )
 				.then( ( data ) => {
+					this.editedPlugin.Metas = data;
+					this.refreshRepeaterFields();
 					this.isSaving = false;
 					this.editedPluginHasChanged = false;
-					// Met à jour le plugin dans la liste
-					//const index = this.plugins.findIndex(p => p.plugin === data.plugin && p.Metas.axeptio_configuration_id === data.Metas.axeptio_configuration_id);
-					//this.plugins[index] = data;
 				} );
 		},
 
@@ -186,20 +184,10 @@ const instance = function( args ) {
 		},
 
 		enableControl( plugin ) {
-			const { Metas, Name, Description } = plugin;
+			const { Metas } = plugin;
+
+			this.editedPlugin = plugin;
 			Metas.enabled = ! Metas.enabled;
-
-			const defaultMetaValues = {
-				vendor_title: Name,
-				vendor_shortDescription: Description,
-				wp_filter_mode: 'none',
-				wp_filter_list: '',
-				shortcode_tags_mode: 'none',
-				shortcode_tags_list: '',
-			};
-
-			Object.assign( Metas, defaultMetaValues, Metas.wp_filter_mode === undefined && defaultMetaValues );
-
 			this.updatePlugin( plugin );
 		},
 
@@ -260,7 +248,7 @@ const instance = function( args ) {
 
 		// prevent from close the edit panel when click inside the media selector
 		setForceEditOpen( enabled ) {
-			if (enabled) {
+			if ( enabled ) {
 				this.forceEditOpen = true;
 			} else {
 				setTimeout( () => {
@@ -270,11 +258,11 @@ const instance = function( args ) {
 		},
 
 		closePanel() {
-			if (this.forceEditOpen) {
+			if ( this.forceEditOpen ) {
 				return;
 			}
 			this.editOpen = false;
-			if (this.editedPluginHasChanged) {
+			if ( this.editedPluginHasChanged ) {
 				this.fetchPlugins();
 				this.editedPluginHasChanged = false;
 			}

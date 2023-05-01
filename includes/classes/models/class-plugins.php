@@ -157,16 +157,16 @@ class Plugins {
 		// If it does not exist, create it.
 		// ...
 		if ( null === $this->plugin ) {
-			$query = $this->create( $meta_datas );
+			$this->create( $meta_datas );
 		} else {
 			$where = array(
 				'axeptio_configuration_id' => $this->configuration_id,
 				'plugin'                   => $this->plugin_id,
 			);
-			$query = $wpdb->update( $wpdb->axeptio_plugin_configuration, $meta_datas, $where ); // @codingStandardsIgnoreLine
+			$wpdb->update( $wpdb->axeptio_plugin_configuration, $meta_datas, $where ); // @codingStandardsIgnoreLine
 		}
 
-		return $query;
+		return self::get_meta_datas( $this->plugin_id, $this->configuration_id );
 	}
 
 	/**
@@ -280,15 +280,33 @@ class Plugins {
 			$output_metas[ $configuration_id ][ $plugin ] = $meta_data;
 
 			if ( 'all' !== $configuration_id && isset( $output_metas['all'][ $plugin ] ) ) {
-				$merged_meta = wp_parse_args( $output_metas[ $configuration_id ][ $plugin ], $output_metas['all'][ $plugin ] );
+				$merged_meta = wp_parse_args( self::remove_empty_string_values( $output_metas[ $configuration_id ][ $plugin ] ), $output_metas['all'][ $plugin ] );
 				$output_metas[ $configuration_id ][ $plugin ]['Merged'] = $merged_meta;
 				$output_metas[ $configuration_id ][ $plugin ]['Parent'] = $output_metas['all'][ $plugin ];
+				$output_metas[ $configuration_id ][ $plugin ]           = self::remove_empty_string_values( $output_metas[ $configuration_id ][ $plugin ] );
 			}
 		}
 
 		self::$all_metas = $output_metas;
 		return self::$all_metas;
 	}
+
+	/**
+	 * Remove empty string values from specified keys in an array.
+	 *
+	 * @param array $meta_array Array to remove empty values from.
+	 * @return array              Modified array.
+	 */
+	protected static function remove_empty_string_values( array $meta_array ): array {
+		foreach ( array( 'vendor_title', 'vendor_shortDescription', 'vendor_longDescription', 'vendor_policyUrl', 'vendor_image' ) as $key ) {
+			if ( '' === $meta_array[ $key ]) {
+				unset( $meta_array[ $key ] );
+			}
+		}
+
+		return $meta_array;
+	}
+
 
 	/**
 	 * Get the metadata of a plugin.
@@ -305,18 +323,17 @@ class Plugins {
 		}
 
 		if ( isset( $all_metas['all'][ $plugin_key ] ) ) {
-			$metas           = array(
+			$metas = array(
 				'plugin'                   => self::get_plugin_id( $plugin_key ),
 				'axeptio_configuration_id' => $configuration_id,
 				'enabled'                  => false,
 			);
-			$merged_meta     = wp_parse_args(
-				$metas,
-				$all_metas['all'][ $plugin_key ]
-			);
+
+			$merged_meta     = wp_parse_args( $metas, $all_metas['all'][ $plugin_key ] );
 			$metas['Merged'] = $merged_meta;
 			$metas['Parent'] = $all_metas['all'][ $plugin_key ];
-			return $metas;
+
+			return self::remove_empty_string_values( $metas );
 		}
 
 		return array(
@@ -346,4 +363,3 @@ class Plugins {
 		return $plugins;
 	}
 }
-
