@@ -31,7 +31,9 @@
 							</div>
 							<div class="flex items-center gap-x-4 sm:gap-x-6">
 								<div>
-									<label for="project-versions" class="block text-sm font-medium leading-6 text-gray-900 min-w-[18rem]">Version du projet</label>
+									<label for="project-versions" class="block text-sm font-medium leading-6 text-gray-900 min-w-[18rem]">
+										<?php esc_html_e( 'Project version', 'axeptio-wordpress-plugin' ); ?>
+									</label>
 									<select x-model="configurationId" @change="fetchPlugins()" id="project-versions" name="location" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-amber-400 sm:text-sm sm:leading-6">
 										<option
 											value="all"

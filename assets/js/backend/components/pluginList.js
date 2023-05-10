@@ -151,7 +151,9 @@ const instance = function( args ) {
 			} )
 				.then( ( response ) => response.json() )
 				.then( ( data ) => {
-					this.editedPlugin.Metas = data;
+					const { Parent: parentMetas = undefined, Merged: mergedMetas } = this.editedPlugin.Metas;
+					this.editedPlugin.Metas = Object.assign(data, mergedMetas);
+
 					this.refreshRepeaterFields();
 					this.isSaving = false;
 					this.editedPluginHasChanged = false;

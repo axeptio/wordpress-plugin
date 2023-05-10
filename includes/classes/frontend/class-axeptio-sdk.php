@@ -61,7 +61,7 @@ class Axeptio_Sdk extends Module {
 
 						$configuration = 'all' !== $cookies_version && isset( $plugin_configuration['Metas']['Merged'] ) ? $plugin_configuration['Metas']['Merged'] : $plugin_configuration['Metas'];
 
-						if ( ! (bool) $configuration['enabled'] ) {
+						if ( ! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled'] ) {
 								return false;
 						}
 

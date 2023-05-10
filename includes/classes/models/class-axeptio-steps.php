@@ -16,8 +16,8 @@ class Axeptio_Steps {
 	public static function all() {
 		return array(
 			array(
-				'title'           => 'Cookies WordPress',
-				'subTitle'        => "Vous retrouverez ici l'ensemble des extensions utilisant des cookies.",
+				'title'           => esc_html__( 'WordPress Cookies', 'axeptio-wordpress-plugin' ),
+				'subTitle'        => esc_html__( 'Here you will find all WordPress extensions using cookies.', 'axeptio-wordpress-plugin' ),
 				'topTitle'        => false,
 				'message'         => 'WordPress',
 				'image'           => false,

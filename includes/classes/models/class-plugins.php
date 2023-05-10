@@ -9,6 +9,7 @@ namespace Axeptio\Models;
 
 use Axeptio\Frontend\Axeptio_Sdk;
 use Axeptio\Utils\Cookie_Analyzer;
+use function Axeptio\Utility\get_favicon;
 
 class Plugins {
 	/**
@@ -78,15 +79,21 @@ class Plugins {
 		foreach ( $plugins as $key => $plugin ) {
 			$plugin_key = self::get_plugin_id( $key );
 
-			if ($plugin_key === 'axeptio-wordpress-plugin') {
+			if ( 'axeptio-wordpress-plugin' === $plugin_key) {
 				continue;
+			}
+
+			$plugin_metadatas = self::get_meta_datas( $plugin_key, $configuration_id );
+
+			if ( ! isset( $plugin_metadatas['Merged']['vendor_image'] ) ) {
+				$plugin_metadatas['Merged']['vendor_image'] = get_favicon( $plugin['PluginURI'] );
 			}
 
 			$plugin_list[ $plugin_key ] = array_merge(
 				$plugin,
 				array(
 					'CookiePercentage' => $cookie_analyser->analyze( $plugin_key, $plugin['Name'], $plugin['Description'] ),
-					'Metas'            => self::get_meta_datas( $plugin_key, $configuration_id ),
+					'Metas'            => $plugin_metadatas,
 				)
 			);
 		}

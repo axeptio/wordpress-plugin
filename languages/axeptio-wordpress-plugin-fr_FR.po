@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2023-05-10 12:00+0200\n"
-"PO-Revision-Date: 2023-05-10 12:01+0200\n"
+"POT-Creation-Date: 2023-05-10 18:19+0200\n"
+"PO-Revision-Date: 2023-05-10 18:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -81,6 +81,15 @@ msgstr "Options"
 #: includes/classes/admin/pages/class-admin-main.php:195
 msgid "Project Version"
 msgstr "Version du projet"
+
+#: includes/classes/models/class-axeptio-steps.php:19
+msgid "WordPress Cookies"
+msgstr "Cookies WordPress"
+
+#: includes/classes/models/class-axeptio-steps.php:20
+msgid "Here you will find all WordPress extensions using cookies."
+msgstr ""
+"Vous trouverez ici toutes les extensions WordPress utilisant des cookies."
 
 #: includes/classes/models/class-hook-modes.php:20
 #: includes/classes/models/class-shortcode-tags-modes.php:20
@@ -331,7 +340,7 @@ msgstr ""
 "Avant de commencer, nous vous invitons à configurer les paramètres ci-"
 "dessous !"
 
-#: templates/admin/plugin-manager.php:25 templates/admin/plugin-manager.php:39
+#: templates/admin/plugin-manager.php:25 templates/admin/plugin-manager.php:41
 msgid "Default configuration"
 msgstr "Configuration par défaut"
 
@@ -346,6 +355,10 @@ msgstr ""
 "extensions agissent en fonction du consentement ou du non-consentement des "
 "règles de cookies via notre widget. Vous pouvez paramétrer la configuration "
 "globalement (Configuration par défaut) ou selon la version de votre projet."
+
+#: templates/admin/plugin-manager.php:35
+msgid "Project version"
+msgstr "Version du projet"
 
 #: templates/admin/sections/main.php:32
 msgid "How To Integrate Axeptio?"
