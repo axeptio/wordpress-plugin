@@ -78,6 +78,10 @@ class Plugins {
 		foreach ( $plugins as $key => $plugin ) {
 			$plugin_key = self::get_plugin_id( $key );
 
+			if ($plugin_key === 'axeptio-wordpress-plugin') {
+				continue;
+			}
+
 			$plugin_list[ $plugin_key ] = array_merge(
 				$plugin,
 				array(
