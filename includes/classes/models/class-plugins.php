@@ -7,7 +7,6 @@
 
 namespace Axeptio\Models;
 
-use Axeptio\Admin;
 use Axeptio\Frontend\Axeptio_Sdk;
 use Axeptio\Utils\Cookie_Analyzer;
 
@@ -70,7 +69,8 @@ class Plugins {
 	 * @return array Array of plugins.
 	 */
 	public static function all( string $configuration_id = 'all' ): array {
-		$plugins         = get_plugins();
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		$plugins         = \get_plugins();
 		$cookie_analyser = new Cookie_Analyzer();
 
 		$plugin_list = array();

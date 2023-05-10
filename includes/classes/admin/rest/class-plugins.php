@@ -51,9 +51,9 @@ class Plugins extends Module {
 			'axeptio/v1',
 			'/plugins/(?P<axeptio_configuration_id>([a-zA-Z0-9_ -]|%20)+)',
 			array(
-				'methods'  => \WP_REST_Server::READABLE,
-				'callback' => array( $this, 'get_plugins' ),
-				// 'permission_callback' => array( $this, 'permission_callback' ),
+				'methods'             => \WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_plugins' ),
+				'permission_callback' => array( $this, 'permission_callback' ),
 			),
 		);
 

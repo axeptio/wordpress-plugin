@@ -15,7 +15,7 @@ class Migration_2_0_0 implements \Axeptio\Contracts\Migration_Interface {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-		$table           = Plugins::$table_name;
+		$table           = $wpdb->prefix . Plugins::$table_name;
 		$charset_collate = $wpdb->get_charset_collate();
 
 		$sql = "CREATE TABLE IF NOT EXISTS $table  (
