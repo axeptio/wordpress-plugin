@@ -1,6 +1,7 @@
 <?php
 namespace Axeptio\Migrations;
 
+use Axeptio\Models\Plugins;
 use Axeptio\Models\Settings;
 
 class Migration_2_0_0 implements \Axeptio\Contracts\Migration_Interface {
@@ -14,7 +15,7 @@ class Migration_2_0_0 implements \Axeptio\Contracts\Migration_Interface {
 
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
-		$table           = self::getPluginConfigurationsTable();
+		$table           = Plugins::$table_name;
 		$charset_collate = $wpdb->get_charset_collate();
 
 		$sql = "CREATE TABLE IF NOT EXISTS $table  (
