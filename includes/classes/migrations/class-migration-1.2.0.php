@@ -12,6 +12,7 @@ class Migration_1_2_0 implements \Axeptio\Contracts\Migration_Interface {
 	 */
 	public function up() {
 		$settings = $this->get_settings();
+
 		update_option( 'axeptio_settings', $settings );
 
 		foreach ( $settings as $key => $value ) {
