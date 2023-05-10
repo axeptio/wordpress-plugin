@@ -3,7 +3,7 @@
 	Plugin Name: Axeptio
 	Plugin URI: https://www.axeptio.eu/
 	Description: Axeptio allows you to make your website compliant with GDPR.
-	Version: 1.1.0
+	Version: 1.2.0
 	Author: axeptio
 	License: GPLv3
 	License URI: https://www.gnu.org/licenses/gpl-3.0.html
