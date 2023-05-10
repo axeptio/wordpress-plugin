@@ -42,7 +42,7 @@
 									:class="{ 'text-green-700 bg-green-50 ring-green-600/20' : (plugin.CookiePercentage < 30), 'text-orange-700 bg-orange-50 ring-orange-600/20' : (plugin.CookiePercentage >= 30 && plugin.CookiePercentage < 60), 'text-red-700 bg-red-50 ring-red-600/20' : plugin.CookiePercentage >= 60 }"
 								>
 									<svg class="-my-1 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960"><path d="M420.118 498Q446 498 464 479.882q18-18.117 18-44Q482 410 463.882 392q-18.117-18-44-18Q394 374 376 392.118q-18 18.117-18 44Q358 462 376.118 480q18.117 18 44 18Zm-80 200Q366 698 384 679.882q18-18.117 18-44Q402 610 383.882 592q-18.117-18-44-18Q314 574 296 592.118q-18 18.117-18 44Q278 662 296.118 680q18.117 18 44 18ZM600 736q17 0 28.5-11.5T640 696q0-17-11.5-28.5T600 656q-17 0-28.5 11.5T560 696q0 17 11.5 28.5T600 736ZM480.234 976Q398 976 325 944.5q-73-31.5-127.5-86t-86-127.5Q80 658 80 576q0-92 39-172t104.5-135.5q65.5-55.5 151-80T552 182q-6 45 8 85t42.5 68q28.5 28 68.5 41t84 6q-20 61 22 109.5T879 545q8 87-20.5 165T775 847q-55 59-130.794 94-75.794 35-163.972 35ZM480 916q142 0 236-93.5T821 592q-54-20-87.5-59.5T692 442q-81-11-136.5-70T492 235q-74-3-138.5 24t-112 74Q194 380 167 443.5T140 576q0 142 99 241t241 99Zm1-345Z"></path></svg>
-									<div class="ml-1">Probability : <span x-text="plugin.CookiePercentage + '%'"></span></div>
+									<div class="ml-1"><?php echo esc_html__( 'Probability:', 'axeptio-wordpress-plugin' ); ?> <span x-text="plugin.CookiePercentage + '%'"></span></div>
 								</div>
 							</div>
 							<div class="min-w-0 mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
@@ -53,7 +53,7 @@
 				</div>
 				<div
 					class="flex flex-none items-center gap-x-4"
-					x-show="plugin.Metas.enabled"
+					x-show="plugin.Metas.enabled !== false"
 					x-transition:enter="transition ease-out duration-200"
 					x-transition:enter-start="opacity-0"
 					x-transition:enter-end="opacity-1"

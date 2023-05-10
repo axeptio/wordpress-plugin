@@ -51,7 +51,7 @@ class User_Hook_Parser {
 				list( $hook_info, $callback, $class, $priority ) = $this->parse_line( $line );
 
 				$this->hooks[] = array(
-					'hook'     => $hook_info,
+					'hook'     => isset( $hook_info ) && '' !== $hook_info ? $hook_info : null,
 					'class'    => $class,
 					'callback' => $callback,
 					'priority' => $priority,
@@ -69,7 +69,7 @@ class User_Hook_Parser {
 	 */
 	private function parse_line( $line ) {
 		$parts    = array_map( 'trim', explode( '>', $line, 2 ) );
-		$callback = $parts[1];
+		$callback = isset( $parts[1] ) ? $parts[1] : null;
 
 		if ( preg_match( '/(.*)\s*\((\d+)\)$/', $callback, $matches ) ) {
 			$callback = trim( $matches[1] );
@@ -78,7 +78,7 @@ class User_Hook_Parser {
 			$priority = null;
 		}
 
-		if ( preg_match( '/^\[([^:]+):class,([^]]+)\]$/', $callback, $class_matches ) ) {
+		if ( preg_match( '/^\[([^:]+),([^]]+)\]$/', $callback, $class_matches ) ) {
 			$callback = trim( $class_matches[2] );
 			$class    = trim( $class_matches[1] );
 		} else {

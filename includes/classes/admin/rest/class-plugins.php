@@ -104,7 +104,7 @@ class Plugins extends Module {
 	public function update_plugin( WP_REST_Request $request ) {
 		$configuration_id = urldecode( $request->get_param( 'axeptio_configuration_id' ) );
 		$plugin           = $request->get_param( 'plugin' );
-		$metas            = array_diff_key( $request->get_params(), array_flip( array( 'Merged', 'Parent' ) ) );
+		$metas            = array_diff_key( $request->get_params(), array_flip( array( 'Merged', 'Parent', 'authorized' ) ) );
 
 		$query_datas = PluginModel::find( $plugin, $configuration_id )->update( $metas );
 

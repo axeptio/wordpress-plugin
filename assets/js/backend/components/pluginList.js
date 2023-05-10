@@ -108,10 +108,11 @@ const instance = function( args ) {
 				.then( ( response ) => response.json() )
 				.then( () => {
 					this.isSaving = false;
-					this.setForceEditOpen( false );
 					this.editOpen = false;
 					this.closeDeleteModal();
-					this.editedPlugin.Metas.enabled = 0;
+					this.fetchPlugins();
+					this.editedPlugin.Metas.enabled = false;
+					this.setForceEditOpen( false );
 				} );
 		},
 
@@ -176,11 +177,11 @@ const instance = function( args ) {
 		},
 
 		globalEnabled( plugin ) {
-			return plugin.Metas.Parent && plugin.Metas.Parent.enabled && ! plugin.Metas.enabled;
+			return plugin.Metas.Parent && plugin.Metas.Parent.enabled && plugin.Metas.enabled === false;
 		},
 
 		localEnabled( plugin ) {
-			return plugin.Metas.enabled;
+			return plugin.Metas.enabled === 1;
 		},
 
 		enableControl( plugin ) {

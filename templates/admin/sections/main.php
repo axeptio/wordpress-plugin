@@ -7,7 +7,6 @@
 
 					use Axeptio\Models\Settings;
 
-
 					echo esc_attr(
 							wp_json_encode(
 								array(

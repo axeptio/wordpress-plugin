@@ -42,7 +42,7 @@ function setup() {
 			$wpdb->$table   = $wpdb->prefix . $table;
 			$wpdb->tables[] = $table;
 		}
-		);
+	);
 }
 
 /**
@@ -168,10 +168,22 @@ function admin_scripts() {
 	wp_enqueue_media();
 	wp_enqueue_script(
 		'axeptio/main',
-		script_url( 'main', 'admin' ),
+		script_url( 'backend/app', 'admin' ),
 		Utility\get_asset_info( 'admin', 'dependencies' ),
 		Utility\get_asset_info( 'admin', 'version' ),
 		true
+	);
+
+	wp_localize_script(
+		'axeptio/main',
+		'Axeptio',
+		array(
+			'errors' => array(
+				'empty_account_id'        => __( 'Please enter an account ID', 'axeptio-wordpress-plugin' ),
+				'non_existing_account_id' => __( "This account doesn't exist", 'axeptio-wordpress-plugin' ),
+				'verification_error'      => __( 'Error verifying account ID. Try Again.', 'axeptio-wordpress-plugin' ),
+			),
+		)
 	);
 }
 
@@ -187,18 +199,6 @@ function admin_styles() {
 		array(),
 		Utility\get_asset_info( 'shared', 'version' ),
 	);
-
-	wp_localize_script(
-		'axeptio/main',
-		'Axeptio',
-		array(
-			'errors' => array(
-				'empty_account_id'        => __( 'Please enter an account ID', 'axeptio-wordpress-plugin' ),
-				'non_existing_account_id' => __( "This account doesn't exist", 'axeptio-wordpress-plugin' ),
-				'verification_error'      => __( 'Error verifying account ID. Try Again.', 'axeptio-wordpress-plugin' ),
-			),
-		)
-		);
 }
 
 /**

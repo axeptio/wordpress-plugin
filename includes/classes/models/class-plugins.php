@@ -7,6 +7,8 @@
 
 namespace Axeptio\Models;
 
+use Axeptio\Admin;
+use Axeptio\Frontend\Axeptio_Sdk;
 use Axeptio\Utils\Cookie_Analyzer;
 
 class Plugins {
@@ -273,6 +275,10 @@ class Plugins {
 			$plugin           = $meta_data['plugin'];
 			$meta_data        = self::fix_metadata_format( $meta_data );
 
+			$cookie = isset( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ) ? json_decode( wp_unslash( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ), JSON_OBJECT_AS_ARRAY ) : array();  // PHPCS:Ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+			$meta_data['authorized'] = isset( $cookie[ "wp_{$plugin}" ] ) && true === $cookie[ "wp_{$plugin}" ];
+
 			if ( ! isset( $output_metas[ $configuration_id ] ) ) {
 				$output_metas[ $configuration_id ] = array();
 			}
@@ -299,7 +305,7 @@ class Plugins {
 	 */
 	protected static function remove_empty_string_values( array $meta_array ): array {
 		foreach ( array( 'vendor_title', 'vendor_shortDescription', 'vendor_longDescription', 'vendor_policyUrl', 'vendor_image' ) as $key ) {
-			if ( '' === $meta_array[ $key ]) {
+			if ( isset( $meta_array[ $key ] ) && '' === $meta_array[ $key ] ) {
 				unset( $meta_array[ $key ] );
 			}
 		}
@@ -329,9 +335,10 @@ class Plugins {
 				'enabled'                  => false,
 			);
 
-			$merged_meta     = wp_parse_args( $metas, $all_metas['all'][ $plugin_key ] );
-			$metas['Merged'] = $merged_meta;
-			$metas['Parent'] = $all_metas['all'][ $plugin_key ];
+			$merged_meta                = wp_parse_args( $metas, $all_metas['all'][ $plugin_key ] );
+			$metas['Merged']            = $merged_meta;
+			$metas['Merged']['enabled'] = false === $metas['Merged']['enabled'] ? $all_metas['all'][ $plugin_key ]['enabled'] : $metas['Merged']['enabled'];
+			$metas['Parent']            = $all_metas['all'][ $plugin_key ];
 
 			return self::remove_empty_string_values( $metas );
 		}

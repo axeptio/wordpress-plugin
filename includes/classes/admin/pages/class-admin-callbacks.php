@@ -42,10 +42,10 @@ class Admin_Callbacks {
 	/**
 	 * Options group
 	 *
-	 * @param string $input The input value.
-	 * @return string
+	 * @param mixed $input The input value.
+	 * @return mixed
 	 */
-	public function options_group( $input ): string {
+	public function options_group( $input ) {
 		return $input;
 	}
 

@@ -39,7 +39,8 @@ mix.setPublicPath('dist');
 mix
 	.copy('assets/img', 'dist/img')
 	.copy('assets/fonts', 'dist/fonts')
-	.js('assets/js/main.js', 'dist/js/main.js')
+	.js('assets/js/backend/app.js', 'dist/js/backend/app.js')
+	.js('assets/js/frontend/axeptio.js', 'dist/js/frontend/axeptio.js')
 	.postCss("assets/css/main.css", "dist/css/", [
 		require('postcss-nested'),
 		require('autoprefixer'),

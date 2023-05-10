@@ -33,22 +33,107 @@
 						:class="isActive(1) ? 'border-amber-400 text-indigo-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
 						class="border-transparent w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
 					>
-						<?php esc_html_e( 'Main settings', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Informations', 'axeptio-wordpress-plugin' ); ?>
 					</button>
 					<button
 						@click="setActive(2)"
 						:class="isActive(2) ? 'border-amber-400 text-indigo-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
 						class="border-transparent w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
 					>
-						<?php esc_html_e( 'Informations', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Main settings', 'axeptio-wordpress-plugin' ); ?>
 					</button>
 				</nav>
 			</div>
 
 			<div class="space-y-6" x-show="isActive(1)" x-transition>
+
+				<div>
+					<label for="vendor-title" class="block text-sm font-medium leading-6 text-gray-900">
+						<?php esc_html_e( 'Title', 'axeptio-wordpress-plugin' ); ?>
+					</label>
+					<div class="mt-2">
+						<input
+							x-model="editedPlugin.Metas.vendor_title"
+							type="text"
+							id="vendor-title"
+							autocomplete="street-address"
+							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
+							:placeholder="editedPlugin?.Metas?.Merged?.vendor_title ?? editedPlugin.Name"
+						>
+					</div>
+				</div>
+
+				<div>
+					<label for="vendor-short-description" class="block text-sm font-medium leading-6 text-gray-900">
+						<?php esc_html_e( 'Short description', 'axeptio-wordpress-plugin' ); ?>
+					</label>
+					<div class="mt-2">
+						<textarea
+							x-model="editedPlugin.Metas.vendor_shortDescription"
+							rows="3" id="vendor-short-description"
+							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
+							:placeholder="editedPlugin?.Metas?.Merged?.vendor_shortDescription ?? editedPlugin.Description"
+						></textarea>
+					</div>
+				</div>
+
+				<div>
+					<label for="vendor-long-description" class="block text-sm font-medium leading-6 text-gray-900">
+						<?php esc_html_e( 'Long description', 'axeptio-wordpress-plugin' ); ?>
+					</label>
+					<div class="mt-2">
+						<textarea
+							x-model="editedPlugin.Metas.vendor_longDescription"
+							rows="3" id="vendor-long-description"
+							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
+							:placeholder="editedPlugin?.Metas?.Merged?.vendor_longDescription ?? ''"
+						></textarea>
+					</div>
+				</div>
+
+				<div>
+					<label for="vendor-policy-url" class="block text-sm font-medium leading-6 text-gray-900">
+						<?php esc_html_e( 'Policy URL', 'axeptio-wordpress-plugin' ); ?>
+					</label>
+					<div class="mt-2">
+						<input
+							x-model="editedPlugin.Metas.vendor_policyUrl"
+							type="url"
+							id="vendor-policy-url"
+							autocomplete="street-address"
+							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
+							:placeholder="editedPlugin?.Metas?.Merged?.vendor_policyUrl ?? editedPlugin.PluginURI"
+						>
+					</div>
+				</div>
+
+				<div>
+					<label for="photo" class="block text-sm font-medium leading-6 text-gray-900">
+						<?php esc_html_e( 'Icon', 'axeptio-wordpress-plugin' ); ?>
+					</label>
+					<input type="hidden" x-model="editedPlugin.Metas.vendor_image" readonly>
+					<div class="mt-2 flex items-center gap-x-3">
+						<div x-show="!editedPlugin.Metas.vendor_image && !editedPlugin?.Metas?.Merged?.vendor_image">
+							<svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
+							</svg>
+						</div>
+						<img x-show="editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image" class="h-12 w-12 aspect-[1/1]" :src=" editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image" alt="<?php esc_attr_e( 'Image preview', 'axeptio-wordpress-plugin' ); ?>">
+						<button
+							@click="openMediaSelector"
+							type="button"
+							class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+							x-text="editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image ? '<?php esc_attr_e( 'Edit', 'axeptio-wordpress-plugin' ); ?>' : '<?php esc_attr_e( 'Select', 'axeptio-wordpress-plugin' ); ?>'"
+						>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="space-y-6" x-show="isActive(2)" x-transition>
 				<div>
 					<label for="wp-filter-mode" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Hook mode', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Hook to be filtered', 'axeptio-wordpress-plugin' ); ?>
 					</label>
 					<select x-model="editedPlugin.Metas.wp_filter_mode" id="wp-filter-mode" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-amber-400 sm:text-sm sm:leading-6">
 						<template x-for="hookMode in hookModes" :key="hookMode.value">
@@ -97,7 +182,7 @@
 
 				<div>
 					<label for="shortcode-tags-mode" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Shortcode Tags', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Shortcodes to be filtered', 'axeptio-wordpress-plugin' ); ?>
 					</label>
 					<select x-model="editedPlugin.Metas.shortcode_tags_mode" id="shortcodes-tags-mode" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-amber-400 sm:text-sm sm:leading-6">
 						<template x-for="shortcodeTagsMode in shortcodeTagsModes" :key="shortcodeTagsMode.value">
@@ -144,90 +229,6 @@
 					</p>
 				</div>
 
-			</div>
-			<div class="space-y-6" x-show="isActive(2)" x-transition>
-
-				<div>
-					<label for="vendor-title" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Title', 'axeptio-wordpress-plugin' ); ?>
-					</label>
-					<div class="mt-2">
-						<input
-							x-model="editedPlugin.Metas.vendor_title"
-							type="text"
-							id="vendor-title"
-							autocomplete="street-address"
-							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
-							:placeholder="editedPlugin?.Metas?.Merged?.vendor_title ?? editedPlugin.Name"
-						>
-					</div>
-				</div>
-
-				<div>
-					<label for="vendor-short-description" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Short description', 'axeptio-wordpress-plugin' ); ?>
-					</label>
-					<div class="mt-2">
-						<textarea
-							x-model="editedPlugin.Metas.vendor_shortDescription"
-							rows="3" id="vendor-short-description"
-							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
-							:placeholder="editedPlugin?.Metas?.Merged?.vendor_shortDescription ?? editedPlugin.Description"
-						></textarea>
-					</div>
-				</div>
-
-				<div>
-					<label for="vendor-long-description" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Long description', 'axeptio-wordpress-plugin' ); ?>
-					</label>
-					<div class="mt-2">
-						<textarea
-							x-model="editedPlugin.Metas.vendor_longDescription"
-							rows="3" id="vendor-long-description"
-							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
-							:placeholder="editedPlugin?.Metas?.Merged?.vendor_shortDescription ?? ''"
-						></textarea>
-					</div>
-				</div>
-
-				<div>
-					<label for="vendor-policy-url" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Policy URL', 'axeptio-wordpress-plugin' ); ?>
-					</label>
-					<div class="mt-2">
-						<input
-							x-model="editedPlugin.Metas.vendor_policyUrl"
-							type="url"
-							id="vendor-policy-url"
-							autocomplete="street-address"
-							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
-							:placeholder="editedPlugin?.Metas?.Merged?.vendor_policyUrl ?? editedPlugin.PluginURI"
-						>
-					</div>
-				</div>
-
-				<div>
-					<label for="photo" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Icon', 'axeptio-wordpress-plugin' ); ?>
-					</label>
-					<input type="hidden" x-model="editedPlugin.Metas.vendor_image" readonly>
-					<div class="mt-2 flex items-center gap-x-3">
-						<div x-show="!editedPlugin.Metas.vendor_image && !editedPlugin?.Metas?.Merged?.vendor_image">
-							<svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-								<path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
-							</svg>
-						</div>
-						<img x-show="editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image" class="h-12 w-12 aspect-[1/1]" :src=" editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image" alt="<?php esc_attr_e( 'Image preview', 'axeptio-wordpress-plugin' ); ?>">
-						<button
-							@click="openMediaSelector"
-							type="button"
-							class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-							x-text="editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image ? '<?php esc_attr_e( 'Edit', 'axeptio-wordpress-plugin' ); ?>' : '<?php esc_attr_e( 'Select', 'axeptio-wordpress-plugin' ); ?>'"
-						>
-						</button>
-					</div>
-				</div>
 			</div>
 
 			<div class="mt-6">
