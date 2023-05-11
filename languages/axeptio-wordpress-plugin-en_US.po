@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-10 18:19+0200\n"
-"PO-Revision-Date: 2023-05-10 18:21+0200\n"
+"POT-Creation-Date: 2023-05-11 13:10+0200\n"
+"PO-Revision-Date: 2023-05-11 13:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -92,21 +92,26 @@ msgstr "Here you will find all WordPress extensions using cookies."
 
 #: includes/classes/models/class-hook-modes.php:20
 #: includes/classes/models/class-shortcode-tags-modes.php:20
-msgid "None"
-msgstr "None"
+msgid "Inherited from defaults"
+msgstr "Inherited from defaults"
 
 #: includes/classes/models/class-hook-modes.php:24
 #: includes/classes/models/class-shortcode-tags-modes.php:24
-msgid "All hooks"
-msgstr "All hooks"
+msgid "None"
+msgstr "None"
 
 #: includes/classes/models/class-hook-modes.php:28
 #: includes/classes/models/class-shortcode-tags-modes.php:28
-msgid "Only the following"
-msgstr "Only the following"
+msgid "All hooks"
+msgstr "All hooks"
 
 #: includes/classes/models/class-hook-modes.php:32
 #: includes/classes/models/class-shortcode-tags-modes.php:32
+msgid "Only the following"
+msgstr "Only the following"
+
+#: includes/classes/models/class-hook-modes.php:36
+#: includes/classes/models/class-shortcode-tags-modes.php:36
 msgid "Only those other than"
 msgstr "Only those other than"
 

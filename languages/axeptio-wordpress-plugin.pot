@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2023-05-10 18:19+0200\n"
+"POT-Creation-Date: 2023-05-11 13:10+0200\n"
 "PO-Revision-Date: 2023-05-10 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -89,21 +89,26 @@ msgstr ""
 
 #: includes/classes/models/class-hook-modes.php:20
 #: includes/classes/models/class-shortcode-tags-modes.php:20
-msgid "None"
+msgid "Inherited from defaults"
 msgstr ""
 
 #: includes/classes/models/class-hook-modes.php:24
 #: includes/classes/models/class-shortcode-tags-modes.php:24
-msgid "All hooks"
+msgid "None"
 msgstr ""
 
 #: includes/classes/models/class-hook-modes.php:28
 #: includes/classes/models/class-shortcode-tags-modes.php:28
-msgid "Only the following"
+msgid "All hooks"
 msgstr ""
 
 #: includes/classes/models/class-hook-modes.php:32
 #: includes/classes/models/class-shortcode-tags-modes.php:32
+msgid "Only the following"
+msgstr ""
+
+#: includes/classes/models/class-hook-modes.php:36
+#: includes/classes/models/class-shortcode-tags-modes.php:36
 msgid "Only those other than"
 msgstr ""
 
