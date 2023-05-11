@@ -70,6 +70,12 @@ class Plugins {
 	 * @return array Array of plugins.
 	 */
 	public static function all( string $configuration_id = 'all' ): array {
+		$plugins_list = get_transient( 'axeptio_plugins_' . sanitize_title( $configuration_id ) );
+
+		if ( $plugins_list ) {
+			return $plugins_list;
+		}
+
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		$plugins         = \get_plugins();
 		$cookie_analyser = new Cookie_Analyzer();
@@ -79,7 +85,7 @@ class Plugins {
 		foreach ( $plugins as $key => $plugin ) {
 			$plugin_key = self::get_plugin_id( $key );
 
-			if ( 'axeptio-wordpress-plugin' === $plugin_key) {
+			if ( 'axeptio-wordpress-plugin' === $plugin_key ) {
 				continue;
 			}
 
@@ -97,6 +103,8 @@ class Plugins {
 				)
 			);
 		}
+
+		set_transient( 'axeptio_plugins_' . sanitize_title( $configuration_id ), $plugin_list, HOUR_IN_SECONDS );
 
 		return $plugin_list;
 	}
@@ -117,24 +125,11 @@ class Plugins {
 	 * @param string $configuration_id Configuration ID.
 	 */
 	public function __construct( string $plugin_id, string $configuration_id = 'all' ) {
-		global $wpdb;
-
 		$this->plugin_id        = $plugin_id;
 		$this->configuration_id = $configuration_id;
 
-		$query = $wpdb->prepare(
-			"SELECT * FROM `$wpdb->axeptio_plugin_configuration` WHERE plugin = %s AND axeptio_configuration_id = %s",
-			$this->plugin_id,
-			$this->configuration_id
-		);
-
-		$this->plugin = $wpdb->get_row( $query ); // @codingStandardsIgnoreLine
-
-		if ( $this->plugin ) {
-			// Ensure data formats.
-			$this->plugin->enabled                = intval( $this->plugin->enabled );
-			$this->plugin->wp_filter_store_output = intval( $this->plugin->wp_filter_store_output );
-		}
+		$plugins      = self::all( $this->configuration_id );
+		$this->plugin = isset( $plugins[ $this->plugin_id ] ) ? $plugins[ $this->plugin_id ] : null;
 	}
 
 	/**
@@ -169,7 +164,7 @@ class Plugins {
 
 		// If it does not exist, create it.
 		// ...
-		if ( null === $this->plugin ) {
+		if ( null === $this->plugin || false === $this->plugin['Metas']['enabled'] ) {
 			$this->create( $meta_datas );
 		} else {
 			$where = array(
@@ -179,7 +174,25 @@ class Plugins {
 			$wpdb->update( $wpdb->axeptio_plugin_configuration, $meta_datas, $where ); // @codingStandardsIgnoreLine
 		}
 
-		return self::get_meta_datas( $this->plugin_id, $this->configuration_id );
+		self::flush_cache();
+
+		$plugins      = self::all( $this->configuration_id );
+		$this->plugin = isset( $plugins[ $this->plugin_id ] ) ? $plugins[ $this->plugin_id ] : null;
+
+		return $this->plugin;
+	}
+
+	/**
+	 * Flush the transient cache.
+	 *
+	 * @return void
+	 */
+	protected static function flush_cache() {
+		$project_versions = Project_Versions::all();
+		foreach ( $project_versions as $project_version ) {
+			delete_transient( 'axeptio_plugins_' . sanitize_title( $project_version->value ) );
+		}
+		delete_transient( 'axeptio_plugins_all' );
 	}
 
 	/**
@@ -195,10 +208,14 @@ class Plugins {
 			'plugin'                   => $this->plugin_id,
 		);
 
-		return $wpdb->delete( // @codingStandardsIgnoreLine
+		$delete = $wpdb->delete( // @codingStandardsIgnoreLine
 			$wpdb->prefix . self::$table_name,
 			$where
 		);
+
+		self::flush_cache();
+
+		return $delete;
 	}
 
 	/**
@@ -286,10 +303,6 @@ class Plugins {
 			$plugin           = $meta_data['plugin'];
 			$meta_data        = self::fix_metadata_format( $meta_data );
 
-			$cookie = isset( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ) ? json_decode( wp_unslash( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ), JSON_OBJECT_AS_ARRAY ) : array();  // PHPCS:Ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-			$meta_data['authorized'] = isset( $cookie[ "wp_{$plugin}" ] ) && true === $cookie[ "wp_{$plugin}" ];
-
 			if ( ! isset( $output_metas[ $configuration_id ] ) ) {
 				$output_metas[ $configuration_id ] = array();
 			}
@@ -344,6 +357,10 @@ class Plugins {
 				'plugin'                   => self::get_plugin_id( $plugin_key ),
 				'axeptio_configuration_id' => $configuration_id,
 				'enabled'                  => false,
+				'wp_filter_mode'           => 'all' === $configuration_id ? 'none' : 'inherit',
+				'wp_filter_list'           => '',
+				'shortcode_tags_mode'      => 'all' === $configuration_id ? 'none' : 'inherit',
+				'shortcode_tags_list'      => '',
 			);
 
 			$merged_meta                = wp_parse_args( $metas, $all_metas['all'][ $plugin_key ] );
@@ -358,9 +375,9 @@ class Plugins {
 			'plugin'                   => self::get_plugin_id( $plugin_key ),
 			'axeptio_configuration_id' => $configuration_id,
 			'enabled'                  => false,
-			'wp_filter_mode'           => 'none',
+			'wp_filter_mode'           => 'all' === $configuration_id ? 'none' : 'inherit',
 			'wp_filter_list'           => '',
-			'shortcode_tags_mode'      => 'none',
+			'shortcode_tags_mode'      => 'all' === $configuration_id ? 'none' : 'inherit',
 			'shortcode_tags_list'      => '',
 		);
 	}

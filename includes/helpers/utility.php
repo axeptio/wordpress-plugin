@@ -45,9 +45,12 @@ function get_asset_info( $slug, $attribute = null ) {
  * @return mixed|string
  */
 function get_favicon( string $url, int $size = 32, int $expire = 86400 ) {
+	if ( ! $url ) {
+		return false;
+	}
 	$domain = wp_parse_url( $url );
 
-	$icon_url = "https://www.google.com/s2/favicons?domain={$domain}&sz={$size}";
+	$icon_url = "https://www.google.com/s2/favicons?domain={$domain['host']}&sz={$size}";
 
 	$cache_key = 'xpwpd_favicon_' . md5( $url );
 

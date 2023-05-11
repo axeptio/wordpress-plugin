@@ -137,7 +137,7 @@ class Hook_Modifier extends Module {
 
 			// consent has been given for this plugin,
 			// no need to add it to the interception.
-			if ( isset( $configuration['authorized'] ) && $configuration['authorized'] ) {
+			if ( ! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled'] || $this->is_cookie_authorized( $configuration['plugin'] ) ) {
 				continue;
 			}
 
@@ -237,6 +237,7 @@ class Hook_Modifier extends Module {
 			}
 
 			if ( $intercepted_hook === $current_hook ) {
+
 				$matching_hook = true;
 				break;
 			}
@@ -255,6 +256,16 @@ class Hook_Modifier extends Module {
 		return false;
 	}
 
+	/**
+	 * Check if the plugin has been consented or not.
+	 *
+	 * @param string $plugin Name of the plugin.
+	 * @return bool
+	 */
+	private function is_cookie_authorized( string $plugin ) {
+		$cookie = isset( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ) ? json_decode( wp_unslash( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ), JSON_OBJECT_AS_ARRAY ) : array();  // PHPCS:Ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		return isset( $cookie[ "wp_{$plugin}" ] ) && true === $cookie[ "wp_{$plugin}" ];
+	}
 
 	/**
 	 * Wrap the function in a tag
@@ -292,15 +303,14 @@ class Hook_Modifier extends Module {
 		$cookies_version       = Settings::get_option( 'version', 'all' );
 		$plugin_configurations = Plugins::all( $cookies_version );
 
-		// maybe optimize since now $this->plugin_configurations is a map
-		// with plugin as keys.
 		foreach ( $plugin_configurations as $plugin_configuration ) {
 
 			$configuration = 'all' === $cookies_version || ! isset( $plugin_configuration['Metas']['Merged'] ) ? $plugin_configuration['Metas'] : $plugin_configuration['Metas']['Merged'];
 
 			// consent has been given for this plugin,
 			// no need to add it to the interception.
-			if ( isset( $configuration['authorized'] ) && $configuration['authorized'] ) {
+
+			if ( ! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled'] || $this->is_cookie_authorized( $configuration['plugin'] ) ) {
 				continue;
 			}
 
@@ -308,16 +318,15 @@ class Hook_Modifier extends Module {
 				// We store the whitelisted hooks in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
 				// if the plugin should be intercepted AND if there hooks to avoid.
-
-				$parser = new User_Hook_Parser( $configuration['wp_filter_list'] );
-				$hooks  = $parser->get_hooks();
+				$configuration['wp_filter_list'] = 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['wp_filter_list'] : $configuration['wp_filter_list'];
+				$parser                          = new User_Hook_Parser( $configuration['wp_filter_list'] );
+				$hooks                           = $parser->get_hooks();
 
 				$intercepted_plugins[ $configuration['plugin'] ] = array(
-					'mode'         => $configuration['wp_filter_mode'],
+					'mode'         => 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['wp_filter_mode'] : $configuration['wp_filter_mode'],
 					'list'         => $hooks,
 					'store_output' => $configuration['wp_filter_store_output'],
 				);
-
 			}
 		}
 

@@ -71,3 +71,8 @@ tasks:
     desc: Lint php (WP Coding Standards)
     cmds:
       - yarn eslint assets/js/
+
+  eslint-fix:
+    desc: Lint php (WP Coding Standards)
+    cmds:
+      - yarn eslint --fix assets/js/

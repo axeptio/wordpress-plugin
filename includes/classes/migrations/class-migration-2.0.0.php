@@ -25,12 +25,12 @@ class Migration_2_0_0 implements \Axeptio\Contracts\Migration_Interface {
 	            `axeptio_configuration_id` varchar(50) NOT NULL,
 	            `enabled` BOOLEAN NOT NULL DEFAULT 0,
 	            -- settings that tell to the Axeptio WP Plugin how to behave with this plugin's filters
-	            `wp_filter_mode` ENUM('none', 'all', 'blacklist', 'whitelist') NOT NULL DEFAULT 'all',
+	            `wp_filter_mode` ENUM('none', 'all', 'blacklist', 'whitelist', 'inherit') NOT NULL DEFAULT 'all',
 	            `wp_filter_list` TEXT NULL,
 	            `wp_filter_store_output` BOOLEAN NOT NULL DEFAULT 0,
 	            `wp_filter_reload_page_after_consent` ENUM('no', 'ask', 'yes') NOT NULL DEFAULT 'no',
                 -- settings that tell to the Axeptio WP Plugin how to behave with this plugin's shortcodes
-	            `shortcode_tags_mode` ENUM('none', 'all', 'blacklist', 'whitelist') NOT NULL DEFAULT 'all',
+	            `shortcode_tags_mode` ENUM('none', 'all', 'blacklist', 'whitelist', 'inherit') NOT NULL DEFAULT 'all',
 	            `shortcode_tags_list` TEXT NULL,
 	            `shortcode_tags_placeholder` TEXT,
 	            -- info about that will be displayed in the widget

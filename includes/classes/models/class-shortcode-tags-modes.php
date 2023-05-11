@@ -16,6 +16,10 @@ class Shortcode_Tags_Modes {
 	public static function all() {
 		return array(
 			array(
+				'value' => 'inherit',
+				'text'  => __( 'Inherited from default', 'axeptio-wordpress-plugin' ),
+			),
+			array(
 				'value' => 'none',
 				'text'  => __( 'None', 'axeptio-wordpress-plugin' ),
 			),

@@ -23,6 +23,7 @@ const instance = function( args ) {
 				return;
 			}
 			this.inputRefs[ fieldSlug ] = [];
+
 			this.fields[ fieldSlug ] = this.sanitizeArray( this.editedPlugin.Metas[ fieldSlug ].split( '\n' ) );
 
 			if ( this.fields[ fieldSlug ].length === 0 || ( this.fields[ fieldSlug ].length === 1 && this.fields[ fieldSlug ][ 0 ] === '' ) ) {
@@ -91,6 +92,7 @@ const instance = function( args ) {
 				.then( ( data ) => {
 					this.plugins = data;
 					this.isGetting = false;
+					this.hookModes = this.configurationId === 'all' ? this.hookModes.filter( ( obj ) => obj.value !== 'inherit' ) : this.originalHookModes;
 				} );
 		},
 
@@ -151,9 +153,7 @@ const instance = function( args ) {
 			} )
 				.then( ( response ) => response.json() )
 				.then( ( data ) => {
-					const { Parent: parentMetas = undefined, Merged: mergedMetas } = this.editedPlugin.Metas;
-					this.editedPlugin.Metas = Object.assign(data, mergedMetas);
-
+					this.editedPlugin = data;
 					this.refreshRepeaterFields();
 					this.isSaving = false;
 					this.editedPluginHasChanged = false;
@@ -175,11 +175,15 @@ const instance = function( args ) {
 		},
 
 		localOrGlobalEnabled( plugin ) {
-			return this.globalEnabled( plugin ) || this.localEnabled( plugin );
+			return this.localEnabled( plugin ) || this.globalEnabled( plugin );
 		},
 
 		globalEnabled( plugin ) {
-			return plugin.Metas.Parent && plugin.Metas.Parent.enabled && plugin.Metas.enabled === false;
+			if ( plugin.Metas.enabled !== false || typeof plugin.Metas.Parent === 'undefined' ) {
+				return false;
+			}
+
+			return Boolean( plugin.Metas.Parent.enabled );
 		},
 
 		localEnabled( plugin ) {
@@ -190,7 +194,7 @@ const instance = function( args ) {
 			const { Metas } = plugin;
 
 			this.editedPlugin = plugin;
-			Metas.enabled = ! Metas.enabled;
+			Metas.enabled = ! Boolean( Metas.enabled ) ? 1 : 0;
 			this.updatePlugin( plugin );
 		},
 
@@ -245,6 +249,7 @@ const instance = function( args ) {
 		shortcodeTagsModes: args.shortcode_tags_mode,
 		editOpen: false,
 		showDeleteModal: false,
+		originalHookModes: args.hook_modes,
 		pluginToDelete: null,
 		inputRefs: [],
 		fields: [],
