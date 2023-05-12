@@ -40,28 +40,14 @@ function get_asset_info( $slug, $attribute = null ) {
  * Get favicon from URL.
  *
  * @param string $url URL of the website.
- * @param int    $size   Size of the icon.
- * @param int    $expire Cache expiration in seconds.
  * @return mixed|string
  */
-function get_favicon( string $url, int $size = 32, int $expire = 86400 ) {
+function get_favicon( string $url ) {
 	if ( ! $url ) {
 		return false;
 	}
 	$domain = wp_parse_url( $url );
 
-	$icon_url = "https://www.google.com/s2/favicons?domain={$domain['host']}&sz={$size}";
-
-	$cache_key = 'xpwpd_favicon_' . md5( $url );
-
-	$cached_favicon_url = get_transient( $cache_key );
-
-	if ( $cached_favicon_url ) {
-		return $cached_favicon_url;
-	}
-
-	set_transient( $cache_key, $icon_url, $expire );
-
-	return $icon_url;
+	return sprintf('https://icon.horse/icon/%s', $domain['host']);
 }
 

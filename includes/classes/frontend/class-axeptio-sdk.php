@@ -53,6 +53,7 @@ class Axeptio_Sdk extends Module {
 		wp_localize_script( 'axeptio/sdk-script', 'Axeptio_SDK', $settings );
 
 		$cookies_version = Settings::get_option( 'version', false );
+		$cookies_version = $cookies_version === '' ? 'all' : $cookies_version;
 
 		$wordpress_vendors = array_values(
 			array_filter(
@@ -73,7 +74,7 @@ class Axeptio_Sdk extends Module {
 							'policyUrl'        => isset( $configuration['vendor_policyUrl'] ) && '' !== $configuration['vendor_policyUrl'] ? $configuration['vendor_policyUrl'] : $plugin_configuration['PluginURI'],
 							// TODO: Vendor Domain.
 							'domain'           => $configuration['vendor_domain'] ?? '',
-							'image'            => $configuration['vendor_image'] ?? '',
+							'image'            => $configuration['vendor_image'] === '' && isset($configuration['Merged']['vendor_image']) ? $configuration['Merged']['vendor_image'] : $configuration['vendor_image'],
 							'type'             => 'wordpress plugin',
 							'step'             => $configuration['cookie_widget_step'] ?? '',
 						);

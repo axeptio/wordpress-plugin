@@ -69,15 +69,16 @@ class Plugins {
 	 * @param string $configuration_id Configuration ID.
 	 * @return array Array of plugins.
 	 */
-	public static function all( string $configuration_id = 'all' ): array {
+	public static function all( string $configuration_id = 'all', $force_refresh = false ): array {
 		$plugins_list = get_transient( 'axeptio_plugins_' . sanitize_title( $configuration_id ) );
-
+		$plugins_list = false;
 		if ( $plugins_list ) {
 			return $plugins_list;
 		}
 
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		$plugins         = \get_plugins();
+
 		$cookie_analyser = new Cookie_Analyzer();
 
 		$plugin_list = array();
@@ -89,7 +90,7 @@ class Plugins {
 				continue;
 			}
 
-			$plugin_metadatas = self::get_meta_datas( $plugin_key, $configuration_id );
+			$plugin_metadatas = self::get_meta_datas( $plugin_key, $configuration_id, $force_refresh );
 
 			if ( ! isset( $plugin_metadatas['Merged']['vendor_image'] ) ) {
 				$plugin_metadatas['Merged']['vendor_image'] = get_favicon( $plugin['PluginURI'] );
@@ -176,7 +177,7 @@ class Plugins {
 
 		self::flush_cache();
 
-		$plugins      = self::all( $this->configuration_id );
+		$plugins      = self::all( $this->configuration_id, true );
 		$this->plugin = isset( $plugins[ $this->plugin_id ] ) ? $plugins[ $this->plugin_id ] : null;
 
 		return $this->plugin;
@@ -264,7 +265,7 @@ class Plugins {
 	 */
 	protected static function get_plugin_id( $key ): string {
 		if ( str_contains( $key, '/' ) ) {
-			$key = explode( '/', $key )[1];
+			$key = explode( '/', $key )[0];
 		}
 		return sanitize_title( str_replace( '.php', '', $key ) );
 	}
@@ -290,8 +291,8 @@ class Plugins {
 	 *
 	 * @return array Metas datas.
 	 */
-	public static function prepare_meta_data() {
-		if ( self::$all_metas ) {
+	public static function prepare_meta_data($force_refresh = false) {
+		if ( self::$all_metas && ! $force_refresh ) {
 			return self::$all_metas;
 		}
 
@@ -345,8 +346,8 @@ class Plugins {
 	 * @param string $configuration_id Configuration ID.
 	 * @return mixed Plugin metadata.
 	 */
-	public static function get_meta_datas( $plugin_key, $configuration_id = 'all' ) {
-		$all_metas = self::prepare_meta_data();
+	public static function get_meta_datas( $plugin_key, $configuration_id = 'all', $force_refresh = false ) {
+		$all_metas = self::prepare_meta_data($force_refresh);
 
 		if ( isset( $all_metas[ $configuration_id ][ $plugin_key ] ) ) {
 			return $all_metas[ $configuration_id ][ $plugin_key ];

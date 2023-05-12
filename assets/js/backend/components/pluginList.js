@@ -154,6 +154,7 @@ const instance = function( args ) {
 				.then( ( response ) => response.json() )
 				.then( ( data ) => {
 					this.editedPlugin = data;
+					console.log( data );
 					this.refreshRepeaterFields();
 					this.isSaving = false;
 					this.editedPluginHasChanged = false;

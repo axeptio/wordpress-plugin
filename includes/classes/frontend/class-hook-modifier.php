@@ -129,6 +129,7 @@ class Hook_Modifier extends Module {
 		// maybe optimize since now $this->plugin_configurations is a map
 		// with plugin as keys.
 		$cookies_version       = Settings::get_option( 'version', false );
+		$cookies_version = ( $cookies_version === '' )? 'all' : $cookies_version;
 		$plugin_configurations = Plugins::all( $cookies_version );
 
 		foreach ( $plugin_configurations as $plugin_configuration ) {
@@ -142,11 +143,12 @@ class Hook_Modifier extends Module {
 			}
 
 			if ( isset( $configuration['shortcode_tags_mode'] ) && 'none' !== $configuration['shortcode_tags_mode'] ) {
+				$configuration['shortcode_tags_list'] = 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['shortcode_tags_list'] : $configuration['shortcode_tags_list'];
 				// We store the whitelisted tags in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
 				// if the plugin should be intercepted AND if there are tags to avoid.
 				$intercepted_plugins[ $configuration['plugin'] ] = array(
-					'mode'        => $configuration['shortcode_tags_mode'],
+					'mode'         => 'inherit' === $configuration['shortcode_tags_mode'] ? $plugin_configuration['Metas']['Parent']['shortcode_tags_mode'] : $configuration['shortcode_tags_mode'],
 					'list'        => explode( "\n", $configuration['shortcode_tags_list'] ),
 					'placeholder' => $configuration['shortcode_tags_placeholder'],
 				);
@@ -301,6 +303,8 @@ class Hook_Modifier extends Module {
 		$intercepted_plugins = array();
 
 		$cookies_version       = Settings::get_option( 'version', 'all' );
+		$cookies_version = ( $cookies_version === '' )? 'all' : $cookies_version;
+
 		$plugin_configurations = Plugins::all( $cookies_version );
 
 		foreach ( $plugin_configurations as $plugin_configuration ) {
@@ -314,6 +318,7 @@ class Hook_Modifier extends Module {
 				continue;
 			}
 
+
 			if ( isset( $configuration['wp_filter_mode'] ) && 'none' !== $configuration['wp_filter_mode'] ) {
 				// We store the whitelisted hooks in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
@@ -321,6 +326,10 @@ class Hook_Modifier extends Module {
 				$configuration['wp_filter_list'] = 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['wp_filter_list'] : $configuration['wp_filter_list'];
 				$parser                          = new User_Hook_Parser( $configuration['wp_filter_list'] );
 				$hooks                           = $parser->get_hooks();
+
+				if (count($hooks) === 0) {
+					continue;
+				}
 
 				$intercepted_plugins[ $configuration['plugin'] ] = array(
 					'mode'         => 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['wp_filter_mode'] : $configuration['wp_filter_mode'],
@@ -333,7 +342,7 @@ class Hook_Modifier extends Module {
 		foreach ( $plugins as $plugin => $configs ) {
 			// The plugin has no key in the $intercepted_plugins array,
 			// meaning it should not be intercepted.
-			if ( ! isset( $intercepted_plugins[ $plugin ] ) ) {
+			if ( ! isset( $intercepted_plugins[ $plugin ] )) {
 				continue;
 			}
 
