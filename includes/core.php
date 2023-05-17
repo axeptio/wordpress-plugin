@@ -33,6 +33,16 @@ function setup() {
 	add_filter( 'script_loader_tag', $n( 'script_loader_tag' ), 10, 2 );
 
 	do_action( 'axeptio/loaded' );
+
+	add_action(
+		'init',
+		function() {
+			global $wpdb;
+			$table          = 'axeptio_plugin_configuration';
+			$wpdb->$table   = $wpdb->prefix . $table;
+			$wpdb->tables[] = $table;
+		}
+	);
 }
 
 /**
@@ -155,26 +165,13 @@ function style_url( $stylesheet, $context ) {
  * @return void
  */
 function admin_scripts() {
+	wp_enqueue_media();
 	wp_enqueue_script(
 		'axeptio/main',
-		script_url( 'main', 'admin' ),
+		script_url( 'backend/app', 'admin' ),
 		Utility\get_asset_info( 'admin', 'dependencies' ),
 		Utility\get_asset_info( 'admin', 'version' ),
 		true
-	);
-}
-
-/**
- * Enqueue styles for admin.
- *
- * @return void
- */
-function admin_styles() {
-	wp_enqueue_style(
-		'axeptio/main',
-		style_url( 'main', 'admin' ),
-		array(),
-		Utility\get_asset_info( 'shared', 'version' ),
 	);
 
 	wp_localize_script(
@@ -187,7 +184,21 @@ function admin_styles() {
 				'verification_error'      => __( 'Error verifying account ID. Try Again.', 'axeptio-wordpress-plugin' ),
 			),
 		)
-		);
+	);
+}
+
+/**
+ * Enqueue styles for admin.
+ *
+ * @return void
+ */
+function admin_styles() {
+	wp_enqueue_style(
+		'axeptio/main',
+		style_url( 'backend/main', 'admin' ),
+		array(),
+		Utility\get_asset_info( 'shared', 'version' ),
+	);
 }
 
 /**

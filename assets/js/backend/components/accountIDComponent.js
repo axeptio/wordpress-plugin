@@ -44,9 +44,10 @@ const instance = function( args ) {
 				if ( data.cookies.length > 0 ) {
 					this.showID = true;
 					this.options = data.cookies.map( ( cookie ) => ( {
-						value: cookie.title,
+						value: cookie.name,
 						text: cookie.title,
 					} ) );
+					console.log(this.options);
 					this.validAccountID = true;
 					this.optionsJson = JSON.stringify( this.options );
 				} else {

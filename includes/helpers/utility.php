@@ -35,3 +35,19 @@ function get_asset_info( $slug, $attribute = null ) {
 
 	return $asset;
 }
+
+/**
+ * Get favicon from URL.
+ *
+ * @param string $url URL of the website.
+ * @return mixed|string
+ */
+function get_favicon( string $url ) {
+	if ( ! $url ) {
+		return false;
+	}
+	$domain = wp_parse_url( $url );
+
+	return sprintf( 'https://icon.horse/icon/%s', $domain['host'] );
+}
+
