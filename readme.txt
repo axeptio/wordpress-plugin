@@ -67,6 +67,21 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
+### 2.0.0 ###
+
+The 2.0 version of the Axeptio WordPress Plugin brings significant improvements and new features to help you manage cookies on your website more effectively. Here is a detailed list of changes in this new version:
+
+1. **New Interface for Extension Management:** The plugin now comes with a new interface that allows you to manage installed extensions and precisely define the blocking of certain functionalities that might use cookies. This can be done through WordPress hooks and shortcodes.
+2. **Introduction of Cookie Analysis Algorithm:** The plugin now provides an algorithm that analyses the likelihood of an extension having third-party cookies. This gives you a better understanding of potential privacy issues related to each extension.
+3. **Access to Axeptio Recommended Configurations:** The plugin now allows you to access configurations recommended by Axeptio. Currently, there are about 15, but this will be expanded in the future.
+4. **Shortcode Placeholder for Blocked Content:** We've added a placeholder for shortcodes to indicate when content is blocked. Users can unblock the content by accepting the cookie through a button, which opens the Axeptio widget to permit or deny the display of content.
+5. **Refactoring of Main Extension Configuration Management:** We've refactored the way we handle the main configuration of the extension, making it more robust and easier to manage.
+6. **Additional Language Support:** The plugin is now available in four more languages: German, Spanish, Italian, and Dutch. This will help in reaching a wider audience and serving users in their native languages.
+
+In addition to these features, we have also fixed an issue related to the management of the Axeptio configuration version. Now, the plugin correctly manages different versions of the Axeptio configuration.
+
+As always, we look forward to your feedback and appreciate your continued support for the Axeptio WordPress Plugin.
+
 ### 1.1.0 ###
 
 - New UI
