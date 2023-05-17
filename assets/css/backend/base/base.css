@@ -1,0 +1,7 @@
+.axeptio-settings {
+	-webkit-font-smoothing: antialiased;
+}
+
+[x-cloak] {
+	display: none;
+}

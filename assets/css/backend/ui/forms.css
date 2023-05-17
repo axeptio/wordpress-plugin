@@ -1,0 +1,28 @@
+#axeptio-app {
+	.form-table .inline-table-row {
+		display: flex;
+		flex-direction: column;
+		th, td {
+			@apply py-2 px-0 w-full;
+		}
+	}
+
+	.notice {
+		@apply rounded-md py-2 px-4 w-full;
+		&.notice-success {
+			 @apply bg-green-50;
+		 }
+
+		&.notice-warning,
+		&.notice-error {
+			 @apply bg-red-50;
+		}
+	}
+
+	input:not(.ring-1):-webkit-autofill,
+	input:not(.ring-1):-webkit-autofill:hover,
+	input:not(.ring-1):-webkit-autofill:focus,
+	input:not(.ring-1):-webkit-autofill:active {
+		-webkit-box-shadow: 0 0 0 30px white inset !important;
+	}
+}

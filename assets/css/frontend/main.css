@@ -1,0 +1,115 @@
+.axeptio-shortcode-placeholder {
+	position: relative;
+	overflow: hidden;
+	border-radius: 12px;
+	padding: 10px 30px 30px;
+	box-shadow: rgba(0, 0, 0, 0.02) 0px 2.8px 2.2px, rgba(0, 0, 0, 0.027) 0px 6.7px 5.3px, rgba(0, 0, 0, 0.035) 0px 12.5px 10px, rgba(0, 0, 0, 0.043) 0px 22.3px 17.9px, rgba(0, 0, 0, 0.05) 0px 41.8px 33.4px, rgba(0, 0, 0, 0.07) 0px 100px 80px;
+	background: #fff;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column-reverse;
+	gap: 0;
+	margin: 20px 0px;
+	-webkit-font-smoothing: antialiased;
+
+	@media (min-width: 992px) {
+		flex-direction: row;
+		gap: 20px;
+	}
+
+	.svg-icon {
+		z-index: 10;
+		position: relative;
+		display: inline-flex;
+		width: 100px;
+		height: 100px;
+		flex-shrink: 0;
+
+		@media (min-width: 992px) {
+			width: 180px;
+			height: 180px;
+		}
+	}
+
+	.background-shape {
+		z-index: 1;
+		position: absolute;
+		top: -82px;
+		right: 0px;
+
+		@media (min-width: 992px) {
+			left: auto;
+			top: -82px;
+			right: 0px;
+		}
+	}
+
+	.axeptio-shortcode-title {
+		font-family: serif;
+		letter-spacing: -0.025em;
+		font-weight: 700;
+		font-size: clamp(20px, 4vw, 24px);
+		line-height: 1.25;
+		margin-bottom: 0.5rem;
+		color: rgb(33, 33, 33);
+	}
+
+	.axeptio-shortcode-content {
+		font-size: clamp(12px, 3vw, 13px);
+		line-height: 1.4;
+		color: rgb(75, 85, 99, 0.6);
+	}
+
+	.axeptio-shortcode-btn {
+		position: relative;
+		display: inline-flex;
+		-webkit-box-align: center;
+		align-items: center;
+		padding: 7px 15px;
+		margin: 10px 0 0 0px;
+		font-size: clamp(12px, 3vw, 13px);
+		font-weight: 700;
+		border: 1px solid rgb(255, 206, 67);
+		border-radius: 1000px;
+		text-decoration: none;
+		overflow: hidden;
+		cursor: pointer;
+		transform: translate3d(0px, 0px, 0px);
+		transition: all 0.15s ease 0s;
+		color: rgb(33, 33, 33);
+		background: rgb(255, 206, 67);
+
+		span {
+			position: relative;
+			z-index: 20;
+		}
+
+		&:after {
+			 z-index: 10;
+			 content: "";
+			 position: absolute;
+			 top: -50%;
+			 left: -25%;
+			 display: block;
+			 width: 150%;
+			 height: 250%;
+			 border-radius: 50%;
+			 background: rgb(244, 246, 251);
+			 pointer-events: none;
+			 transform: translateY(-100%);
+			 transition: all 0.55s cubic-bezier(0.19, 1, 0.22, 1) 0s;
+		 }
+
+		 &:hover {
+			  background: rgb(222, 169, 18);
+			  border-color: rgb(33, 33, 33);
+			  color: rgb(255, 206, 67);
+
+		      &:after {
+				   background: rgb(33, 33, 33);
+				   transform: translateY(-10%);
+              }
+		  }
+	}
+}

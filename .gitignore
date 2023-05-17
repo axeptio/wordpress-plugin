@@ -34,9 +34,16 @@ dwsync.xml
 .komodotools
 
 # Folders to ignore
-.hg
-.svn
-.CVS
-intermediate
-.idea
-cache
+/.hg
+/.svn
+/.CVS
+/intermediate
+/.idea
+/cache
+
+/wp-tests
+/dist/
+
+/node_modules/
+/vendor/
+/releases/

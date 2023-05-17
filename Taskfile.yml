@@ -1,0 +1,104 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  DC_ARGS: -paxeptio-wordpress-plugin -f docker-compose.yml
+
+tasks:
+  release:
+    desc: Create a release
+    cmds:
+      - task: clean-modules
+      - yarn && yarn build:production
+      - task: composer-build
+      - rsync -av --exclude='tmp' --exclude-from='exclusions.txt' ./ ./tmp/
+      - svn co https://plugins.svn.wordpress.org/axeptio-sdk-integration ./releases
+      - rm -rf ./releases/trunk && mv ./tmp/ ./releases/trunk
+      - rm -rf ./releases/assets && cp -R ./release-assets/ ./releases/assets
+      - rm -rf ./releases/tags/{{.CLI_ARGS}}
+      - cp -R ./releases/trunk ./releases/tags/{{.CLI_ARGS}}
+      - cd ./releases && svn add * --force && svn ci -m 'version {{.CLI_ARGS}} release' && svn up
+      - cd ..
+      - rm -rf ./releases
+
+  build:
+    desc: Build containerized application services
+    cmds:
+      - docker-compose {{.DC_ARGS}} up -d --build --remove-orphans --force-recreate
+    silent: true
+
+  restart:
+    desc: Restart the docker application
+    cmds:
+      - task: stop
+      - task: start
+    silent: true
+
+  start:
+    desc: Start the docker application
+    cmds:
+      - docker-compose {{.DC_ARGS}} up -d --remove-orphans
+    silent: true
+
+  stop:
+    desc: Stop the docker application
+    cmds:
+      - docker-compose {{.DC_ARGS}} down
+    silent: true
+
+  logs:
+    desc: View the application logs
+    cmds:
+      - docker-compose {{.DC_ARGS}} logs -f web
+    silent: true
+
+  clean-modules:
+    desc: SSH to the docker app container (use 'task ssh -- root' to connect as root)
+    cmds:
+      - docker-compose run --rm web rm -rf vendor/ && rm -rf node_modules/
+
+  ssh:
+    desc: SSH to the docker app container (use 'task ssh -- root' to connect as root)
+    cmds:
+      - docker-compose run --rm web sh
+
+  composer-install:
+    desc: Run the installation of the composer packages
+    cmds:
+      - docker-compose run --rm web composer install
+
+  composer-build:
+    desc: Run the installation of the composer packages
+    cmds:
+      - docker-compose run --rm web composer install --no-dev --optimize-autoloader
+
+  composer-require:
+    desc: Install a composer packages
+    cmds:
+      - docker-compose run --rm web composer {{.ARGS}}
+
+  php-stan:
+    desc: Lint php (WP Coding Standards)
+    cmds:
+      - docker-compose run --rm web composer run run-stan
+      -
+  lint-php:
+    desc: Lint php (WP Coding Standards)
+    cmds:
+      - docker-compose run --rm web composer run phpcs
+
+  fix-php:
+    desc: Fix php (WP Coding Standards)
+    cmds:
+      - docker-compose run --rm web composer run phpcs:fix
+
+  eslint:
+    desc: Lint php (WP Coding Standards)
+    cmds:
+      - yarn eslint assets/js/
+
+  eslint-fix:
+    desc: Lint php (WP Coding Standards)
+    cmds:
+      - yarn eslint --fix assets/js/
