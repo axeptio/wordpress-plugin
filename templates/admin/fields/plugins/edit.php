@@ -146,7 +146,7 @@
 					</select>
 				</div>
 
-				<div x-show="editedPlugin.Metas.wp_filter_mode != 'none' && editedPlugin.Metas.wp_filter_mode != 'all'">
+				<div x-show="editedPlugin.Metas.wp_filter_mode == 'blacklist' || editedPlugin.Metas.wp_filter_mode == 'whitelist'">
 					<label for="about" class="block text-sm font-medium leading-6 text-gray-900">
 						<?php esc_html_e( 'List of hooks (action or filter)', 'axeptio-wordpress-plugin' ); ?>
 					</label>
@@ -195,7 +195,7 @@
 					</select>
 				</div>
 
-				<div x-show="editedPlugin.Metas.shortcode_tags_mode != 'none' && editedPlugin.Metas.shortcode_tags_mode != 'all'">
+				<div x-show="editedPlugin.Metas.shortcode_tags_mode == 'blacklist' || editedPlugin.Metas.shortcode_tags_mode == 'whitelist'">
 					<label for="shortcode-tags-list" class="block text-sm font-medium leading-6 text-gray-900">
 						<?php esc_html_e( 'List of shortcode Tags', 'axeptio-wordpress-plugin' ); ?>
 					</label>

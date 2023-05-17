@@ -14,6 +14,8 @@ use Axeptio\Models\Settings;
 use Axeptio\Module;
 use function Axeptio\get_sdk_settings;
 use function Axeptio\script_url;
+use function Axeptio\style_url;
+use function Axeptio\Utility\get_asset_info;
 
 class Axeptio_Sdk extends Module {
 
@@ -51,9 +53,15 @@ class Axeptio_Sdk extends Module {
 		wp_register_script( 'axeptio/sdk-script', '', array(), XPWP_VERSION, true );
 		wp_enqueue_script( 'axeptio/sdk-script' );
 		wp_localize_script( 'axeptio/sdk-script', 'Axeptio_SDK', $settings );
+		wp_enqueue_style(
+			'axeptio/main',
+			style_url( 'frontend/main', 'frontend' ),
+			array(),
+			get_asset_info( 'shared', 'version' ),
+		);
 
 		$cookies_version = Settings::get_option( 'version', false );
-		$cookies_version = $cookies_version === '' ? 'all' : $cookies_version;
+		$cookies_version = '' === $cookies_version ? 'all' : $cookies_version;
 
 		$wordpress_vendors = array_values(
 			array_filter(
@@ -74,9 +82,9 @@ class Axeptio_Sdk extends Module {
 							'policyUrl'        => isset( $configuration['vendor_policyUrl'] ) && '' !== $configuration['vendor_policyUrl'] ? $configuration['vendor_policyUrl'] : $plugin_configuration['PluginURI'],
 							// TODO: Vendor Domain.
 							'domain'           => $configuration['vendor_domain'] ?? '',
-							'image'            => $configuration['vendor_image'] === '' && isset($configuration['Merged']['vendor_image']) ? $configuration['Merged']['vendor_image'] : $configuration['vendor_image'],
+							'image'            => '' === $configuration['vendor_image'] && isset( $configuration['Merged']['vendor_image'] ) ? $configuration['Merged']['vendor_image'] : $configuration['vendor_image'],
 							'type'             => 'wordpress plugin',
-							'step'             => $configuration['cookie_widget_step'] ?? '',
+							'step'             => $configuration['cookie_widget_step'] ?? 'wordpress',
 						);
 					},
 					Plugins::all( $cookies_version )

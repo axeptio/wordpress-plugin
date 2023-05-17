@@ -16,7 +16,7 @@ class Cookie_Analyzer {
 	 * @var array[] $keywords
 	 */
 	private $keywords = array(
-		5 => array( 'cookies', 'google' ),
+		5 => array( 'cookies', 'google', 'youtube' ),
 		4 => array( 'tracking', 'pixel', 'analytics', 'remarketing', 'retargeting', 'targeting', 'facebook', 'linkedin', 'twitter', 'bing', 'yahoo' ),
 		3 => array( 'marketing', 'advertisement', 'advertising', 'analysis', 'conversion', 'campaign', 'audience', 'ads', 'adwords', 'social', 'impression', 'views', 'engagement', 'reach', 'frequency', 'capping', 'track' ),
 		2 => array( 'seo', 'form', 'sem', 'ppc', 'cpm', 'cpc', 'cpa', 'cps', 'affiliate', 'email', 'newsletter', 'subscription', 'crm', 'lead', 'landing', 'optimization', 'behavior', 'funnel', 'ab-testing', 'ab testing', 'personalization', 'segmentation', 'geolocation', 'heatmaps', 'scroll', 'bounce', 'rate', 'experience', 'gdpr', 'ccpa', 'lgpd' ),
@@ -41,23 +41,16 @@ class Cookie_Analyzer {
 	private $cookie_plugin = array(
 		'google-analytics-for-wordpress', // MonsterInsights.
 		'google-analytics-dashboard-for-wp', // ExactMetrics.
-		'google-analytics', // Analytify.
+		'wp-analytify', // Analytify.
 		'ga-google-analytics', // GA Google Analytics.
 		'jetpack', // Jetpack.
 		'contact-form-7', // Contact Form 7.
-		'yoast-seo', // Yoast SEO.
 		'all-in-one-seo-pack', // All in One SEO Pack.
-		'wordfence', // Wordfence Security.
-		'w3-total-cache', // W3 Total Cache.
-		'wp-super-cache', // WP Super Cache.
-		'wp-rocket', // WP Rocket.
 		'mailchimp-for-wp', // Mailchimp for WordPress.
-		'hubspot', // HubSpot All-In-One Marketing.
+		'leadin', // HubSpot All-In-One Marketing.
 		'shariff-wrapper', // Shariff Wrapper.
-		'facebook-pixel', // Pixel Cat – Conversion Pixel Manager.
+		'facebook-conversion-pixel', // Pixel Cat – Conversion Pixel Manager.
 		'popup-maker', // Popup Maker.
-		'cookie-notice', // Cookie Notice.
-		'gdpr-cookie-compliance', // GDPR Cookie Compliance.
 		'complianz-gdpr', // Complianz GDPR/CCPA.
 		'google-tag-manager', // Google Tag Manager for WordPress.
 		'woocommerce', // WooCommerce.
@@ -68,7 +61,6 @@ class Cookie_Analyzer {
 		'caldera-forms', // Caldera Forms.
 		'mailpoet', // MailPoet.
 		'sumome', // SumoMe.
-		'optinmonster', // OptinMonster.
 		'convertplug', // ConvertPlug.
 		'bloom', // Bloom.
 		'thrive-leads', // Thrive Leads.
@@ -84,13 +76,10 @@ class Cookie_Analyzer {
 		'social-warfare', // Social Warfare.
 		'nextend-facebook-connect', // Nextend Social Login.
 		'instagram-feed', // Smash Balloon Social Photo Feed.
-		'akismet', // Akismet Anti-Spam.
 		'disqus-comment-system', // Disqus Comment System.
 		'clicky-analytics', // Clicky Analytics.
-		'p3-profiler', // P3 (Plugin Performance Profiler).
-		'updraftplus', // UpdraftPlus WordPress Backup Plugin.
+		'matomo', // Clicky Analytics.
 		'onesignal-free-web-push-notifications', // OneSignal Web Push Notifications.
-		'cookie-law-info', // GDPR Cookie Consent.
 	);
 
 	/**

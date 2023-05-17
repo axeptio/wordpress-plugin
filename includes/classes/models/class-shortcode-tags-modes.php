@@ -11,21 +11,19 @@ class Shortcode_Tags_Modes {
 	/**
 	 * Get shortcode tags mode list.
 	 *
+	 * @param string $configuration_id Configuration ID.
+	 * @param string $plugin_id Plugin ID.
 	 * @return array[]
 	 */
-	public static function all() {
-		return array(
-			array(
-				'value' => 'inherit',
-				'text'  => __( 'Inherited from defaults', 'axeptio-wordpress-plugin' ),
-			),
+	public static function all( $configuration_id, $plugin_id ) {
+		$common = array(
 			array(
 				'value' => 'none',
 				'text'  => __( 'None', 'axeptio-wordpress-plugin' ),
 			),
 			array(
 				'value' => 'all',
-				'text'  => __( 'All hooks', 'axeptio-wordpress-plugin' ),
+				'text'  => __( 'All shortcode tags', 'axeptio-wordpress-plugin' ),
 			),
 			array(
 				'value' => 'blacklist',
@@ -36,5 +34,27 @@ class Shortcode_Tags_Modes {
 				'text'  => __( 'Only those other than', 'axeptio-wordpress-plugin' ),
 			),
 		);
+		if ( 'all' !== $configuration_id ) {
+			array_unshift(
+				$common,
+				array(
+					'value' => 'inherit',
+					'text'  => __( 'Inherited from defaults', 'axeptio-wordpress-plugin' ),
+				)
+			);
+		}
+
+		$recommended_settings = Recommended_Plugin_Settings::find( $plugin_id );
+
+		if ( $recommended_settings && isset( $recommended_settings['shortcode_tags_mode'] ) ) {
+			array_unshift(
+				$common,
+				array(
+					'value' => 'recommended',
+					'text'  => __( 'Recommended by Axeptio', 'axeptio-wordpress-plugin' ),
+				)
+			);
+		}
+		return $common;
 	}
 }

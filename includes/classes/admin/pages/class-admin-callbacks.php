@@ -30,11 +30,9 @@ class Admin_Callbacks {
 	 */
 	public function plugin_manager() {
 		$settings = array(
-			'nonce'               => wp_create_nonce( 'wp_rest' ),
-			'hook_modes'          => Hook_Modes::all(),
-			'shortcode_tags_mode' => Shortcode_Tags_Modes::all(),
-			'active_plugins'      => Plugins::get_active_plugins(),
-			'project_versions'    => Project_Versions::all(),
+			'nonce'            => wp_create_nonce( 'wp_rest' ),
+			'active_plugins'   => Plugins::get_active_plugins(),
+			'project_versions' => Project_Versions::all(),
 		);
 		return require_once XPWP_PATH . 'templates' . DS . 'admin' . DS . 'plugin-manager.php';
 	}

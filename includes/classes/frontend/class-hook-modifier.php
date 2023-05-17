@@ -8,6 +8,7 @@
 namespace Axeptio\Frontend;
 
 use Axeptio\Models\Plugins;
+use Axeptio\Models\Recommended_Plugin_Settings;
 use Axeptio\Models\Settings;
 use Axeptio\Module;
 
@@ -129,7 +130,7 @@ class Hook_Modifier extends Module {
 		// maybe optimize since now $this->plugin_configurations is a map
 		// with plugin as keys.
 		$cookies_version       = Settings::get_option( 'version', false );
-		$cookies_version = ( $cookies_version === '' )? 'all' : $cookies_version;
+		$cookies_version       = '' === $cookies_version ? 'all' : $cookies_version;
 		$plugin_configurations = Plugins::all( $cookies_version );
 
 		foreach ( $plugin_configurations as $plugin_configuration ) {
@@ -143,14 +144,20 @@ class Hook_Modifier extends Module {
 			}
 
 			if ( isset( $configuration['shortcode_tags_mode'] ) && 'none' !== $configuration['shortcode_tags_mode'] ) {
-				$configuration['shortcode_tags_list'] = 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['shortcode_tags_list'] : $configuration['shortcode_tags_list'];
+
+				$configuration['shortcode_tags_list'] = 'inherit' === $configuration['shortcode_tags_mode'] ? $plugin_configuration['Metas']['Parent']['shortcode_tags_list'] : $configuration['shortcode_tags_list'];
+				$configuration['shortcode_tags_mode'] = 'inherit' === $configuration['shortcode_tags_mode'] ? $plugin_configuration['Metas']['Parent']['shortcode_tags_mode'] : $configuration['shortcode_tags_mode'];
+
+				$configuration = $this->maybe_apply_recommended_settings( $configuration, 'shortcode_tags' );
+
 				// We store the whitelisted tags in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
 				// if the plugin should be intercepted AND if there are tags to avoid.
 				$intercepted_plugins[ $configuration['plugin'] ] = array(
-					'mode'         => 'inherit' === $configuration['shortcode_tags_mode'] ? $plugin_configuration['Metas']['Parent']['shortcode_tags_mode'] : $configuration['shortcode_tags_mode'],
-					'list'        => explode( "\n", $configuration['shortcode_tags_list'] ),
-					'placeholder' => $configuration['shortcode_tags_placeholder'],
+					'mode'         => $configuration['shortcode_tags_mode'],
+					'list'         => explode( "\n", $configuration['shortcode_tags_list'] ),
+					'placeholder'  => $configuration['shortcode_tags_placeholder'],
+					'vendor_title' => isset( $configuration['vendor_title'] ) && '' !== $configuration['vendor_title'] ? $configuration['vendor_title'] : $plugin_configuration['Name'],
 				);
 			}
 		}
@@ -166,7 +173,7 @@ class Hook_Modifier extends Module {
 				if ( $this->should_load_shortcode( $intercepted_plugins[ $plugin ], $tag['name'] ) ) {
 					continue;
 				}
-				$shortcode_tags[ $tag['name'] ] = $this->wrap_tag( $tag['function'], $plugin, $tag['name'] ); // PHPCS:Ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+				$shortcode_tags[ $tag['name'] ] = $this->wrap_tag( $tag['function'], $plugin, $intercepted_plugins[ $plugin ], $tag['name'] ); // PHPCS:Ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 			}
 		}
 
@@ -219,6 +226,7 @@ class Hook_Modifier extends Module {
 		);
 
 		$matching_hook = false;
+
 		foreach ( $intercepted_plugin['list'] as $intercepted_hook ) {
 			$current_hook = $default;
 
@@ -226,12 +234,13 @@ class Hook_Modifier extends Module {
 				$current_hook['hook'] = $hook;
 			}
 
-			if ( isset( $intercepted_hook['class'] ) && is_array( $callback['function'] ) ) {
-				$current_hook['class'] = get_class( $callback['function'][0] );
-
-				$current_hook['callback'] = $callback['function'][1];
-			} else {
-				$current_hook['callback'] = $callback['function'];
+			if ( isset( $intercepted_hook['callback'] ) ) {
+				if ( isset( $intercepted_hook['class'] ) && is_array( $callback['function'] ) ) {
+					$current_hook['class']    = is_string( $callback['function'][0] ) ? $callback['function'][0] : get_class( $callback['function'][0] );
+					$current_hook['callback'] = $callback['function'][1];
+				} else {
+					$current_hook['callback'] = $callback['function'];
+				}
 			}
 
 			if ( isset( $intercepted_hook['priority'] ) ) {
@@ -239,7 +248,6 @@ class Hook_Modifier extends Module {
 			}
 
 			if ( $intercepted_hook === $current_hook ) {
-
 				$matching_hook = true;
 				break;
 			}
@@ -267,6 +275,33 @@ class Hook_Modifier extends Module {
 	private function is_cookie_authorized( string $plugin ) {
 		$cookie = isset( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ) ? json_decode( wp_unslash( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ), JSON_OBJECT_AS_ARRAY ) : array();  // PHPCS:Ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		return isset( $cookie[ "wp_{$plugin}" ] ) && true === $cookie[ "wp_{$plugin}" ];
+	}
+
+	/**
+	 * Maybe set Axeptio recommanded settings if exists.
+	 *
+	 * @param array $configuration Plugin configuration array.
+	 * @param array $setting Name of the settings.
+	 * @return array
+	 */
+	protected function maybe_apply_recommended_settings( $configuration, $setting ) {
+		$merged_setting  = $configuration['Merged'][ $setting . '_mode' ] ?? null;
+		$current_setting = $configuration[ $setting . '_mode' ] ?? null;
+
+		if ( 'recommended' === $current_setting || 'recommended' === $merged_setting ) {
+			$recommended_settings = Recommended_Plugin_Settings::find( $configuration['plugin'] );
+
+			$recommended_mode = $recommended_settings[ $setting . '_mode' ];
+			$recommended_list = is_array( $recommended_settings[ $setting . '_list' ] ) ? implode( PHP_EOL, $recommended_settings[ $setting . '_list' ] ) : $recommended_settings[ $setting . '_list' ];
+
+			$configuration[ $setting . '_mode' ] = $recommended_mode;
+			$configuration[ $setting . '_list' ] = $recommended_list;
+
+			$configuration['Merged'][ $setting . '_mode' ] = $recommended_mode;
+			$configuration['Merged'][ $setting . '_list' ] = $recommended_list;
+		}
+
+		return $configuration;
 	}
 
 	/**
@@ -302,8 +337,8 @@ class Hook_Modifier extends Module {
 
 		$intercepted_plugins = array();
 
-		$cookies_version       = Settings::get_option( 'version', 'all' );
-		$cookies_version = ( $cookies_version === '' )? 'all' : $cookies_version;
+		$cookies_version = Settings::get_option( 'version', 'all' );
+		$cookies_version = '' === $cookies_version ? 'all' : $cookies_version;
 
 		$plugin_configurations = Plugins::all( $cookies_version );
 
@@ -318,23 +353,26 @@ class Hook_Modifier extends Module {
 				continue;
 			}
 
-
 			if ( isset( $configuration['wp_filter_mode'] ) && 'none' !== $configuration['wp_filter_mode'] ) {
 				// We store the whitelisted hooks in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
 				// if the plugin should be intercepted AND if there hooks to avoid.
-				$configuration['wp_filter_list'] = 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['wp_filter_list'] : $configuration['wp_filter_list'];
-				$parser                          = new User_Hook_Parser( $configuration['wp_filter_list'] );
-				$hooks                           = $parser->get_hooks();
 
-				if (count($hooks) === 0) {
+				$configuration['wp_filter_list'] = 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['wp_filter_list'] : $configuration['wp_filter_list'];
+				$configuration['wp_filter_mode'] = 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['wp_filter_mode'] : $configuration['wp_filter_mode'];
+
+				$configuration = $this->maybe_apply_recommended_settings( $configuration, 'wp_filter' );
+
+				$parser = new User_Hook_Parser( $configuration['wp_filter_list'] );
+				$hooks  = $parser->get_hooks();
+
+				if ( count( $hooks ) === 0 ) {
 					continue;
 				}
 
 				$intercepted_plugins[ $configuration['plugin'] ] = array(
-					'mode'         => 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['wp_filter_mode'] : $configuration['wp_filter_mode'],
-					'list'         => $hooks,
-					'store_output' => $configuration['wp_filter_store_output'],
+					'mode' => $configuration['wp_filter_mode'],
+					'list' => $hooks,
 				);
 			}
 		}
@@ -342,7 +380,7 @@ class Hook_Modifier extends Module {
 		foreach ( $plugins as $plugin => $configs ) {
 			// The plugin has no key in the $intercepted_plugins array,
 			// meaning it should not be intercepted.
-			if ( ! isset( $intercepted_plugins[ $plugin ] )) {
+			if ( ! isset( $intercepted_plugins[ $plugin ] ) ) {
 				continue;
 			}
 
@@ -358,7 +396,6 @@ class Hook_Modifier extends Module {
 					continue;
 				}
 				// Otherwise we will wrap and overwrite the filter.
-				// Todo => here we should pass the store_output option.
 				$wp_filter[ $filter ]->callbacks[ $priority ][ $name ]['function'] = $this->wrap_filter( $function['function'], $plugin, $filter );
 			}
 		}
@@ -373,17 +410,26 @@ class Hook_Modifier extends Module {
 	 *
 	 * @param mixed  $callback_function Function to wrap.
 	 * @param string $plugin            Plugin name.
+	 * @param string $plugin_settings   Plugin Settings.
 	 * @param string $tag               Tag name.
 	 *
 	 * @return Closure
 	 */
-	private function wrap_tag( $callback_function, $plugin, $tag ) {
-		return function () use ( $callback_function, $plugin, $tag ) {
-			$args   = func_get_args();
-			$return = call_user_func_array( $callback_function, $args );
-
-			// Todo add a placeholder.
-			return "<!-- axeptio_blocked $plugin \n$return\n-->";
+	private function wrap_tag( $callback_function, $plugin, $plugin_settings, $tag ) {
+		return function () use ( $callback_function, $plugin, $plugin_settings, $tag ) {
+			$args        = func_get_args();
+			$return      = call_user_func_array( $callback_function, $args );
+			$pattern     = '/<!--(.*?)-->/s';
+			$return      = preg_replace( $pattern, '', $return );
+			$placeholder = \Axeptio\get_template_part(
+				'frontend/shortcode-placeholder',
+				array(
+					'plugin'          => $plugin,
+					'plugin_settings' => $plugin_settings,
+				),
+				false
+				);
+			return "$placeholder<!-- axeptio_blocked $plugin \n$return\n-->";
 		};
 	}
 

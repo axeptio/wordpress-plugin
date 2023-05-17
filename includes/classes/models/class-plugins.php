@@ -67,17 +67,12 @@ class Plugins {
 	 * Get all plugins.
 	 *
 	 * @param string $configuration_id Configuration ID.
+	 * @param bool   $force_refresh      Force use a fresh value (not cache).
 	 * @return array Array of plugins.
 	 */
 	public static function all( string $configuration_id = 'all', $force_refresh = false ): array {
-		$plugins_list = get_transient( 'axeptio_plugins_' . sanitize_title( $configuration_id ) );
-		$plugins_list = false;
-		if ( $plugins_list ) {
-			return $plugins_list;
-		}
-
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		$plugins         = \get_plugins();
+		$plugins = \get_plugins();
 
 		$cookie_analyser = new Cookie_Analyzer();
 
@@ -99,13 +94,13 @@ class Plugins {
 			$plugin_list[ $plugin_key ] = array_merge(
 				$plugin,
 				array(
-					'CookiePercentage' => $cookie_analyser->analyze( $plugin_key, $plugin['Name'], $plugin['Description'] ),
-					'Metas'            => $plugin_metadatas,
+					'CookiePercentage'   => $cookie_analyser->analyze( $plugin_key, $plugin['Name'], $plugin['Description'] ),
+					'Metas'              => $plugin_metadatas,
+					'HookModes'          => Hook_Modes::all( $configuration_id, $plugin_key ),
+					'ShortcodeTagsModes' => Shortcode_Tags_Modes::all( $configuration_id, $plugin_key ),
 				)
 			);
 		}
-
-		set_transient( 'axeptio_plugins_' . sanitize_title( $configuration_id ), $plugin_list, HOUR_IN_SECONDS );
 
 		return $plugin_list;
 	}
@@ -175,25 +170,10 @@ class Plugins {
 			$wpdb->update( $wpdb->axeptio_plugin_configuration, $meta_datas, $where ); // @codingStandardsIgnoreLine
 		}
 
-		self::flush_cache();
-
 		$plugins      = self::all( $this->configuration_id, true );
 		$this->plugin = isset( $plugins[ $this->plugin_id ] ) ? $plugins[ $this->plugin_id ] : null;
 
 		return $this->plugin;
-	}
-
-	/**
-	 * Flush the transient cache.
-	 *
-	 * @return void
-	 */
-	protected static function flush_cache() {
-		$project_versions = Project_Versions::all();
-		foreach ( $project_versions as $project_version ) {
-			delete_transient( 'axeptio_plugins_' . sanitize_title( $project_version->value ) );
-		}
-		delete_transient( 'axeptio_plugins_all' );
 	}
 
 	/**
@@ -209,14 +189,10 @@ class Plugins {
 			'plugin'                   => $this->plugin_id,
 		);
 
-		$delete = $wpdb->delete( // @codingStandardsIgnoreLine
+		return $wpdb->delete( // @codingStandardsIgnoreLine
 			$wpdb->prefix . self::$table_name,
 			$where
 		);
-
-		self::flush_cache();
-
-		return $delete;
 	}
 
 	/**
@@ -289,9 +265,10 @@ class Plugins {
 	/**
 	 * Collect every meta datas and prepare them.
 	 *
+	 * @param bool $force_refresh      Force use a fresh value (not cache).
 	 * @return array Metas datas.
 	 */
-	public static function prepare_meta_data($force_refresh = false) {
+	public static function prepare_meta_data( $force_refresh = false ) {
 		if ( self::$all_metas && ! $force_refresh ) {
 			return self::$all_metas;
 		}
@@ -344,16 +321,18 @@ class Plugins {
 	 *
 	 * @param string $plugin_key Plugin key.
 	 * @param string $configuration_id Configuration ID.
+	 * @param bool   $force_refresh      Force use a fresh value (not cache).
 	 * @return mixed Plugin metadata.
 	 */
 	public static function get_meta_datas( $plugin_key, $configuration_id = 'all', $force_refresh = false ) {
-		$all_metas = self::prepare_meta_data($force_refresh);
+		$all_metas = self::prepare_meta_data( $force_refresh );
 
 		if ( isset( $all_metas[ $configuration_id ][ $plugin_key ] ) ) {
 			return $all_metas[ $configuration_id ][ $plugin_key ];
 		}
 
 		if ( isset( $all_metas['all'][ $plugin_key ] ) ) {
+
 			$metas = array(
 				'plugin'                   => self::get_plugin_id( $plugin_key ),
 				'axeptio_configuration_id' => $configuration_id,
@@ -372,13 +351,15 @@ class Plugins {
 			return self::remove_empty_string_values( $metas );
 		}
 
+		$recommended_settings = Recommended_Plugin_Settings::find( $plugin_key );
+
 		return array(
 			'plugin'                   => self::get_plugin_id( $plugin_key ),
 			'axeptio_configuration_id' => $configuration_id,
 			'enabled'                  => false,
-			'wp_filter_mode'           => 'all' === $configuration_id ? 'none' : 'inherit',
+			'wp_filter_mode'           => 'all' === $configuration_id ? ( $recommended_settings && isset( $recommended_settings['wp_filter_mode'] ) ? 'recommended' : 'none' ) : 'inherit',
 			'wp_filter_list'           => '',
-			'shortcode_tags_mode'      => 'all' === $configuration_id ? 'none' : 'inherit',
+			'shortcode_tags_mode'      => 'all' === $configuration_id ? ( $recommended_settings && isset( $recommended_settings['shortcode_tags_mode'] ) ? 'recommended' : 'none' ) : 'inherit',
 			'shortcode_tags_list'      => '',
 		);
 	}

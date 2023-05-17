@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2023-05-11 13:10+0200\n"
-"PO-Revision-Date: 2023-05-11 13:11+0200\n"
+"POT-Creation-Date: 2023-05-17 10:13+0200\n"
+"PO-Revision-Date: 2023-05-17 10:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.3\n"
+"X-Generator: Poedit 3.3.1\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio.php\n"
@@ -93,28 +93,36 @@ msgstr ""
 
 #: includes/classes/models/class-hook-modes.php:20
 #: includes/classes/models/class-shortcode-tags-modes.php:20
-msgid "Inherited from defaults"
-msgstr "Hérité des valeurs par défaut"
-
-#: includes/classes/models/class-hook-modes.php:24
-#: includes/classes/models/class-shortcode-tags-modes.php:24
 msgid "None"
 msgstr "Aucun"
 
-#: includes/classes/models/class-hook-modes.php:28
-#: includes/classes/models/class-shortcode-tags-modes.php:28
+#: includes/classes/models/class-hook-modes.php:24
 msgid "All hooks"
 msgstr "Tous les hooks"
 
-#: includes/classes/models/class-hook-modes.php:32
-#: includes/classes/models/class-shortcode-tags-modes.php:32
+#: includes/classes/models/class-hook-modes.php:28
+#: includes/classes/models/class-shortcode-tags-modes.php:28
 msgid "Only the following"
 msgstr "Seulement les suivants"
 
-#: includes/classes/models/class-hook-modes.php:36
-#: includes/classes/models/class-shortcode-tags-modes.php:36
+#: includes/classes/models/class-hook-modes.php:32
+#: includes/classes/models/class-shortcode-tags-modes.php:32
 msgid "Only those other than"
 msgstr "Tous à l'exception de"
+
+#: includes/classes/models/class-hook-modes.php:39
+#: includes/classes/models/class-shortcode-tags-modes.php:38
+msgid "Inherited from defaults"
+msgstr "Hérité des valeurs par défaut"
+
+#: includes/classes/models/class-hook-modes.php:48
+#: includes/classes/models/class-shortcode-tags-modes.php:47
+msgid "Recommended by Axeptio"
+msgstr "Recommandé par Axeptio"
+
+#: includes/classes/models/class-shortcode-tags-modes.php:24
+msgid "All shortcode tags"
+msgstr "Toutes les balises shortcode"
 
 #. translators: %s: the path to the plugin
 #: includes/core.php:83
@@ -381,6 +389,23 @@ msgstr "Probabilité :"
 msgid "Your Axeptio Settings"
 msgstr "Votre configuration Axeptio"
 
+#: templates/frontend/shortcode-placeholder.php:4
+msgid "Oops, content not available at the moment!"
+msgstr "Oups, le contenu n'est pas disponible pour le moment !"
+
+#: templates/frontend/shortcode-placeholder.php:7
+#, php-format
+msgid ""
+"This content is blocked because we take the protection of your data very "
+"seriously. If you wish to unblock it, it's very simple: go to our cookie "
+"consent widget, give your approval for the \"%s\" extension. And voila, "
+"you're all set!"
+msgstr ""
+"Ce contenu est bloqué car nous prenons la protection de vos données très au "
+"sérieux. Si vous souhaitez le débloquer, c'est très simple : rendez-vous sur "
+"notre widget de consentement des cookies, donnez votre accord pour "
+"l'extension \"%s\". Et le tour est joué !"
+
 #. Plugin URI of the plugin/theme
 msgid "https://www.axeptio.eu/"
 msgstr "https://www.axeptio.eu/fr"
@@ -393,6 +418,9 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr "axeptio"
+
+#~ msgid "Recommanded by Axeptio"
+#~ msgstr "Recommandé par Axeptio"
 
 #~ msgctxt "context"
 #~ msgid "Hello World…"

@@ -24,7 +24,7 @@ class Axeptio_Steps {
 				'imageWidth'      => 0,
 				'imageHeight'     => 0,
 				'disablePaint'    => false,
-				'name'            => '0',
+				'name'            => 'wordpress',
 				'layout'          => 'category',
 				'allowOptOut'     => true,
 				'insert_position' => 'after_welcome_step',

@@ -48,6 +48,6 @@ function get_favicon( string $url ) {
 	}
 	$domain = wp_parse_url( $url );
 
-	return sprintf('https://icon.horse/icon/%s', $domain['host']);
+	return sprintf( 'https://icon.horse/icon/%s', $domain['host'] );
 }
 

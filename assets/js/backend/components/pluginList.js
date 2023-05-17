@@ -92,7 +92,6 @@ const instance = function( args ) {
 				.then( ( data ) => {
 					this.plugins = data;
 					this.isGetting = false;
-					this.hookModes = this.configurationId === 'all' ? this.hookModes.filter( ( obj ) => obj.value !== 'inherit' ) : this.originalHookModes;
 				} );
 		},
 
@@ -136,6 +135,9 @@ const instance = function( args ) {
 			this.setActive( 1 );
 			this.editOpen = true;
 			this.editedPlugin = plugin;
+		  this.hookModes = plugin.HookModes;
+			this.shortcodeTagsModes = plugin.ShortcodeTagsModes;
+
 			this.refreshRepeaterFields();
 		},
 
@@ -154,7 +156,6 @@ const instance = function( args ) {
 				.then( ( response ) => response.json() )
 				.then( ( data ) => {
 					this.editedPlugin = data;
-					console.log( data );
 					this.refreshRepeaterFields();
 					this.isSaving = false;
 					this.editedPluginHasChanged = false;
@@ -245,12 +246,11 @@ const instance = function( args ) {
 		nonce: args.nonce,
 		isSaving: false,
 		isGetting: false,
-		hookModes: args.hook_modes,
+		hookModes: [],
 		projectVersions: args.project_versions,
-		shortcodeTagsModes: args.shortcode_tags_mode,
+		shortcodeTagsModes: [],
 		editOpen: false,
 		showDeleteModal: false,
-		originalHookModes: args.hook_modes,
 		pluginToDelete: null,
 		inputRefs: [],
 		fields: [],

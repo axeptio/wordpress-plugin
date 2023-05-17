@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-11 13:10+0200\n"
-"PO-Revision-Date: 2023-05-11 13:13+0200\n"
+"POT-Creation-Date: 2023-05-17 10:13+0200\n"
+"PO-Revision-Date: 2023-05-17 10:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: fr_FR\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.3\n"
+"X-Generator: Poedit 3.3.1\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio.php\n"
@@ -93,28 +93,36 @@ msgstr "Hier finden Sie alle WordPress-Erweiterungen, die Cookies verwenden."
 
 #: includes/classes/models/class-hook-modes.php:20
 #: includes/classes/models/class-shortcode-tags-modes.php:20
-msgid "Inherited from defaults"
-msgstr "Von den Standardwerten geerbt"
-
-#: includes/classes/models/class-hook-modes.php:24
-#: includes/classes/models/class-shortcode-tags-modes.php:24
 msgid "None"
 msgstr "Keine"
 
-#: includes/classes/models/class-hook-modes.php:28
-#: includes/classes/models/class-shortcode-tags-modes.php:28
+#: includes/classes/models/class-hook-modes.php:24
 msgid "All hooks"
 msgstr "Alle Hooks"
 
-#: includes/classes/models/class-hook-modes.php:32
-#: includes/classes/models/class-shortcode-tags-modes.php:32
+#: includes/classes/models/class-hook-modes.php:28
+#: includes/classes/models/class-shortcode-tags-modes.php:28
 msgid "Only the following"
 msgstr "Nur die Folgenden"
 
-#: includes/classes/models/class-hook-modes.php:36
-#: includes/classes/models/class-shortcode-tags-modes.php:36
+#: includes/classes/models/class-hook-modes.php:32
+#: includes/classes/models/class-shortcode-tags-modes.php:32
 msgid "Only those other than"
 msgstr "Alle außer"
+
+#: includes/classes/models/class-hook-modes.php:39
+#: includes/classes/models/class-shortcode-tags-modes.php:38
+msgid "Inherited from defaults"
+msgstr "Von den Standardwerten geerbt"
+
+#: includes/classes/models/class-hook-modes.php:48
+#: includes/classes/models/class-shortcode-tags-modes.php:47
+msgid "Recommended by Axeptio"
+msgstr "Empfohlen von Axeptio"
+
+#: includes/classes/models/class-shortcode-tags-modes.php:24
+msgid "All shortcode tags"
+msgstr "Alle Shortcode-Tags"
 
 #. translators: %s: the path to the plugin
 #: includes/core.php:83
@@ -386,6 +394,23 @@ msgstr "Wahrscheinlichkeit:"
 #: templates/admin/settings-main.php:10
 msgid "Your Axeptio Settings"
 msgstr "Ihre Axeptio-Einstellungen"
+
+#: templates/frontend/shortcode-placeholder.php:4
+msgid "Oops, content not available at the moment!"
+msgstr "Ups, der Inhalt ist im Moment nicht verfügbar!"
+
+#: templates/frontend/shortcode-placeholder.php:7
+#, php-format
+msgid ""
+"This content is blocked because we take the protection of your data very "
+"seriously. If you wish to unblock it, it's very simple: go to our cookie "
+"consent widget, give your approval for the \"%s\" extension. And voila, "
+"you're all set!"
+msgstr ""
+"Dieser Inhalt ist blockiert, weil wir den Schutz Ihrer Daten sehr ernst "
+"nehmen. Wenn Sie die Blockierung aufheben möchten, ist das ganz einfach: "
+"Gehen Sie zu unserem Cookie-Einwilligungs-Widget, geben Sie Ihre Zustimmung "
+"zur Erweiterung \"%s\". Und voila, schon sind Sie fertig!"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.axeptio.eu/"

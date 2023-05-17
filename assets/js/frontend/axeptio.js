@@ -1,11 +1,11 @@
 // noinspection ES6ConvertVarToLetConst
 window.axeptioWordpressSteps = window.axeptioWordpressSteps || [];
-
 window.axeptioWordpressVendors = window.axeptioWordpressVendors || [];
 window._axcb = window._axcb || [];
 window._axcb.push( function( sdk ) {
 	sdk.on( 'ready', function() {
 		const selectedCookieConfigId = sdk.getCookiesConfig().identifier;
+
 		sdk.config.cookies.map( function( cookieConfig ) {
 			// This avoids pushing vendors several times in the same WordPress steps
 			// There's a drawback: we won't be able to change the cookies' version at runtime,
@@ -88,15 +88,34 @@ window._axcb.push( function( sdk ) {
 					cookieConfig.steps.push( step );
 				}
 			} );
+
+			// Sélectionnez tous les éléments avec l'attribut "data-axeptio-consent"
+			const consentElements = document.querySelectorAll('[data-axeptio-consent]');
+
+			// Parcourir tous les éléments sélectionnés
+			if (consentElements) {
+				document.querySelectorAll('[data-axeptio-consent]').forEach(element => {
+					element.addEventListener('click', () => {
+						const consentValue = element.getAttribute('data-axeptio-consent');
+						console.log(consentValue);
+						sdk.requestConsent('wp_'+consentValue);
+					});
+				});
+			}
 		} );
 	} );
 
 	sdk.on( 'cookies:complete', function( choices ) {
+
 		getAllComments( document.body ).forEach( function( comment ) {
 			if ( comment.nodeValue.indexOf( 'axeptio_blocked' ) > -1 ) {
 				const plugin = comment.nodeValue.match( /axeptio_blocked ([\w_-]+)/ )[ 1 ];
 				if ( ! choices[ 'wp_' + plugin ] ) {
 					return;
+				}
+				const placeholder = comment.previousElementSibling;
+				if (placeholder) {
+					placeholder.remove();
 				}
 				const value = comment.nodeValue.split( '\n' ).slice( 1 ).join( '\n' );
 				const elem = document.createElement( 'div' );

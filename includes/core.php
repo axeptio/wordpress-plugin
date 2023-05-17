@@ -195,7 +195,7 @@ function admin_scripts() {
 function admin_styles() {
 	wp_enqueue_style(
 		'axeptio/main',
-		style_url( 'main', 'admin' ),
+		style_url( 'backend/main', 'admin' ),
 		array(),
 		Utility\get_asset_info( 'shared', 'version' ),
 	);
