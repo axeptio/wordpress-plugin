@@ -50,9 +50,6 @@ class Axeptio_Sdk extends Module {
 			return;
 		}
 
-		wp_register_script( 'axeptio/sdk-script', '', array(), XPWP_VERSION, true );
-		wp_enqueue_script( 'axeptio/sdk-script' );
-		wp_localize_script( 'axeptio/sdk-script', 'Axeptio_SDK', $settings );
 		wp_enqueue_style(
 			'axeptio/main',
 			style_url( 'frontend/main', 'frontend' ),
@@ -93,15 +90,14 @@ class Axeptio_Sdk extends Module {
 		);
 
 		wp_enqueue_script(
-			'axeptio/sdk-extends',
+			'axeptio/sdk-script',
 			script_url( 'frontend/axeptio', 'frontend' ),
-			array( 'axeptio/sdk-script' ),
+			array(),
 			XPWP_VERSION,
 			true
 		);
-
+		wp_localize_script( 'axeptio/sdk-script', 'Axeptio_SDK', $settings );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressVendors', $wordpress_vendors );
-
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressSteps', Axeptio_Steps::all() );
 
 		$inline_script = \Axeptio\get_template_part( 'frontend/sdk', array(), false );
