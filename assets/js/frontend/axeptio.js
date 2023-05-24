@@ -50,12 +50,6 @@ window._axcb.push( function( sdk ) {
 						return;
 					}
 
-					// 3. Try to add it to the first WordPress step
-					if ( window.axeptioWordpressSteps.length > 0 ) {
-						window.axeptioWordpressSteps[ 0 ].vendors.push( vendor );
-						return;
-					}
-
 					// 4. Add it to the first "category step"
 					cookieConfig.steps.forEach( function( step ) {
 						if ( step.category === 'category' && ! stepExists ) {
