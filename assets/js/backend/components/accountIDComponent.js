@@ -6,6 +6,7 @@ const instance = function( args ) {
 		errorMessage: '',
 		validAccountID: false,
 		activeSDK: args.activeSDK,
+		sendDatas: args.sendDatas,
 		selectedOption: args.selectedOption,
 		options: ( () => {
 			try {

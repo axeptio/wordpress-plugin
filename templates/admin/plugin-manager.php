@@ -1,14 +1,17 @@
 <div class="wrap">
+	<h1 class="screen-reader-text">
+		<?php esc_html_e( 'Axeptio', 'axeptio-wordpress-plugin' ); ?>
+	</h1>
 	<div id="axeptio-app" class="axeptio-app" x-data="pluginList(<?php echo esc_attr( wp_json_encode( $settings ) ); ?>)" x-init="$watch('plugins', (value, oldValue) => setHasChanged(value, oldValue))">
 		<?php do_action( 'axeptio/before_plugin_manager_container' ); ?>
 		<div class="axeptio-settings bg-white rounded-lg mt-6 shadow-md max-w-7xl mx-auto z-10">
 			<?php do_action( 'axeptio/before_plugin_manager' ); ?>
 			<div class="px-6 py-4 lg:pb-0">
 				<div class="mt-6 mb-0">
-					<h1 class="md:inline-flex md:items-end">
+					<div class="md:inline-flex md:items-end">
 						<img class="aspect-|14/3] w-40" src="<?php echo esc_attr( \Axeptio\get_logo() ); ?>" alt="<?php esc_attr_e( 'Axeptio', 'axeptio-wordpress-plugin' ); ?>">
 						<div class="mt-2 lg:mt-0 md:ml-6 text-base mb-1"><?php esc_html_e( 'Plugin manager', 'axeptio-wordpress-plugin' ); ?></div>
-					</h1>
+					</div>
 				</div>
 				<header class="relative isolate -mx-6 border-b border-gray-200">
 					<div class="absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">

@@ -146,6 +146,11 @@ class Admin_Main extends Module {
 					'after_section'  => '</div>',
 				),
 			),
+			array(
+				'id'    => 'xpwp_admin_send_datas',
+				'title' => false,
+				'page'  => 'axeptio-wordpress-plugin',
+			),
 		);
 		$this->settings->set_sections( $args );
 	}
@@ -199,6 +204,17 @@ class Admin_Main extends Module {
 				'args'     => array(
 					'label_for' => 'xpwp_version',
 					'class'     => 'inline-table-row',
+				),
+			),
+			array(
+				'id'       => 'xpwp_send_datas',
+				'title'    => __( 'Would you allow Axeptio to collect non-sensitive diagnostic data from this website?', 'axeptio-wordpress-plugin' ),
+				'callback' => array( $this->callbacks, 'send_datas_set' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_send_datas',
+				'args'     => array(
+					'label_for' => 'xpwp_send_datas',
+					'class'     => 'inline-table-row label-right',
 				),
 			),
 		);

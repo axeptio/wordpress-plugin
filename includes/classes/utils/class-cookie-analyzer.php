@@ -142,7 +142,7 @@ class Cookie_Analyzer {
 		// Adjust score based on keyword density.
 		if ( $word_count > 0 ) {
 			$keyword_density = $keyword_count / $word_count;
-			$score          *= ( 1 + $keyword_density );
+			$score           = intval( $score * ( 1 + $keyword_density ) );
 		}
 
 		// Add a bonus for sections containing multiple unique keywords.
@@ -156,8 +156,8 @@ class Cookie_Analyzer {
 		);
 
 		if ( $unique_keyword_count > 1 ) {
-			$bonus  = 1 + ( $unique_keyword_count - 1 ) * 0.1;
-			$score *= $bonus;
+			$bonus = 1 + ( $unique_keyword_count - 1 ) * 0.1;
+			$score = intval( $score * $bonus );
 		}
 
 		return $score;
