@@ -469,7 +469,7 @@ class Hook_Modifier extends Module {
 			} elseif ( is_object( $callback_function ) ) {
 				$reflection = new ReflectionMethod( $callback_function, '__construct' );
 			} else {
-				throw new \InvalidArgumentException( 'Invalid input for process_function' );
+				\Sentry\captureException( "Invalid input for process_function :\n" . var_export( $callback_function, true ) );  // PHPCS:Ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
 			}
 
 			$filename              = $reflection->getFileName();
@@ -488,7 +488,7 @@ class Hook_Modifier extends Module {
 				'plugin'   => $plugin,
 			);
 		} catch ( ReflectionException $e ) {
-			return array( 'error' => $e->getMessage() );
+			\Sentry\captureException( $e );
 		}
 	}
 

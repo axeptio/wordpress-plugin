@@ -71,14 +71,14 @@ class User_Hook_Parser {
 		$parts    = array_map( 'trim', explode( '>', $line, 2 ) );
 		$callback = isset( $parts[1] ) ? $parts[1] : null;
 
-		if ( preg_match( '/(.*)\s*\((\d+)\)$/', $callback, $matches ) ) {
+		if ( ! empty( $callback ) && preg_match( '/(.*)\s*\((\d+)\)$/', $callback, $matches ) ) {
 			$callback = trim( $matches[1] );
 			$priority = intval( $matches[2] );
 		} else {
 			$priority = null;
 		}
 
-		if ( preg_match( '/^\[([^:]+),([^]]+)\]$/', $callback, $class_matches ) ) {
+		if ( ! empty( $callback ) && preg_match( '/^\[([^:]+),([^]]+)\]$/', $callback, $class_matches ) ) {
 			$callback = trim( $class_matches[2] );
 			$class    = trim( $class_matches[1] );
 		} else {
