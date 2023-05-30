@@ -10,7 +10,8 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "php": "^7.4 || ^8.0 || ^8.1"
+    "php": "^7.4 || ^8.0 || ^8.1",
+    "sentry/sdk": "dev-master"
   },
   "scripts": {
     "run-stan": "vendor/bin/phpstan analyze --memory-limit=2G --no-progress",
@@ -40,7 +41,8 @@
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "phpstan/extension-installer": true
+      "phpstan/extension-installer": true,
+      "php-http/discovery": true
     }
   }
 }

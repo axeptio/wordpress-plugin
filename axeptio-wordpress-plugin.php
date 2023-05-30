@@ -12,6 +12,8 @@
  **/
 
 // Useful global constants.
+use Axeptio\Models\Settings;
+
 define( 'XPWP_VERSION', '2.0.2' );
 define( 'XPWP_URL', plugin_dir_url( __FILE__ ) );
 define( 'XPWP_PATH', plugin_dir_path( __FILE__ ) );
@@ -50,6 +52,11 @@ $xpwp_is_local        = $xpwp_is_local_envenv || $xpwp_is_local_envurl;
 if ( file_exists( XPWP_PATH . 'vendor/autoload.php' ) ) {
 	require_once XPWP_PATH . 'vendor/autoload.php';
 	require_once XPWP_PATH . 'includes/wpcs-autoload.php';
+}
+
+
+if ( (bool) Settings::get_option( 'send_datas', false ) ) {
+	Sentry\init( array( 'dsn' => 'https://f7fe61f60f424acba143522d108ebe4a@o561678.ingest.sentry.io/4505249684914176' ) );
 }
 
 // Activation/Deactivation.
