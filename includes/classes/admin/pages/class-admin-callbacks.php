@@ -70,6 +70,15 @@ class Admin_Callbacks {
 	 *
 	 * @return void
 	 */
+	public function send_datas_set() {
+		\Axeptio\get_template_part( 'admin/fields/main/send-datas' );
+	}
+
+	/**
+	 * Options page
+	 *
+	 * @return void
+	 */
 	public function client_id_set() {
 		\Axeptio\get_template_part( 'admin/fields/main/client-id' );
 	}

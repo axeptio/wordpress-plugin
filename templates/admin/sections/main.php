@@ -14,6 +14,7 @@
 									'optionsJson'    => Settings::get_option( 'xpwp_version_options', '', false ),
 									'activeSDK'      => (bool) Settings::get_option( 'sdk_active', '0' ),
 									'selectedOption' => Settings::get_option( 'version', '' ),
+									'sendDatas'      => (bool) Settings::get_option( 'send_datas', '0' ),
 								)
 							)
 						);
