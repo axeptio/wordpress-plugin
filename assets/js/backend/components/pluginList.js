@@ -197,6 +197,7 @@ const instance = function( args ) {
 
 			this.editedPlugin = plugin;
 			Metas.enabled = ! Boolean( Metas.enabled ) ? 1 : 0;
+			Metas.cookie_widget_step = 'wordpress';
 			this.updatePlugin( plugin );
 		},
 
