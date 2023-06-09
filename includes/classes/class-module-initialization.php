@@ -15,7 +15,6 @@ use Axeptio\Frontend\Hook_Modifier;
 use Axeptio\Init\Activate;
 use Axeptio\Init\Activation_Hook;
 use Axeptio\Models\Models;
-use Axeptio\Models\Plugins as PluginModel;
 use ReflectionClass;
 
 /**
