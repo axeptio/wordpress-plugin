@@ -67,14 +67,6 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
-### 2.0.5 & 2.0.6 ###
-
-Hotfix for bug report
-
-### 2.0.4 ###
-
-Fixed default step for vendors
-
 ### 2.0.3 ###
 
 1. Added error reporting
