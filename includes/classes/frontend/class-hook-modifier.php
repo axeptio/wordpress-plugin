@@ -468,6 +468,10 @@ class Hook_Modifier extends Module {
 				$reflection = new ReflectionMethod( $callback_function[0], $callback_function[1] );
 			} elseif ( is_object( $callback_function ) ) {
 				$reflection = new ReflectionMethod( $callback_function, '__construct' );
+			} else {
+				\ob_start();
+				\var_dump($callback_function);
+				throw new \ReflectionException( 'Invalid reflection callback function.' . ob_get_clean() );
 			}
 
 			$filename              = $reflection->getFileName();
@@ -486,6 +490,8 @@ class Hook_Modifier extends Module {
 				'plugin'   => $plugin,
 			);
 		} catch ( ReflectionException $e ) {
+			var_dump($e);
+			die();
 			\Sentry\captureException( $e );
 		}
 	}
