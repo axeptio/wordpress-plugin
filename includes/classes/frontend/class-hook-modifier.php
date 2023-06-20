@@ -490,8 +490,6 @@ class Hook_Modifier extends Module {
 				'plugin'   => $plugin,
 			);
 		} catch ( ReflectionException $e ) {
-			var_dump($e);
-			die();
 			\Sentry\captureException( $e );
 		}
 	}
