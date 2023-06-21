@@ -11,7 +11,6 @@ use Axeptio\Models\Plugins;
 use Axeptio\Models\Recommended_Plugin_Settings;
 use Axeptio\Models\Settings;
 use Axeptio\Module;
-
 use Axeptio\Utils\User_Hook_Parser;
 use Closure;
 use ReflectionException;
@@ -19,6 +18,7 @@ use ReflectionFunction;
 use ReflectionMethod;
 
 class Hook_Modifier extends Module {
+
 
 	/**
 	 * Stored plugin contents.
@@ -110,7 +110,6 @@ class Hook_Modifier extends Module {
 	 * @return array
 	 */
 	private function process_shortcode_tags() {
-
 		global $shortcode_tags;
 
 		$stats   = array();
@@ -409,9 +408,9 @@ class Hook_Modifier extends Module {
 	 * for later.
 	 *
 	 * @param mixed  $callback_function Function to wrap.
-	 * @param string $plugin            Plugin name.
-	 * @param string $plugin_settings   Plugin Settings.
-	 * @param string $tag               Tag name.
+	 * @param string $plugin Plugin name.
+	 * @param string $plugin_settings Plugin Settings.
+	 * @param string $tag Tag name.
 	 *
 	 * @return Closure
 	 */
@@ -428,7 +427,7 @@ class Hook_Modifier extends Module {
 					'plugin_settings' => $plugin_settings,
 				),
 				false
-				);
+			);
 			return "$placeholder<!-- axeptio_blocked $plugin \n$return\n-->";
 		};
 	}
@@ -440,8 +439,8 @@ class Hook_Modifier extends Module {
 	 * for later.
 	 *
 	 * @param mixed  $callback_function Callback function to wrap.
-	 * @param string $plugin            Plugin name.
-	 * @param string $filter            Filter name.
+	 * @param string $plugin Plugin name.
+	 * @param string $filter Filter name.
 	 *
 	 * @return Closure
 	 */
@@ -458,7 +457,7 @@ class Hook_Modifier extends Module {
 	 * @param mixed $callback_function The Callback function.
 	 * @return array
 	 *
-	 * @throws \InvalidArgumentException If invalid reflection output.
+	 * @throws \ReflectionException If invalid reflection output.
 	 */
 	private function process_function( $callback_function ) {
 		try {
@@ -470,7 +469,7 @@ class Hook_Modifier extends Module {
 				$reflection = new ReflectionMethod( $callback_function, '__construct' );
 			} else {
 				\ob_start();
-				\var_dump($callback_function);
+				\var_dump( $callback_function ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_dump
 				throw new \ReflectionException( 'Invalid reflection callback function.' . ob_get_clean() );
 			}
 
@@ -490,7 +489,9 @@ class Hook_Modifier extends Module {
 				'plugin'   => $plugin,
 			);
 		} catch ( ReflectionException $e ) {
-			\Sentry\captureException( $e );
+			if ( (bool) Settings::get_option( 'send_datas', false ) ) {
+				\Sentry\captureException( $e );
+			}
 		}
 	}
 
