@@ -21,7 +21,7 @@ class Settings {
 	 * @param string       $slug          Option slug to retrieve.
 	 * @param mixed        $default_value Default value to return if the option is not set.
 	 * @param string|false $group   Option group (if false, single value option).
-	 * @return false|mixed|null
+	 * @return bool|mixed|null
 	 */
 	public static function get_option( string $slug, $default_value = null, $group = 'axeptio_settings' ) {
 		$option_group = ! $group ? $slug : $group;
