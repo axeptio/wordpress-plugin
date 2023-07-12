@@ -3,7 +3,7 @@ Contributors: axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy, eprivacy, consent, script, cmp, data, personnal, widget, googletagmanager, consentmanagement
 Requires at least: 5.0
 Tested up to: 6.1.1
-Stable tag: 2.0.8
+Stable tag: 2.0.9
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -68,6 +68,11 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 == Changelog ==
 
 <<<<<<< HEAD
+
+### 2.0.9
+
+Axeptio Vendor DB API
+
 ### 2.0.5 ~ 2.0.8 ###
 
 Fix for bug report
