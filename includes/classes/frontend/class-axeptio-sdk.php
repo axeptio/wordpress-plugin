@@ -12,6 +12,7 @@ use Axeptio\Models\Axeptio_Steps;
 use Axeptio\Models\Plugins;
 use Axeptio\Models\Settings;
 use Axeptio\Module;
+use function Axeptio\get_cookie_domain;
 use function Axeptio\get_sdk_settings;
 use function Axeptio\script_url;
 use function Axeptio\style_url;
@@ -124,9 +125,10 @@ class Axeptio_Sdk extends Module {
 		return apply_filters(
 			'axeptio/sdk_settings',
 			array(
-				'clientId'       => $client_id,
-				'cookiesVersion' => $cookies_version,
-				'sendDatas'      => $send_datas,
+				'clientId'          => $client_id,
+				'cookiesVersion'    => $cookies_version,
+				'userCookiesDomain' => get_cookie_domain(),
+				'sendDatas'         => $send_datas,
 			)
 		);
 	}

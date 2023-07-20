@@ -99,3 +99,22 @@ function get_template_part( $slug, $datas = array(), $display = true ) {
 		return $content;
 	}
 }
+
+
+	/**
+	 * Retrieves the cookie domain.
+	 *
+	 * By default, the cookie domain is fetched from the 'cookie_domain' option in the WordPress database.
+	 * If the option is empty, the home URL is used.
+	 * The function replaces any 'https://' in the cookie domain with 'http://'.
+	 *
+	 * @return string The cookie domain.
+	 */
+function get_cookie_domain(): string {
+	$cookie_domain = get_option( 'cookie_domain', home_url() );
+	return str_replace(
+		array( 'https://', 'http://' ),
+		'',
+		$cookie_domain
+	);
+}

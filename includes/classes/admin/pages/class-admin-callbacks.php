@@ -12,6 +12,7 @@ use Axeptio\Models\Plugins;
 use Axeptio\Models\Project_Versions;
 use Axeptio\Models\Settings;
 use Axeptio\Models\Shortcode_Tags_Modes;
+use function Axeptio\get_cookie_domain;
 
 class Admin_Callbacks {
 	/**
@@ -100,6 +101,16 @@ class Admin_Callbacks {
 	public function version_set() {
 		\Axeptio\get_template_part( 'admin/fields/main/version', array( 'version' => Settings::get_option( 'version', '' ) ) );
 	}
+
+	/**
+	 * Options page
+	 *
+	 * @return void
+	 */
+	public function cookie_domain_set() {
+		\Axeptio\get_template_part( 'admin/fields/main/cookie-domain', array( 'cookie_domain' => get_cookie_domain() ) );
+	}
+
 
 	/**
 	 * Account panel

@@ -207,6 +207,17 @@ class Admin_Main extends Module {
 				),
 			),
 			array(
+				'id'       => 'xpwp_cookie_domain',
+				'title'    => __( 'Cookie Domain', 'axeptio-wordpress-plugin' ),
+				'callback' => array( $this->callbacks, 'cookie_domain_set' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_index',
+				'args'     => array(
+					'label_for' => 'xpwp_cookie_domain',
+					'class'     => 'inline-table-row',
+				),
+			),
+			array(
 				'id'       => 'xpwp_send_datas',
 				'title'    => __( 'Would you allow Axeptio to collect non-sensitive diagnostic data from this website?', 'axeptio-wordpress-plugin' ),
 				'callback' => array( $this->callbacks, 'send_datas_set' ),
