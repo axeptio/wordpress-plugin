@@ -118,7 +118,7 @@ class Recommended_Plugin_Settings {
 			'shortcode_tags_list' => array(),
 		);
 
-		$hooks = $datas[0]['data']['hooks'];
+		$hooks = $datas['hooks'];
 
 		foreach ( $hooks as $hook ) {
 			if ( 'filter' === $hook['type'] ) {
