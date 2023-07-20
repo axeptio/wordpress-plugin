@@ -108,7 +108,7 @@ class Recommended_Plugin_Settings {
 	 * Format the data.
 	 *
 	 * @param array $datas Data to format.
-	 * @return array
+	 * @return array|false
 	 */
 	public static function format_datas( array $datas ) {
 		$settings = array(
@@ -118,7 +118,12 @@ class Recommended_Plugin_Settings {
 			'shortcode_tags_list' => array(),
 		);
 
+		if (!isset($datas['hooks'])) {
+			return false;
+		}
+
 		$hooks = $datas['hooks'];
+
 
 		foreach ( $hooks as $hook ) {
 			if ( 'filter' === $hook['type'] ) {
