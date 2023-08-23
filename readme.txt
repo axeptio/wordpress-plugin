@@ -8,7 +8,7 @@ Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Axeptio is the best solution to make your website GDPR compatible and make your visitors smile!
+Axeptio is the best solution to make your site GDPR compatible and make your visitors smile!
 
 ## <a href="https://www.axeptio.eu/" target="_blank">★ Visit Axeptio ★</a> ##
 
