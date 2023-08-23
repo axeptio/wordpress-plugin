@@ -365,7 +365,7 @@ class Hook_Modifier extends Module {
 				$parser = new User_Hook_Parser( $configuration['wp_filter_list'] );
 				$hooks  = $parser->get_hooks();
 
-				if ( count( $hooks ) === 0 ) {
+				if ( count( $hooks ) === 0 && ($configuration['wp_filter_mode'] === 'whitelist' || $configuration['wp_filter_mode'] === 'blacklist')) {
 					continue;
 				}
 
@@ -375,6 +375,7 @@ class Hook_Modifier extends Module {
 				);
 			}
 		}
+
 
 		foreach ( $plugins as $plugin => $configs ) {
 			// The plugin has no key in the $intercepted_plugins array,
