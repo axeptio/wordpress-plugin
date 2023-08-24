@@ -1,4 +1,5 @@
 import Alpine from 'alpinejs';
+import persist from '@alpinejs/persist'
 import accountIDComponent from './components/accountIDComponent';
 import pluginList from './components/pluginList';
 
@@ -7,4 +8,5 @@ window.Alpine = Alpine;
 window.accountIDComponent = accountIDComponent.instance;
 window.pluginList = pluginList.instance;
 
+Alpine.plugin(persist);
 Alpine.start();

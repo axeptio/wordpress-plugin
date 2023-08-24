@@ -99,3 +99,18 @@ function get_template_part( $slug, $datas = array(), $display = true ) {
 		return $content;
 	}
 }
+
+/**
+ * Get the main admin tabs.
+ *
+ * This function retrieves an array of main admin tabs with their corresponding labels.
+ *
+ * @return string The HTML template of the main admin tabs.
+ */
+function get_main_admin_tabs() {
+	$tab_items = array(
+		'main-settings' => __( 'Main settings', 'axeptio-wordpress-plugin' ),
+		'customization' => __( 'Customizations', 'axeptio-wordpress-plugin' ),
+	);
+	return \Axeptio\get_template_part( 'admin/main/tabs', array( 'tab_items' => $tab_items ), false );
+}

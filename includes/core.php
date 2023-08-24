@@ -180,7 +180,7 @@ function admin_scripts() {
 		array(
 			'errors' => array(
 				'empty_account_id'        => __( 'Please enter an account ID', 'axeptio-wordpress-plugin' ),
-				'non_existing_account_id' => __( "This account doesn't exist", 'axeptio-wordpress-plugin' ),
+				'non_existing_account_id' => __( 'Your project ID is not found or your project is not published. If you are certain about your project ID, please publish it through the Axeptio interface and restart the configuration.', 'axeptio-wordpress-plugin' ),
 				'verification_error'      => __( 'Error verifying account ID. Try Again.', 'axeptio-wordpress-plugin' ),
 			),
 		)
