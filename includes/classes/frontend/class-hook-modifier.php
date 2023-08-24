@@ -365,7 +365,7 @@ class Hook_Modifier extends Module {
 				$parser = new User_Hook_Parser( $configuration['wp_filter_list'] );
 				$hooks  = $parser->get_hooks();
 
-				if ( count( $hooks ) === 0 ) {
+				if ( 0 === count( $hooks ) && ( 'whitelist' === $configuration['wp_filter_mode'] || 'blacklist' === $configuration['wp_filter_mode'] ) ) {
 					continue;
 				}
 
@@ -394,6 +394,7 @@ class Hook_Modifier extends Module {
 				if ( str_contains( $filter, 'admin' ) ) {
 					continue;
 				}
+
 				// Otherwise we will wrap and overwrite the filter.
 				$wp_filter[ $filter ]->callbacks[ $priority ][ $name ]['function'] = $this->wrap_filter( $function['function'], $plugin, $filter );
 			}
@@ -489,7 +490,7 @@ class Hook_Modifier extends Module {
 				'plugin'   => $plugin,
 			);
 		} catch ( ReflectionException $e ) {
-			if ( (bool) Settings::get_option( 'send_datas', false ) ) {
+			if ( ! (bool) Settings::get_option( 'disable_send_datas', false ) ) {
 				\Sentry\captureException( $e );
 			}
 		}

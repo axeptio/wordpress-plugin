@@ -1,5 +1,5 @@
 <div class="inline-flex items-center w-full relative">
-	<label for="xpwp_send_datas" type="button" class="relative inline-flex h-7 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 bg-gray-400"  role="switch" aria-checked="true" :aria-checked="sendDatas.toString()" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-amber-400': sendDatas, 'bg-gray-400': !(sendDatas) }">
+	<label for="xpwp_disable_send_datas" type="button" class="relative inline-flex h-7 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 bg-gray-400"  role="switch" aria-checked="true" :aria-checked="sendDatas.toString()" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-amber-400': sendDatas, 'bg-gray-400': !(sendDatas) }">
 		<span
 			aria-hidden="true"
 			x-state:on="Enabled"
@@ -18,7 +18,7 @@
 		</span>
 	</label>
 	<div class="ml-5">
-		<label for="xpwp_send_datas"><?php echo esc_html__( 'Yes, I want to contribute to improve the plugin.', 'axeptio-wordpress-plugin' ); ?></label>
+		<label for="xpwp_disable_send_datas"><?php echo esc_html__( 'By checking this box, I do not wish to send data/errors to the Axeptio plugin and do not want to contribute to the improvement of the plugin.', 'axeptio-wordpress-plugin' ); ?></label>
 	</div>
-	<input type="checkbox" @change="sendDatas = !sendDatas" class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0" id="xpwp_send_datas" name="axeptio_settings[send_datas]" value="1" <?php echo (bool) \Axeptio\get_option( 'send_datas', '0' ) ? 'checked' : ''; ?> placeholder="">
+	<input type="checkbox" @change="sendDatas = !sendDatas" class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0" id="xpwp_disable_send_datas" name="axeptio_settings[disable_send_datas]" value="1" <?php echo (bool) \Axeptio\get_option( 'disable_send_datas', '0' ) ? 'checked' : ''; ?> placeholder="">
 </div>

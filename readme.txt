@@ -67,8 +67,7 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
-<<<<<<< HEAD
-### 2.0.5 ~ 2.0.8 ###
+### 2.0.5 ~ 2.0.9 ###
 
 Fix for bug report
 

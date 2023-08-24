@@ -153,7 +153,7 @@
 					<div class="mt-2">
 						<?php
 						\Axeptio\get_template_part(
-							'admin/fields/plugins/repeater',
+							'admin/plugins/fields/repeater',
 							array(
 								'name'        => 'wp_filter_list',
 								'add_item'    => __( 'Add a hook', 'axeptio-wordpress-plugin' ),
@@ -202,7 +202,7 @@
 					<div class="mt-2">
 						<?php
 						\Axeptio\get_template_part(
-							'admin/fields/plugins/repeater',
+							'admin/plugins/fields/repeater',
 							array(
 								'name'        => 'shortcode_tags_list',
 								'add_item'    => __( 'Add a shortcode', 'axeptio-wordpress-plugin' ),

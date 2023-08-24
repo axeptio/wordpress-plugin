@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2023-05-17 10:13+0200\n"
-"PO-Revision-Date: 2023-05-17 10:17+0200\n"
+"POT-Creation-Date: 2023-08-24 16:53+0200\n"
+"PO-Revision-Date: 2023-08-24 16:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio.php\n"
@@ -25,12 +25,12 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-3: ../dist\n"
 "X-Poedit-SearchPathExcluded-4: ../node_modules\n"
 
-#: axeptio-wordpress-plugin.php:31
+#: axeptio-wordpress-plugin.php:33
 msgid "Unable to activate Axeptio"
 msgstr "Impossible d'activer Axeptio"
 
 #. translators: %1$s: current php version min and %2$s version of php required
-#: axeptio-wordpress-plugin.php:35
+#: axeptio-wordpress-plugin.php:37
 #, php-format
 msgid ""
 "Your server is currently running PHP %1$s. The Axeptio plugin requires at "
@@ -40,87 +40,137 @@ msgstr ""
 "moins PHP %2$s. Veuillez mettre à jour votre version de PHP pour utiliser ce "
 "plugin."
 
-#: axeptio-wordpress-plugin.php:39
+#: axeptio-wordpress-plugin.php:41
 msgid "Return to plugins pages"
 msgstr "Retour à la page des plugins"
 
-#: includes/classes/admin/pages/class-admin-main.php:85
+#: includes/classes/admin/pages/class-admin-callbacks.php:112
+msgid "Widget title"
+msgstr "Titre du Widget"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:127
+msgid "Widget sub-title"
+msgstr "Sous-titre du widget"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:142
+msgid "Widget description"
+msgstr "Description du widget"
+
+#: includes/classes/admin/pages/class-admin-main.php:81
+msgid "Settings"
+msgstr "Configuration"
+
+#: includes/classes/admin/pages/class-admin-main.php:91
 msgid "Axeptio Widget Integration"
 msgstr "Intégration du Widget Axeptio"
 
 #. Plugin Name of the plugin/theme
-#: includes/classes/admin/pages/class-admin-main.php:86
+#: includes/classes/admin/pages/class-admin-main.php:92
 #: templates/admin/onboarding/welcome.php:8
-#: templates/admin/plugin-manager.php:9 templates/admin/settings-main.php:9
+#: templates/admin/plugin-manager.php:3 templates/admin/plugin-manager.php:12
+#: templates/admin/settings-main.php:3 templates/admin/settings-main.php:12
 msgid "Axeptio"
 msgstr "Axeptio"
 
-#: includes/classes/admin/pages/class-admin-main.php:97
-#: includes/classes/admin/pages/class-admin-main.php:98
-#: templates/admin/plugin-manager.php:10
+#: includes/classes/admin/pages/class-admin-main.php:103
+#: includes/classes/admin/pages/class-admin-main.php:104
+#: templates/admin/plugin-manager.php:13
 msgid "Plugin manager"
 msgstr "Extensions"
 
-#: includes/classes/admin/pages/class-admin-main.php:137
-#: templates/admin/fields/main/admin-section.php:2
-msgid "Widget settings"
-msgstr "Paramètres de widget"
+#: includes/classes/admin/pages/class-admin-main.php:142
+msgid "Widget main settings"
+msgstr "Paramètres principaux du widget"
 
-#: includes/classes/admin/pages/class-admin-main.php:162
+#: includes/classes/admin/pages/class-admin-main.php:143
+msgid ""
+"Configure the information related to the integration of your Axeptio project "
+"here."
+msgstr ""
+"Configurez ici les informations relatives à l'intégration de votre projet "
+"Axeptio."
+
+#: includes/classes/admin/pages/class-admin-main.php:147
+msgid "Widget customization"
+msgstr "Personnalisation des widgets"
+
+#: includes/classes/admin/pages/class-admin-main.php:148
+msgid ""
+"In this section, you can customize the header texts of the WordPress section "
+"in the Axeptio widget."
+msgstr ""
+"Dans cette section, vous pouvez personnaliser les textes de l'entête de la "
+"section WordPress dans le widget Axeptio."
+
+#: includes/classes/admin/pages/class-admin-main.php:199
 msgid "Do you want to enable the widget?"
 msgstr "Voulez-vous activer le widget ?"
 
-#: includes/classes/admin/pages/class-admin-main.php:173
+#: includes/classes/admin/pages/class-admin-main.php:210
 msgid "Project ID"
 msgstr "ID du projet"
 
-#: includes/classes/admin/pages/class-admin-main.php:184
+#: includes/classes/admin/pages/class-admin-main.php:221
 msgid "Options"
 msgstr "Options"
 
-#: includes/classes/admin/pages/class-admin-main.php:195
+#: includes/classes/admin/pages/class-admin-main.php:232
 msgid "Project Version"
 msgstr "Version du projet"
 
-#: includes/classes/models/class-axeptio-steps.php:19
+#: includes/classes/admin/pages/class-admin-main.php:243
+msgid "Collect of data and errors by Axeptio"
+msgstr "Collecte de données et d'erreurs par Axeptio"
+
+#: includes/classes/models/class-axeptio-steps.php:18
 msgid "WordPress Cookies"
 msgstr "Cookies WordPress"
 
-#: includes/classes/models/class-axeptio-steps.php:20
+#: includes/classes/models/class-axeptio-steps.php:28
 msgid "Here you will find all WordPress extensions using cookies."
 msgstr ""
 "Vous trouverez ici toutes les extensions WordPress utilisant des cookies."
 
-#: includes/classes/models/class-hook-modes.php:20
-#: includes/classes/models/class-shortcode-tags-modes.php:20
+#: includes/classes/models/class-axeptio-steps.php:38
+msgid ""
+"Below is the list of extensions used on this site that utilize cookies. "
+"Please activate or deactivate the ones for which you consent to sharing your "
+"data."
+msgstr ""
+"Vous trouverez ci-dessous la liste des extensions utilisées sur ce site qui "
+"utilisent des cookies. Veuillez activer ou désactiver celles pour lesquelles "
+"vous consentez au partage de vos données."
+
+#: includes/classes/models/class-hook-modes.php:22
+#: includes/classes/models/class-shortcode-tags-modes.php:22
 msgid "None"
 msgstr "Aucun"
 
-#: includes/classes/models/class-hook-modes.php:24
+#: includes/classes/models/class-hook-modes.php:26
 msgid "All hooks"
 msgstr "Tous les hooks"
 
-#: includes/classes/models/class-hook-modes.php:28
-#: includes/classes/models/class-shortcode-tags-modes.php:28
+#: includes/classes/models/class-hook-modes.php:30
+#: includes/classes/models/class-shortcode-tags-modes.php:30
 msgid "Only the following"
 msgstr "Seulement les suivants"
 
-#: includes/classes/models/class-hook-modes.php:32
-#: includes/classes/models/class-shortcode-tags-modes.php:32
+#: includes/classes/models/class-hook-modes.php:34
+#: includes/classes/models/class-shortcode-tags-modes.php:34
 msgid "Only those other than"
 msgstr "Tous à l'exception de"
 
-#: includes/classes/models/class-hook-modes.php:39
-#: includes/classes/models/class-shortcode-tags-modes.php:38
+#: includes/classes/models/class-hook-modes.php:43
+#: includes/classes/models/class-shortcode-tags-modes.php:42
 msgid "Inherited from defaults"
 msgstr "Hérité des valeurs par défaut"
 
-#: includes/classes/models/class-hook-modes.php:48
-#: includes/classes/models/class-shortcode-tags-modes.php:47
+#: includes/classes/models/class-hook-modes.php:55
+#: includes/classes/models/class-shortcode-tags-modes.php:54
 msgid "Recommended by Axeptio"
 msgstr "Recommandé par Axeptio"
 
-#: includes/classes/models/class-shortcode-tags-modes.php:24
+#: includes/classes/models/class-shortcode-tags-modes.php:26
 msgid "All shortcode tags"
 msgstr "Toutes les balises shortcode"
 
@@ -138,168 +188,56 @@ msgid "Please enter an account ID"
 msgstr "Veuillez saisir un identifiant de compte"
 
 #: includes/core.php:183
-msgid "This account doesn't exist"
-msgstr "Ce compte n'existe pas"
+msgid ""
+"Your project ID is not found or your project is not published. If you are "
+"certain about your project ID, please publish it through the Axeptio "
+"interface and restart the configuration."
+msgstr ""
+"L'identifiant de votre projet n'est pas trouvé ou votre projet n'est pas "
+"publié. Si vous êtes certain de l'identité de votre projet, veuillez le "
+"publier via l'interface Axeptio et redémarrer la configuration."
 
 #: includes/core.php:184
 msgid "Error verifying account ID. Try Again."
 msgstr "Erreur de vérification de l'identifiant du compte. Veullez réessayer."
 
-#: templates/admin/fields/main/client-id.php:31
-#: templates/admin/fields/plugins/edit.php:126
+#: includes/helpers/helpers.php:112 templates/admin/plugins/fields/edit.php:43
+msgid "Main settings"
+msgstr "Paramètres principaux"
+
+#: includes/helpers/helpers.php:113
+msgid "Customizations"
+msgstr "Personnalisations"
+
+#: templates/admin/main/fields/client-id.php:31
+#: templates/admin/plugins/fields/edit.php:126
 #: templates/admin/sections/plugins.php:68
 msgid "Edit"
 msgstr "Éditer"
 
-#: templates/admin/fields/main/client-id.php:31
+#: templates/admin/main/fields/client-id.php:31
 msgid "Validate"
 msgstr "Valider"
 
-#: templates/admin/fields/main/sdk-active.php:21
+#: templates/admin/main/fields/sdk-active.php:21
 msgid "Yes, I enable the widget on my website."
 msgstr "Oui, j'active le widget sur mon site web."
 
-#: templates/admin/fields/main/version.php:7
+#: templates/admin/main/fields/send-datas.php:21
+msgid ""
+"By checking this box, I do not wish to send data/errors to the Axeptio "
+"plugin and do not want to contribute to the improvement of the plugin."
+msgstr ""
+"En cochant cette case, je ne souhaite pas envoyer de données/erreurs au "
+"plugin Axeptio et ne souhaite pas contribuer à l'amélioration du plugin."
+
+#: templates/admin/main/fields/version.php:7
 msgid "Dynamic (Axeptio based)"
 msgstr "Dynamique (basé sur Axeptio)"
 
-#: templates/admin/fields/plugins/edit.php:20
-msgid "Close"
-msgstr "Fermer"
-
-#: templates/admin/fields/plugins/edit.php:36
-msgid "Informations"
-msgstr "Informations"
-
-#: templates/admin/fields/plugins/edit.php:43
-msgid "Main settings"
-msgstr "Paramètres principaux"
-
-#: templates/admin/fields/plugins/edit.php:52
-msgid "Title"
-msgstr "Titre"
-
-#: templates/admin/fields/plugins/edit.php:68
-msgid "Short description"
-msgstr "Description courte"
-
-#: templates/admin/fields/plugins/edit.php:82
-msgid "Long description"
-msgstr "Description longue"
-
-#: templates/admin/fields/plugins/edit.php:96
-msgid "Policy URL"
-msgstr "URL des Conditions Générales"
-
-#: templates/admin/fields/plugins/edit.php:112
-msgid "Icon"
-msgstr "Icône"
-
-#: templates/admin/fields/plugins/edit.php:121
-msgid "Image preview"
-msgstr "Aperçu de l’image"
-
-#: templates/admin/fields/plugins/edit.php:126
-msgid "Select"
-msgstr "Sélectionner"
-
-#: templates/admin/fields/plugins/edit.php:136
-msgid "Hook to be filtered"
-msgstr "Hooks à filtrer"
-
-#: templates/admin/fields/plugins/edit.php:151
-msgid "List of hooks (action or filter)"
-msgstr "Liste des hooks (action ou filtre)"
-
-#: templates/admin/fields/plugins/edit.php:159
-msgid "Add a hook"
-msgstr "Ajout d'un hook"
-
-#: templates/admin/fields/plugins/edit.php:160
-#: templates/admin/fields/plugins/edit.php:209
-#: templates/admin/fields/plugins/modal-delete.php:33
-msgid "Delete"
-msgstr "Supprimer"
-
-#: templates/admin/fields/plugins/edit.php:169
-msgid ""
-"Determines if the Axeptio WordPress plugin will intercept and block the "
-"<code>$wp_filters</code>\n"
-"\t\t\t\t\t\t\t\t\tthat have been added by the selected Plugin. Hooks are "
-"very common within 3rd party plugins\n"
-"\t\t\t\t\t\t\t\t\tas they are used to interacting with the page code, like "
-"adding script or stylesheet tags, edit the\n"
-"\t\t\t\t\t\t\t\t\tcontent of a section of the template, etc."
-msgstr ""
-"Détermine si l'extension WordPress Axeption va intercepter et bloquer le "
-"<code>$wp_filters</code>\n"
-"\t\t\t\t\t\t\t\t\tqui a été ajouté par le plugin sélectionné. Les hooks sont "
-"courant dans les extensions tierces\n"
-"\t\t\t\t\t\t\t\t\tpour permettre d'interagir avec le code de la page, en "
-"ajoutant par exemple du style ou du script, modifier le\n"
-"\t\t\t\t\t\t\t\t\tcontenu d'une section du modèle de page, etc."
-
-#: templates/admin/fields/plugins/edit.php:185
-msgid "Shortcodes to be filtered"
-msgstr "Shortcodes à filtrer"
-
-#: templates/admin/fields/plugins/edit.php:200
-msgid "List of shortcode Tags"
-msgstr "Liste des balises shortcodes"
-
-#: templates/admin/fields/plugins/edit.php:208
-msgid "Add a shortcode"
-msgstr "Ajouter un shortcode"
-
-#: templates/admin/fields/plugins/edit.php:218
-msgid ""
-"Some plugins declare <code>[shortcodes]</code> that you can use in the Post "
-"editor.\n"
-"\t\t\t\t\t\t\t\t\tThese shortcodes are commonly used to embed 3rd party "
-"content, like videos or maps. If you\n"
-"\t\t\t\t\t\t\t\t\tthink the shortcodes provided by the selected plugin are "
-"going to load a resource from another\n"
-"\t\t\t\t\t\t\t\t\twebsite, you should probably block them preemptively."
-msgstr ""
-"Certaines extensions déclarer un <code>[shortcodes]</code> que vous pouvez "
-"utiliser dans l'éditeur de contenu.\n"
-"\t\t\t\t\t\t\t\t\tCes shortcodes sont souvent utilisé pour intégrer des "
-"blocs de contenus tels que de la vidéo ou des cartes. Si vous\n"
-"\t\t\t\t\t\t\t\t\tpensez que les shortcodes fournis par l'extension "
-"selectionnée charge du contenu d'une ressource depuis un autre\n"
-"\t\t\t\t\t\t\t\t\tsite, vous devriez les bloquer de manière préventive."
-
-#: templates/admin/fields/plugins/edit.php:250
-msgid "Saving..."
-msgstr "Enregistrement en cours..."
-
-#: templates/admin/fields/plugins/edit.php:256
-msgid "Save settings"
-msgstr "Enregistrer les paramètres"
-
-#: templates/admin/fields/plugins/edit.php:261
-msgid "Delete these settings"
-msgstr "Supprimer ces paramètres"
-
-#: templates/admin/fields/plugins/modal-delete.php:24
-msgid "Deleting plugin settings"
-msgstr "Supprimer la configuration"
-
-#: templates/admin/fields/plugins/modal-delete.php:27
-msgid ""
-"Are you sure you want to delete the configuration for this plugin? This "
-"action cannot be undone."
-msgstr ""
-"Êtes-vous certain de vouloir supprime la configuration pour cette "
-"extension ? Cette action ne peut être annulée."
-
-#: templates/admin/fields/plugins/modal-delete.php:34
-msgid "Cancel"
-msgstr "Annuler"
-
-#: templates/admin/fields/plugins/toggle.php:27
-msgid "Enable"
-msgstr "Activer"
+#: templates/admin/main/tabs.php:3
+msgid "Select a tab"
+msgstr "Sélectionner un onglet"
 
 #: templates/admin/onboarding/account.php:7
 msgid "Don't have a Axeptio account?"
@@ -353,11 +291,11 @@ msgstr ""
 "Avant de commencer, nous vous invitons à configurer les paramètres ci-"
 "dessous !"
 
-#: templates/admin/plugin-manager.php:25 templates/admin/plugin-manager.php:41
+#: templates/admin/plugin-manager.php:28 templates/admin/plugin-manager.php:44
 msgid "Default configuration"
 msgstr "Configuration par défaut"
 
-#: templates/admin/plugin-manager.php:28
+#: templates/admin/plugin-manager.php:31
 msgid ""
 "Axeptio allows you to fine-tune how you want your extensions to act based on "
 "consent or non-consent of cookie rules through our widget. You can set up "
@@ -369,11 +307,145 @@ msgstr ""
 "règles de cookies via notre widget. Vous pouvez paramétrer la configuration "
 "globalement (Configuration par défaut) ou selon la version de votre projet."
 
-#: templates/admin/plugin-manager.php:35
+#: templates/admin/plugin-manager.php:38
 msgid "Project version"
 msgstr "Version du projet"
 
-#: templates/admin/sections/main.php:32
+#: templates/admin/plugins/fields/edit.php:20
+msgid "Close"
+msgstr "Fermer"
+
+#: templates/admin/plugins/fields/edit.php:36
+msgid "Informations"
+msgstr "Informations"
+
+#: templates/admin/plugins/fields/edit.php:52
+msgid "Title"
+msgstr "Titre"
+
+#: templates/admin/plugins/fields/edit.php:68
+msgid "Short description"
+msgstr "Description courte"
+
+#: templates/admin/plugins/fields/edit.php:82
+msgid "Long description"
+msgstr "Description longue"
+
+#: templates/admin/plugins/fields/edit.php:96
+msgid "Policy URL"
+msgstr "URL des Conditions Générales"
+
+#: templates/admin/plugins/fields/edit.php:112
+msgid "Icon"
+msgstr "Icône"
+
+#: templates/admin/plugins/fields/edit.php:121
+msgid "Image preview"
+msgstr "Aperçu de l’image"
+
+#: templates/admin/plugins/fields/edit.php:126
+msgid "Select"
+msgstr "Sélectionner"
+
+#: templates/admin/plugins/fields/edit.php:136
+msgid "Hook to be filtered"
+msgstr "Hooks à filtrer"
+
+#: templates/admin/plugins/fields/edit.php:151
+msgid "List of hooks (action or filter)"
+msgstr "Liste des hooks (action ou filtre)"
+
+#: templates/admin/plugins/fields/edit.php:159
+msgid "Add a hook"
+msgstr "Ajout d'un hook"
+
+#: templates/admin/plugins/fields/edit.php:160
+#: templates/admin/plugins/fields/edit.php:209
+#: templates/admin/plugins/fields/modal-delete.php:33
+msgid "Delete"
+msgstr "Supprimer"
+
+#: templates/admin/plugins/fields/edit.php:169
+msgid ""
+"Determines if the Axeptio WordPress plugin will intercept and block the "
+"<code>$wp_filters</code>\n"
+"\t\t\t\t\t\t\t\t\tthat have been added by the selected Plugin. Hooks are "
+"very common within 3rd party plugins\n"
+"\t\t\t\t\t\t\t\t\tas they are used to interacting with the page code, like "
+"adding script or stylesheet tags, edit the\n"
+"\t\t\t\t\t\t\t\t\tcontent of a section of the template, etc."
+msgstr ""
+"Détermine si l'extension WordPress Axeption va intercepter et bloquer le "
+"<code>$wp_filters</code>\n"
+"\t\t\t\t\t\t\t\t\tqui a été ajouté par le plugin sélectionné. Les hooks sont "
+"courant dans les extensions tierces\n"
+"\t\t\t\t\t\t\t\t\tpour permettre d'interagir avec le code de la page, en "
+"ajoutant par exemple du style ou du script, modifier le\n"
+"\t\t\t\t\t\t\t\t\tcontenu d'une section du modèle de page, etc."
+
+#: templates/admin/plugins/fields/edit.php:185
+msgid "Shortcodes to be filtered"
+msgstr "Shortcodes à filtrer"
+
+#: templates/admin/plugins/fields/edit.php:200
+msgid "List of shortcode Tags"
+msgstr "Liste des balises shortcodes"
+
+#: templates/admin/plugins/fields/edit.php:208
+msgid "Add a shortcode"
+msgstr "Ajouter un shortcode"
+
+#: templates/admin/plugins/fields/edit.php:218
+msgid ""
+"Some plugins declare <code>[shortcodes]</code> that you can use in the Post "
+"editor.\n"
+"\t\t\t\t\t\t\t\t\tThese shortcodes are commonly used to embed 3rd party "
+"content, like videos or maps. If you\n"
+"\t\t\t\t\t\t\t\t\tthink the shortcodes provided by the selected plugin are "
+"going to load a resource from another\n"
+"\t\t\t\t\t\t\t\t\twebsite, you should probably block them preemptively."
+msgstr ""
+"Certaines extensions déclarer un <code>[shortcodes]</code> que vous pouvez "
+"utiliser dans l'éditeur de contenu.\n"
+"\t\t\t\t\t\t\t\t\tCes shortcodes sont souvent utilisé pour intégrer des "
+"blocs de contenus tels que de la vidéo ou des cartes. Si vous\n"
+"\t\t\t\t\t\t\t\t\tpensez que les shortcodes fournis par l'extension "
+"selectionnée charge du contenu d'une ressource depuis un autre\n"
+"\t\t\t\t\t\t\t\t\tsite, vous devriez les bloquer de manière préventive."
+
+#: templates/admin/plugins/fields/edit.php:250
+msgid "Saving..."
+msgstr "Enregistrement en cours..."
+
+#: templates/admin/plugins/fields/edit.php:256
+msgid "Save settings"
+msgstr "Enregistrer les paramètres"
+
+#: templates/admin/plugins/fields/edit.php:261
+msgid "Delete these settings"
+msgstr "Supprimer ces paramètres"
+
+#: templates/admin/plugins/fields/modal-delete.php:24
+msgid "Deleting plugin settings"
+msgstr "Supprimer la configuration"
+
+#: templates/admin/plugins/fields/modal-delete.php:27
+msgid ""
+"Are you sure you want to delete the configuration for this plugin? This "
+"action cannot be undone."
+msgstr ""
+"Êtes-vous certain de vouloir supprime la configuration pour cette "
+"extension ? Cette action ne peut être annulée."
+
+#: templates/admin/plugins/fields/modal-delete.php:34
+msgid "Cancel"
+msgstr "Annuler"
+
+#: templates/admin/plugins/fields/toggle.php:27
+msgid "Enable"
+msgstr "Activer"
+
+#: templates/admin/sections/main.php:34
 msgid "How To Integrate Axeptio?"
 msgstr "Comment intégrer Axeptio ?"
 
@@ -385,7 +457,7 @@ msgstr "Actif"
 msgid "Probability:"
 msgstr "Probabilité :"
 
-#: templates/admin/settings-main.php:10
+#: templates/admin/settings-main.php:13
 msgid "Your Axeptio Settings"
 msgstr "Votre configuration Axeptio"
 
@@ -393,7 +465,8 @@ msgstr "Votre configuration Axeptio"
 msgid "Oops, content not available at the moment!"
 msgstr "Oups, le contenu n'est pas disponible pour le moment !"
 
-#: templates/frontend/shortcode-placeholder.php:7
+#. translators: $s: Name of the plugin
+#: templates/frontend/shortcode-placeholder.php:10
 #, php-format
 msgid ""
 "This content is blocked because we take the protection of your data very "
@@ -419,8 +492,18 @@ msgstr ""
 msgid "axeptio"
 msgstr "axeptio"
 
-#~ msgid "Recommanded by Axeptio"
-#~ msgstr "Recommandé par Axeptio"
+#~ msgid ""
+#~ "Would you allow Axeptio to collect non-sensitive diagnostic data from "
+#~ "this website?"
+#~ msgstr ""
+#~ "Autorisez-vous Axeptio à collecter des données de diagnostic non "
+#~ "sensibles à partir de ce site web ?"
+
+#~ msgid "Yes, I want to contribute to improve the plugin."
+#~ msgstr "Oui, je souhaite contribuer à l'amélioration du plugin."
+
+#~ msgid "This account doesn't exist"
+#~ msgstr "Ce compte n'existe pas"
 
 #~ msgctxt "context"
 #~ msgid "Hello World…"

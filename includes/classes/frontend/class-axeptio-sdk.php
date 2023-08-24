@@ -111,8 +111,8 @@ class Axeptio_Sdk extends Module {
 	 * @return array|false Settings of the SDK.
 	 */
 	private function get_sdk_settings() {
-		$sdk_active = (bool) Settings::get_option( 'sdk_active', false );
-		$send_datas = (bool) Settings::get_option( 'send_datas', false );
+		$sdk_active         = (bool) Settings::get_option( 'sdk_active', false );
+		$disable_send_datas = (bool) Settings::get_option( 'disable_send_datas', false );
 
 		$client_id       = Settings::get_option( 'client_id', false );
 		$cookies_version = Settings::get_option( 'version', false );
@@ -126,7 +126,8 @@ class Axeptio_Sdk extends Module {
 			array(
 				'clientId'       => $client_id,
 				'cookiesVersion' => $cookies_version,
-				'sendDatas'      => $send_datas,
+				'platform'       => 'plugin-wordpress',
+				'sendDatas'      => $disable_send_datas,
 			)
 		);
 	}

@@ -14,13 +14,14 @@
 									'optionsJson'    => Settings::get_option( 'xpwp_version_options', '', false ),
 									'activeSDK'      => (bool) Settings::get_option( 'sdk_active', '0' ),
 									'selectedOption' => Settings::get_option( 'version', '' ),
-									'sendDatas'      => (bool) Settings::get_option( 'send_datas', '0' ),
+									'sendDatas'      => (bool) Settings::get_option( 'disable_send_datas', '0' ),
 								)
 							)
 						);
 					?>
 					)'
 		>
+			<?php echo \Axeptio\get_main_admin_tabs(); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<?php
 			settings_fields( 'xpwp_settings_group' );
 			do_settings_sections( 'axeptio-wordpress-plugin' );
