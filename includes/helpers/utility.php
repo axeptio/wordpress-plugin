@@ -48,7 +48,9 @@ function get_favicon( string $url ) {
 	}
 	$domain = wp_parse_url( $url );
 
-	if ( !isset( $domain['host'] ) ) {
+	if ( ! isset(
+		$domain['host']
+		) ) {
 		return false;
 	}
 

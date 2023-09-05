@@ -2,7 +2,7 @@
 Contributors: axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy, eprivacy, consent, script, cmp, data, personnal, widget, googletagmanager, consentmanagement
 Requires at least: 5.0
-Tested up to: 6.1.1
+Tested up to: 6.3.1
 Stable tag: 2.0.8
 Requires PHP: 7.4
 License: GPLv3
@@ -66,6 +66,11 @@ The idea is to customize the appearance of your widget so that it matches the de
 All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en-gb/articles/4402985038225-Customize-my-widget-s-aspect)
 
 == Changelog ==
+
+### 2.1 ###
+
+1. Added a new section in the settings for customize the text of the Axeptio widget.
+2. Fix some bug related to hook that doesn't have to be overridden.
 
 ### 2.0.5 ~ 2.0.9 ###
 
