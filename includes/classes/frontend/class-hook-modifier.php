@@ -36,6 +36,7 @@ class Hook_Modifier extends Module {
 
 	const WHITELISTED_HOOK = array(
 		'map_meta_cap',
+		'user_has_cap',
 		'wp_after_insert_post',
 		'muplugins_loaded',
 		'plugins_loaded',
@@ -302,6 +303,10 @@ class Hook_Modifier extends Module {
 		);
 
 		$matching_hook = false;
+
+		if ( 'none' === $intercepted_plugin['mode'] ) {
+			return true;
+		}
 
 		if ( $this->is_whitelisted_hook( $hook ) ) {
 			return true;
