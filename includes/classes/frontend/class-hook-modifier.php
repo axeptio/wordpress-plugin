@@ -34,6 +34,57 @@ class Hook_Modifier extends Module {
 	 */
 	private $plugins_errors = array();
 
+	const WHITELISTED_HOOK = array(
+		'map_meta_cap',
+		'wp_after_insert_post',
+		'muplugins_loaded',
+		'plugins_loaded',
+		'the_permalink_rss',
+		'admin_enqueue_scripts',
+		'registered_taxonomy',
+		'registered_taxonomy_*',
+		'registered_post_type',
+		'registered_post_type_*',
+		'plugin_loaded',
+		'wp_roles_init',
+		'auth_cookie_valid',
+		'set_current_user',
+		'sanitize_comment_cookies',
+		'setup_theme',
+		'unload_textdomain',
+		'after_setup_theme',
+		'register_setting',
+		'wp_sitemaps_init',
+		'parse_tax_query',
+		'parse_query',
+		'pre_get_posts',
+		'parse_term_query',
+		'pre_get_terms',
+		'wp_cache_set_last_changed',
+		'posts_selection',
+		'debug_bar_enqueue_scripts',
+		'wp_loaded',
+		'update_option',
+		'update_option_*',
+		'set_transient_*',
+		'setted_transient',
+		'requests-*',
+		'http_api_curl',
+		'http_api_debug',
+		'parse_request',
+		'send_headers',
+		'admin_bar_init',
+		'add_admin_bar_menus',
+		'loop_start',
+		'loop_end',
+		'the_post',
+		'qm/*',
+		'axeptio/*',
+		'admin_bar_menu',
+		'wp_before_admin_bar_render',
+		'wp_after_admin_bar_render',
+	);
+
 	/**
 	 * Module can run within the current context.
 	 *
@@ -204,6 +255,32 @@ class Hook_Modifier extends Module {
 	}
 
 	/**
+	 * Checks if a hook is whitelisted.
+	 *
+	 * @param string $hook The hook to check.
+	 * @return bool Returns true if the hook is whitelisted, false otherwise.
+	 */
+	protected function is_whitelisted_hook( string $hook ): bool {
+		return array_reduce(
+			self::WHITELISTED_HOOK,
+			function ( $carry, $whitelisted_hook ) use ( $hook ) {
+				if ( true === $carry ) {
+					return true;
+				}
+
+				if ( strpos( $whitelisted_hook, '*' ) !== false ) {
+					$whitelisted_hook = preg_quote( $whitelisted_hook, '/' );
+					$pattern          = '/^' . str_replace( '\*', '.*', $whitelisted_hook ) . '$/';
+					return (bool) preg_match( $pattern, $hook );
+				}
+
+				return $hook === $whitelisted_hook;
+			},
+			false
+		);
+	}
+
+	/**
 	 * Should the plugin continue to be loaded ?
 	 *
 	 * @param array $intercepted_plugin Axeptio plugin settings intercepted.
@@ -225,6 +302,10 @@ class Hook_Modifier extends Module {
 		);
 
 		$matching_hook = false;
+
+		if ( $this->is_whitelisted_hook( $hook ) ) {
+			return true;
+		}
 
 		foreach ( $intercepted_plugin['list'] as $intercepted_hook ) {
 			$current_hook = $default;
@@ -365,7 +446,7 @@ class Hook_Modifier extends Module {
 				$parser = new User_Hook_Parser( $configuration['wp_filter_list'] );
 				$hooks  = $parser->get_hooks();
 
-				if ( count( $hooks ) === 0 && ($configuration['wp_filter_mode'] === 'whitelist' || $configuration['wp_filter_mode'] === 'blacklist')) {
+				if ( 0 === count( $hooks ) && ( 'whitelist' === $configuration['wp_filter_mode'] || 'blacklist' === $configuration['wp_filter_mode'] ) ) {
 					continue;
 				}
 
@@ -375,7 +456,6 @@ class Hook_Modifier extends Module {
 				);
 			}
 		}
-
 
 		foreach ( $plugins as $plugin => $configs ) {
 			// The plugin has no key in the $intercepted_plugins array,
@@ -395,6 +475,7 @@ class Hook_Modifier extends Module {
 				if ( str_contains( $filter, 'admin' ) ) {
 					continue;
 				}
+
 				// Otherwise we will wrap and overwrite the filter.
 				$wp_filter[ $filter ]->callbacks[ $priority ][ $name ]['function'] = $this->wrap_filter( $function['function'], $plugin, $filter );
 			}
@@ -490,7 +571,7 @@ class Hook_Modifier extends Module {
 				'plugin'   => $plugin,
 			);
 		} catch ( ReflectionException $e ) {
-			if ( (bool) Settings::get_option( 'send_datas', false ) ) {
+			if ( ! (bool) Settings::get_option( 'disable_send_datas', false ) ) {
 				\Sentry\captureException( $e );
 			}
 		}

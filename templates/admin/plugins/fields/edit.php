@@ -40,7 +40,7 @@
 						:class="isActive(2) ? 'border-amber-400 text-indigo-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
 						class="border-transparent w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
 					>
-						<?php esc_html_e( 'Main settings', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Hooks and shortcodes', 'axeptio-wordpress-plugin' ); ?>
 					</button>
 				</nav>
 			</div>
@@ -153,7 +153,7 @@
 					<div class="mt-2">
 						<?php
 						\Axeptio\get_template_part(
-							'admin/fields/plugins/repeater',
+							'admin/plugins/fields/repeater',
 							array(
 								'name'        => 'wp_filter_list',
 								'add_item'    => __( 'Add a hook', 'axeptio-wordpress-plugin' ),
@@ -202,7 +202,7 @@
 					<div class="mt-2">
 						<?php
 						\Axeptio\get_template_part(
-							'admin/fields/plugins/repeater',
+							'admin/plugins/fields/repeater',
 							array(
 								'name'        => 'shortcode_tags_list',
 								'add_item'    => __( 'Add a shortcode', 'axeptio-wordpress-plugin' ),

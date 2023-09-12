@@ -72,6 +72,18 @@ class Admin_Main extends Module {
 				add_action( 'axeptio/after_main_settings', array( $this->callbacks, 'display_onboarding_account_panel' ) );
 			}
 		);
+
+		add_action( 'admin_menu', array( $this, 'override_first_menu_name' ), 90 );
+	}
+
+	/**
+	 * Override the name of the first menu item under the 'Axeptio' menu.
+	 *
+	 * @return void
+	 */
+	public function override_first_menu_name() {
+		global $submenu;
+		$submenu['axeptio-wordpress-plugin'][0][0] = __( 'Settings', 'axeptio-wordpress-plugin' ); // PHPCS:Ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 	}
 
 	/**
@@ -131,11 +143,33 @@ class Admin_Main extends Module {
 	 * @return void
 	 */
 	public function set_sections() {
+
+		$main_settings_title = \Axeptio\get_template_part(
+			'admin/common/fields/title',
+			array(
+				'title'       => __( 'Widget main settings', 'axeptio-wordpress-plugin' ),
+				'description' => __( 'Configure the information related to the integration of your Axeptio project here.', 'axeptio-wordpress-plugin' ),
+			),
+			false
+			);
+
+		$customize_title = \Axeptio\get_template_part(
+			'admin/common/fields/title',
+			array(
+				'title'       => __( 'Widget customization', 'axeptio-wordpress-plugin' ),
+				'description' => __( 'In this section, you can customize the header texts of the WordPress section in the Axeptio widget.', 'axeptio-wordpress-plugin' ),
+			),
+			false
+			);
+
 		$args = array(
 			array(
 				'id'    => 'xpwp_admin_index',
-				'title' => __( 'Widget settings', 'axeptio-wordpress-plugin' ),
+				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
+				'args'  => array(
+					'before_section' => '<div x-show="currentTab === \'main-settings\'" x-cloak="false">' . $main_settings_title,
+				),
 			),
 			array(
 				'id'    => 'xpwp_admin_version',
@@ -147,9 +181,21 @@ class Admin_Main extends Module {
 				),
 			),
 			array(
-				'id'    => 'xpwp_admin_send_datas',
+				'id'    => 'xpwp_admin_disable_send_datas',
 				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
+				'args'  => array(
+					'after_section' => '</div>',
+				),
+			),
+			array(
+				'id'    => 'xpwp_admin_customize',
+				'title' => false,
+				'page'  => 'axeptio-wordpress-plugin',
+				'args'  => array(
+					'before_section' => '<div x-show="currentTab === \'customization\'" x-cloak>' . $customize_title,
+					'after_section'  => '</div>',
+				),
 			),
 		);
 		$this->settings->set_sections( $args );
@@ -207,13 +253,46 @@ class Admin_Main extends Module {
 				),
 			),
 			array(
-				'id'       => 'xpwp_send_datas',
-				'title'    => __( 'Would you allow Axeptio to collect non-sensitive diagnostic data from this website?', 'axeptio-wordpress-plugin' ),
+				'id'       => 'xpwp_disable_send_datas',
+				'title'    => __( 'Collect of data and errors by Axeptio', 'axeptio-wordpress-plugin' ),
 				'callback' => array( $this->callbacks, 'send_datas_set' ),
 				'page'     => 'axeptio-wordpress-plugin',
-				'section'  => 'xpwp_admin_send_datas',
+				'section'  => 'xpwp_admin_disable_send_datas',
 				'args'     => array(
-					'label_for' => 'xpwp_send_datas',
+					'label_for' => 'xpwp_disable_send_datas',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
+				'id'       => 'xpwp_widget_title',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'widget_title' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_customize',
+				'args'     => array(
+					'label_for' => 'xpwp_widget_title',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
+				'id'       => 'xpwp_widget_subtitle',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'widget_subtitle' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_customize',
+				'args'     => array(
+					'label_for' => 'xpwp_widget_subtitle',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
+				'id'       => 'xpwp_widget_description',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'widget_description' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_customize',
+				'args'     => array(
+					'label_for' => 'xpwp_widget_description',
 					'class'     => 'inline-table-row label-right',
 				),
 			),

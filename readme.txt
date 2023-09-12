@@ -2,7 +2,7 @@
 Contributors: axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy, eprivacy, consent, script, cmp, data, personnal, widget, googletagmanager, consentmanagement
 Requires at least: 5.0
-Tested up to: 6.1.1
+Tested up to: 6.3.1
 Stable tag: 2.0.8
 Requires PHP: 7.4
 License: GPLv3
@@ -67,8 +67,12 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
-<<<<<<< HEAD
-### 2.0.5 ~ 2.0.8 ###
+### 2.1 ###
+
+1. Added a new section in the settings for customize the text of the Axeptio widget.
+2. Fix some bug related to hook that doesn't have to be overridden.
+
+### 2.0.5 ~ 2.0.9 ###
 
 Fix for bug report
 

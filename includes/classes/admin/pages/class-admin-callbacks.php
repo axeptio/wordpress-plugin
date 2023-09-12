@@ -7,6 +7,7 @@
 
 namespace Axeptio\Admin\Pages;
 
+use Axeptio\Models\Axeptio_Steps;
 use Axeptio\Models\Hook_Modes;
 use Axeptio\Models\Plugins;
 use Axeptio\Models\Project_Versions;
@@ -52,17 +53,8 @@ class Admin_Callbacks {
 	 *
 	 * @return void
 	 */
-	public function admin_section() {
-		\Axeptio\get_template_part( 'admin/fields/main/admin-section' );
-	}
-
-	/**
-	 * Options page
-	 *
-	 * @return void
-	 */
 	public function sdk_active_set() {
-		\Axeptio\get_template_part( 'admin/fields/main/sdk-active' );
+		\Axeptio\get_template_part( 'admin/main/fields/sdk-active' );
 	}
 
 	/**
@@ -71,7 +63,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function send_datas_set() {
-		\Axeptio\get_template_part( 'admin/fields/main/send-datas' );
+		\Axeptio\get_template_part( 'admin/main/fields/send-datas' );
 	}
 
 	/**
@@ -80,7 +72,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function client_id_set() {
-		\Axeptio\get_template_part( 'admin/fields/main/client-id' );
+		\Axeptio\get_template_part( 'admin/main/fields/client-id' );
 	}
 
 	/**
@@ -89,7 +81,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function version_set_options() {
-		\Axeptio\get_template_part( 'admin/fields/main/version-options', array( 'versions' => Settings::get_option( 'xpwp_version_options', '', false ) ) );
+		\Axeptio\get_template_part( 'admin/main/fields/version-options', array( 'versions' => Settings::get_option( 'xpwp_version_options', '', false ) ) );
 	}
 
 	/**
@@ -98,7 +90,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function version_set() {
-		\Axeptio\get_template_part( 'admin/fields/main/version', array( 'version' => Settings::get_option( 'version', '' ) ) );
+		\Axeptio\get_template_part( 'admin/main/fields/version', array( 'version' => Settings::get_option( 'version', '' ) ) );
 	}
 
 	/**
@@ -108,5 +100,59 @@ class Admin_Callbacks {
 	 */
 	public function display_onboarding_account_panel() {
 		\Axeptio\get_template_part( 'admin/onboarding/account' );
+	}
+
+	/**
+	 * Title of the widget.
+	 *
+	 * @return void
+	 */
+	public function widget_title() {
+		\Axeptio\get_template_part(
+			'admin/common/fields/text',
+			array(
+				'label' => __( 'Widget title', 'axeptio-wordpress-plugin' ),
+				'group' => 'axeptio_settings',
+				'name'  => 'widget_title',
+				'id'    => 'xpwp_widget_title',
+				'value' => Axeptio_Steps::get_title(),
+			)
+			);
+	}
+
+	/**
+	 * Sub-title of the widget.
+	 *
+	 * @return void
+	 */
+	public function widget_subtitle() {
+		\Axeptio\get_template_part(
+			'admin/common/fields/text',
+			array(
+				'label' => __( 'Widget sub-title', 'axeptio-wordpress-plugin' ),
+				'group' => 'axeptio_settings',
+				'name'  => 'widget_subtitle',
+				'id'    => 'xpwp_widget_subtitle',
+				'value' => Axeptio_Steps::get_sub_title(),
+			)
+			);
+	}
+
+	/**
+	 * Description of the widget.
+	 *
+	 * @return void
+	 */
+	public function widget_description() {
+		\Axeptio\get_template_part(
+			'admin/common/fields/textarea',
+			array(
+				'label' => __( 'Widget description', 'axeptio-wordpress-plugin' ),
+				'group' => 'axeptio_settings',
+				'name'  => 'widget_description',
+				'id'    => 'xpwp_widget_description',
+				'value' => Axeptio_Steps::get_description(),
+			)
+			);
 	}
 }
