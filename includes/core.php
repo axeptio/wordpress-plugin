@@ -9,11 +9,8 @@ namespace Axeptio;
 
 use Axeptio\Init\Activate;
 use Axeptio\Init\Activation_Hook;
-use Axeptio\ModuleInitialization;
 use Axeptio\Utils\WP_Migration_Manager;
 use \WP_Error;
-use Axeptio\Utility;
-
 
 /**
  * Default setup routine
@@ -179,9 +176,28 @@ function admin_scripts() {
 		'Axeptio',
 		array(
 			'errors' => array(
-				'empty_account_id'        => __( 'Please enter an account ID', 'axeptio-wordpress-plugin' ),
-				'non_existing_account_id' => __( 'Your project ID is not found or your project is not published. If you are certain about your project ID, please publish it through the Axeptio interface and restart the configuration.', 'axeptio-wordpress-plugin' ),
-				'verification_error'      => __( 'Error verifying account ID. Try Again.', 'axeptio-wordpress-plugin' ),
+				'non_existing_account_id' => \Axeptio\get_template_part(
+					'admin/main/fields/validation-error',
+					array(
+						'title'   => __( 'We were unable to find your project, or it appears that it has not yet been published.', 'axeptio-wordpress-plugin' ),
+						'message' => \Axeptio\get_template_part( 'admin/main/fields/non-existing-account', array(), false ),
+					),
+					false
+					),
+				'verification_error'      => \Axeptio\get_template_part(
+					'admin/main/fields/validation-error',
+					array(
+						'title' => __( 'Error verifying account ID. Try Again.', 'axeptio-wordpress-plugin' ),
+					),
+					false
+					),
+				'empty_account_id'        => \Axeptio\get_template_part(
+					'admin/main/fields/validation-error',
+					array(
+						'title' => __( 'Please enter an account ID', 'axeptio-wordpress-plugin' ),
+					),
+					false
+					),
 			),
 		)
 	);

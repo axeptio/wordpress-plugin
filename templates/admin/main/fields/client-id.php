@@ -34,7 +34,7 @@
 	</div>
 	<p
 		x-show="errorMessage"
-		x-text="errorMessage"
+		x-html="errorMessage"
 		x-transition:enter="transition ease-out duration-200"
 		x-transition:enter-start="opacity-0"
 		x-transition:enter-end="opacity-1"
