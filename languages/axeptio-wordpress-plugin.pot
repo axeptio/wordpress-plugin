@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2023-08-24 16:53+0200\n"
+"POT-Creation-Date: 2023-09-12 12:31+0200\n"
 "PO-Revision-Date: 2023-05-10 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,77 +41,77 @@ msgstr ""
 msgid "Return to plugins pages"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:112
+#: includes/classes/admin/pages/class-admin-callbacks.php:114
 msgid "Widget title"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:127
+#: includes/classes/admin/pages/class-admin-callbacks.php:132
 msgid "Widget sub-title"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:142
+#: includes/classes/admin/pages/class-admin-callbacks.php:150
 msgid "Widget description"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:81
+#: includes/classes/admin/pages/class-admin-main.php:86
 msgid "Settings"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:91
+#: includes/classes/admin/pages/class-admin-main.php:97
 msgid "Axeptio Widget Integration"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-#: includes/classes/admin/pages/class-admin-main.php:92
+#: includes/classes/admin/pages/class-admin-main.php:98
 #: templates/admin/onboarding/welcome.php:8
 #: templates/admin/plugin-manager.php:3 templates/admin/plugin-manager.php:12
 #: templates/admin/settings-main.php:3 templates/admin/settings-main.php:12
 msgid "Axeptio"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:103
-#: includes/classes/admin/pages/class-admin-main.php:104
+#: includes/classes/admin/pages/class-admin-main.php:109
+#: includes/classes/admin/pages/class-admin-main.php:110
 #: templates/admin/plugin-manager.php:13
 msgid "Plugin manager"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:142
+#: includes/classes/admin/pages/class-admin-main.php:150
 msgid "Widget main settings"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:143
+#: includes/classes/admin/pages/class-admin-main.php:151
 msgid ""
 "Configure the information related to the integration of your Axeptio project "
 "here."
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:147
+#: includes/classes/admin/pages/class-admin-main.php:159
 msgid "Widget customization"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:148
+#: includes/classes/admin/pages/class-admin-main.php:160
 msgid ""
 "In this section, you can customize the header texts of the WordPress section "
 "in the Axeptio widget."
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:199
+#: includes/classes/admin/pages/class-admin-main.php:213
 msgid "Do you want to enable the widget?"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:210
+#: includes/classes/admin/pages/class-admin-main.php:224
 msgid "Project ID"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:221
+#: includes/classes/admin/pages/class-admin-main.php:235
 msgid "Options"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:232
+#: includes/classes/admin/pages/class-admin-main.php:246
 msgid "Project Version"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:243
+#: includes/classes/admin/pages/class-admin-main.php:257
 msgid "Collect of data and errors by Axeptio"
 msgstr ""
 
@@ -164,33 +164,32 @@ msgid "All shortcode tags"
 msgstr ""
 
 #. translators: %s: the path to the plugin
-#: includes/core.php:83
+#: includes/core.php:80
 #, php-format
 msgid ""
 "The composer.json file was not found within %s. No classes will be loaded."
 msgstr ""
 
 #: includes/core.php:182
-msgid "Please enter an account ID"
-msgstr ""
-
-#: includes/core.php:183
 msgid ""
-"Your project ID is not found or your project is not published. If you are "
-"certain about your project ID, please publish it through the Axeptio "
-"interface and restart the configuration."
+"We were unable to find your project, or it appears that it has not yet been "
+"published."
 msgstr ""
 
-#: includes/core.php:184
+#: includes/core.php:190
 msgid "Error verifying account ID. Try Again."
 msgstr ""
 
-#: includes/helpers/helpers.php:112 templates/admin/plugins/fields/edit.php:43
+#: includes/core.php:197
+msgid "Please enter an account ID"
+msgstr ""
+
+#: includes/helpers/helpers.php:112
 msgid "Main settings"
 msgstr ""
 
 #: includes/helpers/helpers.php:113
-msgid "Customizations"
+msgid "Customization"
 msgstr ""
 
 #: templates/admin/main/fields/client-id.php:31
@@ -201,6 +200,34 @@ msgstr ""
 
 #: templates/admin/main/fields/client-id.php:31
 msgid "Validate"
+msgstr ""
+
+#: templates/admin/main/fields/non-existing-account.php:2
+msgid "If you are certain that your project exists, please follow these steps:"
+msgstr ""
+
+#: templates/admin/main/fields/non-existing-account.php:6
+msgid "Go to the Axeptio interface."
+msgstr ""
+
+#: templates/admin/main/fields/non-existing-account.php:7
+msgid "Publish your project."
+msgstr ""
+
+#: templates/admin/main/fields/non-existing-account.php:8
+msgid "Return here and refresh the configuration."
+msgstr ""
+
+#. translators: %s: the url of the Axeptio help guide
+#: templates/admin/main/fields/non-existing-account.php:14
+#, php-format
+msgid ""
+"If the issue persists, please don't hesitate to consult <a target=\"_blank\" "
+"class=\"underline hover:no-underline\" href=\"%s\">our help guide.</a>"
+msgstr ""
+
+#: templates/admin/main/fields/non-existing-account.php:15
+msgid "https://support.axeptio.eu/hc/en-gb"
 msgstr ""
 
 #: templates/admin/main/fields/sdk-active.php:21
@@ -217,7 +244,7 @@ msgstr ""
 msgid "Dynamic (Axeptio based)"
 msgstr ""
 
-#: templates/admin/main/tabs.php:3
+#: templates/admin/main/tabs.php:4
 msgid "Select a tab"
 msgstr ""
 
@@ -286,6 +313,10 @@ msgstr ""
 
 #: templates/admin/plugins/fields/edit.php:36
 msgid "Informations"
+msgstr ""
+
+#: templates/admin/plugins/fields/edit.php:43
+msgid "Hooks and shortcodes"
 msgstr ""
 
 #: templates/admin/plugins/fields/edit.php:52
