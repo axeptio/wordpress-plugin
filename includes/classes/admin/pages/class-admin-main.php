@@ -70,6 +70,8 @@ class Admin_Main extends Module {
 					->register();
 
 				add_action( 'axeptio/after_main_settings', array( $this->callbacks, 'display_onboarding_account_panel' ) );
+				add_action( 'axeptio/before_main_setting_container', array( $this->callbacks, 'add_admin_notice_for_review' ) );
+				add_action( 'axeptio/before_plugin_manager_container', array( $this->callbacks, 'add_admin_notice_for_review' ) );
 			}
 		);
 

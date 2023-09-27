@@ -155,4 +155,18 @@ class Admin_Callbacks {
 			)
 			);
 	}
+
+	/**
+	 * Display notice for reviews.
+	 *
+	 * @return void
+	 */
+	public function add_admin_notice_for_review() {
+		if ( ! \Axeptio\Models\Notice::isDisplayable() ) {
+			return;
+		}
+		\Axeptio\get_template_part(
+			'admin/sections/notice'
+		);
+	}
 }
