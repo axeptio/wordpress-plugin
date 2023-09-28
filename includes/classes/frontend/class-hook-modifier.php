@@ -243,11 +243,17 @@ class Hook_Modifier extends Module {
 		// If the  name is found in the $intercepted_plugins list
 		// and the current mode is whitelist, it should be skipped.
 
+		if ( 'none' === $intercepted_plugin['mode'] ) {
+			return true;
+		}
+
 		if ( 'whitelist' === $intercepted_plugin['mode'] && in_array( $name, $intercepted_plugin['list'], true ) ) {
 			return true;
 		}
+
 		// Vice versa, if the name is not found in the $intercepted_plugins list
 		// and the current mode is blacklist, it should be skipped as well.
+
 		if ( 'blacklist' === $intercepted_plugin['mode'] && ! in_array( $name, $intercepted_plugin['list'], true ) ) {
 			return true;
 		}

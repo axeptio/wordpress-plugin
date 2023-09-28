@@ -7,6 +7,7 @@
 
 namespace Axeptio\Admin\Rest;
 
+use Axeptio\Models\Notice;
 use Axeptio\Models\Plugins as PluginModel;
 use Axeptio\Module;
 use WP_REST_Request;
@@ -76,6 +77,26 @@ class Plugins extends Module {
 				'permission_callback' => array( $this, 'permission_callback' ),
 			)
 		);
+
+		register_rest_route(
+			'axeptio/v1',
+			'/disable-notice',
+			array(
+				'methods'             => \WP_REST_Server::CREATABLE,
+				'callback'            => array( $this, 'disable_notice' ),
+				'permission_callback' => array( $this, 'permission_callback' ),
+			)
+		);
+
+		register_rest_route(
+			'axeptio/v1',
+			'/timeout-notice',
+			array(
+				'methods'             => \WP_REST_Server::CREATABLE,
+				'callback'            => array( $this, 'timeout_notice' ),
+				'permission_callback' => array( $this, 'permission_callback' ),
+			)
+		);
 	}
 
 	/**
@@ -125,5 +146,27 @@ class Plugins extends Module {
 		return array();
 	}
 
+	/**
+	 * Set the disable notice meta as true on the current user.
+	 *
+	 * @param WP_REST_Request $request Request object.
+	 * @return array
+	 */
+	public function disable_notice( WP_REST_Request $request ) {
+		Notice::disable();
 
+		return array();
+	}
+
+	/**
+	 * Set the timeout notice cookie.
+	 *
+	 * @param WP_REST_Request $request Request object.
+	 * @return array
+	 */
+	public function timeout_notice( WP_REST_Request $request ) {
+		Notice::set_timeout();
+
+		return array();
+	}
 }

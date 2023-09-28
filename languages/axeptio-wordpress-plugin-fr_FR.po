@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2023-09-12 12:31+0200\n"
-"PO-Revision-Date: 2023-09-12 12:35+0200\n"
+"POT-Creation-Date: 2023-09-27 16:39+0200\n"
+"PO-Revision-Date: 2023-09-27 16:42+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio.php\n"
@@ -56,33 +56,32 @@ msgstr "Sous-titre du widget"
 msgid "Widget description"
 msgstr "Description du widget"
 
-#: includes/classes/admin/pages/class-admin-main.php:86
+#: includes/classes/admin/pages/class-admin-main.php:88
 msgid "Settings"
 msgstr "Configuration"
 
-#: includes/classes/admin/pages/class-admin-main.php:97
+#: includes/classes/admin/pages/class-admin-main.php:99
 msgid "Axeptio Widget Integration"
 msgstr "Intégration du Widget Axeptio"
 
-#. Plugin Name of the plugin/theme
-#: includes/classes/admin/pages/class-admin-main.php:98
+#: includes/classes/admin/pages/class-admin-main.php:100
 #: templates/admin/onboarding/welcome.php:8
 #: templates/admin/plugin-manager.php:3 templates/admin/plugin-manager.php:12
 #: templates/admin/settings-main.php:3 templates/admin/settings-main.php:12
 msgid "Axeptio"
 msgstr "Axeptio"
 
-#: includes/classes/admin/pages/class-admin-main.php:109
-#: includes/classes/admin/pages/class-admin-main.php:110
+#: includes/classes/admin/pages/class-admin-main.php:111
+#: includes/classes/admin/pages/class-admin-main.php:112
 #: templates/admin/plugin-manager.php:13
 msgid "Plugin manager"
 msgstr "Extensions"
 
-#: includes/classes/admin/pages/class-admin-main.php:150
+#: includes/classes/admin/pages/class-admin-main.php:152
 msgid "Widget main settings"
 msgstr "Paramètres principaux du widget"
 
-#: includes/classes/admin/pages/class-admin-main.php:151
+#: includes/classes/admin/pages/class-admin-main.php:153
 msgid ""
 "Configure the information related to the integration of your Axeptio project "
 "here."
@@ -90,11 +89,11 @@ msgstr ""
 "Configurez ici les informations relatives à l'intégration de votre projet "
 "Axeptio."
 
-#: includes/classes/admin/pages/class-admin-main.php:159
+#: includes/classes/admin/pages/class-admin-main.php:161
 msgid "Widget customization"
 msgstr "Personnalisation des widgets"
 
-#: includes/classes/admin/pages/class-admin-main.php:160
+#: includes/classes/admin/pages/class-admin-main.php:162
 msgid ""
 "In this section, you can customize the header texts of the WordPress section "
 "in the Axeptio widget."
@@ -102,23 +101,23 @@ msgstr ""
 "Dans cette section, vous pouvez personnaliser les textes de l'entête de la "
 "section WordPress dans le widget Axeptio."
 
-#: includes/classes/admin/pages/class-admin-main.php:213
+#: includes/classes/admin/pages/class-admin-main.php:215
 msgid "Do you want to enable the widget?"
 msgstr "Voulez-vous activer le widget ?"
 
-#: includes/classes/admin/pages/class-admin-main.php:224
+#: includes/classes/admin/pages/class-admin-main.php:226
 msgid "Project ID"
 msgstr "ID du projet"
 
-#: includes/classes/admin/pages/class-admin-main.php:235
+#: includes/classes/admin/pages/class-admin-main.php:237
 msgid "Options"
 msgstr "Options"
 
-#: includes/classes/admin/pages/class-admin-main.php:246
+#: includes/classes/admin/pages/class-admin-main.php:248
 msgid "Project Version"
 msgstr "Version du projet"
 
-#: includes/classes/admin/pages/class-admin-main.php:257
+#: includes/classes/admin/pages/class-admin-main.php:259
 msgid "Collect of data and errors by Axeptio"
 msgstr "Collecte de données et d'erreurs par Axeptio"
 
@@ -481,6 +480,22 @@ msgstr "Activer"
 msgid "How To Integrate Axeptio?"
 msgstr "Comment intégrer Axeptio ?"
 
+#: templates/admin/sections/notice.php:16
+msgid "Do you like Axeptio?"
+msgstr "Aimez-vous Axeptio ?"
+
+#: templates/admin/sections/notice.php:19
+msgid "Your opinion matters to us, leave us a review on WordPress.org"
+msgstr "Votre opinion nous importe, laissez-nous un avis sur WordPress.org"
+
+#: templates/admin/sections/notice.php:27
+msgid "Leave a review"
+msgstr "Laisser un avis"
+
+#: templates/admin/sections/notice.php:32
+msgid "Don't ask me anymore"
+msgstr "Ne plus me demander"
+
 #: templates/admin/sections/plugins.php:38
 msgid "Active"
 msgstr "Actif"
@@ -511,18 +526,15 @@ msgstr ""
 "notre widget de consentement des cookies, donnez votre accord pour "
 "l'extension \"%s\". Et le tour est joué !"
 
-#. Plugin URI of the plugin/theme
-msgid "https://www.axeptio.eu/"
-msgstr "https://www.axeptio.eu/fr"
+#~ msgid "https://www.axeptio.eu/"
+#~ msgstr "https://www.axeptio.eu/fr"
 
-#. Description of the plugin/theme
-msgid "Axeptio allows you to make your website compliant with GDPR."
-msgstr ""
-"Axeptio vous permet de mettre votre site web en conformité avec le RGPD."
+#~ msgid "Axeptio allows you to make your website compliant with GDPR."
+#~ msgstr ""
+#~ "Axeptio vous permet de mettre votre site web en conformité avec le RGPD."
 
-#. Author of the plugin/theme
-msgid "axeptio"
-msgstr "axeptio"
+#~ msgid "axeptio"
+#~ msgstr "axeptio"
 
 #~ msgid ""
 #~ "Your project ID is not found or your project is not published. If you are "

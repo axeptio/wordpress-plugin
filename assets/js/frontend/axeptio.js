@@ -84,23 +84,22 @@ window._axcb.push( function( sdk ) {
 			} );
 
 			// Sélectionnez tous les éléments avec l'attribut "data-axeptio-consent"
-			const consentElements = document.querySelectorAll('[data-axeptio-consent]');
+			const consentElements = document.querySelectorAll( '[data-axeptio-consent]' );
 
 			// Parcourir tous les éléments sélectionnés
-			if (consentElements) {
-				document.querySelectorAll('[data-axeptio-consent]').forEach(element => {
-					element.addEventListener('click', () => {
-						const consentValue = element.getAttribute('data-axeptio-consent');
-						console.log(consentValue);
-						sdk.requestConsent('wp_'+consentValue);
-					});
-				});
+			if ( consentElements ) {
+				document.querySelectorAll( '[data-axeptio-consent]' ).forEach( ( element ) => {
+					element.addEventListener( 'click', () => {
+						const consentValue = element.getAttribute( 'data-axeptio-consent' );
+						console.log( consentValue );
+						sdk.requestConsent( 'wp_' + consentValue );
+					} );
+				} );
 			}
 		} );
 	} );
 
 	sdk.on( 'cookies:complete', function( choices ) {
-
 		getAllComments( document.body ).forEach( function( comment ) {
 			if ( comment.nodeValue.indexOf( 'axeptio_blocked' ) > -1 ) {
 				const plugin = comment.nodeValue.match( /axeptio_blocked ([\w_-]+)/ )[ 1 ];
@@ -108,7 +107,7 @@ window._axcb.push( function( sdk ) {
 					return;
 				}
 				const placeholder = comment.previousElementSibling;
-				if (placeholder) {
+				if ( placeholder ) {
 					placeholder.remove();
 				}
 				const value = comment.nodeValue.split( '\n' ).slice( 1 ).join( '\n' );
