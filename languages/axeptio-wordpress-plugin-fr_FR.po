@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2023-09-27 16:39+0200\n"
-"PO-Revision-Date: 2023-09-27 16:42+0200\n"
+"POT-Creation-Date: 2023-11-11 17:24+0100\n"
+"PO-Revision-Date: 2023-11-11 17:31+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio.php\n"
@@ -64,6 +64,7 @@ msgstr "Configuration"
 msgid "Axeptio Widget Integration"
 msgstr "Intégration du Widget Axeptio"
 
+#. Plugin Name of the plugin/theme
 #: includes/classes/admin/pages/class-admin-main.php:100
 #: templates/admin/onboarding/welcome.php:8
 #: templates/admin/plugin-manager.php:3 templates/admin/plugin-manager.php:12
@@ -192,7 +193,7 @@ msgstr ""
 
 #: includes/core.php:190
 msgid "Error verifying account ID. Try Again."
-msgstr "Erreur de vérification de l'identifiant du compte. Veullez réessayer."
+msgstr "Erreur de vérification de l'identifiant du compte. Veuillez réessayer."
 
 #: includes/core.php:197
 msgid "Please enter an account ID"
@@ -481,16 +482,17 @@ msgid "How To Integrate Axeptio?"
 msgstr "Comment intégrer Axeptio ?"
 
 #: templates/admin/sections/notice.php:16
-msgid "Do you like Axeptio?"
-msgstr "Aimez-vous Axeptio ?"
+msgid "Axeptio aims for the moon, you look after the stars?"
+msgstr "Axeptio vise la lune, vous vous occupez des étoiles ?"
 
 #: templates/admin/sections/notice.php:19
-msgid "Your opinion matters to us, leave us a review on WordPress.org"
-msgstr "Votre opinion nous importe, laissez-nous un avis sur WordPress.org"
+msgid "If you like Axeptio, give us a rating to make us shine!"
+msgstr ""
+"Si Axeptio vous plaît, n’hésitez pas à nous noter pour nous faire briller !"
 
 #: templates/admin/sections/notice.php:27
-msgid "Leave a review"
-msgstr "Laisser un avis"
+msgid "Review Axeptio plugin"
+msgstr "Je mets un avis pour le plugin Axeptio"
 
 #: templates/admin/sections/notice.php:32
 msgid "Don't ask me anymore"
@@ -526,15 +528,27 @@ msgstr ""
 "notre widget de consentement des cookies, donnez votre accord pour "
 "l'extension \"%s\". Et le tour est joué !"
 
-#~ msgid "https://www.axeptio.eu/"
-#~ msgstr "https://www.axeptio.eu/fr"
+#. Plugin URI of the plugin/theme
+msgid "https://www.axeptio.eu/"
+msgstr "https://www.axeptio.eu/fr"
 
-#~ msgid "Axeptio allows you to make your website compliant with GDPR."
-#~ msgstr ""
-#~ "Axeptio vous permet de mettre votre site web en conformité avec le RGPD."
+#. Description of the plugin/theme
+msgid "Axeptio allows you to make your website compliant with GDPR."
+msgstr ""
+"Axeptio vous permet de mettre votre site web en conformité avec le RGPD."
 
-#~ msgid "axeptio"
-#~ msgstr "axeptio"
+#. Author of the plugin/theme
+msgid "axeptio"
+msgstr "axeptio"
+
+#~ msgid "Do you like Axeptio?"
+#~ msgstr "Aimez-vous Axeptio ?"
+
+#~ msgid "Your opinion matters to us, leave us a review on WordPress.org"
+#~ msgstr "Votre opinion nous importe, laissez-nous un avis sur WordPress.org"
+
+#~ msgid "Leave a review"
+#~ msgstr "Laisser un avis"
 
 #~ msgid ""
 #~ "Your project ID is not found or your project is not published. If you are "
