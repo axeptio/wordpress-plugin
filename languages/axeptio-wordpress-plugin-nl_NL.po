@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-27 16:39+0200\n"
-"PO-Revision-Date: 2023-09-27 16:44+0200\n"
+"POT-Creation-Date: 2023-11-11 17:24+0100\n"
+"PO-Revision-Date: 2023-11-11 17:29+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio.php\n"
@@ -64,6 +64,7 @@ msgstr "Instellingen"
 msgid "Axeptio Widget Integration"
 msgstr "Integratie van Axeptio Widget"
 
+#. Plugin Name of the plugin/theme
 #: includes/classes/admin/pages/class-admin-main.php:100
 #: templates/admin/onboarding/welcome.php:8
 #: templates/admin/plugin-manager.php:3 templates/admin/plugin-manager.php:12
@@ -238,9 +239,9 @@ msgid ""
 "If the issue persists, please don't hesitate to consult <a target=\"_blank\" "
 "class=\"underline hover:no-underline\" href=\"%s\">our help guide.</a>"
 msgstr ""
-"Als het probleem zich blijft voordoen, aarzel dan niet om <a "
-"target=\"_blank\" class=\"underline hover:no-underline\" href=\"%s\">onze "
-"helpgids te raadplegen.</a>"
+"Als het probleem zich blijft voordoen, aarzel dan niet om <a target=\"_blank"
+"\" class=\"underline hover:no-underline\" href=\"%s\">onze helpgids te "
+"raadplegen.</a>"
 
 #: templates/admin/main/fields/non-existing-account.php:15
 msgid "https://support.axeptio.eu/hc/en-gb"
@@ -483,17 +484,18 @@ msgid "How To Integrate Axeptio?"
 msgstr "Hoe Axeptio te integreren?"
 
 #: templates/admin/sections/notice.php:16
-msgid "Do you like Axeptio?"
-msgstr "Vind je Axeptio leuk?"
+msgid "Axeptio aims for the moon, you look after the stars?"
+msgstr "Axeptio streeft naar de maan, zorg jij voor de sterren?"
 
 #: templates/admin/sections/notice.php:19
-msgid "Your opinion matters to us, leave us a review on WordPress.org"
+msgid "If you like Axeptio, give us a rating to make us shine!"
 msgstr ""
-"Uw mening is belangrijk voor ons, laat een recensie achter op WordPress.org"
+"Als je Axeptio leuk vindt, geef ons een beoordeling om ons te laten "
+"schitteren!"
 
 #: templates/admin/sections/notice.php:27
-msgid "Leave a review"
-msgstr "Laat een beoordeling achter"
+msgid "Review Axeptio plugin"
+msgstr "Beoordeel de Axeptio-plugin"
 
 #: templates/admin/sections/notice.php:32
 msgid "Don't ask me anymore"
@@ -529,14 +531,28 @@ msgstr ""
 "naar onze cookie toestemmingswidget, geef uw toestemming voor de \"%s\" "
 "extensie. En voila, u bent helemaal klaar!"
 
-#~ msgid "https://www.axeptio.eu/"
-#~ msgstr "https://www.axeptio.eu/nl"
+#. Plugin URI of the plugin/theme
+msgid "https://www.axeptio.eu/"
+msgstr "https://www.axeptio.eu/nl"
 
-#~ msgid "Axeptio allows you to make your website compliant with GDPR."
-#~ msgstr "Axeptio stelt u in staat om uw website GDPR-conform te maken."
+#. Description of the plugin/theme
+msgid "Axeptio allows you to make your website compliant with GDPR."
+msgstr "Axeptio stelt u in staat om uw website GDPR-conform te maken."
 
-#~ msgid "axeptio"
-#~ msgstr "axeptio"
+#. Author of the plugin/theme
+msgid "axeptio"
+msgstr "axeptio"
+
+#~ msgid "Do you like Axeptio?"
+#~ msgstr "Vind je Axeptio leuk?"
+
+#~ msgid "Your opinion matters to us, leave us a review on WordPress.org"
+#~ msgstr ""
+#~ "Uw mening is belangrijk voor ons, laat een recensie achter op WordPress."
+#~ "org"
+
+#~ msgid "Leave a review"
+#~ msgstr "Laat een beoordeling achter"
 
 #~ msgid ""
 #~ "Your project ID is not found or your project is not published. If you are "

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2023-09-27 16:39+0200\n"
+"POT-Creation-Date: 2023-11-11 17:24+0100\n"
 "PO-Revision-Date: 2023-05-10 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio-wordpress-plugin.php\n"
@@ -61,6 +61,7 @@ msgstr ""
 msgid "Axeptio Widget Integration"
 msgstr ""
 
+#. Plugin Name of the plugin/theme
 #: includes/classes/admin/pages/class-admin-main.php:100
 #: templates/admin/onboarding/welcome.php:8
 #: templates/admin/plugin-manager.php:3 templates/admin/plugin-manager.php:12
@@ -433,15 +434,15 @@ msgid "How To Integrate Axeptio?"
 msgstr ""
 
 #: templates/admin/sections/notice.php:16
-msgid "Do you like Axeptio?"
+msgid "Axeptio aims for the moon, you look after the stars?"
 msgstr ""
 
 #: templates/admin/sections/notice.php:19
-msgid "Your opinion matters to us, leave us a review on WordPress.org"
+msgid "If you like Axeptio, give us a rating to make us shine!"
 msgstr ""
 
 #: templates/admin/sections/notice.php:27
-msgid "Leave a review"
+msgid "Review Axeptio plugin"
 msgstr ""
 
 #: templates/admin/sections/notice.php:32
@@ -472,4 +473,16 @@ msgid ""
 "seriously. If you wish to unblock it, it's very simple: go to our cookie "
 "consent widget, give your approval for the \"%s\" extension. And voila, "
 "you're all set!"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://www.axeptio.eu/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Axeptio allows you to make your website compliant with GDPR."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "axeptio"
 msgstr ""

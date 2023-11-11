@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-27 16:39+0200\n"
-"PO-Revision-Date: 2023-09-27 16:47+0200\n"
+"POT-Creation-Date: 2023-11-11 17:24+0100\n"
+"PO-Revision-Date: 2023-11-11 17:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio.php\n"
@@ -64,6 +64,7 @@ msgstr "Settings"
 msgid "Axeptio Widget Integration"
 msgstr "Axeptio Widget Integration"
 
+#. Plugin Name of the plugin/theme
 #: includes/classes/admin/pages/class-admin-main.php:100
 #: templates/admin/onboarding/welcome.php:8
 #: templates/admin/plugin-manager.php:3 templates/admin/plugin-manager.php:12
@@ -475,16 +476,16 @@ msgid "How To Integrate Axeptio?"
 msgstr "How To Integrate Axeptio?"
 
 #: templates/admin/sections/notice.php:16
-msgid "Do you like Axeptio?"
-msgstr "Do you like Axeptio?"
+msgid "Axeptio aims for the moon, you look after the stars?"
+msgstr "Axeptio aims for the moon, you look after the stars?"
 
 #: templates/admin/sections/notice.php:19
-msgid "Your opinion matters to us, leave us a review on WordPress.org"
-msgstr "Your opinion matters to us, leave us a review on WordPress.org"
+msgid "If you like Axeptio, give us a rating to make us shine!"
+msgstr "If you like Axeptio, give us a rating to make us shine!"
 
 #: templates/admin/sections/notice.php:27
-msgid "Leave a review"
-msgstr "Leave a review"
+msgid "Review Axeptio plugin"
+msgstr "Review Axeptio plugin"
 
 #: templates/admin/sections/notice.php:32
 msgid "Don't ask me anymore"
@@ -520,14 +521,26 @@ msgstr ""
 "consent widget, give your approval for the \"%s\" extension. And voila, "
 "you're all set!"
 
-#~ msgid "https://www.axeptio.eu/"
-#~ msgstr "https://www.axeptio.eu/"
+#. Plugin URI of the plugin/theme
+msgid "https://www.axeptio.eu/"
+msgstr "https://www.axeptio.eu/"
 
-#~ msgid "Axeptio allows you to make your website compliant with GDPR."
-#~ msgstr "Axeptio allows you to make your website compliant with GDPR."
+#. Description of the plugin/theme
+msgid "Axeptio allows you to make your website compliant with GDPR."
+msgstr "Axeptio allows you to make your website compliant with GDPR."
 
-#~ msgid "axeptio"
-#~ msgstr "axeptio"
+#. Author of the plugin/theme
+msgid "axeptio"
+msgstr "axeptio"
+
+#~ msgid "Do you like Axeptio?"
+#~ msgstr "Do you like Axeptio?"
+
+#~ msgid "Your opinion matters to us, leave us a review on WordPress.org"
+#~ msgstr "Your opinion matters to us, leave us a review on WordPress.org"
+
+#~ msgid "Leave a review"
+#~ msgstr "Leave a review"
 
 #~ msgid ""
 #~ "Your project ID is not found or your project is not published. If you are "
