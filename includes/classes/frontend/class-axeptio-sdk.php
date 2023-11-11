@@ -10,6 +10,7 @@ namespace Axeptio\Frontend;
 use Axeptio\Admin;
 use Axeptio\Models\Axeptio_Steps;
 use Axeptio\Models\Plugins;
+use Axeptio\Models\Project_Versions;
 use Axeptio\Models\Settings;
 use Axeptio\Module;
 use function Axeptio\get_sdk_settings;
@@ -115,7 +116,7 @@ class Axeptio_Sdk extends Module {
 		$disable_send_datas = (bool) Settings::get_option( 'disable_send_datas', false );
 
 		$client_id       = Settings::get_option( 'client_id', false );
-		$cookies_version = Settings::get_option( 'version', false );
+		$cookies_version = Project_Versions::get_current_lang_version();
 
 		if ( ! $sdk_active || ( ! $client_id && ! $cookies_version ) ) {
 			return false;
