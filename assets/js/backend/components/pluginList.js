@@ -135,7 +135,7 @@ const instance = function( args ) {
 			this.setActive( 1 );
 			this.editOpen = true;
 			this.editedPlugin = plugin;
-		  this.hookModes = plugin.HookModes;
+			this.hookModes = plugin.HookModes;
 			this.shortcodeTagsModes = plugin.ShortcodeTagsModes;
 
 			this.refreshRepeaterFields();

@@ -90,7 +90,13 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function version_set() {
-		\Axeptio\get_template_part( 'admin/main/fields/version', array( 'version' => Settings::get_option( 'version', '' ) ) );
+		\Axeptio\get_template_part(
+			'admin/main/fields/version',
+			array(
+				'version'     => Project_Versions::all(),
+				'option_keys' => array_values( Project_Versions::get_localized_versions() ),
+			)
+		);
 	}
 
 	/**
@@ -162,7 +168,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function add_admin_notice_for_review() {
-		if ( ! \Axeptio\Models\Notice::isDisplayable() ) {
+		if ( ! \Axeptio\Models\Notice::is_displayable() ) {
 			return;
 		}
 		\Axeptio\get_template_part(

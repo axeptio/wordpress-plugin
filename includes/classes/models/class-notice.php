@@ -35,7 +35,7 @@ class Notice {
 	 *
 	 * @return boolean
 	 */
-	public static function isDisplayable() {
+	public static function is_displayable() {
 		$user = wp_get_current_user();
 		if ( ! $user ) {
 			return false;
