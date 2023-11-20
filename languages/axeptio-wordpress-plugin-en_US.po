@@ -2,8 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
+<<<<<<< Updated upstream
 "POT-Creation-Date: 2023-09-27 16:39+0200\n"
 "PO-Revision-Date: 2023-09-27 16:47+0200\n"
+=======
+"POT-Creation-Date: 2023-11-20 11:36+0100\n"
+"PO-Revision-Date: 2023-11-20 11:42+0100\n"
+>>>>>>> Stashed changes
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -44,15 +49,15 @@ msgstr ""
 msgid "Return to plugins pages"
 msgstr "Return to plugins page"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:114
+#: includes/classes/admin/pages/class-admin-callbacks.php:120
 msgid "Widget title"
 msgstr "Widget title"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:132
+#: includes/classes/admin/pages/class-admin-callbacks.php:138
 msgid "Widget sub-title"
 msgstr "Widget sub-title"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:150
+#: includes/classes/admin/pages/class-admin-callbacks.php:156
 msgid "Widget description"
 msgstr "Widget description"
 
@@ -101,23 +106,36 @@ msgstr ""
 "In this section, you can customize the header texts of the WordPress section "
 "in the Axeptio widget."
 
-#: includes/classes/admin/pages/class-admin-main.php:215
+#: includes/classes/admin/pages/class-admin-main.php:170
+#: includes/helpers/helpers.php:114
+msgid "Data sending"
+msgstr "Data sending"
+
+#: includes/classes/admin/pages/class-admin-main.php:171
+msgid ""
+"In this section, you can set whether or not you want to let Axeptio collect "
+"technical datas"
+msgstr ""
+"In this section, you can set whether or not you want to let Axeptio collect "
+"technical datas"
+
+#: includes/classes/admin/pages/class-admin-main.php:225
 msgid "Do you want to enable the widget?"
 msgstr "Do you want to enable the widget?"
 
-#: includes/classes/admin/pages/class-admin-main.php:226
+#: includes/classes/admin/pages/class-admin-main.php:236
 msgid "Project ID"
 msgstr "Project ID"
 
-#: includes/classes/admin/pages/class-admin-main.php:237
+#: includes/classes/admin/pages/class-admin-main.php:247
 msgid "Options"
 msgstr "Options"
 
-#: includes/classes/admin/pages/class-admin-main.php:248
+#: includes/classes/admin/pages/class-admin-main.php:258
 msgid "Project Version"
 msgstr "Project Version"
 
-#: includes/classes/admin/pages/class-admin-main.php:259
+#: includes/classes/admin/pages/class-admin-main.php:269
 msgid "Collect of data and errors by Axeptio"
 msgstr "Collect of data and errors by Axeptio"
 
@@ -257,9 +275,18 @@ msgstr ""
 "By checking this box, I do not wish to send data/errors to the Axeptio "
 "plugin and do not want to contribute to the improvement of the plugin."
 
-#: templates/admin/main/fields/version.php:7
+#: templates/admin/main/fields/version.php:118
+#: templates/admin/main/fields/version.php:155
 msgid "Dynamic (Axeptio based)"
 msgstr "Dynamic (Axeptio based)"
+
+#: templates/admin/main/fields/version.php:136
+msgid "Configured languages"
+msgstr "Data sending"
+
+#: templates/admin/main/fields/version.php:167
+msgid "Not configured"
+msgstr "Not configured"
 
 #: templates/admin/main/tabs.php:4
 msgid "Select a tab"

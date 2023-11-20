@@ -164,6 +164,15 @@ class Admin_Main extends Module {
 			false
 			);
 
+		$data_sending_title = \Axeptio\get_template_part(
+			'admin/common/fields/title',
+			array(
+				'title'       => __( 'Data sending', 'axeptio-wordpress-plugin' ),
+				'description' => __( 'In this section, you can set whether or not you want to let Axeptio collect technical datas', 'axeptio-wordpress-plugin' ),
+			),
+			false
+		);
+
 		$args = array(
 			array(
 				'id'    => 'xpwp_admin_index',
@@ -178,7 +187,16 @@ class Admin_Main extends Module {
 				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
 				'args'  => array(
-					'before_section' => '<div x-show="validAccountID">',
+					'before_section' => '<div x-show="validAccountID" class="-mt-2">',
+					'after_section'  => '</div>',
+				),
+			),
+			array(
+				'id'    => 'xpwp_admin_customize',
+				'title' => false,
+				'page'  => 'axeptio-wordpress-plugin',
+				'args'  => array(
+					'before_section' => '</div><div x-show="currentTab === \'customization\'" x-cloak>' . $customize_title,
 					'after_section'  => '</div>',
 				),
 			),
@@ -187,15 +205,7 @@ class Admin_Main extends Module {
 				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
 				'args'  => array(
-					'after_section' => '</div>',
-				),
-			),
-			array(
-				'id'    => 'xpwp_admin_customize',
-				'title' => false,
-				'page'  => 'axeptio-wordpress-plugin',
-				'args'  => array(
-					'before_section' => '<div x-show="currentTab === \'customization\'" x-cloak>' . $customize_title,
+					'before_section' => '<div x-show="currentTab === \'data-sending\'" x-cloak>' . $data_sending_title,
 					'after_section'  => '</div>',
 				),
 			),
