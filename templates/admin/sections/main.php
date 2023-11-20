@@ -13,7 +13,7 @@
 									'accountID'      => Settings::get_option( 'client_id', '' ),
 									'optionsJson'    => Settings::get_option( 'xpwp_version_options', '', false ),
 									'activeSDK'      => (bool) Settings::get_option( 'sdk_active', '0' ),
-									'selectedOption' => Settings::get_option( 'version', '' ),
+									'selectedOption' => \Axeptio\Models\Project_Versions::selected_versions(),
 									'sendDatas'      => (bool) Settings::get_option( 'disable_send_datas', '0' ),
 								)
 							)

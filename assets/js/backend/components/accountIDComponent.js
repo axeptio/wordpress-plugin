@@ -1,4 +1,5 @@
 import Alpine from 'alpinejs';
+
 const instance = function( args ) {
 	return {
 		axeptioSettings: {},
@@ -8,7 +9,7 @@ const instance = function( args ) {
 		validAccountID: false,
 		activeSDK: args.activeSDK,
 		sendDatas: args.sendDatas,
-		currentTab: Alpine.$persist('main-settings'),
+		currentTab: Alpine.$persist( 'main-settings' ),
 		selectedOption: args.selectedOption,
 		options: ( () => {
 			try {
@@ -50,7 +51,6 @@ const instance = function( args ) {
 						value: cookie.name,
 						text: cookie.title,
 					} ) );
-					console.log(this.options);
 					this.validAccountID = true;
 					this.optionsJson = JSON.stringify( this.options );
 				} else {

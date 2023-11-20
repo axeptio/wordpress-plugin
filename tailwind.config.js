@@ -16,6 +16,9 @@ module.exports = {
 			fontFamily: {
 				'serif': ['"Source Serif 4"', ...defaultTheme.fontFamily.serif],
 			},
+			aspectRatio: {
+				'square': '1/1',
+			}
 		},
 	},
 	plugins: [
