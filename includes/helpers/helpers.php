@@ -111,6 +111,7 @@ function get_main_admin_tabs() {
 	$tab_items = array(
 		'main-settings' => __( 'Main settings', 'axeptio-wordpress-plugin' ),
 		'customization' => __( 'Customization', 'axeptio-wordpress-plugin' ),
+		'data-sending'  => __( 'Data sending', 'axeptio-wordpress-plugin' ),
 	);
 	return \Axeptio\get_template_part( 'admin/main/tabs', array( 'tab_items' => $tab_items ), false );
 }

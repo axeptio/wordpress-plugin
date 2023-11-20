@@ -47,7 +47,7 @@ class Project_Versions {
 
 		$option_key = i18n::has_multilangual() && isset( $localised_version[ $current_lang ] ) ? $localised_version[ $current_lang ] : 'version';
 
-		return apply_filters( 'axeptio/version', Settings::get_option( $option_key, false ), $localised_version, $current_lang );
+		return apply_filters( 'axeptio/version', Settings::get_option( $option_key, '' ), $localised_version, $current_lang );
 	}
 
 	/**

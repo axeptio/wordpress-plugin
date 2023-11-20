@@ -1,10 +1,14 @@
 <?php
+
+use Axeptio\Models\Settings;
+
 $axeptio_has_multilingual = \Axeptio\Models\i18n::has_multilangual();
+$axeptio_languages        = \Axeptio\Models\i18n::get_languages();
 ?>
 <div class="grid grid-cols-3 gap-4" x-data="{ selectedLang: '0' }">
 	<?php if ( $axeptio_has_multilingual ) : ?>
 		<div
-			x-data="selectLang({ data: <?php echo esc_attr( wp_json_encode( array_values( \Axeptio\Models\i18n::get_languages() ) ) ); ?>, emptyOptionsMessage: 'No countries match your search.', name: 'lang', placeholder: 'Select a language', value: 0 })"
+			x-data="selectLang({ data: <?php echo esc_attr( wp_json_encode( array_values( $axeptio_languages ) ) ); ?>, emptyOptionsMessage: 'No countries match your search.', name: 'lang', placeholder: 'Select a language', value: 0 })"
 			x-init="init()"
 			@click.away="closeListbox()"
 			@keydown.escape="closeListbox()"
@@ -123,4 +127,49 @@ $axeptio_has_multilingual = \Axeptio\Models\i18n::has_multilangual();
 			</div>
 		<?php endforeach; ?>
 	</div>
+
+	<?php
+		$axeptio_option_list = json_decode( Settings::get_option( 'xpwp_version_options', '', false ) );
+	?>
+	<?php if ( $axeptio_option_list ) : ?>
+	<p class="block text-sm font-medium leading-6 text-gray-900">
+		<?php esc_html_e( 'Configured languages', 'axeptio-wordpress-plugin' ); ?>
+	</p>
+	<div role="list" class="-mt-2 divide-y divide-gray-300 col-span-3 border border-grey-100 px-2">
+		<?php foreach ( $axeptio_languages as $axeptio_language_key => $axeptio_language ) : ?>
+			<?php
+				$axeptio_option = Settings::get_option( 'version' . $axeptio_language['option_key_suffix'], '' );
+			?>
+			<div class="flex justify-between gap-x-6 py-2">
+				<div class="flex min-w-0 gap-x-4 items-center">
+					<img src="<?php echo esc_attr( $axeptio_language['country_flag_url'] ); ?>" alt="Flag" class="flex-none mr-2 w-[16px] h-[11px]">
+					<div class="min-w-0 flex-auto">
+						<p class="text-sm font-semibold leading-6 text-gray-900">
+							<?php echo esc_html( $axeptio_language['native_name'] ); ?>
+						</p>
+					</div>
+				</div>
+				<div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+					<p class="text-sm leading-6 text-gray-500">
+						<?php if ( '' === $axeptio_option ) : ?>
+							<?php esc_html_e( 'Dynamic (Axeptio based)', 'axeptio-wordpress-plugin' ); ?>
+						<?php else : ?>
+							<?php
+							$axeptio_result = array_filter(
+								$axeptio_option_list,
+								function( $obj ) use ( $axeptio_option ) {
+									return $obj->value === $axeptio_option;
+								}
+								);
+
+							$axeptio_founded = reset( $axeptio_result );
+							?>
+							<?php echo $axeptio_founded ? esc_html( $axeptio_founded->text ) : esc_html_e( 'Not configured', 'axeptio-wordpress-plugin' ); ?>
+						<?php endif; ?>
+					</p>
+				</div>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<?php endif; ?>
 </div>
