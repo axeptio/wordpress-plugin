@@ -122,14 +122,19 @@ class Axeptio_Sdk extends Module {
 			return false;
 		}
 
+		$sdk_settings = array(
+			'clientId'       => $client_id,
+			'platform'       => 'plugin-wordpress',
+			'sendDatas'      => $disable_send_datas,
+		);
+
+		if ($cookies_version !== '') {
+			$sdk_settings['cookiesVersion'] = $cookies_version;
+		}
+
 		return apply_filters(
 			'axeptio/sdk_settings',
-			array(
-				'clientId'       => $client_id,
-				'cookiesVersion' => $cookies_version,
-				'platform'       => 'plugin-wordpress',
-				'sendDatas'      => $disable_send_datas,
-			)
+			$sdk_settings
 		);
 	}
 }
