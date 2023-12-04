@@ -131,7 +131,7 @@ $axeptio_languages        = \Axeptio\Models\i18n::get_languages();
 	<?php
 		$axeptio_option_list = json_decode( Settings::get_option( 'xpwp_version_options', '', false ) );
 	?>
-	<?php if ( $axeptio_option_list ) : ?>
+	<?php if (  Axeptio\Models\i18n::has_multilangual() && $axeptio_option_list ) : ?>
 	<p class="block text-sm font-medium leading-6 text-gray-900">
 		<?php esc_html_e( 'Configured languages', 'axeptio-wordpress-plugin' ); ?>
 	</p>
