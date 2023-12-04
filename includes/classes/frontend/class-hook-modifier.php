@@ -106,8 +106,6 @@ class Hook_Modifier extends Module {
 			return;
 		}
 
-		die();
-
 		add_action( 'template_redirect', array( $this, 'on_template_redirect' ) );
 		add_action( 'shutdown', array( $this, 'on_shutdown' ) );
 	}
