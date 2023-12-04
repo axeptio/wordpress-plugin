@@ -9,6 +9,7 @@ namespace Axeptio\Frontend;
 
 use Axeptio\Models\Plugins;
 use Axeptio\Models\Recommended_Plugin_Settings;
+use Axeptio\Models\Sdk;
 use Axeptio\Models\Settings;
 use Axeptio\Module;
 use Axeptio\Utils\User_Hook_Parser;
@@ -101,6 +102,12 @@ class Hook_Modifier extends Module {
 	 * @return void
 	 */
 	public function register() {
+		if (! Sdk::is_active() ) {
+			return;
+		}
+
+		die();
+
 		add_action( 'template_redirect', array( $this, 'on_template_redirect' ) );
 		add_action( 'shutdown', array( $this, 'on_shutdown' ) );
 	}
