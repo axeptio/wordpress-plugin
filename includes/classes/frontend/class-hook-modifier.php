@@ -102,7 +102,7 @@ class Hook_Modifier extends Module {
 	 * @return void
 	 */
 	public function register() {
-		if (! Sdk::is_active() ) {
+		if ( ! Sdk::is_active() ) {
 			return;
 		}
 

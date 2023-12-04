@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2023-11-20 11:36+0100\n"
+"POT-Creation-Date: 2023-12-04 16:13+0100\n"
 "PO-Revision-Date: 2023-05-10 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -205,7 +205,7 @@ msgstr ""
 
 #: templates/admin/main/fields/client-id.php:31
 #: templates/admin/plugins/fields/edit.php:126
-#: templates/admin/sections/plugins.php:68
+#: templates/admin/sections/plugins.php:69
 msgid "Edit"
 msgstr ""
 
@@ -473,8 +473,8 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
-#: templates/admin/sections/plugins.php:45
-msgid "Probability:"
+#: templates/admin/sections/plugins.php:46
+msgid "This extension is subject to consent"
 msgstr ""
 
 #: templates/admin/settings-main.php:13

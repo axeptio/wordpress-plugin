@@ -43,7 +43,9 @@ const instance = function( args ) {
 				return;
 			}
 			try {
-				const response = await fetch( `https://client.axept.io/${ this.accountID }.json` );
+				const timestamp = new Date().getTime();
+				const url = `https://client.axept.io/${this.accountID}.json?nocache=${timestamp}`;
+				const response = await fetch(url);
 				const data = await response.json();
 				if ( data.cookies.length > 0 ) {
 					this.showID = true;

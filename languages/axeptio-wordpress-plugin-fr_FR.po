@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2023-11-20 11:36+0100\n"
-"PO-Revision-Date: 2023-11-20 11:40+0100\n"
+"POT-Creation-Date: 2023-12-04 16:13+0100\n"
+"PO-Revision-Date: 2023-12-04 16:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -222,7 +222,7 @@ msgstr "Personnalisation"
 
 #: templates/admin/main/fields/client-id.php:31
 #: templates/admin/plugins/fields/edit.php:126
-#: templates/admin/sections/plugins.php:68
+#: templates/admin/sections/plugins.php:69
 msgid "Edit"
 msgstr "Éditer"
 
@@ -524,9 +524,9 @@ msgstr "Ne plus me demander"
 msgid "Active"
 msgstr "Actif"
 
-#: templates/admin/sections/plugins.php:45
-msgid "Probability:"
-msgstr "Probabilité :"
+#: templates/admin/sections/plugins.php:46
+msgid "This extension is subject to consent"
+msgstr "Cette extension est soumise au consentement"
 
 #: templates/admin/settings-main.php:13
 msgid "Your Axeptio Settings"
@@ -562,6 +562,9 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr "axeptio"
+
+#~ msgid "Probability:"
+#~ msgstr "Probabilité :"
 
 #~ msgid "Do you like Axeptio?"
 #~ msgstr "Aimez-vous Axeptio ?"

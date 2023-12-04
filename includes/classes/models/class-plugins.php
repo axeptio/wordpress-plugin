@@ -7,8 +7,6 @@
 
 namespace Axeptio\Models;
 
-use Axeptio\Frontend\Axeptio_Sdk;
-use Axeptio\Utils\Cookie_Analyzer;
 use function Axeptio\Utility\get_favicon;
 
 class Plugins {
@@ -74,8 +72,6 @@ class Plugins {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		$plugins = \get_plugins();
 
-		$cookie_analyser = new Cookie_Analyzer();
-
 		$plugin_list = array();
 
 		foreach ( $plugins as $key => $plugin ) {
@@ -94,10 +90,10 @@ class Plugins {
 			$plugin_list[ $plugin_key ] = array_merge(
 				$plugin,
 				array(
-					'CookiePercentage'   => $cookie_analyser->analyze( $plugin_key, $plugin['Name'], $plugin['Description'] ),
-					'Metas'              => $plugin_metadatas,
-					'HookModes'          => Hook_Modes::all( $configuration_id, $plugin_key ),
-					'ShortcodeTagsModes' => Shortcode_Tags_Modes::all( $configuration_id, $plugin_key ),
+					'AxeptioRecommendedSettings' => Recommended_Plugin_Settings::find( $plugin_key ),
+					'Metas'                      => $plugin_metadatas,
+					'HookModes'                  => Hook_Modes::all( $configuration_id, $plugin_key ),
+					'ShortcodeTagsModes'         => Shortcode_Tags_Modes::all( $configuration_id, $plugin_key ),
 				)
 			);
 		}

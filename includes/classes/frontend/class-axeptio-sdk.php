@@ -124,12 +124,12 @@ class Axeptio_Sdk extends Module {
 		}
 
 		$sdk_settings = array(
-			'clientId'       => $client_id,
-			'platform'       => 'plugin-wordpress',
-			'sendDatas'      => $disable_send_datas,
+			'clientId'  => $client_id,
+			'platform'  => 'plugin-wordpress',
+			'sendDatas' => $disable_send_datas,
 		);
 
-		if ($cookies_version !== '') {
+		if ( '' !== $cookies_version ) {
 			$sdk_settings['cookiesVersion'] = $cookies_version;
 		}
 
