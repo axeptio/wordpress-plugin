@@ -2,6 +2,32 @@
 window.axeptioWordpressSteps = window.axeptioWordpressSteps || [];
 window.axeptioWordpressVendors = window.axeptioWordpressVendors || [];
 window._axcb = window._axcb || [];
+
+function generateKeyFromTrueValues(obj) {
+	return Object.keys(obj)
+		.filter(key => obj[key] === true)
+		.join('_');
+}
+
+async function createHash(str) {
+	const encoder = new TextEncoder();
+	const data = encoder.encode(str);
+	const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+	const hashArray = Array.from(new Uint8Array(hashBuffer));
+	const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+	return hashHex;
+}
+
+function setCookie(name, value, days) {
+	let expires = "";
+	if (days) {
+		let date = new Date();
+		date.setTime(date.getTime() + (days*24*60*60*1000));
+		expires = "; expires=" + date.toUTCString();
+	}
+	document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
 window._axcb.push( function( sdk ) {
 	sdk.on( 'ready', function() {
 		const selectedCookieConfigId = sdk.getCookiesConfig().identifier;
@@ -100,7 +126,14 @@ window._axcb.push( function( sdk ) {
 	} );
 
 	sdk.on( 'cookies:complete', function( choices ) {
+		const stringToHash = generateKeyFromTrueValues(choices);
+
+		createHash(stringToHash).then(hash => {
+			setCookie('axeptio_cache_identifier', hash, 7);
+		});
+
 		getAllComments( document.body ).forEach( function( comment ) {
+
 			if ( comment.nodeValue.indexOf( 'axeptio_blocked' ) > -1 ) {
 				const plugin = comment.nodeValue.match( /axeptio_blocked ([\w_-]+)/ )[ 1 ];
 				if ( ! choices[ 'wp_' + plugin ] ) {

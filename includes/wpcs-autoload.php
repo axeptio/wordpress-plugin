@@ -26,7 +26,6 @@ function xpwp_file_path( $class_name, $prefix, $folder ) {
 	if ( file_exists( $path ) ) {
 		return $path;
 	}
-
 	return false;
 }
 

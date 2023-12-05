@@ -98,6 +98,18 @@ function activate() {
 	( new Activation_Hook() )->maybe_redirect_to_settings_page();
 	// First load the init scripts in case any rewrite functionality is being loaded.
 	init();
+
+	// Update the WP Rocket rules on the .htaccess file.
+	if ( function_exists( 'flush_rocket_htaccess' ) ) {
+		flush_rocket_htaccess();
+
+		// Regenerate the config file.
+		rocket_generate_config_file();
+
+		// Clear WP Rocket cache.
+		rocket_clean_domain();
+	}
+
 	flush_rewrite_rules();
 }
 
