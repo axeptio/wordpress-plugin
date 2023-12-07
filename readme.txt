@@ -84,7 +84,7 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
-**🌟 2.3 🌟**
+###🌟 2.3 🌟###
 
 🔧 **Fixes :**
 - **Dynamic Mode Sorted :** The SDK's dynamic mode is now smoother than ever. No more hiccups!
