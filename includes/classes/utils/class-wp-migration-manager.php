@@ -45,7 +45,6 @@ class WP_Migration_Manager {
 
 		if ( version_compare( XPWP_VERSION, $this->current_version, '>' ) ) {
 			$migrations = $this->get_migrations( $this->current_version );
-
 			foreach ( $migrations as $migration ) {
 				$this->run_upgrade( $migration );
 			}

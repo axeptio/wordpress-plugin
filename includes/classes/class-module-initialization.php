@@ -15,6 +15,7 @@ use Axeptio\Frontend\Hook_Modifier;
 use Axeptio\Init\Activate;
 use Axeptio\Init\Activation_Hook;
 use Axeptio\Models\Models;
+use Axeptio\Third_Party\Wp_Rocket;
 use ReflectionClass;
 
 /**
@@ -71,6 +72,7 @@ class Module_Initialization {
 			Axeptio_Sdk::class,
 			Hook_Modifier::class,
 			Plugins::class,
+			Wp_Rocket::class,
 		);
 	}
 

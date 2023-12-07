@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-20 11:36+0100\n"
-"PO-Revision-Date: 2023-11-20 11:44+0100\n"
+"POT-Creation-Date: 2023-12-04 16:13+0100\n"
+"PO-Revision-Date: 2023-12-04 16:15+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -222,7 +222,7 @@ msgstr "Personalizzazione"
 
 #: templates/admin/main/fields/client-id.php:31
 #: templates/admin/plugins/fields/edit.php:126
-#: templates/admin/sections/plugins.php:68
+#: templates/admin/sections/plugins.php:69
 msgid "Edit"
 msgstr "Modifica"
 
@@ -524,9 +524,9 @@ msgstr "Lascia una recensione"
 msgid "Active"
 msgstr "Attivo"
 
-#: templates/admin/sections/plugins.php:45
-msgid "Probability:"
-msgstr "Probabilità:"
+#: templates/admin/sections/plugins.php:46
+msgid "This extension is subject to consent"
+msgstr "Questa estensione è soggetta al consenso"
 
 #: templates/admin/settings-main.php:13
 msgid "Your Axeptio Settings"
@@ -561,6 +561,9 @@ msgstr "Axeptio ti permette di rendere il tuo sito web conforme al GDPR."
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr "axeptio"
+
+#~ msgid "Probability:"
+#~ msgstr "Probabilità:"
 
 #~ msgid "Do you like Axeptio?"
 #~ msgstr "Ti piace Axettio?"
