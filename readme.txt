@@ -44,7 +44,7 @@ Please follow our documentation to configure and test your settings for Axeptio 
 
 1. Axeptio widget Presentation
 2. Integration sample on your website
-3. Setup your project ID 
+3. Setup your project ID
 4. Select your plugin connected with the vendorDB
 5. Axeptio Back Office for color customization
 
@@ -83,6 +83,18 @@ The idea is to customize the appearance of your widget so that it matches the de
 All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en-gb/articles/4402985038225-Customize-my-widget-s-aspect)
 
 == Changelog ==
+
+**🌟 2.3 🌟**
+
+🔧 **Fixes :**
+- **Dynamic Mode Sorted :** The SDK's dynamic mode is now smoother than ever. No more hiccups!
+- **Configuration Listing on Hold :** If WPML or Polylang are napping, we pause the language-based SDK config listings.
+- **Hook Manager on Break :** No active Axeptio SDK? The Hook Manager is taking a well-deserved break.
+
+🚀 **Improvements :**
+- **Farewell, Indecisive Algorithm :** We're waving goodbye to the cookie extension suggestion algorithm. Hello clarity with the vendor db integration!
+- **BFFs with WP Rocket :** We're now besties with WP Rocket's page cache. Talk about speed and efficiency!
+- **DB Retrieval Optimized :** Fetching plugin configurations is now as fast as a cheetah!
 
 ### 2.2 ###
 
