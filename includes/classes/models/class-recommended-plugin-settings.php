@@ -9,6 +9,9 @@ namespace Axeptio\Models;
  * recommended by the Axeptio service.
  */
 class Recommended_Plugin_Settings {
+
+	const TRANSIENT_KEY = 'axeptio/recommanded_plugin_settings';
+
 	/**
 	 * Stores the results of the fetched plugin data.
 	 *
@@ -54,12 +57,23 @@ class Recommended_Plugin_Settings {
 	 * @return array An array of plugin data.
 	 */
 	private static function fetch_plugin_datas() {
+		$cached_plugin_datas = get_transient(self::TRANSIENT_KEY);
+
+		if ( $cached_plugin_datas !== false ) {
+			return $cached_plugin_datas;
+		}
+
 		$plugin_datas = wp_remote_get( self::$service_url );
-		if ( ! $plugin_datas ) {
+
+		if ( is_wp_error( $plugin_datas ) || ! isset( $plugin_datas['body'] ) ) {
 			return array();
 		}
 
-		return self::process_plugin_items( json_decode( $plugin_datas['body'], true ) );
+		$processed_plugin_datas = self::process_plugin_items( json_decode( $plugin_datas['body'], true ) );
+
+		set_transient( 'cached_plugin_datas', $processed_plugin_datas, 1 * DAY_IN_SECONDS );
+
+		return $processed_plugin_datas;
 	}
 
 	/**
