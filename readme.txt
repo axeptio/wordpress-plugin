@@ -84,6 +84,14 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
+### 2.3.2 ###
+
+- Fix error when remote networking issue
+
+### 2.3.1 ###
+
+- Fix error on primary key
+
 ###🌟 2.3 🌟###
 
 🔧 **Fixes :**
