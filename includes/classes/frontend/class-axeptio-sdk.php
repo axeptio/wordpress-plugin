@@ -14,6 +14,7 @@ use Axeptio\Models\Project_Versions;
 use Axeptio\Models\Sdk;
 use Axeptio\Models\Settings;
 use Axeptio\Module;
+use function Axeptio\get_relative_path;
 use function Axeptio\get_sdk_settings;
 use function Axeptio\script_url;
 use function Axeptio\style_url;
@@ -101,6 +102,10 @@ class Axeptio_Sdk extends Module {
 		wp_localize_script( 'axeptio/sdk-script', 'Axeptio_SDK', $settings );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressVendors', $wordpress_vendors );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressSteps', Axeptio_Steps::all() );
+		wp_localize_script( 'axeptio/sdk-script', 'axeptioAjax', [
+			'wp' => ['relativePath' => get_relative_path(XPWP_PATH, ABSPATH)],
+			'url' => XPWP_URL . '/ajax.php',
+		]);
 
 		$inline_script = \Axeptio\get_template_part( 'frontend/sdk', array(), false );
 		preg_match( '/<script[^>]*>(.*?)<\/script>/is', $inline_script, $matches );

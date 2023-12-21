@@ -1,6 +1,7 @@
 // noinspection ES6ConvertVarToLetConst
 window.axeptioWordpressSteps = window.axeptioWordpressSteps || [];
 window.axeptioWordpressVendors = window.axeptioWordpressVendors || [];
+window.axeptioAjax = window.axeptioAjax || [];
 window._axcb = window._axcb || [];
 
 function generateKeyFromTrueValues(obj) {
@@ -131,6 +132,22 @@ window._axcb.push( function( sdk ) {
 		createHash(stringToHash).then(hash => {
 			setCookie('axeptio_cache_identifier', hash, 7);
 		});
+
+		let data = new FormData();
+		data.append('action', 'set_cookie');
+		data.append('relative_path', window.axeptioAjax.wp.relativePath);
+		data.append('userPreferencesManager', JSON.stringify(sdk.userPreferencesManager));
+
+		fetch(window.axeptioAjax.url, {
+			method: 'POST',
+			credentials: 'same-origin',
+			body: data
+		})
+			.then(response => response.json())
+			.then(response => {
+				console.log('Réponse :', response);
+			})
+			.catch(error => console.error('Erreur :', error));
 
 		getAllComments( document.body ).forEach( function( comment ) {
 
