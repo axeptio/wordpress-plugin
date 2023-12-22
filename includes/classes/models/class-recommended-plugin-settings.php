@@ -65,7 +65,11 @@ class Recommended_Plugin_Settings {
 
 		$plugin_datas = wp_remote_get( self::$service_url );
 
-		if ( is_wp_error( $plugin_datas ) || ! isset( $plugin_datas['body'] ) ) {
+		if ( is_wp_error( $plugin_datas ) ) {
+			return array();
+		}
+
+		if (! isset( $plugin_datas['body'] ) ) {
 			return array();
 		}
 

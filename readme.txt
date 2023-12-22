@@ -84,7 +84,7 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
-### 2.3.2 ###
+### 2.3.2 && 2.3.21 ###
 
 - Fix error when remote networking issue
 
