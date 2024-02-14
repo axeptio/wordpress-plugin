@@ -13,6 +13,16 @@
 									'accountID'      => Settings::get_option( 'client_id', '' ),
 									'optionsJson'    => Settings::get_option( 'xpwp_version_options', '', false ),
 									'activeSDK'      => (bool) Settings::get_option( 'sdk_active', '0' ),
+									'activeGoogleConsentMode' => (bool) Settings::get_option( 'google_consent_mode', '0' ),
+									'googleConsentModeParams' => (array) Settings::get_option(
+										'google_consent_params',
+										array(
+											'analytics_storage' => false,
+											'ad_storage'   => false,
+											'ad_user_data' => false,
+											'ad_personalization' => false,
+										)
+										),
 									'selectedOption' => \Axeptio\Models\Project_Versions::selected_versions(),
 									'sendDatas'      => (bool) Settings::get_option( 'disable_send_datas', '0' ),
 								)

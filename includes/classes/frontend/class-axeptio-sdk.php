@@ -98,13 +98,27 @@ class Axeptio_Sdk extends Module {
 			XPWP_VERSION,
 			true
 		);
+
 		wp_localize_script( 'axeptio/sdk-script', 'Axeptio_SDK', $settings );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressVendors', $wordpress_vendors );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressSteps', Axeptio_Steps::all() );
 
-		$inline_script = \Axeptio\get_template_part( 'frontend/sdk', array(), false );
-		preg_match( '/<script[^>]*>(.*?)<\/script>/is', $inline_script, $matches );
+		$sdk_script = \Axeptio\get_template_part( 'frontend/sdk', array(), false );
+		preg_match( '/<script[^>]*>(.*?)<\/script>/is', $sdk_script, $matches );
 		wp_add_inline_script( 'axeptio/sdk-script', $matches[1] ?? '' );
+
+		add_action(
+			'wp_head',
+			function () use ( $settings ) {
+				\Axeptio\get_template_part(
+					'frontend/google-consent-mode',
+					array(
+						'active_google_consent_mode' => (bool) $settings['googleConsentMode'],
+						'google_consent_mode_params' => $settings['googleConsentModeParams'],
+					)
+				);
+			}
+		);
 	}
 
 	/**
@@ -119,14 +133,32 @@ class Axeptio_Sdk extends Module {
 		$client_id       = Settings::get_option( 'client_id', false );
 		$cookies_version = Project_Versions::get_current_lang_version();
 
+		$google_consent_mode        = Settings::get_option( 'google_consent_mode', '0' );
+		$google_consent_mode_params = Settings::get_option(
+			'google_consent_params',
+			array(
+				'analytics_storage'  => false,
+				'ad_storage'         => false,
+				'ad_user_data'       => false,
+				'ad_personalization' => false,
+			)
+			);
+
 		if ( ! $sdk_active || ( ! $client_id && ! $cookies_version ) ) {
 			return false;
 		}
 
 		$sdk_settings = array(
-			'clientId'  => $client_id,
-			'platform'  => 'plugin-wordpress',
-			'sendDatas' => $disable_send_datas,
+			'clientId'                => $client_id,
+			'platform'                => 'plugin-wordpress',
+			'sendDatas'               => $disable_send_datas,
+			'googleConsentMode'       => $google_consent_mode,
+			'googleConsentModeParams' => array(
+				'analytics_storage'  => isset( $google_consent_mode_params['analytics_storage'] ) && '1' === $google_consent_mode_params['analytics_storage'] ? 'granted' : 'denied',
+				'ad_storage'         => isset( $google_consent_mode_params['ad_storage'] ) && '1' === $google_consent_mode_params['ad_storage'] ? 'granted' : 'denied',
+				'ad_user_data'       => isset( $google_consent_mode_params['ad_user_data'] ) && '1' === $google_consent_mode_params['ad_user_data'] ? 'granted' : 'denied',
+				'ad_personalization' => isset( $google_consent_mode_params['ad_personalization'] ) && '1' === $google_consent_mode_params ? 'granted' : 'denied',
+			),
 		);
 
 		if ( '' !== $cookies_version ) {

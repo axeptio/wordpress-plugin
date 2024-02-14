@@ -1,5 +1,5 @@
 <div class="inline-flex items-center w-full relative">
-	<label for="xpwp_sdk_active" type="button" class="relative inline-flex h-7 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 bg-gray-400"  role="switch" aria-checked="true" :aria-checked="activeSDK.toString()" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-amber-400': activeSDK, 'bg-gray-400': !(activeSDK) }">
+	<label for="xpwp_sdk_active" class="relative inline-flex h-7 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 bg-gray-400"  role="switch" aria-checked="true" :aria-checked="activeSDK.toString()" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-amber-400': activeSDK, 'bg-gray-400': !(activeSDK) }">
 		<span
 			aria-hidden="true"
 			x-state:on="Enabled"

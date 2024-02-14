@@ -62,6 +62,15 @@ class Admin_Callbacks {
 	 *
 	 * @return void
 	 */
+	public function google_consent_mode_set() {
+		\Axeptio\get_template_part( 'admin/main/fields/google-consent-mode' );
+	}
+
+	/**
+	 * Options page
+	 *
+	 * @return void
+	 */
 	public function send_datas_set() {
 		\Axeptio\get_template_part( 'admin/main/fields/send-datas' );
 	}

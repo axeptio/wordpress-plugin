@@ -8,6 +8,8 @@ const instance = function( args ) {
 		errorMessage: '',
 		validAccountID: false,
 		activeSDK: args.activeSDK,
+		activeGoogleConsentMode: args.activeGoogleConsentMode,
+		googleConsentModeParams: args.googleConsentModeParams,
 		sendDatas: args.sendDatas,
 		currentTab: Alpine.$persist( 'main-settings' ),
 		selectedOption: args.selectedOption,

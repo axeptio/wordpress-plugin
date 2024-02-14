@@ -57,9 +57,9 @@ class Recommended_Plugin_Settings {
 	 * @return array An array of plugin data.
 	 */
 	private static function fetch_plugin_datas() {
-		$cached_plugin_datas = get_transient(self::TRANSIENT_KEY);
+		$cached_plugin_datas = get_transient( self::TRANSIENT_KEY );
 
-		if ( $cached_plugin_datas !== false ) {
+		if ( false !== $cached_plugin_datas ) {
 			return $cached_plugin_datas;
 		}
 
@@ -69,7 +69,7 @@ class Recommended_Plugin_Settings {
 			return array();
 		}
 
-		if (! isset( $plugin_datas['body'] ) ) {
+		if ( ! isset( $plugin_datas['body'] ) ) {
 			return array();
 		}
 

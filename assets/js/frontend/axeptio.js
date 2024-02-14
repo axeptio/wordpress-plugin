@@ -1,6 +1,8 @@
 // noinspection ES6ConvertVarToLetConst
 window.axeptioWordpressSteps = window.axeptioWordpressSteps || [];
 window.axeptioWordpressVendors = window.axeptioWordpressVendors || [];
+window.Axeptio_SDK = window.Axeptio_SDK || [];
+
 window._axcb = window._axcb || [];
 
 function generateKeyFromTrueValues(obj) {
@@ -33,6 +35,22 @@ window._axcb.push( function( sdk ) {
 		const selectedCookieConfigId = sdk.getCookiesConfig().identifier;
 
 		sdk.config.cookies.map( function( cookieConfig ) {
+
+			if (window.Axeptio_SDK.googleConsentMode === '1') {
+				cookieConfig.googleConsentMode = {
+					display: true,
+				}
+				const hasGoogleConsentMode = cookieConfig?.steps?.some(step => step.layout === 'como_v2');
+
+				if (cookieConfig?.googleConsentMode?.display && !hasGoogleConsentMode) {
+					const como_v2_step = {
+						name: 'google_consent_mode_v2',
+						layout: 'como_v2'
+					};
+					cookieConfig?.steps.splice(1, 0, como_v2_step);
+				}
+			}
+
 			// This avoids pushing vendors several times in the same WordPress steps
 			// There's a drawback: we won't be able to change the cookies' version at runtime,
 			// because the vendors are not up-to-date. One fix could be to switch to a dedicated function

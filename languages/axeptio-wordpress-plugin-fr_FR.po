@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2023-12-04 16:13+0100\n"
-"PO-Revision-Date: 2023-12-04 16:14+0100\n"
+"POT-Creation-Date: 2024-02-14 11:33+0100\n"
+"PO-Revision-Date: 2024-02-14 11:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio.php\n"
@@ -44,15 +44,15 @@ msgstr ""
 msgid "Return to plugins pages"
 msgstr "Retour à la page des plugins"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:120
+#: includes/classes/admin/pages/class-admin-callbacks.php:129
 msgid "Widget title"
 msgstr "Titre du Widget"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:138
+#: includes/classes/admin/pages/class-admin-callbacks.php:147
 msgid "Widget sub-title"
 msgstr "Sous-titre du widget"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:156
+#: includes/classes/admin/pages/class-admin-callbacks.php:165
 msgid "Widget description"
 msgstr "Description du widget"
 
@@ -132,6 +132,10 @@ msgid "Project Version"
 msgstr "Version du projet"
 
 #: includes/classes/admin/pages/class-admin-main.php:269
+msgid "Google Consent Mode V2"
+msgstr "Google Consent Mode V2"
+
+#: includes/classes/admin/pages/class-admin-main.php:280
 msgid "Collect of data and errors by Axeptio"
 msgstr "Collecte de données et d'erreurs par Axeptio"
 
@@ -196,7 +200,7 @@ msgstr ""
 "Le fichier composer.json n'a pas été trouvé dans %s. Aucune classe ne sera "
 "chargée."
 
-#: includes/core.php:182
+#: includes/core.php:194
 msgid ""
 "We were unable to find your project, or it appears that it has not yet been "
 "published."
@@ -204,11 +208,11 @@ msgstr ""
 "Nous n'avons pas pu trouver votre projet ou il semble qu'il ne soit pas "
 "encore publié."
 
-#: includes/core.php:190
+#: includes/core.php:202
 msgid "Error verifying account ID. Try Again."
 msgstr "Erreur de vérification de l'identifiant du compte. Veuillez réessayer."
 
-#: includes/core.php:197
+#: includes/core.php:209
 msgid "Please enter an account ID"
 msgstr "Veuillez saisir un identifiant de compte"
 
@@ -229,6 +233,69 @@ msgstr "Éditer"
 #: templates/admin/main/fields/client-id.php:31
 msgid "Validate"
 msgstr "Valider"
+
+#: templates/admin/main/fields/google-consent-mode.php:31
+msgid "Enable Google Consent Mode V2?"
+msgstr "Activer Google Consent Mode V2?"
+
+#: templates/admin/main/fields/google-consent-mode.php:44
+msgid "Analytics storage"
+msgstr "Analytics storage"
+
+#: templates/admin/main/fields/google-consent-mode.php:45
+msgid ""
+"Allow Google Analytics to measure how visitors use the site to enhance "
+"functionality and service."
+msgstr ""
+"Autoriser Google Analytics à mesurer comment les visiteurs utilisent le site "
+"pour améliorer la fonctionnalité et le service."
+
+#: templates/admin/main/fields/google-consent-mode.php:49
+msgid "Ad Storage"
+msgstr "Ad Storage"
+
+#: templates/admin/main/fields/google-consent-mode.php:50
+msgid ""
+"Permit Google to save advertising information on visitors' devices for "
+"better ad relevance."
+msgstr ""
+"Permettre à Google de sauvegarder des informations publicitaires sur les "
+"appareils des visiteurs pour une meilleure pertinence des annonces."
+
+#: templates/admin/main/fields/google-consent-mode.php:54
+msgid "Ad User Data"
+msgstr "Ad User Data"
+
+#: templates/admin/main/fields/google-consent-mode.php:55
+msgid "Share visitors' activity data with Google for targeted advertising."
+msgstr ""
+"Partager les données d'activité des visiteurs avec Google pour une publicité "
+"ciblée."
+
+#: templates/admin/main/fields/google-consent-mode.php:59
+msgid "Ad Personalization"
+msgstr "Ad Personalization"
+
+#: templates/admin/main/fields/google-consent-mode.php:60
+msgid ""
+"Customize the ad experience by allowing Google to personalize the ads that "
+"visitors see."
+msgstr ""
+"Personnaliser l'expérience publicitaire en permettant à Google de "
+"personnaliser les annonces que les visiteurs voient."
+
+#: templates/admin/main/fields/google-consent-mode.php:67
+msgid "Default settings for consent mode"
+msgstr "Réglage par défaut pour le Consent Mode"
+
+#: templates/admin/main/fields/google-consent-mode.php:69
+msgid ""
+"These consent signals will be sent at page load to tell Google services how "
+"they should handle data before consent is granted or denied."
+msgstr ""
+"Ces signaux de consentement seront envoyés au chargement de la page pour "
+"indiquer aux services de Google comment ils doivent traiter les données "
+"avant que le consentement soit donné par l'utilisateur."
 
 #: templates/admin/main/fields/non-existing-account.php:2
 msgid "If you are certain that your project exists, please follow these steps:"
@@ -254,7 +321,7 @@ msgid ""
 "class=\"underline hover:no-underline\" href=\"%s\">our help guide.</a>"
 msgstr ""
 "Si le problème persiste, n'hésitez pas à consulter <a target=\"_blank\" "
-"class=\"underline hover:no-underline\" href=\"%s\">notre guide d'aide</a>."
+"class=\"underline hover:no-underline\" href=\"%s\">notre guide d'aide</a>"
 
 #: templates/admin/main/fields/non-existing-account.php:15
 msgid "https://support.axeptio.eu/hc/en-gb"
@@ -499,7 +566,7 @@ msgstr "Annuler"
 msgid "Enable"
 msgstr "Activer"
 
-#: templates/admin/sections/main.php:34
+#: templates/admin/sections/main.php:44
 msgid "How To Integrate Axeptio?"
 msgstr "Comment intégrer Axeptio ?"
 

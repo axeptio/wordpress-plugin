@@ -265,6 +265,17 @@ class Admin_Main extends Module {
 				),
 			),
 			array(
+				'id'       => 'xpwp_google_consent_mode',
+				'title'    => __( 'Google Consent Mode V2', 'axeptio-wordpress-plugin' ),
+				'callback' => array( $this->callbacks, 'google_consent_mode_set' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_index',
+				'args'     => array(
+					'label_for' => 'xpwp_google_consent_mode',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
 				'id'       => 'xpwp_disable_send_datas',
 				'title'    => __( 'Collect of data and errors by Axeptio', 'axeptio-wordpress-plugin' ),
 				'callback' => array( $this->callbacks, 'send_datas_set' ),
