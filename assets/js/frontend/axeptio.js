@@ -45,7 +45,8 @@ window._axcb.push( function( sdk ) {
 				if (cookieConfig?.googleConsentMode?.display && !hasGoogleConsentMode) {
 					const como_v2_step = {
 						name: 'google_consent_mode_v2',
-						layout: 'como_v2'
+						layout: 'como_v2',
+						identifier: `google_consent_mode_v2_${Math.random().toString(36).substring(7)}`
 					};
 					cookieConfig?.steps.splice(1, 0, como_v2_step);
 				}

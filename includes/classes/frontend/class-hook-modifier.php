@@ -20,7 +20,6 @@ use ReflectionMethod;
 
 class Hook_Modifier extends Module {
 
-
 	/**
 	 * Stored plugin contents.
 	 *
@@ -587,7 +586,7 @@ class Hook_Modifier extends Module {
 				'plugin'   => $plugin,
 			);
 		} catch ( ReflectionException $e ) {
-			if ( ! (bool) Settings::get_option( 'disable_send_datas', false ) ) {
+			if ( XPWP_SHOW_ALL_ERRORS && ! (bool) Settings::get_option( 'disable_send_datas', false ) ) {
 				\Sentry\captureException( $e );
 			}
 		}

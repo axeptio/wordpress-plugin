@@ -20,6 +20,9 @@ define( 'XPWP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'XPWP_BASENAME', plugin_basename( __FILE__ ) );
 define( 'XPWP_INC', XPWP_PATH . 'includes/' );
 define( 'XPWP_MIN_PHP_VERSION', '7.4' );
+if ( ! defined( 'XPWP_SHOW_ALL_ERRORS' ) ) {
+	define( 'XPWP_SHOW_ALL_ERRORS', false );
+}
 
 if ( ! defined( 'DS' ) ) {
 	define( 'DS', DIRECTORY_SEPARATOR ); // PHPCS:Ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
