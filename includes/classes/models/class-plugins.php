@@ -7,6 +7,7 @@
 
 namespace Axeptio\Models;
 
+use Axeptio\Utils\Remember;
 use function Axeptio\Utility\get_favicon;
 
 class Plugins {
@@ -69,36 +70,43 @@ class Plugins {
 	 * @return array Array of plugins.
 	 */
 	public static function all( string $configuration_id = 'all', $force_refresh = false ): array {
-		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		$plugins = \get_plugins();
+		return Remember::get_or_reset_result(
+			'plugins_all',
+			function () use ( $configuration_id, $force_refresh ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+				$plugins = \get_plugins();
 
-		$plugin_list = array();
+				$plugin_list = array();
 
-		foreach ( $plugins as $key => $plugin ) {
-			$plugin_key = self::get_plugin_id( $key );
+				foreach ( $plugins as $key => $plugin ) {
+					$plugin_key = self::get_plugin_id( $key );
 
-			if ( 'axeptio-wordpress-plugin' === $plugin_key ) {
-				continue;
-			}
+					if ( 'axeptio-wordpress-plugin' === $plugin_key ) {
+						continue;
+					}
 
-			$plugin_metadatas = self::get_meta_datas( $plugin_key, $configuration_id, $force_refresh );
+					$plugin_metadatas = self::get_meta_datas( $plugin_key, $configuration_id, $force_refresh );
 
-			if ( ! isset( $plugin_metadatas['Merged']['vendor_image'] ) ) {
-				$plugin_metadatas['Merged']['vendor_image'] = get_favicon( $plugin['PluginURI'] );
-			}
+					if ( ! isset( $plugin_metadatas['Merged']['vendor_image'] ) ) {
+						$plugin_metadatas['Merged']['vendor_image'] = get_favicon( $plugin['PluginURI'] );
+					}
 
-			$plugin_list[ $plugin_key ] = array_merge(
-				$plugin,
-				array(
-					'AxeptioRecommendedSettings' => Recommended_Plugin_Settings::find( $plugin_key ),
-					'Metas'                      => $plugin_metadatas,
-					'HookModes'                  => Hook_Modes::all( $configuration_id, $plugin_key ),
-					'ShortcodeTagsModes'         => Shortcode_Tags_Modes::all( $configuration_id, $plugin_key ),
-				)
+					$plugin_list[ $plugin_key ] = array_merge(
+					$plugin,
+					array(
+						'AxeptioRecommendedSettings' => Recommended_Plugin_Settings::find( $plugin_key ),
+						'Metas'                      => $plugin_metadatas,
+						'HookModes'                  => Hook_Modes::all( $configuration_id, $plugin_key ),
+						'ShortcodeTagsModes'         => Shortcode_Tags_Modes::all( $configuration_id, $plugin_key ),
+					)
+					);
+				}
+
+				return $plugin_list;
+			},
+			$configuration_id,
+			$force_refresh
 			);
-		}
-
-		return $plugin_list;
 	}
 
 	/**

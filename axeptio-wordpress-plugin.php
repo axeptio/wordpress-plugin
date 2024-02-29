@@ -3,7 +3,7 @@
 	Plugin Name: Axeptio
 	Plugin URI: https://www.axeptio.eu/
 	Description: Axeptio allows you to make your website compliant with GDPR.
-	Version: 2.3.3
+	Version: 2.3.31
 	Author: axeptio
 	License: GPLv3
 	License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -14,12 +14,15 @@
 // Useful global constants.
 use Axeptio\Models\Settings;
 
-define( 'XPWP_VERSION', '2.3.3' );
+define( 'XPWP_VERSION', '2.3.31' );
 define( 'XPWP_URL', plugin_dir_url( __FILE__ ) );
 define( 'XPWP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'XPWP_BASENAME', plugin_basename( __FILE__ ) );
 define( 'XPWP_INC', XPWP_PATH . 'includes/' );
 define( 'XPWP_MIN_PHP_VERSION', '7.4' );
+if ( ! defined( 'XPWP_SHOW_ALL_ERRORS' ) ) {
+	define( 'XPWP_SHOW_ALL_ERRORS', false );
+}
 
 if ( ! defined( 'DS' ) ) {
 	define( 'DS', DIRECTORY_SEPARATOR ); // PHPCS:Ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound
