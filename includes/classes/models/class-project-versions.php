@@ -5,7 +5,7 @@
  * This class provides methods to retrieve project versions.
  */
 
-namespace Axeptio\Models;
+namespace Axeptio\Plugin\Models;
 
 class Project_Versions {
 	/**

@@ -5,7 +5,7 @@
  * This class provides methods to retrieve information about the Axeptio steps.
  */
 
-namespace Axeptio\Models;
+namespace Axeptio\Plugin\Models;
 
 class Axeptio_Steps {
 

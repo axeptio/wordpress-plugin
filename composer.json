@@ -11,7 +11,8 @@
   "minimum-stability": "dev",
   "require": {
     "php": "^7.4 || ^8.0 || ^8.1",
-    "sentry/sdk": "dev-master"
+    "sentry/sdk": "dev-master",
+    "axeptio/sdk": "dev-master"
   },
   "scripts": {
     "run-stan": "vendor/bin/phpstan analyze --memory-limit=2G --no-progress",
@@ -22,7 +23,7 @@
   },
   "autoload": {
     "psr-4": {
-      "\\Axeptio\\": "includes/classes"
+      "\\Axeptio\\Plugin\\": "includes/classes"
     },
     "files": [
       "includes/helpers/helpers.php",

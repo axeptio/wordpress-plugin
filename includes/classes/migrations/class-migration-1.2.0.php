@@ -1,9 +1,9 @@
 <?php
-namespace Axeptio\Migrations;
+namespace Axeptio\Plugin\Migrations;
 
-use Axeptio\Models\Settings;
+use Axeptio\Plugin\Models\Settings;
 
-class Migration_1_2_0 implements \Axeptio\Contracts\Migration_Interface {
+class Migration_1_2_0 implements \Axeptio\Plugin\Contracts\Migration_Interface {
 
 	/**
 	 * Run the upgrade migration.

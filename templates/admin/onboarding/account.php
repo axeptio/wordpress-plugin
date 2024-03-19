@@ -1,6 +1,6 @@
 <div class="relative isolate overflow-hidden bg-amber-400/20">
 	<svg class="w-full md:-mt-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="fill-white" d="M808,64.1c-205,11.1-205,11.1-410,6.5C195.4,66,193,66-5,74.9v-85.8h1215V67C1012.9,53,1010.3,53.1,808,64.1z"></path></svg>
-	<img class="buddy-cookie hidden md:block" src="<?php echo esc_attr( \Axeptio\get_img( 'buddy-cookie.svg' ) ); ?>" alt="" />
+	<img class="buddy-cookie hidden md:block" src="<?php echo esc_attr( \Axeptio\Plugin\get_img( 'buddy-cookie.svg' ) ); ?>" alt="" />
 	<div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 px-6 pt-8 pb-12 sm:px-16 md:pt-0 md:px-36 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
 		<div class="text-center">
 			<h3 class="mx-auto font-serif max-w-2xl text-xl font-bold tracking-tight text-gray-900 sm:text-xl">

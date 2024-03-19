@@ -7,9 +7,9 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Utils;
+namespace Axeptio\Plugin\Utils;
 
-use Axeptio\Contracts\Migration_Interface;
+use Axeptio\Plugin\Contracts\Migration_Interface;
 
 class WP_Migration_Manager {
 	/**
@@ -88,7 +88,7 @@ class WP_Migration_Manager {
 			$version = str_replace( 'class-migration-', '', basename( $file, '.php' ) );
 			if ( version_compare( $version, $current_version, '>' ) ) {
 				require_once $file;
-				$class_name             = '\\Axeptio\\Migrations\\Migration_' . str_replace( '.', '_', $version );
+				$class_name             = '\\Axeptio\\Plugin\\Migrations\\Migration_' . str_replace( '.', '_', $version );
 				$migrations[ $version ] = new $class_name();
 			}
 		}

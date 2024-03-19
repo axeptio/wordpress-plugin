@@ -5,10 +5,10 @@
 	<div class="flex gap-6">
 		<button class="w-4 h-4 absolute top-4 right-4 p-0" id="axeptio-timeout-button">
 			<img class="w-full h-full object-contain object-center"
-				src="<?php echo esc_attr( \Axeptio\get_img( 'close.svg' ) ); ?>" alt=""/>
+				src="<?php echo esc_attr( \Axeptio\Plugin\get_img( 'close.svg' ) ); ?>" alt=""/>
 		</button>
 		<div class="h-32 aspect-square -translate-y-2 -ml-16">
-			<img src="<?php echo esc_attr( \Axeptio\get_img( 'review-icon.svg' ) ); ?>" alt=""/>
+			<img src="<?php echo esc_attr( \Axeptio\Plugin\get_img( 'review-icon.svg' ) ); ?>" alt=""/>
 		</div>
 		<div class="grow flex flex-col gap-6 justify-center">
 			<div class="flex flex-col">

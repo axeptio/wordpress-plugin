@@ -5,14 +5,14 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Admin\Pages;
+namespace Axeptio\Plugin\Admin\Pages;
 
-use Axeptio\Models\Axeptio_Steps;
-use Axeptio\Models\Hook_Modes;
-use Axeptio\Models\Plugins;
-use Axeptio\Models\Project_Versions;
-use Axeptio\Models\Settings;
-use Axeptio\Models\Shortcode_Tags_Modes;
+use Axeptio\Plugin\Models\Axeptio_Steps;
+use Axeptio\Plugin\Models\Hook_Modes;
+use Axeptio\Plugin\Models\Plugins;
+use Axeptio\Plugin\Models\Project_Versions;
+use Axeptio\Plugin\Models\Settings;
+use Axeptio\Plugin\Models\Shortcode_Tags_Modes;
 
 class Admin_Callbacks {
 	/**
@@ -54,7 +54,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function sdk_active_set() {
-		\Axeptio\get_template_part( 'admin/main/fields/sdk-active' );
+		\Axeptio\Plugin\get_template_part( 'admin/main/fields/sdk-active' );
 	}
 
 	/**
@@ -63,7 +63,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function google_consent_mode_set() {
-		\Axeptio\get_template_part( 'admin/main/fields/google-consent-mode' );
+		\Axeptio\Plugin\get_template_part( 'admin/main/fields/google-consent-mode' );
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function send_datas_set() {
-		\Axeptio\get_template_part( 'admin/main/fields/send-datas' );
+		\Axeptio\Plugin\get_template_part( 'admin/main/fields/send-datas' );
 	}
 
 	/**
@@ -81,7 +81,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function client_id_set() {
-		\Axeptio\get_template_part( 'admin/main/fields/client-id' );
+		\Axeptio\Plugin\get_template_part( 'admin/main/fields/client-id' );
 	}
 
 	/**
@@ -90,7 +90,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function version_set_options() {
-		\Axeptio\get_template_part( 'admin/main/fields/version-options', array( 'versions' => Settings::get_option( 'xpwp_version_options', '', false ) ) );
+		\Axeptio\Plugin\get_template_part( 'admin/main/fields/version-options', array( 'versions' => Settings::get_option( 'xpwp_version_options', '', false ) ) );
 	}
 
 	/**
@@ -99,7 +99,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function version_set() {
-		\Axeptio\get_template_part(
+		\Axeptio\Plugin\get_template_part(
 			'admin/main/fields/version',
 			array(
 				'version'     => Project_Versions::all(),
@@ -114,7 +114,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function display_onboarding_account_panel() {
-		\Axeptio\get_template_part( 'admin/onboarding/account' );
+		\Axeptio\Plugin\get_template_part( 'admin/onboarding/account' );
 	}
 
 	/**
@@ -123,7 +123,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function widget_title() {
-		\Axeptio\get_template_part(
+		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
 				'label' => __( 'Widget title', 'axeptio-wordpress-plugin' ),
@@ -141,7 +141,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function widget_subtitle() {
-		\Axeptio\get_template_part(
+		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
 				'label' => __( 'Widget sub-title', 'axeptio-wordpress-plugin' ),
@@ -159,7 +159,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function widget_description() {
-		\Axeptio\get_template_part(
+		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/textarea',
 			array(
 				'label' => __( 'Widget description', 'axeptio-wordpress-plugin' ),
@@ -177,10 +177,10 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function add_admin_notice_for_review() {
-		if ( ! \Axeptio\Models\Notice::is_displayable() ) {
+		if ( ! \Axeptio\Plugin\Models\Notice::is_displayable() ) {
 			return;
 		}
-		\Axeptio\get_template_part(
+		\Axeptio\Plugin\get_template_part(
 			'admin/sections/notice'
 		);
 	}
