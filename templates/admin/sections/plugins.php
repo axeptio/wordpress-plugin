@@ -25,7 +25,7 @@
 				<div class="min-w-0">
 					<div class="flex items-center gap-x-6">
 						<div>
-							<?php \Axeptio\get_template_part( 'admin/plugins/fields/toggle' ); ?>
+							<?php \Axeptio\Plugin\get_template_part( 'admin/plugins/fields/toggle' ); ?>
 						</div>
 						<div>
 							<div class="min-w-0 flex items-start gap-x-3 flex-auto">

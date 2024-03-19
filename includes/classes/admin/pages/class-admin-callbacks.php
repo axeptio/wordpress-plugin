@@ -105,7 +105,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function display_onboarding_account_panel() {
-		\Axeptio\get_template_part( 'admin/onboarding/account' );
+		\Axeptio\Plugin\get_template_part( 'admin/onboarding/account' );
 	}
 
 	/**
@@ -114,7 +114,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function widget_title() {
-		\Axeptio\get_template_part(
+		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
 				'label' => __( 'Widget title', 'axeptio-wordpress-plugin' ),
@@ -132,7 +132,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function widget_subtitle() {
-		\Axeptio\get_template_part(
+		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
 				'label' => __( 'Widget sub-title', 'axeptio-wordpress-plugin' ),
@@ -150,7 +150,7 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function widget_description() {
-		\Axeptio\get_template_part(
+		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/textarea',
 			array(
 				'label' => __( 'Widget description', 'axeptio-wordpress-plugin' ),
@@ -168,10 +168,10 @@ class Admin_Callbacks {
 	 * @return void
 	 */
 	public function add_admin_notice_for_review() {
-		if ( ! \Axeptio\Models\Notice::is_displayable() ) {
+		if ( ! \Axeptio\Plugin\Models\Notice::is_displayable() ) {
 			return;
 		}
-		\Axeptio\get_template_part(
+		\Axeptio\Plugin\get_template_part(
 			'admin/sections/notice'
 		);
 	}

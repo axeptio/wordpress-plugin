@@ -18,7 +18,7 @@ use Axeptio\Plugin\Utils\Template;
  * @return false|Module
  */
 function get_module( $class_name ) {
-	return \Axeptio\ModuleInitialization::instance()->get_class( $class_name );
+	return \Axeptio\Plugin\ModuleInitialization::instance()->get_class( $class_name );
 }
 
 /**
@@ -113,7 +113,7 @@ function get_main_admin_tabs() {
 		'customization' => __( 'Customization', 'axeptio-wordpress-plugin' ),
 		'data-sending'  => __( 'Data sending', 'axeptio-wordpress-plugin' ),
 	);
-	return \Axeptio\get_template_part( 'admin/main/tabs', array( 'tab_items' => $tab_items ), false );
+	return \Axeptio\Plugin\get_template_part( 'admin/main/tabs', array( 'tab_items' => $tab_items ), false );
 }
 
 function get_relative_path($from, $to)

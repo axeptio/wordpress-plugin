@@ -1,9 +1,9 @@
 <?php
 
-use Axeptio\Models\Settings;
+use Axeptio\Plugin\Models\Settings;
 
-$axeptio_has_multilingual = \Axeptio\Models\i18n::has_multilangual();
-$axeptio_languages        = \Axeptio\Models\i18n::get_languages();
+$axeptio_has_multilingual = \Axeptio\Plugin\Models\i18n::has_multilangual();
+$axeptio_languages        = \Axeptio\Plugin\Models\i18n::get_languages();
 ?>
 <div class="grid grid-cols-3 gap-4" x-data="{ selectedLang: '0' }">
 	<?php if ( $axeptio_has_multilingual ) : ?>
@@ -131,7 +131,7 @@ $axeptio_languages        = \Axeptio\Models\i18n::get_languages();
 	<?php
 		$axeptio_option_list = json_decode( Settings::get_option( 'xpwp_version_options', '', false ) );
 	?>
-	<?php if ( Axeptio\Models\i18n::has_multilangual() && $axeptio_option_list ) : ?>
+	<?php if ( Axeptio\Plugin\Models\i18n::has_multilangual() && $axeptio_option_list ) : ?>
 	<p class="block text-sm font-medium leading-6 text-gray-900">
 		<?php esc_html_e( 'Configured languages', 'axeptio-wordpress-plugin' ); ?>
 	</p>

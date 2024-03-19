@@ -3,7 +3,7 @@ namespace Axeptio\Plugin\Migrations;
 
 use Axeptio\Plugin\Models\Plugins;
 
-class Migration_2_3_0 implements \Axeptio\Contracts\Migration_Interface {
+class Migration_2_3_0 implements \Axeptio\Plugin\Contracts\Migration_Interface {
 	/**
 	 * Run the upgrade migration.
 	 *

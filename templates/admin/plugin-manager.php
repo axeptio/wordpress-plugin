@@ -58,13 +58,13 @@
 				</header>
 
 				<div>
-					<?php \Axeptio\get_template_part( 'admin/sections/plugins' ); ?>
+					<?php \Axeptio\Plugin\get_template_part( 'admin/sections/plugins' ); ?>
 				</div>
 			</div>
 			<?php do_action( 'axeptio/after_plugin_manager' ); ?>
 		</div>
 		<?php do_action( 'axeptio/after_plugin_manager_container' ); ?>
-		<?php \Axeptio\get_template_part( 'admin/plugins/fields/edit' ); ?>
-		<?php \Axeptio\get_template_part( 'admin/plugins/fields/modal-delete' ); ?>
+		<?php \Axeptio\Plugin\get_template_part( 'admin/plugins/fields/edit' ); ?>
+		<?php \Axeptio\Plugin\get_template_part( 'admin/plugins/fields/modal-delete' ); ?>
 	</div>
 </div>

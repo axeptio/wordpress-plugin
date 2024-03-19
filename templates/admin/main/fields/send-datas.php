@@ -20,5 +20,5 @@
 	<div class="ml-5">
 		<label for="xpwp_disable_send_datas"><?php echo esc_html__( 'By checking this box, I do not wish to send data/errors to the Axeptio plugin and do not want to contribute to the improvement of the plugin.', 'axeptio-wordpress-plugin' ); ?></label>
 	</div>
-	<input type="checkbox" @change="sendDatas = !sendDatas" class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0" id="xpwp_disable_send_datas" name="axeptio_settings[disable_send_datas]" value="1" <?php echo (bool) \Axeptio\get_option( 'disable_send_datas', '0' ) ? 'checked' : ''; ?> placeholder="">
+	<input type="checkbox" @change="sendDatas = !sendDatas" class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0" id="xpwp_disable_send_datas" name="axeptio_settings[disable_send_datas]" value="1" <?php echo (bool) \Axeptio\Plugin\get_option( 'disable_send_datas', '0' ) ? 'checked' : ''; ?> placeholder="">
 </div>
