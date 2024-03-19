@@ -36,7 +36,7 @@ window._axcb.push( function( sdk ) {
 
 		sdk.config.cookies.map( function( cookieConfig ) {
 
-			if (window.Axeptio_SDK.googleConsentMode === '1') {
+			if (window.Axeptio_SDK.enableGoogleConsentMode === '1') {
 				cookieConfig.googleConsentMode = {
 					display: true,
 				}
