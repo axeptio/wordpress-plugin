@@ -5,10 +5,10 @@
  * @package Axeptio
  */
 
-namespace Axeptio;
+namespace Axeptio\Plugin;
 
-use Axeptio\Models\Settings;
-use Axeptio\Utils\Template;
+use Axeptio\Plugin\Models\Settings;
+use Axeptio\Plugin\Utils\Template;
 
 /**
  * Get an initialized class by its full class name, including namespace.
@@ -18,7 +18,7 @@ use Axeptio\Utils\Template;
  * @return false|Module
  */
 function get_module( $class_name ) {
-	return \Axeptio\ModuleInitialization::instance()->get_class( $class_name );
+	return \Axeptio\Plugin\ModuleInitialization::instance()->get_class( $class_name );
 }
 
 /**
@@ -113,5 +113,38 @@ function get_main_admin_tabs() {
 		'customization' => __( 'Customization', 'axeptio-wordpress-plugin' ),
 		'data-sending'  => __( 'Data sending', 'axeptio-wordpress-plugin' ),
 	);
-	return \Axeptio\get_template_part( 'admin/main/tabs', array( 'tab_items' => $tab_items ), false );
+	return \Axeptio\Plugin\get_template_part( 'admin/main/tabs', array( 'tab_items' => $tab_items ), false );
+}
+
+function get_relative_path($from, $to)
+{
+	// some compatibility fixes for Windows paths
+	$from = is_dir($from) ? rtrim($from, '\/') . '/' : $from;
+	$to   = is_dir($to)   ? rtrim($to, '\/') . '/'   : $to;
+	$from = str_replace([ABSPATH, '\\'], ['', '/'], $from);
+	$to   = str_replace([ABSPATH, '\\'], ['', '/'], $to);
+
+	$from     = explode('/', $from);
+	$to       = explode('/', $to);
+	$relPath  = $to;
+
+	foreach($from as $depth => $dir) {
+		// find first non-matching dir
+		if($dir === $to[$depth]) {
+			// ignore this directory
+			array_shift($relPath);
+		} else {
+			// get number of remaining dirs to $from
+			$remaining = count($from) - $depth;
+			if($remaining > 1) {
+				// add traversals up to first matching dir
+				$padLength = (count($relPath) + $remaining - 1) * -1;
+				$relPath = array_pad($relPath, $padLength, '..');
+				break;
+			} else {
+				$relPath[0] = './' . $relPath[0];
+			}
+		}
+	}
+	return implode('/', $relPath);
 }

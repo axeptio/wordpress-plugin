@@ -5,7 +5,7 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Models;
+namespace Axeptio\Plugin\Models;
 
 class Hook_Modes {
 	/**

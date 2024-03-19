@@ -5,7 +5,7 @@
 				x-data='accountIDComponent(
 					<?php
 
-					use Axeptio\Models\Settings;
+					use Axeptio\Plugin\Models\Settings;
 
 					echo esc_attr(
 							wp_json_encode(
@@ -23,7 +23,7 @@
 											'ad_personalization' => false,
 										)
 										),
-									'selectedOption' => \Axeptio\Models\Project_Versions::selected_versions(),
+									'selectedOption' => \Axeptio\Plugin\Models\Project_Versions::selected_versions(),
 									'sendDatas'      => (bool) Settings::get_option( 'disable_send_datas', '0' ),
 								)
 							)
@@ -31,7 +31,7 @@
 					?>
 					)'
 		>
-			<?php echo \Axeptio\get_main_admin_tabs(); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php echo \Axeptio\Plugin\get_main_admin_tabs(); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			<?php
 			settings_fields( 'xpwp_settings_group' );
 			do_settings_sections( 'axeptio-wordpress-plugin' );

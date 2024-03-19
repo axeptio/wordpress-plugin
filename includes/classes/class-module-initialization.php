@@ -5,17 +5,18 @@
  * @package Axeptio
  */
 
-namespace Axeptio;
+namespace Axeptio\Plugin;
 
-use Axeptio\Admin\Rest\Plugins;
-use Axeptio\Frontend\Axeptio_Sdk;
-use Axeptio\Compat\AlpineJS_Wpkses;
-use Axeptio\Admin\Settings\Setting_Api;
-use Axeptio\Frontend\Hook_Modifier;
-use Axeptio\Init\Activate;
-use Axeptio\Init\Activation_Hook;
-use Axeptio\Models\Models;
-use Axeptio\Third_Party\Wp_Rocket;
+use Axeptio\Plugin\Admin\Rest\Plugins;
+use Axeptio\Plugin\Frontend\Axeptio_Sdk;
+use Axeptio\Plugin\Compat\AlpineJS_Wpkses;
+use Axeptio\Plugin\Admin\Settings\Setting_Api;
+use Axeptio\Plugin\Frontend\Cookie;
+use Axeptio\Plugin\Frontend\Hook_Modifier;
+use Axeptio\Plugin\Init\Activate;
+use Axeptio\Plugin\Init\Activation_Hook;
+use Axeptio\Plugin\Models\Models;
+use Axeptio\Plugin\Third_Party\Wp_Rocket;
 use ReflectionClass;
 
 /**
@@ -69,6 +70,7 @@ class Module_Initialization {
 			Activation_Hook::class,
 			AlpineJS_Wpkses::class,
 			Admin\Pages\Admin_Main::class,
+			Cookie::class,
 			Axeptio_Sdk::class,
 			Hook_Modifier::class,
 			Plugins::class,
@@ -102,7 +104,7 @@ class Module_Initialization {
 			}
 
 			// Make sure the class is a subclass of Module, so we can initialize it.
-			if ( ! $reflection_class->isSubclassOf( '\Axeptio\Module' ) ) {
+			if ( ! $reflection_class->isSubclassOf( '\Axeptio\Plugin\Module' ) ) {
 				continue;
 			}
 
@@ -152,7 +154,7 @@ class Module_Initialization {
 	 *
 	 * @param string $class_name The class name & namespace.
 	 *
-	 * @return false|\Axeptio\Module
+	 * @return false|\Axeptio\Plugin\Module
 	 */
 	public function get_class( $class_name ) {
 		$class_name = $this->slugify_class_name( $class_name );

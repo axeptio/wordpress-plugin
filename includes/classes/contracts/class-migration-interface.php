@@ -1,5 +1,5 @@
 <?php
-namespace Axeptio\Contracts;
+namespace Axeptio\Plugin\Contracts;
 
 interface Migration_Interface {
 	/**

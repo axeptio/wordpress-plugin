@@ -12,7 +12,7 @@
  **/
 
 // Useful global constants.
-use Axeptio\Models\Settings;
+use Axeptio\Plugin\Models\Settings;
 
 define( 'XPWP_VERSION', '2.3.31' );
 define( 'XPWP_URL', plugin_dir_url( __FILE__ ) );
@@ -63,8 +63,8 @@ if ( ! (bool) Settings::get_option( 'disable_send_datas', false ) ) {
 }
 
 // Activation/Deactivation.
-register_activation_hook( __FILE__, '\Axeptio\activate' );
-register_deactivation_hook( __FILE__, '\Axeptio\deactivate' );
+register_activation_hook( __FILE__, '\Axeptio\Plugin\activate' );
+register_deactivation_hook( __FILE__, '\Axeptio\Plugin\deactivate' );
 
 // Bootstrap.
-Axeptio\setup();
+Axeptio\Plugin\setup();

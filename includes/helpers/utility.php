@@ -11,7 +11,7 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Utility;
+namespace Axeptio\Plugin\Utility;
 
 /**
  * Get asset info from extracted asset files

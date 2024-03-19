@@ -5,19 +5,20 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Frontend;
+namespace Axeptio\Plugin\Frontend;
 
-use Axeptio\Admin;
-use Axeptio\Models\Axeptio_Steps;
-use Axeptio\Models\Plugins;
-use Axeptio\Models\Project_Versions;
-use Axeptio\Models\Sdk;
-use Axeptio\Models\Settings;
-use Axeptio\Module;
-use function Axeptio\get_sdk_settings;
-use function Axeptio\script_url;
-use function Axeptio\style_url;
-use function Axeptio\Utility\get_asset_info;
+use Axeptio\Plugin\Admin;
+use Axeptio\Plugin\Models\Axeptio_Steps;
+use Axeptio\Plugin\Models\Plugins;
+use Axeptio\Plugin\Models\Project_Versions;
+use Axeptio\Plugin\Models\Sdk;
+use Axeptio\Plugin\Models\Settings;
+use Axeptio\Plugin\Module;
+use function Axeptio\Plugin\get_relative_path;
+use function Axeptio\Plugin\get_sdk_settings;
+use function Axeptio\Plugin\script_url;
+use function Axeptio\Plugin\style_url;
+use function Axeptio\Plugin\Utility\get_asset_info;
 
 class Axeptio_Sdk extends Module
 {
@@ -107,15 +108,19 @@ class Axeptio_Sdk extends Module
 		wp_localize_script('axeptio/sdk-script', 'Axeptio_SDK', $settings);
 		wp_localize_script('axeptio/sdk-script', 'axeptioWordpressVendors', $wordpress_vendors);
 		wp_localize_script('axeptio/sdk-script', 'axeptioWordpressSteps', Axeptio_Steps::all());
+		wp_localize_script( 'axeptio/sdk-script', 'axeptioAjax', [
+			'wp' => ['relativePath' => get_relative_path(XPWP_PATH, ABSPATH)],
+			'url' => XPWP_URL . '/ajax.php',
+		]);
 
-		$sdk_script = \Axeptio\get_template_part('frontend/sdk', array(), false);
+		$sdk_script = \Axeptio\Plugin\get_template_part('frontend/sdk', array(), false);
 		preg_match('/<script[^>]*>(.*?)<\/script>/is', $sdk_script, $matches);
 		wp_add_inline_script('axeptio/sdk-script', $matches[1] ?? '');
 
 		add_action(
 			'wp_head',
 			function () use ($settings) {
-				\Axeptio\get_template_part(
+				\Axeptio\Plugin\get_template_part(
 					'frontend/google-consent-mode',
 					array(
 						'active_google_consent_mode' => (bool)$settings['enableGoogleConsentMode'],
