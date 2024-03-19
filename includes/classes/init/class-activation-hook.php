@@ -5,10 +5,10 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Init;
+namespace Axeptio\Plugin\Init;
 
-use Axeptio\Module;
-use function Axeptio\get_current_admin_url;
+use Axeptio\Plugin\Module;
+use function Axeptio\Plugin\get_current_admin_url;
 
 class Activation_Hook extends Module {
 
@@ -78,6 +78,6 @@ class Activation_Hook extends Module {
 		if ( ! isset( $_GET['onboard'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
-		\Axeptio\get_template_part( 'admin/onboarding/welcome' );
+		\Axeptio\Plugin\get_template_part( 'admin/onboarding/welcome' );
 	}
 }

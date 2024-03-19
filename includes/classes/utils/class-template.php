@@ -8,7 +8,7 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Utils;
+namespace Axeptio\Plugin\Utils;
 
 class Template {
 	/**

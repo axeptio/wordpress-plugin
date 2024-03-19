@@ -5,10 +5,10 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Admin\Pages;
+namespace Axeptio\Plugin\Admin\Pages;
 
-use Axeptio\Admin\Settings\Setting_Api;
-use Axeptio\Module;
+use Axeptio\Plugin\Admin\Settings\Setting_Api;
+use Axeptio\Plugin\Module;
 
 class Admin_Main extends Module {
 
@@ -146,7 +146,7 @@ class Admin_Main extends Module {
 	 */
 	public function set_sections() {
 
-		$main_settings_title = \Axeptio\get_template_part(
+		$main_settings_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(
 				'title'       => __( 'Widget main settings', 'axeptio-wordpress-plugin' ),
@@ -155,7 +155,7 @@ class Admin_Main extends Module {
 			false
 			);
 
-		$customize_title = \Axeptio\get_template_part(
+		$customize_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(
 				'title'       => __( 'Widget customization', 'axeptio-wordpress-plugin' ),
@@ -164,7 +164,7 @@ class Admin_Main extends Module {
 			false
 			);
 
-		$data_sending_title = \Axeptio\get_template_part(
+		$data_sending_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(
 				'title'       => __( 'Data sending', 'axeptio-wordpress-plugin' ),

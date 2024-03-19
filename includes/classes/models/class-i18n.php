@@ -5,7 +5,7 @@
  * This class provides methods for handling multilingual support in WordPress.
  */
 
-namespace Axeptio\Models;
+namespace Axeptio\Plugin\Models;
 
 class I18n {
 

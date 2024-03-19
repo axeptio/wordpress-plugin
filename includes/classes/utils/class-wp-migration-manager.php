@@ -7,9 +7,9 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Utils;
+namespace Axeptio\Plugin\Utils;
 
-use Axeptio\Contracts\Migration_Interface;
+use Axeptio\Plugin\Contracts\Migration_Interface;
 
 class WP_Migration_Manager {
 	/**

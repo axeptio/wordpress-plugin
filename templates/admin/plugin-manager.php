@@ -9,7 +9,7 @@
 			<div class="px-6 py-4 lg:pb-0">
 				<div class="mt-6 mb-0">
 					<div class="md:inline-flex md:items-end">
-						<img class="aspect-|14/3] w-40" src="<?php echo esc_attr( \Axeptio\get_logo() ); ?>" alt="<?php esc_attr_e( 'Axeptio', 'axeptio-wordpress-plugin' ); ?>">
+						<img class="aspect-|14/3] w-40" src="<?php echo esc_attr( \Axeptio\Plugin\get_logo() ); ?>" alt="<?php esc_attr_e( 'Axeptio', 'axeptio-wordpress-plugin' ); ?>">
 						<div class="mt-2 lg:mt-0 md:ml-6 text-base mb-1"><?php esc_html_e( 'Plugin manager', 'axeptio-wordpress-plugin' ); ?></div>
 					</div>
 				</div>

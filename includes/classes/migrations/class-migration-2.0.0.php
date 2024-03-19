@@ -1,8 +1,8 @@
 <?php
-namespace Axeptio\Migrations;
+namespace Axeptio\Plugin\Migrations;
 
-use Axeptio\Models\Plugins;
-use Axeptio\Models\Settings;
+use Axeptio\Plugin\Models\Plugins;
+use Axeptio\Plugin\Models\Settings;
 
 class Migration_2_0_0 implements \Axeptio\Contracts\Migration_Interface {
 	/**

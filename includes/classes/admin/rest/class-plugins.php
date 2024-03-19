@@ -5,11 +5,11 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Admin\Rest;
+namespace Axeptio\Plugin\Admin\Rest;
 
-use Axeptio\Models\Notice;
-use Axeptio\Models\Plugins as PluginModel;
-use Axeptio\Module;
+use Axeptio\Plugin\Models\Notice;
+use Axeptio\Plugin\Models\Plugins as PluginModel;
+use Axeptio\Plugin\Module;
 use WP_REST_Request;
 use WP_REST_Response;
 

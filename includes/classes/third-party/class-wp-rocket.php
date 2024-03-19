@@ -1,7 +1,7 @@
 <?php
-namespace Axeptio\Third_Party;
+namespace Axeptio\Plugin\Third_Party;
 
-use Axeptio\Module;
+use Axeptio\Plugin\Module;
 
 class Wp_Rocket extends Module {
 

@@ -5,14 +5,14 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Frontend;
+namespace Axeptio\Plugin\Frontend;
 
-use Axeptio\Models\Plugins;
-use Axeptio\Models\Recommended_Plugin_Settings;
-use Axeptio\Models\Sdk;
-use Axeptio\Models\Settings;
-use Axeptio\Module;
-use Axeptio\Utils\User_Hook_Parser;
+use Axeptio\Plugin\Models\Plugins;
+use Axeptio\Plugin\Models\Recommended_Plugin_Settings;
+use Axeptio\Plugin\Models\Sdk;
+use Axeptio\Plugin\Models\Settings;
+use Axeptio\Plugin\Module;
+use Axeptio\Plugin\Utils\User_Hook_Parser;
 use Closure;
 use ReflectionException;
 use ReflectionFunction;
@@ -518,7 +518,7 @@ class Hook_Modifier extends Module {
 			$return      = call_user_func_array( $callback_function, $args );
 			$pattern     = '/<!--(.*?)-->/s';
 			$return      = preg_replace( $pattern, '', $return );
-			$placeholder = \Axeptio\get_template_part(
+			$placeholder = \Axeptio\Plugin\get_template_part(
 				'frontend/shortcode-placeholder',
 				array(
 					'plugin'          => $plugin,

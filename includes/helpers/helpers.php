@@ -5,10 +5,10 @@
  * @package Axeptio
  */
 
-namespace Axeptio;
+namespace Axeptio\Plugin;
 
-use Axeptio\Models\Settings;
-use Axeptio\Utils\Template;
+use Axeptio\Plugin\Models\Settings;
+use Axeptio\Plugin\Utils\Template;
 
 /**
  * Get an initialized class by its full class name, including namespace.

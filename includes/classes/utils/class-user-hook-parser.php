@@ -5,7 +5,7 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Utils;
+namespace Axeptio\Plugin\Utils;
 
 /**
  * Class User_Hook_Parser.

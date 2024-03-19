@@ -40,7 +40,6 @@ nocache_headers();
 
 $action = $_REQUEST['action'];
 
-var_dump($action);
 if ( is_user_logged_in() ) {
 	// If no action is registered, return a Bad Request response.
 	if ( ! has_action( "axeptio/ajax_{$action}" ) ) {

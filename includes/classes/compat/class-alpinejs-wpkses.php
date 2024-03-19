@@ -5,9 +5,9 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Compat;
+namespace Axeptio\Plugin\Compat;
 
-use Axeptio\Module;
+use Axeptio\Plugin\Module;
 
 class AlpineJS_Wpkses extends Module {
 	/**

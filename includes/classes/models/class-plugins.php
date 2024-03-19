@@ -5,9 +5,9 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Models;
+namespace Axeptio\Plugin\Models;
 
-use function Axeptio\Utility\get_favicon;
+use function Axeptio\Plugin\Utility\get_favicon;
 
 class Plugins {
 	/**
