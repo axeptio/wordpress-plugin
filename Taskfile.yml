@@ -6,6 +6,15 @@ vars:
   DC_ARGS: -paxeptio-wordpress-plugin -f docker-compose.yml
 
 tasks:
+  pre-release:
+    desc: Create a release
+    cmds:
+      - task: clean-modules
+      - yarn && yarn build:production
+      - task: composer-build
+      - rsync -av --exclude='tmp' --exclude-from='exclusions.txt' ./ ./tmp/
+
+
   release:
     desc: Create a release
     cmds:
