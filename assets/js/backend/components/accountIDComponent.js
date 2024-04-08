@@ -49,10 +49,18 @@ const instance = function( args ) {
 				const data = await response.json();
 				if ( data.cookies.length > 0 ) {
 					this.showID = true;
-					this.options = data.cookies.map( ( cookie ) => ( {
+					const existingCookieNames = new Set();
+
+					this.options = data.cookies.filter(cookie => {
+						if (!existingCookieNames.has(cookie.name)) {
+							existingCookieNames.add(cookie.name);
+							return true;
+						}
+						return false;
+					}).map(cookie => ({
 						value: cookie.name,
 						text: cookie.title,
-					} ) );
+					}));
 					this.validAccountID = true;
 					this.optionsJson = JSON.stringify( this.options );
 				} else {

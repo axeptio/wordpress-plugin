@@ -31,8 +31,8 @@ class Cookie extends Module {
 	 * @return void
 	 */
 	public function register() {
-		add_action( 'axeptio/ajax_nopriv_set_cookie', array( $this, 'set_cookie' ) );
-		add_action( 'axeptio/ajax_set_cookie', array( $this, 'set_cookie' ) );
+		add_action( 'wp_ajax_nopriv_set_cookie', array( $this, 'set_cookie' ) );
+		add_action( 'wp_ajax_set_cookie', array( $this, 'set_cookie' ) );
 	}
 
 	/**

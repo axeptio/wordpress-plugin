@@ -104,7 +104,7 @@ class Axeptio_Sdk extends Module {
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressSteps', Axeptio_Steps::all() );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioAjax', [
 			'wp' => ['relativePath' => get_relative_path(XPWP_PATH, ABSPATH)],
-			'url' => XPWP_URL . '/ajax.php',
+			'url' => admin_url( 'admin-ajax.php' ),
 		]);
 
 		$inline_script = \Axeptio\Plugin\get_template_part( 'frontend/sdk', array(), false );
