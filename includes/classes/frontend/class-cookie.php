@@ -71,14 +71,17 @@ class Cookie extends Module {
 		$axeptio_cookie_builder->setUserToken($userToken);
 		$axeptio_cookie_builder->setUserPreferences($user_preferences);
 		$axeptio_cookie_builder->setExpiry(172800);
+		$axeptio_cookie_builder->setHttponly(false);
 		$axeptio_cookie = $axeptio_cookie_builder->create();
 
 		$authorized_vendor_cookies_builder = new AuthorizedVendorCookiesBuilder();
 		$authorized_vendor_cookies_builder->setUserPreferences($user_preferences);
+		$authorized_vendor_cookies_builder->setHttponly(false);
 		$authorized_vendor_cookies = $authorized_vendor_cookies_builder->create();
 
 		$all_vendor_cookies_builder = new AllVendorCookiesBuilder();
 		$all_vendor_cookies_builder->setVendors($all_vendors);
+		$all_vendor_cookies_builder->setHttponly(false);
 		$all_vendor_cookies = $all_vendor_cookies_builder->create();
 
 		$cookie_manager->addAxeptioCookies($axeptio_cookie);
