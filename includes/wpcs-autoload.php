@@ -14,6 +14,7 @@
  * @return false|string Path to the file or false on failure.
  */
 function xpwp_file_path( $class_name, $prefix, $folder ) {
+
 	$class_name   = str_replace( $prefix, '', $class_name );
 	$plugin_parts = explode( '\\', $class_name );
 	$name         = 'class-' . array_pop( $plugin_parts ) . '.php';
@@ -31,7 +32,7 @@ function xpwp_file_path( $class_name, $prefix, $folder ) {
 
 spl_autoload_register(
 	function ( $class_name ) {
-		$prefix   = 'Axeptio\\';
+		$prefix   = 'Axeptio\\Plugin\\';
 		$base_dir = __DIR__ . '/classes/';
 
 		$len = strlen( $prefix );

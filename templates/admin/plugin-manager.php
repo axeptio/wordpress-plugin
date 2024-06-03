@@ -9,7 +9,7 @@
 			<div class="px-6 py-4 lg:pb-0">
 				<div class="mt-6 mb-0">
 					<div class="md:inline-flex md:items-end">
-						<img class="aspect-|14/3] w-40" src="<?php echo esc_attr( \Axeptio\get_logo() ); ?>" alt="<?php esc_attr_e( 'Axeptio', 'axeptio-wordpress-plugin' ); ?>">
+						<img class="aspect-|14/3] w-40" src="<?php echo esc_attr( \Axeptio\Plugin\get_logo() ); ?>" alt="<?php esc_attr_e( 'Axeptio', 'axeptio-wordpress-plugin' ); ?>">
 						<div class="mt-2 lg:mt-0 md:ml-6 text-base mb-1"><?php esc_html_e( 'Plugin manager', 'axeptio-wordpress-plugin' ); ?></div>
 					</div>
 				</div>
@@ -58,13 +58,13 @@
 				</header>
 
 				<div>
-					<?php \Axeptio\get_template_part( 'admin/sections/plugins' ); ?>
+					<?php \Axeptio\Plugin\get_template_part( 'admin/sections/plugins' ); ?>
 				</div>
 			</div>
 			<?php do_action( 'axeptio/after_plugin_manager' ); ?>
 		</div>
 		<?php do_action( 'axeptio/after_plugin_manager_container' ); ?>
-		<?php \Axeptio\get_template_part( 'admin/plugins/fields/edit' ); ?>
-		<?php \Axeptio\get_template_part( 'admin/plugins/fields/modal-delete' ); ?>
+		<?php \Axeptio\Plugin\get_template_part( 'admin/plugins/fields/edit' ); ?>
+		<?php \Axeptio\Plugin\get_template_part( 'admin/plugins/fields/modal-delete' ); ?>
 	</div>
 </div>

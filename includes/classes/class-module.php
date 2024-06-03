@@ -5,7 +5,7 @@
  * @package Axeptio
  */
 
-namespace Axeptio;
+namespace Axeptio\Plugin;
 
 /**
  * Module is any feature that conditionally activates based on the current context.

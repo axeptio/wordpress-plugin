@@ -5,10 +5,10 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Models;
+namespace Axeptio\Plugin\Models;
 
-use Axeptio\Utils\Remember;
-use function Axeptio\Utility\get_favicon;
+use Axeptio\Plugin\Utils\Remember;
+use function Axeptio\Plugin\Utility\get_favicon;
 
 class Plugins {
 	/**

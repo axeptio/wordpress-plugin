@@ -1,6 +1,6 @@
 <?php
 
-namespace Axeptio\Models;
+namespace Axeptio\Plugin\Models;
 
 /**
  * Class handling settings for recommended plugins.

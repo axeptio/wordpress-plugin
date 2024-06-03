@@ -5,9 +5,9 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Admin\Settings;
+namespace Axeptio\Plugin\Admin\Settings;
 
-use Axeptio\Module;
+use Axeptio\Plugin\Module;
 
 class Setting_Api {
 

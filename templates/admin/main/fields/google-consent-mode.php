@@ -33,12 +33,12 @@
 	<input type="checkbox" @change="activeGoogleConsentMode = !activeGoogleConsentMode"
 			class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0"
 			id="xpwp_google_consent_mode" name="axeptio_settings[google_consent_mode]"
-			value="1" <?php echo (bool) \Axeptio\get_option( 'google_consent_mode', '0' ) ? 'checked' : ''; ?>
+			value="1" <?php echo (bool) \Axeptio\Plugin\get_option( 'google_consent_mode', '0' ) ? 'checked' : ''; ?>
 			placeholder="">
 </div>
 
 <?php
-$axeptio_google_consent_params = (array) \Axeptio\get_option( 'google_consent_params', array() );
+$axeptio_google_consent_params = (array) \Axeptio\Plugin\get_option( 'google_consent_params', array() );
 $axeptio_google_params_list    = array(
 	array(
 		'label'       => esc_html__( 'Analytics storage', 'axeptio-wordpress-plugin' ),
@@ -72,7 +72,7 @@ $axeptio_google_params_list    = array(
 		<?php foreach ( $axeptio_google_params_list as $axeptio_google_param ) : ?>
 			<li class="flex items-center justify-between py-2 pl-4 pr-5 text-sm leading-6">
 					<?php
-						\Axeptio\get_template_part(
+						\Axeptio\Plugin\get_template_part(
 							'admin/common/fields/toggle',
 							array(
 								'label'        => $axeptio_google_param['label'],

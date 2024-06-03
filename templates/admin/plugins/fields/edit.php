@@ -152,7 +152,7 @@
 					</label>
 					<div class="mt-2">
 						<?php
-						\Axeptio\get_template_part(
+						\Axeptio\Plugin\get_template_part(
 							'admin/plugins/fields/repeater',
 							array(
 								'name'        => 'wp_filter_list',
@@ -201,7 +201,7 @@
 					</label>
 					<div class="mt-2">
 						<?php
-						\Axeptio\get_template_part(
+						\Axeptio\Plugin\get_template_part(
 							'admin/plugins/fields/repeater',
 							array(
 								'name'        => 'shortcode_tags_list',

@@ -5,9 +5,9 @@
  * @package Axeptio
  */
 
-namespace Axeptio\Models;
+namespace Axeptio\Plugin\Models;
 
-use Axeptio\Module;
+use Axeptio\Plugin\Module;
 
 class Models extends Module {
 	/**

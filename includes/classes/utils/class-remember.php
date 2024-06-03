@@ -1,5 +1,5 @@
 <?php
-namespace Axeptio\Utils;
+namespace Axeptio\Plugin\Utils;
 
 class Remember {
 	/**
