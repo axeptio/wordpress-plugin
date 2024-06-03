@@ -7,7 +7,9 @@
 
 namespace Axeptio\Plugin\Init;
 
+use Axeptio\Plugin\Models\Settings;
 use Axeptio\Plugin\Module;
+use Axeptio\Plugin\Utils\Flash_Vars;
 use function Axeptio\Plugin\get_current_admin_url;
 
 class Activation_Hook extends Module {
@@ -38,7 +40,18 @@ class Activation_Hook extends Module {
 	 * @return void
 	 */
 	public function after_plugin_activation() {
-		$this->maybe_redirect_to_settings_page();
+
+		if (isset( $_GET['plugin'] ) && isset( $_GET['activate'] )) {
+			return;
+		}
+
+		$axeptio_plugin_activated  = get_option('axeptio_plugin_activated' );
+
+		if ($axeptio_plugin_activated && ! Settings::get_option('client_id')) {
+			delete_option('axeptio_plugin_activated' );
+			wp_safe_redirect( admin_url( 'admin.php?page=axeptio-wordpress-plugin&onboard=1' ) );
+			exit;
+		}
 	}
 
 	/**
@@ -54,19 +67,8 @@ class Activation_Hook extends Module {
 	 *
 	 * @return void
 	 */
-	public function maybe_redirect_to_settings_page() {
-		$current_url = get_current_admin_url();
-
-		$activated_by_wpdmin = ! empty( strpos( $current_url, 'plugins.php' ) ) && isset( $_GET['activate'] ) && (bool) sanitize_text_field( wp_unslash( $_GET['activate'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-
-		if ( ! $activated_by_wpdmin || isset( $_GET['activate-multi'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			return;
-		}
-
-		if ( get_option( 'xpwp_client_id' ) === false ) {
-			wp_safe_redirect( admin_url( 'admin.php?page=axeptio-wordpress-plugin&onboard=1' ) );
-			exit;
-		}
+	public function set_plugin_activated() {
+		update_option('axeptio_plugin_activated', true);
 	}
 
 	/**

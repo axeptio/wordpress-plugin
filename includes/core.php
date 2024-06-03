@@ -9,6 +9,7 @@ namespace Axeptio\Plugin;
 
 use Axeptio\Plugin\Init\Activate;
 use Axeptio\Plugin\Init\Activation_Hook;
+use Axeptio\Plugin\Utils\Flash_Vars;
 use Axeptio\Plugin\Utils\WP_Migration_Manager;
 use \WP_Error;
 use function Axeptio\Plugin\Utility\get_asset_info;
@@ -70,6 +71,7 @@ function migrate() {
  * @return void
  */
 function init() {
+
 	do_action( 'axeptio/before_init' );
 	// If the composer.json isn't found, trigger a warning.
 	if ( ! file_exists( XPWP_PATH . 'composer.json' ) ) {
@@ -96,7 +98,8 @@ function init() {
  * @return void
  */
 function activate() {
-	( new Activation_Hook() )->maybe_redirect_to_settings_page();
+
+	( new Activation_Hook() )->set_plugin_activated();
 	// First load the init scripts in case any rewrite functionality is being loaded.
 	init();
 
