@@ -153,6 +153,46 @@ class Admin_Callbacks {
 			);
 	}
 
+
+	/**
+	 * Cookie domain.
+	 *
+	 * @return void
+	 */
+	public function cookie_domain() {
+		\Axeptio\Plugin\get_template_part(
+			'admin/common/fields/text',
+			array(
+				'label' => __( 'Cookie domain', 'axeptio-wordpress-plugin' ),
+				'group' => 'axeptio_settings',
+				'name'  => 'cookie_domain',
+				'id'    => 'xpwp_cookie_domain',
+				'value' => Settings::get_option( 'cookie_domain', '' ) ,
+				'instruction' => __( 'If specified, domain name on which the cookie containing user choices will be available. This allows to request one consent for various subdomains', 'axeptio-wordpress-plugin'),
+			)
+		);
+	}
+
+
+	/**
+	 * Cookie domain.
+	 *
+	 * @return void
+	 */
+	public function api_url() {
+		\Axeptio\Plugin\get_template_part(
+			'admin/common/fields/text',
+			array(
+				'label' => __( 'API url', 'axeptio-wordpress-plugin' ),
+				'group' => 'axeptio_settings',
+				'name'  => 'api_url',
+				'id'    => 'xpwp_api_url',
+				'value' => Settings::get_option( 'api_url', '' ) ,
+				'instruction' => __( 'URL on which the widget will send its POST and GET requests for querying and storing consent proofs.', 'axeptio-wordpress-plugin' )
+			)
+		);
+	}
+
 	/**
 	 * Description of the widget.
 	 *
