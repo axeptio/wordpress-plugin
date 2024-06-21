@@ -379,6 +379,17 @@ class Admin_Main extends Module {
 					'class'     => 'inline-table-row label-right',
 				),
 			),
+			array(
+				'id'       => 'xpwp_proxy_sdk',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'proxy_sdk' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_advanced_settings',
+				'args'     => array(
+					'label_for' => 'xpwp_proxy_sdk',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
 		);
 
 		$this->settings->set_fields( $args );

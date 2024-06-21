@@ -150,3 +150,12 @@ function get_relative_path($from, $to)
 	}
 	return implode('/', $relPath);
 }
+
+function get_sdk_url() {
+	if (Settings::get_option('proxy_sdk', false)) {
+		$proxy_key = \get_option('axeptio/sdk_proxy_key');
+		return home_url() . '/'. $proxy_key . '.js';
+	}
+	return 'https://static.axept.io/sdk.js';
+
+}

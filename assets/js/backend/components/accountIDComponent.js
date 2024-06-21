@@ -11,6 +11,7 @@ const instance = function( args ) {
 		activeGoogleConsentMode: args.activeGoogleConsentMode,
 		googleConsentModeParams: args.googleConsentModeParams,
 		sendDatas: args.sendDatas,
+		proxySdk: args.proxySdk,
 		currentTab: Alpine.$persist( 'main-settings' ),
 		selectedOption: args.selectedOption,
 		options: ( () => {
