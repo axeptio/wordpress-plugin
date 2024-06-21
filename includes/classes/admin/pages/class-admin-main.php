@@ -169,11 +169,31 @@ class Admin_Main extends Module {
 			false
 			);
 
+
+
+		$consent_mode_title = \Axeptio\Plugin\get_template_part(
+			'admin/common/fields/title',
+			array(
+				'title'       => __( 'Google Consent Mode', 'axeptio-wordpress-plugin' ),
+				'description' => __( 'In this section, you can set the settings relative to the Google Consent Mode', 'axeptio-wordpress-plugin' ),
+			),
+			false
+		);
+
 		$data_sending_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(
 				'title'       => __( 'Data sending', 'axeptio-wordpress-plugin' ),
 				'description' => __( 'In this section, you can set whether or not you want to let Axeptio collect technical datas', 'axeptio-wordpress-plugin' ),
+			),
+			false
+		);
+
+		$advanced_settings_title = \Axeptio\Plugin\get_template_part(
+			'admin/common/fields/title',
+			array(
+				'title'       => __( 'Advanced Settings', 'axeptio-wordpress-plugin' ),
+				'description' => __( 'In this section, you will have the opportunity to manage advanced Axeptio settings.', 'axeptio-wordpress-plugin' ),
 			),
 			false
 		);
@@ -197,11 +217,20 @@ class Admin_Main extends Module {
 				),
 			),
 			array(
+				'id'    => 'xpwp_admin_consent_mode',
+				'title' => false,
+				'page'  => 'axeptio-wordpress-plugin',
+				'args'  => array(
+					'before_section' => '</div><div x-show="currentTab === \'consent-mode\'" x-cloak>' . $consent_mode_title,
+					'after_section'  => '</div>',
+				),
+			),
+			array(
 				'id'    => 'xpwp_admin_customize',
 				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
 				'args'  => array(
-					'before_section' => '</div><div x-show="currentTab === \'customization\'" x-cloak>' . $customize_title,
+					'before_section' => '<div x-show="currentTab === \'customization\'" x-cloak>' . $customize_title,
 					'after_section'  => '</div>',
 				),
 			),
@@ -211,6 +240,15 @@ class Admin_Main extends Module {
 				'page'  => 'axeptio-wordpress-plugin',
 				'args'  => array(
 					'before_section' => '<div x-show="currentTab === \'data-sending\'" x-cloak>' . $data_sending_title,
+					'after_section'  => '</div>',
+				),
+			),
+			array(
+				'id'    => 'xpwp_admin_advanced_settings',
+				'title' => false,
+				'page'  => 'axeptio-wordpress-plugin',
+				'args'  => array(
+					'before_section' => '<div x-show="currentTab === \'advanced-settings\'" x-cloak>' . $advanced_settings_title,
 					'after_section'  => '</div>',
 				),
 			),
@@ -274,20 +312,9 @@ class Admin_Main extends Module {
 				'title'    => __( 'Google Consent Mode V2', 'axeptio-wordpress-plugin' ),
 				'callback' => array( $this->callbacks, 'google_consent_mode_set' ),
 				'page'     => 'axeptio-wordpress-plugin',
-				'section'  => 'xpwp_admin_index',
+				'section'  => 'xpwp_admin_consent_mode',
 				'args'     => array(
 					'label_for' => 'xpwp_google_consent_mode',
-					'class'     => 'inline-table-row label-right',
-				),
-			),
-			array(
-				'id'       => 'xpwp_disable_send_datas',
-				'title'    => __( 'Collect of data and errors by Axeptio', 'axeptio-wordpress-plugin' ),
-				'callback' => array( $this->callbacks, 'send_datas_set' ),
-				'page'     => 'axeptio-wordpress-plugin',
-				'section'  => 'xpwp_admin_disable_send_datas',
-				'args'     => array(
-					'label_for' => 'xpwp_disable_send_datas',
 					'class'     => 'inline-table-row label-right',
 				),
 			),
@@ -321,6 +348,39 @@ class Admin_Main extends Module {
 				'section'  => 'xpwp_admin_customize',
 				'args'     => array(
 					'label_for' => 'xpwp_widget_description',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
+				'id'       => 'xpwp_disable_send_datas',
+				'title'    => __( 'Collect of data and errors by Axeptio', 'axeptio-wordpress-plugin' ),
+				'callback' => array( $this->callbacks, 'send_datas_set' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_disable_send_datas',
+				'args'     => array(
+					'label_for' => 'xpwp_disable_send_datas',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
+				'id'       => 'xpwp_cookie_domain',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'cookie_domain' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_advanced_settings',
+				'args'     => array(
+					'label_for' => 'xpwp_cookie_domain',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
+				'id'       => 'xpwp_api_url',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'api_url' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_advanced_settings',
+				'args'     => array(
+					'label_for' => 'xpwp_api_url',
 					'class'     => 'inline-table-row label-right',
 				),
 			),
