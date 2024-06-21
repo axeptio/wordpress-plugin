@@ -8,4 +8,5 @@
 @import "base/typography.css";
 @import "ui/button.css";
 @import "ui/forms.css";
+@import "ui/notice.css";
 @import "layout/account-box.css";

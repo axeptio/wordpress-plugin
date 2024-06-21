@@ -110,8 +110,10 @@ function get_template_part( $slug, $datas = array(), $display = true ) {
 function get_main_admin_tabs() {
 	$tab_items = array(
 		'main-settings' => __( 'Main settings', 'axeptio-wordpress-plugin' ),
+		'consent-mode' => __( 'Google Consent Mode', 'axeptio-wordpress-plugin' ),
 		'customization' => __( 'Customization', 'axeptio-wordpress-plugin' ),
 		'data-sending'  => __( 'Data sending', 'axeptio-wordpress-plugin' ),
+		'advanced-settings'  => __( 'Advanced', 'axeptio-wordpress-plugin' ),
 	);
 	return \Axeptio\Plugin\get_template_part( 'admin/main/tabs', array( 'tab_items' => $tab_items ), false );
 }

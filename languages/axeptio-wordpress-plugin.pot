@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2024-02-14 11:33+0100\n"
+"POT-Creation-Date: 2024-06-21 11:07+0200\n"
 "PO-Revision-Date: 2023-05-10 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio-wordpress-plugin.php\n"
@@ -25,19 +25,19 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-3: node_modules\n"
 "X-Poedit-SearchPathExcluded-4: dist\n"
 
-#: axeptio-wordpress-plugin.php:33
+#: axeptio-wordpress-plugin.php:35
 msgid "Unable to activate Axeptio"
 msgstr ""
 
 #. translators: %1$s: current php version min and %2$s version of php required
-#: axeptio-wordpress-plugin.php:37
+#: axeptio-wordpress-plugin.php:39
 #, php-format
 msgid ""
 "Your server is currently running PHP %1$s. The Axeptio plugin requires at "
 "least PHP %2$s. Please upgrade your PHP version to use this plugin."
 msgstr ""
 
-#: axeptio-wordpress-plugin.php:41
+#: axeptio-wordpress-plugin.php:43
 msgid "Return to plugins pages"
 msgstr ""
 
@@ -49,7 +49,27 @@ msgstr ""
 msgid "Widget sub-title"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:165
+#: includes/classes/admin/pages/class-admin-callbacks.php:166
+msgid "Cookie domain"
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:171
+msgid ""
+"If specified, domain name on which the cookie containing user choices will "
+"be available. This allows to request one consent for various subdomains"
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:186
+msgid "API url"
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:191
+msgid ""
+"URL on which the widget will send its POST and GET requests for querying and "
+"storing consent proofs."
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:205
 msgid "Widget description"
 msgstr ""
 
@@ -95,38 +115,58 @@ msgid ""
 "in the Axeptio widget."
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:170
-#: includes/helpers/helpers.php:114
+#: includes/classes/admin/pages/class-admin-main.php:172
+#: includes/helpers/helpers.php:113
+msgid "Google Consent Mode"
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-main.php:173
+msgid ""
+"In this section, you can set the settings relative to the Google Consent Mode"
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-main.php:181
+#: includes/helpers/helpers.php:115
 msgid "Data sending"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:171
+#: includes/classes/admin/pages/class-admin-main.php:182
 msgid ""
 "In this section, you can set whether or not you want to let Axeptio collect "
 "technical datas"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:225
+#: includes/classes/admin/pages/class-admin-main.php:190
+msgid "Advanced Settings"
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-main.php:191
+msgid ""
+"In this section, you will have the opportunity to manage advanced Axeptio "
+"settings."
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-main.php:263
 msgid "Do you want to enable the widget?"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:236
+#: includes/classes/admin/pages/class-admin-main.php:274
 msgid "Project ID"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:247
+#: includes/classes/admin/pages/class-admin-main.php:285
 msgid "Options"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:258
+#: includes/classes/admin/pages/class-admin-main.php:296
 msgid "Project Version"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:269
+#: includes/classes/admin/pages/class-admin-main.php:307
 msgid "Google Consent Mode V2"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:280
+#: includes/classes/admin/pages/class-admin-main.php:351
 msgid "Collect of data and errors by Axeptio"
 msgstr ""
 
@@ -179,23 +219,23 @@ msgid "All shortcode tags"
 msgstr ""
 
 #. translators: %s: the path to the plugin
-#: includes/core.php:80
+#: includes/core.php:83
 #, php-format
 msgid ""
 "The composer.json file was not found within %s. No classes will be loaded."
 msgstr ""
 
-#: includes/core.php:194
+#: includes/core.php:198
 msgid ""
 "We were unable to find your project, or it appears that it has not yet been "
 "published."
 msgstr ""
 
-#: includes/core.php:202
+#: includes/core.php:206
 msgid "Error verifying account ID. Try Again."
 msgstr ""
 
-#: includes/core.php:209
+#: includes/core.php:213
 msgid "Please enter an account ID"
 msgstr ""
 
@@ -203,8 +243,12 @@ msgstr ""
 msgid "Main settings"
 msgstr ""
 
-#: includes/helpers/helpers.php:113
+#: includes/helpers/helpers.php:114
 msgid "Customization"
+msgstr ""
+
+#: includes/helpers/helpers.php:116
+msgid "Advanced"
 msgstr ""
 
 #: templates/admin/main/fields/client-id.php:31
@@ -367,11 +411,15 @@ msgstr ""
 msgid "Before you get started, we invite you to configure the settings below!"
 msgstr ""
 
-#: templates/admin/plugin-manager.php:28 templates/admin/plugin-manager.php:44
+#: templates/admin/plugin-manager.php:20 templates/admin/settings-main.php:20
+msgid "Documentation"
+msgstr ""
+
+#: templates/admin/plugin-manager.php:35 templates/admin/plugin-manager.php:51
 msgid "Default configuration"
 msgstr ""
 
-#: templates/admin/plugin-manager.php:31
+#: templates/admin/plugin-manager.php:38
 msgid ""
 "Axeptio allows you to fine-tune how you want your extensions to act based on "
 "consent or non-consent of cookie rules through our widget. You can set up "
@@ -379,7 +427,7 @@ msgid ""
 "version of your project."
 msgstr ""
 
-#: templates/admin/plugin-manager.php:38
+#: templates/admin/plugin-manager.php:45
 msgid "Project version"
 msgstr ""
 
@@ -503,10 +551,6 @@ msgstr ""
 
 #: templates/admin/plugins/fields/toggle.php:27
 msgid "Enable"
-msgstr ""
-
-#: templates/admin/sections/main.php:44
-msgid "How To Integrate Axeptio?"
 msgstr ""
 
 #: templates/admin/sections/notice.php:16

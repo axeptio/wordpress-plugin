@@ -85,7 +85,6 @@ class Axeptio_Sdk extends Module
 							'shortDescription' => isset($configuration['vendor_shortDescription']) && '' !== $configuration['vendor_shortDescription'] ? wp_strip_all_tags($configuration['vendor_shortDescription']) : $plugin_configuration['Description'],
 							'longDescription' => wp_strip_all_tags($configuration['vendor_longDescription'] ?? ''),
 							'policyUrl' => isset($configuration['vendor_policyUrl']) && '' !== $configuration['vendor_policyUrl'] ? $configuration['vendor_policyUrl'] : $plugin_configuration['PluginURI'],
-							// TODO: Vendor Domain.
 							'domain' => $configuration['vendor_domain'] ?? '',
 							'image' => '' === $configuration['vendor_image'] && isset($configuration['Merged']['vendor_image']) ? $configuration['Merged']['vendor_image'] : $configuration['vendor_image'],
 							'type' => 'wordpress plugin',
@@ -142,6 +141,8 @@ class Axeptio_Sdk extends Module
 		$disable_send_datas = (bool)Settings::get_option('disable_send_datas', false);
 
 		$client_id = Settings::get_option('client_id', false);
+		$cookie_domain = Settings::get_option('cookie_domain', false);
+		$api_url = Settings::get_option('api_url', false);
 		$cookies_version = Project_Versions::get_current_lang_version();
 
 		$google_consent_mode = Settings::get_option('google_consent_mode', '0');
@@ -176,6 +177,14 @@ class Axeptio_Sdk extends Module
 
 		if ('' !== $cookies_version) {
 			$sdk_settings['cookiesVersion'] = $cookies_version;
+		}
+
+		if ($cookie_domain && ''!== $cookie_domain) {
+			$sdk_settings['userCookiesDomain'] = $cookie_domain;
+		}
+
+		if ($api_url && ''!== $api_url) {
+			$sdk_settings['apiUrl'] = $api_url;
 		}
 
 		return apply_filters(
