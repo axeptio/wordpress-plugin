@@ -194,6 +194,25 @@ class Admin_Callbacks {
 	}
 
 	/**
+	 * Cookie domain.
+	 *
+	 * @return void
+	 */
+	public function proxy_sdk() {
+		\Axeptio\Plugin\get_template_part(
+			'admin/main/fields/proxy-sdk',
+			array(
+				'label' => __( 'Enable sdk proxy', 'axeptio-wordpress-plugin' ),
+				'group' => 'axeptio_settings',
+				'name'  => 'sdk_proxy',
+				'id'    => 'xpwp_sdk_proxy',
+				'value' => Settings::get_option( 'sdk_proxy', '0' ) ,
+				'instruction' => __( 'Load the Axeptio SDK from your website domain.', 'axeptio-wordpress-plugin' )
+			)
+		);
+	}
+
+	/**
 	 * Description of the widget.
 	 *
 	 * @return void

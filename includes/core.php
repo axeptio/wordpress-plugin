@@ -73,6 +73,7 @@ function migrate() {
 function init() {
 
 	do_action( 'axeptio/before_init' );
+
 	// If the composer.json isn't found, trigger a warning.
 	if ( ! file_exists( XPWP_PATH . 'composer.json' ) ) {
 		add_action(

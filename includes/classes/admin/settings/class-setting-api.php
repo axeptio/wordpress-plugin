@@ -7,8 +7,6 @@
 
 namespace Axeptio\Plugin\Admin\Settings;
 
-use Axeptio\Plugin\Module;
-
 class Setting_Api {
 
 	/**
