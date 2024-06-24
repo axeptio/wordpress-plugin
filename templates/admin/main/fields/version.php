@@ -81,7 +81,7 @@ use Axeptio\Plugin\Models\Settings;
 				<h3 class="text-sm font-medium text-amber-800">
 					<?php esc_html_e( 'Existing project version backup', 'axeptio-wordpress-plugin' ); ?>
 				</h3>
-				<div class="mt-2 text-sm text-amber-700">
+				<div class="mt-2 text-sm text-amber-700 text-pretty">
 					<p><?php esc_html_e( 'A backup of the version configuration exists for this project, do you want to restore it?', 'axeptio-wordpress-plugin' ); ?></p>
 				</div>
 				<div class="mt-4">
