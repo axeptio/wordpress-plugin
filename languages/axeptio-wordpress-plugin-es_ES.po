@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-21 11:07+0200\n"
-"PO-Revision-Date: 2024-06-21 11:21+0200\n"
+"POT-Creation-Date: 2024-06-24 12:05+0200\n"
+"PO-Revision-Date: 2024-06-24 12:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -389,18 +389,34 @@ msgstr ""
 "Al marcar esta casilla, no deseo enviar datos/errores al plugin Axeptio y no "
 "deseo contribuir a la mejora del plugin."
 
-#: templates/admin/main/fields/version.php:118
-#: templates/admin/main/fields/version.php:155
-msgid "Dynamic (Axeptio based)"
-msgstr "Dinámico (basado en Axeptio)"
-
-#: templates/admin/main/fields/version.php:136
+#: templates/admin/main/fields/version.php:17
 msgid "Configured languages"
 msgstr "Idiomas configurados"
 
-#: templates/admin/main/fields/version.php:167
-msgid "Not configured"
-msgstr "No configurado"
+#: templates/admin/main/fields/version.php:38
+#: templates/admin/main/fields/version.php:60
+msgid "Dynamic (Axeptio based)"
+msgstr "Dinámico (basado en Axeptio)"
+
+#: templates/admin/main/fields/version.php:82
+msgid "Existing project version backup"
+msgstr "Copia de seguridad de la versión existente del proyecto"
+
+#: templates/admin/main/fields/version.php:85
+msgid ""
+"A backup of the version configuration exists for this project, do you want "
+"to restore it?"
+msgstr ""
+"Existe una copia de seguridad de la configuración de la versión para este "
+"proyecto, ¿desea restaurarla?"
+
+#: templates/admin/main/fields/version.php:90
+msgid "Yes, restore it"
+msgstr "Sí, restáurala"
+
+#: templates/admin/main/fields/version.php:93
+msgid "Dismiss"
+msgstr "Descartar"
 
 #: templates/admin/main/tabs.php:4
 msgid "Select a tab"
@@ -676,6 +692,9 @@ msgstr "Axeptio le permite hacer que su sitio web cumpla con el RGPD."
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr "axeptio"
+
+#~ msgid "Not configured"
+#~ msgstr "No configurado"
 
 #~ msgid "How To Integrate Axeptio?"
 #~ msgstr "¿Cómo integrar Axeptio?"

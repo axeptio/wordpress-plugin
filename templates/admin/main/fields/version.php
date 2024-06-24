@@ -78,14 +78,20 @@ use Axeptio\Plugin\Models\Settings;
 				</svg>
 			</div>
 			<div class="ml-3">
-				<h3 class="text-sm font-medium text-amber-800">Existing project version backup</h3>
+				<h3 class="text-sm font-medium text-amber-800">
+					<?php esc_html_e( 'Existing project version backup', 'axeptio-wordpress-plugin' ); ?>
+				</h3>
 				<div class="mt-2 text-sm text-amber-700">
-					<p>A backup of the version configuration exists for this project, do you want to restore it?</p>
+					<p><?php esc_html_e( 'A backup of the version configuration exists for this project, do you want to restore it?', 'axeptio-wordpress-plugin' ); ?></p>
 				</div>
 				<div class="mt-4">
 					<div class="-mx-2 -my-1.5 flex">
-						<button type="button" @click="restoreHistorizedVersion()" class="rounded-md bg-amber-50 px-2 py-1.5 text-sm font-medium text-amber-800 hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2 focus:ring-offset-amber-50">Yes, restore it</button>
-						<button type="button" @click="isHistorizedVersion = false" class="ml-3 rounded-md bg-amber-50 px-2 py-1.5 text-sm font-medium text-amber-800 hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2 focus:ring-offset-amber-50">Dismiss</button>
+						<button type="button" @click="restoreHistorizedVersion()" class="rounded-md bg-amber-50 px-2 py-1.5 text-sm font-medium text-amber-800 hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2 focus:ring-offset-amber-50">
+							<?php esc_html_e( 'Yes, restore it', 'axeptio-wordpress-plugin' ); ?>
+						</button>
+						<button type="button" @click="isHistorizedVersion = false" class="ml-3 rounded-md bg-amber-50 px-2 py-1.5 text-sm font-medium text-amber-800 hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2 focus:ring-offset-amber-50">
+							<?php esc_html_e( 'Dismiss', 'axeptio-wordpress-plugin' ); ?>
+						</button>
 					</div>
 				</div>
 			</div>

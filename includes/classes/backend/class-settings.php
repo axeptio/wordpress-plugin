@@ -1,10 +1,11 @@
 <?php
 /**
- * Cookie Saver
+ * Class Settings
  *
- * @package Axeptio
+ * This class extends the Module class and provides functionality related to cookies.
+ *
+ * @package Axeptio\Plugin\Backend
  */
-
 namespace Axeptio\Plugin\Backend;
 
 use Axeptio\Plugin\Models\Project_Versions;
@@ -22,7 +23,9 @@ class Settings extends Module {
 	}
 
 	/**
-	 * Registering the cookie actions
+	 * Method register
+	 *
+	 * Registers the updated option action
 	 *
 	 * @return void
 	 */
@@ -30,6 +33,15 @@ class Settings extends Module {
 		add_action( 'update_option_axeptio_settings', array( $this, 'historize_version' ), 20, 2 );
 	}
 
+	/**
+	 * Method historize_version
+	 *
+	 * Saves the previous version of the settings when the settings are updated.
+	 *
+	 * @param mixed $old_value The old version of the settings.
+	 * @param mixed $new_value The new version of the settings.
+	 * @return void
+	 */
 	public function historize_version($old_value, $new_value)
 	{
 		$localized_version = Project_Versions::get_localized_versions();

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
-"POT-Creation-Date: 2024-06-21 11:07+0200\n"
-"PO-Revision-Date: 2024-06-21 11:21+0200\n"
+"POT-Creation-Date: 2024-06-24 12:05+0200\n"
+"PO-Revision-Date: 2024-06-24 12:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -392,18 +392,34 @@ msgstr ""
 "En cochant cette case, je ne souhaite pas envoyer de données/erreurs au "
 "plugin Axeptio et ne souhaite pas contribuer à l'amélioration du plugin."
 
-#: templates/admin/main/fields/version.php:118
-#: templates/admin/main/fields/version.php:155
-msgid "Dynamic (Axeptio based)"
-msgstr "Dynamique (basé sur Axeptio)"
-
-#: templates/admin/main/fields/version.php:136
+#: templates/admin/main/fields/version.php:17
 msgid "Configured languages"
 msgstr "Langues configurées"
 
-#: templates/admin/main/fields/version.php:167
-msgid "Not configured"
-msgstr "Non configurée"
+#: templates/admin/main/fields/version.php:38
+#: templates/admin/main/fields/version.php:60
+msgid "Dynamic (Axeptio based)"
+msgstr "Dynamique (basé sur Axeptio)"
+
+#: templates/admin/main/fields/version.php:82
+msgid "Existing project version backup"
+msgstr "Sauvegarde de la version existante du projet"
+
+#: templates/admin/main/fields/version.php:85
+msgid ""
+"A backup of the version configuration exists for this project, do you want "
+"to restore it?"
+msgstr ""
+"Une sauvegarde de la configuration de la version existe pour ce projet, "
+"voulez-vous la restaurer ?"
+
+#: templates/admin/main/fields/version.php:90
+msgid "Yes, restore it"
+msgstr "Oui, restaure-la"
+
+#: templates/admin/main/fields/version.php:93
+msgid "Dismiss"
+msgstr "Ignorer"
 
 #: templates/admin/main/tabs.php:4
 msgid "Select a tab"
@@ -682,6 +698,9 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr "axeptio"
+
+#~ msgid "Not configured"
+#~ msgstr "Non configurée"
 
 #~ msgid "How To Integrate Axeptio?"
 #~ msgstr "Comment intégrer Axeptio ?"

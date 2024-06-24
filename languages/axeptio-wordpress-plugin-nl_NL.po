@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-21 11:07+0200\n"
-"PO-Revision-Date: 2024-06-21 11:16+0200\n"
+"POT-Creation-Date: 2024-06-24 12:05+0200\n"
+"PO-Revision-Date: 2024-06-24 12:14+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -390,18 +390,34 @@ msgstr ""
 "Door dit vakje aan te vinken, wil ik geen gegevens/fouten naar de Axeptio "
 "plugin sturen en niet bijdragen aan de verbetering van de plugin."
 
-#: templates/admin/main/fields/version.php:118
-#: templates/admin/main/fields/version.php:155
-msgid "Dynamic (Axeptio based)"
-msgstr "Dynamisch (gebaseerd op Axeptio)"
-
-#: templates/admin/main/fields/version.php:136
+#: templates/admin/main/fields/version.php:17
 msgid "Configured languages"
 msgstr "Geconfigureerde talen"
 
-#: templates/admin/main/fields/version.php:167
-msgid "Not configured"
-msgstr "Niet geconfigureerd"
+#: templates/admin/main/fields/version.php:38
+#: templates/admin/main/fields/version.php:60
+msgid "Dynamic (Axeptio based)"
+msgstr "Dynamisch (gebaseerd op Axeptio)"
+
+#: templates/admin/main/fields/version.php:82
+msgid "Existing project version backup"
+msgstr "Backup van bestaande projectversie"
+
+#: templates/admin/main/fields/version.php:85
+msgid ""
+"A backup of the version configuration exists for this project, do you want "
+"to restore it?"
+msgstr ""
+"Er bestaat een backup van de versieconfiguratie voor dit project, wilt u "
+"deze herstellen?"
+
+#: templates/admin/main/fields/version.php:90
+msgid "Yes, restore it"
+msgstr "Ja, herstel het"
+
+#: templates/admin/main/fields/version.php:93
+msgid "Dismiss"
+msgstr "Afwijzen"
 
 #: templates/admin/main/tabs.php:4
 msgid "Select a tab"
@@ -461,7 +477,7 @@ msgstr ""
 
 #: templates/admin/plugin-manager.php:20 templates/admin/settings-main.php:20
 msgid "Documentation"
-msgstr ""
+msgstr "Documentatie"
 
 #: templates/admin/plugin-manager.php:35 templates/admin/plugin-manager.php:51
 msgid "Default configuration"
@@ -682,6 +698,9 @@ msgstr "Axeptio stelt u in staat om uw website GDPR-conform te maken."
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr "axeptio"
+
+#~ msgid "Not configured"
+#~ msgstr "Niet geconfigureerd"
 
 #~ msgid "How To Integrate Axeptio?"
 #~ msgstr "Hoe Axeptio te integreren?"
