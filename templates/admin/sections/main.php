@@ -23,6 +23,7 @@
 							  'ad_personalization' => false,
 						  )
 					  ),
+					  'historizedVersions' => get_option('axeptio_versions', array()),
 					  'selectedOption' => \Axeptio\Plugin\Models\Project_Versions::selected_versions(),
 					  'sendDatas' => (bool)Settings::get_option('disable_send_datas', '0'),
 				  )

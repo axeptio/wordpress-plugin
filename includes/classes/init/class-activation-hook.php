@@ -10,7 +10,6 @@ namespace Axeptio\Plugin\Init;
 use Axeptio\Plugin\Models\Settings;
 use Axeptio\Plugin\Module;
 use Axeptio\Plugin\Utils\Flash_Vars;
-use function Axeptio\Plugin\get_current_admin_url;
 
 class Activation_Hook extends Module {
 

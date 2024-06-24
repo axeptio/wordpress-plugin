@@ -6,10 +6,12 @@ const instance = function( args ) {
 		accountID: args.accountID,
 		showID: false,
 		errorMessage: '',
+		isHistorizedVersion: false,
 		validAccountID: false,
 		activeSDK: args.activeSDK,
 		activeGoogleConsentMode: args.activeGoogleConsentMode,
 		googleConsentModeParams: args.googleConsentModeParams,
+		historizedVersions: args.historizedVersions,
 		sendDatas: args.sendDatas,
 		currentTab: Alpine.$persist( 'main-settings' ),
 		selectedOption: args.selectedOption,
@@ -36,6 +38,10 @@ const instance = function( args ) {
 				this.validateAccountID();
 			}
 		},
+		restoreHistorizedVersion() {
+			this.selectedOption = this.historizedVersions[this.accountID];
+			this.isHistorizedVersion = false;
+		},
 		async validateAccountID() {
 			this.errorMessage = '';
 
@@ -57,6 +63,10 @@ const instance = function( args ) {
 					} ) );
 					this.validAccountID = true;
 					this.optionsJson = JSON.stringify( this.options );
+
+					if (typeof this.historizedVersions[this.accountID] !== 'undefined') {
+						this.isHistorizedVersion = true;
+					}
 				} else {
 					this.validAccountID = false;
 					this.errorMessage = this.axeptioSettings.errors.non_existing_account_id;

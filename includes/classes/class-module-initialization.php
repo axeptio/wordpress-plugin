@@ -8,12 +8,11 @@
 namespace Axeptio\Plugin;
 
 use Axeptio\Plugin\Admin\Rest\Plugins;
+use Axeptio\Plugin\Backend\Settings;
 use Axeptio\Plugin\Frontend\Axeptio_Sdk;
 use Axeptio\Plugin\Compat\AlpineJS_Wpkses;
-use Axeptio\Plugin\Admin\Settings\Setting_Api;
 use Axeptio\Plugin\Frontend\Cookie;
 use Axeptio\Plugin\Frontend\Hook_Modifier;
-use Axeptio\Plugin\Init\Activate;
 use Axeptio\Plugin\Init\Activation_Hook;
 use Axeptio\Plugin\Models\Models;
 use Axeptio\Plugin\Third_Party\Wp_Rocket;
@@ -75,6 +74,7 @@ class Module_Initialization {
 			Hook_Modifier::class,
 			Plugins::class,
 			Wp_Rocket::class,
+			Settings::class,
 		);
 	}
 
