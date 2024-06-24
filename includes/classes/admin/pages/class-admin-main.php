@@ -85,6 +85,11 @@ class Admin_Main extends Module {
 	 */
 	public function override_first_menu_name() {
 		global $submenu;
+
+		if ( !isset($submenu['axeptio-wordpress-plugin']) ) {
+			return;
+		}
+
 		$submenu['axeptio-wordpress-plugin'][0][0] = __( 'Settings', 'axeptio-wordpress-plugin' ); // PHPCS:Ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 	}
 
