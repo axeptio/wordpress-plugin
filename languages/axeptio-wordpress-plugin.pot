@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2024-06-21 11:07+0200\n"
+"POT-Creation-Date: 2024-06-24 12:05+0200\n"
 "PO-Revision-Date: 2023-05-10 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -351,17 +351,31 @@ msgid ""
 "plugin and do not want to contribute to the improvement of the plugin."
 msgstr ""
 
-#: templates/admin/main/fields/version.php:118
-#: templates/admin/main/fields/version.php:155
-msgid "Dynamic (Axeptio based)"
-msgstr ""
-
-#: templates/admin/main/fields/version.php:136
+#: templates/admin/main/fields/version.php:17
 msgid "Configured languages"
 msgstr ""
 
-#: templates/admin/main/fields/version.php:167
-msgid "Not configured"
+#: templates/admin/main/fields/version.php:38
+#: templates/admin/main/fields/version.php:60
+msgid "Dynamic (Axeptio based)"
+msgstr ""
+
+#: templates/admin/main/fields/version.php:82
+msgid "Existing project version backup"
+msgstr ""
+
+#: templates/admin/main/fields/version.php:85
+msgid ""
+"A backup of the version configuration exists for this project, do you want "
+"to restore it?"
+msgstr ""
+
+#: templates/admin/main/fields/version.php:90
+msgid "Yes, restore it"
+msgstr ""
+
+#: templates/admin/main/fields/version.php:93
+msgid "Dismiss"
 msgstr ""
 
 #: templates/admin/main/tabs.php:4
