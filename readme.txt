@@ -2,8 +2,8 @@
 Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy, eprivacy, consent, script, cmp, data, personnal, widget, googletagmanager, consentmanagement
 Requires at least: 5.0
-Tested up to: 6.4.3
-Stable tag: 2.3.32
+Tested up to: 6.5.5
+Stable tag: 2.4
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -83,6 +83,23 @@ The idea is to customize the appearance of your widget so that it matches the de
 All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en-gb/articles/4402985038225-Customize-my-widget-s-aspect)
 
 == Changelog ==
+
+### 🎨 2.4 🎨 ###
+
+**Reorganized Settings Management Space 🎨**
+We did some spring cleaning! The settings management space has been redesigned and reorganized for a more intuitive and pleasant navigation experience. 🧹✨
+
+**Project Version History 🕰️**
+Keep track of all your project versions with history based on the project ID. You can now restore your settings with ease whenever necessary. 🔄🗂️
+
+**Link to Documentation 📚**
+No more searching around! A direct link to the plugin documentation is now available. Head over to Axeptio.io for all the info you need. 🔗📖
+
+**Set a Cookie Domain for the Axeptio SDK 🍪**
+For those who like to share, you can now set a cookie domain for the Axeptio SDK. Perfect for WordPress multisite configurations. 🌐🤝
+
+** Use a Proxy for the Axeptio SDK 🕵️‍♂️**
+Load the Axeptio SDK from your WordPress site domain using a proxy. 🛡️🔍
 
 ### 🙏 2.3.32 🙏 ###
 
