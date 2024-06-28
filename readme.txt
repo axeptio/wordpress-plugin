@@ -84,6 +84,13 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
+### 🐞 2.4.1 🐞 ###
+
+- **Fixed a bug related to Axeptio cookie preferences**
+Oops! One of our new features was a bit too eager to launch and introduced a bug in the Axeptio cookie preferences. We've now fixed this issue so everything works perfectly. 🚀🔧
+
+Thank you for your patience and understanding. Enjoy an even smoother experience with this update! 🎉
+
 ### 🎨 2.4 🎨 ###
 
 **Reorganized Settings Management Space 🎨**
