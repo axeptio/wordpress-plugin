@@ -18,7 +18,8 @@ use ReflectionException;
 use ReflectionFunction;
 use ReflectionMethod;
 
-class Hook_Modifier extends Module {
+class Hook_Modifier extends Module
+{
 
 	/**
 	 * Stored plugin contents.
@@ -91,7 +92,8 @@ class Hook_Modifier extends Module {
 	 *
 	 * @return true
 	 */
-	public function can_register() {
+	public function can_register()
+	{
 		return true;
 	}
 
@@ -100,13 +102,14 @@ class Hook_Modifier extends Module {
 	 *
 	 * @return void
 	 */
-	public function register() {
-		if ( ! Sdk::is_active() ) {
+	public function register()
+	{
+		if (!Sdk::is_active()) {
 			return;
 		}
 
-		add_action( 'template_redirect', array( $this, 'on_template_redirect' ) );
-		add_action( 'shutdown', array( $this, 'on_shutdown' ) );
+		add_action('template_redirect', array($this, 'on_template_redirect'));
+		add_action('shutdown', array($this, 'on_shutdown'));
 	}
 
 	/**
@@ -114,7 +117,8 @@ class Hook_Modifier extends Module {
 	 *
 	 * @return void
 	 */
-	public function on_template_redirect() {
+	public function on_template_redirect()
+	{
 		$this->process_shortcode_tags();
 		$this->process_wp_filter();
 	}
@@ -124,7 +128,8 @@ class Hook_Modifier extends Module {
 	 *
 	 * @return void
 	 */
-	public function on_shutdown() {
+	public function on_shutdown()
+	{
 		$_SESSION['axeptio_intercepted_content'] = $this->plugins_contents;
 	}
 
@@ -137,9 +142,10 @@ class Hook_Modifier extends Module {
 	 *
 	 * @return void
 	 */
-	public function add_error( string $plugin, string $filter, string $error ) {
-		$this->plugins_errors[ $plugin ][] = array(
-			'error'  => $error,
+	public function add_error(string $plugin, string $filter, string $error)
+	{
+		$this->plugins_errors[$plugin][] = array(
+			'error' => $error,
 			'filter' => $filter,
 		);
 	}
@@ -153,10 +159,11 @@ class Hook_Modifier extends Module {
 	 *
 	 * @return void
 	 */
-	public function add_content( $plugin, $filter, $content ) {
-		$this->plugins_contents[ $plugin ][] = array(
+	public function add_content($plugin, $filter, $content)
+	{
+		$this->plugins_contents[$plugin][] = array(
 			'content' => $content,
-			'filter'  => $filter,
+			'filter' => $filter,
 		);
 	}
 
@@ -165,17 +172,18 @@ class Hook_Modifier extends Module {
 	 *
 	 * @return array
 	 */
-	private function process_shortcode_tags() {
+	private function process_shortcode_tags()
+	{
 		global $shortcode_tags;
 
-		$stats   = array();
+		$stats = array();
 		$plugins = array();
-		foreach ( $shortcode_tags as $tag => $function ) {
-			$stats[ $tag ] = $this->process_function( $function );
-			if ( isset( $stats[ $tag ]['plugin'] ) ) {
-				$plugins[ $stats[ $tag ]['plugin'] ][] = array(
-					'name'     => $tag,
-					'plugin'   => $stats[ $tag ]['plugin'],
+		foreach ($shortcode_tags as $tag => $function) {
+			$stats[$tag] = $this->process_function($function);
+			if (isset($stats[$tag]['plugin'])) {
+				$plugins[$stats[$tag]['plugin']][] = array(
+					'name' => $tag,
+					'plugin' => $stats[$tag]['plugin'],
 					'function' => $function,
 				);
 			}
@@ -184,51 +192,51 @@ class Hook_Modifier extends Module {
 		$intercepted_plugins = array();
 		// maybe optimize since now $this->plugin_configurations is a map
 		// with plugin as keys.
-		$cookies_version       = Settings::get_option( 'version', false );
-		$cookies_version       = '' === $cookies_version ? 'all' : $cookies_version;
-		$plugin_configurations = Plugins::all( $cookies_version );
+		$cookies_version = Settings::get_option('version', false);
+		$cookies_version = '' === $cookies_version ? 'all' : $cookies_version;
+		$plugin_configurations = Plugins::all($cookies_version);
 
-		foreach ( $plugin_configurations as $plugin_configuration ) {
+		foreach ($plugin_configurations as $plugin_configuration) {
 
-			$configuration = 'all' === $cookies_version || ! isset( $plugin_configuration['Metas']['Merged'] ) ? $plugin_configuration['Metas'] : $plugin_configuration['Metas']['Merged'];
+			$configuration = 'all' === $cookies_version || !isset($plugin_configuration['Metas']['Merged']) ? $plugin_configuration['Metas'] : $plugin_configuration['Metas']['Merged'];
 
 			// consent has been given for this plugin,
 			// no need to add it to the interception.
-			if ( ! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled'] || $this->is_cookie_authorized( $configuration['plugin'] ) ) {
+			if (!isset($configuration['enabled']) || !(bool)$configuration['enabled'] || $this->is_cookie_authorized($configuration['plugin'])) {
 				continue;
 			}
 
-			if ( isset( $configuration['shortcode_tags_mode'] ) && 'none' !== $configuration['shortcode_tags_mode'] ) {
+			if (isset($configuration['shortcode_tags_mode']) && 'none' !== $configuration['shortcode_tags_mode']) {
 
 				$configuration['shortcode_tags_list'] = 'inherit' === $configuration['shortcode_tags_mode'] ? $plugin_configuration['Metas']['Parent']['shortcode_tags_list'] : $configuration['shortcode_tags_list'];
 				$configuration['shortcode_tags_mode'] = 'inherit' === $configuration['shortcode_tags_mode'] ? $plugin_configuration['Metas']['Parent']['shortcode_tags_mode'] : $configuration['shortcode_tags_mode'];
 
-				$configuration = $this->maybe_apply_recommended_settings( $configuration, 'shortcode_tags' );
+				$configuration = $this->maybe_apply_recommended_settings($configuration, 'shortcode_tags');
 
 				// We store the whitelisted tags in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
 				// if the plugin should be intercepted AND if there are tags to avoid.
-				$intercepted_plugins[ $configuration['plugin'] ] = array(
-					'mode'         => $configuration['shortcode_tags_mode'],
-					'list'         => explode( "\n", $configuration['shortcode_tags_list'] ),
-					'placeholder'  => $configuration['shortcode_tags_placeholder'],
-					'vendor_title' => isset( $configuration['vendor_title'] ) && '' !== $configuration['vendor_title'] ? $configuration['vendor_title'] : $plugin_configuration['Name'],
+				$intercepted_plugins[$configuration['plugin']] = array(
+					'mode' => $configuration['shortcode_tags_mode'],
+					'list' => explode("\n", $configuration['shortcode_tags_list']),
+					'placeholder' => $configuration['shortcode_tags_placeholder'],
+					'vendor_title' => isset($configuration['vendor_title']) && '' !== $configuration['vendor_title'] ? $configuration['vendor_title'] : $plugin_configuration['Name'],
 				);
 			}
 		}
 
-		foreach ( $plugins as $plugin => $tags ) {
+		foreach ($plugins as $plugin => $tags) {
 			// The plugin has no key in the $intercepted_plugins array,
 			// meaning it should not be intercepted.
-			if ( ! isset( $intercepted_plugins[ $plugin ] ) ) {
+			if (!isset($intercepted_plugins[$plugin])) {
 				continue;
 			}
 
-			foreach ( $tags as $tag ) {
-				if ( $this->should_load_shortcode( $intercepted_plugins[ $plugin ], $tag['name'] ) ) {
+			foreach ($tags as $tag) {
+				if ($this->should_load_shortcode($intercepted_plugins[$plugin], $tag['name'])) {
 					continue;
 				}
-				$shortcode_tags[ $tag['name'] ] = $this->wrap_tag( $tag['function'], $plugin, $intercepted_plugins[ $plugin ], $tag['name'] ); // PHPCS:Ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+				$shortcode_tags[$tag['name']] = $this->wrap_tag($tag['function'], $plugin, $intercepted_plugins[$plugin], $tag['name']); // PHPCS:Ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 			}
 		}
 
@@ -238,27 +246,28 @@ class Hook_Modifier extends Module {
 	/**
 	 * Should the shortcode be loaded or not?
 	 *
-	 * @param array  $intercepted_plugin Axeptio plugin settings intercepted.
+	 * @param array $intercepted_plugin Axeptio plugin settings intercepted.
 	 * @param string $name Shortcode tag name.
 	 *
 	 * @return bool
 	 */
-	private function should_load_shortcode( $intercepted_plugin, $name ) {
+	private function should_load_shortcode($intercepted_plugin, $name)
+	{
 		// If the  name is found in the $intercepted_plugins list
 		// and the current mode is whitelist, it should be skipped.
 
-		if ( 'none' === $intercepted_plugin['mode'] ) {
+		if ('none' === $intercepted_plugin['mode']) {
 			return true;
 		}
 
-		if ( 'whitelist' === $intercepted_plugin['mode'] && in_array( $name, $intercepted_plugin['list'], true ) ) {
+		if ('whitelist' === $intercepted_plugin['mode'] && in_array($name, $intercepted_plugin['list'], true)) {
 			return true;
 		}
 
 		// Vice versa, if the name is not found in the $intercepted_plugins list
 		// and the current mode is blacklist, it should be skipped as well.
 
-		if ( 'blacklist' === $intercepted_plugin['mode'] && ! in_array( $name, $intercepted_plugin['list'], true ) ) {
+		if ('blacklist' === $intercepted_plugin['mode'] && !in_array($name, $intercepted_plugin['list'], true)) {
 			return true;
 		}
 
@@ -271,18 +280,19 @@ class Hook_Modifier extends Module {
 	 * @param string $hook The hook to check.
 	 * @return bool Returns true if the hook is whitelisted, false otherwise.
 	 */
-	protected function is_whitelisted_hook( string $hook ): bool {
+	protected function is_whitelisted_hook(string $hook): bool
+	{
 		return array_reduce(
 			self::WHITELISTED_HOOK,
-			function ( $carry, $whitelisted_hook ) use ( $hook ) {
-				if ( true === $carry ) {
+			function ($carry, $whitelisted_hook) use ($hook) {
+				if (true === $carry) {
 					return true;
 				}
 
-				if ( strpos( $whitelisted_hook, '*' ) !== false ) {
-					$whitelisted_hook = preg_quote( $whitelisted_hook, '/' );
-					$pattern          = '/^' . str_replace( '\*', '.*', $whitelisted_hook ) . '$/';
-					return (bool) preg_match( $pattern, $hook );
+				if (strpos($whitelisted_hook, '*') !== false) {
+					$whitelisted_hook = preg_quote($whitelisted_hook, '/');
+					$pattern = '/^' . str_replace('\*', '.*', $whitelisted_hook) . '$/';
+					return (bool)preg_match($pattern, $hook);
 				}
 
 				return $hook === $whitelisted_hook;
@@ -301,60 +311,61 @@ class Hook_Modifier extends Module {
 	 *
 	 * @return bool
 	 */
-	private function should_load_hook( $intercepted_plugin, $hook, $callback = false, $priority = 10 ) {
+	private function should_load_hook($intercepted_plugin, $hook, $callback = false, $priority = 10)
+	{
 		// If the  name is found in the $intercepted_plugins list
 		// and the current mode is whitelist, it should be skipped.
 
 		$default = array(
-			'hook'     => null,
-			'class'    => null,
+			'hook' => null,
+			'class' => null,
 			'callback' => null,
 			'priority' => null,
 		);
 
 		$matching_hook = false;
 
-		if ( 'none' === $intercepted_plugin['mode'] ) {
+		if ('none' === $intercepted_plugin['mode']) {
 			return true;
 		}
 
-		if ( $this->is_whitelisted_hook( $hook ) ) {
+		if ($this->is_whitelisted_hook($hook)) {
 			return true;
 		}
 
-		foreach ( $intercepted_plugin['list'] as $intercepted_hook ) {
+		foreach ($intercepted_plugin['list'] as $intercepted_hook) {
 			$current_hook = $default;
 
-			if ( isset( $intercepted_hook['hook'] ) ) {
+			if (isset($intercepted_hook['hook'])) {
 				$current_hook['hook'] = $hook;
 			}
 
-			if ( isset( $intercepted_hook['callback'] ) ) {
-				if ( isset( $intercepted_hook['class'] ) && is_array( $callback['function'] ) ) {
-					$current_hook['class']    = is_string( $callback['function'][0] ) ? $callback['function'][0] : get_class( $callback['function'][0] );
+			if (isset($intercepted_hook['callback'])) {
+				if (isset($intercepted_hook['class']) && is_array($callback['function'])) {
+					$current_hook['class'] = is_string($callback['function'][0]) ? $callback['function'][0] : get_class($callback['function'][0]);
 					$current_hook['callback'] = $callback['function'][1];
 				} else {
 					$current_hook['callback'] = $callback['function'];
 				}
 			}
 
-			if ( isset( $intercepted_hook['priority'] ) ) {
+			if (isset($intercepted_hook['priority'])) {
 				$current_hook['priority'] = $priority;
 			}
 
-			if ( $intercepted_hook === $current_hook ) {
+			if ($intercepted_hook === $current_hook) {
 				$matching_hook = true;
 				break;
 			}
 		}
 
-		if ( 'whitelist' === $intercepted_plugin['mode'] && $matching_hook ) {
+		if ('whitelist' === $intercepted_plugin['mode'] && $matching_hook) {
 			return true;
 		}
 
 		// Vice versa, if the name is not found in the $intercepted_plugins list
 		// and the current mode is blacklist, it should be skipped as well.
-		if ( 'blacklist' === $intercepted_plugin['mode'] && ! $matching_hook ) {
+		if ('blacklist' === $intercepted_plugin['mode'] && !$matching_hook) {
 			return true;
 		}
 
@@ -367,9 +378,10 @@ class Hook_Modifier extends Module {
 	 * @param string $plugin Name of the plugin.
 	 * @return bool
 	 */
-	private function is_cookie_authorized( string $plugin ) {
-		$cookie = isset( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ) ? json_decode( wp_unslash( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ), JSON_OBJECT_AS_ARRAY ) : array();  // PHPCS:Ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		return isset( $cookie[ "wp_{$plugin}" ] ) && true === $cookie[ "wp_{$plugin}" ];
+	private function is_cookie_authorized(string $plugin)
+	{
+		$cookie = isset($_COOKIE[Axeptio_Sdk::OPTION_JSON_COOKIE_NAME]) ? json_decode(wp_unslash($_COOKIE[Axeptio_Sdk::OPTION_JSON_COOKIE_NAME]), JSON_OBJECT_AS_ARRAY) : array();  // PHPCS:Ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		return isset($cookie["wp_{$plugin}"]) && true === $cookie["wp_{$plugin}"];
 	}
 
 	/**
@@ -379,50 +391,54 @@ class Hook_Modifier extends Module {
 	 * @param array $setting Name of the settings.
 	 * @return array
 	 */
-	protected function maybe_apply_recommended_settings( $configuration, $setting ) {
-		$merged_setting  = $configuration['Merged'][ $setting . '_mode' ] ?? null;
-		$current_setting = $configuration[ $setting . '_mode' ] ?? null;
+	protected function maybe_apply_recommended_settings($configuration, $setting)
+	{
+		$merged_setting = $configuration['Merged'][$setting . '_mode'] ?? null;
+		$current_setting = $configuration[$setting . '_mode'] ?? null;
 
-		if ( 'recommended' === $current_setting || 'recommended' === $merged_setting ) {
-			$recommended_settings = Recommended_Plugin_Settings::find( $configuration['plugin'] );
+		if ('recommended' === $current_setting || 'recommended' === $merged_setting) {
+			$recommended_settings = Recommended_Plugin_Settings::find($configuration['plugin']);
 
-			$recommended_mode = $recommended_settings[ $setting . '_mode' ];
-			$recommended_list = is_array( $recommended_settings[ $setting . '_list' ] ) ? implode( PHP_EOL, $recommended_settings[ $setting . '_list' ] ) : $recommended_settings[ $setting . '_list' ];
+			$recommended_mode = $recommended_settings[$setting . '_mode'];
+			$recommended_list = is_array($recommended_settings[$setting . '_list']) ? implode(PHP_EOL, $recommended_settings[$setting . '_list']) : $recommended_settings[$setting . '_list'];
 
-			$configuration[ $setting . '_mode' ] = $recommended_mode;
-			$configuration[ $setting . '_list' ] = $recommended_list;
+			$configuration[$setting . '_mode'] = $recommended_mode;
+			$configuration[$setting . '_list'] = $recommended_list;
 
-			$configuration['Merged'][ $setting . '_mode' ] = $recommended_mode;
-			$configuration['Merged'][ $setting . '_list' ] = $recommended_list;
+			$configuration['Merged'][$setting . '_mode'] = $recommended_mode;
+			$configuration['Merged'][$setting . '_list'] = $recommended_list;
 		}
 
 		return $configuration;
 	}
+
+
 
 	/**
 	 * Wrap the function in a tag
 	 *
 	 * @return array $stats
 	 */
-	private function process_wp_filter() {
+	private function process_wp_filter()
+	{
 		/*
 		 * WP_filter is a massive array containing all the functions
 		 * that will be called when hooks are applied.
 		 */
 		global $wp_filter;
 
-		$stats   = array();
+		$stats = array();
 		$plugins = array();
-		foreach ( $wp_filter as $filter => $hook ) {
-			foreach ( $hook->callbacks as $priority => $functions ) {
-				foreach ( $functions as $name => $function ) {
-					$stats[ $filter ][ $name ] = $this->process_function( $function['function'] );
+		foreach ($wp_filter as $filter => $hook) {
+			foreach ($hook->callbacks as $priority => $functions) {
+				foreach ($functions as $name => $function) {
+					$stats[$filter][$name] = $this->process_function($function['function']);
 
-					if ( isset( $stats[ $filter ][ $name ]['plugin'] ) ) {
-						$plugins[ $stats[ $filter ][ $name ]['plugin'] ][] = array(
-							'filter'   => $filter,
+					if (isset($stats[$filter][$name]['plugin'])) {
+						$plugins[$stats[$filter][$name]['plugin']][] = array(
+							'filter' => $filter,
 							'priority' => $priority,
-							'name'     => $name,
+							'name' => $name,
 							'function' => $function,
 						);
 					}
@@ -432,23 +448,23 @@ class Hook_Modifier extends Module {
 
 		$intercepted_plugins = array();
 
-		$cookies_version = Settings::get_option( 'version', 'all' );
+		$cookies_version = Settings::get_option('version', 'all');
 		$cookies_version = '' === $cookies_version ? 'all' : $cookies_version;
 
-		$plugin_configurations = Plugins::all( $cookies_version );
+		$plugin_configurations = Plugins::all($cookies_version);
 
-		foreach ( $plugin_configurations as $plugin_configuration ) {
+		foreach ($plugin_configurations as $plugin_configuration) {
 
-			$configuration = 'all' === $cookies_version || ! isset( $plugin_configuration['Metas']['Merged'] ) ? $plugin_configuration['Metas'] : $plugin_configuration['Metas']['Merged'];
+			$configuration = 'all' === $cookies_version || !isset($plugin_configuration['Metas']['Merged']) ? $plugin_configuration['Metas'] : $plugin_configuration['Metas']['Merged'];
 
 			// consent has been given for this plugin,
 			// no need to add it to the interception.
 
-			if ( ! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled'] || $this->is_cookie_authorized( $configuration['plugin'] ) ) {
+			if (!isset($configuration['enabled']) || !(bool)$configuration['enabled'] || $this->is_cookie_authorized($configuration['plugin'])) {
 				continue;
 			}
 
-			if ( isset( $configuration['wp_filter_mode'] ) && 'none' !== $configuration['wp_filter_mode'] ) {
+			if (isset($configuration['wp_filter_mode']) && 'none' !== $configuration['wp_filter_mode']) {
 				// We store the whitelisted hooks in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
 				// if the plugin should be intercepted AND if there hooks to avoid.
@@ -456,43 +472,43 @@ class Hook_Modifier extends Module {
 				$configuration['wp_filter_list'] = 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['wp_filter_list'] : $configuration['wp_filter_list'];
 				$configuration['wp_filter_mode'] = 'inherit' === $configuration['wp_filter_mode'] ? $plugin_configuration['Metas']['Parent']['wp_filter_mode'] : $configuration['wp_filter_mode'];
 
-				$configuration = $this->maybe_apply_recommended_settings( $configuration, 'wp_filter' );
+				$configuration = $this->maybe_apply_recommended_settings($configuration, 'wp_filter');
 
-				$parser = new User_Hook_Parser( $configuration['wp_filter_list'] );
-				$hooks  = $parser->get_hooks();
+				$parser = new User_Hook_Parser($configuration['wp_filter_list']);
+				$hooks = $parser->get_hooks();
 
-				if ( 0 === count( $hooks ) && ( 'whitelist' === $configuration['wp_filter_mode'] || 'blacklist' === $configuration['wp_filter_mode'] ) ) {
+				if (0 === count($hooks) && ('whitelist' === $configuration['wp_filter_mode'] || 'blacklist' === $configuration['wp_filter_mode'])) {
 					continue;
 				}
 
-				$intercepted_plugins[ $configuration['plugin'] ] = array(
+				$intercepted_plugins[$configuration['plugin']] = array(
 					'mode' => $configuration['wp_filter_mode'],
 					'list' => $hooks,
 				);
 			}
 		}
 
-		foreach ( $plugins as $plugin => $configs ) {
+		foreach ($plugins as $plugin => $configs) {
 			// The plugin has no key in the $intercepted_plugins array,
 			// meaning it should not be intercepted.
-			if ( ! isset( $intercepted_plugins[ $plugin ] ) ) {
+			if (!isset($intercepted_plugins[$plugin])) {
 				continue;
 			}
 
-			foreach ( $configs as $config ) {
-				list($filter, $priority, $name, $function) = array_values( $config );
+			foreach ($configs as $config) {
+				list($filter, $priority, $name, $function) = array_values($config);
 
-				if ( $this->should_load_hook( $intercepted_plugins[ $plugin ], $filter, $function, $priority ) ) {
+				if ($this->should_load_hook($intercepted_plugins[$plugin], $filter, $function, $priority)) {
 					continue;
 				}
 
 				// We decide to prevent admin hooks to be intercepted.
-				if ( str_contains( $filter, 'admin' ) ) {
+				if (str_contains($filter, 'admin')) {
 					continue;
 				}
 
 				// Otherwise we will wrap and overwrite the filter.
-				$wp_filter[ $filter ]->callbacks[ $priority ][ $name ]['function'] = $this->wrap_filter( $function['function'], $plugin, $filter );
+				$wp_filter[$filter]->callbacks[$priority][$name]['function'] = $this->wrap_filter($function['function'], $plugin, $filter);
 			}
 		}
 
@@ -504,23 +520,24 @@ class Hook_Modifier extends Module {
 	 * by a plugin and executes it in an output buffer to store its result
 	 * for later.
 	 *
-	 * @param mixed  $callback_function Function to wrap.
+	 * @param mixed $callback_function Function to wrap.
 	 * @param string $plugin Plugin name.
 	 * @param string $plugin_settings Plugin Settings.
 	 * @param string $tag Tag name.
 	 *
 	 * @return Closure
 	 */
-	private function wrap_tag( $callback_function, $plugin, $plugin_settings, $tag ) {
-		return function () use ( $callback_function, $plugin, $plugin_settings, $tag ) {
-			$args        = func_get_args();
-			$return      = call_user_func_array( $callback_function, $args );
-			$pattern     = '/<!--(.*?)-->/s';
-			$return      = preg_replace( $pattern, '', $return );
+	private function wrap_tag($callback_function, $plugin, $plugin_settings, $tag)
+	{
+		return function () use ($callback_function, $plugin, $plugin_settings, $tag) {
+			$args = func_get_args();
+			$return = call_user_func_array($callback_function, $args);
+			$pattern = '/<!--(.*?)-->/s';
+			$return = preg_replace($pattern, '', $return);
 			$placeholder = \Axeptio\Plugin\get_template_part(
 				'frontend/shortcode-placeholder',
 				array(
-					'plugin'          => $plugin,
+					'plugin' => $plugin,
 					'plugin_settings' => $plugin_settings,
 				),
 				false
@@ -535,61 +552,126 @@ class Hook_Modifier extends Module {
 	 * by a plugin and executes it in an output buffer to store its result
 	 * for later.
 	 *
-	 * @param mixed  $callback_function Callback function to wrap.
+	 * @param mixed $callback_function Callback function to wrap.
 	 * @param string $plugin Plugin name.
 	 * @param string $filter Filter name.
 	 *
 	 * @return Closure
 	 */
-	private function wrap_filter( $callback_function, $plugin, $filter ) {
-		return function () use ( $callback_function, $plugin, $filter ) {
+	private function wrap_filter($callback_function, $plugin, $filter)
+	{
+		return function () use ($callback_function, $plugin, $filter) {
 			// noop for the moment. ob_start seems to break :
 			// "Cannot use output buffering in output buffering display handlers".
 		};
 	}
 
-	/**
-	 * Callback function to analyse.
-	 *
-	 * @param mixed $callback_function The Callback function.
-	 * @return array
-	 *
-	 * @throws \ReflectionException If invalid reflection output.
-	 */
-	private function process_function( $callback_function ) {
+
+	private function process_function($callback_function): ?array
+	{
 		try {
-			if ( is_string( $callback_function ) || $callback_function instanceof Closure ) {
-				$reflection = new ReflectionFunction( $callback_function );
-			} elseif ( is_array( $callback_function ) && count( $callback_function ) === 2 ) {
-				$reflection = new ReflectionMethod( $callback_function[0], $callback_function[1] );
-			} elseif ( is_object( $callback_function ) ) {
-				$reflection = new ReflectionMethod( $callback_function, '__construct' );
-			} else {
-				\ob_start();
-				\var_dump( $callback_function ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_dump
-				throw new \ReflectionException( 'Invalid reflection callback function.' . ob_get_clean() );
+			$filename = null;
+			$class_name = null;
+
+			if (is_string($callback_function)) {
+				if (function_exists($callback_function)) {
+					$reflection = new ReflectionFunction($callback_function);
+					$filename = $reflection->getFileName();
+				}
+			} elseif (is_array($callback_function) && count($callback_function) === 2) {
+				if (is_object($callback_function[0])) {
+					$class_name = get_class($callback_function[0]);
+				} elseif (is_string($callback_function[0])) {
+					$class_name = $callback_function[0];
+				}
+
+				if ($class_name) {
+					$filename = $this->find_class_file($class_name);
+				}
+			} elseif (is_object($callback_function)) {
+				$class_name = get_class($callback_function);
+				$filename = $this->find_class_file($class_name);
 			}
 
-			$filename              = $reflection->getFileName();
-			$plugin_regexp_matches = array();
 
-			preg_match( '#' . preg_quote( WP_PLUGIN_DIR, '#' ) . '[/\\\]([a-zA-Z0-9_-]+)[/\\\]#', $filename, $plugin_regexp_matches );
-
-			$plugin = isset( $plugin_regexp_matches[1] ) ? $plugin_regexp_matches[1] : null;
-
-			if ( null === $plugin && str_contains( $filename, WP_PLUGIN_DIR ) ) {
-				$plugin = str_replace( '.php', '', basename( $filename ) );
+			if (!$filename) {
+				return null;
 			}
 
-			return array(
+			$plugin = $this->get_plugin_from_filename($filename);
+
+			return [
 				'filename' => $filename,
-				'plugin'   => $plugin,
-			);
-		} catch ( ReflectionException $e ) {
-			if ( XPWP_SHOW_ALL_ERRORS && ! (bool) Settings::get_option( 'disable_send_datas', false ) ) {
-				\Sentry\captureException( $e );
+				'plugin' => $plugin,
+			];
+		} catch (\Exception $e) {
+			// Log l'erreur ou gère-la silencieusement
+			if (XPWP_SHOW_ALL_ERRORS && !(bool)Settings::get_option('disable_send_datas', false)) {
+				\Sentry\captureException($e);
+			}
+			return null;
+		}
+	}
+
+	private function find_class_file($class_name): ?string
+	{
+		$psr4_path = str_replace('\\', '/', $class_name) . '.php';
+		$wp_path = str_replace('_', '/', $class_name) . '.php';
+
+		$psr4_path = ltrim($psr4_path, '/');
+		$wp_path = ltrim($wp_path, '/');
+
+		$possible_subfolders = ['', 'src/', 'includes/', 'app/', 'core/', 'lib/'];
+
+		$base_dir = WP_PLUGIN_DIR;
+
+		foreach ($possible_subfolders as $subfolder) {
+			$possible_paths = [
+				// PSR-4 style
+				$base_dir . '/' . $subfolder . $psr4_path,
+				// WordPress style
+				$base_dir . '/' . $subfolder . $wp_path,
+				// Class-prefixed files
+				$base_dir . '/' . $subfolder . dirname($wp_path) . '/class-' . basename($wp_path),
+				// Lowercase filename
+				$base_dir . '/' . $subfolder . strtolower($psr4_path),
+				// File named after the last part of the namespace/class
+				$base_dir . '/' . $subfolder . basename($psr4_path),
+			];
+
+			foreach ($possible_paths as $path) {
+				if (file_exists($path)) {
+					return $path;
+				}
 			}
 		}
+
+		// Check for composer's vendor directory
+		$vendor_path = $base_dir . '/vendor/';
+		if (is_dir($vendor_path)) {
+			$vendor_psr4_path = $vendor_path . $psr4_path;
+			if (file_exists($vendor_psr4_path)) {
+				return $vendor_psr4_path;
+			}
+		}
+
+
+		return null;
+	}
+
+	private function get_plugin_from_filename(string $filename)
+	{
+		$plugin_dir = wp_normalize_path(WP_PLUGIN_DIR);
+		$plugin_dir = trailingslashit($plugin_dir);
+
+		$filename = wp_normalize_path($filename);
+
+		if (strpos($filename, $plugin_dir) === 0) {
+			$plugin_dir_parts = explode('/', str_replace($plugin_dir, '', $filename));
+			return $plugin_dir_parts[0];
+		}
+
+		return null;
 	}
 
 	/**
@@ -601,7 +683,8 @@ class Hook_Modifier extends Module {
 	 * @todo implement
 	 * @return string
 	 */
-	private function getCookiesVersion() {
+	private function getCookiesVersion()
+	{
 		return 'not implemented';
 	}
 }
