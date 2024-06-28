@@ -76,8 +76,8 @@ class Module_Initialization {
 			Hook_Modifier::class,
 			Plugins::class,
 			Wp_Rocket::class,
-			Sdk_Proxy::class,
 			Settings::class,
+			Sdk_Proxy::class,
 		);
 	}
 
