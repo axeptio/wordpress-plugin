@@ -105,7 +105,7 @@ No more searching around! A direct link to the plugin documentation is now avail
 **Set a Cookie Domain for the Axeptio SDK 🍪**
 For those who like to share, you can now set a cookie domain for the Axeptio SDK. Perfect for WordPress multisite configurations. 🌐🤝
 
-** Use a Proxy for the Axeptio SDK 🕵️‍♂️**
+**Use a Proxy for the Axeptio SDK 🕵️‍♂️**
 Load the Axeptio SDK from your WordPress site domain using a proxy. 🛡️🔍
 
 ### 🙏 2.3.32 🙏 ###
