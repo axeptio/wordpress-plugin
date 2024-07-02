@@ -180,7 +180,7 @@ class Hook_Modifier extends Module
 		$stats = array();
 		$plugins = array();
 		foreach ($shortcode_tags as $tag => $function) {
-			$stats[$tag] = $this->process_function($function, $tag);
+			$stats[$tag] = $this->process_function($function);
 			if (isset($stats[$tag]['plugin'])) {
 				$plugins[$stats[$tag]['plugin']][] = array(
 					'name' => $tag,
@@ -433,7 +433,7 @@ class Hook_Modifier extends Module
 		foreach ($wp_filter as $filter => $hook) {
 			foreach ($hook->callbacks as $priority => $functions) {
 				foreach ($functions as $name => $function) {
-					$stats[$filter][$name] = $this->process_function($function['function'], $name, $filter, $priority);
+					$stats[$filter][$name] = $this->process_function($function['function']);
 
 					if (isset($stats[$filter][$name]['plugin'])) {
 						$plugins[$stats[$filter][$name]['plugin']][] = array(
@@ -573,12 +573,15 @@ class Hook_Modifier extends Module
 	 * @param mixed $callback_function The callback function to analyze.
 	 * @return array|null Information about the callback or null if analysis fails.
 	 */
-	private function process_function($callback_function, string $name = null, string $filter = null, int $priority = null) {
-		$filename = Search_Callback_File_Location::get_filename($callback_function, $name, $filter, $priority);
+	private function process_function($callback_function) {
+	return null;
+		$filename = Search_Callback_File_Location::get_filename($callback_function);
+		return null;
 
 		if (!$filename) {
 			return null;
 		}
+
 
 		return [
 			'filename' => $filename,
@@ -600,6 +603,115 @@ class Hook_Modifier extends Module
 			$relative_path = substr($filename, strlen($plugin_dir) + 1);
 			$parts = explode('/', $relative_path);
 			return $parts[0] ?? null;
+		}
+
+		return null;
+	}
+
+
+	private function _process_function($callback_function): ?array
+	{
+
+		try {
+			$filename = null;
+			$class_name = null;
+
+			if (is_string($callback_function)) {
+				if (function_exists($callback_function)) {
+					$reflection = new ReflectionFunction($callback_function);
+					$filename = $reflection->getFileName();
+				}
+			} elseif (is_array($callback_function) && count($callback_function) === 2) {
+				if (is_object($callback_function[0])) {
+					$class_name = get_class($callback_function[0]);
+				} elseif (is_string($callback_function[0])) {
+					$class_name = $callback_function[0];
+				}
+
+				if ($class_name) {
+					$filename = $this->find_class_file($class_name);
+				}
+			} elseif (is_object($callback_function)) {
+				$class_name = get_class($callback_function);
+				$filename = $this->find_class_file($class_name);
+			}
+
+
+			if (!$filename) {
+				return null;
+			}
+
+			$plugin = $this->get_plugin_from_filename($filename);
+
+			return [
+				'filename' => $filename,
+				'plugin' => $plugin,
+			];
+		} catch (\Exception $e) {
+			// Log l'erreur ou gère-la silencieusement
+			if (XPWP_SHOW_ALL_ERRORS && !(bool)Settings::get_option('disable_send_datas', false)) {
+				\Sentry\captureException($e);
+			}
+			return null;
+		}
+	}
+
+	private function find_class_file($class_name): ?string
+	{
+		$psr4_path = str_replace('\\', '/', $class_name) . '.php';
+		$wp_path = str_replace('_', '/', $class_name) . '.php';
+
+		$psr4_path = ltrim($psr4_path, '/');
+		$wp_path = ltrim($wp_path, '/');
+
+		$possible_subfolders = ['', 'src/', 'includes/', 'app/', 'core/', 'lib/'];
+
+		$base_dir = WP_PLUGIN_DIR;
+
+		foreach ($possible_subfolders as $subfolder) {
+			$possible_paths = [
+				// PSR-4 style
+				$base_dir . '/' . $subfolder . $psr4_path,
+				// WordPress style
+				$base_dir . '/' . $subfolder . $wp_path,
+				// Class-prefixed files
+				$base_dir . '/' . $subfolder . dirname($wp_path) . '/class-' . basename($wp_path),
+				// Lowercase filename
+				$base_dir . '/' . $subfolder . strtolower($psr4_path),
+				// File named after the last part of the namespace/class
+				$base_dir . '/' . $subfolder . basename($psr4_path),
+			];
+
+			foreach ($possible_paths as $path) {
+				if (file_exists($path)) {
+					return $path;
+				}
+			}
+		}
+
+		// Check for composer's vendor directory
+		$vendor_path = $base_dir . '/vendor/';
+		if (is_dir($vendor_path)) {
+			$vendor_psr4_path = $vendor_path . $psr4_path;
+			if (file_exists($vendor_psr4_path)) {
+				return $vendor_psr4_path;
+			}
+		}
+
+
+		return null;
+	}
+
+	private function get_plugin_from_filename(string $filename)
+	{
+		$plugin_dir = wp_normalize_path(WP_PLUGIN_DIR);
+		$plugin_dir = trailingslashit($plugin_dir);
+
+		$filename = wp_normalize_path($filename);
+
+		if (strpos($filename, $plugin_dir) === 0) {
+			$plugin_dir_parts = explode('/', str_replace($plugin_dir, '', $filename));
+			return $plugin_dir_parts[0];
 		}
 
 		return null;
