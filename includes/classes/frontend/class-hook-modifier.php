@@ -605,67 +605,6 @@ class Hook_Modifier extends Module
 		return null;
 	}
 
-	private function find_class_file($class_name): ?string
-	{
-		$psr4_path = str_replace('\\', '/', $class_name) . '.php';
-		$wp_path = str_replace('_', '/', $class_name) . '.php';
-
-		$psr4_path = ltrim($psr4_path, '/');
-		$wp_path = ltrim($wp_path, '/');
-
-		$possible_subfolders = ['', 'src/', 'includes/', 'app/', 'core/', 'lib/'];
-
-		$base_dir = WP_PLUGIN_DIR;
-
-		foreach ($possible_subfolders as $subfolder) {
-			$possible_paths = [
-				// PSR-4 style
-				$base_dir . '/' . $subfolder . $psr4_path,
-				// WordPress style
-				$base_dir . '/' . $subfolder . $wp_path,
-				// Class-prefixed files
-				$base_dir . '/' . $subfolder . dirname($wp_path) . '/class-' . basename($wp_path),
-				// Lowercase filename
-				$base_dir . '/' . $subfolder . strtolower($psr4_path),
-				// File named after the last part of the namespace/class
-				$base_dir . '/' . $subfolder . basename($psr4_path),
-			];
-
-			foreach ($possible_paths as $path) {
-				if (file_exists($path)) {
-					return $path;
-				}
-			}
-		}
-
-		// Check for composer's vendor directory
-		$vendor_path = $base_dir . '/vendor/';
-		if (is_dir($vendor_path)) {
-			$vendor_psr4_path = $vendor_path . $psr4_path;
-			if (file_exists($vendor_psr4_path)) {
-				return $vendor_psr4_path;
-			}
-		}
-
-
-		return null;
-	}
-
-	private function get_plugin_from_filename(string $filename)
-	{
-		$plugin_dir = wp_normalize_path(WP_PLUGIN_DIR);
-		$plugin_dir = trailingslashit($plugin_dir);
-
-		$filename = wp_normalize_path($filename);
-
-		if (strpos($filename, $plugin_dir) === 0) {
-			$plugin_dir_parts = explode('/', str_replace($plugin_dir, '', $filename));
-			return $plugin_dir_parts[0];
-		}
-
-		return null;
-	}
-
 	/**
 	 * Fetch the client configuration and determines which cookies version
 	 * will be selected by the SDK (reimplements the SDK algorithm)
