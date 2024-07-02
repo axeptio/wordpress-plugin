@@ -25,23 +25,8 @@ class Search_Callback_File_Location {
 	 * @return string|null The filename if found, null otherwise.
 	 * @throws \ReflectionException
 	 */
-	public static function get_filename($callback, string $name = null, string $filter = null, int $priority = null): ?string
+	public static function get_filename($callback, string $name = null, string $filter = null, int|string $priority = null): ?string
 	{
-		// Generate a unique key for caching based on callback and additional parameters
-		if ($callback instanceof \Closure) {
-			$reflected = new \ReflectionFunction($callback);
-			$callback_id = $reflected->getFileName();
-		} else {
-			$callback_id = serialize($callback);
-		}
-		$cache_key = 'axeptio/callback_filename_' . md5($callback_id . $name . $filter . (string)$priority);
-		$cached_filename = get_transient($cache_key);
-
-		// Check if the filename is already cached
-		if (false !== $cached_filename) {
-			return $cached_filename;
-		}
-
 		// If not cached, compute the filename
 		$filename = self::find_file_for_callback($callback);
 
@@ -50,11 +35,6 @@ class Search_Callback_File_Location {
 			if ($reflection !== null) {
 				$filename = $reflection->getFileName();
 			}
-		}
-
-		// Cache the filename for future requests, set the expiry to 12 hours (43200 seconds)
-		if ($filename !== null) {
-			set_transient($cache_key, $filename, 43200);
 		}
 
 		return $filename;
