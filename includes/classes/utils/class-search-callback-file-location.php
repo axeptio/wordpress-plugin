@@ -25,7 +25,7 @@ class Search_Callback_File_Location {
 	 * @return string|null The filename if found, null otherwise.
 	 * @throws \ReflectionException
 	 */
-	public static function get_filename($callback, string $name = null, string $filter = null, int|string $priority = null): ?string
+	public static function get_filename($callback, string $name = null, string $filter = null, $priority = null): ?string
 	{
 		// If not cached, compute the filename
 		$filename = self::find_file_for_callback($callback);

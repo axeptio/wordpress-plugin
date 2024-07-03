@@ -3,7 +3,7 @@ Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy, eprivacy, consent, script, cmp, data, personnal, widget, googletagmanager, consentmanagement
 Requires at least: 5.0
 Tested up to: 6.5.5
-Stable tag: 2.4.3
+Stable tag: 2.4.4
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -84,9 +84,9 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
-Bien sûr, voici une proposition pour le changelog de la version 2.4.3, qui communique le retrait temporaire du système de cache et inclut des excuses pour les désagréments causés :
+### 🐞 2.4.4 🐞 ###
 
-== Changelog ==
+**Bugfix for PHP 7.4**
 
 ### 🛠️ 2.4.3 🛠️ ###
 
