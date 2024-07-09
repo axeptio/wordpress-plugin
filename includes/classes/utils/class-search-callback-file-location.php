@@ -81,7 +81,7 @@ class Search_Callback_File_Location {
 			return new \ReflectionMethod($callback, '__invoke');
 		}
 
-		throw new \ReflectionException("Unable to create reflection for the provided callback.");
+		return null;
 	}
 
 	/**
