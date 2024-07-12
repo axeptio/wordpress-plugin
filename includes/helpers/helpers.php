@@ -128,6 +128,10 @@ function get_relative_path($from, $to)
 	$to       = explode('/', $to);
 	$relPath  = $to;
 
+	// Remove all empty values
+	$filteredEmptyValue = array_filter($from);
+	$from = array_values($filteredEmptyValue);
+
 	foreach($from as $depth => $dir) {
 		// find first non-matching dir
 		if($dir === $to[$depth]) {
