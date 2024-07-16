@@ -152,7 +152,7 @@ function script_url( $script, $context ) {
 		return new WP_Error( 'invalid_enqueue_context', 'Invalid $context specified in Axeptio script loader.' );
 	}
 
-	return XPWP_URL . "dist/js/${script}.js";
+	return XPWP_URL . "dist/js/{$script}.js";
 }
 
 /**
@@ -169,7 +169,7 @@ function style_url( $stylesheet, $context ) {
 		return new WP_Error( 'invalid_enqueue_context', 'Invalid $context specified in Axeptio stylesheet loader.' );
 	}
 
-	return XPWP_URL . "dist/css/${stylesheet}.css";
+	return XPWP_URL . "dist/css/{$stylesheet}.css";
 }
 
 
