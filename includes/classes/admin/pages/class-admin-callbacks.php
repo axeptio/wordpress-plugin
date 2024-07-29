@@ -153,6 +153,32 @@ class Admin_Callbacks {
 			);
 	}
 
+	public function widget_image() {
+		\Axeptio\Plugin\get_template_part(
+			'admin/common/fields/image-upload',
+			array(
+				'label' => __( 'Widget Image', 'axeptio-wordpress-plugin' ),
+				'group' => 'axeptio_settings',
+				'name'  => 'widget_image',
+				'id'    => 'xpwp_widget_image',
+				'value' => \Axeptio\Plugin\Models\Settings::get_option( 'widget_image', '' ),
+			)
+		);
+	}
+
+	public function widget_background_image() {
+		\Axeptio\Plugin\get_template_part(
+			'admin/common/fields/image-upload',
+			array(
+				'label' => __( 'Widget Background Image', 'axeptio-wordpress-plugin' ),
+				'group' => 'axeptio_settings',
+				'name'  => 'widget_background_image',
+				'id'    => 'xpwp_widget_background_image',
+				'value' => \Axeptio\Plugin\Models\Settings::get_option( 'widget_background_image', '' ),
+			)
+		);
+	}
+
 
 	/**
 	 * Cookie domain.
