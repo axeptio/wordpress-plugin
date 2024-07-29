@@ -168,13 +168,14 @@ class Admin_Callbacks {
 
 	public function widget_background_image() {
 		\Axeptio\Plugin\get_template_part(
-			'admin/common/fields/image-upload',
+			'admin/main/fields/background-image',
 			array(
-				'label' => __( 'Widget Background Image', 'axeptio-wordpress-plugin' ),
+				'label' => __( 'Disable the background Image', 'axeptio-wordpress-plugin' ),
+				'description' => __( 'By checking this box, you will deactivate the painted background.', 'axeptio-wordpress-plugin' ),
 				'group' => 'axeptio_settings',
-				'name'  => 'widget_background_image',
-				'id'    => 'xpwp_widget_background_image',
-				'value' => \Axeptio\Plugin\Models\Settings::get_option( 'widget_background_image', '' ),
+				'name'  => 'widget_disable_paint',
+				'id'    => 'xpwp_widget_disable_paint',
+				'value' => \Axeptio\Plugin\Models\Settings::get_option( 'widget_disable_paint', '' ),
 			)
 		);
 	}

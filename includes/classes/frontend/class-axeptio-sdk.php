@@ -145,6 +145,15 @@ class Axeptio_Sdk extends Module
 		$api_url = Settings::get_option('api_url', false);
 		$cookies_version = Project_Versions::get_current_lang_version();
 
+		$widget_image = Settings::get_option('widget_image', '');
+		$widget_disable_bg_image = Settings::get_option('widget_disable_paint', '');
+
+		if ($widget_image === 'disabled') {
+			$widget_image_settings = false;
+		} else if ($widget_image !== '') {
+			 $widget_image_settings = $widget_image;
+		}
+
 		$google_consent_mode = Settings::get_option('google_consent_mode', '0');
 		$google_consent_mode_params = Settings::get_option(
 			'google_consent_params',
@@ -177,6 +186,14 @@ class Axeptio_Sdk extends Module
 
 		if ('' !== $cookies_version) {
 			$sdk_settings['cookiesVersion'] = $cookies_version;
+		}
+
+		if ('' !== $widget_image_settings) {
+			$sdk_settings['image'] = $widget_image_settings;
+		}
+
+		if ('1' === $widget_disable_bg_image) {
+			$sdk_settings['disablePaint'] = $widget_disable_bg_image;
 		}
 
 		if ($cookie_domain && ''!== $cookie_domain) {

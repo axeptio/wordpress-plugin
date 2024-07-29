@@ -1,15 +1,13 @@
-// imageUploadComponent.js
-
 const instance = function(args) {
 	return {
-		useImage: args.initialValue !== '',
-		imageUrl: args.initialValue,
+		disableImage: args.initialValue === 'disabled',
+		imageUrl: args.initialValue === 'disabled' ? '' : args.initialValue,
 		fieldName: args.fieldName,
 		fieldId: args.fieldId,
 
 		init() {
-			this.$watch('useImage', (value) => {
-				if (!value) {
+			this.$watch('disableImage', (value) => {
+				if (value) {
 					this.imageUrl = '';
 				}
 			});
@@ -28,6 +26,7 @@ const instance = function(args) {
 				frame.on('select', () => {
 					const attachment = frame.state().get('selection').first().toJSON();
 					this.imageUrl = attachment.url;
+					this.disableImage = false;
 				});
 
 				frame.open();
@@ -36,6 +35,10 @@ const instance = function(args) {
 
 		removeImage() {
 			this.imageUrl = '';
+		},
+
+		getValue() {
+			return this.disableImage ? 'disabled' : this.imageUrl;
 		}
 	};
 };

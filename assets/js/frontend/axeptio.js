@@ -36,6 +36,10 @@ window._axcb.push( function( sdk ) {
 
 		sdk.config.cookies.map( function( cookieConfig ) {
 
+			cookieConfig.steps[0].image = window.Axeptio_SDK.image ?? 'cookie-bienvenue';
+			cookieConfig.steps[0].disablePaint = window.Axeptio_SDK.disablePaint ?? false;
+			console.log(cookieConfig.steps[0]);
+
 			if (window.Axeptio_SDK.enableGoogleConsentMode === '1') {
 				cookieConfig.googleConsentMode = {
 					display: true,
@@ -73,6 +77,7 @@ window._axcb.push( function( sdk ) {
 						// We test the step layout in order to prevent adding a vendor
 						// to a step layout that don't display them
 						// Note: add it once because we may have duplicate names
+
 						if ( step.name === vendor.step && ( step.layout === 'category' || step.layout === 'info' ) && ! stepExists ) {
 							stepExists = true;
 							step.vendors = step.vendors || [];
