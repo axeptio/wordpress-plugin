@@ -558,7 +558,7 @@ class Hook_Modifier extends Module {
 	 * @param mixed $callback_function The callback function to analyze.
 	 * @return array|null Information about the callback or null if analysis fails.
 	 */
-	private function process_function( $callback_function, string $name = null, string $filter = null, int $priority = null ) {
+	private function process_function( $callback_function, string $name = null, string $filter = null, $priority = null ) {
 		$filename = Search_Callback_File_Location::get_filename( $callback_function, $name, $filter, $priority );
 
 		if ( ! $filename ) {
