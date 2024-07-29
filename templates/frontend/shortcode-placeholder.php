@@ -7,7 +7,7 @@
 
 			<?php
 				/* translators: $s: Name of the plugin */
-				echo sprintf( esc_html__( "This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it's very simple: go to our cookie consent widget, give your approval for the \"%s\" extension. And voila, you're all set!", 'axeptio-wordpress-plugin' ), esc_html( $data->plugin_settings['vendor_title'] ) );
+				printf( esc_html__( "This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it's very simple: go to our cookie consent widget, give your approval for the \"%s\" extension. And voila, you're all set!", 'axeptio-wordpress-plugin' ), esc_html( $data->plugin_settings['vendor_title'] ) );
 			?>
 		</div>
 		<button type="button" class="axeptio-shortcode-btn" data-axeptio-consent="<?php echo esc_attr( $data->plugin ); ?>" spellcheck="false">

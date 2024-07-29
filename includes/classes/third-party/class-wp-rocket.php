@@ -35,6 +35,4 @@ class Wp_Rocket extends Module {
 		$cookies[] = self::COOKIE_KEY;
 		return $cookies;
 	}
-
-
 }

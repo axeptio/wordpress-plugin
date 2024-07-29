@@ -17,8 +17,7 @@ class Settings extends Module {
 	 *
 	 * @return true
 	 */
-	public function can_register(): bool
-	{
+	public function can_register(): bool {
 		return true;
 	}
 
@@ -42,18 +41,16 @@ class Settings extends Module {
 	 * @param mixed $new_value The new version of the settings.
 	 * @return void
 	 */
-	public function historize_version($old_value, $new_value)
-	{
+	public function historize_version( $old_value, $new_value ) {
 		$localized_version = Project_Versions::get_localized_versions();
 
-		$datas = [];
-		foreach ($localized_version as $option_key) {
-			$datas[$option_key] = $old_value[$option_key];
+		$datas = array();
+		foreach ( $localized_version as $option_key ) {
+			$datas[ $option_key ] = $old_value[ $option_key ];
 		}
 
-		$axeptio_versions = get_option('axeptio_versions');
-		$axeptio_versions[$old_value['client_id']] = $datas;
-		update_option('axeptio_versions', $axeptio_versions);
-
+		$axeptio_versions                            = get_option( 'axeptio_versions' );
+		$axeptio_versions[ $old_value['client_id'] ] = $datas;
+		update_option( 'axeptio_versions', $axeptio_versions );
 	}
 }

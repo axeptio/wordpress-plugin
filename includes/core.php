@@ -11,7 +11,7 @@ use Axeptio\Plugin\Init\Activate;
 use Axeptio\Plugin\Init\Activation_Hook;
 use Axeptio\Plugin\Utils\Flash_Vars;
 use Axeptio\Plugin\Utils\WP_Migration_Manager;
-use \WP_Error;
+use WP_Error;
 use function Axeptio\Plugin\Utility\get_asset_info;
 
 /**
@@ -20,7 +20,7 @@ use function Axeptio\Plugin\Utility\get_asset_info;
  * @return void
  */
 function setup() {
-	$n = fn( $func) => __NAMESPACE__ . "\\$func";
+	$n = fn( $func ) => __NAMESPACE__ . "\\$func";
 
 	add_action( 'init', $n( 'migrate' ) );
 	add_action( 'init', $n( 'i18n' ) );
@@ -35,7 +35,7 @@ function setup() {
 
 	add_action(
 		'init',
-		function() {
+		function () {
 			global $wpdb;
 			$table          = 'axeptio_plugin_configuration';
 			$wpdb->$table   = $wpdb->prefix . $table;
@@ -78,7 +78,7 @@ function init() {
 	if ( ! file_exists( XPWP_PATH . 'composer.json' ) ) {
 		add_action(
 			'admin_notices',
-			function() {
+			function () {
 				$class = 'notice notice-error';
 				/* translators: %s: the path to the plugin */
 				$message = sprintf( __( 'The composer.json file was not found within %s. No classes will be loaded.', 'axeptio-wordpress-plugin' ), XPWP_PATH );

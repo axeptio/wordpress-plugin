@@ -18,12 +18,12 @@ class Migration_2_0_2 implements \Axeptio\Plugin\Contracts\Migration_Interface {
 
 		$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			sprintf(
-				"ALTER TABLE %s ALTER COLUMN cookie_widget_step SET DEFAULT 'wordpress';", // phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.WP.CapitalPDangit.Misspelled
+				"ALTER TABLE %s ALTER COLUMN cookie_widget_step SET DEFAULT 'WordPress';", // phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.WP.CapitalPDangit.Misspelled
 				$table // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			)
 		);
 
-		$sql = "UPDATE `$table` SET `cookie_widget_step` = 'wordpress' WHERE cookie_widget_step IS NULL OR cookie_widget_step = 0;"; // phpcs:ignore WordPress.WP.CapitalPDangit.Misspelled
+		$sql = "UPDATE `$table` SET `cookie_widget_step` = 'WordPress' WHERE cookie_widget_step IS NULL OR cookie_widget_step = 0;"; // phpcs:ignore WordPress.WP.CapitalPDangit.Misspelled
 		dbDelta( $sql );
 	}
 

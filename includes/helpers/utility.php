@@ -56,4 +56,3 @@ function get_favicon( string $url ) {
 
 	return sprintf( 'https://icon.horse/icon/%s', $domain['host'] );
 }
-

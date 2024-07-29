@@ -164,8 +164,6 @@ class Admin_Main extends Module {
 			false
 			);
 
-
-
 		$consent_mode_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(

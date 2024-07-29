@@ -109,53 +109,51 @@ function get_template_part( $slug, $datas = array(), $display = true ) {
  */
 function get_main_admin_tabs() {
 	$tab_items = array(
-		'main-settings' => __( 'Main settings', 'axeptio-wordpress-plugin' ),
-		'consent-mode' => __( 'Google Consent Mode', 'axeptio-wordpress-plugin' ),
-		'customization' => __( 'Customization', 'axeptio-wordpress-plugin' ),
-		'data-sending'  => __( 'Data sending', 'axeptio-wordpress-plugin' ),
-		'advanced-settings'  => __( 'Advanced', 'axeptio-wordpress-plugin' ),
+		'main-settings'     => __( 'Main settings', 'axeptio-wordpress-plugin' ),
+		'consent-mode'      => __( 'Google Consent Mode', 'axeptio-wordpress-plugin' ),
+		'customization'     => __( 'Customization', 'axeptio-wordpress-plugin' ),
+		'data-sending'      => __( 'Data sending', 'axeptio-wordpress-plugin' ),
+		'advanced-settings' => __( 'Advanced', 'axeptio-wordpress-plugin' ),
 	);
 	return \Axeptio\Plugin\get_template_part( 'admin/main/tabs', array( 'tab_items' => $tab_items ), false );
 }
 
-function get_relative_path($from, $to)
-{
+function get_relative_path( $from, $to ) {
 	// some compatibility fixes for Windows paths
-	$from = is_dir($from) ? rtrim($from, '\/') . '/' : $from;
-	$to   = is_dir($to)   ? rtrim($to, '\/') . '/'   : $to;
-	$from = str_replace([ABSPATH, '\\'], ['', '/'], $from);
-	$to   = str_replace([ABSPATH, '\\'], ['', '/'], $to);
+	$from = is_dir( $from ) ? rtrim( $from, '\/' ) . '/' : $from;
+	$to   = is_dir( $to ) ? rtrim( $to, '\/' ) . '/' : $to;
+	$from = str_replace( array( ABSPATH, '\\' ), array( '', '/' ), $from );
+	$to   = str_replace( array( ABSPATH, '\\' ), array( '', '/' ), $to );
 
-	$from     = explode('/', $from);
-	$to       = explode('/', $to);
-	$relPath  = $to;
+	$from    = explode( '/', $from );
+	$to      = explode( '/', $to );
+	$relPath = $to;
 
-	foreach($from as $depth => $dir) {
+	foreach ( $from as $depth => $dir ) {
 		// find first non-matching dir
-		if($dir === $to[$depth]) {
+		if ( $dir === $to[ $depth ] ) {
 			// ignore this directory
-			array_shift($relPath);
+			array_shift( $relPath );
 		} else {
 			// get number of remaining dirs to $from
-			$remaining = count($from) - $depth;
-			if($remaining > 1) {
+			$remaining = count( $from ) - $depth;
+			if ( $remaining > 1 ) {
 				// add traversals up to first matching dir
-				$padLength = (count($relPath) + $remaining - 1) * -1;
-				$relPath = array_pad($relPath, $padLength, '..');
+				$padLength = ( count( $relPath ) + $remaining - 1 ) * -1;
+				$relPath   = array_pad( $relPath, $padLength, '..' );
 				break;
 			} else {
 				$relPath[0] = './' . $relPath[0];
 			}
 		}
 	}
-	return implode('/', $relPath);
+	return implode( '/', $relPath );
 }
 
 function get_sdk_url() {
-	if (Settings::get_option('proxy_sdk', false)) {
-		$proxy_key = \get_option('axeptio/sdk_proxy_key');
-		return home_url() . '/'. $proxy_key . '.js';
+	if ( Settings::get_option( 'proxy_sdk', false ) ) {
+		$proxy_key = \get_option( 'axeptio/sdk_proxy_key' );
+		return home_url() . '/' . $proxy_key . '.js';
 	}
 	return 'https://static.axept.io/sdk.js';
-
 }

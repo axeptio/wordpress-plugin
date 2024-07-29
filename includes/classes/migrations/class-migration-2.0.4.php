@@ -14,7 +14,7 @@ class Migration_2_0_4 implements \Axeptio\Plugin\Contracts\Migration_Interface {
 		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 		$table = $wpdb->prefix . Plugins::$table_name;
 
-		$sql = "UPDATE `$table` SET `cookie_widget_step` = 'wordpress' WHERE cookie_widget_step IS NULL OR cookie_widget_step = 0;"; // phpcs:ignore WordPress.WP.CapitalPDangit.Misspelled
+		$sql = "UPDATE `$table` SET `cookie_widget_step` = 'WordPress' WHERE cookie_widget_step IS NULL OR cookie_widget_step = 0;"; // phpcs:ignore WordPress.WP.CapitalPDangit.Misspelled
 		dbDelta( $sql );
 	}
 
