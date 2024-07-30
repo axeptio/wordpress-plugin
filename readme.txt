@@ -3,7 +3,7 @@ Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy, eprivacy, consent, script, cmp, data, personnal, widget, googletagmanager, consentmanagement
 Requires at least: 5.0
 Tested up to: 6.5.5
-Stable tag: 2.4.8
+Stable tag: 2.4.9
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -83,6 +83,19 @@ The idea is to customize the appearance of your widget so that it matches the de
 All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en-gb/articles/4402985038225-Customize-my-widget-s-aspect)
 
 == Changelog ==
+
+Bien sûr ! Voici un changelog fun pour la version 2.4.9 du plugin Axeptio :
+
+### 🎉 2.4.9 🎉 ###
+
+### 🖼️ 2.4.9 🖼️ ###
+
+- **Custom Illustrations:** Upload your own image to the widget screen and make it uniquely yours. Show off your brand's personality with style! 🌟
+- **Background Image Control:** Want a minimalist look? You can now disable the background image of the screen. Clean and simple! 🧼
+
+Make your Axeptio widget truly your own with these exciting new customization options. Enjoy a smoother and more personalized user experience. Thank you for being awesome and sticking with us on this journey! 🚀
+
+Keep creating, keep smiling, and keep complying! 😊
 
 ### 🐞 2.4.8 🐞 ###
 
