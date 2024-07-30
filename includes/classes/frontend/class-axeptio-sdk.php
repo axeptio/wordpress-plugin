@@ -152,6 +152,8 @@ class Axeptio_Sdk extends Module {
 			$widget_image_settings = false;
 		} elseif ( $widget_image !== '' ) {
 			$widget_image_settings = $widget_image;
+		} else {
+			$widget_image_settings = $widget_image;
 		}
 
 		$google_consent_mode        = Settings::get_option( 'google_consent_mode', '0' );
