@@ -559,7 +559,7 @@ class Hook_Modifier extends Module {
 	 * @return array|null Information about the callback or null if analysis fails.
 	 */
 	private function process_function( $callback_function, string $name = null, string $filter = null, $priority = null ) {
-		$filename = Search_Callback_File_Location::get_filename( $callback_function, $name, $filter, $priority );
+		$filename = Search_Callback_File_Location::get_filename( $callback_function, $name, $filter, (int) ($priority ?: 10) );
 
 		if ( ! $filename ) {
 			return null;
