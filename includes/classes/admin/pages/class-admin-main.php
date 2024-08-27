@@ -169,8 +169,6 @@ class Admin_Main extends Module {
 			false
 			);
 
-
-
 		$consent_mode_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(
@@ -348,6 +346,28 @@ class Admin_Main extends Module {
 				'section'  => 'xpwp_admin_customize',
 				'args'     => array(
 					'label_for' => 'xpwp_widget_description',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
+				'id'       => 'xpwp_widget_image',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'widget_image' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_customize',
+				'args'     => array(
+					'label_for' => 'xpwp_widget_image',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
+				'id'       => 'xpwp_widget_background_image',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'widget_background_image' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_customize',
+				'args'     => array(
+					'label_for' => 'xpwp_widget_background_image',
 					'class'     => 'inline-table-row label-right',
 				),
 			),

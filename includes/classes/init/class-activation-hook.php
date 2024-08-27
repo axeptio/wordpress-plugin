@@ -40,14 +40,14 @@ class Activation_Hook extends Module {
 	 */
 	public function after_plugin_activation() {
 
-		if (isset( $_GET['plugin'] ) && isset( $_GET['activate'] )) {
+		if ( isset( $_GET['plugin'] ) && isset( $_GET['activate'] ) ) {
 			return;
 		}
 
-		$axeptio_plugin_activated  = get_option('axeptio_plugin_activated' );
+		$axeptio_plugin_activated = get_option( 'axeptio_plugin_activated' );
 
-		if ($axeptio_plugin_activated && ! Settings::get_option('client_id')) {
-			delete_option('axeptio_plugin_activated' );
+		if ( $axeptio_plugin_activated && ! Settings::get_option( 'client_id' ) ) {
+			delete_option( 'axeptio_plugin_activated' );
 			wp_safe_redirect( admin_url( 'admin.php?page=axeptio-wordpress-plugin&onboard=1' ) );
 			exit;
 		}
@@ -67,7 +67,7 @@ class Activation_Hook extends Module {
 	 * @return void
 	 */
 	public function set_plugin_activated() {
-		update_option('axeptio_plugin_activated', true);
+		update_option( 'axeptio_plugin_activated', true );
 	}
 
 	/**

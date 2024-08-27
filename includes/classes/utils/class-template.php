@@ -185,7 +185,7 @@ class Template {
 				$tpl_names,
 				function ( $carry, $tpl_name ) use ( $tpl_paths ) {
 					$tpl_name  = ltrim( $tpl_name, '/' );
-					$new_paths = array_map( fn( $tpl_path) => $tpl_path . $tpl_name, $tpl_paths );
+					$new_paths = array_map( fn( $tpl_path ) => $tpl_path . $tpl_name, $tpl_paths );
 					return array_merge( $carry, $new_paths );
 				},
 				array()

@@ -1,30 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Axeptio SDK Integration\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-24 12:05+0200\n"
-"PO-Revision-Date: 2024-06-24 12:14+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.3\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: axeptio.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.min.js\n"
-"X-Poedit-SearchPathExcluded-1: ../vendor\n"
-"X-Poedit-SearchPathExcluded-2: ../node_modules\n"
-"X-Poedit-SearchPathExcluded-3: ../dist\n"
-"X-Poedit-SearchPathExcluded-4: ../node_modules\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Axeptio\n"
+"Language: nl\n"
 
 #: axeptio-wordpress-plugin.php:35
 msgid "Unable to activate Axeptio"
@@ -32,13 +13,8 @@ msgstr "Het is niet mogelijk om Axeptio te activeren"
 
 #. translators: %1$s: current php version min and %2$s version of php required
 #: axeptio-wordpress-plugin.php:39
-#, php-format
-msgid ""
-"Your server is currently running PHP %1$s. The Axeptio plugin requires at "
-"least PHP %2$s. Please upgrade your PHP version to use this plugin."
-msgstr ""
-"Uw server gebruikt momenteel PHP %1$s. De Axeptio-plugin vereist minimaal "
-"PHP %2$s. Werk uw PHP-versie bij om deze plugin te gebruiken."
+msgid "Your server is currently running PHP %1$s. The Axeptio plugin requires at least PHP %2$s. Please upgrade your PHP version to use this plugin."
+msgstr "Uw server gebruikt momenteel PHP %1$s. De Axeptio-plugin vereist minimaal PHP %2$s. Werk uw PHP-versie bij om deze plugin te gebruiken."
 
 #: axeptio-wordpress-plugin.php:43
 msgid "Return to plugins pages"
@@ -52,32 +28,23 @@ msgstr "Widget titel"
 msgid "Widget sub-title"
 msgstr "Widget subtitel"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:166
+#: includes/classes/admin/pages/class-admin-callbacks.php:193
 msgid "Cookie domain"
 msgstr "Cookie-domein"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:171
-msgid ""
-"If specified, domain name on which the cookie containing user choices will "
-"be available. This allows to request one consent for various subdomains"
-msgstr ""
-"Indien gespecificeerd, de domeinnaam waarop de cookie met gebruikerskeuzes "
-"beschikbaar zal zijn. Dit maakt het mogelijk om één toestemming te vragen "
-"voor verschillende subdomeinen"
+#: includes/classes/admin/pages/class-admin-callbacks.php:198
+msgid "If specified, domain name on which the cookie containing user choices will be available. This allows to request one consent for various subdomains"
+msgstr "Indien gespecificeerd, de domeinnaam waarop de cookie met gebruikerskeuzes beschikbaar zal zijn. Dit maakt het mogelijk om één toestemming te vragen voor verschillende subdomeinen"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:186
+#: includes/classes/admin/pages/class-admin-callbacks.php:213
 msgid "API url"
 msgstr "API-url"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:191
-msgid ""
-"URL on which the widget will send its POST and GET requests for querying and "
-"storing consent proofs."
-msgstr ""
-"URL waarop de widget zijn POST- en GET-verzoeken zal verzenden voor het "
-"opvragen en opslaan van toestemmingsbewijzen."
+#: includes/classes/admin/pages/class-admin-callbacks.php:218
+msgid "URL on which the widget will send its POST and GET requests for querying and storing consent proofs."
+msgstr "URL waarop de widget zijn POST- en GET-verzoeken zal verzenden voor het opvragen en opslaan van toestemmingsbewijzen."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:205
+#: includes/classes/admin/pages/class-admin-callbacks.php:251
 msgid "Widget description"
 msgstr "Widget beschrijving"
 
@@ -108,24 +75,16 @@ msgid "Widget main settings"
 msgstr "Widget hoofdinstellingen"
 
 #: includes/classes/admin/pages/class-admin-main.php:153
-msgid ""
-"Configure the information related to the integration of your Axeptio project "
-"here."
-msgstr ""
-"Configureer hier de informatie met betrekking tot de integratie van je "
-"Axeptio project."
+msgid "Configure the information related to the integration of your Axeptio project here."
+msgstr "Configureer hier de informatie met betrekking tot de integratie van je Axeptio project."
 
 #: includes/classes/admin/pages/class-admin-main.php:161
 msgid "Widget customization"
 msgstr "Widget aanpassen"
 
 #: includes/classes/admin/pages/class-admin-main.php:162
-msgid ""
-"In this section, you can customize the header texts of the WordPress section "
-"in the Axeptio widget."
-msgstr ""
-"In deze sectie kun je de kopteksten van de WordPress sectie in de Axeptio "
-"widget aanpassen."
+msgid "In this section, you can customize the header texts of the WordPress section in the Axeptio widget."
+msgstr "In deze sectie kun je de kopteksten van de WordPress sectie in de Axeptio widget aanpassen."
 
 #: includes/classes/admin/pages/class-admin-main.php:172
 #: includes/helpers/helpers.php:113
@@ -133,10 +92,8 @@ msgid "Google Consent Mode"
 msgstr "Google Consent Mode"
 
 #: includes/classes/admin/pages/class-admin-main.php:173
-msgid ""
-"In this section, you can set the settings relative to the Google Consent Mode"
-msgstr ""
-"In deze sectie kunt u de instellingen voor de Google Consent Mode instellen"
+msgid "In this section, you can set the settings relative to the Google Consent Mode"
+msgstr "In deze sectie kunt u de instellingen voor de Google Consent Mode instellen"
 
 #: includes/classes/admin/pages/class-admin-main.php:181
 #: includes/helpers/helpers.php:115
@@ -144,24 +101,16 @@ msgid "Data sending"
 msgstr "Gegevensverzending"
 
 #: includes/classes/admin/pages/class-admin-main.php:182
-msgid ""
-"In this section, you can set whether or not you want to let Axeptio collect "
-"technical datas"
-msgstr ""
-"In deze sectie kunt u instellen of u Axeptio technische gegevens wilt laten "
-"verzamelen of niet"
+msgid "In this section, you can set whether or not you want to let Axeptio collect technical datas"
+msgstr "In deze sectie kunt u instellen of u Axeptio technische gegevens wilt laten verzamelen of niet"
 
 #: includes/classes/admin/pages/class-admin-main.php:190
 msgid "Advanced Settings"
 msgstr "Geavanceerde instellingen"
 
 #: includes/classes/admin/pages/class-admin-main.php:191
-msgid ""
-"In this section, you will have the opportunity to manage advanced Axeptio "
-"settings."
-msgstr ""
-"In deze sectie heeft u de mogelijkheid om geavanceerde Axeptio-instellingen "
-"te beheren."
+msgid "In this section, you will have the opportunity to manage advanced Axeptio settings."
+msgstr "In deze sectie heeft u de mogelijkheid om geavanceerde Axeptio-instellingen te beheren."
 
 #: includes/classes/admin/pages/class-admin-main.php:263
 msgid "Do you want to enable the widget?"
@@ -183,7 +132,7 @@ msgstr "Projectversie"
 msgid "Google Consent Mode V2"
 msgstr "Google Consent Mode V2"
 
-#: includes/classes/admin/pages/class-admin-main.php:351
+#: includes/classes/admin/pages/class-admin-main.php:373
 msgid "Collect of data and errors by Axeptio"
 msgstr "Verzamelen van gegevens en fouten door Axeptio"
 
@@ -196,14 +145,8 @@ msgid "Here you will find all WordPress extensions using cookies."
 msgstr "Hier vind je alle WordPress-extensies die cookies gebruiken."
 
 #: includes/classes/models/class-axeptio-steps.php:38
-msgid ""
-"Below is the list of extensions used on this site that utilize cookies. "
-"Please activate or deactivate the ones for which you consent to sharing your "
-"data."
-msgstr ""
-"Hieronder vindt u de lijst met extensies die op deze site worden gebruikt en "
-"die cookies gebruiken. Activeer of deactiveer de extensies waarvoor u "
-"toestemming geeft om uw gegevens te delen."
+msgid "Below is the list of extensions used on this site that utilize cookies. Please activate or deactivate the ones for which you consent to sharing your data."
+msgstr "Hieronder vindt u de lijst met extensies die op deze site worden gebruikt en die cookies gebruiken. Activeer of deactiveer de extensies waarvoor u toestemming geeft om uw gegevens te delen."
 
 #: includes/classes/models/class-hook-modes.php:22
 #: includes/classes/models/class-shortcode-tags-modes.php:22
@@ -239,27 +182,19 @@ msgid "All shortcode tags"
 msgstr "Alle shortcode-tags"
 
 #. translators: %s: the path to the plugin
-#: includes/core.php:83
-#, php-format
-msgid ""
-"The composer.json file was not found within %s. No classes will be loaded."
-msgstr ""
-"Het composer.json-bestand werd niet gevonden binnen %s. Er worden geen "
-"klassen geladen."
+#: includes/core.php:84
+msgid "The composer.json file was not found within %s. No classes will be loaded."
+msgstr "Het composer.json-bestand werd niet gevonden binnen %s. Er worden geen klassen geladen."
 
-#: includes/core.php:198
-msgid ""
-"We were unable to find your project, or it appears that it has not yet been "
-"published."
-msgstr ""
-"We konden je project niet vinden, of het lijkt erop dat het nog niet is "
-"gepubliceerd."
+#: includes/core.php:199
+msgid "We were unable to find your project, or it appears that it has not yet been published."
+msgstr "We konden je project niet vinden, of het lijkt erop dat het nog niet is gepubliceerd."
 
-#: includes/core.php:206
+#: includes/core.php:207
 msgid "Error verifying account ID. Try Again."
 msgstr "Fout bij het verifiëren van de account-ID. Probeer opnieuw."
 
-#: includes/core.php:213
+#: includes/core.php:214
 msgid "Please enter an account ID"
 msgstr "Voer een account-ID in"
 
@@ -294,24 +229,16 @@ msgid "Analytics storage"
 msgstr "Analytics storage"
 
 #: templates/admin/main/fields/google-consent-mode.php:45
-msgid ""
-"Allow Google Analytics to measure how visitors use the site to enhance "
-"functionality and service."
-msgstr ""
-"Google Analytics toestaan om te meten hoe bezoekers de site gebruiken om "
-"functionaliteit en service te verbeteren."
+msgid "Allow Google Analytics to measure how visitors use the site to enhance functionality and service."
+msgstr "Google Analytics toestaan om te meten hoe bezoekers de site gebruiken om functionaliteit en service te verbeteren."
 
 #: templates/admin/main/fields/google-consent-mode.php:49
 msgid "Ad Storage"
 msgstr "Ad Storage"
 
 #: templates/admin/main/fields/google-consent-mode.php:50
-msgid ""
-"Permit Google to save advertising information on visitors' devices for "
-"better ad relevance."
-msgstr ""
-"Google toestaan om advertentie-informatie op apparaten van bezoekers op te "
-"slaan voor betere advertentierelevantie."
+msgid "Permit Google to save advertising information on visitors' devices for better ad relevance."
+msgstr "Google toestaan om advertentie-informatie op apparaten van bezoekers op te slaan voor betere advertentierelevantie."
 
 #: templates/admin/main/fields/google-consent-mode.php:54
 msgid "Ad User Data"
@@ -319,33 +246,23 @@ msgstr "Ad User Data"
 
 #: templates/admin/main/fields/google-consent-mode.php:55
 msgid "Share visitors' activity data with Google for targeted advertising."
-msgstr ""
-"Activiteitsgegevens van bezoekers delen met Google voor gerichte reclame."
+msgstr "Activiteitsgegevens van bezoekers delen met Google voor gerichte reclame."
 
 #: templates/admin/main/fields/google-consent-mode.php:59
 msgid "Ad Personalization"
 msgstr "Ad Personalization"
 
 #: templates/admin/main/fields/google-consent-mode.php:60
-msgid ""
-"Customize the ad experience by allowing Google to personalize the ads that "
-"visitors see."
-msgstr ""
-"De advertentie-ervaring aanpassen door Google toe te staan de advertenties "
-"die bezoekers zien te personaliseren."
+msgid "Customize the ad experience by allowing Google to personalize the ads that visitors see."
+msgstr "De advertentie-ervaring aanpassen door Google toe te staan de advertenties die bezoekers zien te personaliseren."
 
 #: templates/admin/main/fields/google-consent-mode.php:67
 msgid "Default settings for consent mode"
 msgstr "Standaardinstellingen voor consent mode"
 
 #: templates/admin/main/fields/google-consent-mode.php:69
-msgid ""
-"These consent signals will be sent at page load to tell Google services how "
-"they should handle data before consent is granted or denied."
-msgstr ""
-"Deze toestemmingssignalen worden bij het laden van de pagina verzonden om "
-"Google-diensten te vertellen hoe ze met gegevens moeten omgaan voordat "
-"toestemming wordt verleend of geweigerd."
+msgid "These consent signals will be sent at page load to tell Google services how they should handle data before consent is granted or denied."
+msgstr "Deze toestemmingssignalen worden bij het laden van de pagina verzonden om Google-diensten te vertellen hoe ze met gegevens moeten omgaan voordat toestemming wordt verleend of geweigerd."
 
 #: templates/admin/main/fields/non-existing-account.php:2
 msgid "If you are certain that your project exists, please follow these steps:"
@@ -365,14 +282,8 @@ msgstr "Keer hier terug en vernieuw de configuratie."
 
 #. translators: %s: the url of the Axeptio help guide
 #: templates/admin/main/fields/non-existing-account.php:14
-#, php-format
-msgid ""
-"If the issue persists, please don't hesitate to consult <a target=\"_blank\" "
-"class=\"underline hover:no-underline\" href=\"%s\">our help guide.</a>"
-msgstr ""
-"Als het probleem zich blijft voordoen, aarzel dan niet om <a target=\"_blank"
-"\" class=\"underline hover:no-underline\" href=\"%s\">onze helpgids te "
-"raadplegen.</a>"
+msgid "If the issue persists, please don't hesitate to consult <a target=\"_blank\" class=\"underline hover:no-underline\" href=\"%s\">our help guide.</a>"
+msgstr "Als het probleem zich blijft voordoen, aarzel dan niet om <a target=\"_blank\" class=\"underline hover:no-underline\" href=\"%s\">onze helpgids te raadplegen.</a>"
 
 #: templates/admin/main/fields/non-existing-account.php:15
 msgid "https://support.axeptio.eu/hc/en-gb"
@@ -383,12 +294,8 @@ msgid "Yes, I enable the widget on my website."
 msgstr "Ja, ik activeer de widget op mijn website."
 
 #: templates/admin/main/fields/send-datas.php:21
-msgid ""
-"By checking this box, I do not wish to send data/errors to the Axeptio "
-"plugin and do not want to contribute to the improvement of the plugin."
-msgstr ""
-"Door dit vakje aan te vinken, wil ik geen gegevens/fouten naar de Axeptio "
-"plugin sturen en niet bijdragen aan de verbetering van de plugin."
+msgid "By checking this box, I do not wish to send data/errors to the Axeptio plugin and do not want to contribute to the improvement of the plugin."
+msgstr "Door dit vakje aan te vinken, wil ik geen gegevens/fouten naar de Axeptio plugin sturen en niet bijdragen aan de verbetering van de plugin."
 
 #: templates/admin/main/fields/version.php:17
 msgid "Configured languages"
@@ -404,12 +311,8 @@ msgid "Existing project version backup"
 msgstr "Backup van bestaande projectversie"
 
 #: templates/admin/main/fields/version.php:85
-msgid ""
-"A backup of the version configuration exists for this project, do you want "
-"to restore it?"
-msgstr ""
-"Er bestaat een backup van de versieconfiguratie voor dit project, wilt u "
-"deze herstellen?"
+msgid "A backup of the version configuration exists for this project, do you want to restore it?"
+msgstr "Er bestaat een backup van de versieconfiguratie voor dit project, wilt u deze herstellen?"
 
 #: templates/admin/main/fields/version.php:90
 msgid "Yes, restore it"
@@ -429,9 +332,7 @@ msgstr "Heeft u geen Axeptio-account?"
 
 #: templates/admin/onboarding/account.php:10
 msgid "You need an Axeptio account to finish the configuration of this module"
-msgstr ""
-"U heeft een Axeptio-account nodig om de configuratie van deze module te "
-"voltooien"
+msgstr "U heeft een Axeptio-account nodig om de configuratie van deze module te voltooien"
 
 #: templates/admin/onboarding/account.php:14
 msgid "I create an account now"
@@ -446,11 +347,8 @@ msgid "You have already a Axeptio account?"
 msgstr "Heeft u al een Axeptio-account?"
 
 #: templates/admin/onboarding/account.php:26
-msgid ""
-"Go to your personal dashboard to retrieve the project ID you want to use"
-msgstr ""
-"Ga naar uw persoonlijke dashboard om de project-ID op te halen die u wilt "
-"gebruiken"
+msgid "Go to your personal dashboard to retrieve the project ID you want to use"
+msgstr "Ga naar uw persoonlijke dashboard om de project-ID op te halen die u wilt gebruiken"
 
 #: templates/admin/onboarding/account.php:30
 msgid "I login to my account"
@@ -458,22 +356,15 @@ msgstr "Ik log in op mijn account"
 
 #: templates/admin/onboarding/welcome.php:10
 msgid "Welcome and thank you for installing the Axeptio WordPress extension!"
-msgstr ""
-"Welkom en bedankt voor het installeren van de Axeptio WordPress-extensie!"
+msgstr "Welkom en bedankt voor het installeren van de Axeptio WordPress-extensie!"
 
 #: templates/admin/onboarding/welcome.php:13
-msgid ""
-"We're happy to have you among our users and to provide you with a unique "
-"consent management experience that is intuitive, elegant, and fun."
-msgstr ""
-"We zijn blij u onder onze gebruikers te hebben en u een unieke, intuïtieve, "
-"elegante en leuke ervaring te bieden op het gebied van toestemmingsbeheer."
+msgid "We're happy to have you among our users and to provide you with a unique consent management experience that is intuitive, elegant, and fun."
+msgstr "We zijn blij u onder onze gebruikers te hebben en u een unieke, intuïtieve, elegante en leuke ervaring te bieden op het gebied van toestemmingsbeheer."
 
 #: templates/admin/onboarding/welcome.php:16
 msgid "Before you get started, we invite you to configure the settings below!"
-msgstr ""
-"Voordat u begint, nodigen wij u uit om de onderstaande instellingen te "
-"configureren!"
+msgstr "Voordat u begint, nodigen wij u uit om de onderstaande instellingen te configureren!"
 
 #: templates/admin/plugin-manager.php:20 templates/admin/settings-main.php:20
 msgid "Documentation"
@@ -484,16 +375,8 @@ msgid "Default configuration"
 msgstr "Standaardconfiguratie"
 
 #: templates/admin/plugin-manager.php:38
-msgid ""
-"Axeptio allows you to fine-tune how you want your extensions to act based on "
-"consent or non-consent of cookie rules through our widget. You can set up "
-"the configuration globally (Default Configuration) or according to the "
-"version of your project."
-msgstr ""
-"Axeptio stelt u in staat om nauwkeurig af te stemmen hoe u wilt dat uw "
-"extensies werken op basis van toestemming of niet-toestemming van "
-"cookieregels via onze widget. U kunt de configuratie globaal instellen "
-"(Standaardconfiguratie) of volgens de versie van uw project."
+msgid "Axeptio allows you to fine-tune how you want your extensions to act based on consent or non-consent of cookie rules through our widget. You can set up the configuration globally (Default Configuration) or according to the version of your project."
+msgstr "Axeptio stelt u in staat om nauwkeurig af te stemmen hoe u wilt dat uw extensies werken op basis van toestemming of niet-toestemming van cookieregels via onze widget. U kunt de configuratie globaal instellen (Standaardconfiguratie) of volgens de versie van uw project."
 
 #: templates/admin/plugin-manager.php:45
 msgid "Project version"
@@ -558,22 +441,13 @@ msgid "Delete"
 msgstr "Verwijderen"
 
 #: templates/admin/plugins/fields/edit.php:169
-msgid ""
-"Determines if the Axeptio WordPress plugin will intercept and block the "
-"<code>$wp_filters</code>\n"
-"\t\t\t\t\t\t\t\t\tthat have been added by the selected Plugin. Hooks are "
-"very common within 3rd party plugins\n"
-"\t\t\t\t\t\t\t\t\tas they are used to interacting with the page code, like "
-"adding script or stylesheet tags, edit the\n"
+msgid "Determines if the Axeptio WordPress plugin will intercept and block the <code>$wp_filters</code>\n"
+"\t\t\t\t\t\t\t\t\tthat have been added by the selected Plugin. Hooks are very common within 3rd party plugins\n"
+"\t\t\t\t\t\t\t\t\tas they are used to interacting with the page code, like adding script or stylesheet tags, edit the\n"
 "\t\t\t\t\t\t\t\t\tcontent of a section of the template, etc."
-msgstr ""
-"Bepaalt of de Axeptio WordPress-plugin het <code>$wp_filters</code>\n"
-"\t\t\t\t\t\t\t\t\tdat is toegevoegd door de geselecteerde plugin, zal "
-"onderscheppen en blokkeren. Hooks zijn heel gebruikelijk bij plugins van "
-"derden\n"
-"\t\t\t\t\t\t\t\t\tomdat ze worden gebruikt om te communiceren met de "
-"paginacode, zoals het toevoegen van script- of stylesheet-tags, het bewerken "
-"van de\n"
+msgstr "Bepaalt of de Axeptio WordPress-plugin het <code>$wp_filters</code>\n"
+"\t\t\t\t\t\t\t\t\tdat is toegevoegd door de geselecteerde plugin, zal onderscheppen en blokkeren. Hooks zijn heel gebruikelijk bij plugins van derden\n"
+"\t\t\t\t\t\t\t\t\tomdat ze worden gebruikt om te communiceren met de paginacode, zoals het toevoegen van script- of stylesheet-tags, het bewerken van de\n"
 "\t\t\t\t\t\t\t\t\tinhoud van een sectie van het sjabloon, enz."
 
 #: templates/admin/plugins/fields/edit.php:185
@@ -589,23 +463,14 @@ msgid "Add a shortcode"
 msgstr "Een shortcode toevoegen"
 
 #: templates/admin/plugins/fields/edit.php:218
-msgid ""
-"Some plugins declare <code>[shortcodes]</code> that you can use in the Post "
-"editor.\n"
-"\t\t\t\t\t\t\t\t\tThese shortcodes are commonly used to embed 3rd party "
-"content, like videos or maps. If you\n"
-"\t\t\t\t\t\t\t\t\tthink the shortcodes provided by the selected plugin are "
-"going to load a resource from another\n"
+msgid "Some plugins declare <code>[shortcodes]</code> that you can use in the Post editor.\n"
+"\t\t\t\t\t\t\t\t\tThese shortcodes are commonly used to embed 3rd party content, like videos or maps. If you\n"
+"\t\t\t\t\t\t\t\t\tthink the shortcodes provided by the selected plugin are going to load a resource from another\n"
 "\t\t\t\t\t\t\t\t\twebsite, you should probably block them preemptively."
-msgstr ""
-"Sommige plugins verklaren <code>[shortcodes]</code> die je kunt gebruiken in "
-"de Berichteditor.\n"
-"\t\t\t\t\t\t\t\t\tDeze shortcodes worden vaak gebruikt om inhoud van derden "
-"in te voegen, zoals video's of kaarten. Als u denkt\n"
-"\t\t\t\t\t\t\t\t\t dat de shortcodes die door de geselecteerde plugin worden "
-"aangeboden een bron van een andere\n"
-"\t\t\t\t\t\t\t\t\twebsite gaan laden, moet u ze waarschijnlijk proactief "
-"blokkeren."
+msgstr "Sommige plugins verklaren <code>[shortcodes]</code> die je kunt gebruiken in de Berichteditor.\n"
+"\t\t\t\t\t\t\t\t\tDeze shortcodes worden vaak gebruikt om inhoud van derden in te voegen, zoals video's of kaarten. Als u denkt\n"
+"\t\t\t\t\t\t\t\t\t dat de shortcodes die door de geselecteerde plugin worden aangeboden een bron van een andere\n"
+"\t\t\t\t\t\t\t\t\twebsite gaan laden, moet u ze waarschijnlijk proactief blokkeren."
 
 #: templates/admin/plugins/fields/edit.php:250
 msgid "Saving..."
@@ -624,12 +489,8 @@ msgid "Deleting plugin settings"
 msgstr "Plugin configuratie verwijderen"
 
 #: templates/admin/plugins/fields/modal-delete.php:27
-msgid ""
-"Are you sure you want to delete the configuration for this plugin? This "
-"action cannot be undone."
-msgstr ""
-"Weet u zeker dat u de configuratie voor deze plugin wilt verwijderen? Deze "
-"actie kan niet ongedaan worden gemaakt."
+msgid "Are you sure you want to delete the configuration for this plugin? This action cannot be undone."
+msgstr "Weet u zeker dat u de configuratie voor deze plugin wilt verwijderen? Deze actie kan niet ongedaan worden gemaakt."
 
 #: templates/admin/plugins/fields/modal-delete.php:34
 msgid "Cancel"
@@ -645,9 +506,7 @@ msgstr "Axeptio streeft naar de maan, zorg jij voor de sterren?"
 
 #: templates/admin/sections/notice.php:19
 msgid "If you like Axeptio, give us a rating to make us shine!"
-msgstr ""
-"Als je Axeptio leuk vindt, geef ons een beoordeling om ons te laten "
-"schitteren!"
+msgstr "Als je Axeptio leuk vindt, geef ons een beoordeling om ons te laten schitteren!"
 
 #: templates/admin/sections/notice.php:27
 msgid "Review Axeptio plugin"
@@ -675,126 +534,57 @@ msgstr "Oeps, inhoud niet beschikbaar op dit moment!"
 
 #. translators: $s: Name of the plugin
 #: templates/frontend/shortcode-placeholder.php:10
-#, php-format
-msgid ""
-"This content is blocked because we take the protection of your data very "
-"seriously. If you wish to unblock it, it's very simple: go to our cookie "
-"consent widget, give your approval for the \"%s\" extension. And voila, "
-"you're all set!"
-msgstr ""
-"Deze inhoud is geblokkeerd omdat wij de bescherming van uw gegevens zeer "
-"serieus nemen. Als u de blokkering wilt opheffen, is dat heel eenvoudig: ga "
-"naar onze cookie toestemmingswidget, geef uw toestemming voor de \"%s\" "
-"extensie. En voila, u bent helemaal klaar!"
+msgid "This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it's very simple: go to our cookie consent widget, give your approval for the \"%s\" extension. And voila, you're all set!"
+msgstr "Deze inhoud is geblokkeerd omdat wij de bescherming van uw gegevens zeer serieus nemen. Als u de blokkering wilt opheffen, is dat heel eenvoudig: ga naar onze cookie toestemmingswidget, geef uw toestemming voor de \"%s\" extensie. En voila, u bent helemaal klaar!"
 
 #. Plugin URI of the plugin/theme
+#: 
 msgid "https://www.axeptio.eu/"
 msgstr "https://www.axeptio.eu/nl"
 
 #. Description of the plugin/theme
+#: 
 msgid "Axeptio allows you to make your website compliant with GDPR."
 msgstr "Axeptio stelt u in staat om uw website GDPR-conform te maken."
 
 #. Author of the plugin/theme
+#: 
 msgid "axeptio"
 msgstr "axeptio"
 
-#~ msgid "Not configured"
-#~ msgstr "Niet geconfigureerd"
+#: includes/classes/admin/pages/class-admin-callbacks.php:160
+msgid "Widget Image"
+msgstr "Widgetafbeelding"
 
-#~ msgid "How To Integrate Axeptio?"
-#~ msgstr "Hoe Axeptio te integreren?"
+#: includes/classes/admin/pages/class-admin-callbacks.php:173
+msgid "Disable the background Image"
+msgstr "Achtergrondafbeelding uitschakelen"
 
-#~ msgid "Probability:"
-#~ msgstr "Waarschijnlijkheid:"
+#: includes/classes/admin/pages/class-admin-callbacks.php:174
+msgid "By checking this box, you will deactivate the painted background."
+msgstr "Door dit vakje aan te vinken, deactiveer je de geschilderde achtergrond."
 
-#~ msgid "Do you like Axeptio?"
-#~ msgstr "Vind je Axeptio leuk?"
+#: includes/classes/admin/pages/class-admin-callbacks.php:232
+msgid "Enable sdk proxy"
+msgstr "SDK-proxy inschakelen"
 
-#~ msgid "Your opinion matters to us, leave us a review on WordPress.org"
-#~ msgstr ""
-#~ "Uw mening is belangrijk voor ons, laat een recensie achter op WordPress."
-#~ "org"
+#: includes/classes/admin/pages/class-admin-callbacks.php:237
+msgid "Load the Axeptio SDK from your website domain."
+msgstr "Laad de Axeptio SDK vanaf je domein."
 
-#~ msgid "Leave a review"
-#~ msgstr "Laat een beoordeling achter"
+#: templates/admin/common/fields/image-upload.php:14
+msgid "Disable this image"
+msgstr "Deze afbeelding uitschakelen"
 
-#~ msgid ""
-#~ "Your project ID is not found or your project is not published. If you are "
-#~ "certain about your project ID, please publish it through the Axeptio "
-#~ "interface and restart the configuration."
-#~ msgstr ""
-#~ "Uw project ID is niet gevonden of uw project is niet gepubliceerd. Als u "
-#~ "zeker bent van uw project ID, publiceer het dan via de Axeptio interface "
-#~ "en start de configuratie opnieuw."
+#: templates/admin/common/fields/image-upload.php:24
+msgid "Choose Image"
+msgstr "Afbeelding kiezen"
 
-#~ msgid ""
-#~ "Would you allow Axeptio to collect non-sensitive diagnostic data from "
-#~ "this website?"
-#~ msgstr ""
-#~ "Wilt u Axeptio toestaan om niet-gevoelige diagnostische gegevens te "
-#~ "verzamelen van deze website?"
+#: templates/admin/common/fields/image-upload.php:33
+msgid "Remove"
+msgstr "Verwijderen"
 
-#~ msgid "Yes, I want to contribute to improve the plugin."
-#~ msgstr "Ja, ik wil bijdragen aan het verbeteren van de plugin."
+#: templates/admin/main/fields/background-image.php:9
+msgid "Widget Background Image"
+msgstr "Widget Achtergrondafbeelding"
 
-#~ msgid "This account doesn't exist"
-#~ msgstr "Dit account bestaat niet"
-
-#~ msgctxt "context"
-#~ msgid "Hello World…"
-#~ msgstr "Hallo Allemaal…"
-
-#~ msgid "Hello %s"
-#~ msgstr "Hallo %s"
-
-#~ msgid "%d%%"
-#~ msgstr "%d%%"
-
-#~ msgid "%s"
-#~ msgid_plural "%s"
-#~ msgstr[0] "%s"
-#~ msgstr[1] "%s"
-
-#~ msgid "%s%s"
-#~ msgstr "%s%s"
-
-#~ msgctxt "random"
-#~ msgid "Hello World"
-#~ msgstr "Hallo Wereld"
-
-#~ msgid "generated-value"
-#~ msgstr "gegenereerde waarde"
-
-#~ msgid "default:"
-#~ msgstr "standaard:"
-
-#~ msgid "Invalid values:"
-#~ msgstr "Ongeldige waarden:"
-
-#~ msgid "Argument: %s, Given: %s, Choices: %s"
-#~ msgstr "Argument: %s, Gegeven: %s, Keuzes: %s"
-
-#~ msgid "Implications failed:"
-#~ msgstr "Implicaties mislukt:"
-
-#~ msgid "Arguments %s and %s are mutually exclusive"
-#~ msgstr "Argumenten %s en %s zijn onderling uitsluitend"
-
-#~ msgid "Did you mean %s?"
-#~ msgstr "Bedoelde u %s?"
-
-#~ msgid "Argument check failed: %s"
-#~ msgstr "Argumentcontrole mislukt: %s"
-
-#~ msgid "Select a version"
-#~ msgstr "Selecteer een versie"
-
-#~ msgid "Axeptio SDK Integration"
-#~ msgstr "Axeptio SDK-integratie"
-
-#~ msgid "Axeptio Widget"
-#~ msgstr "Axeptio Widget"
-
-#~ msgid "Please enter your automation key here."
-#~ msgstr "Voer hier uw automatiseringssleutel in."

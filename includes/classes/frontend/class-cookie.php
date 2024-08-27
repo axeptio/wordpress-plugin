@@ -20,8 +20,7 @@ class Cookie extends Module {
 	 *
 	 * @return true
 	 */
-	public function can_register(): bool
-	{
+	public function can_register(): bool {
 		return true;
 	}
 
@@ -42,24 +41,23 @@ class Cookie extends Module {
 	 * @throws UndefinedCookie
 	 */
 	public function set_cookie() {
-		$input_json = stripslashes($_POST['userPreferencesManager']);
-		$input = json_decode($input_json); // Convert JSON to array
+		$input_json = stripslashes( $_POST['userPreferencesManager'] );
+		$input      = json_decode( $input_json ); // Convert JSON to array
 
-
-		if (!isset($input->choices)) {
+		if ( ! isset( $input->choices ) ) {
 			wp_send_json_error();
 		}
 
 		$userToken = $input->choices->{'$$token'};
 
-		$user_preferences = [];
-		$all_vendors = [];
+		$user_preferences = array();
+		$all_vendors      = array();
 
-		foreach ((array)$input->choices as $key => $value) {
-			if (str_contains($key, '$$') !== false) {
+		foreach ( (array) $input->choices as $key => $value ) {
+			if ( str_contains( $key, '$$' ) !== false ) {
 				continue;
 			}
-			if ($value) {
+			if ( $value ) {
 				$user_preferences[] = $key;
 			}
 			$all_vendors[] = $key;
@@ -68,22 +66,22 @@ class Cookie extends Module {
 		$cookie_manager = new AxeptioCookieManager();
 
 		$axeptio_cookie_builder = new AxeptioCookiesBuilder();
-		$axeptio_cookie_builder->setUserToken($userToken);
-		$axeptio_cookie_builder->setUserPreferences($user_preferences);
-		$axeptio_cookie_builder->setExpiry(172800);
+		$axeptio_cookie_builder->setUserToken( $userToken );
+		$axeptio_cookie_builder->setUserPreferences( $user_preferences );
+		$axeptio_cookie_builder->setExpiry( 172800 );
 		$axeptio_cookie = $axeptio_cookie_builder->create();
 
 		$authorized_vendor_cookies_builder = new AuthorizedVendorCookiesBuilder();
-		$authorized_vendor_cookies_builder->setUserPreferences($user_preferences);
+		$authorized_vendor_cookies_builder->setUserPreferences( $user_preferences );
 		$authorized_vendor_cookies = $authorized_vendor_cookies_builder->create();
 
 		$all_vendor_cookies_builder = new AllVendorCookiesBuilder();
-		$all_vendor_cookies_builder->setVendors($all_vendors);
+		$all_vendor_cookies_builder->setVendors( $all_vendors );
 		$all_vendor_cookies = $all_vendor_cookies_builder->create();
 
-		$cookie_manager->addAxeptioCookies($axeptio_cookie);
-		$cookie_manager->addAuthorizedVendorCookies($authorized_vendor_cookies);
-		$cookie_manager->addAllVendorCookies($all_vendor_cookies);
+		$cookie_manager->addAxeptioCookies( $axeptio_cookie );
+		$cookie_manager->addAuthorizedVendorCookies( $authorized_vendor_cookies );
+		$cookie_manager->addAllVendorCookies( $all_vendor_cookies );
 		$cookie_manager->set();
 
 		wp_send_json_success();

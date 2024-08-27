@@ -14,7 +14,7 @@ if ( ! defined( 'WP_ADMIN' ) ) {
 
 /** Load WordPress Bootstrap */
 
-$relative_path =  $_REQUEST['relative_path'];
+$relative_path = $_REQUEST['relative_path'];
 
 require_once $relative_path . 'wp-load.php';
 

@@ -27,7 +27,7 @@ tasks:
       - rm -rf ./releases/assets && cp -R ./release-assets/ ./releases/assets
       - rm -rf ./releases/tags/{{.CLI_ARGS}}
       - cp -R ./releases/trunk ./releases/tags/{{.CLI_ARGS}}
-      - cd ./releases && svn add ./releases/trunk --force && ./releases/tags/{{.CLI_ARGS}} -force && svn ci -m 'version {{.CLI_ARGS}} release' && svn up
+      - cd ./releases && svn add trunk tags/{{.CLI_ARGS}} --force && svn ci -m 'version {{.CLI_ARGS}} release' && svn up
       - cd ..
       - rm -rf ./releases
 

@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2024-06-24 12:05+0200\n"
+"POT-Creation-Date: 2024-07-29 12:57+0200\n"
 "PO-Revision-Date: 2023-05-10 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -49,27 +49,47 @@ msgstr ""
 msgid "Widget sub-title"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:166
+#: includes/classes/admin/pages/class-admin-callbacks.php:160
+msgid "Widget Image"
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:173
+msgid "Disable the background Image"
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:174
+msgid "By checking this box, you will deactivate the painted background."
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:193
 msgid "Cookie domain"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:171
+#: includes/classes/admin/pages/class-admin-callbacks.php:198
 msgid ""
 "If specified, domain name on which the cookie containing user choices will "
 "be available. This allows to request one consent for various subdomains"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:186
+#: includes/classes/admin/pages/class-admin-callbacks.php:213
 msgid "API url"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:191
+#: includes/classes/admin/pages/class-admin-callbacks.php:218
 msgid ""
 "URL on which the widget will send its POST and GET requests for querying and "
 "storing consent proofs."
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:205
+#: includes/classes/admin/pages/class-admin-callbacks.php:232
+msgid "Enable sdk proxy"
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:237
+msgid "Load the Axeptio SDK from your website domain."
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:251
 msgid "Widget description"
 msgstr ""
 
@@ -166,7 +186,7 @@ msgstr ""
 msgid "Google Consent Mode V2"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:351
+#: includes/classes/admin/pages/class-admin-main.php:373
 msgid "Collect of data and errors by Axeptio"
 msgstr ""
 
@@ -219,23 +239,23 @@ msgid "All shortcode tags"
 msgstr ""
 
 #. translators: %s: the path to the plugin
-#: includes/core.php:83
+#: includes/core.php:84
 #, php-format
 msgid ""
 "The composer.json file was not found within %s. No classes will be loaded."
 msgstr ""
 
-#: includes/core.php:198
+#: includes/core.php:199
 msgid ""
 "We were unable to find your project, or it appears that it has not yet been "
 "published."
 msgstr ""
 
-#: includes/core.php:206
+#: includes/core.php:207
 msgid "Error verifying account ID. Try Again."
 msgstr ""
 
-#: includes/core.php:213
+#: includes/core.php:214
 msgid "Please enter an account ID"
 msgstr ""
 
@@ -249,6 +269,22 @@ msgstr ""
 
 #: includes/helpers/helpers.php:116
 msgid "Advanced"
+msgstr ""
+
+#: templates/admin/common/fields/image-upload.php:14
+msgid "Disable this image"
+msgstr ""
+
+#: templates/admin/common/fields/image-upload.php:24
+msgid "Choose Image"
+msgstr ""
+
+#: templates/admin/common/fields/image-upload.php:33
+msgid "Remove"
+msgstr ""
+
+#: templates/admin/main/fields/background-image.php:9
+msgid "Widget Background Image"
 msgstr ""
 
 #: templates/admin/main/fields/client-id.php:31

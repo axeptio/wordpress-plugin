@@ -2,7 +2,7 @@ let mix = require('laravel-mix');
 let ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 mix.browserSync({
-	proxy: 'https://axeptio.docker.localhost',
+	proxy: 'https://axeptio.ddev.site',
 	https: true,
 	files: [
 		'./templates/**/*.php',
