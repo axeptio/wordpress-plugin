@@ -630,10 +630,6 @@ class Hook_Modifier extends Module {
 				'plugin'   => $plugin,
 			);
 		} catch ( \Exception $e ) {
-			// Log l'erreur ou gère-la silencieusement
-			if ( XPWP_SHOW_ALL_ERRORS && ! (bool) Settings::get_option( 'disable_send_datas', false ) ) {
-				\Sentry\captureException( $e );
-			}
 			return null;
 		}
 	}

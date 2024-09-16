@@ -371,6 +371,7 @@ class Admin_Main extends Module {
 					'class'     => 'inline-table-row label-right',
 				),
 			),
+
 			array(
 				'id'       => 'xpwp_disable_send_datas',
 				'title'    => __( 'Collect of data and errors by Axeptio', 'axeptio-wordpress-plugin' ),

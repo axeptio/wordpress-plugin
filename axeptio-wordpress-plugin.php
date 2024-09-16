@@ -56,11 +56,6 @@ if ( file_exists( XPWP_PATH . 'vendor/autoload.php' ) ) {
 	require_once XPWP_PATH . 'includes/wpcs-autoload.php';
 }
 
-
-if ( ! (bool) Settings::get_option( 'disable_send_datas', false ) ) {
-	Sentry\init( array( 'dsn' => 'https://f7fe61f60f424acba143522d108ebe4a@o561678.ingest.sentry.io/4505249684914176' ) );
-}
-
 // Activation/Deactivation.
 register_activation_hook( __FILE__, '\Axeptio\Plugin\activate' );
 register_deactivation_hook( __FILE__, '\Axeptio\Plugin\deactivate' );
