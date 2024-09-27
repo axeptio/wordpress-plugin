@@ -34,7 +34,7 @@ class Recommended_Plugin_Settings {
 	 */
 	public static function find( string $plugin ) {
 		$result = self::all();
-		return isset( $result[ $plugin ] ) ? $result[ $plugin ] : false;
+		return $result[$plugin] ?? false;
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Recommended_Plugin_Settings {
 
 		$processed_plugin_datas = self::process_plugin_items( json_decode( $plugin_datas['body'], true ) );
 
-		set_transient( 'cached_plugin_datas', $processed_plugin_datas, 1 * DAY_IN_SECONDS );
+		set_transient( self::TRANSIENT_KEY, $processed_plugin_datas, 1 * DAY_IN_SECONDS );
 
 		return $processed_plugin_datas;
 	}
