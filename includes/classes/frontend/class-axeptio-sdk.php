@@ -160,10 +160,13 @@ class Axeptio_Sdk extends Module {
 		$google_consent_mode_params = Settings::get_option(
 			'google_consent_params',
 			array(
-				'analytics_storage'  => false,
-				'ad_storage'         => false,
-				'ad_user_data'       => false,
-				'ad_personalization' => false,
+				'analytics_storage'      => false,
+				'ad_storage'             => false,
+				'ad_user_data'           => false,
+				'ad_personalization'     => false,
+				'functionality_storage'  => false,
+				'personalization_storage'=> false,
+				'security_storage'       => false,
 			)
 		);
 
@@ -178,10 +181,13 @@ class Axeptio_Sdk extends Module {
 			'enableGoogleConsentMode' => $google_consent_mode,
 			'googleConsentMode'       => array(
 				'default' => array(
-					'analytics_storage'  => isset( $google_consent_mode_params['analytics_storage'] ) && '1' === $google_consent_mode_params['analytics_storage'] ? 'granted' : 'denied',
-					'ad_storage'         => isset( $google_consent_mode_params['ad_storage'] ) && '1' === $google_consent_mode_params['ad_storage'] ? 'granted' : 'denied',
-					'ad_user_data'       => isset( $google_consent_mode_params['ad_user_data'] ) && '1' === $google_consent_mode_params['ad_user_data'] ? 'granted' : 'denied',
-					'ad_personalization' => isset( $google_consent_mode_params['ad_personalization'] ) && '1' === $google_consent_mode_params ? 'granted' : 'denied',
+					'analytics_storage'      => isset( $google_consent_mode_params['analytics_storage'] ) && '1' === $google_consent_mode_params['analytics_storage'] ? 'granted' : 'denied',
+					'ad_storage'             => isset( $google_consent_mode_params['ad_storage'] ) && '1' === $google_consent_mode_params['ad_storage'] ? 'granted' : 'denied',
+					'ad_user_data'           => isset( $google_consent_mode_params['ad_user_data'] ) && '1' === $google_consent_mode_params['ad_user_data'] ? 'granted' : 'denied',
+					'ad_personalization'     => isset( $google_consent_mode_params['ad_personalization'] ) && '1' === $google_consent_mode_params['ad_personalization'] ? 'granted' : 'denied',
+					'functionality_storage'  => isset( $google_consent_mode_params['functionality_storage'] ) && '1' === $google_consent_mode_params['functionality_storage'] ? 'granted' : 'denied',
+					'personalization_storage'=> isset( $google_consent_mode_params['personalization_storage'] ) && '1' === $google_consent_mode_params['personalization_storage'] ? 'granted' : 'denied',
+					'security_storage'       => isset( $google_consent_mode_params['security_storage'] ) && '1' === $google_consent_mode_params['security_storage'] ? 'granted' : 'denied',
 				),
 			),
 		);

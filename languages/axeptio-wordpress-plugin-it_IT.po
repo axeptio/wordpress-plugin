@@ -1,11 +1,15 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: Axeptio\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"Project-Id-Version: Axeptio\n"
-"Language: it\n"
+"X-Generator: Poedit 3.5\n"
 
 #: axeptio-wordpress-plugin.php:35
 msgid "Unable to activate Axeptio"
@@ -256,6 +260,30 @@ msgstr "Ad Personalization"
 msgid "Customize the ad experience by allowing Google to personalize the ads that visitors see."
 msgstr "Personalizzare l'esperienza pubblicitaria permettendo a Google di personalizzare gli annunci che i visitatori vedono."
 
+#: templates/admin/main/fields/google-consent-mode.php:65
+msgid "Functionality storage"
+msgstr "Archiviazione funzionalità"
+
+#: templates/admin/main/fields/google-consent-mode.php:66
+msgid "Enables storage that supports the functionality of the website or app, for example, language settings."
+msgstr "Abilita l'archiviazione che supporta la funzionalità del sito web o dell'app, ad esempio le impostazioni della lingua."
+
+#: templates/admin/main/fields/google-consent-mode.php:70
+msgid "Personalization storage"
+msgstr "Archiviazione personalizzazione"
+
+#: templates/admin/main/fields/google-consent-mode.php:71
+msgid "Enables storage related to personalization, for example, video recommendations."
+msgstr "Abilita l'archiviazione relativa alla personalizzazione, ad esempio le raccomandazioni video."
+
+#: templates/admin/main/fields/google-consent-mode.php:75
+msgid "Security storage"
+msgstr "Archiviazione sicurezza"
+
+#: templates/admin/main/fields/google-consent-mode.php:76
+msgid "Enables storage related to security such as authentication functionality, fraud prevention, and other user protection."
+msgstr "Abilita l'archiviazione relativa alla sicurezza come la funzionalità di autenticazione, la prevenzione delle frodi e altre protezioni dell'utente."
+
 #: templates/admin/main/fields/google-consent-mode.php:67
 msgid "Default settings for consent mode"
 msgstr "Impostazioni predefinite per il consent mode"
@@ -441,11 +469,13 @@ msgid "Delete"
 msgstr "Elimina"
 
 #: templates/admin/plugins/fields/edit.php:169
-msgid "Determines if the Axeptio WordPress plugin will intercept and block the <code>$wp_filters</code>\n"
+msgid ""
+"Determines if the Axeptio WordPress plugin will intercept and block the <code>$wp_filters</code>\n"
 "\t\t\t\t\t\t\t\t\tthat have been added by the selected Plugin. Hooks are very common within 3rd party plugins\n"
 "\t\t\t\t\t\t\t\t\tas they are used to interacting with the page code, like adding script or stylesheet tags, edit the\n"
 "\t\t\t\t\t\t\t\t\tcontent of a section of the template, etc."
-msgstr "Determina se il plugin WordPress Axeptio intercetterà e bloccherà il <code>$wp_filters</code>\n"
+msgstr ""
+"Determina se il plugin WordPress Axeptio intercetterà e bloccherà il <code>$wp_filters</code>\n"
 "\t\t\t\t\t\t\t\t\tche è stato aggiunto dal plugin selezionato. Gli hook sono molto comuni nei plugin di terze parti\n"
 "\t\t\t\t\t\t\t\t\tpoiché vengono utilizzati per interagire con il codice della pagina, come aggiungere tag di script o fogli di stile, modificare il\n"
 "\t\t\t\t\t\t\t\t\tcontenuto di una sezione del modello, ecc."
@@ -463,11 +493,13 @@ msgid "Add a shortcode"
 msgstr "Aggiungi un shortcode"
 
 #: templates/admin/plugins/fields/edit.php:218
-msgid "Some plugins declare <code>[shortcodes]</code> that you can use in the Post editor.\n"
+msgid ""
+"Some plugins declare <code>[shortcodes]</code> that you can use in the Post editor.\n"
 "\t\t\t\t\t\t\t\t\tThese shortcodes are commonly used to embed 3rd party content, like videos or maps. If you\n"
 "\t\t\t\t\t\t\t\t\tthink the shortcodes provided by the selected plugin are going to load a resource from another\n"
-"\t\t\t\t\t\t\t\t\twebsite, you should probably block them preemptively."
-msgstr "Alcuni plugin dichiarano <code>[shortcodes]</code> che è possibile utilizzare nell'editor dei post.\n"
+"\t\t\t\t\t\t\t\t\tsite web, you should probably block them preemptively."
+msgstr ""
+"Alcuni plugin dichiarano <code>[shortcodes]</code> che è possibile utilizzare nell'editor dei post.\n"
 "\t\t\t\t\t\t\t\t\tQuesti shortcode sono comunemente utilizzati per incorporare contenuti di terze parti, come video o mappe. Se pensi\n"
 "\t\t\t\t\t\t\t\t\tche gli shortcode forniti dal plugin selezionato caricheranno una risorsa da un altro\n"
 "\t\t\t\t\t\t\t\t\tsito web, è probabile che dovresti bloccarli preventivamente."
@@ -538,17 +570,14 @@ msgid "This content is blocked because we take the protection of your data very 
 msgstr "Questo contenuto è bloccato perché prendiamo molto sul serio la protezione dei vostri dati. Se desiderate sbloccarlo, è molto semplice: andate sul nostro widget per il consenso ai cookie, date il vostro consenso all'estensione \"%s\". E voilà, il gioco è fatto!"
 
 #. Plugin URI of the plugin/theme
-#: 
 msgid "https://www.axeptio.eu/"
 msgstr "https://www.axeptio.eu/it"
 
 #. Description of the plugin/theme
-#: 
 msgid "Axeptio allows you to make your website compliant with GDPR."
 msgstr "Axeptio ti permette di rendere il tuo sito web conforme al GDPR."
 
 #. Author of the plugin/theme
-#: 
 msgid "axeptio"
 msgstr "axeptio"
 
@@ -587,4 +616,3 @@ msgstr "Rimuovi"
 #: templates/admin/main/fields/background-image.php:9
 msgid "Widget Background Image"
 msgstr "Immagine di sfondo del widget"
-
