@@ -281,6 +281,11 @@ class Admin_Callbacks {
 		);
 	}
 
+	/**
+	 * Google Tag Manager Event settings.
+	 *
+	 * @return void
+	 */
 	public function gtm_events_set() {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/gtm-events',
