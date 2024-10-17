@@ -9,6 +9,7 @@ namespace Axeptio\Plugin\Frontend;
 
 use Axeptio\Plugin\Models\Settings;
 use Axeptio\Plugin\Module;
+use WP_Filesystem_Direct;
 
 class Sdk_Proxy extends Module {
 
@@ -110,19 +111,29 @@ class Sdk_Proxy extends Module {
 			return;
 		}
 
-		$file_path = wp_upload_dir()['basedir'] . '/' . self::CACHE_DIR . '/' . self::CACHE_FILE;
+		// Initialize the WP_Filesystem API.
+		global $wp_filesystem;
+		if ( empty( $wp_filesystem ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			WP_Filesystem();
+		}
 
-		if ( ! is_dir( self::CACHE_DIR ) ) {
-			wp_mkdir_p( self::CACHE_DIR );
-			chmod( self::CACHE_DIR, 0755 );
+		$upload_dir = wp_upload_dir();
+		$file_path  = $upload_dir['basedir'] . '/' . self::CACHE_DIR . '/' . self::CACHE_FILE;
+
+		// Create directory if it doesn't exist and set correct permissions.
+		if ( ! $wp_filesystem->is_dir( $upload_dir['basedir'] . '/' . self::CACHE_DIR ) ) {
+			$wp_filesystem->mkdir( $upload_dir['basedir'] . '/' . self::CACHE_DIR );
+			$wp_filesystem->chmod( $upload_dir['basedir'] . '/' . self::CACHE_DIR, 0755 );
 		}
 
 		header( 'Content-Type: application/javascript' );
 		header( 'Cache-Control: public, max-age=' . self::CACHE_TIME );
 		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + self::CACHE_TIME ) . ' GMT' );
+		// Serve cached file if it exists and is still valid.
+		if ( $wp_filesystem->exists( $file_path ) && ( time() - $wp_filesystem->mtime( $file_path ) ) < self::CACHE_TIME ) {
 
-		if ( file_exists( $file_path ) && ( time() - filemtime( $file_path ) ) < self::CACHE_TIME ) {
-			readfile( $file_path );
+			echo esc_js( $wp_filesystem->get_contents( $file_path ) );
 			exit;
 		}
 
@@ -134,8 +145,9 @@ class Sdk_Proxy extends Module {
 		}
 
 		$body = wp_remote_retrieve_body( $response );
-		file_put_contents( $file_path, $body );
-		echo $body;
+		$wp_filesystem->put_contents( $file_path, $body, FS_CHMOD_FILE );
+
+		echo esc_js( $body ); // Ensure output is escaped.
 		exit;
 	}
 }

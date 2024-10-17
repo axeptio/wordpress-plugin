@@ -45,7 +45,13 @@ spl_autoload_register(
 		if ( $file ) {
 			require $file;
 		} else {
-			throw new Exception( $class_name, $prefix );
+			throw new Exception(
+				sprintf(
+					'Unable to load class %s with prefix %s',
+					esc_html( $class_name ),
+					esc_html( $prefix )
+				)
+			);
 		}
 	}
 );
