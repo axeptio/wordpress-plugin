@@ -406,6 +406,17 @@ class Admin_Main extends Module {
 				),
 			),
 			array(
+				'id'       => 'xpwp_gtm_events',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'gtm_events_set' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_advanced_settings',
+				'args'     => array(
+					'label_for' => 'xpwp_gtm_events',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
 				'id'       => 'xpwp_proxy_sdk',
 				'title'    => false,
 				'callback' => array( $this->callbacks, 'proxy_sdk' ),

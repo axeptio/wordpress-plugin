@@ -588,3 +588,22 @@ msgstr "Entfernen"
 msgid "Widget Background Image"
 msgstr "Widget-Hintergrundbild"
 
+#: templates/admin/common/fields/gtm-events.php:3
+msgid "Google Tag Manager Events"
+msgstr "Google Tag Manager-Ereignisse"
+
+#: templates/admin/common/fields/gtm-events.php:5
+msgid "Configure how events are sent to Google Tag Manager"
+msgstr "Konfigurieren Sie, wie Ereignisse an Google Tag Manager gesendet werden"
+
+#: templates/admin/common/fields/gtm-events.php:12
+msgid "Send all events to dataLayer"
+msgstr "Alle Ereignisse an dataLayer senden"
+
+#: templates/admin/common/fields/gtm-events.php:13
+msgid "Do not send any events to dataLayer"
+msgstr "Keine Ereignisse an dataLayer senden"
+
+#: templates/admin/common/fields/gtm-events.php:14
+msgid "Send only axeptio_update event to dataLayer"
+msgstr "Nur axeptio_update-Ereignis an dataLayer senden"
