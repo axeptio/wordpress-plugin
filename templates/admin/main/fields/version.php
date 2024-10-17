@@ -10,8 +10,8 @@ use Axeptio\Plugin\Models\Settings;
 	?>
 	<?php if ( Axeptio\Plugin\Models\i18n::has_multilangual() && $axeptio_option_list ) : ?>
 		<?php
-			$axeptio_languages  = \Axeptio\Plugin\Models\i18n::get_languages();
-			$localized_versions = Project_Versions::get_localized_versions();
+			$axeptio_languages          = \Axeptio\Plugin\Models\i18n::get_languages();
+			$axeptio_localized_versions = Project_Versions::get_localized_versions();
 		?>
 		<p class="block text-sm font-medium leading-6 text-gray-900">
 			<?php esc_html_e( 'Configured languages', 'axeptio-wordpress-plugin' ); ?>
@@ -32,7 +32,7 @@ use Axeptio\Plugin\Models\Settings;
 					</div>
 					<div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
 						<select
-							name="axeptio_settings[<?php echo esc_attr( $localized_versions[ $axeptio_language_key ] ); ?>]"
+							name="axeptio_settings[<?php echo esc_attr( $axeptio_localized_versions[ $axeptio_language_key ] ); ?>]"
 							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:max-w-xs sm:text-sm sm:leading-6"
 						>
 							<option value=""><?php esc_html_e( 'Dynamic (Axeptio based)', 'axeptio-wordpress-plugin' ); ?></option>
@@ -40,7 +40,7 @@ use Axeptio\Plugin\Models\Settings;
 								<option
 									:value="option.value"
 									x-text="option.text"
-									:selected="option.value === selectedOption.<?php echo esc_attr( $localized_versions[ $axeptio_language_key ] ); ?>"
+									:selected="option.value === selectedOption.<?php echo esc_attr( $axeptio_localized_versions[ $axeptio_language_key ] ); ?>"
 								></option>
 							</template>
 						</select>

@@ -38,17 +38,25 @@ class Cookie extends Module {
 	 * Set user cookie.
 	 *
 	 * @return void
-	 * @throws UndefinedCookie
+	 * @throws UndefinedCookie When the cookie is undefined.
 	 */
 	public function set_cookie() {
-		$input_json = stripslashes( $_POST['userPreferencesManager'] );
-		$input      = json_decode( $input_json ); // Convert JSON to array
+		if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'axeptio_set_cookie' ) ) {
+			wp_send_json_error( 'Invalid nonce' );
+		}
+
+		if ( ! isset( $_POST['userPreferencesManager'] ) ) {
+			wp_send_json_error( 'Missing user preferences' );
+		}
+
+		$input_json = sanitize_text_field( wp_unslash( $_POST['userPreferencesManager'] ) );
+		$input      = json_decode( $input_json );
 
 		if ( ! isset( $input->choices ) ) {
 			wp_send_json_error();
 		}
 
-		$userToken = $input->choices->{'$$token'};
+		$user_token = $input->choices->{'$$token'};
 
 		$user_preferences = array();
 		$all_vendors      = array();
@@ -58,15 +66,15 @@ class Cookie extends Module {
 				continue;
 			}
 			if ( $value ) {
-				$user_preferences[] = $key;
+				$user_preferences[] = sanitize_text_field( $key );
 			}
-			$all_vendors[] = $key;
+			$all_vendors[] = sanitize_text_field( $key );
 		}
 
 		$cookie_manager = new AxeptioCookieManager();
 
 		$axeptio_cookie_builder = new AxeptioCookiesBuilder();
-		$axeptio_cookie_builder->setUserToken( $userToken );
+		$axeptio_cookie_builder->setUserToken( sanitize_text_field( $user_token ) );
 		$axeptio_cookie_builder->setUserPreferences( $user_preferences );
 		$axeptio_cookie_builder->setExpiry( 172800 );
 		$axeptio_cookie = $axeptio_cookie_builder->create();
