@@ -281,12 +281,17 @@ class Admin_Callbacks {
 		);
 	}
 
+	/**
+	 * Callback function to display the API URL input field.
+	 *
+	 * @return void
+	 */
 	public function api_url_callback() {
 		$api_url = Settings::get_option( 'api_url' );
 		?>
 		<input type="text" name="axeptio_settings[api_url]" value="<?php echo esc_attr( $api_url ); ?>" class="regular-text">
 		<p class="description">
-			<?php _e( 'URL to which the widget will send POST requests after user consent.', 'axeptio-wordpress-plugin' ); ?>
+			<?php esc_html_e( 'URL to which the widget will send POST requests after user consent.', 'axeptio-wordpress-plugin' ); ?>
 		</p>
 		<?php
 	}
