@@ -280,4 +280,23 @@ class Admin_Callbacks {
 			'admin/sections/notice'
 		);
 	}
+
+	/**
+	 * Google Tag Manager Event settings.
+	 *
+	 * @return void
+	 */
+	public function gtm_events_set() {
+		\Axeptio\Plugin\get_template_part(
+			'admin/common/fields/gtm-events',
+			array(
+				'label'       => __( 'Google Tag Manager Events', 'axeptio-wordpress-plugin' ),
+				'description' => __( 'Configure how events are sent to Google Tag Manager', 'axeptio-wordpress-plugin' ),
+				'group'       => 'axeptio_settings',
+				'name'        => 'gtm_events',
+				'id'          => 'xpwp_gtm_events',
+				'value'       => \Axeptio\Plugin\Models\Settings::get_option( 'gtm_events', 'true' ),
+			)
+		);
+	}
 }

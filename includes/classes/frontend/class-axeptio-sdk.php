@@ -170,6 +170,8 @@ class Axeptio_Sdk extends Module {
 			)
 		);
 
+		$gtm_events = Settings::get_option( 'gtm_events', 'true' );
+
 		if ( ! $sdk_active || ( ! $client_id && ! $cookies_version ) ) {
 			return false;
 		}
@@ -179,6 +181,7 @@ class Axeptio_Sdk extends Module {
 			'platform'                => 'plugin-wordpress',
 			'sendDatas'               => $disable_send_datas,
 			'enableGoogleConsentMode' => $google_consent_mode,
+			'triggerGTMEvents'        => $gtm_events,
 			'googleConsentMode'       => array(
 				'default' => array(
 					'analytics_storage'       => isset( $google_consent_mode_params['analytics_storage'] ) && '1' === $google_consent_mode_params['analytics_storage'] ? 'granted' : 'denied',

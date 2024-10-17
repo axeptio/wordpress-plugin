@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-24 12:05+0200\n"
-"PO-Revision-Date: 2024-10-17 13:42+0200\n"
+"PO-Revision-Date: 2024-10-17 16:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -623,6 +623,26 @@ msgstr "Axeptio allows you to make your website compliant with GDPR."
 msgid "axeptio"
 msgstr "axeptio"
 
+#: templates/admin/common/fields/gtm-events.php:3
+msgid "Google Tag Manager Events"
+msgstr "Google Tag Manager Events"
+
+#: templates/admin/common/fields/gtm-events.php:5
+msgid "Configure how events are sent to Google Tag Manager"
+msgstr "Configure how events are sent to Google Tag Manager"
+
+#: templates/admin/common/fields/gtm-events.php:12
+msgid "Send all events to dataLayer"
+msgstr "Send all events to dataLayer"
+
+#: templates/admin/common/fields/gtm-events.php:13
+msgid "Do not send any events to dataLayer"
+msgstr "Do not send any events to dataLayer"
+
+#: templates/admin/common/fields/gtm-events.php:14
+msgid "Send only axeptio_update event to dataLayer"
+msgstr "Send only axeptio_update event to dataLayer"
+
 #~ msgid "Not configured"
 #~ msgstr "Not configured"
 
@@ -774,21 +794,3 @@ msgstr "axeptio"
 
 #~ msgid "Arguments %s and %s are mutually exclusive"
 #~ msgstr "Arguments %s and %s are mutually exclusive"
-
-#~ msgid "Did you mean %s?"
-#~ msgstr "Did you mean %s?"
-
-#~ msgid "Argument check failed: %s"
-#~ msgstr "Argument check failed: %s"
-
-#~ msgid "Select a version"
-#~ msgstr "Select a version"
-
-#~ msgid "Axeptio SDK Integration"
-#~ msgstr "Axeptio SDK Integration"
-
-#~ msgid "Axeptio Widget"
-#~ msgstr "Axeptio Widget"
-
-#~ msgid "Please enter your automation key here."
-#~ msgstr "Please enter your automation key here."

@@ -593,6 +593,26 @@ msgstr "Verwijderen"
 msgid "Widget Background Image"
 msgstr "Widget Achtergrondafbeelding"
 
+#: templates/admin/common/fields/gtm-events.php:3
+msgid "Google Tag Manager Events"
+msgstr "Google Tag Manager Gebeurtenissen"
+
+#: templates/admin/common/fields/gtm-events.php:5
+msgid "Configure how events are sent to Google Tag Manager"
+msgstr "Configureer hoe gebeurtenissen naar Google Tag Manager worden verzonden"
+
+#: templates/admin/common/fields/gtm-events.php:12
+msgid "Send all events to dataLayer"
+msgstr "Verzend alle gebeurtenissen naar dataLayer"
+
+#: templates/admin/common/fields/gtm-events.php:13
+msgid "Do not send any events to dataLayer"
+msgstr "Verzend geen gebeurtenissen naar dataLayer"
+
+#: templates/admin/common/fields/gtm-events.php:14
+msgid "Send only axeptio_update event to dataLayer"
+msgstr "Verzend alleen axeptio_update gebeurtenis naar dataLayer"
+
 #: templates/admin/main/fields/google-consent-mode.php:65
 msgid "Functionality storage"
 msgstr "Functionaliteitsopslag"
