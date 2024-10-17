@@ -212,7 +212,7 @@ class Axeptio_Sdk extends Module {
 		}
 
 		if ( $api_url && '' !== $api_url ) {
-			$sdk_settings['apiUrl'] = $api_url;
+			$sdk_settings['postConsentURL'] = $api_url;
 		}
 
 		return apply_filters(

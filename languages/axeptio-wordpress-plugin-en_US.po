@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-24 12:05+0200\n"
-"PO-Revision-Date: 2024-10-17 16:26+0200\n"
+"PO-Revision-Date: 2024-10-17 16:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -64,12 +64,12 @@ msgstr ""
 "for various subdomains"
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:186
-msgid "API url"
-msgstr "API url"
+msgid "Post consent URL"
+msgstr "Post consent URL"
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:191
-msgid "URL on which the widget will send its POST and GET requests for querying and storing consent proofs."
-msgstr "URL on which the widget will send its POST and GET requests for querying and storing consent proofs."
+msgid "URL to which the widget will send POST requests after user consent."
+msgstr "URL to which the widget will send POST requests after user consent."
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:205
 msgid "Widget description"

@@ -41,12 +41,12 @@ msgid "If specified, domain name on which the cookie containing user choices wil
 msgstr "Si se especifica, el nombre de dominio en el que estará disponible la cookie que contiene las elecciones del usuario. Esto permite solicitar un solo consentimiento para varios subdominios"
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:213
-msgid "API url"
-msgstr "URL de la API"
+msgid "Post consent URL"
+msgstr "URL posterior al consentimiento"
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:218
-msgid "URL on which the widget will send its POST and GET requests for querying and storing consent proofs."
-msgstr "URL en la que el widget enviará sus solicitudes POST y GET para consultar y almacenar pruebas de consentimiento."
+msgid "URL to which the widget will send POST requests after user consent."
+msgstr "URL a la que el widget enviará solicitudes POST después del consentimiento del usuario."
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:251
 msgid "Widget description"

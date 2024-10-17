@@ -41,12 +41,12 @@ msgid "If specified, domain name on which the cookie containing user choices wil
 msgstr "Indien gespecificeerd, de domeinnaam waarop de cookie met gebruikerskeuzes beschikbaar zal zijn. Dit maakt het mogelijk om één toestemming te vragen voor verschillende subdomeinen"
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:213
-msgid "API url"
-msgstr "API-url"
+msgid "Post consent URL"
+msgstr "URL na toestemming"
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:218
-msgid "URL on which the widget will send its POST and GET requests for querying and storing consent proofs."
-msgstr "URL waarop de widget zijn POST- en GET-verzoeken zal verzenden voor het opvragen en opslaan van toestemmingsbewijzen."
+msgid "URL to which the widget will send POST requests after user consent."
+msgstr "URL waarnaar de widget POST-verzoeken zal sturen na toestemming van de gebruiker."
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:251
 msgid "Widget description"

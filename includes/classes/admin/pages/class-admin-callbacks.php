@@ -220,12 +220,12 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
-				'label'       => __( 'API url', 'axeptio-wordpress-plugin' ),
+				'label'       => __( 'Post consent URL', 'axeptio-wordpress-plugin' ),
 				'group'       => 'axeptio_settings',
 				'name'        => 'api_url',
 				'id'          => 'xpwp_api_url',
 				'value'       => Settings::get_option( 'api_url', '' ),
-				'instruction' => __( 'URL on which the widget will send its POST and GET requests for querying and storing consent proofs.', 'axeptio-wordpress-plugin' ),
+				'instruction' => __( 'URL to which the widget will send POST requests after user consent.', 'axeptio-wordpress-plugin' ),
 			)
 		);
 	}
@@ -279,6 +279,21 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/sections/notice'
 		);
+	}
+
+	/**
+	 * Callback function to display the API URL input field.
+	 *
+	 * @return void
+	 */
+	public function api_url_callback() {
+		$api_url = Settings::get_option( 'api_url' );
+		?>
+		<input type="text" name="axeptio_settings[api_url]" value="<?php echo esc_attr( $api_url ); ?>" class="regular-text">
+		<p class="description">
+			<?php esc_html_e( 'URL to which the widget will send POST requests after user consent.', 'axeptio-wordpress-plugin' ); ?>
+		</p>
+		<?php
 	}
 
 	/**
