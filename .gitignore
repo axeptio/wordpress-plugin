@@ -50,3 +50,5 @@ dwsync.xml
 /tmp/
 
 .internal
+bin/act
+.env

@@ -86,7 +86,7 @@ class Admin_Main extends Module {
 	public function override_first_menu_name() {
 		global $submenu;
 
-		if ( !isset($submenu['axeptio-wordpress-plugin']) ) {
+		if ( ! isset( $submenu['axeptio-wordpress-plugin'] ) ) {
 			return;
 		}
 

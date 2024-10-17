@@ -40,7 +40,7 @@ const instance = function( args ) {
 			}
 		},
 		restoreHistorizedVersion() {
-			this.selectedOption = this.historizedVersions[this.accountID];
+			this.selectedOption = this.historizedVersions[ this.accountID ];
 			this.isHistorizedVersion = false;
 		},
 		async validateAccountID() {
@@ -53,8 +53,8 @@ const instance = function( args ) {
 			}
 			try {
 				const timestamp = new Date().getTime();
-				const url = `https://client.axept.io/${this.accountID}.json?nocache=${timestamp}`;
-				const response = await fetch(url);
+				const url = `https://client.axept.io/${ this.accountID }.json?nocache=${ timestamp }`;
+				const response = await fetch( url );
 				const data = await response.json();
 				if ( data.cookies.length > 0 ) {
 					this.showID = true;
@@ -65,7 +65,7 @@ const instance = function( args ) {
 					this.validAccountID = true;
 					this.optionsJson = JSON.stringify( this.options );
 
-					if (typeof this.historizedVersions[this.accountID] !== 'undefined') {
+					if ( typeof this.historizedVersions[ this.accountID ] !== 'undefined' ) {
 						this.isHistorizedVersion = true;
 					}
 				} else {

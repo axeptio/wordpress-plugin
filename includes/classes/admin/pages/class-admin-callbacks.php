@@ -153,6 +153,11 @@ class Admin_Callbacks {
 			);
 	}
 
+	/**
+	 * Display widget image upload field.
+	 *
+	 * @return void
+	 */
 	public function widget_image() {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/image-upload',
@@ -166,6 +171,11 @@ class Admin_Callbacks {
 		);
 	}
 
+	/**
+	 * Display widget background image settings.
+	 *
+	 * @return void
+	 */
 	public function widget_background_image() {
 		\Axeptio\Plugin\get_template_part(
 			'admin/main/fields/background-image',

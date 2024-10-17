@@ -148,9 +148,9 @@ class Axeptio_Sdk extends Module {
 		$widget_image            = Settings::get_option( 'widget_image', '' );
 		$widget_disable_bg_image = Settings::get_option( 'widget_disable_paint', '' );
 
-		if ( $widget_image === 'disabled' ) {
+		if ( 'disabled' === $widget_image ) {
 			$widget_image_settings = false;
-		} elseif ( $widget_image !== '' ) {
+		} elseif ( '' !== $widget_image ) {
 			$widget_image_settings = $widget_image;
 		} else {
 			$widget_image_settings = $widget_image;

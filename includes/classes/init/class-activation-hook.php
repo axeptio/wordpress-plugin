@@ -40,7 +40,7 @@ class Activation_Hook extends Module {
 	 */
 	public function after_plugin_activation() {
 
-		if ( isset( $_GET['plugin'] ) && isset( $_GET['activate'] ) ) {
+		if ( isset( $_GET['plugin'] ) && isset( $_GET['activate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			return;
 		}
 
