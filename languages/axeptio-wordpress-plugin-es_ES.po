@@ -1,11 +1,15 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: Axeptio\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"Project-Id-Version: Axeptio\n"
-"Language: es\n"
+"X-Generator: Poedit 3.5\n"
 
 #: axeptio-wordpress-plugin.php:35
 msgid "Unable to activate Axeptio"
@@ -441,11 +445,13 @@ msgid "Delete"
 msgstr "Eliminar"
 
 #: templates/admin/plugins/fields/edit.php:169
-msgid "Determines if the Axeptio WordPress plugin will intercept and block the <code>$wp_filters</code>\n"
+msgid ""
+"Determines if the Axeptio WordPress plugin will intercept and block the <code>$wp_filters</code>\n"
 "\t\t\t\t\t\t\t\t\tthat have been added by the selected Plugin. Hooks are very common within 3rd party plugins\n"
 "\t\t\t\t\t\t\t\t\tas they are used to interacting with the page code, like adding script or stylesheet tags, edit the\n"
 "\t\t\t\t\t\t\t\t\tcontent of a section of the template, etc."
-msgstr "Determina si el plugin de WordPress Axeptio interceptará y bloqueará el <code>$wp_filters</code>\n"
+msgstr ""
+"Determina si el plugin de WordPress Axeptio interceptará y bloqueará el <code>$wp_filters</code>\n"
 "\t\t\t\t\t\t\t\t\tque ha sido agregado por el plugin seleccionado. Los hooks son comunes en los plugins de terceros\n"
 "\t\t\t\t\t\t\t\t\tya que se utilizan para interactuar con el código de la página, como agregar etiquetas de script o estilos, editar el\n"
 "\t\t\t\t\t\t\t\t\tcontenido de una sección de la plantilla, etc."
@@ -463,11 +469,13 @@ msgid "Add a shortcode"
 msgstr "Agregar un shortcode"
 
 #: templates/admin/plugins/fields/edit.php:218
-msgid "Some plugins declare <code>[shortcodes]</code> that you can use in the Post editor.\n"
+msgid ""
+"Some plugins declare <code>[shortcodes]</code> that you can use in the Post editor.\n"
 "\t\t\t\t\t\t\t\t\tThese shortcodes are commonly used to embed 3rd party content, like videos or maps. If you\n"
 "\t\t\t\t\t\t\t\t\tthink the shortcodes provided by the selected plugin are going to load a resource from another\n"
 "\t\t\t\t\t\t\t\t\twebsite, you should probably block them preemptively."
-msgstr "Algunos complementos declaran <code>[shortcodes]</code> que se pueden usar en el editor de entradas.\n"
+msgstr ""
+"Algunos complementos declaran <code>[shortcodes]</code> que se pueden usar en el editor de entradas.\n"
 "\t\t\t\t\t\t\t\t\tEstos shortcodes se utilizan comúnmente para incrustar contenido de terceros, como videos o mapas. Si cree\n"
 "\t\t\t\t\t\t\t\t\tque los shortcodes proporcionados por el complemento seleccionado van a cargar un recurso de otro\n"
 "\t\t\t\t\t\t\t\t\tsitio web, probablemente debería bloquearlos de manera preventiva."
@@ -538,17 +546,14 @@ msgid "This content is blocked because we take the protection of your data very 
 msgstr "Este contenido está bloqueado porque nos tomamos muy en serio la protección de sus datos. Si desea desbloquearlo, es muy sencillo: vaya a nuestro widget de consentimiento de cookies, dé su aprobación a la extensión \"%s\". Y voilà, ¡ya está todo listo!"
 
 #. Plugin URI of the plugin/theme
-#: 
 msgid "https://www.axeptio.eu/"
 msgstr "https://www.axeptio.eu/es"
 
 #. Description of the plugin/theme
-#: 
 msgid "Axeptio allows you to make your website compliant with GDPR."
 msgstr "Axeptio le permite hacer que su sitio web cumpla con el RGPD."
 
 #. Author of the plugin/theme
-#: 
 msgid "axeptio"
 msgstr "axeptio"
 

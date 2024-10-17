@@ -1,11 +1,15 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: Axeptio\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"Project-Id-Version: Axeptio\n"
-"Language: de\n"
+"X-Generator: Poedit 3.5\n"
 
 #: axeptio-wordpress-plugin.php:35
 msgid "Unable to activate Axeptio"
@@ -441,11 +445,13 @@ msgid "Delete"
 msgstr "Löschen"
 
 #: templates/admin/plugins/fields/edit.php:169
-msgid "Determines if the Axeptio WordPress plugin will intercept and block the <code>$wp_filters</code>\n"
+msgid ""
+"Determines if the Axeptio WordPress plugin will intercept and block the <code>$wp_filters</code>\n"
 "\t\t\t\t\t\t\t\t\tthat have been added by the selected Plugin. Hooks are very common within 3rd party plugins\n"
 "\t\t\t\t\t\t\t\t\tas they are used to interacting with the page code, like adding script or stylesheet tags, edit the\n"
 "\t\t\t\t\t\t\t\t\tcontent of a section of the template, etc."
-msgstr "Bestimmt, ob das Axeptio WordPress-Plugin die <code> $wp_filters </code> intercept und blockiert\n"
+msgstr ""
+"Bestimmt, ob das Axeptio WordPress-Plugin die <code> $wp_filters </code> intercept und blockiert\n"
 "\t\t\t\t\t\t\t\t\t , die vom ausgewählten Plugin hinzugefügt wurden. Hooks sind in Plugins von Drittanbietern sehr verbreitet\n"
 "\t\t\t\t\t\t\t\t\t weil sie zum Interagieren mit dem Seitencode verwendet werden, z. B. zum Hinzufügen von Skript- oder Stylesheet-Tags, zum Bearbeiten des\n"
 "\t\t\t\t\t\t\t\t\t Inhalts eines Abschnitts der Vorlage usw."
@@ -463,11 +469,13 @@ msgid "Add a shortcode"
 msgstr "Shortcode hinzufügen"
 
 #: templates/admin/plugins/fields/edit.php:218
-msgid "Some plugins declare <code>[shortcodes]</code> that you can use in the Post editor.\n"
+msgid ""
+"Some plugins declare <code>[shortcodes]</code> that you can use in the Post editor.\n"
 "\t\t\t\t\t\t\t\t\tThese shortcodes are commonly used to embed 3rd party content, like videos or maps. If you\n"
 "\t\t\t\t\t\t\t\t\tthink the shortcodes provided by the selected plugin are going to load a resource from another\n"
 "\t\t\t\t\t\t\t\t\twebsite, you should probably block them preemptively."
-msgstr "Einige Plugins deklarieren <code>[shortcodes]</code>, die Sie im Beitrag-Editor verwenden können.\n"
+msgstr ""
+"Einige Plugins deklarieren <code>[shortcodes]</code>, die Sie im Beitrag-Editor verwenden können.\n"
 "\t\t\t\t\t\t\t\t\tDiese Shortcodes werden häufig verwendet, um Inhalte von Drittanbietern wie Videos oder Karten einzubetten. Wenn Sie\n"
 "\t\t\t\t\t\t\t\t\tglauben, dass die von dem ausgewählten Plugin bereitgestellten Shortcodes eine Ressource von einer anderen\n"
 "\t\t\t\t\t\t\t\t\tWebsite laden werden, sollten Sie sie wahrscheinlich vorsorglich blockieren."
@@ -538,17 +546,14 @@ msgid "This content is blocked because we take the protection of your data very 
 msgstr "Dieser Inhalt ist blockiert, weil wir den Schutz Ihrer Daten sehr ernst nehmen. Wenn Sie die Blockierung aufheben möchten, ist das ganz einfach: Gehen Sie zu unserem Cookie-Einwilligungs-Widget, geben Sie Ihre Zustimmung zur Erweiterung \"%s\". Und voila, schon sind Sie fertig!"
 
 #. Plugin URI of the plugin/theme
-#: 
 msgid "https://www.axeptio.eu/"
 msgstr "https://www.axeptio.eu/de"
 
 #. Description of the plugin/theme
-#: 
 msgid "Axeptio allows you to make your website compliant with GDPR."
 msgstr "Axeptio ermöglicht es Ihnen, Ihre Website DSGVO-konform zu gestalten."
 
 #. Author of the plugin/theme
-#: 
 msgid "axeptio"
 msgstr "axeptio"
 
