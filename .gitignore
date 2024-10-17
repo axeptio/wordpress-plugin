@@ -48,3 +48,7 @@ dwsync.xml
 /vendor/
 /releases/
 /tmp/
+
+.internal
+bin/act
+.env

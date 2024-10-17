@@ -6,6 +6,7 @@
  *
  * @package Axeptio\Plugin\Backend
  */
+
 namespace Axeptio\Plugin\Backend;
 
 use Axeptio\Plugin\Models\Project_Versions;
@@ -42,10 +43,10 @@ class Settings extends Module {
 	 * @return void
 	 */
 	public function historize_version( $old_value, $new_value ) {
-		$localized_version = Project_Versions::get_localized_versions();
+		$axeptio_localized_version = Project_Versions::get_localized_versions();
 
 		$datas = array();
-		foreach ( $localized_version as $option_key ) {
+		foreach ( $axeptio_localized_version as $option_key ) {
 			$datas[ $option_key ] = $old_value[ $option_key ];
 		}
 

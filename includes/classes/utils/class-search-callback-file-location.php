@@ -49,20 +49,20 @@ class Search_Callback_File_Location {
 	 */
 	private static function find_filename( $callback_function, ?string $name = null, ?string $filter = null, ?int $priority = null ): ?string {
 		try {
-			// Handle string callbacks (function names)
+			// Handle string callbacks (function names).
 			if ( is_string( $callback_function ) ) {
 				if ( function_exists( $callback_function ) ) {
 					$reflection = new \ReflectionFunction( $callback_function );
 					return $reflection->getFileName();
 				} elseif ( strpos( $callback_function, '::' ) !== false ) {
-					// Static method call string like 'Class::method'
+					// Static method call string like 'Class::method'.
 					list($class, $method) = explode( '::', $callback_function );
 					$reflection           = new \ReflectionMethod( $class, $method );
 					return $reflection->getFileName();
 				}
 			}
 
-			// Handle array callbacks
+			// Handle array callbacks.
 			if ( is_array( $callback_function ) && count( $callback_function ) === 2 ) {
 				list($object_or_class, $method) = $callback_function;
 
@@ -77,38 +77,38 @@ class Search_Callback_File_Location {
 				return $reflection->getFileName();
 			}
 
-			// Handle Closure
+			// Handle Closure.
 			if ( $callback_function instanceof \Closure ) {
 				$reflection = new \ReflectionFunction( $callback_function );
 				return $reflection->getFileName();
 			}
 
-			// Handle invokable objects
+			// Handle invokable objects.
 			if ( is_object( $callback_function ) && method_exists( $callback_function, '__invoke' ) ) {
 				$reflection = new \ReflectionMethod( $callback_function, '__invoke' );
 				return $reflection->getFileName();
 			}
 
-			// Handle WordPress-specific cases
+			// Handle WordPress-specific cases.
 			if ( is_string( $name ) && is_string( $filter ) ) {
 				return self::handle_wp_specific_cases( $name, $filter, $priority );
 			}
 		} catch ( \ReflectionException $e ) {
-			// Log the exception or handle it as needed
+			// Log the exception or handle it as needed.
 			return null;
 		}
 
-		// If we couldn't determine the file name, return null
+		// If we couldn't determine the file name, return null.
 		return null;
 	}
 
 	/**
 	 * Generate a unique cache key for the given parameters.
 	 *
-	 * @param mixed       $callback_function
-	 * @param string|null $name
-	 * @param string|null $filter
-	 * @param int|null    $priority
+	 * @param mixed       $callback_function The callback function.
+	 * @param string|null $name              The name of the callback.
+	 * @param string|null $filter            The filter name.
+	 * @param int|null    $priority          The priority of the hook.
 	 * @return string
 	 */
 	private static function generate_cache_key( $callback_function, ?string $name, ?string $filter, ?int $priority ): string {
@@ -122,6 +122,12 @@ class Search_Callback_File_Location {
 		return md5( implode( '|', array_filter( $key_parts ) ) );
 	}
 
+	/**
+	 * Get a unique identifier for the callback function.
+	 *
+	 * @param mixed $callback_function The callback function.
+	 * @return string A unique identifier for the callback.
+	 */
 	private static function get_callback_identifier( $callback_function ): string {
 		if ( is_string( $callback_function ) ) {
 			return $callback_function;
@@ -156,7 +162,7 @@ class Search_Callback_File_Location {
 
 		if ( isset( $wp_filter[ $filter ] ) ) {
 			$hooks = $wp_filter[ $filter ];
-			if ( $priority !== null && isset( $hooks->callbacks[ $priority ][ $name ] ) ) {
+			if ( null !== $priority && isset( $hooks->callbacks[ $priority ][ $name ] ) ) {
 				$callback = $hooks->callbacks[ $priority ][ $name ]['function'];
 				return self::get_filename( $callback );
 			} else {
