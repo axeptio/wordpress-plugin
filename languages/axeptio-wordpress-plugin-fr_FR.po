@@ -41,8 +41,8 @@ msgid "If specified, domain name on which the cookie containing user choices wil
 msgstr "Si spécifié, le nom de domaine sur lequel le cookie contenant les choix de l'utilisateur sera disponible. Cela permet de demander un seul consentement pour divers sous-domaines"
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:213
-msgid "Post consent URL"
-msgstr "URL de post-consentement"
+msgid "URL for server-side usage"
+msgstr "URL pour une utilisation server side"
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:218
 msgid "URL to which the widget will send POST requests after user consent."
