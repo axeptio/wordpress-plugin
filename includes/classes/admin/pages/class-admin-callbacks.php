@@ -314,6 +314,7 @@ class Admin_Callbacks {
 				'name'        => 'gtm_events',
 				'id'          => 'xpwp_gtm_events',
 				'value'       => \Axeptio\Plugin\Models\Settings::get_option( 'gtm_events', 'true' ),
+				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/hc/fr/articles/27662718518929-Gestion-des-%C3%A9v%C3%A9nements-personnalis%C3%A9s-Google-Tag-Manager' : 'https://support.axeptio.eu/hc/en-gb/articles/27662718518929-Management-of-Custom-Events-in-Google-Tag-Manager',
 			)
 		);
 	}

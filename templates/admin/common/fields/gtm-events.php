@@ -1,6 +1,11 @@
 <div x-data="{ gtmEvents: '<?php echo esc_js( $data->value ); ?>' }">
 	<label for="<?php echo esc_attr( $data->id ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
 		<?php echo esc_html( $data->label ); ?>
+		<?php if ( isset($data->help_url) ): ?>
+			<a href="<?php echo esc_url( $data->help_url ); ?>" target="_blank">
+				<span class="dashicons dashicons-info-outline"></span>
+			</a>
+		<?php endif ?>
 	</label>
 	<p class="mt-1 text-sm text-gray-500"><?php echo esc_html( $data->description ); ?></p>
 	<select
