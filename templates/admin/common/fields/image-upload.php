@@ -5,6 +5,11 @@
 })">
 	<label :for="fieldId" class="block text-sm font-medium leading-6 text-gray-900">
 		<?php echo esc_html( $data->label ); ?>
+		<?php if ( isset($data->help_url) ): ?>
+			<a href="<?php echo esc_url( $data->help_url ); ?>" target="_blank">
+				<span class="dashicons dashicons-info-outline"></span>
+			</a>
+		<?php endif ?>
 	</label>
 	<div class="flex items-center my-2">
 		<input type="checkbox" id="disable_<?php echo esc_attr( $data->id ); ?>"
