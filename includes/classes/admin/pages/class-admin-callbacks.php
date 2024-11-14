@@ -190,7 +190,6 @@ class Admin_Callbacks {
 		);
 	}
 
-
 	/**
 	 * Cookie domain.
 	 *
@@ -200,12 +199,13 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
-				'label'       => __( 'Cookie domain', 'axeptio-wordpress-plugin' ),
+				'label'       => __( 'Cookie domain', 'axeptio-wordpress-plugin' ) . ' (userCookieDomain)',
 				'group'       => 'axeptio_settings',
 				'name'        => 'cookie_domain',
 				'id'          => 'xpwp_cookie_domain',
 				'value'       => Settings::get_option( 'cookie_domain', '' ),
 				'instruction' => __( 'If specified, domain name on which the cookie containing user choices will be available. This allows to request one consent for various subdomains', 'axeptio-wordpress-plugin' ),
+				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/hc/fr/articles/4402881048977-Comment-param%C3%A9trer-le-Widget-pour-un-sous-domaine' : 'https://support.axeptio.eu/hc/en-gb/articles/4402881048977-How-to-set-the-widget-for-a-sub-domain',
 			)
 		);
 	}
@@ -220,12 +220,15 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
-				'label'       => __( 'API url', 'axeptio-wordpress-plugin' ),
+				'label'       => __( 'URL for server-side usage', 'axeptio-wordpress-plugin' ) . ' (postConsentUrl)',
 				'group'       => 'axeptio_settings',
+				'type'        => 'url',
 				'name'        => 'api_url',
 				'id'          => 'xpwp_api_url',
 				'value'       => Settings::get_option( 'api_url', '' ),
-				'instruction' => __( 'URL on which the widget will send its POST and GET requests for querying and storing consent proofs.', 'axeptio-wordpress-plugin' ),
+				'instruction' => __( 'URL to which the widget will send POST requests after user consent.', 'axeptio-wordpress-plugin' ),
+				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/hc/fr/articles/29597926237841-Mise-en-place-du-Server-Side-Tracking' : 'https://support.axeptio.eu/hc/en-gb/articles/28447238691345-Passing-Consent-in-Your-GTM-Server-side-Container',
+				'placeholder' => 'https://yourdomain.clouds',
 			)
 		);
 	}
@@ -279,6 +282,21 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/sections/notice'
 		);
+	}
+
+	/**
+	 * Callback function to display the API URL input field.
+	 *
+	 * @return void
+	 */
+	public function api_url_callback() {
+		$api_url = Settings::get_option( 'api_url' );
+		?>
+		<input type="text" name="axeptio_settings[api_url]" value="<?php echo esc_attr( $api_url ); ?>" class="regular-text">
+		<p class="description">
+			<?php esc_html_e( 'URL to which the widget will send POST requests after user consent.', 'axeptio-wordpress-plugin' ); ?>
+		</p>
+		<?php
 	}
 
 	/**
