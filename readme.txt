@@ -3,7 +3,7 @@ Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy, eprivacy, consent, script, cmp, data, personnal, widget, googletagmanager, consentmanagement
 Requires at least: 5.0
 Tested up to: 6.5.5
-Stable tag: 2.5.1
+Stable tag: 2.5.2
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -84,9 +84,16 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
-Bien sûr ! Voici un changelog fun pour la version 2.4.9 du plugin Axeptio :
+### 🌟 2.5.2 🌟 ###
 
-Voici un changelog fun pour la version 2.5 du plugin Axeptio, annonçant la désactivation temporaire de l'outil de log d'erreur :
+- **Advanced Configuration**: Updated `postConsentURL` field with a new label and a link to documentation for server-side configurations.
+- **GTM Event Management**: Added a `triggerGTMEvents` parameter for precise control of events sent to the dataLayer. Choose between: all, none, or updates only.
+- **Consent Mode V2**: Added 3 new consent purposes for enhanced flexibility:
+  - Functionality storage
+  - Personalization storage
+  - Security storage
+- **Community Contributions**: Resolved Alpine.js conflicts with an integrated PR. Thanks to [@sayedulsayem](https://github.com/sayedulsayem)!
+
 
 ### 🐞 2.5.1 🐞 ###
 

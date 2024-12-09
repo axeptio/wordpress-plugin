@@ -260,6 +260,30 @@ msgstr "Ad Personalization"
 msgid "Customize the ad experience by allowing Google to personalize the ads that visitors see."
 msgstr "Personalizzare l'esperienza pubblicitaria permettendo a Google di personalizzare gli annunci che i visitatori vedono."
 
+#: templates/admin/main/fields/google-consent-mode.php:65
+msgid "Functionality storage"
+msgstr "Archiviazione funzionalità"
+
+#: templates/admin/main/fields/google-consent-mode.php:66
+msgid "Enables storage that supports the functionality of the website or app, for example, language settings."
+msgstr "Abilita l'archiviazione che supporta la funzionalità del sito web o dell'app, ad esempio le impostazioni della lingua."
+
+#: templates/admin/main/fields/google-consent-mode.php:70
+msgid "Personalization storage"
+msgstr "Archiviazione personalizzazione"
+
+#: templates/admin/main/fields/google-consent-mode.php:71
+msgid "Enables storage related to personalization, for example, video recommendations."
+msgstr "Abilita l'archiviazione relativa alla personalizzazione, ad esempio le raccomandazioni video."
+
+#: templates/admin/main/fields/google-consent-mode.php:75
+msgid "Security storage"
+msgstr "Archiviazione sicurezza"
+
+#: templates/admin/main/fields/google-consent-mode.php:76
+msgid "Enables storage related to security such as authentication functionality, fraud prevention, and other user protection."
+msgstr "Abilita l'archiviazione relativa alla sicurezza come la funzionalità di autenticazione, la prevenzione delle frodi e altre protezioni dell'utente."
+
 #: templates/admin/main/fields/google-consent-mode.php:67
 msgid "Default settings for consent mode"
 msgstr "Impostazioni predefinite per il consent mode"
@@ -473,7 +497,7 @@ msgid ""
 "Some plugins declare <code>[shortcodes]</code> that you can use in the Post editor.\n"
 "\t\t\t\t\t\t\t\t\tThese shortcodes are commonly used to embed 3rd party content, like videos or maps. If you\n"
 "\t\t\t\t\t\t\t\t\tthink the shortcodes provided by the selected plugin are going to load a resource from another\n"
-"\t\t\t\t\t\t\t\t\twebsite, you should probably block them preemptively."
+"\t\t\t\t\t\t\t\t\tsite web, you should probably block them preemptively."
 msgstr ""
 "Alcuni plugin dichiarano <code>[shortcodes]</code> che è possibile utilizzare nell'editor dei post.\n"
 "\t\t\t\t\t\t\t\t\tQuesti shortcode sono comunemente utilizzati per incorporare contenuti di terze parti, come video o mappe. Se pensi\n"

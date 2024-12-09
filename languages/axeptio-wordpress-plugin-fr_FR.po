@@ -612,3 +612,27 @@ msgstr "Ne pas envoyer d'événements à dataLayer"
 #: templates/admin/common/fields/gtm-events.php:14
 msgid "Send only axeptio_update event to dataLayer"
 msgstr "Envoyer uniquement l'événement axeptio_update à dataLayer"
+
+#: templates/admin/main/fields/google-consent-mode.php:65
+msgid "Functionality storage"
+msgstr "Stockage de fonctionnalité"
+
+#: templates/admin/main/fields/google-consent-mode.php:66
+msgid "Enables storage that supports the functionality of the website or app, for example, language settings."
+msgstr "Permet le stockage qui prend en charge la fonctionnalité du site Web ou de l'application, par exemple, les paramètres de langue."
+
+#: templates/admin/main/fields/google-consent-mode.php:70
+msgid "Personalization storage"
+msgstr "Stockage de personnalisation"
+
+#: templates/admin/main/fields/google-consent-mode.php:71
+msgid "Enables storage related to personalization, for example, video recommendations."
+msgstr "Permet le stockage lié à la personnalisation, par exemple, les recommandations vidéo."
+
+#: templates/admin/main/fields/google-consent-mode.php:75
+msgid "Security storage"
+msgstr "Stockage de sécurité"
+
+#: templates/admin/main/fields/google-consent-mode.php:76
+msgid "Enables storage related to security such as authentication functionality, fraud prevention, and other user protection."
+msgstr "Permet le stockage lié à la sécurité, comme la fonctionnalité d'authentification, la prévention de la fraude et d'autres protections de l'utilisateur."

@@ -612,3 +612,27 @@ msgstr "Verzend geen gebeurtenissen naar dataLayer"
 #: templates/admin/common/fields/gtm-events.php:14
 msgid "Send only axeptio_update event to dataLayer"
 msgstr "Verzend alleen axeptio_update gebeurtenis naar dataLayer"
+
+#: templates/admin/main/fields/google-consent-mode.php:65
+msgid "Functionality storage"
+msgstr "Functionaliteitsopslag"
+
+#: templates/admin/main/fields/google-consent-mode.php:66
+msgid "Enables storage that supports the functionality of the website or app, for example, language settings."
+msgstr "Maakt opslag mogelijk die de functionaliteit van de website of app ondersteunt, bijvoorbeeld taalinstellingen."
+
+#: templates/admin/main/fields/google-consent-mode.php:70
+msgid "Personalization storage"
+msgstr "Personalisatieopslag"
+
+#: templates/admin/main/fields/google-consent-mode.php:71
+msgid "Enables storage related to personalization, for example, video recommendations."
+msgstr "Maakt opslag mogelijk gerelateerd aan personalisatie, bijvoorbeeld videoaanbevelingen."
+
+#: templates/admin/main/fields/google-consent-mode.php:75
+msgid "Security storage"
+msgstr "Beveiligingsopslag"
+
+#: templates/admin/main/fields/google-consent-mode.php:76
+msgid "Enables storage related to security such as authentication functionality, fraud prevention, and other user protection."
+msgstr "Maakt opslag mogelijk gerelateerd aan beveiliging, zoals authenticatiefunctionaliteit, fraudepreventie en andere gebruikersbescherming."

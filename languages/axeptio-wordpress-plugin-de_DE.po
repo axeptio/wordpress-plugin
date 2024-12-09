@@ -268,6 +268,30 @@ msgstr "Standard-Einstellungen für den consent mode"
 msgid "These consent signals will be sent at page load to tell Google services how they should handle data before consent is granted or denied."
 msgstr "Diese Zustimmungssignale werden beim Seitenladen gesendet, um Google-Diensten zu signalisieren, wie sie Daten handhaben sollen, bevor die Zustimmung erteilt oder verweigert wird."
 
+#: templates/admin/main/fields/google-consent-mode.php:65
+msgid "Functionality storage"
+msgstr "Funktionsspeicher"
+
+#: templates/admin/main/fields/google-consent-mode.php:66
+msgid "Enables storage that supports the functionality of the website or app, for example, language settings."
+msgstr "Ermöglicht die Speicherung, die die Funktionalität der Website oder App unterstützt, zum Beispiel Spracheinstellungen."
+
+#: templates/admin/main/fields/google-consent-mode.php:70
+msgid "Personalization storage"
+msgstr "Personalisierungsspeicher"
+
+#: templates/admin/main/fields/google-consent-mode.php:71
+msgid "Enables storage related to personalization, for example, video recommendations."
+msgstr "Ermöglicht die Speicherung im Zusammenhang mit Personalisierung, zum Beispiel Videoempfehlungen."
+
+#: templates/admin/main/fields/google-consent-mode.php:75
+msgid "Security storage"
+msgstr "Sicherheitsspeicher"
+
+#: templates/admin/main/fields/google-consent-mode.php:76
+msgid "Enables storage related to security such as authentication functionality, fraud prevention, and other user protection."
+msgstr "Ermöglicht die Speicherung im Zusammenhang mit Sicherheit, wie Authentifizierungsfunktionalität, Betrugsprävention und anderen Benutzerschutz."
+
 #: templates/admin/main/fields/non-existing-account.php:2
 msgid "If you are certain that your project exists, please follow these steps:"
 msgstr "Wenn Sie sicher sind, dass Ihr Projekt existiert, gehen Sie bitte wie folgt vor:"
