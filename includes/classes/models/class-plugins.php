@@ -58,9 +58,10 @@ class Plugins {
 			return;
 		}
 
-		$wpdb->self::$table_name = $wpdb->prefix . self::$table_name;
-		$wpdb->tables[]          = self::$table_name;
+		$wpdb->{self::$table_name} = $wpdb->prefix . self::$table_name;
+		$wpdb->tables[]            = self::$table_name;
 	}
+
 
 	/**
 	 * Get all plugins.

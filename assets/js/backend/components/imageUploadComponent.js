@@ -1,4 +1,4 @@
-const instance = function(args) {
+const instance = function( args ) {
 	return {
 		disableImage: args.initialValue === 'disabled',
 		imageUrl: args.initialValue === 'disabled' ? '' : args.initialValue,
@@ -6,28 +6,28 @@ const instance = function(args) {
 		fieldId: args.fieldId,
 
 		init() {
-			this.$watch('disableImage', (value) => {
-				if (value) {
+			this.$watch( 'disableImage', ( value ) => {
+				if ( value ) {
 					this.imageUrl = '';
 				}
-			});
+			} );
 		},
 
 		openMediaUploader() {
-			if (typeof wp !== 'undefined' && wp.media) {
-				const frame = wp.media({
+			if ( typeof wp !== 'undefined' && wp.media ) {
+				const frame = wp.media( {
 					title: 'Select or Upload Media',
 					button: {
-						text: 'Use this media'
+						text: 'Use this media',
 					},
-					multiple: false
-				});
+					multiple: false,
+				} );
 
-				frame.on('select', () => {
-					const attachment = frame.state().get('selection').first().toJSON();
+				frame.on( 'select', () => {
+					const attachment = frame.state().get( 'selection' ).first().toJSON();
 					this.imageUrl = attachment.url;
 					this.disableImage = false;
-				});
+				} );
 
 				frame.open();
 			}
@@ -39,7 +39,7 @@ const instance = function(args) {
 
 		getValue() {
 			return this.disableImage ? 'disabled' : this.imageUrl;
-		}
+		},
 	};
 };
 

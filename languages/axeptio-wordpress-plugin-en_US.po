@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-24 12:05+0200\n"
-"PO-Revision-Date: 2024-06-24 13:18+0200\n"
+"PO-Revision-Date: 2024-11-14 14:42+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.3\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio.php\n"
@@ -65,16 +65,12 @@ msgstr ""
 "be available. This allows to request one consent for various subdomains"
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:186
-msgid "API url"
-msgstr "API url"
+msgid "Post consent URL"
+msgstr "Post consent URL"
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:191
-msgid ""
-"URL on which the widget will send its POST and GET requests for querying and "
-"storing consent proofs."
-msgstr ""
-"URL on which the widget will send its POST and GET requests for querying and "
-"storing consent proofs."
+msgid "URL to which the widget will send POST requests after user consent."
+msgstr "URL to which the widget will send POST requests after user consent."
 
 #: includes/classes/admin/pages/class-admin-callbacks.php:205
 msgid "Widget description"
@@ -686,178 +682,22 @@ msgstr "Axeptio allows you to make your website compliant with GDPR."
 msgid "axeptio"
 msgstr "axeptio"
 
-#~ msgid "Not configured"
-#~ msgstr "Not configured"
+#: templates/admin/common/fields/gtm-events.php:3
+msgid "Google Tag Manager Events"
+msgstr "Google Tag Manager Events"
 
-#~ msgid "How To Integrate Axeptio?"
-#~ msgstr "How To Integrate Axeptio?"
+#: templates/admin/common/fields/gtm-events.php:5
+msgid "Configure how events are sent to Google Tag Manager"
+msgstr "Configure how events are sent to Google Tag Manager"
 
-#~ msgid "Probability:"
-#~ msgstr "Probability:"
+#: templates/admin/common/fields/gtm-events.php:12
+msgid "Send all events to dataLayer"
+msgstr "Send all events to dataLayer"
 
-#~ msgid "Do you like Axeptio?"
-#~ msgstr "Do you like Axeptio?"
+#: templates/admin/common/fields/gtm-events.php:13
+msgid "Do not send any events to dataLayer"
+msgstr "Do not send any events to dataLayer"
 
-#~ msgid "Your opinion matters to us, leave us a review on WordPress.org"
-#~ msgstr "Your opinion matters to us, leave us a review on WordPress.org"
-
-#~ msgid "Leave a review"
-#~ msgstr "Leave a review"
-
-#~ msgid ""
-#~ "Your project ID is not found or your project is not published. If you are "
-#~ "certain about your project ID, please publish it through the Axeptio "
-#~ "interface and restart the configuration."
-#~ msgstr ""
-#~ "Your project ID is not found or your project is not published. If you are "
-#~ "certain about your project ID, please publish it through the Axeptio "
-#~ "interface and restart the configuration."
-
-#~ msgid ""
-#~ "Would you allow Axeptio to collect non-sensitive diagnostic data from "
-#~ "this website?"
-#~ msgstr ""
-#~ "Would you allow Axeptio to collect non-sensitive diagnostic data from "
-#~ "this website?"
-
-#~ msgid "Yes, I want to contribute to improve the plugin."
-#~ msgstr "Yes, I want to contribute to improve the plugin."
-
-#~ msgid "This account doesn't exist"
-#~ msgstr "This account doesn't exist"
-
-#~ msgctxt "context"
-#~ msgid "Hello World…"
-#~ msgstr "Hello World…"
-
-#~ msgid "Hello %s"
-#~ msgstr "Hello %s"
-
-#~ msgid "%d%%"
-#~ msgstr "%d%%"
-
-#~ msgid "%s"
-#~ msgid_plural "%s"
-#~ msgstr[0] "%s"
-#~ msgstr[1] "%s"
-
-#~ msgid "%s%s"
-#~ msgstr "%s%s"
-
-#~ msgctxt "random"
-#~ msgid "Hello World"
-#~ msgstr "Hello World"
-
-#~ msgctxt "context"
-#~ msgid "Singular"
-#~ msgid_plural "Plural"
-#~ msgstr[0] "Singular"
-#~ msgstr[1] "Plural"
-
-#~ msgid "default"
-#~ msgstr "default"
-
-#~ msgid "Color: %s"
-#~ msgstr "Color: %s"
-
-#~ msgid "Address: %s"
-#~ msgstr "Address: %s"
-
-#~ msgid "Name: %s"
-#~ msgstr "Name: %s"
-
-#~ msgid "Argument unexpected for: %s"
-#~ msgstr "Unexpected argument for: %s"
-
-#~ msgid "Not enough arguments following: %s"
-#~ msgstr "Not enough arguments following: %s"
-
-#~ msgid "Invalid JSON config file: %s"
-#~ msgstr "Invalid JSON config file: %s"
-
-#~ msgid "Invalid configuration: %s, opts.count excludes opts.array."
-#~ msgstr "Invalid configuration: %s, opts.count excludes opts.array."
-
-#~ msgid "Invalid configuration: %s, opts.count excludes opts.narg."
-#~ msgstr "Invalid configuration: %s, opts.count excludes opts.narg."
-
-#~ msgid "Positionals:"
-#~ msgstr "Positionals:"
-
-#~ msgid "command"
-#~ msgstr "command"
-
-#~ msgid "Commands:"
-#~ msgstr "Commands:"
-
-#~ msgid "aliases:"
-#~ msgstr "aliases:"
-
-#~ msgid "deprecated: %s"
-#~ msgstr "deprecated: %s"
-
-#~ msgid "deprecated"
-#~ msgstr "deprecated"
-
-#~ msgid "Options:"
-#~ msgstr "Options:"
-
-#~ msgid "boolean"
-#~ msgstr "boolean"
-
-#~ msgid "count"
-#~ msgstr "count"
-
-#~ msgid "string"
-#~ msgstr "string"
-
-#~ msgid "array"
-#~ msgstr "array"
-
-#~ msgid "number"
-#~ msgstr "number"
-
-#~ msgid "required"
-#~ msgstr "required"
-
-#~ msgid "choices:"
-#~ msgstr "choices:"
-
-#~ msgid "Examples:"
-#~ msgstr "Examples:"
-
-#~ msgid "generated-value"
-#~ msgstr "generated value"
-
-#~ msgid "default:"
-#~ msgstr "default:"
-
-#~ msgid "Invalid values:"
-#~ msgstr "Invalid values:"
-
-#~ msgid "Argument: %s, Given: %s, Choices: %s"
-#~ msgstr "Argument: %s, Given: %s, Choices: %s"
-
-#~ msgid "Implications failed:"
-#~ msgstr "Implications failed:"
-
-#~ msgid "Arguments %s and %s are mutually exclusive"
-#~ msgstr "Arguments %s and %s are mutually exclusive"
-
-#~ msgid "Did you mean %s?"
-#~ msgstr "Did you mean %s?"
-
-#~ msgid "Argument check failed: %s"
-#~ msgstr "Argument check failed: %s"
-
-#~ msgid "Select a version"
-#~ msgstr "Select a version"
-
-#~ msgid "Axeptio SDK Integration"
-#~ msgstr "Axeptio SDK Integration"
-
-#~ msgid "Axeptio Widget"
-#~ msgstr "Axeptio Widget"
-
-#~ msgid "Please enter your automation key here."
-#~ msgstr "Please enter your automation key here."
+#: templates/admin/common/fields/gtm-events.php:14
+msgid "Send only axeptio_update event to dataLayer"
+msgstr "Send only axeptio_update event to dataLayer"

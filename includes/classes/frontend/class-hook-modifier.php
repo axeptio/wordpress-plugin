@@ -555,11 +555,14 @@ class Hook_Modifier extends Module {
 	/**
 	 * Analyse a callback function and extract information.
 	 *
-	 * @param mixed $callback_function The callback function to analyze.
+	 * @param mixed  $callback_function The callback function to analyze.
+	 * @param string $name              The name of the callback.
+	 * @param string $filter            The filter name.
+	 * @param int    $priority          The priority of the callback.
 	 * @return array|null Information about the callback or null if analysis fails.
 	 */
 	private function process_function( $callback_function, string $name = null, string $filter = null, $priority = null ) {
-		$filename = Search_Callback_File_Location::get_filename( $callback_function, $name, $filter, (int) ($priority ?: 10) );
+		$filename = Search_Callback_File_Location::get_filename( $callback_function, $name, $filter, $priority ? (int) $priority : 10 );
 
 		if ( ! $filename ) {
 			return null;

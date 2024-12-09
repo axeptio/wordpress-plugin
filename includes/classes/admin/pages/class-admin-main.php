@@ -86,7 +86,7 @@ class Admin_Main extends Module {
 	public function override_first_menu_name() {
 		global $submenu;
 
-		if ( !isset($submenu['axeptio-wordpress-plugin']) ) {
+		if ( ! isset( $submenu['axeptio-wordpress-plugin'] ) ) {
 			return;
 		}
 
@@ -402,6 +402,17 @@ class Admin_Main extends Module {
 				'section'  => 'xpwp_admin_advanced_settings',
 				'args'     => array(
 					'label_for' => 'xpwp_api_url',
+					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
+				'id'       => 'xpwp_gtm_events',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'gtm_events_set' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_advanced_settings',
+				'args'     => array(
+					'label_for' => 'xpwp_gtm_events',
 					'class'     => 'inline-table-row label-right',
 				),
 			),

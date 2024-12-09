@@ -127,9 +127,7 @@ class Plugins extends Module {
 		$plugin           = $request->get_param( 'plugin' );
 		$metas            = array_diff_key( $request->get_params(), array_flip( array( 'Merged', 'Parent', 'authorized' ) ) );
 
-		$query_datas = PluginModel::find( $plugin, $configuration_id )->update( $metas );
-
-		return $query_datas;
+		return PluginModel::find( $plugin, $configuration_id )->update( $metas );
 	}
 
 	/**

@@ -148,9 +148,9 @@ class Axeptio_Sdk extends Module {
 		$widget_image            = Settings::get_option( 'widget_image', '' );
 		$widget_disable_bg_image = Settings::get_option( 'widget_disable_paint', '' );
 
-		if ( $widget_image === 'disabled' ) {
+		if ( 'disabled' === $widget_image ) {
 			$widget_image_settings = false;
-		} elseif ( $widget_image !== '' ) {
+		} elseif ( '' !== $widget_image ) {
 			$widget_image_settings = $widget_image;
 		} else {
 			$widget_image_settings = $widget_image;
@@ -167,6 +167,8 @@ class Axeptio_Sdk extends Module {
 			)
 		);
 
+		$gtm_events = Settings::get_option( 'gtm_events', 'true' );
+
 		if ( ! $sdk_active || ( ! $client_id && ! $cookies_version ) ) {
 			return false;
 		}
@@ -176,6 +178,7 @@ class Axeptio_Sdk extends Module {
 			'platform'                => 'plugin-wordpress',
 			'sendDatas'               => $disable_send_datas,
 			'enableGoogleConsentMode' => $google_consent_mode,
+			'triggerGTMEvents'        => $gtm_events,
 			'googleConsentMode'       => array(
 				'default' => array(
 					'analytics_storage'  => isset( $google_consent_mode_params['analytics_storage'] ) && '1' === $google_consent_mode_params['analytics_storage'] ? 'granted' : 'denied',
@@ -203,7 +206,7 @@ class Axeptio_Sdk extends Module {
 		}
 
 		if ( $api_url && '' !== $api_url ) {
-			$sdk_settings['apiUrl'] = $api_url;
+			$sdk_settings['postConsentUrl'] = $api_url;
 		}
 
 		return apply_filters(

@@ -18,7 +18,8 @@
     "install-codestandards": "Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\Plugin::run",
     "phpcs": "phpcs --basepath=.",
     "phpcs-changed": "./bin/phpcs-changed.sh",
-    "phpcs:fix": "phpcbf"
+    "phpcs:fix": "phpcbf",
+    "test": "pest"
   },
   "autoload": {
     "psr-4": {
@@ -36,13 +37,17 @@
     "szepeviktor/phpstan-wordpress": "dev-master",
     "phpstan/extension-installer": "1.2.x-dev",
     "phpcompatibility/phpcompatibility-wp": "dev-master",
-    "dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+    "pestphp/pest": "1.x-dev",
+    "pestphp/pest-plugin-faker": "1.x-dev",
+    "mockery/mockery": "1.7.x-dev"
   },
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "phpstan/extension-installer": true,
-      "php-http/discovery": true
+      "php-http/discovery": true,
+      "pestphp/pest-plugin": true
     }
   }
 }
