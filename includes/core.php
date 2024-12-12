@@ -180,9 +180,11 @@ function style_url( $stylesheet, $context ) {
  */
 function admin_scripts() {
 	$screen = get_current_screen();
-	if ( 'toplevel_page_axeptio-wordpress-plugin' != $screen->id ) {
+
+	if (!str_contains($screen->id, 'axeptio-')) {
 		return;
 	}
+
 	wp_enqueue_media();
 	wp_enqueue_script(
 		'axeptio/main',
