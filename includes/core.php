@@ -181,7 +181,7 @@ function style_url( $stylesheet, $context ) {
 function admin_scripts() {
 	$screen = get_current_screen();
 
-	if (!str_contains($screen->id, 'axeptio-')) {
+	if ($screen->id !== 'toplevel_page_axeptio-wordpress-plugin' && $screen->id !== 'axeptio_page_axeptio-plugin-manager') {
 		return;
 	}
 
