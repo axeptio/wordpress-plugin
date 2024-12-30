@@ -104,14 +104,6 @@ class Axeptio_Sdk extends Module {
 		wp_localize_script( 'axeptio/sdk-script', 'Axeptio_SDK', $settings );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressVendors', $wordpress_vendors );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressSteps', Axeptio_Steps::all() );
-		wp_localize_script(
-			'axeptio/sdk-script',
-			'axeptioAjax',
-			array(
-				'wp'  => array( 'relativePath' => get_relative_path( XPWP_PATH, ABSPATH ) ),
-				'url' => XPWP_URL . '/ajax.php',
-			)
-			);
 
 		$sdk_script = \Axeptio\Plugin\get_template_part( 'frontend/sdk', array(), false );
 		preg_match( '/<script[^>]*>(.*?)<\/script>/is', $sdk_script, $matches );
