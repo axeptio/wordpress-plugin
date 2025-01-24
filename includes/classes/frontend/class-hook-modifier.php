@@ -117,6 +117,9 @@ class Hook_Modifier extends Module {
 	 * @return void
 	 */
 	public function on_template_redirect() {
+		if (count(Plugins::find_all()) === 0) {
+			return;
+		}
 		$this->process_shortcode_tags();
 		$this->process_wp_filter();
 	}
@@ -313,6 +316,10 @@ class Hook_Modifier extends Module {
 			'callback' => null,
 			'priority' => null,
 		);
+
+		if ($hook === 'seopress_compatibility_woocommerce') {
+			return false;
+		}
 
 		$matching_hook = false;
 
