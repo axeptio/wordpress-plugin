@@ -15,9 +15,6 @@ use Axeptio\Plugin\Module;
 use Axeptio\Plugin\Utils\Search_Callback_File_Location;
 use Axeptio\Plugin\Utils\User_Hook_Parser;
 use Closure;
-use ReflectionException;
-use ReflectionFunction;
-use ReflectionMethod;
 
 class Hook_Modifier extends Module {
 
@@ -120,6 +117,9 @@ class Hook_Modifier extends Module {
 		if (count(Plugins::find_all()) === 0) {
 			return;
 		}
+
+		Search_Callback_File_Location::initialize_cache();
+
 		$this->process_shortcode_tags();
 		$this->process_wp_filter();
 	}
@@ -166,7 +166,7 @@ class Hook_Modifier extends Module {
 	}
 
 	/**
-	 * Process shortcode tags.
+	 * Process shortcode tags and write cache to file.
 	 *
 	 * @return array
 	 */
@@ -236,6 +236,9 @@ class Hook_Modifier extends Module {
 				$shortcode_tags[ $tag['name'] ] = $this->wrap_tag( $tag['function'], $plugin, $intercepted_plugins[ $plugin ], $tag['name'] ); // PHPCS:Ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 			}
 		}
+
+		// Write the cache to a file after processing all shortcode tags.
+		Search_Callback_File_Location::write_cache_to_file();
 
 		return $stats;
 	}
@@ -506,6 +509,9 @@ class Hook_Modifier extends Module {
 				$wp_filter[ $filter ]->callbacks[ $priority ][ $name ]['function'] = $this->wrap_filter( $function['function'], $plugin, $filter );
 			}
 		}
+
+		// Write the cache to a file after processing all hooks.
+		Search_Callback_File_Location::write_cache_to_file();
 
 		return $stats;
 	}

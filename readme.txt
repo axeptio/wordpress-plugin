@@ -3,7 +3,7 @@ Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy, eprivacy, consent, script, cmp, data, personnal, widget, googletagmanager, consentmanagement
 Requires at least: 5.0
 Tested up to: 6.5.5
-Stable tag: 2.5.6
+Stable tag: 2.5.7
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -84,6 +84,11 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en
 
 == Changelog ==
 
+### 🚀 2.5.7 🚀 ###
+
+- **Code Refactoring:** Improved code readability and maintainability with better function organization and reduced duplication.
+- **Performance Optimization:** Ensured efficient cache handling with minimal performance impact.
+
 ### ⚡️ 2.5.6 ⚡️ ###
 
 **Shutdown the hook parser if no extension is filtered in the configuration 💤**
@@ -124,7 +129,7 @@ Hotfix for undefined variable
 
 **Error Logging Tool Taking a Power Nap 💤**
 
-In this release, we've temporarily disabled our error logging tool. But don't worry! It’s just taking a break to come back stronger, faster, and smarter. 💪
+In this release, we've temporarily disabled our error logging tool. But don't worry! It's just taking a break to come back stronger, faster, and smarter. 💪
 
 ### 🎉 2.4.9 🎉 ###
 
@@ -162,7 +167,7 @@ We have greatly enhanced our caching system for hook detection, significantly bo
 ### 🛠️ 2.4.3 🛠️ ###
 
 **Temporary Removal of Caching Feature 🔄**
-We’ve identified an issue with our new caching system that might have affected performance for some users. As we work on a more robust solution, we have temporarily removed this feature to ensure the best experience for all our users.
+We've identified an issue with our new caching system that might have affected performance for some users. As we work on a more robust solution, we have temporarily removed this feature to ensure the best experience for all our users.
 
 - **Apologies for Any Inconvenience 🙏**
 We're sorry for any trouble this might have caused. We're dedicated to getting it right, and appreciate your understanding as we make these adjustments.

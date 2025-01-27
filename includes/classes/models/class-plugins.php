@@ -107,7 +107,7 @@ class Plugins {
 			},
 			$configuration_id,
 			$force_refresh
-			);
+		);
 	}
 
 	/**
@@ -139,8 +139,15 @@ class Plugins {
 	 * @return array
 	 */
 	public static function find_all(): array {
-		global $wpdb;
-		return $wpdb->get_results( "SELECT * FROM `$wpdb->axeptio_plugin_configuration` ORDER BY axeptio_configuration_id = 'all' DESC", ARRAY_A ); // @codingStandardsIgnoreLine
+		return Remember::get_or_reset_result(
+			'plugins_find_all',
+			function () {
+				global $wpdb;
+				return $wpdb->get_results( "SELECT * FROM `$wpdb->axeptio_plugin_configuration` ORDER BY axeptio_configuration_id = 'all' DESC", ARRAY_A ); // @codingStandardsIgnoreLine
+			},
+			'all',
+			true
+		);
 	}
 
 	/**
