@@ -3,7 +3,7 @@ Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy, eprivacy, consent, script, cmp, data, personnal, widget, googletagmanager, consentmanagement
 Requires at least: 5.0
 Tested up to: 6.5.5
-Stable tag: 2.5.7
+Stable tag: 2.5.8
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -82,7 +82,14 @@ Axeptio is free to use and always will be up to 200 visitors/month. If your webs
 The idea is to customize the appearance of your widget so that it matches the design of your site perfectly.
 All informations here : [Axeptio customization](https://support.axeptio.eu/hc/en-gb/articles/4402985038225-Customize-my-widget-s-aspect)
 
-== Changelog ==
+### 🚀 2.5.8 🚀 ###
+
+**Fixes and Improvements:**
+- **Critical Bug Fix:** Resolved an issue that prevented the proper loading of the website on specific WordPress site configurations.
+- **Performance Enhancements:** Optimized rendering processes to reduce server load.
+- **Improved Compatibility:** Updated to ensure better compatibility with the latest WordPress version and modern PHP environments.
+
+We sincerely thank our users for their valuable feedback. We deeply apologize for any inconvenience caused to clients affected by this bug. We are committed to strengthening our testing processes to prevent such issues in the future.
 
 ### 🚀 2.5.7 🚀 ###
 

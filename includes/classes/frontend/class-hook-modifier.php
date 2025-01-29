@@ -15,6 +15,7 @@ use Axeptio\Plugin\Module;
 use Axeptio\Plugin\Utils\Search_Callback_File_Location;
 use Axeptio\Plugin\Utils\User_Hook_Parser;
 use Closure;
+use function Axeptio\Plugin\is_rest;
 
 class Hook_Modifier extends Module {
 
@@ -100,7 +101,7 @@ class Hook_Modifier extends Module {
 	 * @return void
 	 */
 	public function register() {
-		if ( ! Sdk::is_active() ) {
+		if ( ! Sdk::is_active() || is_admin() || wp_doing_ajax() || defined( 'WP_CLI' ) || wp_doing_cron() || is_rest() ) {
 			return;
 		}
 
@@ -177,10 +178,11 @@ class Hook_Modifier extends Module {
 		$plugins = array();
 		foreach ( $shortcode_tags as $tag => $function ) {
 			$stats[ $tag ] = $this->process_function( $function, $tag );
-			if ( isset( $stats[ $tag ]['plugin'] ) ) {
-				$plugins[ $stats[ $tag ]['plugin'] ][] = array(
+
+			if ( isset( $stats[ $tag ] ) ) {
+				$plugins[ $stats[ $tag ] ][] = array(
 					'name'     => $tag,
-					'plugin'   => $stats[ $tag ]['plugin'],
+					'plugin'   => $stats[ $tag ],
 					'function' => $function,
 				);
 			}
@@ -432,8 +434,9 @@ class Hook_Modifier extends Module {
 				foreach ( $functions as $name => $function ) {
 					$stats[ $filter ][ $name ] = $this->process_function( $function['function'], $name, $filter, $priority );
 
-					if ( isset( $stats[ $filter ][ $name ]['plugin'] ) ) {
-						$plugins[ $stats[ $filter ][ $name ]['plugin'] ][] = array(
+					if ( isset( $stats[ $filter ][ $name ] ) ) {
+
+						$plugins[ $stats[ $filter ][ $name ] ][] = array(
 							'filter'   => $filter,
 							'priority' => $priority,
 							'name'     => $name,
@@ -575,36 +578,14 @@ class Hook_Modifier extends Module {
 	 * @return array|null Information about the callback or null if analysis fails.
 	 */
 	private function process_function( $callback_function, string $name = null, string $filter = null, $priority = null ) {
-		$filename = Search_Callback_File_Location::get_filename( $callback_function, $name, $filter, $priority ? (int) $priority : 10 );
-
-		if ( ! $filename ) {
+		$plugin = Search_Callback_File_Location::get_plugin( $callback_function, $name, $filter, $priority ? (int) $priority : 10 );
+		if ( ! $plugin ) {
 			return null;
 		}
 
-		return array(
-			'filename' => $filename,
-			'plugin'   => $this->extract_plugin_name( $filename ),
-		);
+		return $plugin;
 	}
 
-	/**
-	 * Extract the plugin name from a given filename.
-	 *
-	 * @param string $filename The full path to the file.
-	 * @return string|null The plugin name or null if not found.
-	 */
-	private function extract_plugin_name( $filename ) {
-		$plugin_dir = wp_normalize_path( WP_PLUGIN_DIR );
-		$filename   = wp_normalize_path( $filename );
-
-		if ( strpos( $filename, $plugin_dir ) === 0 ) {
-			$relative_path = substr( $filename, strlen( $plugin_dir ) + 1 );
-			$parts         = explode( '/', $relative_path );
-			return $parts[0] ?? null;
-		}
-
-		return null;
-	}
 
 	/**
 	 * Fetch the client configuration and determines which cookies version
