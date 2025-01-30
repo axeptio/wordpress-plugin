@@ -119,8 +119,6 @@ class Hook_Modifier extends Module {
 			return;
 		}
 
-		Search_Callback_File_Location::initialize_cache();
-
 		$this->process_shortcode_tags();
 		$this->process_wp_filter();
 	}
@@ -238,9 +236,6 @@ class Hook_Modifier extends Module {
 				$shortcode_tags[ $tag['name'] ] = $this->wrap_tag( $tag['function'], $plugin, $intercepted_plugins[ $plugin ], $tag['name'] ); // PHPCS:Ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 			}
 		}
-
-		// Write the cache to a file after processing all shortcode tags.
-		Search_Callback_File_Location::write_cache_to_file();
 
 		return $stats;
 	}
@@ -512,9 +507,6 @@ class Hook_Modifier extends Module {
 				$wp_filter[ $filter ]->callbacks[ $priority ][ $name ]['function'] = $this->wrap_filter( $function['function'], $plugin, $filter );
 			}
 		}
-
-		// Write the cache to a file after processing all hooks.
-		Search_Callback_File_Location::write_cache_to_file();
 
 		return $stats;
 	}
