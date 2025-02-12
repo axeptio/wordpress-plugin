@@ -140,16 +140,29 @@ window._axcb.push( function( sdk ) {
 		getAllComments( document.body ).forEach( function( comment ) {
 			if ( comment.nodeValue.indexOf( 'axeptio_blocked' ) > -1 ) {
 				const plugin = comment.nodeValue.match( /axeptio_blocked ([\w_-]+)/ )[ 1 ];
+				const attributes = comment.nodeValue.match( /data-axeptio-attributes="([^"]+)"/ );
+
 				if ( ! choices[ 'wp_' + plugin ] ) {
 					return;
 				}
+
 				const placeholder = comment.previousElementSibling;
 				if ( placeholder ) {
 					placeholder.remove();
 				}
+
 				const value = comment.nodeValue.split( '\n' ).slice( 1 ).join( '\n' );
 				const elem = document.createElement( 'div' );
 				elem.innerHTML = value;
+
+				if (attributes && attributes[1]) {
+					const attributesList = attributes[1].split(',');
+					if (attributesList.includes('forceReload')) {
+						window.location.reload();
+						return;
+					}
+				}
+
 				comment.parentElement.replaceChild( elem.childNodes[ 0 ], comment );
 			}
 		} );
