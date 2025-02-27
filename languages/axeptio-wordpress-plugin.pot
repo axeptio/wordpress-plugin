@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2025-02-12 13:47+0100\n"
+"POT-Creation-Date: 2025-02-27 10:47+0100\n"
 "PO-Revision-Date: 2023-05-10 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -41,62 +41,62 @@ msgstr ""
 msgid "Return to plugins pages"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:129
+#: includes/classes/admin/pages/class-admin-callbacks.php:227
 msgid "Widget title"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:147
+#: includes/classes/admin/pages/class-admin-callbacks.php:241
 msgid "Widget sub-title"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:165
+#: includes/classes/admin/pages/class-admin-callbacks.php:255
 msgid "Widget Image"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:183
+#: includes/classes/admin/pages/class-admin-callbacks.php:273
 msgid "Disable the background Image"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:184
+#: includes/classes/admin/pages/class-admin-callbacks.php:274
 msgid "By checking this box, you will deactivate the painted background."
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:202
+#: includes/classes/admin/pages/class-admin-callbacks.php:292
 msgid "Cookie domain"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:207
+#: includes/classes/admin/pages/class-admin-callbacks.php:297
 msgid ""
 "If specified, domain name on which the cookie containing user choices will "
 "be available. This allows to request one consent for various subdomains"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:223
+#: includes/classes/admin/pages/class-admin-callbacks.php:313
 msgid "URL for server-side usage"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:229
-#: includes/classes/admin/pages/class-admin-callbacks.php:297
+#: includes/classes/admin/pages/class-admin-callbacks.php:319
+#: includes/classes/admin/pages/class-admin-callbacks.php:384
 msgid "URL to which the widget will send POST requests after user consent."
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:245
+#: includes/classes/admin/pages/class-admin-callbacks.php:335
 msgid "Enable sdk proxy"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:250
+#: includes/classes/admin/pages/class-admin-callbacks.php:340
 msgid "Load the Axeptio SDK from your website domain."
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:264
+#: includes/classes/admin/pages/class-admin-callbacks.php:354
 msgid "Widget description"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:311
+#: includes/classes/admin/pages/class-admin-callbacks.php:398
 msgid "Google Tag Manager Events"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:312
+#: includes/classes/admin/pages/class-admin-callbacks.php:399
 msgid "Configure how events are sent to Google Tag Manager"
 msgstr ""
 
@@ -193,19 +193,19 @@ msgstr ""
 msgid "Google Consent Mode V2"
 msgstr ""
 
-#: includes/classes/admin/pages/class-admin-main.php:377
+#: includes/classes/admin/pages/class-admin-main.php:401
 msgid "Collect of data and errors by Axeptio"
 msgstr ""
 
-#: includes/classes/models/class-axeptio-steps.php:18
+#: includes/classes/models/class-axeptio-steps.php:20
 msgid "WordPress Cookies"
 msgstr ""
 
-#: includes/classes/models/class-axeptio-steps.php:28
+#: includes/classes/models/class-axeptio-steps.php:21
 msgid "Here you will find all WordPress extensions using cookies."
 msgstr ""
 
-#: includes/classes/models/class-axeptio-steps.php:38
+#: includes/classes/models/class-axeptio-steps.php:22
 msgid ""
 "Below is the list of extensions used on this site that utilize cookies. "
 "Please activate or deactivate the ones for which you consent to sharing your "
@@ -461,6 +461,14 @@ msgstr ""
 
 #: templates/admin/main/fields/version.php:93
 msgid "Dismiss"
+msgstr ""
+
+#: templates/admin/main/fields/widget-options.php:16
+msgid "Default"
+msgstr ""
+
+#: templates/admin/main/fields/widget-options.php:29
+msgid "Widget language"
 msgstr ""
 
 #: templates/admin/main/tabs.php:4

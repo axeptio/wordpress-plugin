@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2025-02-12 13:47+0100\n"
+"POT-Creation-Date: 2025-02-27 10:47+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,33 +30,33 @@ msgstr ""
 msgid "Return to plugins pages"
 msgstr "Zurück zur Plugins-Seite"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:129
+#: includes/classes/admin/pages/class-admin-callbacks.php:227
 msgid "Widget title"
 msgstr "Widget Titel"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:147
+#: includes/classes/admin/pages/class-admin-callbacks.php:241
 msgid "Widget sub-title"
 msgstr "Untertitel des Widgets"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:165
+#: includes/classes/admin/pages/class-admin-callbacks.php:255
 msgid "Widget Image"
 msgstr "Widgetbild"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:183
+#: includes/classes/admin/pages/class-admin-callbacks.php:273
 msgid "Disable the background Image"
 msgstr "Hintergrundbild deaktivieren"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:184
+#: includes/classes/admin/pages/class-admin-callbacks.php:274
 msgid "By checking this box, you will deactivate the painted background."
 msgstr ""
 "Wenn Sie dieses Kästchen ankreuzen, deaktivieren Sie den gemalten "
 "Hintergrund."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:202
+#: includes/classes/admin/pages/class-admin-callbacks.php:292
 msgid "Cookie domain"
 msgstr "Cookie-Domäne"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:207
+#: includes/classes/admin/pages/class-admin-callbacks.php:297
 msgid ""
 "If specified, domain name on which the cookie containing user choices will "
 "be available. This allows to request one consent for various subdomains"
@@ -65,34 +65,34 @@ msgstr ""
 "Benutzerentscheidungen verfügbar sein wird. Dies ermöglicht es, eine "
 "Zustimmung für verschiedene Subdomains zu beantragen"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:223
+#: includes/classes/admin/pages/class-admin-callbacks.php:313
 msgid "URL for server-side usage"
 msgstr "URL für serverseitige Nutzung"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:229
-#: includes/classes/admin/pages/class-admin-callbacks.php:297
+#: includes/classes/admin/pages/class-admin-callbacks.php:319
+#: includes/classes/admin/pages/class-admin-callbacks.php:384
 msgid "URL to which the widget will send POST requests after user consent."
 msgstr ""
 "URL, an die das Widget POST-Anfragen nach der Einwilligung des Benutzers "
 "sendet."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:245
+#: includes/classes/admin/pages/class-admin-callbacks.php:335
 msgid "Enable sdk proxy"
 msgstr "SDK-Proxy aktivieren"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:250
+#: includes/classes/admin/pages/class-admin-callbacks.php:340
 msgid "Load the Axeptio SDK from your website domain."
 msgstr "Laden Sie das Axeptio SDK von Ihrer Domain."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:264
+#: includes/classes/admin/pages/class-admin-callbacks.php:354
 msgid "Widget description"
 msgstr "Widget-Beschreibung"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:311
+#: includes/classes/admin/pages/class-admin-callbacks.php:398
 msgid "Google Tag Manager Events"
 msgstr "Google Tag Manager-Ereignisse"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:312
+#: includes/classes/admin/pages/class-admin-callbacks.php:399
 msgid "Configure how events are sent to Google Tag Manager"
 msgstr ""
 "Konfigurieren Sie, wie Ereignisse an Google Tag Manager gesendet werden"
@@ -200,19 +200,19 @@ msgstr "Projektversion"
 msgid "Google Consent Mode V2"
 msgstr "Google Consent Mode V2"
 
-#: includes/classes/admin/pages/class-admin-main.php:377
+#: includes/classes/admin/pages/class-admin-main.php:401
 msgid "Collect of data and errors by Axeptio"
 msgstr "Sammlung von Daten und Fehlern durch Axeptio"
 
-#: includes/classes/models/class-axeptio-steps.php:18
+#: includes/classes/models/class-axeptio-steps.php:20
 msgid "WordPress Cookies"
 msgstr "WordPress Cookies"
 
-#: includes/classes/models/class-axeptio-steps.php:28
+#: includes/classes/models/class-axeptio-steps.php:21
 msgid "Here you will find all WordPress extensions using cookies."
 msgstr "Hier finden Sie alle WordPress-Erweiterungen, die Cookies verwenden."
 
-#: includes/classes/models/class-axeptio-steps.php:38
+#: includes/classes/models/class-axeptio-steps.php:22
 msgid ""
 "Below is the list of extensions used on this site that utilize cookies. "
 "Please activate or deactivate the ones for which you consent to sharing your "
@@ -503,6 +503,14 @@ msgstr "Ja, stelle es wieder her"
 #: templates/admin/main/fields/version.php:93
 msgid "Dismiss"
 msgstr "Verwerfen"
+
+#: templates/admin/main/fields/widget-options.php:16
+msgid "Default"
+msgstr "Standard"
+
+#: templates/admin/main/fields/widget-options.php:29
+msgid "Widget language"
+msgstr "Widget-Sprache"
 
 #: templates/admin/main/tabs.php:4
 msgid "Select a tab"
