@@ -29,8 +29,6 @@ export default function SelectComponent() {
                 this.state.options = [];
             }
 
-			console.log(config);
-
             this.state.name = config.group ? `${config.group}[${config.name}]` : '';
             this.state.value = config.value || CONFIG.DEFAULTS.VALUE;
 
@@ -38,6 +36,8 @@ export default function SelectComponent() {
             if (!this.state.options.find(opt => opt.value === this.state.value)) {
                 this.state.value = this.state.options[0]?.value || CONFIG.DEFAULTS.VALUE;
             }
+
+            this.$nextTick(() => this.dispatchLanguageEvent());
         },
 
         // Getters
@@ -85,17 +85,41 @@ export default function SelectComponent() {
 
         selectOption(index) {
             if (index === undefined || index === null) return;
+            const previousValue = this.state.value;
             this.state.value = this.state.options[index].value;
 
-            // Émettre un événement personnalisé avec la valeur sélectionnée
+            if (previousValue !== this.state.value) {
+                this.dispatchLanguageEvent();
+            }
+
+            this.closeListbox();
+        },
+
+        dispatchLanguageEvent() {
+            if (!this.state.value) return;
+
+            const selectedOption = this.selectedOption;
+
             window.dispatchEvent(new CustomEvent('language-changed', {
                 detail: {
                     value: this.state.value,
-                    label: this.state.options[index].label
+                    language: this.state.value,
+                    label: selectedOption?.label || ''
                 }
             }));
 
-            this.closeListbox();
+            document.dispatchEvent(new CustomEvent('language-changed', {
+                detail: {
+                    value: this.state.value,
+                    language: this.state.value,
+                    label: selectedOption?.label || ''
+                },
+                bubbles: true
+            }));
+
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('lang', this.state.value);
+            history.replaceState({}, '', currentUrl.toString());
         },
 
         toggleListbox() {

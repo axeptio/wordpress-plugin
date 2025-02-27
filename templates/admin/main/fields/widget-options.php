@@ -21,7 +21,7 @@ if ($is_multilingual) {
 
 <div class="widgetOptions lg:w-4/6 2xl:w-3/4" <?php echo $is_multilingual ? 'x-data="{ selectedLang: \'' . esc_attr($default_lang) . '\' }"' : ''; ?>>
 	<?php if ($is_multilingual) : ?>
-		<div class="mb-6" @language-changed.window="selectedLang = $event.detail.value">
+		<div class="mb-6">
 			<?php
 			\Axeptio\Plugin\get_template_part(
 				'admin/common/fields/select-languages',
@@ -31,10 +31,21 @@ if ($is_multilingual) {
 					'name'      => 'widget_title',
 					'id'        => 'xpwp_widget_title',
 					'languages' => $axeptio_languages,
-					'value'     => Axeptio_Steps::get_title(),
+					'value'     => $default_lang,
 				)
 			);
 			?>
+
+			<?php // Event listener to update the selected language ?>
+			<div x-init="
+				window.addEventListener('language-changed', (event) => {
+					if (event.detail && event.detail.language) {
+						selectedLang = event.detail.language;
+					} else if (event.detail && event.detail.value) {
+						selectedLang = event.detail.value;
+					}
+				});
+			"></div>
 		</div>
 	<?php endif; ?>
 
