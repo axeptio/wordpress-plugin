@@ -316,39 +316,63 @@ class Admin_Main extends Module {
 					'class'     => 'inline-table-row label-right',
 				),
 			),
+
 			array(
-				'id'       => 'xpwp_widget_title',
-				'title'    => false,
-				'callback' => array( $this->callbacks, 'widget_title' ),
+				'id'       => 'xpwp_personnalization_options',
+				'title'    => '',
+				'callback' => array( $this->callbacks, 'widget_set_options' ),
 				'page'     => 'axeptio-wordpress-plugin',
 				'section'  => 'xpwp_admin_customize',
 				'args'     => array(
-					'label_for' => 'xpwp_widget_title',
+					'label_for' => 'xpwp_personnalization_options',
 					'class'     => 'inline-table-row label-right',
 				),
 			),
-			array(
-				'id'       => 'xpwp_widget_subtitle',
-				'title'    => false,
-				'callback' => array( $this->callbacks, 'widget_subtitle' ),
-				'page'     => 'axeptio-wordpress-plugin',
-				'section'  => 'xpwp_admin_customize',
-				'args'     => array(
-					'label_for' => 'xpwp_widget_subtitle',
-					'class'     => 'inline-table-row label-right',
-				),
-			),
-			array(
-				'id'       => 'xpwp_widget_description',
-				'title'    => false,
-				'callback' => array( $this->callbacks, 'widget_description' ),
-				'page'     => 'axeptio-wordpress-plugin',
-				'section'  => 'xpwp_admin_customize',
-				'args'     => array(
-					'label_for' => 'xpwp_widget_description',
-					'class'     => 'inline-table-row label-right',
-				),
-			),
+
+//			array(
+//				'id'       => 'xpwp_widget_select_language',
+//				'title'    => false,
+//				'callback' => array( $this->callbacks, 'select_language' ),
+//				'page'     => 'axeptio-wordpress-plugin',
+//				'section'  => 'xpwp_admin_customize',
+//				'args'     => array(
+//					'label_for' => 'xpwp_widget_select_language',
+//					'class'     => 'inline-table-row label-right',
+//				),
+//			),
+//			array(
+//				'id'       => 'xpwp_widget_title',
+//				'title'    => false,
+//				'callback' => array( $this->callbacks, 'widget_title' ),
+//				'page'     => 'axeptio-wordpress-plugin',
+//				'section'  => 'xpwp_admin_customize',
+//				'args'     => array(
+//					'label_for' => 'xpwp_widget_title',
+//					'class'     => 'inline-table-row label-right',
+//				),
+//			),
+//			array(
+//				'id'       => 'xpwp_widget_subtitle',
+//				'title'    => false,
+//				'callback' => array( $this->callbacks, 'widget_subtitle' ),
+//				'page'     => 'axeptio-wordpress-plugin',
+//				'section'  => 'xpwp_admin_customize',
+//				'args'     => array(
+//					'label_for' => 'xpwp_widget_subtitle',
+//					'class'     => 'inline-table-row label-right',
+//				),
+//			),
+//			array(
+//				'id'       => 'xpwp_widget_description',
+//				'title'    => false,
+//				'callback' => array( $this->callbacks, 'widget_description' ),
+//				'page'     => 'axeptio-wordpress-plugin',
+//				'section'  => 'xpwp_admin_customize',
+//				'args'     => array(
+//					'label_for' => 'xpwp_widget_description',
+//					'class'     => 'inline-table-row label-right',
+//				),
+//			),
 			array(
 				'id'       => 'xpwp_widget_image',
 				'title'    => false,

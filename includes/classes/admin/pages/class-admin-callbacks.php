@@ -117,22 +117,41 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part( 'admin/onboarding/account' );
 	}
 
+	public function widget_set_options() {
+		\Axeptio\Plugin\get_template_part( 'admin/main/fields/widget-options', array( 'widgets' => Settings::get_option( 'xpwp_version_options', '', false ) ) );
+	}
+
+	/**
+	 * Display widget fields for a given language
+	 *
+	 * @param string $language_code Language code
+	 */
+	public static function render_widget_fields($language_code) {
+		\Axeptio\Plugin\Admin\Pages\Admin_Callbacks::widget_title(['language' => $language_code]);
+		\Axeptio\Plugin\Admin\Pages\Admin_Callbacks::widget_subtitle(['language' => $language_code]);
+		\Axeptio\Plugin\Admin\Pages\Admin_Callbacks::widget_description(['language' => $language_code]);
+	}
+
 	/**
 	 * Title of the widget.
 	 *
+	 * @param array $args Arguments passed to the function.
 	 * @return void
 	 */
-	public function widget_title() {
+	public static function widget_title($args = []) {
+		$language = isset($args['language']) ? $args['language'] : '';
+
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
-				'label' => __( 'Widget title', 'axeptio-wordpress-plugin' ),
-				'group' => 'axeptio_settings',
-				'name'  => 'widget_title',
-				'id'    => 'xpwp_widget_title',
-				'value' => Axeptio_Steps::get_title(),
+				'label' 	=> __( 'Widget title', 'axeptio-wordpress-plugin' ) . ($language ? " ({$language})" : ''),
+				'group' 	=> 'axeptio_settings',
+				'name'  	=> 'widget_title' . ($language ? "_{$language}" : ''),
+				'id'    	=> 'xpwp_widget_title' . ($language ? "_{$language}" : ''),
+				'value' 	=> Axeptio_Steps::get_title(),
+				'language' 	=> $language ?? null,
 			)
-			);
+		);
 	}
 
 	/**
@@ -140,7 +159,7 @@ class Admin_Callbacks {
 	 *
 	 * @return void
 	 */
-	public function widget_subtitle() {
+	public static function widget_subtitle() {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
@@ -257,7 +276,7 @@ class Admin_Callbacks {
 	 *
 	 * @return void
 	 */
-	public function widget_description() {
+	public static function widget_description() {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/textarea',
 			array(
@@ -267,7 +286,7 @@ class Admin_Callbacks {
 				'id'    => 'xpwp_widget_description',
 				'value' => Axeptio_Steps::get_description(),
 			)
-			);
+		);
 	}
 
 	/**
