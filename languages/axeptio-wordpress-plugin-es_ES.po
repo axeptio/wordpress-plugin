@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2025-02-12 13:47+0100\n"
+"POT-Creation-Date: 2025-03-07 11:24+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -316,7 +316,7 @@ msgstr "Imagen de fondo del widget"
 
 #: templates/admin/main/fields/client-id.php:31
 #: templates/admin/plugins/fields/edit.php:126
-#: templates/admin/sections/plugins.php:69
+#: templates/admin/sections/plugins.php:79
 msgid "Edit"
 msgstr "Editar"
 
@@ -732,13 +732,17 @@ msgstr "Evalúa el plugin de Axeptio"
 msgid "Don't ask me anymore"
 msgstr "Non chiedermelo più"
 
-#: templates/admin/sections/plugins.php:38
+#: templates/admin/sections/plugins.php:40
 msgid "Active"
 msgstr "Activo"
 
-#: templates/admin/sections/plugins.php:46
+#: templates/admin/sections/plugins.php:48
 msgid "This extension is subject to consent"
 msgstr "Esta extensión está sujeta al consentimiento"
+
+#: templates/admin/sections/plugins.php:56
+msgid "This extension is managed through WP Consent API"
+msgstr "Esta extensión se gestiona a través de la API WP Consent"
 
 #: templates/admin/settings-main.php:13
 msgid "Your Axeptio Settings"
