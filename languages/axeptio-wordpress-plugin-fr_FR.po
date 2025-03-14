@@ -603,12 +603,12 @@ msgstr "Configurer comment les événements sont envoyés à Google Tag Manager"
 
 #: templates/admin/common/fields/gtm-events.php:12
 msgid "Send all events to dataLayer"
-msgstr "Envoyer tous les événements à dataLayer"
+msgstr "Envoyer tous les événements au dataLayer"
 
 #: templates/admin/common/fields/gtm-events.php:13
 msgid "Do not send any events to dataLayer"
-msgstr "Ne pas envoyer d'événements à dataLayer"
+msgstr "Ne pas envoyer d'événements au dataLayer"
 
 #: templates/admin/common/fields/gtm-events.php:14
 msgid "Send only axeptio_update event to dataLayer"
-msgstr "Envoyer uniquement l'événement axeptio_update à dataLayer"
+msgstr "Envoyer uniquement l'événement axeptio_update au dataLayer"
