@@ -2,6 +2,7 @@
   "name": "axeptio-wordpress-plugin",
   "version": "2.3",
   "license": "GPL-3.0-or-later",
+  "type": "module",
   "scripts": {
     "build": "TAILWIND_MODE=build mix",
     "build:production": "TAILWIND_MODE=build mix --production",
@@ -14,7 +15,8 @@
     "translate:pot": "find ./resources ./inc -iname \"*.php\" | xargs xgettext --add-comments=TRANSLATORS --force-po --from-code=UTF-8 --default-domain=de_DE -k__ -k_e -k_n:1,2 -k_x:1,2c -k_ex:1,2c -k_nx:4c,12 -kesc_attr__ -kesc_attr_e -kesc_attr_x:1,2c -kesc_html__ -kesc_html_e -kesc_html_x:1,2c -k_n_noop:1,2 -k_nx_noop:3c,1,2, -k__ngettext_noop:1,2 -o languages/themosis.pot && find ./views -iname '*.blade.php' | xargs xgettext --language=Python --add-comments=TRANSLATORS --force-po --from-code=UTF-8 --ignore-domain -k__ -k_e -k_n:1,2 -k_x:1,2c -k_ex:1,2c -k_nx:4c,12 -kesc_attr__ -kesc_attr_e -kesc_attr_x:1,2c -kesc_html__ -kesc_html_e -kesc_html_x:1,2c -k_n_noop:1,2 -k_nx_noop:3c,1,2, -k__ngettext_noop:1,2 -j -o languages/themosis.pot",
     "translate:js": "wp i18n make-json ./languages --no-purge --pretty-print",
     "eslint": "eslint assets/js --ext .js",
-    "fix-eslint": "eslint assets/js --ext .js"
+    "fix-eslint": "eslint assets/js --ext .js",
+    "prepare": "husky"
   },
   "keywords": [
     "WordPress",
@@ -31,27 +33,35 @@
     "npm": ">= 8.3.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@wordpress/eslint-plugin": "^15.1.0",
-    "browser-sync": "^2.29.1",
+    "@wordpress/eslint-plugin": "^22.6.0",
+    "browser-sync": "^3.0.3",
     "browser-sync-webpack-plugin": "^2.3.0",
-    "css-loader": "^6.7.3",
-    "eslint": "^9.19.0",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.23.0",
+    "husky": "^9.1.7",
     "imagemin-webpack-plugin": "^2.4.2",
     "laravel-mix": "^6.0.49",
-    "postcss": "^8.4.21",
+    "postcss": "^8.4.31",
     "postcss-loader": "^7.2.4",
     "postcss-nested": "^6.0.1",
     "postcss-preset-env": "^8.3.1",
     "style-loader": "^3.3.2",
     "tailwindcss": "^3.3.1",
-    "webpack": "^5.79.0",
+    "webpack": "^5.94.0",
     "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.13.3"
+    "webpack-dev-server": "^4.13.3",
+    "lint-staged": "^15.5.0",
+    "prettier": "^3.5.3"
   },
   "dependencies": {
-    "@alpinejs/persist": "^3.12.3",
-    "alpinejs": "^3.12.0",
+    "@alpinejs/persist": "^3.14.9",
+    "alpinejs": "^3.14.9",
     "cross-env": "^7.0.3"
+  },
+  "lint-staged": {
+    "**/*.{js,md,yml,mjs}": "prettier --write"
   }
 }
