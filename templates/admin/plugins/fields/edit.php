@@ -207,6 +207,7 @@
 								'name'        => 'shortcode_tags_list',
 								'add_item'    => __( 'Add a shortcode', 'axeptio-wordpress-plugin' ),
 								'delete_item' => __( 'Delete', 'axeptio-wordpress-plugin' ),
+								'placeholder' => __( 'Example tag : axeptio --forceReload', 'axeptio-wordpress-plugin' ),
 							)
 							);
 						?>
