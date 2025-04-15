@@ -117,40 +117,130 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part( 'admin/onboarding/account' );
 	}
 
+	public function widget_set_options() {
+		\Axeptio\Plugin\get_template_part( 'admin/main/fields/widget-options', array( 'widgets' => Settings::get_option( 'xpwp_version_options', '', false ) ) );
+	}
+
+	/**
+	 * Display widget fields for a given language
+	 *
+	 * @param string $language_code Language code
+	 */
+	public static function render_widget_fields(string $language_code): void {
+		self::widget_title(['language' => $language_code]);
+		self::widget_subtitle(['language' => $language_code]);
+		self::widget_description(['language' => $language_code]);
+	}
+
+	/**
+	 * Extract language code from arguments
+	 *
+	 * @param array $args Arguments
+	 * @return string Language code or empty string
+	 */
+	private static function get_language_from_args(array $args): string {
+		return $args['language'] ?? '';
+	}
+
+	/**
+	 * Format label with language code if needed
+	 *
+	 * @param string $label Base label
+	 * @param string $language Language code
+	 * @return string Formatted label
+	 */
+	private static function format_label_with_language(string $label, string $language): string {
+		return $language ? sprintf('%s (%s)', $label, $language) : $label;
+	}
+
+	/**
+	 * Generate field attributes with language suffix if needed
+	 *
+	 * @param string $base_name Base name of the field
+	 * @param string $language Language code
+	 * @return array Field attributes with name and id
+	 */
+	private static function get_field_attributes(string $base_name, string $language): array {
+		$suffix = $language ? "_{$language}" : '';
+		return [
+			'name' => $base_name . $suffix,
+			'id'   => 'xpwp_' . $base_name . $suffix,
+		];
+	}
+
+	/**
+	 * Get option value with language support and fallback
+	 *
+	 * @param string $base_name Base option name
+	 * @param string $language Language code
+	 * @return string Option value
+	 */
+	private static function get_widget_value(string $base_name, string $language): string {
+		if ($language) {
+			$value = Settings::get_option($base_name . '_' . $language, null);
+			if ($value !== null) {
+				return $value;
+			}
+		}
+
+		return Settings::get_option($base_name, '');
+	}
+
+	/**
+	 * Render a widget field with proper template
+	 *
+	 * @param array $args Field configuration
+	 * @return void
+	 */
+	private static function render_widget_field(array $args): void {
+		$language = $args['language'] ?? '';
+		$field_name = $args['field_name'];
+		$label = $args['label'];
+		$template = $args['template'] ?? 'admin/common/fields/text';
+
+		$field_attrs = self::get_field_attributes($field_name, $language);
+		$value = self::get_widget_value($field_name, $language);
+
+		\Axeptio\Plugin\get_template_part(
+			$template,
+			array_merge(
+				[
+					'label'    => self::format_label_with_language($label, $language),
+					'group'    => 'axeptio_settings',
+					'value'    => $value,
+					'language' => $language,
+				],
+				$field_attrs
+			)
+		);
+	}
+
 	/**
 	 * Title of the widget.
 	 *
+	 * @param array $args Arguments passed to the function.
 	 * @return void
 	 */
-	public function widget_title() {
-		\Axeptio\Plugin\get_template_part(
-			'admin/common/fields/text',
-			array(
-				'label' => __( 'Widget title', 'axeptio-wordpress-plugin' ),
-				'group' => 'axeptio_settings',
-				'name'  => 'widget_title',
-				'id'    => 'xpwp_widget_title',
-				'value' => Axeptio_Steps::get_title(),
-			)
-			);
+	public static function widget_title(array $args = []): void {
+		self::render_widget_field([
+			'field_name' => 'widget_title',
+			'label'      => __('Widget title', 'axeptio-wordpress-plugin'),
+			'language'   => self::get_language_from_args($args),
+		]);
 	}
 
 	/**
 	 * Sub-title of the widget.
 	 *
+	 * @param array $args Arguments passed to the function.
 	 * @return void
 	 */
-	public function widget_subtitle() {
-		\Axeptio\Plugin\get_template_part(
-			'admin/common/fields/text',
-			array(
-				'label' => __( 'Widget sub-title', 'axeptio-wordpress-plugin' ),
-				'group' => 'axeptio_settings',
-				'name'  => 'widget_subtitle',
-				'id'    => 'xpwp_widget_subtitle',
-				'value' => Axeptio_Steps::get_sub_title(),
-			)
-			);
+	public static function widget_subtitle(array $args = []): void {
+		self::render_widget_field([
+			'field_name' => 'widget_subtitle',
+			'label'      => __('Widget sub-title', 'axeptio-wordpress-plugin'),
+			'language'   => self::get_language_from_args($args),
+		]);
 	}
 
 	/**
@@ -255,19 +345,16 @@ class Admin_Callbacks {
 	/**
 	 * Description of the widget.
 	 *
+	 * @param array $args Arguments passed to the function.
 	 * @return void
 	 */
-	public function widget_description() {
-		\Axeptio\Plugin\get_template_part(
-			'admin/common/fields/textarea',
-			array(
-				'label' => __( 'Widget description', 'axeptio-wordpress-plugin' ),
-				'group' => 'axeptio_settings',
-				'name'  => 'widget_description',
-				'id'    => 'xpwp_widget_description',
-				'value' => Axeptio_Steps::get_description(),
-			)
-			);
+	public static function widget_description(array $args = []): void {
+		self::render_widget_field([
+			'field_name' => 'widget_description',
+			'label'      => __('Widget description', 'axeptio-wordpress-plugin'),
+			'language'   => self::get_language_from_args($args),
+			'template'   => 'admin/common/fields/textarea',
+		]);
 	}
 
 	/**
