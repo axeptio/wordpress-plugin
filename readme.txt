@@ -1,8 +1,8 @@
 === Axeptio - Cookie Banner - GDPR Consent & Compliance with a friendly touch ===
 Contributors: Axeptio
-Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy, eprivacy, consent, script, cmp, data, personnal, widget, googletagmanager, consentmanagement
+Tags: Axeptio, GDPR, RGPD, Cookies, Consent, Privacy
 Requires at least: 5.0
-Tested up to: 6.5.5
+Tested up to: 6.8.1
 Stable tag: 2.5.9
 Requires PHP: 7.4
 License: GPLv3
