@@ -10,7 +10,7 @@ if ($is_multilingual) {
 	$axeptio_languages = \Axeptio\Plugin\Models\i18n::get_languages();
 	$default_lang = array_key_first($axeptio_languages);
 } else {
-	// Pour les sites monolingues, on utilise la langue courante
+	// For monolingual sites, we use the current language
 	$current_lang = [
 		'language_code' => get_locale(),
 		'native_name' => __('Default', 'axeptio-wordpress-plugin')
