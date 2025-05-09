@@ -34,6 +34,8 @@ function setCookie( name, value, days ) {
 window._axcb.push( function( sdk ) {
 	sdk.on( 'ready', function() {
 		const selectedCookieConfigId = sdk.getCookiesConfig().identifier;
+		const selectedConfig = sdk.config.cookies.find(config => config.identifier === selectedCookieConfigId);
+		const currentLanguage = selectedConfig?.language || 'en';
 
 		sdk.config.cookies.forEach( function( cookieConfig ) {
 			if ( window.Axeptio_SDK.enableGoogleConsentMode === '1' ) {
@@ -76,6 +78,14 @@ window._axcb.push( function( sdk ) {
 					window.axeptioWordpressSteps.forEach( function( step ) {
 						if ( step.name === vendor.step && ! stepExists ) {
 							stepExists = true;
+
+							const title = window.Axeptio_SDK[`widget_title_${currentLanguage}`] || window.Axeptio_SDK.widget_title;
+							const subTitle = window.Axeptio_SDK[`widget_subtitle_${currentLanguage}`] || window.Axeptio_SDK.widget_subtitle;
+							const message = window.Axeptio_SDK[`widget_description_${currentLanguage}`] || window.Axeptio_SDK.widget_description;
+
+							if (title) step.title = title;
+							if (subTitle) step.subTitle = subTitle;
+							if (message) step.message = message;
 
 							step.image = window.Axeptio_SDK.image ?? 'cookie-bienvenue';
 							step.disablePaint = window.Axeptio_SDK.disablePaint ?? false;
