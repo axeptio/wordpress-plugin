@@ -82,7 +82,7 @@ class Plugins {
 				foreach ( $plugins as $key => $plugin ) {
 					$plugin_key = self::get_plugin_id( $key );
 
-					if ( 'axeptio-wordpress-plugin' === $plugin_key ) {
+					if ( isset($plugin['TextDomain']) && 'axeptio-wordpress-plugin' === $plugin['TextDomain'] ) {
 						continue;
 					}
 

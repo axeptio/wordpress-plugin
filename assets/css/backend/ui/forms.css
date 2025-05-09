@@ -4,6 +4,10 @@
 		flex-direction: column;
 		th, td {
 			@apply py-2 px-0 w-full;
+
+			&:has(> label:empty) {
+				@apply hidden p-0;
+			}
 		}
 	}
 
