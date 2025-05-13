@@ -34,6 +34,18 @@ class WP_Consent_API_Settings {
 	}
 
 	/**
+	 * Check if the WP Consent API plugin is active.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return bool True if the WP Consent API plugin is active, false otherwise.
+	 */
+	public static function is_active(): bool {
+
+		return function_exists( 'is_plugin_active' ) && is_plugin_active( 'wp-consent-api/wp-consent-api.php' );
+	}
+
+	/**
 	 * Get available consent categories.
 	 *
 	 * @since 1.0.0

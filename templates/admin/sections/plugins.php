@@ -1,4 +1,24 @@
 <div class="mx-auto max-w-7xl relative">
+	<?php if ( ! \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ) : ?>
+	<div class="bg-yellow-50 p-4 my-4 rounded-lg ring-1 ring-yellow-600/50 ring-inset">
+		<div class="flex">
+			<div class="flex-shrink-0">
+				<svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+					<path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+				</svg>
+			</div>
+			<div class="ml-3">
+				<p class="text-sm text-gray-900 font-semibold">
+					<?php esc_html_e( 'WP Consent API plugin is not active. WP Consent API features are disabled.', 'axeptio-wordpress-plugin' ); ?>
+					<a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wp-consent-api' ) ); ?>"
+					   class="font-medium underline text-yellow-700 hover:text-yellow-600 transition-colors">
+						<?php esc_html_e( 'Install and activate WP Consent API plugin to enable these features.', 'axeptio-wordpress-plugin' ); ?>
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
 	<div
 		x-show="isGetting"
 		x-transition
@@ -48,6 +68,7 @@
 									<div class="ml-1"><?php esc_attr_e( 'This extension is subject to consent', 'axeptio-wordpress-plugin' ); ?></div>
 								</div>
 
+								<?php if ( \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ) : ?>
 								<div
 									class="rounded-md inline-flex mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset whitespace-nowrap items-center text-orange-700 bg-orange-50 ring-orange-600/20"
 									x-show="plugin.WPConsentAPI && plugin.WPConsentAPI.is_compliant"
@@ -55,6 +76,7 @@
 									<svg class="-my-1 h-4 w-4 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>
 									<div class="ml-1"><?php esc_attr_e( 'This extension is managed through WP Consent API', 'axeptio-wordpress-plugin' ); ?></div>
 								</div>
+								<?php endif; ?>
 							</div>
 							<div class="min-w-0 mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
 								<p x-html="plugin.Description"></p>
