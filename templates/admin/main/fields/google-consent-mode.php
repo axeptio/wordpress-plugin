@@ -60,6 +60,21 @@ $axeptio_google_params_list    = array(
 		'description' => esc_html__( 'Customize the ad experience by allowing Google to personalize the ads that visitors see.', 'axeptio-wordpress-plugin' ),
 		'name'        => 'ad_personalization',
 	),
+	array(
+		'label'       => esc_html__( 'Functionality storage', 'axeptio-wordpress-plugin' ),
+		'description' => esc_html__( 'Enables storage that supports the functionality of the website or app, for example, language settings.', 'axeptio-wordpress-plugin' ),
+		'name'        => 'functionality_storage',
+	),
+	array(
+		'label'       => esc_html__( 'Personalization storage', 'axeptio-wordpress-plugin' ),
+		'description' => esc_html__( 'Enables storage related to personalization, for example, video recommendations.', 'axeptio-wordpress-plugin' ),
+		'name'        => 'personalization_storage',
+	),
+	array(
+		'label'       => esc_html__( 'Security storage', 'axeptio-wordpress-plugin' ),
+		'description' => esc_html__( 'Enables storage related to security such as authentication functionality, fraud prevention, and other user protection.', 'axeptio-wordpress-plugin' ),
+		'name'        => 'security_storage',
+	),
 );
 
 ?>

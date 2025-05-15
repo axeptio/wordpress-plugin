@@ -13,11 +13,11 @@ use Axeptio\Plugin\Module;
 class Sdk_Proxy extends Module {
 
 	/**
-	 * Constants for cache time, file name, and directory.
+	 * Constants for cache time and transient name
 	 */
 	const CACHE_TIME = DAY_IN_SECONDS;
-	const CACHE_FILE = 'axeptio-sdk.js';
-	const CACHE_DIR  = 'axeptio';
+	const TRANSIENT_KEY = 'axeptio_sdk_content';
+	private const ALLOWED_MIME_TYPES = ['application/javascript', 'text/javascript'];
 
 	/**
 	 * Check if the module can be registered.
@@ -51,6 +51,73 @@ class Sdk_Proxy extends Module {
 			update_option( 'axeptio/sdk_proxy_key', $proxy_file );
 		}
 		update_option( 'axeptio/need_flush', '1' );
+
+		// Supprimer le transient pour forcer un rechargement
+		delete_transient( self::TRANSIENT_KEY );
+	}
+
+	/**
+	 * Fetch the SDK content from remote URL
+	 */
+	private function fetch_sdk_content() {
+		$external_url = 'https://static.axept.io/sdk.js';
+		$response = wp_remote_get( $external_url );
+
+		if ( is_wp_error( $response ) ) {
+			return false;
+		}
+
+		$content = wp_remote_retrieve_body( $response );
+
+		if ( empty( $content ) ) {
+			return false;
+		}
+
+		// Nettoyer et normaliser le contenu JavaScript
+		$content = str_replace(["\r\n", "\r"], "\n", $content);
+
+		// Stocker le contenu dans un transient
+		set_transient( self::TRANSIENT_KEY, $content, self::CACHE_TIME );
+
+		return $content;
+	}
+
+	/**
+	 * Serve the SDK proxy content
+	 */
+	public function proxy_cmp_js() {
+		if ( ! get_query_var( 'proxy_axeptio_sdk' ) ) {
+			return;
+		}
+
+		// Récupérer le contenu du cache
+		$sdk_content = get_transient( self::TRANSIENT_KEY );
+
+
+		// Si le cache est vide ou expiré, récupérer le contenu distant
+		if ( false === $sdk_content ) {
+			$sdk_content = $this->fetch_sdk_content();
+
+			if ( false === $sdk_content ) {
+				wp_die( 'Error fetching SDK content' );
+			}
+		}
+
+		// Headers de sécurité
+		nocache_headers();
+		header( 'Content-Type: application/javascript; charset=utf-8' );
+		header( 'X-Content-Type-Options: nosniff' );
+
+		// Autres headers de sécurité
+		header( 'X-Frame-Options: DENY' );
+		header( 'X-XSS-Protection: 1; mode=block' );
+
+		// S'assurer que le contenu est bien encodé avant de l'envoyer
+		$sdk_content = wp_check_invalid_utf8($sdk_content);
+		header('Content-Length: ' . strlen($sdk_content));
+
+		echo $sdk_content;
+		exit;
 	}
 
 	/**
@@ -100,42 +167,5 @@ class Sdk_Proxy extends Module {
 	public function add_query_vars( $vars ) {
 		$vars[] = 'proxy_axeptio_sdk';
 		return $vars;
-	}
-
-	/**
-	 * Serve the SDK proxy file.
-	 */
-	public function proxy_cmp_js() {
-		if ( ! get_query_var( 'proxy_axeptio_sdk' ) ) {
-			return;
-		}
-
-		$file_path = wp_upload_dir()['basedir'] . '/' . self::CACHE_DIR . '/' . self::CACHE_FILE;
-
-		if ( ! is_dir( self::CACHE_DIR ) ) {
-			wp_mkdir_p( self::CACHE_DIR );
-			chmod( self::CACHE_DIR, 0755 );
-		}
-
-		header( 'Content-Type: application/javascript' );
-		header( 'Cache-Control: public, max-age=' . self::CACHE_TIME );
-		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + self::CACHE_TIME ) . ' GMT' );
-
-		if ( file_exists( $file_path ) && ( time() - filemtime( $file_path ) ) < self::CACHE_TIME ) {
-			readfile( $file_path );
-			exit;
-		}
-
-		$external_url = 'https://static.axept.io/sdk.js';
-		$response     = wp_remote_get( $external_url );
-
-		if ( is_wp_error( $response ) ) {
-			wp_die( 'Error fetching the file.' );
-		}
-
-		$body = wp_remote_retrieve_body( $response );
-		file_put_contents( $file_path, $body );
-		echo $body;
-		exit;
 	}
 }

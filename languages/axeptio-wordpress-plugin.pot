@@ -656,3 +656,6 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr ""
+
+msgid "URL for server-side usage"
+msgstr ""

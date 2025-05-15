@@ -1,0 +1,8 @@
+# Skip commit message validation in Github Actions CI
+if [ -n "$CI" ] ; then
+  echo "CI environment detected, skipping commit message check"
+  exit 0
+fi
+
+echo "Checking commit message format..."
+npx --no -- commitlint --edit $1
