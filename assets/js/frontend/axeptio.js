@@ -34,6 +34,8 @@ function setCookie( name, value, days ) {
 window._axcb.push( function( sdk ) {
 	sdk.on( 'ready', function() {
 		const selectedCookieConfigId = sdk.getCookiesConfig().identifier;
+		const selectedConfig = sdk.config.cookies.find(config => config.identifier === selectedCookieConfigId);
+		const currentLanguage = selectedConfig?.language || 'en';
 
 		sdk.config.cookies.forEach( function( cookieConfig ) {
 			if ( window.Axeptio_SDK.enableGoogleConsentMode === '1' ) {
@@ -76,6 +78,14 @@ window._axcb.push( function( sdk ) {
 					window.axeptioWordpressSteps.forEach( function( step ) {
 						if ( step.name === vendor.step && ! stepExists ) {
 							stepExists = true;
+
+							const title = window.Axeptio_SDK[`widget_title_${currentLanguage}`] || window.Axeptio_SDK.widget_title;
+							const subTitle = window.Axeptio_SDK[`widget_subtitle_${currentLanguage}`] || window.Axeptio_SDK.widget_subtitle;
+							const message = window.Axeptio_SDK[`widget_description_${currentLanguage}`] || window.Axeptio_SDK.widget_description;
+
+							if (title) step.title = title;
+							if (subTitle) step.subTitle = subTitle;
+							if (message) step.message = message;
 
 							step.image = window.Axeptio_SDK.image ?? 'cookie-bienvenue';
 							step.disablePaint = window.Axeptio_SDK.disablePaint ?? false;
@@ -140,16 +150,29 @@ window._axcb.push( function( sdk ) {
 		getAllComments( document.body ).forEach( function( comment ) {
 			if ( comment.nodeValue.indexOf( 'axeptio_blocked' ) > -1 ) {
 				const plugin = comment.nodeValue.match( /axeptio_blocked ([\w_-]+)/ )[ 1 ];
+				const attributes = comment.nodeValue.match( /data-axeptio-attributes="([^"]+)"/ );
+
 				if ( ! choices[ 'wp_' + plugin ] ) {
 					return;
 				}
+
 				const placeholder = comment.previousElementSibling;
 				if ( placeholder ) {
 					placeholder.remove();
 				}
+
 				const value = comment.nodeValue.split( '\n' ).slice( 1 ).join( '\n' );
 				const elem = document.createElement( 'div' );
 				elem.innerHTML = value;
+
+				if (attributes && attributes[1]) {
+					const attributesList = attributes[1].split(',');
+					if (attributesList.includes('forceReload')) {
+						window.location.reload();
+						return;
+					}
+				}
+
 				comment.parentElement.replaceChild( elem.childNodes[ 0 ], comment );
 			}
 		} );

@@ -13,6 +13,7 @@ use Axeptio\Plugin\Models\Plugins;
 use Axeptio\Plugin\Models\Project_Versions;
 use Axeptio\Plugin\Models\Sdk;
 use Axeptio\Plugin\Models\Settings;
+use Axeptio\Plugin\Models\i18n;
 use Axeptio\Plugin\Module;
 use function Axeptio\Plugin\get_relative_path;
 use function Axeptio\Plugin\get_sdk_settings;
@@ -124,6 +125,26 @@ class Axeptio_Sdk extends Module {
 	}
 
 	/**
+	 * Get widget fields for current language
+	 *
+	 * @return array Widget fields configuration
+	 */
+	private function get_widget_fields(): array {
+		$current_language = i18n::get_current_language();
+		$suffix = $current_language ? "_{$current_language}" : '';
+
+		$fields = [
+			'widget_title'       => Settings::get_option("widget_title{$suffix}", ''),
+			'widget_subtitle'    => Settings::get_option("widget_subtitle{$suffix}", ''),
+			'widget_description' => Settings::get_option("widget_description{$suffix}", ''),
+		];
+
+		return array_filter($fields, function($value) {
+			return !empty($value);
+		});
+	}
+
+	/**
 	 * Retrieve the SDK settings.
 	 *
 	 * @return array|false Settings of the SDK.
@@ -186,6 +207,8 @@ class Axeptio_Sdk extends Module {
 				),
 			),
 		);
+
+		$sdk_settings = array_merge($sdk_settings, $this->get_widget_fields());
 
 		if ( '' !== $cookies_version ) {
 			$sdk_settings['cookiesVersion'] = $cookies_version;
