@@ -28,3 +28,4 @@ tailwind.config.js
 Taskfile.yml
 webpack.mix.js
 yarn.lock
+.env

@@ -118,42 +118,54 @@ function get_main_admin_tabs() {
 	return \Axeptio\Plugin\get_template_part( 'admin/main/tabs', array( 'tab_items' => $tab_items ), false );
 }
 
+/**
+ * Get the relative path between two paths.
+ *
+ * @param string $from The source path.
+ * @param string $to   The destination path.
+ * @return string The relative path.
+ */
 function get_relative_path( $from, $to ) {
-	// some compatibility fixes for Windows paths
+	// Some compatibility fixes for Windows paths.
 	$from = is_dir( $from ) ? rtrim( $from, '\/' ) . '/' : $from;
 	$to   = is_dir( $to ) ? rtrim( $to, '\/' ) . '/' : $to;
 	$from = str_replace( array( ABSPATH, '\\' ), array( '', '/' ), $from );
 	$to   = str_replace( array( ABSPATH, '\\' ), array( '', '/' ), $to );
 
-	$from    = explode( '/', $from );
-	$to      = explode( '/', $to );
-	$relPath = $to;
+	$from     = explode( '/', $from );
+	$to       = explode( '/', $to );
+	$rel_path = $to;
 
-	// Remove all empty values
-	$filteredEmptyValue = array_filter($from);
-	$from = array_values($filteredEmptyValue);
+	// Remove all empty values.
+	$filtered_empty_value = array_filter( $from );
+	$from                 = array_values( $filtered_empty_value );
 
 	foreach ( $from as $depth => $dir ) {
-		// find first non-matching dir
+		// Find first non-matching dir.
 		if ( $dir === $to[ $depth ] ) {
-			// ignore this directory
-			array_shift( $relPath );
+			// Ignore this directory.
+			array_shift( $rel_path );
 		} else {
-			// get number of remaining dirs to $from
+			// Get number of remaining dirs to $from.
 			$remaining = count( $from ) - $depth;
 			if ( $remaining > 1 ) {
-				// add traversals up to first matching dir
-				$padLength = ( count( $relPath ) + $remaining - 1 ) * -1;
-				$relPath   = array_pad( $relPath, $padLength, '..' );
+				// Add traversals up to first matching dir.
+				$pad_length = ( count( $rel_path ) + $remaining - 1 ) * -1;
+				$rel_path   = array_pad( $rel_path, $pad_length, '..' );
 				break;
 			} else {
-				$relPath[0] = './' . $relPath[0];
+				$rel_path[0] = './' . $rel_path[0];
 			}
 		}
 	}
-	return implode( '/', $relPath );
+	return implode( '/', $rel_path );
 }
 
+/**
+ * Get the SDK URL.
+ *
+ * @return string The SDK URL.
+ */
 function get_sdk_url() {
 	if ( Settings::get_option( 'proxy_sdk', false ) ) {
 		$proxy_key = \get_option( 'axeptio/sdk_proxy_key' );
@@ -161,3 +173,72 @@ function get_sdk_url() {
 	}
 	return 'https://static.axept.io/sdk.js';
 }
+
+/**
+ * Get the current WordPress memory limit in bytes.
+ *
+ * This function retrieves the memory limit set in WordPress and converts it to bytes.
+ * If the WP_MEMORY_LIMIT constant is defined, it is used. Otherwise, the memory_limit
+ * value from the PHP configuration is used.
+ *
+ * @return int The memory limit in bytes.
+ */
+function wp_memory_limit_in_bytes(): int {
+    $memoryLimit = defined('WP_MEMORY_LIMIT') ? WP_MEMORY_LIMIT : ini_get('memory_limit');
+
+    $unit = strtolower(substr($memoryLimit, -1));
+    $bytes = (int) $memoryLimit;
+    switch ($unit) {
+        case 'g':
+            $bytes *= 1024 ** 3; // Gigabytes to bytes
+            break;
+        case 'm':
+            $bytes *= 1024 ** 2; // Megabytes to bytes
+            break;
+        case 'k':
+            $bytes *= 1024; // Kilobytes to bytes
+            break;
+    }
+    return $bytes;
+}
+
+/**
+ * Determines if the current request is a WordPress REST API request.
+ *
+ * Handles various scenarios to ensure compatibility:
+ * - REST_REQUEST constant is defined (direct REST API request).
+ * - The `rest_route` parameter exists (support for plain permalinks).
+ * - WP_Rewrite might not be initialized yet.
+ * - The URL path starts with the REST API prefix (e.g., `wp-json/`).
+ *
+ * @return bool True if the request is a REST API request, false otherwise.
+ */
+function is_rest(): bool {
+	// Check if the REST_REQUEST constant is defined and true (#1)
+	if (defined('REST_REQUEST') && REST_REQUEST) {
+		return true;
+	}
+
+	// Check if the `rest_route` parameter exists and starts with a forward slash (#2)
+	if (isset($_GET['rest_route']) && is_string($_GET['rest_route']) && strpos($_GET['rest_route'], '/') === 0) {
+		return true;
+	}
+
+	// Initialize WP_Rewrite if not already initialized (#3)
+	global $wp_rewrite;
+	if ($wp_rewrite === null) {
+		$wp_rewrite = new WP_Rewrite();
+	}
+
+	// Compare the current URL path with the REST API base path (#4)
+	$rest_url = wp_parse_url(trailingslashit(rest_url()));
+	$current_url = wp_parse_url(add_query_arg([]));
+
+	// Ensure both paths are available before comparing
+	if (isset($rest_url['path'], $current_url['path'])) {
+		return strpos($current_url['path'], $rest_url['path']) === 0;
+	}
+
+	return false;
+}
+

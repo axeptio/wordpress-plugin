@@ -34,7 +34,7 @@ class Recommended_Plugin_Settings {
 	 */
 	public static function find( string $plugin ) {
 		$result = self::all();
-		return $result[$plugin] ?? false;
+		return $result[ $plugin ] ?? false;
 	}
 
 	/**

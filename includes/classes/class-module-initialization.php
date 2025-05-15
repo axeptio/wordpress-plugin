@@ -11,7 +11,6 @@ use Axeptio\Plugin\Admin\Rest\Plugins;
 use Axeptio\Plugin\Backend\Settings;
 use Axeptio\Plugin\Frontend\Axeptio_Sdk;
 use Axeptio\Plugin\Compat\AlpineJS_Wpkses;
-use Axeptio\Plugin\Frontend\Cookie;
 use Axeptio\Plugin\Frontend\Hook_Modifier;
 use Axeptio\Plugin\Frontend\Sdk_Proxy;
 use Axeptio\Plugin\Init\Activate;
@@ -71,7 +70,6 @@ class Module_Initialization {
 			Activation_Hook::class,
 			AlpineJS_Wpkses::class,
 			Admin\Pages\Admin_Main::class,
-			Cookie::class,
 			Axeptio_Sdk::class,
 			Hook_Modifier::class,
 			Plugins::class,
