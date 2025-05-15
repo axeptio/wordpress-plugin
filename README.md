@@ -5,6 +5,7 @@
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue?style=flat-square) ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square) ![WordPress Version](https://img.shields.io/badge/WordPress-%5E5.0-blue?style=flat-square) ![PHP Version](https://img.shields.io/badge/PHP-%3E%3D%207.0-blue?style=flat-square)
 
+
 Integrate the Axeptio SDK with your WordPress Website for seamless privacy management.
 
 Axeptio transforms your **WordPress** site’s privacy management into a smooth and compliant experience. With its easy-to-install and highly customizable plugin, you can ensure GDPR compliance and transparency without compromising user experience.
