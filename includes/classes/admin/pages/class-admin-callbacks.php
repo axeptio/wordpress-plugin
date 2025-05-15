@@ -205,7 +205,7 @@ class Admin_Callbacks {
 				'id'          => 'xpwp_cookie_domain',
 				'value'       => Settings::get_option( 'cookie_domain', '' ),
 				'instruction' => __( 'If specified, domain name on which the cookie containing user choices will be available. This allows to request one consent for various subdomains', 'axeptio-wordpress-plugin' ),
-				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/hc/fr/articles/4402881048977-Comment-param%C3%A9trer-le-Widget-pour-un-sous-domaine' : 'https://support.axeptio.eu/hc/en-gb/articles/4402881048977-How-to-set-the-widget-for-a-sub-domain',
+				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274095-comment-parametrer-le-widget-pour-un-sous-domaine' : 'https://support.axeptio.eu/en/articles/274095-how-to-set-the-widget-for-a-sub-domain',
 			)
 		);
 	}
@@ -227,7 +227,7 @@ class Admin_Callbacks {
 				'id'          => 'xpwp_api_url',
 				'value'       => Settings::get_option( 'api_url', '' ),
 				'instruction' => __( 'URL to which the widget will send POST requests after user consent.', 'axeptio-wordpress-plugin' ),
-				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/hc/fr/articles/29597926237841-Mise-en-place-du-Server-Side-Tracking' : 'https://support.axeptio.eu/hc/en-gb/articles/28447238691345-Passing-Consent-in-Your-GTM-Server-side-Container',
+				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274016-mise-en-place-du-server-side-tracking' : 'https://support.axeptio.eu/hc/en-gb/articles/28447238691345-Passing-Consent-in-Your-GTM-Server-side-Container',
 				'placeholder' => 'https://yourdomain.clouds',
 			)
 		);
@@ -314,7 +314,7 @@ class Admin_Callbacks {
 				'name'        => 'gtm_events',
 				'id'          => 'xpwp_gtm_events',
 				'value'       => \Axeptio\Plugin\Models\Settings::get_option( 'gtm_events', 'true' ),
-				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/hc/fr/articles/27662718518929-Gestion-des-%C3%A9v%C3%A9nements-personnalis%C3%A9s-Google-Tag-Manager' : 'https://support.axeptio.eu/hc/en-gb/articles/27662718518929-Management-of-Custom-Events-in-Google-Tag-Manager',
+				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274038-gestion-des-evenements-personnalises-google-tag-manager' : 'https://support.axeptio.eu/hc/en-gb/articles/27662718518929-Management-of-Custom-Events-in-Google-Tag-Manager',
 			)
 		);
 	}
