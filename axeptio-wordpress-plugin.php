@@ -45,9 +45,7 @@ if ( version_compare( PHP_VERSION, XPWP_MIN_PHP_VERSION, '<' ) ) {
 
 }
 
-$xpwp_is_local_envenv = in_array( wp_get_environment_type(), array( 'local', 'development' ), true );
-$xpwp_is_local_envurl = strpos( home_url(), '.test' ) || strpos( home_url(), '.docker.localhost' );
-$xpwp_is_local        = $xpwp_is_local_envenv || $xpwp_is_local_envurl;
+$xpwp_is_local = in_array( wp_get_environment_type(), array( 'local', 'development' ), true );
 
 // Require Composer autoloader if it exists.
 if ( file_exists( XPWP_PATH . 'vendor/autoload.php' ) ) {

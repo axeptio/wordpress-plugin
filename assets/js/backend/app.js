@@ -4,6 +4,7 @@ import accountIDComponent from './components/accountIDComponent';
 import imageUploadComponent from './components/imageUploadComponent';
 import selectLang from './components/selectLang';
 import pluginList from './components/pluginList';
+import selectComponent from './components/selectComponent';
 import noticeComponent from './components/noticeComponent';
 
 window.Alpine = Alpine;
@@ -14,5 +15,8 @@ window.pluginList = pluginList.instance;
 window.noticeComponent = noticeComponent.instance;
 window.selectLang = selectLang.instance;
 
+Alpine.data('SelectComponent', selectComponent);
+
 Alpine.plugin( persist );
+
 Alpine.start();
