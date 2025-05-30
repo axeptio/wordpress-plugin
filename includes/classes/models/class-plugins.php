@@ -235,6 +235,8 @@ class Plugins {
 			'shortcode_tags_mode'                 => 'none',
 			'shortcode_tags_list'                 => '',
 			'shortcode_tags_placeholder'          => '',
+			'shortcode_placeholder_title'         => '',
+			'shortcode_placeholder_description'   => '',
 			'vendor_id'                           => 0,
 			'vendor_title'                        => '',
 			'vendor_shortDescription'             => '',

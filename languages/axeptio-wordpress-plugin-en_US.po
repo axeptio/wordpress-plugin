@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 10:47+0100\n"
-"PO-Revision-Date: 2025-02-27 10:51+0100\n"
+"POT-Creation-Date: 2025-05-30 15:22+0200\n"
+"PO-Revision-Date: 2025-05-30 15:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -11,14 +11,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: ../vendor\n"
@@ -207,7 +206,7 @@ msgstr "Project Version"
 msgid "Google Consent Mode V2"
 msgstr "Google Consent Mode V2"
 
-#: includes/classes/admin/pages/class-admin-main.php:401
+#: includes/classes/admin/pages/class-admin-main.php:356
 msgid "Collect of data and errors by Axeptio"
 msgstr "Collect of data and errors by Axeptio"
 
@@ -697,15 +696,60 @@ msgstr ""
 "going to load a resource from another\n"
 "\t\t\t\t\t\t\t\t\twebsite, you should probably block them preemptively."
 
-#: templates/admin/plugins/fields/edit.php:251
+#: templates/admin/plugins/fields/edit.php:235
+#, fuzzy
+#| msgid "Shortcodes to be filtered"
+msgid "Shortcode placeholder title"
+msgstr "Shortcodes to be filtered"
+
+#: templates/admin/plugins/fields/edit.php:243
+#: templates/frontend/shortcode-placeholder.php:8
+msgid "Oops, content not available at the moment!"
+msgstr "Oops, content not available at the moment!"
+
+#: templates/admin/plugins/fields/edit.php:247
+msgid ""
+"Custom title displayed when shortcode content is blocked. If left empty, the "
+"default title will be used."
+msgstr ""
+
+#: templates/admin/plugins/fields/edit.php:253
+#, fuzzy
+#| msgid "Short description"
+msgid "Shortcode placeholder description"
+msgstr "Short description"
+
+#. translators: $s: Name of the plugin
+#: templates/admin/plugins/fields/edit.php:258
+#: templates/frontend/shortcode-placeholder.php:20
+#, php-format
+msgid ""
+"This content is blocked because we take the protection of your data very "
+"seriously. If you wish to unblock it, it's very simple: go to our cookie "
+"consent widget, give your approval for the \"%s\" extension. And voila, "
+"you're all set!"
+msgstr ""
+"This content is blocked because we take the protection of your data very "
+"seriously. If you wish to unblock it, it's very simple: go to our cookie "
+"consent widget, give your approval for the \"%s\" extension. And voila, "
+"you're all set!"
+
+#: templates/admin/plugins/fields/edit.php:271
+msgid ""
+"Custom description displayed when shortcode content is blocked. If left "
+"empty, the default description will be used. You can use {plugin_name} as a "
+"placeholder for the plugin title."
+msgstr ""
+
+#: templates/admin/plugins/fields/edit.php:293
 msgid "Saving..."
 msgstr "Saving in progress..."
 
-#: templates/admin/plugins/fields/edit.php:257
+#: templates/admin/plugins/fields/edit.php:299
 msgid "Save settings"
 msgstr "Save settings"
 
-#: templates/admin/plugins/fields/edit.php:262
+#: templates/admin/plugins/fields/edit.php:304
 msgid "Delete these settings"
 msgstr "Delete these settings"
 
@@ -757,23 +801,9 @@ msgstr "This extension is subject to consent"
 msgid "Your Axeptio Settings"
 msgstr "Your Axeptio Settings"
 
-#: templates/frontend/shortcode-placeholder.php:4
-msgid "Oops, content not available at the moment!"
-msgstr "Oops, content not available at the moment!"
-
-#. translators: $s: Name of the plugin
-#: templates/frontend/shortcode-placeholder.php:10
-#, php-format
-msgid ""
-"This content is blocked because we take the protection of your data very "
-"seriously. If you wish to unblock it, it's very simple: go to our cookie "
-"consent widget, give your approval for the \"%s\" extension. And voila, "
-"you're all set!"
+#: templates/frontend/shortcode-placeholder.php:26
+msgid "I accept this service"
 msgstr ""
-"This content is blocked because we take the protection of your data very "
-"seriously. If you wish to unblock it, it's very simple: go to our cookie "
-"consent widget, give your approval for the \"%s\" extension. And voila, "
-"you're all set!"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.axeptio.eu/"

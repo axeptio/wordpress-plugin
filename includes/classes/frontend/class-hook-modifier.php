@@ -226,6 +226,8 @@ class Hook_Modifier extends Module {
 					],
 					'placeholder'  => $configuration['shortcode_tags_placeholder'],
 					'vendor_title' => isset( $configuration['vendor_title'] ) && '' !== $configuration['vendor_title'] ? $configuration['vendor_title'] : $plugin_configuration['Name'],
+					'shortcode_placeholder_title' => $configuration['shortcode_placeholder_title'] ?? '',
+					'shortcode_placeholder_description' => $configuration['shortcode_placeholder_description'] ?? '',
 				);
 			}
 		}

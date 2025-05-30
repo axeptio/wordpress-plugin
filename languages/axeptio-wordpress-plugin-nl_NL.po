@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2025-02-27 10:47+0100\n"
+"POT-Creation-Date: 2025-05-30 15:22+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #: axeptio-wordpress-plugin.php:33
 msgid "Unable to activate Axeptio"
@@ -197,7 +197,7 @@ msgstr "Projectversie"
 msgid "Google Consent Mode V2"
 msgstr "Google Consent Mode V2"
 
-#: includes/classes/admin/pages/class-admin-main.php:401
+#: includes/classes/admin/pages/class-admin-main.php:356
 msgid "Collect of data and errors by Axeptio"
 msgstr "Verzamelen van gegevens en fouten door Axeptio"
 
@@ -698,15 +698,62 @@ msgstr ""
 "\t\t\t\t\t\t\t\t\twebsite gaan laden, moet u ze waarschijnlijk proactief "
 "blokkeren."
 
-#: templates/admin/plugins/fields/edit.php:251
+#: templates/admin/plugins/fields/edit.php:235
+msgid "Shortcode placeholder title"
+msgstr "Titel plaatshouder shortcode"
+
+#: templates/admin/plugins/fields/edit.php:243
+#: templates/frontend/shortcode-placeholder.php:8
+msgid "Oops, content not available at the moment!"
+msgstr "Oeps, inhoud niet beschikbaar op dit moment!"
+
+#: templates/admin/plugins/fields/edit.php:247
+msgid ""
+"Custom title displayed when shortcode content is blocked. If left empty, the "
+"default title will be used."
+msgstr ""
+"Aangepaste titel die wordt weergegeven wanneer de inhoud van de shortcode "
+"wordt geblokkeerd. Als deze leeg blijft, wordt de standaardtitel gebruikt."
+
+#: templates/admin/plugins/fields/edit.php:253
+msgid "Shortcode placeholder description"
+msgstr "Korte code plaatshouder beschrijving"
+
+#. translators: $s: Name of the plugin
+#: templates/admin/plugins/fields/edit.php:258
+#: templates/frontend/shortcode-placeholder.php:20
+#, php-format
+msgid ""
+"This content is blocked because we take the protection of your data very "
+"seriously. If you wish to unblock it, it's very simple: go to our cookie "
+"consent widget, give your approval for the \"%s\" extension. And voila, "
+"you're all set!"
+msgstr ""
+"Deze inhoud is geblokkeerd omdat wij de bescherming van uw gegevens zeer "
+"serieus nemen. Als u de blokkering wilt opheffen, is dat heel eenvoudig: ga "
+"naar onze cookie toestemmingswidget, geef uw toestemming voor de \"%s\" "
+"extensie. En voila, u bent helemaal klaar!"
+
+#: templates/admin/plugins/fields/edit.php:271
+msgid ""
+"Custom description displayed when shortcode content is blocked. If left "
+"empty, the default description will be used. You can use {plugin_name} as a "
+"placeholder for the plugin title."
+msgstr ""
+"Aangepaste beschrijving die wordt weergegeven wanneer de inhoud van de "
+"shortcode wordt geblokkeerd. Als deze leeg blijft, wordt de standaard "
+"beschrijving gebruikt. Je kunt {plugin_name} gebruiken als plaatshouder voor "
+"de titel van de plugin."
+
+#: templates/admin/plugins/fields/edit.php:293
 msgid "Saving..."
 msgstr "Opslaan bezig..."
 
-#: templates/admin/plugins/fields/edit.php:257
+#: templates/admin/plugins/fields/edit.php:299
 msgid "Save settings"
 msgstr "Instellingen opslaan"
 
-#: templates/admin/plugins/fields/edit.php:262
+#: templates/admin/plugins/fields/edit.php:304
 msgid "Delete these settings"
 msgstr "Deze instellingen verwijderen"
 
@@ -760,23 +807,9 @@ msgstr "Deze extensie is onderhevig aan toestemming"
 msgid "Your Axeptio Settings"
 msgstr "Uw Axeptio-instellingen"
 
-#: templates/frontend/shortcode-placeholder.php:4
-msgid "Oops, content not available at the moment!"
-msgstr "Oeps, inhoud niet beschikbaar op dit moment!"
-
-#. translators: $s: Name of the plugin
-#: templates/frontend/shortcode-placeholder.php:10
-#, php-format
-msgid ""
-"This content is blocked because we take the protection of your data very "
-"seriously. If you wish to unblock it, it's very simple: go to our cookie "
-"consent widget, give your approval for the \"%s\" extension. And voila, "
-"you're all set!"
-msgstr ""
-"Deze inhoud is geblokkeerd omdat wij de bescherming van uw gegevens zeer "
-"serieus nemen. Als u de blokkering wilt opheffen, is dat heel eenvoudig: ga "
-"naar onze cookie toestemmingswidget, geef uw toestemming voor de \"%s\" "
-"extensie. En voila, u bent helemaal klaar!"
+#: templates/frontend/shortcode-placeholder.php:26
+msgid "I accept this service"
+msgstr "Ik accepteer deze service"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.axeptio.eu/"

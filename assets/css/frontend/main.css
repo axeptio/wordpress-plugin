@@ -18,6 +18,10 @@
 		gap: 20px;
 	}
 
+	.axeptio-shortcode-content {
+		flex-grow: 1;
+	}
+
 	.svg-icon {
 		z-index: 10;
 		position: relative;
