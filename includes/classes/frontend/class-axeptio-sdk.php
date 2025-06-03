@@ -73,7 +73,7 @@ class Axeptio_Sdk extends Module {
 
 						$configuration = 'all' !== $cookies_version && isset( $plugin_configuration['Metas']['Merged'] ) ? $plugin_configuration['Metas']['Merged'] : $plugin_configuration['Metas'];
 
-						if ( ! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled'] ) {
+						if ( (! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled']) || $plugin_configuration['WPConsentAPI']['is_compliant'] === true ) {
 							return false;
 						}
 
@@ -87,6 +87,7 @@ class Axeptio_Sdk extends Module {
 							'image'            => '' === $configuration['vendor_image'] && isset( $configuration['Merged']['vendor_image'] ) ? $configuration['Merged']['vendor_image'] : $configuration['vendor_image'],
 							'type'             => 'wordpress plugin',
 							'step'             => $configuration['cookie_widget_step'] ?? 'wordpress',
+							'WPConsentAPI' 	   => $plugin_configuration['WPConsentAPI'],
 						);
 					},
 					Plugins::all( $cookies_version )

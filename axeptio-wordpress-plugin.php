@@ -9,6 +9,7 @@
 	License URI: https://www.gnu.org/licenses/gpl-3.0.html
 	Text Domain: axeptio-wordpress-plugin
 	Domain Path: /languages
+	Requires Plugins: wp-consent-api
  **/
 
 define( 'XPWP_VERSION', '2.5.9' );
