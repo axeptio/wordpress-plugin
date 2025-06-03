@@ -25,12 +25,12 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-3: ../dist\n"
 "X-Poedit-SearchPathExcluded-4: ../node_modules\n"
 
-#: axeptio-wordpress-plugin.php:33
+#: axeptio-wordpress-plugin.php:34
 msgid "Unable to activate Axeptio"
 msgstr "Unable to activate Axeptio"
 
 #. translators: %1$s: current php version min and %2$s version of php required
-#: axeptio-wordpress-plugin.php:37
+#: axeptio-wordpress-plugin.php:38
 #, php-format
 msgid ""
 "Your server is currently running PHP %1$s. The Axeptio plugin requires at "
@@ -39,7 +39,7 @@ msgstr ""
 "Your server is currently running PHP %1$s. The Axeptio plugin requires at "
 "least PHP %2$s. Please upgrade your PHP version to use this plugin."
 
-#: axeptio-wordpress-plugin.php:41
+#: axeptio-wordpress-plugin.php:42
 msgid "Return to plugins pages"
 msgstr "Return to plugins page"
 
@@ -327,7 +327,7 @@ msgstr ""
 
 #: templates/admin/main/fields/client-id.php:31
 #: templates/admin/plugins/fields/edit.php:126
-#: templates/admin/sections/plugins.php:69
+#: templates/admin/sections/plugins.php:101
 msgid "Edit"
 msgstr "Edit"
 
@@ -335,15 +335,24 @@ msgstr "Edit"
 msgid "Validate"
 msgstr "Validate"
 
-#: templates/admin/main/fields/google-consent-mode.php:31
+#: templates/admin/main/fields/google-consent-mode.php:11
+msgid "Google Consent Mode requires the WP Consent API plugin to be active."
+msgstr ""
+
+#: templates/admin/main/fields/google-consent-mode.php:13
+#: templates/admin/sections/plugins.php:15
+msgid "Install and activate WP Consent API plugin to enable these features."
+msgstr ""
+
+#: templates/admin/main/fields/google-consent-mode.php:51
 msgid "Enable Google Consent Mode V2?"
 msgstr "Enable Google Consent Mode V2?"
 
-#: templates/admin/main/fields/google-consent-mode.php:44
+#: templates/admin/main/fields/google-consent-mode.php:65
 msgid "Analytics storage"
 msgstr "Analytics storage"
 
-#: templates/admin/main/fields/google-consent-mode.php:45
+#: templates/admin/main/fields/google-consent-mode.php:66
 msgid ""
 "Allow Google Analytics to measure how visitors use the site to enhance "
 "functionality and service."
@@ -351,11 +360,11 @@ msgstr ""
 "Allow Google Analytics to measure how visitors use the site to enhance "
 "functionality and service."
 
-#: templates/admin/main/fields/google-consent-mode.php:49
+#: templates/admin/main/fields/google-consent-mode.php:70
 msgid "Ad Storage"
 msgstr "Ad Storage"
 
-#: templates/admin/main/fields/google-consent-mode.php:50
+#: templates/admin/main/fields/google-consent-mode.php:71
 msgid ""
 "Permit Google to save advertising information on visitors' devices for "
 "better ad relevance."
@@ -363,19 +372,19 @@ msgstr ""
 "Permit Google to save advertising information on visitors' devices for "
 "better ad relevance."
 
-#: templates/admin/main/fields/google-consent-mode.php:54
+#: templates/admin/main/fields/google-consent-mode.php:75
 msgid "Ad User Data"
 msgstr "Ad User Data"
 
-#: templates/admin/main/fields/google-consent-mode.php:55
+#: templates/admin/main/fields/google-consent-mode.php:76
 msgid "Share visitors' activity data with Google for targeted advertising."
 msgstr "Share visitors' activity data with Google for targeted advertising."
 
-#: templates/admin/main/fields/google-consent-mode.php:59
+#: templates/admin/main/fields/google-consent-mode.php:80
 msgid "Ad Personalization"
 msgstr "Ad Personalization"
 
-#: templates/admin/main/fields/google-consent-mode.php:60
+#: templates/admin/main/fields/google-consent-mode.php:81
 msgid ""
 "Customize the ad experience by allowing Google to personalize the ads that "
 "visitors see."
@@ -383,11 +392,11 @@ msgstr ""
 "Customize the ad experience by allowing Google to personalize the ads that "
 "visitors see."
 
-#: templates/admin/main/fields/google-consent-mode.php:64
+#: templates/admin/main/fields/google-consent-mode.php:85
 msgid "Functionality storage"
 msgstr "Functionality storage"
 
-#: templates/admin/main/fields/google-consent-mode.php:65
+#: templates/admin/main/fields/google-consent-mode.php:86
 msgid ""
 "Enables storage that supports the functionality of the website or app, for "
 "example, language settings."
@@ -395,11 +404,11 @@ msgstr ""
 "Enables storage that supports the functionality of the website or app, for "
 "example, language settings."
 
-#: templates/admin/main/fields/google-consent-mode.php:69
+#: templates/admin/main/fields/google-consent-mode.php:90
 msgid "Personalization storage"
 msgstr "Personalization storage"
 
-#: templates/admin/main/fields/google-consent-mode.php:70
+#: templates/admin/main/fields/google-consent-mode.php:91
 msgid ""
 "Enables storage related to personalization, for example, video "
 "recommendations."
@@ -407,11 +416,11 @@ msgstr ""
 "Enables storage related to personalization, for example, video "
 "recommendations."
 
-#: templates/admin/main/fields/google-consent-mode.php:74
+#: templates/admin/main/fields/google-consent-mode.php:95
 msgid "Security storage"
 msgstr "Security storage"
 
-#: templates/admin/main/fields/google-consent-mode.php:75
+#: templates/admin/main/fields/google-consent-mode.php:96
 msgid ""
 "Enables storage related to security such as authentication functionality, "
 "fraud prevention, and other user protection."
@@ -419,11 +428,11 @@ msgstr ""
 "Enables storage related to security such as authentication functionality, "
 "fraud prevention, and other user protection."
 
-#: templates/admin/main/fields/google-consent-mode.php:82
+#: templates/admin/main/fields/google-consent-mode.php:103
 msgid "Default settings for consent mode"
 msgstr "Default settings for consent mode"
 
-#: templates/admin/main/fields/google-consent-mode.php:84
+#: templates/admin/main/fields/google-consent-mode.php:105
 msgid ""
 "These consent signals will be sent at page load to tell Google services how "
 "they should handle data before consent is granted or denied."
@@ -789,12 +798,23 @@ msgstr "Review Axeptio plugin"
 msgid "Don't ask me anymore"
 msgstr "Don't ask me anymore"
 
-#: templates/admin/sections/plugins.php:38
+#: templates/admin/sections/plugins.php:12
+msgid ""
+"WP Consent API plugin is not active. WP Consent API features are disabled."
+msgstr ""
+
+#: templates/admin/sections/plugins.php:60
 msgid "Active"
 msgstr "Active"
 
-#: templates/admin/sections/plugins.php:46
+#: templates/admin/sections/plugins.php:68
 msgid "This extension is subject to consent"
+msgstr "This extension is subject to consent"
+
+#: templates/admin/sections/plugins.php:77
+#, fuzzy
+#| msgid "This extension is subject to consent"
+msgid "This extension is managed through WP Consent API"
 msgstr "This extension is subject to consent"
 
 #: templates/admin/settings-main.php:13

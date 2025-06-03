@@ -1,4 +1,24 @@
 <div class="mx-auto max-w-7xl relative">
+	<?php if ( ! \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ) : ?>
+	<div class="bg-yellow-50 p-4 my-4 rounded-lg ring-1 ring-yellow-600/50 ring-inset">
+		<div class="flex">
+			<div class="flex-shrink-0">
+				<svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+					<path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+				</svg>
+			</div>
+			<div class="ml-3">
+				<p class="text-sm text-gray-900 font-semibold">
+					<?php esc_html_e( 'WP Consent API plugin is not active. WP Consent API features are disabled.', 'axeptio-wordpress-plugin' ); ?>
+					<a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wp-consent-api' ) ); ?>"
+					   class="font-medium underline text-yellow-700 hover:text-yellow-600 transition-colors">
+						<?php esc_html_e( 'Install and activate WP Consent API plugin to enable these features.', 'axeptio-wordpress-plugin' ); ?>
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
 	<div
 		x-show="isGetting"
 		x-transition
@@ -24,8 +44,10 @@
 			<li class="flex items-center justify-between gap-x-6 py-5">
 				<div class="min-w-0">
 					<div class="flex items-center gap-x-6">
-						<div>
-							<?php \Axeptio\Plugin\get_template_part( 'admin/plugins/fields/toggle' ); ?>
+						<div x-bind:class="{ 'cursor-not-allowed': plugin.WPConsentAPI?.is_compliant }">
+							<div x-bind:class="{ 'opacity-50 pointer-events-none': plugin.WPConsentAPI?.is_compliant }">
+								<?php \Axeptio\Plugin\get_template_part( 'admin/plugins/fields/toggle' ); ?>
+							</div>
 						</div>
 						<div>
 							<div class="min-w-0 flex items-start gap-x-3 flex-auto">
@@ -45,6 +67,16 @@
 									<svg class="-my-1 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960"><path d="M420.118 498Q446 498 464 479.882q18-18.117 18-44Q482 410 463.882 392q-18.117-18-44-18Q394 374 376 392.118q-18 18.117-18 44Q358 462 376.118 480q18.117 18 44 18Zm-80 200Q366 698 384 679.882q18-18.117 18-44Q402 610 383.882 592q-18.117-18-44-18Q314 574 296 592.118q-18 18.117-18 44Q278 662 296.118 680q18.117 18 44 18ZM600 736q17 0 28.5-11.5T640 696q0-17-11.5-28.5T600 656q-17 0-28.5 11.5T560 696q0 17 11.5 28.5T600 736ZM480.234 976Q398 976 325 944.5q-73-31.5-127.5-86t-86-127.5Q80 658 80 576q0-92 39-172t104.5-135.5q65.5-55.5 151-80T552 182q-6 45 8 85t42.5 68q28.5 28 68.5 41t84 6q-20 61 22 109.5T879 545q8 87-20.5 165T775 847q-55 59-130.794 94-75.794 35-163.972 35ZM480 916q142 0 236-93.5T821 592q-54-20-87.5-59.5T692 442q-81-11-136.5-70T492 235q-74-3-138.5 24t-112 74Q194 380 167 443.5T140 576q0 142 99 241t241 99Zm1-345Z"></path></svg>
 									<div class="ml-1"><?php esc_attr_e( 'This extension is subject to consent', 'axeptio-wordpress-plugin' ); ?></div>
 								</div>
+
+								<?php if ( \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ) : ?>
+								<div
+									class="rounded-md inline-flex mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset whitespace-nowrap items-center text-orange-700 bg-orange-50 ring-orange-600/20"
+									x-show="plugin.WPConsentAPI && plugin.WPConsentAPI.is_compliant"
+								>
+									<svg class="-my-1 h-4 w-4 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>
+									<div class="ml-1"><?php esc_attr_e( 'This extension is managed through WP Consent API', 'axeptio-wordpress-plugin' ); ?></div>
+								</div>
+								<?php endif; ?>
 							</div>
 							<div class="min-w-0 mt-1 flex items-center gap-x-2 text-xs leading-5 text-gray-500">
 								<p x-html="plugin.Description"></p>
@@ -54,7 +86,7 @@
 				</div>
 				<div
 					class="flex flex-none items-center gap-x-4"
-					x-show="plugin.Metas.enabled !== false"
+					x-show="plugin.Metas.enabled !== false && !plugin.WPConsentAPI?.is_compliant"
 					x-transition:enter="transition ease-out duration-200"
 					x-transition:enter-start="opacity-0"
 					x-transition:enter-end="opacity-1"
