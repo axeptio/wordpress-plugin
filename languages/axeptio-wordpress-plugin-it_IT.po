@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2025-05-28 17:31+0200\n"
+"POT-Creation-Date: 2025-06-03 14:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -707,15 +707,62 @@ msgstr ""
 "\t\t\t\t\t\t\t\t\tsito web, è probabile che dovresti bloccarli "
 "preventivamente."
 
-#: templates/admin/plugins/fields/edit.php:251
+#: templates/admin/plugins/fields/edit.php:235
+msgid "Shortcode placeholder title"
+msgstr "Titolo segnaposto dello shortcode"
+
+#: templates/admin/plugins/fields/edit.php:243
+#: templates/frontend/shortcode-placeholder.php:8
+msgid "Oops, content not available at the moment!"
+msgstr "Oops, contenuto non disponibile al momento!"
+
+#: templates/admin/plugins/fields/edit.php:247
+msgid ""
+"Custom title displayed when shortcode content is blocked. If left empty, the "
+"default title will be used."
+msgstr ""
+"Titolo personalizzato visualizzato quando il contenuto del codice breve è "
+"bloccato. Se lasciato vuoto, verrà utilizzato il titolo predefinito."
+
+#: templates/admin/plugins/fields/edit.php:253
+msgid "Shortcode placeholder description"
+msgstr "Descrizione segnaposto dello shortcode"
+
+#. translators: $s: Name of the plugin
+#: templates/admin/plugins/fields/edit.php:258
+#: templates/frontend/shortcode-placeholder.php:20
+#, php-format
+msgid ""
+"This content is blocked because we take the protection of your data very "
+"seriously. If you wish to unblock it, it's very simple: go to our cookie "
+"consent widget, give your approval for the \"%s\" extension. And voila, "
+"you're all set!"
+msgstr ""
+"Questo contenuto è bloccato perché prendiamo molto sul serio la protezione "
+"dei vostri dati. Se desiderate sbloccarlo, è molto semplice: andate sul "
+"nostro widget per il consenso ai cookie, date il vostro consenso "
+"all'estensione \"%s\". E voilà, il gioco è fatto!"
+
+#: templates/admin/plugins/fields/edit.php:271
+msgid ""
+"Custom description displayed when shortcode content is blocked. If left "
+"empty, the default description will be used. You can use {plugin_name} as a "
+"placeholder for the plugin title."
+msgstr ""
+"Descrizione personalizzata visualizzata quando il contenuto dello shortcode "
+"è bloccato. Se lasciata vuota, verrà utilizzata la descrizione predefinita. "
+"È possibile utilizzare {nome_del_plugin} come segnaposto per il titolo del "
+"plugin."
+
+#: templates/admin/plugins/fields/edit.php:293
 msgid "Saving..."
 msgstr "Salvataggio in corso..."
 
-#: templates/admin/plugins/fields/edit.php:257
+#: templates/admin/plugins/fields/edit.php:299
 msgid "Save settings"
 msgstr "Salva impostazioni"
 
-#: templates/admin/plugins/fields/edit.php:262
+#: templates/admin/plugins/fields/edit.php:304
 msgid "Delete these settings"
 msgstr "Elimina queste impostazioni"
 
@@ -778,23 +825,9 @@ msgstr "Questa estensione è gestita tramite WP Consent API"
 msgid "Your Axeptio Settings"
 msgstr "Le tue impostazioni Axeptio"
 
-#: templates/frontend/shortcode-placeholder.php:4
-msgid "Oops, content not available at the moment!"
-msgstr "Oops, contenuto non disponibile al momento!"
-
-#. translators: $s: Name of the plugin
-#: templates/frontend/shortcode-placeholder.php:10
-#, php-format
-msgid ""
-"This content is blocked because we take the protection of your data very "
-"seriously. If you wish to unblock it, it's very simple: go to our cookie "
-"consent widget, give your approval for the \"%s\" extension. And voila, "
-"you're all set!"
-msgstr ""
-"Questo contenuto è bloccato perché prendiamo molto sul serio la protezione "
-"dei vostri dati. Se desiderate sbloccarlo, è molto semplice: andate sul "
-"nostro widget per il consenso ai cookie, date il vostro consenso "
-"all'estensione \"%s\". E voilà, il gioco è fatto!"
+#: templates/frontend/shortcode-placeholder.php:26
+msgid "I accept this service"
+msgstr "Accetto questo servizio"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.axeptio.eu/"
