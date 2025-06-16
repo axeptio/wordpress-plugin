@@ -3,7 +3,7 @@ Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent
 Requires at least: 5.0
 Tested up to: 6.8.1
-Stable tag: 2.5.9.1
+Stable tag: 2.6.1
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -85,6 +85,27 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/en/ar
 ### 📃 2.5.9.1 📃 ###
 
 **Fix doc links**
+
+== Changelog ==
+
+### 🔒 2.6.1 🔒 ###
+
+- 🐛 Fix fatal error "=>" (T_DOUBLE_ARROW)
+
+### ⚡️ 2.6.0 ⚡️ ###
+
+This new version introduces several major improvements and fixes:
+
+- ✅ **Compatibility with WP Consent API**
+  Native integration with the [WP Consent API](https://wordpress.org/plugins/wp-consent-api/) plugin.
+- 🔐 **Security fixes**
+  Enhanced overall plugin security.
+- ⚙️ **Customizable shortcode blocking screen**
+  Customize the appearance and content of the screens that block shortcodes pending consent.
+- 🔁 **Optional page reload on consent**
+  Ability to trigger an automatic page reload after a blocking screen is validated (especially useful for HubSpot forms and other third-party services).
+- 🌍 **Multilingual support for the Axeptio widget screen**
+  Dynamic display of consent texts in the site's language.
 
 ### 🔄 2.5.9 🔄 ###
 

@@ -82,7 +82,7 @@ class Plugins {
 				foreach ( $plugins as $key => $plugin ) {
 					$plugin_key = self::get_plugin_id( $key );
 
-					if ( 'axeptio-wordpress-plugin' === $plugin_key ) {
+					if ( isset($plugin['TextDomain']) && 'axeptio-wordpress-plugin' === $plugin['TextDomain'] ) {
 						continue;
 					}
 
@@ -92,14 +92,20 @@ class Plugins {
 						$plugin_metadatas['Merged']['vendor_image'] = get_favicon( $plugin['PluginURI'] );
 					}
 
-					$plugin_list[ $plugin_key ] = array_merge(
-					$plugin,
-					array(
+					$plugin_data = array(
 						'AxeptioRecommendedSettings' => Recommended_Plugin_Settings::find( $plugin_key ),
 						'Metas'                      => $plugin_metadatas,
 						'HookModes'                  => Hook_Modes::all( $configuration_id, $plugin_key ),
 						'ShortcodeTagsModes'         => Shortcode_Tags_Modes::all( $configuration_id, $plugin_key ),
-					)
+					);
+
+					if ( WP_Consent_API_Settings::is_active() ) {
+						$plugin_data['WPConsentAPI'] = WP_Consent_API_Settings::find( $key );
+					}
+
+					$plugin_list[ $plugin_key ] = array_merge(
+						$plugin,
+						$plugin_data
 					);
 				}
 
@@ -235,6 +241,8 @@ class Plugins {
 			'shortcode_tags_mode'                 => 'none',
 			'shortcode_tags_list'                 => '',
 			'shortcode_tags_placeholder'          => '',
+			'shortcode_placeholder_title'         => '',
+			'shortcode_placeholder_description'   => '',
 			'vendor_id'                           => 0,
 			'vendor_title'                        => '',
 			'vendor_shortDescription'             => '',

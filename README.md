@@ -3,7 +3,7 @@
   Axeptio WordPress Plugin
 </h1>
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue?style=flat-square) ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square) ![WordPress Version](https://img.shields.io/badge/WordPress-%5E5.0-blue?style=flat-square) ![PHP Version](https://img.shields.io/badge/PHP-%3E%3D%207.0-blue?style=flat-square)
+![Version](https://img.shields.io/badge/version-1.0.0-blue?style=flat-square) ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square) ![WordPress Version](https://img.shields.io/badge/WordPress-%5E5.0-blue?style=flat-square) ![PHP Version](https://img.shields.io/badge/PHP-%3E%3D%207.4-blue?style=flat-square)
 
 Integrate the Axeptio SDK with your WordPress Website for seamless privacy management.
 
