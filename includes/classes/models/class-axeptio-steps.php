@@ -16,12 +16,16 @@ class Axeptio_Steps {
 	 * @return string Default value
 	 */
 	private static function get_default_value(string $field): string {
-		return match($field) {
-			'widget_title' => esc_html__('WordPress Cookies', 'axeptio-wordpress-plugin'),
-			'widget_subtitle' => esc_html__('Here you will find all WordPress extensions using cookies.', 'axeptio-wordpress-plugin'),
-			'widget_description' => esc_html__('Below is the list of extensions used on this site that utilize cookies. Please activate or deactivate the ones for which you consent to sharing your data.', 'axeptio-wordpress-plugin'),
-			default => '',
-		};
+		switch ($field) {
+			case 'widget_title':
+				return esc_html__('WordPress Cookies', 'axeptio-wordpress-plugin');
+			case 'widget_subtitle':
+				return esc_html__('Here you will find all WordPress extensions using cookies.', 'axeptio-wordpress-plugin');
+			case 'widget_description':
+				return esc_html__('Below is the list of extensions used on this site that utilize cookies. Please activate or deactivate the ones for which you consent to sharing your data.', 'axeptio-wordpress-plugin');
+			default:
+				return '';
+		}
 	}
 
 	/**
