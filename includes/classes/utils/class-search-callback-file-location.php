@@ -41,7 +41,7 @@ class Search_Callback_File_Location {
      */
     public static function get_plugin( $callback_function, ?string $name = null, ?string $filter = null, ?int $priority = null ): ?string {
         $filename = self::find_filename( $callback_function, $name, $filter, $priority );
-		return self::extract_plugin_name($filename);
+		return !is_null($filename) ? self::extract_plugin_name($filename) : null;
     }
 
 	/**
