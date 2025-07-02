@@ -3,15 +3,16 @@
 	Plugin Name: Axeptio
 	Plugin URI: https://www.axeptio.eu/
 	Description: Axeptio allows you to make your website compliant with GDPR.
-	Version: 2.5.9.1
+	Version: 2.6.1
 	Author: axeptio
 	License: GPLv3
 	License URI: https://www.gnu.org/licenses/gpl-3.0.html
 	Text Domain: axeptio-wordpress-plugin
 	Domain Path: /languages
+	Requires Plugins: wp-consent-api
  **/
 
-define( 'XPWP_VERSION', '2.5.9.1' );
+define( 'XPWP_VERSION', '2.6.1' );
 define( 'XPWP_URL', plugin_dir_url( __FILE__ ) );
 define( 'XPWP_PATH', plugin_dir_path( __FILE__ ) );
 define( 'XPWP_BASENAME', plugin_basename( __FILE__ ) );
@@ -44,9 +45,7 @@ if ( version_compare( PHP_VERSION, XPWP_MIN_PHP_VERSION, '<' ) ) {
 
 }
 
-$xpwp_is_local_envenv = in_array( wp_get_environment_type(), array( 'local', 'development' ), true );
-$xpwp_is_local_envurl = strpos( home_url(), '.test' ) || strpos( home_url(), '.docker.localhost' );
-$xpwp_is_local        = $xpwp_is_local_envenv || $xpwp_is_local_envurl;
+$xpwp_is_local = in_array( wp_get_environment_type(), array( 'local', 'development' ), true );
 
 // Require Composer autoloader if it exists.
 if ( file_exists( XPWP_PATH . 'vendor/autoload.php' ) ) {

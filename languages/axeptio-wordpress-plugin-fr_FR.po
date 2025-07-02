@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2025-06-03 14:59+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,148 +9,216 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
-#: axeptio-wordpress-plugin.php:35
+#: axeptio-wordpress-plugin.php:34
 msgid "Unable to activate Axeptio"
 msgstr "Impossible d'activer Axeptio"
 
 #. translators: %1$s: current php version min and %2$s version of php required
-#: axeptio-wordpress-plugin.php:39
-msgid "Your server is currently running PHP %1$s. The Axeptio plugin requires at least PHP %2$s. Please upgrade your PHP version to use this plugin."
-msgstr "Votre serveur utilise actuellement PHP %1$s. Le plugin Axeptio nécessite au moins PHP %2$s. Veuillez mettre à jour votre version de PHP pour utiliser ce plugin."
+#: axeptio-wordpress-plugin.php:38
+#, php-format
+msgid ""
+"Your server is currently running PHP %1$s. The Axeptio plugin requires at "
+"least PHP %2$s. Please upgrade your PHP version to use this plugin."
+msgstr ""
+"Votre serveur utilise actuellement PHP %1$s. Le plugin Axeptio nécessite au "
+"moins PHP %2$s. Veuillez mettre à jour votre version de PHP pour utiliser ce "
+"plugin."
 
-#: axeptio-wordpress-plugin.php:43
+#: axeptio-wordpress-plugin.php:42
 msgid "Return to plugins pages"
 msgstr "Retour à la page des plugins"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:129
+#: includes/classes/admin/pages/class-admin-callbacks.php:227
 msgid "Widget title"
 msgstr "Titre du Widget"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:147
+#: includes/classes/admin/pages/class-admin-callbacks.php:241
 msgid "Widget sub-title"
 msgstr "Sous-titre du widget"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:193
+#: includes/classes/admin/pages/class-admin-callbacks.php:255
+msgid "Widget Image"
+msgstr "Image du widget"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:273
+msgid "Disable the background Image"
+msgstr "Désactiver l'image de fond"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:274
+msgid "By checking this box, you will deactivate the painted background."
+msgstr "En cochant cette case, vous désactivez l'arrière-plan peint."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:292
 msgid "Cookie domain"
 msgstr "Domaine du cookie"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:198
-msgid "If specified, domain name on which the cookie containing user choices will be available. This allows to request one consent for various subdomains"
-msgstr "Si spécifié, le nom de domaine sur lequel le cookie contenant les choix de l'utilisateur sera disponible. Cela permet de demander un seul consentement pour divers sous-domaines"
+#: includes/classes/admin/pages/class-admin-callbacks.php:297
+msgid ""
+"If specified, domain name on which the cookie containing user choices will "
+"be available. This allows to request one consent for various subdomains"
+msgstr ""
+"Si spécifié, le nom de domaine sur lequel le cookie contenant les choix de "
+"l'utilisateur sera disponible. Cela permet de demander un seul consentement "
+"pour divers sous-domaines"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:213
+#: includes/classes/admin/pages/class-admin-callbacks.php:313
 msgid "URL for server-side usage"
 msgstr "URL pour une utilisation server side"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:218
+#: includes/classes/admin/pages/class-admin-callbacks.php:319
+#: includes/classes/admin/pages/class-admin-callbacks.php:384
 msgid "URL to which the widget will send POST requests after user consent."
-msgstr "URL vers laquelle le widget enverra des requêtes POST après le consentement de l'utilisateur."
+msgstr ""
+"URL vers laquelle le widget enverra des requêtes POST après le consentement "
+"de l'utilisateur."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:251
+#: includes/classes/admin/pages/class-admin-callbacks.php:335
+msgid "Enable sdk proxy"
+msgstr "Activer le proxy SDK"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:340
+msgid "Load the Axeptio SDK from your website domain."
+msgstr "Charger le SDK Axeptio depuis votre domaine."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:354
 msgid "Widget description"
 msgstr "Description du widget"
 
-#: includes/classes/admin/pages/class-admin-main.php:88
+#: includes/classes/admin/pages/class-admin-callbacks.php:398
+msgid "Google Tag Manager Events"
+msgstr "Événements Google Tag Manager"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:399
+msgid "Configure how events are sent to Google Tag Manager"
+msgstr "Configurer comment les événements sont envoyés à Google Tag Manager"
+
+#: includes/classes/admin/pages/class-admin-main.php:93
 msgid "Settings"
 msgstr "Configuration"
 
-#: includes/classes/admin/pages/class-admin-main.php:99
+#: includes/classes/admin/pages/class-admin-main.php:104
 msgid "Axeptio Widget Integration"
 msgstr "Intégration du Widget Axeptio"
 
 #. Plugin Name of the plugin/theme
-#: includes/classes/admin/pages/class-admin-main.php:100
+#: includes/classes/admin/pages/class-admin-main.php:105
 #: templates/admin/onboarding/welcome.php:8
 #: templates/admin/plugin-manager.php:3 templates/admin/plugin-manager.php:12
 #: templates/admin/settings-main.php:3 templates/admin/settings-main.php:12
 msgid "Axeptio"
 msgstr "Axeptio"
 
-#: includes/classes/admin/pages/class-admin-main.php:111
-#: includes/classes/admin/pages/class-admin-main.php:112
+#: includes/classes/admin/pages/class-admin-main.php:116
+#: includes/classes/admin/pages/class-admin-main.php:117
 #: templates/admin/plugin-manager.php:13
 msgid "Plugin manager"
 msgstr "Extensions"
 
-#: includes/classes/admin/pages/class-admin-main.php:152
+#: includes/classes/admin/pages/class-admin-main.php:157
 msgid "Widget main settings"
 msgstr "Paramètres principaux du widget"
 
-#: includes/classes/admin/pages/class-admin-main.php:153
-msgid "Configure the information related to the integration of your Axeptio project here."
-msgstr "Configurez ici les informations relatives à l'intégration de votre projet Axeptio."
+#: includes/classes/admin/pages/class-admin-main.php:158
+msgid ""
+"Configure the information related to the integration of your Axeptio project "
+"here."
+msgstr ""
+"Configurez ici les informations relatives à l'intégration de votre projet "
+"Axeptio."
 
-#: includes/classes/admin/pages/class-admin-main.php:161
+#: includes/classes/admin/pages/class-admin-main.php:166
 msgid "Widget customization"
 msgstr "Personnalisation des widgets"
 
-#: includes/classes/admin/pages/class-admin-main.php:162
-msgid "In this section, you can customize the header texts of the WordPress section in the Axeptio widget."
-msgstr "Dans cette section, vous pouvez personnaliser les textes de l'entête de la section WordPress dans le widget Axeptio."
+#: includes/classes/admin/pages/class-admin-main.php:167
+msgid ""
+"In this section, you can customize the header texts of the WordPress section "
+"in the Axeptio widget."
+msgstr ""
+"Dans cette section, vous pouvez personnaliser les textes de l'entête de la "
+"section WordPress dans le widget Axeptio."
 
-#: includes/classes/admin/pages/class-admin-main.php:172
+#: includes/classes/admin/pages/class-admin-main.php:175
 #: includes/helpers/helpers.php:113
 msgid "Google Consent Mode"
 msgstr "Google Consent Mode"
 
-#: includes/classes/admin/pages/class-admin-main.php:173
-msgid "In this section, you can set the settings relative to the Google Consent Mode"
-msgstr "Dans cette section, vous pouvez configurer les paramètres relatifs au Google Consent Mode"
+#: includes/classes/admin/pages/class-admin-main.php:176
+msgid ""
+"In this section, you can set the settings relative to the Google Consent Mode"
+msgstr ""
+"Dans cette section, vous pouvez configurer les paramètres relatifs au Google "
+"Consent Mode"
 
-#: includes/classes/admin/pages/class-admin-main.php:181
+#: includes/classes/admin/pages/class-admin-main.php:184
 #: includes/helpers/helpers.php:115
 msgid "Data sending"
 msgstr "Envoi de données"
 
-#: includes/classes/admin/pages/class-admin-main.php:182
-msgid "In this section, you can set whether or not you want to let Axeptio collect technical datas"
-msgstr "Dans cette section, vous pouvez choisir de permettre ou non à Axeptio de collecter des données techniques"
+#: includes/classes/admin/pages/class-admin-main.php:185
+msgid ""
+"In this section, you can set whether or not you want to let Axeptio collect "
+"technical datas"
+msgstr ""
+"Dans cette section, vous pouvez choisir de permettre ou non à Axeptio de "
+"collecter des données techniques"
 
-#: includes/classes/admin/pages/class-admin-main.php:190
+#: includes/classes/admin/pages/class-admin-main.php:193
 msgid "Advanced Settings"
 msgstr "Paramètres avancés"
 
-#: includes/classes/admin/pages/class-admin-main.php:191
-msgid "In this section, you will have the opportunity to manage advanced Axeptio settings."
-msgstr "Dans cette section, vous aurez la possibilité de gérer les paramètres avancés Axeptio."
+#: includes/classes/admin/pages/class-admin-main.php:194
+msgid ""
+"In this section, you will have the opportunity to manage advanced Axeptio "
+"settings."
+msgstr ""
+"Dans cette section, vous aurez la possibilité de gérer les paramètres "
+"avancés Axeptio."
 
-#: includes/classes/admin/pages/class-admin-main.php:263
+#: includes/classes/admin/pages/class-admin-main.php:266
 msgid "Do you want to enable the widget?"
 msgstr "Voulez-vous activer le widget ?"
 
-#: includes/classes/admin/pages/class-admin-main.php:274
+#: includes/classes/admin/pages/class-admin-main.php:277
 msgid "Project ID"
 msgstr "ID du projet"
 
-#: includes/classes/admin/pages/class-admin-main.php:285
+#: includes/classes/admin/pages/class-admin-main.php:288
 msgid "Options"
 msgstr "Options"
 
-#: includes/classes/admin/pages/class-admin-main.php:296
+#: includes/classes/admin/pages/class-admin-main.php:299
 msgid "Project Version"
 msgstr "Version du projet"
 
-#: includes/classes/admin/pages/class-admin-main.php:307
+#: includes/classes/admin/pages/class-admin-main.php:310
 msgid "Google Consent Mode V2"
 msgstr "Google Consent Mode V2"
 
-#: includes/classes/admin/pages/class-admin-main.php:373
+#: includes/classes/admin/pages/class-admin-main.php:356
 msgid "Collect of data and errors by Axeptio"
 msgstr "Collecte de données et d'erreurs par Axeptio"
 
-#: includes/classes/models/class-axeptio-steps.php:18
+#: includes/classes/models/class-axeptio-steps.php:20
 msgid "WordPress Cookies"
 msgstr "Cookies WordPress"
 
-#: includes/classes/models/class-axeptio-steps.php:28
+#: includes/classes/models/class-axeptio-steps.php:21
 msgid "Here you will find all WordPress extensions using cookies."
-msgstr "Vous trouverez ici toutes les extensions WordPress utilisant des cookies."
+msgstr ""
+"Vous trouverez ici toutes les extensions WordPress utilisant des cookies."
 
-#: includes/classes/models/class-axeptio-steps.php:38
-msgid "Below is the list of extensions used on this site that utilize cookies. Please activate or deactivate the ones for which you consent to sharing your data."
-msgstr "Vous trouverez ci-dessous la liste des extensions utilisées sur ce site qui utilisent des cookies. Veuillez activer ou désactiver celles pour lesquelles vous consentez au partage de vos données."
+#: includes/classes/models/class-axeptio-steps.php:22
+msgid ""
+"Below is the list of extensions used on this site that utilize cookies. "
+"Please activate or deactivate the ones for which you consent to sharing your "
+"data."
+msgstr ""
+"Vous trouverez ci-dessous la liste des extensions utilisées sur ce site qui "
+"utilisent des cookies. Veuillez activer ou désactiver celles pour lesquelles "
+"vous consentez au partage de vos données."
 
 #: includes/classes/models/class-hook-modes.php:22
 #: includes/classes/models/class-shortcode-tags-modes.php:22
@@ -187,18 +255,26 @@ msgstr "Toutes les balises shortcode"
 
 #. translators: %s: the path to the plugin
 #: includes/core.php:84
-msgid "The composer.json file was not found within %s. No classes will be loaded."
-msgstr "Le fichier composer.json n'a pas été trouvé dans %s. Aucune classe ne sera chargée."
+#, php-format
+msgid ""
+"The composer.json file was not found within %s. No classes will be loaded."
+msgstr ""
+"Le fichier composer.json n'a pas été trouvé dans %s. Aucune classe ne sera "
+"chargée."
 
-#: includes/core.php:199
-msgid "We were unable to find your project, or it appears that it has not yet been published."
-msgstr "Nous n'avons pas pu trouver votre projet ou il semble qu'il ne soit pas encore publié."
+#: includes/core.php:205
+msgid ""
+"We were unable to find your project, or it appears that it has not yet been "
+"published."
+msgstr ""
+"Nous n'avons pas pu trouver votre projet ou il semble qu'il ne soit pas "
+"encore publié."
 
-#: includes/core.php:207
+#: includes/core.php:213
 msgid "Error verifying account ID. Try Again."
 msgstr "Erreur de vérification de l'identifiant du compte. Veuillez réessayer."
 
-#: includes/core.php:214
+#: includes/core.php:220
 msgid "Please enter an account ID"
 msgstr "Veuillez saisir un identifiant de compte"
 
@@ -214,9 +290,37 @@ msgstr "Personnalisation"
 msgid "Advanced"
 msgstr "Avancé"
 
+#: templates/admin/common/fields/gtm-events.php:17
+msgid "Send all events to dataLayer"
+msgstr "Envoyer tous les événements à dataLayer"
+
+#: templates/admin/common/fields/gtm-events.php:18
+msgid "Do not send any events to dataLayer"
+msgstr "Ne pas envoyer d'événements à dataLayer"
+
+#: templates/admin/common/fields/gtm-events.php:19
+msgid "Send only axeptio_update event to dataLayer"
+msgstr "Envoyer uniquement l'événement axeptio_update à dataLayer"
+
+#: templates/admin/common/fields/image-upload.php:19
+msgid "Disable this image"
+msgstr "Désactiver cette image"
+
+#: templates/admin/common/fields/image-upload.php:29
+msgid "Choose Image"
+msgstr "Choisir une image"
+
+#: templates/admin/common/fields/image-upload.php:38
+msgid "Remove"
+msgstr "Supprimer"
+
+#: templates/admin/main/fields/background-image.php:9
+msgid "Widget Background Image"
+msgstr "Image de fond du widget"
+
 #: templates/admin/main/fields/client-id.php:31
 #: templates/admin/plugins/fields/edit.php:126
-#: templates/admin/sections/plugins.php:69
+#: templates/admin/sections/plugins.php:101
 msgid "Edit"
 msgstr "Éditer"
 
@@ -224,49 +328,118 @@ msgstr "Éditer"
 msgid "Validate"
 msgstr "Valider"
 
-#: templates/admin/main/fields/google-consent-mode.php:31
+#: templates/admin/main/fields/google-consent-mode.php:11
+msgid "Google Consent Mode requires the WP Consent API plugin to be active."
+msgstr ""
+"Le mode de consentement de Google nécessite que le plugin WP Consent API "
+"soit actif."
+
+#: templates/admin/main/fields/google-consent-mode.php:13
+#: templates/admin/sections/plugins.php:15
+msgid "Install and activate WP Consent API plugin to enable these features."
+msgstr ""
+"Installez et activez le plugin WP Consent API pour activer ces "
+"fonctionnalités."
+
+#: templates/admin/main/fields/google-consent-mode.php:51
 msgid "Enable Google Consent Mode V2?"
 msgstr "Activer Google Consent Mode V2?"
 
-#: templates/admin/main/fields/google-consent-mode.php:44
+#: templates/admin/main/fields/google-consent-mode.php:65
 msgid "Analytics storage"
 msgstr "Analytics storage"
 
-#: templates/admin/main/fields/google-consent-mode.php:45
-msgid "Allow Google Analytics to measure how visitors use the site to enhance functionality and service."
-msgstr "Autoriser Google Analytics à mesurer comment les visiteurs utilisent le site pour améliorer la fonctionnalité et le service."
+#: templates/admin/main/fields/google-consent-mode.php:66
+msgid ""
+"Allow Google Analytics to measure how visitors use the site to enhance "
+"functionality and service."
+msgstr ""
+"Autoriser Google Analytics à mesurer comment les visiteurs utilisent le site "
+"pour améliorer la fonctionnalité et le service."
 
-#: templates/admin/main/fields/google-consent-mode.php:49
+#: templates/admin/main/fields/google-consent-mode.php:70
 msgid "Ad Storage"
 msgstr "Ad Storage"
 
-#: templates/admin/main/fields/google-consent-mode.php:50
-msgid "Permit Google to save advertising information on visitors' devices for better ad relevance."
-msgstr "Permettre à Google de sauvegarder des informations publicitaires sur les appareils des visiteurs pour une meilleure pertinence des annonces."
+#: templates/admin/main/fields/google-consent-mode.php:71
+msgid ""
+"Permit Google to save advertising information on visitors' devices for "
+"better ad relevance."
+msgstr ""
+"Permettre à Google de sauvegarder des informations publicitaires sur les "
+"appareils des visiteurs pour une meilleure pertinence des annonces."
 
-#: templates/admin/main/fields/google-consent-mode.php:54
+#: templates/admin/main/fields/google-consent-mode.php:75
 msgid "Ad User Data"
 msgstr "Ad User Data"
 
-#: templates/admin/main/fields/google-consent-mode.php:55
+#: templates/admin/main/fields/google-consent-mode.php:76
 msgid "Share visitors' activity data with Google for targeted advertising."
-msgstr "Partager les données d'activité des visiteurs avec Google pour une publicité ciblée."
+msgstr ""
+"Partager les données d'activité des visiteurs avec Google pour une publicité "
+"ciblée."
 
-#: templates/admin/main/fields/google-consent-mode.php:59
+#: templates/admin/main/fields/google-consent-mode.php:80
 msgid "Ad Personalization"
 msgstr "Ad Personalization"
 
-#: templates/admin/main/fields/google-consent-mode.php:60
-msgid "Customize the ad experience by allowing Google to personalize the ads that visitors see."
-msgstr "Personnaliser l'expérience publicitaire en permettant à Google de personnaliser les annonces que les visiteurs voient."
+#: templates/admin/main/fields/google-consent-mode.php:81
+msgid ""
+"Customize the ad experience by allowing Google to personalize the ads that "
+"visitors see."
+msgstr ""
+"Personnaliser l'expérience publicitaire en permettant à Google de "
+"personnaliser les annonces que les visiteurs voient."
 
-#: templates/admin/main/fields/google-consent-mode.php:67
+#: templates/admin/main/fields/google-consent-mode.php:85
+msgid "Functionality storage"
+msgstr "Stockage de fonctionnalité"
+
+#: templates/admin/main/fields/google-consent-mode.php:86
+msgid ""
+"Enables storage that supports the functionality of the website or app, for "
+"example, language settings."
+msgstr ""
+"Permet le stockage qui prend en charge la fonctionnalité du site Web ou de "
+"l'application, par exemple, les paramètres de langue."
+
+#: templates/admin/main/fields/google-consent-mode.php:90
+msgid "Personalization storage"
+msgstr "Stockage de personnalisation"
+
+#: templates/admin/main/fields/google-consent-mode.php:91
+msgid ""
+"Enables storage related to personalization, for example, video "
+"recommendations."
+msgstr ""
+"Permet le stockage lié à la personnalisation, par exemple, les "
+"recommandations vidéo."
+
+#: templates/admin/main/fields/google-consent-mode.php:95
+msgid "Security storage"
+msgstr "Stockage de sécurité"
+
+#: templates/admin/main/fields/google-consent-mode.php:96
+msgid ""
+"Enables storage related to security such as authentication functionality, "
+"fraud prevention, and other user protection."
+msgstr ""
+"Permet le stockage lié à la sécurité, comme la fonctionnalité "
+"d'authentification, la prévention de la fraude et d'autres protections de "
+"l'utilisateur."
+
+#: templates/admin/main/fields/google-consent-mode.php:103
 msgid "Default settings for consent mode"
 msgstr "Réglage par défaut pour le Consent Mode"
 
-#: templates/admin/main/fields/google-consent-mode.php:69
-msgid "These consent signals will be sent at page load to tell Google services how they should handle data before consent is granted or denied."
-msgstr "Ces signaux de consentement seront envoyés au chargement de la page pour indiquer aux services de Google comment ils doivent traiter les données avant que le consentement soit donné par l'utilisateur."
+#: templates/admin/main/fields/google-consent-mode.php:105
+msgid ""
+"These consent signals will be sent at page load to tell Google services how "
+"they should handle data before consent is granted or denied."
+msgstr ""
+"Ces signaux de consentement seront envoyés au chargement de la page pour "
+"indiquer aux services de Google comment ils doivent traiter les données "
+"avant que le consentement soit donné par l'utilisateur."
 
 #: templates/admin/main/fields/non-existing-account.php:2
 msgid "If you are certain that your project exists, please follow these steps:"
@@ -286,8 +459,13 @@ msgstr "Revenez ici et actualisez la configuration."
 
 #. translators: %s: the url of the Axeptio help guide
 #: templates/admin/main/fields/non-existing-account.php:14
-msgid "If the issue persists, please don't hesitate to consult <a target=\"_blank\" class=\"underline hover:no-underline\" href=\"%s\">our help guide.</a>"
-msgstr "Si le problème persiste, n'hésitez pas à consulter <a target=\"_blank\" class=\"underline hover:no-underline\" href=\"%s\">notre guide d'aide</a>"
+#, php-format
+msgid ""
+"If the issue persists, please don't hesitate to consult <a target=\"_blank\" "
+"class=\"underline hover:no-underline\" href=\"%s\">our help guide.</a>"
+msgstr ""
+"Si le problème persiste, n'hésitez pas à consulter <a target=\"_blank\" "
+"class=\"underline hover:no-underline\" href=\"%s\">notre guide d'aide</a>"
 
 #: templates/admin/main/fields/non-existing-account.php:15
 msgid "https://support.axeptio.eu/hc/en-gb"
@@ -298,8 +476,12 @@ msgid "Yes, I enable the widget on my website."
 msgstr "Oui, j'active le widget sur mon site web."
 
 #: templates/admin/main/fields/send-datas.php:21
-msgid "By checking this box, I do not wish to send data/errors to the Axeptio plugin and do not want to contribute to the improvement of the plugin."
-msgstr "En cochant cette case, je ne souhaite pas envoyer de données/erreurs au plugin Axeptio et ne souhaite pas contribuer à l'amélioration du plugin."
+msgid ""
+"By checking this box, I do not wish to send data/errors to the Axeptio "
+"plugin and do not want to contribute to the improvement of the plugin."
+msgstr ""
+"En cochant cette case, je ne souhaite pas envoyer de données/erreurs au "
+"plugin Axeptio et ne souhaite pas contribuer à l'amélioration du plugin."
 
 #: templates/admin/main/fields/version.php:17
 msgid "Configured languages"
@@ -315,8 +497,12 @@ msgid "Existing project version backup"
 msgstr "Sauvegarde de la version existante du projet"
 
 #: templates/admin/main/fields/version.php:85
-msgid "A backup of the version configuration exists for this project, do you want to restore it?"
-msgstr "Une sauvegarde de la configuration de la version existe pour ce projet, voulez-vous la restaurer ?"
+msgid ""
+"A backup of the version configuration exists for this project, do you want "
+"to restore it?"
+msgstr ""
+"Une sauvegarde de la configuration de la version existe pour ce projet, "
+"voulez-vous la restaurer ?"
 
 #: templates/admin/main/fields/version.php:90
 msgid "Yes, restore it"
@@ -325,6 +511,14 @@ msgstr "Oui, restaure-la"
 #: templates/admin/main/fields/version.php:93
 msgid "Dismiss"
 msgstr "Ignorer"
+
+#: templates/admin/main/fields/widget-options.php:16
+msgid "Default"
+msgstr "Défaut"
+
+#: templates/admin/main/fields/widget-options.php:29
+msgid "Widget language"
+msgstr "Langue du widget"
 
 #: templates/admin/main/tabs.php:4
 msgid "Select a tab"
@@ -336,7 +530,9 @@ msgstr "Vous n'avez pas de compte Axeptio ?"
 
 #: templates/admin/onboarding/account.php:10
 msgid "You need an Axeptio account to finish the configuration of this module"
-msgstr "Vous avez besoin d'un compte Axeptio pour terminer la configuration de ce module"
+msgstr ""
+"Vous avez besoin d'un compte Axeptio pour terminer la configuration de ce "
+"module"
 
 #: templates/admin/onboarding/account.php:14
 msgid "I create an account now"
@@ -351,8 +547,11 @@ msgid "You have already a Axeptio account?"
 msgstr "Vous avez déjà un compte Axeptio ?"
 
 #: templates/admin/onboarding/account.php:26
-msgid "Go to your personal dashboard to retrieve the project ID you want to use"
-msgstr "Accédez à votre tableau de bord pour récupérer l'identifiant du projet que vous souhaitez utiliser"
+msgid ""
+"Go to your personal dashboard to retrieve the project ID you want to use"
+msgstr ""
+"Accédez à votre tableau de bord pour récupérer l'identifiant du projet que "
+"vous souhaitez utiliser"
 
 #: templates/admin/onboarding/account.php:30
 msgid "I login to my account"
@@ -363,12 +562,19 @@ msgid "Welcome and thank you for installing the Axeptio WordPress extension!"
 msgstr "Bienvenue et merci d'avoir installé l'extension WordPress Axeptio !"
 
 #: templates/admin/onboarding/welcome.php:13
-msgid "We're happy to have you among our users and to provide you with a unique consent management experience that is intuitive, elegant, and fun."
-msgstr "Nous sommes ravis de vous compter parmi nos utilisateurs et de vous offrir une expérience unique de gestion du consentement à fois intuitive, élégante et amusante."
+msgid ""
+"We're happy to have you among our users and to provide you with a unique "
+"consent management experience that is intuitive, elegant, and fun."
+msgstr ""
+"Nous sommes ravis de vous compter parmi nos utilisateurs et de vous offrir "
+"une expérience unique de gestion du consentement à fois intuitive, élégante "
+"et amusante."
 
 #: templates/admin/onboarding/welcome.php:16
 msgid "Before you get started, we invite you to configure the settings below!"
-msgstr "Avant de commencer, nous vous invitons à configurer les paramètres ci-dessous !"
+msgstr ""
+"Avant de commencer, nous vous invitons à configurer les paramètres ci-"
+"dessous !"
 
 #: templates/admin/plugin-manager.php:20 templates/admin/settings-main.php:20
 msgid "Documentation"
@@ -379,8 +585,16 @@ msgid "Default configuration"
 msgstr "Configuration par défaut"
 
 #: templates/admin/plugin-manager.php:38
-msgid "Axeptio allows you to fine-tune how you want your extensions to act based on consent or non-consent of cookie rules through our widget. You can set up the configuration globally (Default Configuration) or according to the version of your project."
-msgstr "Axeptio vous permet d'affiner la façon dont vous souhaitez que vos extensions agissent en fonction du consentement ou du non-consentement des règles de cookies via notre widget. Vous pouvez paramétrer la configuration globalement (Configuration par défaut) ou selon la version de votre projet."
+msgid ""
+"Axeptio allows you to fine-tune how you want your extensions to act based on "
+"consent or non-consent of cookie rules through our widget. You can set up "
+"the configuration globally (Default Configuration) or according to the "
+"version of your project."
+msgstr ""
+"Axeptio vous permet d'affiner la façon dont vous souhaitez que vos "
+"extensions agissent en fonction du consentement ou du non-consentement des "
+"règles de cookies via notre widget. Vous pouvez paramétrer la configuration "
+"globalement (Configuration par défaut) ou selon la version de votre projet."
 
 #: templates/admin/plugin-manager.php:45
 msgid "Project version"
@@ -446,14 +660,20 @@ msgstr "Supprimer"
 
 #: templates/admin/plugins/fields/edit.php:169
 msgid ""
-"Determines if the Axeptio WordPress plugin will intercept and block the <code>$wp_filters</code>\n"
-"\t\t\t\t\t\t\t\t\tthat have been added by the selected Plugin. Hooks are very common within 3rd party plugins\n"
-"\t\t\t\t\t\t\t\t\tas they are used to interacting with the page code, like adding script or stylesheet tags, edit the\n"
+"Determines if the Axeptio WordPress plugin will intercept and block the "
+"<code>$wp_filters</code>\n"
+"\t\t\t\t\t\t\t\t\tthat have been added by the selected Plugin. Hooks are "
+"very common within 3rd party plugins\n"
+"\t\t\t\t\t\t\t\t\tas they are used to interacting with the page code, like "
+"adding script or stylesheet tags, edit the\n"
 "\t\t\t\t\t\t\t\t\tcontent of a section of the template, etc."
 msgstr ""
-"Détermine si l'extension WordPress Axeption va intercepter et bloquer le <code>$wp_filters</code>\n"
-"\t\t\t\t\t\t\t\t\tqui a été ajouté par le plugin sélectionné. Les hooks sont courant dans les extensions tierces\n"
-"\t\t\t\t\t\t\t\t\tpour permettre d'interagir avec le code de la page, en ajoutant par exemple du style ou du script, modifier le\n"
+"Détermine si l'extension WordPress Axeption va intercepter et bloquer le "
+"<code>$wp_filters</code>\n"
+"\t\t\t\t\t\t\t\t\tqui a été ajouté par le plugin sélectionné. Les hooks sont "
+"courant dans les extensions tierces\n"
+"\t\t\t\t\t\t\t\t\tpour permettre d'interagir avec le code de la page, en "
+"ajoutant par exemple du style ou du script, modifier le\n"
 "\t\t\t\t\t\t\t\t\tcontenu d'une section du modèle de page, etc."
 
 #: templates/admin/plugins/fields/edit.php:185
@@ -468,27 +688,83 @@ msgstr "Liste des balises shortcodes"
 msgid "Add a shortcode"
 msgstr "Ajouter un shortcode"
 
-#: templates/admin/plugins/fields/edit.php:218
+#: templates/admin/plugins/fields/edit.php:210
+msgid "Example tag : axeptio --forceReload"
+msgstr "Exemple : axeptio —forceReload"
+
+#: templates/admin/plugins/fields/edit.php:219
 msgid ""
-"Some plugins declare <code>[shortcodes]</code> that you can use in the Post editor.\n"
-"\t\t\t\t\t\t\t\t\tThese shortcodes are commonly used to embed 3rd party content, like videos or maps. If you\n"
-"\t\t\t\t\t\t\t\t\tthink the shortcodes provided by the selected plugin are going to load a resource from another\n"
+"Some plugins declare <code>[shortcodes]</code> that you can use in the Post "
+"editor.\n"
+"\t\t\t\t\t\t\t\t\tThese shortcodes are commonly used to embed 3rd party "
+"content, like videos or maps. If you\n"
+"\t\t\t\t\t\t\t\t\tthink the shortcodes provided by the selected plugin are "
+"going to load a resource from another\n"
 "\t\t\t\t\t\t\t\t\twebsite, you should probably block them preemptively."
 msgstr ""
-"Certaines extensions déclarer un <code>[shortcodes]</code> que vous pouvez utiliser dans l'éditeur de contenu.\n"
-"\t\t\t\t\t\t\t\t\tCes shortcodes sont souvent utilisé pour intégrer des blocs de contenus tels que de la vidéo ou des cartes. Si vous\n"
-"\t\t\t\t\t\t\t\t\tpensez que les shortcodes fournis par l'extension selectionnée charge du contenu d'une ressource depuis un autre\n"
+"Certaines extensions déclarer un <code>[shortcodes]</code> que vous pouvez "
+"utiliser dans l'éditeur de contenu.\n"
+"\t\t\t\t\t\t\t\t\tCes shortcodes sont souvent utilisé pour intégrer des "
+"blocs de contenus tels que de la vidéo ou des cartes. Si vous\n"
+"\t\t\t\t\t\t\t\t\tpensez que les shortcodes fournis par l'extension "
+"selectionnée charge du contenu d'une ressource depuis un autre\n"
 "\t\t\t\t\t\t\t\t\tsite, vous devriez les bloquer de manière préventive."
 
-#: templates/admin/plugins/fields/edit.php:250
+#: templates/admin/plugins/fields/edit.php:235
+msgid "Shortcode placeholder title"
+msgstr "Titre du shortcode"
+
+#: templates/admin/plugins/fields/edit.php:243
+#: templates/frontend/shortcode-placeholder.php:8
+msgid "Oops, content not available at the moment!"
+msgstr "Oups, le contenu n'est pas disponible pour le moment !"
+
+#: templates/admin/plugins/fields/edit.php:247
+msgid ""
+"Custom title displayed when shortcode content is blocked. If left empty, the "
+"default title will be used."
+msgstr ""
+"Titre personnalisé affiché lorsque le contenu du shortcode est bloqué. Si ce "
+"champ est vide, le titre par défaut sera utilisé."
+
+#: templates/admin/plugins/fields/edit.php:253
+msgid "Shortcode placeholder description"
+msgstr "Description du shortcode"
+
+#. translators: $s: Name of the plugin
+#: templates/admin/plugins/fields/edit.php:258
+#: templates/frontend/shortcode-placeholder.php:20
+#, php-format
+msgid ""
+"This content is blocked because we take the protection of your data very "
+"seriously. If you wish to unblock it, it's very simple: go to our cookie "
+"consent widget, give your approval for the \"%s\" extension. And voila, "
+"you're all set!"
+msgstr ""
+"Ce contenu est bloqué car nous prenons la protection de vos données très au "
+"sérieux. Si vous souhaitez le débloquer, c'est très simple : rendez-vous sur "
+"notre widget de consentement des cookies, donnez votre accord pour "
+"l'extension \"%s\". Et le tour est joué !"
+
+#: templates/admin/plugins/fields/edit.php:271
+msgid ""
+"Custom description displayed when shortcode content is blocked. If left "
+"empty, the default description will be used. You can use {plugin_name} as a "
+"placeholder for the plugin title."
+msgstr ""
+"Description personnalisée affichée lorsque le contenu du shortcode est "
+"bloqué. Si elle est vide, la description par défaut sera utilisée. Vous "
+"pouvez utiliser {plugin_name} comme espace réservé pour le titre du plugin."
+
+#: templates/admin/plugins/fields/edit.php:293
 msgid "Saving..."
 msgstr "Enregistrement en cours..."
 
-#: templates/admin/plugins/fields/edit.php:256
+#: templates/admin/plugins/fields/edit.php:299
 msgid "Save settings"
 msgstr "Enregistrer les paramètres"
 
-#: templates/admin/plugins/fields/edit.php:261
+#: templates/admin/plugins/fields/edit.php:304
 msgid "Delete these settings"
 msgstr "Supprimer ces paramètres"
 
@@ -497,8 +773,12 @@ msgid "Deleting plugin settings"
 msgstr "Supprimer la configuration"
 
 #: templates/admin/plugins/fields/modal-delete.php:27
-msgid "Are you sure you want to delete the configuration for this plugin? This action cannot be undone."
-msgstr "Êtes-vous certain de vouloir supprime la configuration pour cette extension ? Cette action ne peut être annulée."
+msgid ""
+"Are you sure you want to delete the configuration for this plugin? This "
+"action cannot be undone."
+msgstr ""
+"Êtes-vous certain de vouloir supprime la configuration pour cette "
+"extension ? Cette action ne peut être annulée."
 
 #: templates/admin/plugins/fields/modal-delete.php:34
 msgid "Cancel"
@@ -514,7 +794,8 @@ msgstr "Axeptio vise la lune, vous vous occupez des étoiles ?"
 
 #: templates/admin/sections/notice.php:19
 msgid "If you like Axeptio, give us a rating to make us shine!"
-msgstr "Si Axeptio vous plaît, n’hésitez pas à nous noter pour nous faire briller !"
+msgstr ""
+"Si Axeptio vous plaît, n’hésitez pas à nous noter pour nous faire briller !"
 
 #: templates/admin/sections/notice.php:27
 msgid "Review Axeptio plugin"
@@ -524,26 +805,32 @@ msgstr "Je mets un avis pour le plugin Axeptio"
 msgid "Don't ask me anymore"
 msgstr "Ne plus me demander"
 
-#: templates/admin/sections/plugins.php:38
+#: templates/admin/sections/plugins.php:12
+msgid ""
+"WP Consent API plugin is not active. WP Consent API features are disabled."
+msgstr ""
+"Le plugin WP Consent API n'est pas actif. Les fonctionnalités de WP Consent "
+"API sont désactivées."
+
+#: templates/admin/sections/plugins.php:60
 msgid "Active"
 msgstr "Actif"
 
-#: templates/admin/sections/plugins.php:46
+#: templates/admin/sections/plugins.php:68
 msgid "This extension is subject to consent"
 msgstr "Cette extension est soumise au consentement"
+
+#: templates/admin/sections/plugins.php:77
+msgid "This extension is managed through WP Consent API"
+msgstr "Cette extension est gérée via l'API WP Consent"
 
 #: templates/admin/settings-main.php:13
 msgid "Your Axeptio Settings"
 msgstr "Votre configuration Axeptio"
 
-#: templates/frontend/shortcode-placeholder.php:4
-msgid "Oops, content not available at the moment!"
-msgstr "Oups, le contenu n'est pas disponible pour le moment !"
-
-#. translators: $s: Name of the plugin
-#: templates/frontend/shortcode-placeholder.php:10
-msgid "This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it's very simple: go to our cookie consent widget, give your approval for the \"%s\" extension. And voila, you're all set!"
-msgstr "Ce contenu est bloqué car nous prenons la protection de vos données très au sérieux. Si vous souhaitez le débloquer, c'est très simple : rendez-vous sur notre widget de consentement des cookies, donnez votre accord pour l'extension \"%s\". Et le tour est joué !"
+#: templates/frontend/shortcode-placeholder.php:26
+msgid "I accept this service"
+msgstr "J'accepte ce service"
 
 #. Plugin URI of the plugin/theme
 msgid "https://www.axeptio.eu/"
@@ -551,88 +838,9 @@ msgstr "https://www.axeptio.eu/fr"
 
 #. Description of the plugin/theme
 msgid "Axeptio allows you to make your website compliant with GDPR."
-msgstr "Axeptio vous permet de mettre votre site web en conformité avec le RGPD."
+msgstr ""
+"Axeptio vous permet de mettre votre site web en conformité avec le RGPD."
 
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr "axeptio"
-
-#: includes/classes/admin/pages/class-admin-callbacks.php:160
-msgid "Widget Image"
-msgstr "Image du widget"
-
-#: includes/classes/admin/pages/class-admin-callbacks.php:173
-msgid "Disable the background Image"
-msgstr "Désactiver l'image de fond"
-
-#: includes/classes/admin/pages/class-admin-callbacks.php:174
-msgid "By checking this box, you will deactivate the painted background."
-msgstr "En cochant cette case, vous désactivez l'arrière-plan peint."
-
-#: includes/classes/admin/pages/class-admin-callbacks.php:232
-msgid "Enable sdk proxy"
-msgstr "Activer le proxy SDK"
-
-#: includes/classes/admin/pages/class-admin-callbacks.php:237
-msgid "Load the Axeptio SDK from your website domain."
-msgstr "Charger le SDK Axeptio depuis votre domaine."
-
-#: templates/admin/common/fields/image-upload.php:14
-msgid "Disable this image"
-msgstr "Désactiver cette image"
-
-#: templates/admin/common/fields/image-upload.php:24
-msgid "Choose Image"
-msgstr "Choisir une image"
-
-#: templates/admin/common/fields/image-upload.php:33
-msgid "Remove"
-msgstr "Supprimer"
-
-#: templates/admin/main/fields/background-image.php:9
-msgid "Widget Background Image"
-msgstr "Image de fond du widget"
-
-#: templates/admin/common/fields/gtm-events.php:3
-msgid "Google Tag Manager Events"
-msgstr "Événements Google Tag Manager"
-
-#: templates/admin/common/fields/gtm-events.php:5
-msgid "Configure how events are sent to Google Tag Manager"
-msgstr "Configurer comment les événements sont envoyés à Google Tag Manager"
-
-#: templates/admin/common/fields/gtm-events.php:12
-msgid "Send all events to dataLayer"
-msgstr "Envoyer tous les événements à dataLayer"
-
-#: templates/admin/common/fields/gtm-events.php:13
-msgid "Do not send any events to dataLayer"
-msgstr "Ne pas envoyer d'événements à dataLayer"
-
-#: templates/admin/common/fields/gtm-events.php:14
-msgid "Send only axeptio_update event to dataLayer"
-msgstr "Envoyer uniquement l'événement axeptio_update à dataLayer"
-
-#: templates/admin/main/fields/google-consent-mode.php:65
-msgid "Functionality storage"
-msgstr "Stockage de fonctionnalité"
-
-#: templates/admin/main/fields/google-consent-mode.php:66
-msgid "Enables storage that supports the functionality of the website or app, for example, language settings."
-msgstr "Permet le stockage qui prend en charge la fonctionnalité du site Web ou de l'application, par exemple, les paramètres de langue."
-
-#: templates/admin/main/fields/google-consent-mode.php:70
-msgid "Personalization storage"
-msgstr "Stockage de personnalisation"
-
-#: templates/admin/main/fields/google-consent-mode.php:71
-msgid "Enables storage related to personalization, for example, video recommendations."
-msgstr "Permet le stockage lié à la personnalisation, par exemple, les recommandations vidéo."
-
-#: templates/admin/main/fields/google-consent-mode.php:75
-msgid "Security storage"
-msgstr "Stockage de sécurité"
-
-#: templates/admin/main/fields/google-consent-mode.php:76
-msgid "Enables storage related to security such as authentication functionality, fraud prevention, and other user protection."
-msgstr "Permet le stockage lié à la sécurité, comme la fonctionnalité d'authentification, la prévention de la fraude et d'autres protections de l'utilisateur."
