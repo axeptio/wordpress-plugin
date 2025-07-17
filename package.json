@@ -59,6 +59,9 @@
     "alpinejs": "^3.14.9",
     "cross-env": "^7.0.3"
   },
+  "resolutions": {
+    "webpack-dev-server": "^5.2.1"
+  },
   "lint-staged": {
     "**/*.{js,md,yml,mjs}": "prettier --write"
   },
