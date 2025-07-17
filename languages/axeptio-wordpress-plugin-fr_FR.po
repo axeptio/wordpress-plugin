@@ -292,15 +292,15 @@ msgstr "Avancé"
 
 #: templates/admin/common/fields/gtm-events.php:17
 msgid "Send all events to dataLayer"
-msgstr "Envoyer tous les événements à dataLayer"
+msgstr "Envoyer tous les événements au dataLayer"
 
 #: templates/admin/common/fields/gtm-events.php:18
 msgid "Do not send any events to dataLayer"
-msgstr "Ne pas envoyer d'événements à dataLayer"
+msgstr "Ne pas envoyer d'événements au dataLayer"
 
 #: templates/admin/common/fields/gtm-events.php:19
 msgid "Send only axeptio_update event to dataLayer"
-msgstr "Envoyer uniquement l'événement axeptio_update à dataLayer"
+msgstr "Envoyer uniquement l'événement axeptio_update au dataLayer"
 
 #: templates/admin/common/fields/image-upload.php:19
 msgid "Disable this image"
