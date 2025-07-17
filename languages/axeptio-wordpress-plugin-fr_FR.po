@@ -292,7 +292,7 @@ msgstr "Avancé"
 
 #: templates/admin/common/fields/gtm-events.php:17
 msgid "Send all events to dataLayer"
-msgstr "Envoyer tous les événements à dataLayer"
+msgstr "Envoyer tous les événements au dataLayer"
 
 #: templates/admin/common/fields/gtm-events.php:18
 msgid "Do not send any events to dataLayer"
