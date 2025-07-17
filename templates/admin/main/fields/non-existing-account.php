@@ -12,7 +12,7 @@
 					sprintf(
 						/* translators: %s: the url of the Axeptio help guide */
 						__( "If the issue persists, please don't hesitate to consult <a target=\"_blank\" class=\"underline hover:no-underline\" href=\"%s\">our help guide.</a>", 'axeptio-wordpress-plugin' ),
-						esc_url( __( 'https://support.axeptio.eu/hc/en-gb', 'axeptio-wordpress-plugin' ) )
+						esc_url( __( 'https://support.axeptio.eu/en', 'axeptio-wordpress-plugin' ) )
 					)
 				);
 				?>

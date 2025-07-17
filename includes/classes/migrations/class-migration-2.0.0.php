@@ -33,6 +33,8 @@ class Migration_2_0_0 implements \Axeptio\Plugin\Contracts\Migration_Interface {
 	            `shortcode_tags_mode` ENUM('none', 'all', 'blacklist', 'whitelist', 'inherit') NOT NULL DEFAULT 'all',
 	            `shortcode_tags_list` TEXT NULL,
 	            `shortcode_tags_placeholder` TEXT,
+	            `shortcode_placeholder_title` TEXT NULL,
+	            `shortcode_placeholder_description` TEXT NULL,
 	            -- info about that will be displayed in the widget
 	            `vendor_id` varchar(24) NULL,
 	            `vendor_title` TEXT NOT NULL,

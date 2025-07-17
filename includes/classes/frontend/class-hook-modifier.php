@@ -15,9 +15,7 @@ use Axeptio\Plugin\Module;
 use Axeptio\Plugin\Utils\Search_Callback_File_Location;
 use Axeptio\Plugin\Utils\User_Hook_Parser;
 use Closure;
-use ReflectionException;
-use ReflectionFunction;
-use ReflectionMethod;
+use function Axeptio\Plugin\is_rest;
 
 class Hook_Modifier extends Module {
 
@@ -103,7 +101,7 @@ class Hook_Modifier extends Module {
 	 * @return void
 	 */
 	public function register() {
-		if ( ! Sdk::is_active() ) {
+		if ( ! Sdk::is_active() || is_admin() || wp_doing_ajax() || defined( 'WP_CLI' ) || wp_doing_cron() || is_rest() ) {
 			return;
 		}
 
@@ -117,6 +115,10 @@ class Hook_Modifier extends Module {
 	 * @return void
 	 */
 	public function on_template_redirect() {
+		if (count(Plugins::find_all()) === 0) {
+			return;
+		}
+
 		$this->process_shortcode_tags();
 		$this->process_wp_filter();
 	}
@@ -163,7 +165,7 @@ class Hook_Modifier extends Module {
 	}
 
 	/**
-	 * Process shortcode tags.
+	 * Process shortcode tags and write cache to file.
 	 *
 	 * @return array
 	 */
@@ -174,10 +176,11 @@ class Hook_Modifier extends Module {
 		$plugins = array();
 		foreach ( $shortcode_tags as $tag => $function ) {
 			$stats[ $tag ] = $this->process_function( $function, $tag );
-			if ( isset( $stats[ $tag ]['plugin'] ) ) {
-				$plugins[ $stats[ $tag ]['plugin'] ][] = array(
+
+			if ( isset( $stats[ $tag ] ) ) {
+				$plugins[ $stats[ $tag ] ][] = array(
 					'name'     => $tag,
-					'plugin'   => $stats[ $tag ]['plugin'],
+					'plugin'   => $stats[ $tag ],
 					'function' => $function,
 				);
 			}
@@ -207,14 +210,24 @@ class Hook_Modifier extends Module {
 
 				$configuration = $this->maybe_apply_recommended_settings( $configuration, 'shortcode_tags' );
 
+				// Split shortcodes and their additional attributes
+				$shortcode_tags_data = array_map(function($tag) {
+					return $this->parseShortcodeTag(trim($tag));
+				}, explode("\n", $configuration['shortcode_tags_list']));
+
 				// We store the whitelisted tags in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
 				// if the plugin should be intercepted AND if there are tags to avoid.
 				$intercepted_plugins[ $configuration['plugin'] ] = array(
 					'mode'         => $configuration['shortcode_tags_mode'],
-					'list'         => explode( "\n", $configuration['shortcode_tags_list'] ),
+					'list'         => [
+						'shortcode_tags' => array_column($shortcode_tags_data, 'tag'),
+						'additionalAttributes' => array_filter(array_column($shortcode_tags_data, 'additionalAttributes'))
+					],
 					'placeholder'  => $configuration['shortcode_tags_placeholder'],
 					'vendor_title' => isset( $configuration['vendor_title'] ) && '' !== $configuration['vendor_title'] ? $configuration['vendor_title'] : $plugin_configuration['Name'],
+					'shortcode_placeholder_title' => $configuration['shortcode_placeholder_title'] ?? '',
+					'shortcode_placeholder_description' => $configuration['shortcode_placeholder_description'] ?? '',
 				);
 			}
 		}
@@ -238,6 +251,30 @@ class Hook_Modifier extends Module {
 	}
 
 	/**
+	 * Parse a shortcode tag and its additional attributes
+	 *
+	 * @param string $tag The tag to parse
+	 * @return array{tag: string, additionalAttributes: array|null}
+	 */
+	private function parseShortcodeTag(string $tag): array
+	{
+		$parts = explode(' --', $tag);
+
+		// If no additional attributes, return only the tag
+		if (count($parts) === 1) {
+			return [
+				'tag' => $parts[0],
+				'additionalAttributes' => null
+			];
+		}
+
+		return [
+			'tag' => array_shift($parts),
+			'additionalAttributes' => !empty($parts) ? $parts : null
+		];
+	}
+
+	/**
 	 * Should the shortcode be loaded or not?
 	 *
 	 * @param array  $intercepted_plugin Axeptio plugin settings intercepted.
@@ -253,14 +290,17 @@ class Hook_Modifier extends Module {
 			return true;
 		}
 
-		if ( 'whitelist' === $intercepted_plugin['mode'] && in_array( $name, $intercepted_plugin['list'], true ) ) {
+
+		if ( 'whitelist' === $intercepted_plugin['mode'] &&
+			in_array( $name, $intercepted_plugin['list']['shortcode_tags'], true ) ) {
 			return true;
 		}
 
 		// Vice versa, if the name is not found in the $intercepted_plugins list
 		// and the current mode is blacklist, it should be skipped as well.
 
-		if ( 'blacklist' === $intercepted_plugin['mode'] && ! in_array( $name, $intercepted_plugin['list'], true ) ) {
+		if ( 'blacklist' === $intercepted_plugin['mode'] &&
+			! in_array( $name, $intercepted_plugin['list']['shortcode_tags'], true ) ) {
 			return true;
 		}
 
@@ -313,6 +353,10 @@ class Hook_Modifier extends Module {
 			'callback' => null,
 			'priority' => null,
 		);
+
+		if ($hook === 'seopress_compatibility_woocommerce') {
+			return false;
+		}
 
 		$matching_hook = false;
 
@@ -422,8 +466,9 @@ class Hook_Modifier extends Module {
 				foreach ( $functions as $name => $function ) {
 					$stats[ $filter ][ $name ] = $this->process_function( $function['function'], $name, $filter, $priority );
 
-					if ( isset( $stats[ $filter ][ $name ]['plugin'] ) ) {
-						$plugins[ $stats[ $filter ][ $name ]['plugin'] ][] = array(
+					if ( isset( $stats[ $filter ][ $name ] ) ) {
+
+						$plugins[ $stats[ $filter ][ $name ] ][] = array(
 							'filter'   => $filter,
 							'priority' => $priority,
 							'name'     => $name,
@@ -510,17 +555,34 @@ class Hook_Modifier extends Module {
 	 *
 	 * @param mixed  $callback_function Function to wrap.
 	 * @param string $plugin Plugin name.
-	 * @param string $plugin_settings Plugin Settings.
+	 * @param array  $plugin_settings Plugin Settings.
 	 * @param string $tag Tag name.
 	 *
 	 * @return Closure
 	 */
-	private function wrap_tag( $callback_function, $plugin, $plugin_settings, $tag ) {
-		return function () use ( $callback_function, $plugin, $plugin_settings, $tag ) {
-			$args        = func_get_args();
-			$return      = call_user_func_array( $callback_function, $args );
-			$pattern     = '/<!--(.*?)-->/s';
-			$return      = preg_replace( $pattern, '', $return );
+	private function wrap_tag($callback_function, $plugin, $plugin_settings, $tag) 
+	{
+		return function () use ($callback_function, $plugin, $plugin_settings, $tag) {
+			$args   = func_get_args();
+			$return = call_user_func_array($callback_function, $args);
+			$pattern = '/<!--(.*?)-->/s';
+			$return = preg_replace($pattern, '', $return);
+
+			$additional_attributes = '';
+			$shortcode_tags = $plugin_settings['list']['shortcode_tags'] ?? [];
+			$attributes_list = $plugin_settings['list']['additionalAttributes'] ?? [];
+			
+			if ($shortcode_tags && $attributes_list) {
+				$tag_position = array_search($tag, $shortcode_tags, true);
+				
+				if ($tag_position !== false && isset($attributes_list[$tag_position])) {
+					$additional_attributes = sprintf(
+						' data-axeptio-attributes="%s"',
+						implode(',', (array) $attributes_list[$tag_position])
+					);
+				}
+			}
+
 			$placeholder = \Axeptio\Plugin\get_template_part(
 				'frontend/shortcode-placeholder',
 				array(
@@ -529,7 +591,8 @@ class Hook_Modifier extends Module {
 				),
 				false
 			);
-			return "$placeholder<!-- axeptio_blocked $plugin \n$return\n-->";
+
+			return "$placeholder<!-- axeptio_blocked $plugin{$additional_attributes}\n$return\n-->";
 		};
 	}
 
@@ -562,36 +625,14 @@ class Hook_Modifier extends Module {
 	 * @return array|null Information about the callback or null if analysis fails.
 	 */
 	private function process_function( $callback_function, string $name = null, string $filter = null, $priority = null ) {
-		$filename = Search_Callback_File_Location::get_filename( $callback_function, $name, $filter, $priority ? (int) $priority : 10 );
-
-		if ( ! $filename ) {
+		$plugin = Search_Callback_File_Location::get_plugin( $callback_function, $name, $filter, $priority ? (int) $priority : 10 );
+		if ( ! $plugin ) {
 			return null;
 		}
 
-		return array(
-			'filename' => $filename,
-			'plugin'   => $this->extract_plugin_name( $filename ),
-		);
+		return $plugin;
 	}
 
-	/**
-	 * Extract the plugin name from a given filename.
-	 *
-	 * @param string $filename The full path to the file.
-	 * @return string|null The plugin name or null if not found.
-	 */
-	private function extract_plugin_name( $filename ) {
-		$plugin_dir = wp_normalize_path( WP_PLUGIN_DIR );
-		$filename   = wp_normalize_path( $filename );
-
-		if ( strpos( $filename, $plugin_dir ) === 0 ) {
-			$relative_path = substr( $filename, strlen( $plugin_dir ) + 1 );
-			$parts         = explode( '/', $relative_path );
-			return $parts[0] ?? null;
-		}
-
-		return null;
-	}
 
 	/**
 	 * Fetch the client configuration and determines which cookies version
