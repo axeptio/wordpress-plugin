@@ -10,7 +10,7 @@
 				<?php esc_html_e( 'You need an Axeptio account to finish the configuration of this module', 'axeptio-wordpress-plugin' ); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			</p>
 			<div class="mt-6 flex flex-col items-center justify-center gap-y-2">
-				<a href="https://admin.axeptio.eu/#signup" target="_blank" class="rounded-full bg-amber-400 px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-900 hover:text-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+				<a href="https://admin.axeptio.eu/?utm_source=google-ads&utm_medium=cpc&utm_campaign=global-en-wordpress#signup" target="_blank" class="rounded-full bg-amber-400 px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-900 hover:text-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
 					<?php esc_html_e( 'I create an account now', 'axeptio-wordpress-plugin' ); ?>
 				</a>
 				<a href="https://www.axeptio.eu/fr/cookie-widget" target="_blank" class="text-xs font-semibold leading-6 text-gray-900">
