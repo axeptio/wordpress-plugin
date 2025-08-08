@@ -2,8 +2,8 @@
 Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent
 Requires at least: 5.0
-Tested up to: 6.8.1
-Stable tag: 2.6.1
+Tested up to: 6.8.2
+Stable tag: 2.6.2
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -87,6 +87,15 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/en/ar
 **Fix doc links**
 
 == Changelog ==
+
+### ✨ 2.6.2 ✨ ###
+
+**Enhancements and Fixes:**
+
+- 🔗 **Enhanced Signup Experience:** UTM parameters are now automatically added to signup links for better tracking and attribution.
+- 🌐 **Improved French Translations:** Enhanced GTM events translation consistency in the French language pack for better user experience.
+- 🛠️ **PHP 8.0+ Compatibility:** Fixed null pointer errors for improved compatibility with PHP 8.0 and newer versions.
+- 📦 **Dependency Updates:** Updated package dependencies and resolved security vulnerabilities to ensure optimal performance and security.
 
 ### 🔒 2.6.1 🔒 ###
 
