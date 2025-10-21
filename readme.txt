@@ -8,30 +8,54 @@ Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Axeptio is the best solution to make your website GDPR compatible and make your visitors smile!
+Axeptio | GDPR Cookie Banner - An Immersive Compliance Experience
 
 ## <a href="https://www.axept.io" target="_blank">★ Visit Axeptio ★</a> ##
 
 == Description ==
 
-Transform your WordPress site's **privacy management** into a smooth and compliant experience with Axeptio. Our plugin, crafted for seamless integration with WordPress, offers a turnkey solution for adhering to privacy standards without compromising user experience.
-With a unique and many times copied cookie consent widget, Axeptio will ensure you gather your users consent while properly informing them about their rights.
-Very easy to install and configure, [Axeptio](https://www.axept.io) will be deployed on your site in just a few minutes.
-Once the plugin is installed, you will need to configure it in the admin part of Wordpress. More customization and consent log are available on our dashboard.
-With a large customization palette, you can chose what colors, logos and texts you want to display on your widget. Axeptio also supports several languages.
+Axeptio is a deeply customizable Consent Banner that makes your site compliant with GDPR, TCF v2.2, Google Consent Mode v2, and more —while providing users with a branded and premium cookie consent experience
+
+**Axeptio is a powerful Consent Management Platform (CMP) that keeps your website compliant with global privacy laws.** From **GDPR, ePrivacy,** and **TCF v2.2** in Europe, to **Google Consent Mode v2, PIPEDA** and **Law 25** in Canada, the **CCPA** in the U.S. and even more.
+
+[Axeptio](https://www.axept.io/) ensures your business meets every standard. By managing cookie consent in a clear and customizable way, it helps you build trust while staying fully compliant.Join 80.000 websites that trust Axeptio worldwide. 4.5/5 TrustPilot score.
 
 == Key Features ==
 
-The plugin will download our SDK to display Axeptio on your website
+[Instant Setup with Cookie Scanner](https://www.axept.io/shake-cookie-checker)
 
-* **Quick and Easy Installation:** Integrate Axeptio into your WordPress site in just a few clicks with our streamlined setup. Simply enter your client ID, and you're all set - the Axeptio code is automatically integrated.
-* **Multilingual Compatibility:** Axeptio works seamlessly with WPML and PolyLang, ensuring privacy management is tailored to all your users, no matter their language.
-* **Smart Extension Blocking:** Our advanced system of filters and hooks allows you to block extensions by default, ensuring full compliance and enhanced security.
-* **Connection to Vendor Database:** Simplify extension blocking with direct access to our comprehensive database.
-* **Automatic Updates:** Stay always up-to-date with the latest features and improvements effortlessly.
-* **Advanced Customization:** Tailor the plugin's appearance to match your brand with customization options for colors, logo, and text directly from your Axeptio backoffice.
-* **Dedicated Axeptio Support:** Access expert assistance for any questions or support needs.
-* **Google Tag Manager Integration:** Easily integrate Axeptio with Google Tag Manager for optimized tag management.
+Automatically scan your site and generate a ready-to-use consent banner, complete with detected cookies and pre-configured design.
+
+[100% Customizable to Your Brand](https://www.axept.io/cookie-banner)
+
+Make the banner truly yours:
+- Edit all texts to fit your tone of voice
+- Adjust colors, themes, and layouts
+- Add illustrations, logos, or Axeptio’s cookie visuals
+- Embed images or videos for a more engaging experience
+
+**Track and Understand Consent Behavior**
+Gain full visibility with a real-time dashboard and connect with your analytics stack, including GA4, Matomo, Piano, and more.**Optimization Tools That Drive Results**
+Boost performance with advanced controls: A/B testing, consent walls, and fine-tuned timing or shadow effects.
+
+[Efficiency by Design](https://www.axept.io/cookie-banner)
+
+- Mobile ready and responsive across devices
+- 1,500+ vendors pre-integrated with logos, icons, and policy links
+- Lightweight CMP optimized for Core Web Vitals and SEO performance
+- Audit-ready with instant consent logs and a clear compliance trail
+
+**Autotranslation**
+
+- Automatically detect the visitor’s browser language and IP, then show the banner in their preferred language (with support for 30+ languages).
+
+Axeptio is free up to 200 unique visitors / month. Scan your website now on [www.axept.io/shake-cookie-checker](http://www.axept.io/shake-cookie-checker)
+
+How to install Axeptio wordpress plugin
+
+## Tutorial Video
+
+https://youtu.be/bB8PjlhLxso
 
 Configuration happens in the Wordpress admin part where you can input your client ID and link your website to your Axeptio account
 User consent and customization happens on our website directly
@@ -82,10 +106,6 @@ Axeptio is free to use and always will be up to 200 visitors/month. If your webs
 The idea is to customize the appearance of your widget so that it matches the design of your site perfectly.
 All informations here : [Axeptio customization](https://support.axeptio.eu/en/articles/273978-3-widget-customisation)
 
-### 📃 2.5.9.1 📃 ###
-
-**Fix doc links**
-
 == Changelog ==
 
 ### ✨ 2.6.2 ✨ ###
@@ -115,6 +135,10 @@ This new version introduces several major improvements and fixes:
   Ability to trigger an automatic page reload after a blocking screen is validated (especially useful for HubSpot forms and other third-party services).
 - 🌍 **Multilingual support for the Axeptio widget screen**
   Dynamic display of consent texts in the site's language.
+
+### 📃 2.5.9.1 📃 ###
+
+**Fix doc links**
 
 ### 🔄 2.5.9 🔄 ###
 
