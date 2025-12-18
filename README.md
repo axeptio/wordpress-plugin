@@ -38,6 +38,7 @@ Axeptio transforms your **WordPress** site’s privacy management into a smooth 
 - **Automatic Updates**: Stay up-to-date with the latest features and improvements effortlessly.
 - **Advanced Customization**: Customize the appearance of the consent widget with options for colors, logo, and text directly from your Axeptio back office.
 - **Google Tag Manager Integration**: Easily integrate Axeptio with Google Tag Manager for optimized tag management.
+- **WP Consent API Compatibility**: Native integration with the [WP Consent API](https://wordpress.org/plugins/wp-consent-api/) plugin. When active, consent categories are automatically synchronized between Axeptio and WP Consent API-compatible plugins.
 - **Dedicated Support**: Access expert assistance for any questions or support needs.
 - **Consent Log**: Easily track and manage user consents through the Axeptio back office.
   Installing this plugin does not automatically make your site GDPR-compliant. Each website uses different cookies, and you must ensure the required configuration is in place. Please follow our documentation for proper configuration.
