@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2025-06-03 14:59+0200\n"
+"POT-Creation-Date: 2025-12-18 15:15+0100\n"
 "PO-Revision-Date: 2023-05-10 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: axeptio-wordpress-plugin.php\n"
@@ -196,15 +196,15 @@ msgstr ""
 msgid "Collect of data and errors by Axeptio"
 msgstr ""
 
-#: includes/classes/models/class-axeptio-steps.php:20
+#: includes/classes/models/class-axeptio-steps.php:21
 msgid "WordPress Cookies"
 msgstr ""
 
-#: includes/classes/models/class-axeptio-steps.php:21
+#: includes/classes/models/class-axeptio-steps.php:23
 msgid "Here you will find all WordPress extensions using cookies."
 msgstr ""
 
-#: includes/classes/models/class-axeptio-steps.php:22
+#: includes/classes/models/class-axeptio-steps.php:25
 msgid ""
 "Below is the list of extensions used on this site that utilize cookies. "
 "Please activate or deactivate the ones for which you consent to sharing your "
@@ -242,6 +242,60 @@ msgstr ""
 
 #: includes/classes/models/class-shortcode-tags-modes.php:26
 msgid "All shortcode tags"
+msgstr ""
+
+#: includes/classes/models/class-wp-consent-api-settings.php:56
+msgid "Functional"
+msgstr ""
+
+#: includes/classes/models/class-wp-consent-api-settings.php:57
+msgid ""
+"The cookie or any other form of local storage is used for the sole purpose "
+"of carrying out the transmission of a communication over an electronic "
+"communications network."
+msgstr ""
+
+#: includes/classes/models/class-wp-consent-api-settings.php:60
+msgid "Preferences"
+msgstr ""
+
+#: includes/classes/models/class-wp-consent-api-settings.php:61
+msgid ""
+"Cookies or any other form of local storage that can not be seen as "
+"statistics, statistics-anonymous, marketing or functional, and where the "
+"technical storage or access is necessary for the legitimate purpose of "
+"storing preferences."
+msgstr ""
+
+#: includes/classes/models/class-wp-consent-api-settings.php:64
+msgid "Statistics"
+msgstr ""
+
+#: includes/classes/models/class-wp-consent-api-settings.php:65
+msgid ""
+"Cookies or any other form of local storage that are used exclusively for "
+"statistical purposes (Analytics Cookies)."
+msgstr ""
+
+#: includes/classes/models/class-wp-consent-api-settings.php:68
+msgid "Anonymous Statistics"
+msgstr ""
+
+#: includes/classes/models/class-wp-consent-api-settings.php:69
+msgid ""
+"Cookies or any other form of local storage that are used exclusively for "
+"anonymous statistical purposes."
+msgstr ""
+
+#: includes/classes/models/class-wp-consent-api-settings.php:72
+msgid "Marketing"
+msgstr ""
+
+#: includes/classes/models/class-wp-consent-api-settings.php:73
+msgid ""
+"Cookies or any other form of local storage required to create user profiles "
+"to send advertising or to track the user on a website or across websites for "
+"similar marketing purposes."
 msgstr ""
 
 #. translators: %s: the path to the plugin
@@ -431,7 +485,7 @@ msgid ""
 msgstr ""
 
 #: templates/admin/main/fields/non-existing-account.php:15
-msgid "https://support.axeptio.eu/hc/en-gb"
+msgid "https://support.axeptio.eu/en"
 msgstr ""
 
 #: templates/admin/main/fields/sdk-active.php:21

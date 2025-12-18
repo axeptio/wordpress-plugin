@@ -14,8 +14,8 @@ use Axeptio\Plugin\Models\Project_Versions;
 use Axeptio\Plugin\Models\Sdk;
 use Axeptio\Plugin\Models\Settings;
 use Axeptio\Plugin\Models\i18n;
+use Axeptio\Plugin\Models\WP_Consent_API_Settings;
 use Axeptio\Plugin\Module;
-use function Axeptio\Plugin\get_relative_path;
 use function Axeptio\Plugin\get_sdk_settings;
 use function Axeptio\Plugin\script_url;
 use function Axeptio\Plugin\style_url;
@@ -95,10 +95,18 @@ class Axeptio_Sdk extends Module {
 			)
 		);
 
+		$script_dependencies = array();
+
+		if ( WP_Consent_API_Settings::is_active() ) {
+			$wp_consent_categories = WP_Consent_API_Settings::get_category_vendors();
+			$wordpress_vendors     = array_merge( $wp_consent_categories, $wordpress_vendors );
+			$script_dependencies[] = 'wp-consent-api';
+		}
+
 		wp_enqueue_script(
 			'axeptio/sdk-script',
 			script_url( 'frontend/axeptio', 'frontend' ),
-			array(),
+			$script_dependencies,
 			XPWP_VERSION,
 			true
 		);
@@ -106,6 +114,7 @@ class Axeptio_Sdk extends Module {
 		wp_localize_script( 'axeptio/sdk-script', 'Axeptio_SDK', $settings );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressVendors', $wordpress_vendors );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressSteps', Axeptio_Steps::all() );
+		wp_localize_script( 'axeptio/sdk-script', 'axeptioWpConsentCategories', WP_Consent_API_Settings::get_consent_categories() );
 
 		$sdk_script = \Axeptio\Plugin\get_template_part( 'frontend/sdk', array(), false );
 		preg_match( '/<script[^>]*>(.*?)<\/script>/is', $sdk_script, $matches );
