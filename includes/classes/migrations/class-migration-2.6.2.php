@@ -12,8 +12,6 @@ class Migration_2_6_2 implements \Axeptio\Plugin\Contracts\Migration_Interface {
 	public function up() {
 		global $wpdb;
 
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-
 		$table = $wpdb->prefix . Plugins::$table_name;
 
 		// Check if columns don't already exist before adding them
