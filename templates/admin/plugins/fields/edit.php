@@ -273,13 +273,17 @@ if ( $is_multilingual ) {
 					</p>
 				</div>
 
-				<div class="border-t border-gray-200 pt-6 mt-6">
+				<div
+					class="border-t border-gray-200 pt-6 mt-6"
+					x-data="{ selectedPlaceholderLang: '<?php echo esc_attr( $default_lang ); ?>' }"
+					@language-changed.window="selectedPlaceholderLang = $event.detail.language || $event.detail.value"
+				>
 					<h3 class="text-sm font-semibold leading-6 text-gray-900 mb-4">
 						<?php esc_html_e( 'Consent Banner', 'axeptio-wordpress-plugin' ); ?>
 					</h3>
 
 					<?php if ( $is_multilingual ) : ?>
-					<div class="mb-4" x-init="selectedPlaceholderLang = '<?php echo esc_attr( $default_lang ); ?>'">
+					<div class="mb-4">
 						<?php
 						\Axeptio\Plugin\get_template_part(
 							'admin/common/fields/select-languages',
