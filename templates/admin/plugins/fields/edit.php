@@ -6,11 +6,15 @@
 	x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
 	x-transition:leave-start="translate-x-0"
 	x-transition:leave-end="translate-x-full"
-	class="fixed pointer-events-auto w-screen max-w-md top-[46px] md:top-[32px] right-0 bottom-0"
+	class="fixed pointer-events-auto w-screen max-w-md top-[46px] md:top-[32px] right-0 bottom-0 z-10"
 	x-description="Slide-over panel, show/hide based on slide-over state."
 	@click.away="closePanel()"
 >
-	<div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl z-50">
+	<div
+		x-ref="scrollContainer"
+		x-init="$watch('editOpen', value => { if (value) setTimeout(() => $el.scrollTop = 0, 100) })"
+		class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl z-50"
+	>
 		<div class="px-4 py-6 sm:px-6">
 			<div class="flex items-start justify-between">
 				<h2 id="slide-over-heading" class="text-base font-semibold leading-6 text-gray-900" x-text="editedPlugin.Name"></h2>
@@ -30,22 +34,31 @@
 				<nav class="-mb-px flex" aria-label="Tabs">
 					<button
 						@click="setActive(1)"
-						:class="isActive(1) ? 'border-amber-400 text-indigo-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
-						class="border-transparent w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
+						:class="isActive(1) ? 'border-amber-400 text-amber-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
+						class="w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
 					>
 						<?php esc_html_e( 'Informations', 'axeptio-wordpress-plugin' ); ?>
 					</button>
 					<button
 						@click="setActive(2)"
-						:class="isActive(2) ? 'border-amber-400 text-indigo-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
-						class="border-transparent w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
+						:class="isActive(2) ? 'border-amber-400 text-amber-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
+						class="w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
 					>
 						<?php esc_html_e( 'Hooks and shortcodes', 'axeptio-wordpress-plugin' ); ?>
 					</button>
 				</nav>
 			</div>
 
-			<div class="space-y-6" x-show="isActive(1)" x-transition>
+			<div
+				class="space-y-6"
+				x-show="isActive(1)"
+				x-transition:enter="ease-out duration-200"
+				x-transition:enter-start="opacity-0"
+				x-transition:enter-end="opacity-100"
+				x-transition:leave="ease-in duration-150"
+				x-transition:leave-start="opacity-100"
+				x-transition:leave-end="opacity-0"
+			>
 
 				<div>
 					<label for="vendor-title" class="block text-sm font-medium leading-6 text-gray-900">
@@ -70,7 +83,8 @@
 					<div class="mt-2">
 						<textarea
 							x-model="editedPlugin.Metas.vendor_shortDescription"
-							rows="3" id="vendor-short-description"
+							rows="7"
+							id="vendor-short-description"
 							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
 							:placeholder="editedPlugin?.Metas?.Merged?.vendor_shortDescription ?? editedPlugin.Description"
 						></textarea>
@@ -130,7 +144,16 @@
 				</div>
 			</div>
 
-			<div class="space-y-6" x-show="isActive(2)" x-transition>
+			<div
+				class="space-y-6"
+				x-show="isActive(2)"
+				x-transition:enter="ease-out duration-200"
+				x-transition:enter-start="opacity-0"
+				x-transition:enter-end="opacity-100"
+				x-transition:leave="ease-in duration-150"
+				x-transition:leave-start="opacity-100"
+				x-transition:leave-end="opacity-0"
+			>
 				<div>
 					<label for="wp-filter-mode" class="block text-sm font-medium leading-6 text-gray-900">
 						<?php esc_html_e( 'Hook to be filtered', 'axeptio-wordpress-plugin' ); ?>
@@ -254,14 +277,14 @@
 					</label>
 					<div class="mt-2">
 						<?php
-						$default_placeholder_text = sprintf( 
-							__( 'This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it\'s very simple: go to our cookie consent widget, give your approval for the "%s" extension. And voila, you\'re all set!', 'axeptio-wordpress-plugin' ), 
-							'{plugin_name}' 
+						$default_placeholder_text = sprintf(
+							__( 'This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it\'s very simple: go to our cookie consent widget, give your approval for the "%s" extension. And voila, you\'re all set!', 'axeptio-wordpress-plugin' ),
+							'{plugin_name}'
 						);
 						?>
 						<textarea
 							x-model="editedPlugin.Metas.shortcode_placeholder_description"
-							rows="3"
+							rows="7"
 							id="shortcode-placeholder-description"
 							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
 							placeholder="<?php echo esc_attr( $default_placeholder_text ); ?>"
@@ -271,12 +294,16 @@
 						<?php esc_html_e( 'Custom description displayed when shortcode content is blocked. If left empty, the default description will be used. You can use {plugin_name} as a placeholder for the plugin title.', 'axeptio-wordpress-plugin' ); ?>
 					</p>
 				</div>
-
 			</div>
 
 			<div class="mt-6">
 				<div>
-					<button @click.prevent="updatePlugin(editedPlugin)" type="button"  class="flex w-full justify-center rounded-md bg-amber-400 px-3.5 py-2.5 text-sm border-0 font-semibold text-gray-900 shadow-sm hover:bg-gray-900 hover:text-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+					<button @click.prevent="updatePlugin(editedPlugin)"
+							type="button"
+							class="flex w-full justify-center rounded-md bg-amber-400 px-3.5 py-2.5 text-sm border-0
+									font-semibold text-gray-900 shadow-sm hover:bg-gray-900 hover:text-amber-400
+									focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+									focus-visible:outline-white transition-colors duration-300">
 						<span
 							class="inline-flex"
 							x-show="isSaving"
