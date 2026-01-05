@@ -16,7 +16,7 @@
 		<span class="text-gray-500 text-xs"><?php echo esc_html( $data->description ); ?></span>
 	</label>
 	<input type="checkbox" @change="<?php echo esc_attr( $data->alpine_state ); ?> = !<?php echo esc_attr( $data->alpine_state ); ?>"
-			class="appearance-none hidden active:outline-none focus:outline-none"
+			class="sr-only"
 			id="<?php echo esc_attr( $data->id ); ?>" name="<?php echo esc_attr( $data->name ); ?>"
 			value="1" <?php echo esc_attr( $data->checked ) ? 'checked' : ''; ?>
 			<?php echo isset( $data->disabled ) && $data->disabled ? 'disabled' : ''; ?>
