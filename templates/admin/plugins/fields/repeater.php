@@ -9,7 +9,7 @@
 				   type="text"
 				   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
 				   			ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
-							focus:ring-indigo-600 sm:text-sm sm:leading-6"
+							focus:ring-amber-600 sm:text-sm sm:leading-6"
 				   placeholder="<?php echo esc_attr( $data->placeholder ?? '' ); ?>"
 			>
 			<button @click="removeField('<?php echo esc_attr( $data->name ); ?>', index)" type="button" class="mx-1 text-red-500" spellcheck="false">
@@ -21,6 +21,6 @@
 		</div>
 	</template>
 </div>
-<button @click="addField('<?php echo esc_attr( $data->name ); ?>')" type="button" class="text-sm font-semibold leading-6 text-indigo-600 hover:text-indigo-500" spellcheck="false">
+<button @click="addField('<?php echo esc_attr( $data->name ); ?>')" type="button" class="text-sm font-semibold leading-6 text-amber-600 hover:text-amber-500" spellcheck="false">
 	<span aria-hidden="true">+</span> <?php echo esc_html( $data->add_item ); ?>
 </button>

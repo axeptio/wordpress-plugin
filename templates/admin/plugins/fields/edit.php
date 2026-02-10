@@ -1,3 +1,23 @@
+<?php
+use Axeptio\Plugin\Models\I18n;
+
+$is_multilingual     = I18n::has_multilangual();
+$axeptio_languages   = array();
+$default_lang        = '';
+
+if ( $is_multilingual ) {
+	$axeptio_languages = I18n::get_languages();
+	$default_lang      = array_key_first( $axeptio_languages );
+} else {
+	$default_lang      = 'default';
+	$axeptio_languages = array(
+		'default' => array(
+			'language_code' => 'default',
+			'native_name'   => __( 'Default', 'axeptio-wordpress-plugin' ),
+		),
+	);
+}
+?>
 <div x-show="editOpen"
 	x-cloak
 	x-transition:enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -6,11 +26,15 @@
 	x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
 	x-transition:leave-start="translate-x-0"
 	x-transition:leave-end="translate-x-full"
-	class="fixed pointer-events-auto w-screen max-w-md top-[46px] md:top-[32px] right-0 bottom-0"
+	class="fixed pointer-events-auto w-screen max-w-md top-[46px] md:top-[32px] right-0 bottom-0 z-10"
 	x-description="Slide-over panel, show/hide based on slide-over state."
 	@click.away="closePanel()"
 >
-	<div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl z-50">
+	<div
+		x-ref="scrollContainer"
+		x-init="$watch('editOpen', value => { if (value) setTimeout(() => $el.scrollTop = 0, 100) })"
+		class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl z-50"
+	>
 		<div class="px-4 py-6 sm:px-6">
 			<div class="flex items-start justify-between">
 				<h2 id="slide-over-heading" class="text-base font-semibold leading-6 text-gray-900" x-text="editedPlugin.Name"></h2>
@@ -30,22 +54,31 @@
 				<nav class="-mb-px flex" aria-label="Tabs">
 					<button
 						@click="setActive(1)"
-						:class="isActive(1) ? 'border-amber-400 text-indigo-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
-						class="border-transparent w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
+						:class="isActive(1) ? 'border-amber-400 text-amber-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
+						class="w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
 					>
 						<?php esc_html_e( 'Informations', 'axeptio-wordpress-plugin' ); ?>
 					</button>
 					<button
 						@click="setActive(2)"
-						:class="isActive(2) ? 'border-amber-400 text-indigo-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
-						class="border-transparent w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
+						:class="isActive(2) ? 'border-amber-400 text-amber-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
+						class="w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
 					>
 						<?php esc_html_e( 'Hooks and shortcodes', 'axeptio-wordpress-plugin' ); ?>
 					</button>
 				</nav>
 			</div>
 
-			<div class="space-y-6" x-show="isActive(1)" x-transition>
+			<div
+				class="space-y-6"
+				x-show="isActive(1)"
+				x-transition:enter="ease-out duration-200"
+				x-transition:enter-start="opacity-0"
+				x-transition:enter-end="opacity-100"
+				x-transition:leave="ease-in duration-150"
+				x-transition:leave-start="opacity-100"
+				x-transition:leave-end="opacity-0"
+			>
 
 				<div>
 					<label for="vendor-title" class="block text-sm font-medium leading-6 text-gray-900">
@@ -70,7 +103,8 @@
 					<div class="mt-2">
 						<textarea
 							x-model="editedPlugin.Metas.vendor_shortDescription"
-							rows="3" id="vendor-short-description"
+							rows="7"
+							id="vendor-short-description"
 							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
 							:placeholder="editedPlugin?.Metas?.Merged?.vendor_shortDescription ?? editedPlugin.Description"
 						></textarea>
@@ -130,7 +164,16 @@
 				</div>
 			</div>
 
-			<div class="space-y-6" x-show="isActive(2)" x-transition>
+			<div
+				class="space-y-6"
+				x-show="isActive(2)"
+				x-transition:enter="ease-out duration-200"
+				x-transition:enter-start="opacity-0"
+				x-transition:enter-end="opacity-100"
+				x-transition:leave="ease-in duration-150"
+				x-transition:leave-start="opacity-100"
+				x-transition:leave-end="opacity-0"
+			>
 				<div>
 					<label for="wp-filter-mode" class="block text-sm font-medium leading-6 text-gray-900">
 						<?php esc_html_e( 'Hook to be filtered', 'axeptio-wordpress-plugin' ); ?>
@@ -230,53 +273,126 @@
 					</p>
 				</div>
 
-				<div>
-					<label for="shortcode-placeholder-title" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Shortcode placeholder title', 'axeptio-wordpress-plugin' ); ?>
-					</label>
-					<div class="mt-2">
-						<input
-							x-model="editedPlugin.Metas.shortcode_placeholder_title"
-							type="text"
-							id="shortcode-placeholder-title"
-							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
-							placeholder="<?php echo esc_attr__( 'Oops, content not available at the moment!', 'axeptio-wordpress-plugin' ); ?>"
-						>
-					</div>
-					<p class="mt-2 text-xs leading-4 text-gray-600">
-						<?php esc_html_e( 'Custom title displayed when shortcode content is blocked. If left empty, the default title will be used.', 'axeptio-wordpress-plugin' ); ?>
-					</p>
-				</div>
+				<div
+					class="border-t border-gray-200 pt-6 mt-6"
+					x-data="{ selectedPlaceholderLang: '<?php echo esc_attr( $default_lang ); ?>' }"
+					@language-changed.window="selectedPlaceholderLang = $event.detail.language || $event.detail.value"
+				>
+					<h3 class="text-sm font-semibold leading-6 text-gray-900 mb-4">
+						<?php esc_html_e( 'Consent Banner', 'axeptio-wordpress-plugin' ); ?>
+					</h3>
 
-				<div>
-					<label for="shortcode-placeholder-description" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Shortcode placeholder description', 'axeptio-wordpress-plugin' ); ?>
-					</label>
-					<div class="mt-2">
+					<?php if ( $is_multilingual ) : ?>
+					<div class="mb-4">
 						<?php
-						$default_placeholder_text = sprintf( 
-							__( 'This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it\'s very simple: go to our cookie consent widget, give your approval for the "%s" extension. And voila, you\'re all set!', 'axeptio-wordpress-plugin' ), 
-							'{plugin_name}' 
+						\Axeptio\Plugin\get_template_part(
+							'admin/common/fields/select-languages',
+							array(
+								'label'     => __( 'Language', 'axeptio-wordpress-plugin' ),
+								'group'     => '',
+								'name'      => 'placeholder_lang',
+								'id'        => 'xpwp_placeholder_lang',
+								'languages' => $axeptio_languages,
+								'value'     => $default_lang,
+							)
 						);
 						?>
-						<textarea
-							x-model="editedPlugin.Metas.shortcode_placeholder_description"
-							rows="3"
-							id="shortcode-placeholder-description"
-							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
-							placeholder="<?php echo esc_attr( $default_placeholder_text ); ?>"
-						></textarea>
 					</div>
-					<p class="mt-2 text-xs leading-4 text-gray-600">
-						<?php esc_html_e( 'Custom description displayed when shortcode content is blocked. If left empty, the default description will be used. You can use {plugin_name} as a placeholder for the plugin title.', 'axeptio-wordpress-plugin' ); ?>
-					</p>
-				</div>
+					<?php endif; ?>
 
+					<?php foreach ( $axeptio_languages as $lang_code => $lang ) : ?>
+					<div class="space-y-4" x-show="selectedPlaceholderLang === '<?php echo esc_attr( $lang['language_code'] ); ?>'">
+						<div>
+							<label for="shortcode-placeholder-title-<?php echo esc_attr( $lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
+								<?php esc_html_e( 'Shortcode placeholder title', 'axeptio-wordpress-plugin' ); ?>
+							</label>
+							<div class="mt-2">
+								<input
+									:value="getLocalizedMeta('shortcode_placeholder_title', '<?php echo esc_attr( $lang['language_code'] ); ?>')"
+									@input="setLocalizedMeta('shortcode_placeholder_title', '<?php echo esc_attr( $lang['language_code'] ); ?>', $event.target.value)"
+									type="text"
+									id="shortcode-placeholder-title-<?php echo esc_attr( $lang['language_code'] ); ?>"
+									class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
+									placeholder="<?php echo esc_attr__( 'Oops, content not available at the moment!', 'axeptio-wordpress-plugin' ); ?>"
+								>
+							</div>
+							<p class="mt-2 text-xs leading-4 text-gray-600">
+								<?php esc_html_e( 'Custom title displayed when shortcode content is blocked. If left empty, the default title will be used.', 'axeptio-wordpress-plugin' ); ?>
+							</p>
+						</div>
+
+						<div>
+							<label for="shortcode-placeholder-description-<?php echo esc_attr( $lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
+								<?php esc_html_e( 'Shortcode placeholder description', 'axeptio-wordpress-plugin' ); ?>
+							</label>
+							<div class="mt-2">
+								<?php
+								$default_placeholder_text = sprintf(
+									__( 'This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it\'s very simple: go to our cookie consent widget, give your approval for the "%s" extension. And voila, you\'re all set!', 'axeptio-wordpress-plugin' ),
+									'{plugin_name}'
+								);
+								?>
+								<textarea
+									:value="getLocalizedMeta('shortcode_placeholder_description', '<?php echo esc_attr( $lang['language_code'] ); ?>')"
+									@input="setLocalizedMeta('shortcode_placeholder_description', '<?php echo esc_attr( $lang['language_code'] ); ?>', $event.target.value)"
+									rows="5"
+									id="shortcode-placeholder-description-<?php echo esc_attr( $lang['language_code'] ); ?>"
+									class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
+									placeholder="<?php echo esc_attr( $default_placeholder_text ); ?>"
+								></textarea>
+							</div>
+							<p class="mt-2 text-xs leading-4 text-gray-600">
+								<?php esc_html_e( 'Custom description displayed when shortcode content is blocked. If left empty, the default description will be used. You can use {plugin_name} as a placeholder for the plugin title.', 'axeptio-wordpress-plugin' ); ?>
+							</p>
+						</div>
+
+						<div>
+							<label for="shortcode-placeholder-button-text-<?php echo esc_attr( $lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
+								<?php esc_html_e( 'Shortcode placeholder button text', 'axeptio-wordpress-plugin' ); ?>
+							</label>
+							<div class="mt-2">
+								<input
+									:value="getLocalizedMeta('shortcode_placeholder_button_text', '<?php echo esc_attr( $lang['language_code'] ); ?>')"
+									@input="setLocalizedMeta('shortcode_placeholder_button_text', '<?php echo esc_attr( $lang['language_code'] ); ?>', $event.target.value)"
+									type="text"
+									id="shortcode-placeholder-button-text-<?php echo esc_attr( $lang['language_code'] ); ?>"
+									class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
+									placeholder="<?php echo esc_attr__( 'I accept this service', 'axeptio-wordpress-plugin' ); ?>"
+								>
+							</div>
+							<p class="mt-2 text-xs leading-4 text-gray-600">
+								<?php esc_html_e( 'Custom button text displayed on the placeholder. If left empty, the default text will be used.', 'axeptio-wordpress-plugin' ); ?>
+							</p>
+						</div>
+					</div>
+					<?php endforeach; ?>
+
+					<div class="mt-4 pt-4 border-t border-gray-100">
+						<?php
+						\Axeptio\Plugin\get_template_part(
+							'admin/common/fields/toggle',
+							array(
+								'id'           => 'xpwp_shortcode_placeholder_hide_decoration',
+								'name'         => 'shortcode_placeholder_hide_decoration',
+								'alpine_state' => 'editedPlugin.Metas.shortcode_placeholder_hide_decoration',
+								'label'        => __( 'Hide decoration', 'axeptio-wordpress-plugin' ),
+								'description'  => __( 'Hide the cookie icon and background shape on the placeholder.', 'axeptio-wordpress-plugin' ),
+								'checked'      => false,
+							)
+						);
+						?>
+					</div>
+				</div>
 			</div>
 
 			<div class="mt-6">
 				<div>
-					<button @click.prevent="updatePlugin(editedPlugin)" type="button"  class="flex w-full justify-center rounded-md bg-amber-400 px-3.5 py-2.5 text-sm border-0 font-semibold text-gray-900 shadow-sm hover:bg-gray-900 hover:text-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+					<button @click.prevent="updatePlugin(editedPlugin)"
+							type="button"
+							class="flex w-full justify-center rounded-md bg-amber-400 px-3.5 py-2.5 text-sm border-0
+									font-semibold text-gray-900 shadow-sm hover:bg-gray-900 hover:text-amber-400
+									focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2
+									focus-visible:outline-white transition-colors duration-300">
 						<span
 							class="inline-flex"
 							x-show="isSaving"
