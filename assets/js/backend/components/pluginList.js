@@ -230,10 +230,68 @@ const instance = function( args ) {
 		},
 	};
 
+	const localizedMetaMethods = {
+		getLocalizedMeta( field, lang ) {
+			if ( ! this.editedPlugin || ! this.editedPlugin.Metas ) {
+				return '';
+			}
+
+			const value = this.editedPlugin.Metas[ field ];
+
+			if ( ! value || value === '' ) {
+				return '';
+			}
+
+			try {
+				const parsed = JSON.parse( value );
+				if ( typeof parsed === 'object' && parsed !== null ) {
+					return parsed[ lang ] || '';
+				}
+			} catch ( e ) {
+				return value;
+			}
+
+			return value;
+		},
+
+		setLocalizedMeta( field, lang, value ) {
+			if ( ! this.editedPlugin || ! this.editedPlugin.Metas ) {
+				return;
+			}
+
+			if ( lang === 'default' ) {
+				this.editedPlugin.Metas[ field ] = value;
+				this.setHasChanged();
+				return;
+			}
+
+			const currentValue = this.editedPlugin.Metas[ field ] || '';
+			let parsed = {};
+
+			if ( currentValue ) {
+				try {
+					const temp = JSON.parse( currentValue );
+					if ( typeof temp === 'object' && temp !== null ) {
+						parsed = temp;
+					}
+				} catch ( e ) {
+					// Not JSON
+				}
+			}
+
+			parsed[ lang ] = value;
+
+			const hasNonEmptyValue = Object.values( parsed ).some( ( v ) => v && v.trim() !== '' );
+			this.editedPlugin.Metas[ field ] = hasNonEmptyValue ? JSON.stringify( parsed ) : '';
+			this.setHasChanged();
+		},
+	};
+
 	return {
 		...repeaterMethods,
 		...deleteModal,
 		...pluginMethods,
+		...localizedMetaMethods,
 		plugins: [],
 		editedPlugin: null,
 		editedPluginHasChanged: false,
