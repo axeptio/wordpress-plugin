@@ -116,6 +116,9 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/en/ar
 - 🌐 **Improved French Translations:** Enhanced GTM events translation consistency in the French language pack for better user experience.
 - 🛠️ **PHP 8.0+ Compatibility:** Fixed null pointer errors for improved compatibility with PHP 8.0 and newer versions.
 - 📦 **Dependency Updates:** Updated package dependencies and resolved security vulnerabilities to ensure optimal performance and security.
+- 🍪 **Enhanced WP Consent API Integration:** The 5 WP Consent API categories (functional, preferences, statistics, statistics-anonymous, marketing) are now displayed as virtual vendors in the Axeptio widget when the WP Consent API plugin is active.
+- 🐛 **WP Consent API Bug Fix:** Fixed an initialization bug that prevented proper consent synchronization with WP Consent API.
+- ⚡ **Direct Consent Updates:** WP Consent API consent updates now work independently of Google Consent Mode for improved reliability.
 
 ### 🔒 2.6.1 🔒 ###
 
