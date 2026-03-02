@@ -35,7 +35,7 @@ Make the banner truly yours:
 - Embed images or videos for a more engaging experience
 
 **Track and Understand Consent Behavior**
-Gain full visibility with a real-time dashboard and connect with your analytics stack, including GA4, Matomo, Piano, and more.**Optimization Tools That Drive Results**
+Gain full visibility with a real-time dashboard and connect with your analytics stack, including GA4, Matomo, Piano, and more. **Optimization Tools That Drive Results**
 Boost performance with advanced controls: A/B testing, consent walls, and fine-tuned timing or shadow effects.
 
 [Efficiency by Design](https://www.axept.io/cookie-banner)
