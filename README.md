@@ -109,6 +109,45 @@ For detailed setup, configuration, and troubleshooting, please read our full [Do
 - [Coding Standards](http://codex.wordpress.org/WordPress_Coding_Standards)
 - [Documentation Standards](https://make.wordpress.org/core/handbook/best-practices/inline-documentation-standards/php/).
 
+## Claude Code MCP Setup (Redmine)
+
+The repository ships with a `.mcp.json` that registers the [mcp-redmine](https://pypi.org/project/mcp-redmine/) server for use with Claude Code.
+
+### Prerequisites
+
+Add the following variables to your shell profile (e.g. `~/.zshrc`):
+
+```bash
+export REDMINE_URL="https://projets.adexos.fr/"
+export REDMINE_API_KEY="<your-redmine-api-key>"
+```
+
+Create the upload scratch directory once:
+
+```bash
+mkdir -p /tmp/redmine-uploads
+```
+
+### How it works
+
+`.mcp.json` passes `${REDMINE_URL}` and `${REDMINE_API_KEY}` as env var references — they are expanded from your shell environment when Claude Code starts. No secrets are stored in the file.
+
+The server is launched via `uvx` (part of the `uv` Python toolchain). If `uvx` is not installed:
+
+```bash
+brew install uv
+```
+
+### Verification
+
+After starting Claude Code from this directory:
+
+```bash
+claude mcp list | grep redmine
+```
+
+Expected output: `redmine: uvx ... - ✓ Connected`
+
 ## Contributions
 
 ### Commit
