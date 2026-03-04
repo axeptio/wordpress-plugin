@@ -36,3 +36,9 @@ Issues, risks, and proposals identified during the deployment workflow review.
 | 13 | Workflow | Taskfile `release` task duplicates GitHub Action SVN logic — risk of manual bypasses | Clarify it is for emergency use only; consider renaming to `release:manual` |
 | 14 | Workflow | `exclusions.txt` has no comments explaining why each path is excluded         | Add inline comments or reference this document                                  |
 | 15 | Workflow | `composer install` in CI missing `--no-interaction` flag                      | Add `--no-interaction` and `--prefer-dist` to all `composer install` CI steps   |
+
+## Fixed in this PR
+
+| #  | Area      | Issue                                                                         | Fix                                                                             |
+| :- | :-------- | :---------------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| 16 | Packaging | `docs/` directory was not in `exclusions.txt` — internal engineering docs would be shipped in the WordPress.org SVN package and end-user `.zip` | Added `docs/` to `exclusions.txt`                                |
