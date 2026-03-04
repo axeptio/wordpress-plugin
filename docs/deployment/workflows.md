@@ -43,19 +43,19 @@ sequenceDiagram
 
 **Steps:**
 
-| Step                         | Tool / Command                                                | Notes                                          |
-| :--------------------------- | :------------------------------------------------------------ | :--------------------------------------------- |
-| Checkout code                | `actions/checkout@v2`                                         | Full history                                   |
-| Setup Node.js                | `actions/setup-node@v2` — Node 16                            | See [Improvements #2](improvements.md)         |
+| Step                         | Tool / Command                                                | Notes                                              |
+| :--------------------------- | :------------------------------------------------------------ | :------------------------------------------------- |
+| Checkout code                | `actions/checkout@v2`                                         | Shallow clone (default, `fetch-depth: 1`)          |
+| Setup Node.js                | `actions/setup-node@v2` — Node 16                            | See [Improvements #2](improvements.md)             |
 | Install Node dependencies    | `yarn install`                                                | No `--frozen-lockfile` — see [#9](improvements.md) |
-| ESLint check                 | `yarn eslint`                                                 | Lints `assets/js/`                             |
-| Setup PHP                    | `shivammathur/setup-php@v2` — PHP 7.4                        | See [Improvements #3](improvements.md)         |
-| Install Composer deps        | `composer install`                                            | Includes dev dependencies for tests            |
-| PHPCS check                  | `composer run phpcs`                                          | WordPress Coding Standards                     |
-| Unit tests                   | `vendor/bin/pest`                                             | See [Improvements #10](improvements.md)        |
-| Build                        | `yarn build:production` + `composer install --no-dev` + `rsync` to `./tmp/` | Produces clean release artifact   |
-| WordPress Plugin Deploy      | `10up/action-wordpress-plugin-deploy@stable`                  | SVN deploy to `trunk/` + `tags/<version>/` + zip generation |
-| Create GitHub release        | `softprops/action-gh-release@v1`                              | Attaches `.zip` to the GitHub release          |
+| ESLint check                 | `yarn eslint`                                                 | Lints `assets/js/`                                 |
+| Setup PHP                    | `shivammathur/setup-php@v2` — PHP 7.4                        | See [Improvements #3](improvements.md)             |
+| Install Composer deps        | `composer install`                                            | Includes dev dependencies for tests                |
+| PHPCS check                  | `composer run phpcs`                                          | WordPress Coding Standards                         |
+| Unit tests                   | `vendor/bin/pest`                                             | See [Improvements #10](improvements.md)            |
+| Build                        | `yarn build:production` + `composer install --no-dev` + `rsync` to `./tmp/` | Produces clean release artifact       |
+| WordPress Plugin Deploy      | `10up/action-wordpress-plugin-deploy@stable`                  | SVN deploy to `trunk/` + `tags/<version>/` + zip  |
+| Create GitHub release        | `softprops/action-gh-release@v1`                              | Attaches `.zip` to the GitHub release              |
 
 **Secrets required:**
 

@@ -43,14 +43,14 @@ It is **not** used in GitHub Actions CI.
 
 **Common local commands (via Taskfile):**
 
-| Task                  | Command           | Description                              |
-| :-------------------- | :---------------- | :--------------------------------------- |
-| `task build`          | docker-compose up | Build and start containers               |
-| `task composer-install` | composer install | Install PHP dependencies in container   |
-| `task lint-php`       | composer run phpcs | Run PHPCS in container                  |
-| `task php-stan`       | composer run-stan | Run PHPStan static analysis             |
-| `task ssh`            | docker-compose run | Open shell in container                 |
-| `task stop`           | docker-compose down | Stop containers                        |
+| Task                    | Command                  | Description                              |
+| :---------------------- | :----------------------- | :--------------------------------------- |
+| `task build`            | docker-compose up        | Build and start containers               |
+| `task composer-install` | composer install         | Install PHP dependencies in container   |
+| `task lint-php`         | composer run phpcs       | Run PHPCS in container                   |
+| `task php-stan`         | composer run run-stan    | Run PHPStan static analysis              |
+| `task ssh`              | docker-compose run       | Open shell in container                  |
+| `task stop`             | docker-compose down      | Stop containers                          |
 
 ## WordPress.org Release Process
 
@@ -82,6 +82,7 @@ Key excluded paths:
 | :----------------- | :------------------------------------ |
 | `assets/`          | Raw source assets (compiled to `public/`) |
 | `node_modules/`    | JS dependencies                       |
+| `docs/`            | Internal engineering documentation    |
 | `release-assets/`  | Moved to SVN `assets/` separately     |
 | `releases/`        | Temporary SVN checkout directory      |
 | `tmp/`             | Temporary build output                |
