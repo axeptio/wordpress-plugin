@@ -4,6 +4,13 @@ on:
   push:
     tags:
       - '*'
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Dry run (no SVN commit)'
+        required: false
+        default: true
+        type: boolean
 
 jobs:
   deploy:
@@ -38,12 +45,14 @@ jobs:
         uses: 10up/action-wordpress-plugin-deploy@stable
         with:
           generate-zip: true
+          dry-run: ${{ inputs.dry-run || false }}
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: axeptio-wordpress-plugin
 
       - name: Create GitHub Release
+        if: ${{ !inputs.dry-run && github.event_name == 'push' }}
         uses: softprops/action-gh-release@v2
         with:
           files: ${{ steps.deploy.outputs.zip-path }}
