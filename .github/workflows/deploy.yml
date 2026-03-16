@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - '*'
+  # Manual trigger for testing. Note: dry-run on a branch won't perfectly simulate
+  # a tag-based deploy since 10up action derives version from the git tag.
   workflow_dispatch:
     inputs:
       dry-run:
