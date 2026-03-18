@@ -91,7 +91,8 @@ jobs:
         env:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SLUG: axeptio-wordpress-plugin
+          SLUG: axeptio-sdk-integration
+          ASSETS_DIR: release-assets
 
       - name: Create GitHub Release
         if: ${{ !inputs.dry-run && github.event_name == 'push' }}
