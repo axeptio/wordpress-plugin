@@ -1,61 +1,107 @@
-name: Deploy and Release Plugin
+name: Deploy to WordPress.org
+
 on:
   push:
     tags:
-    - "*"
+      - '*'
+  # Manual trigger for testing. Note: dry-run on a branch won't perfectly simulate
+  # a tag-based deploy since 10up action derives version from the git tag.
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (no SVN commit)'
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
 
 jobs:
-  tag:
-    name: New tag
+  lint-and-test:
+    name: Lint and Test
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
 
-    - name: Install Node dependencies
-      run: yarn install
+      - name: Install Node dependencies
+        run: yarn install --frozen-lockfile
 
-    - name: Run ESLint check
-      run: yarn eslint
+      - name: Run JS lint
+        run: yarn eslint
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '7.4'
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.37.0
+        with:
+          php-version: '7.4'
 
-    - name: Install Composer dependencies
-      run: composer install
+      - name: Install Composer dependencies (with dev tools)
+        run: composer install --no-interaction --prefer-dist
 
-    - name: Run PHPCS check
-      run: composer run phpcs
+      - name: Run PHPCS
+        run: composer phpcs
 
-    - name: Run unit tests
-      run: vendor/bin/pest
+      - name: Run PHP unit tests
+        run: composer test
 
-    - name: Build
-      run: |
-        yarn build:production
-        composer install --no-dev --optimize-autoloader
-        rsync -av --exclude='tmp' --exclude-from='exclusions.txt' ./ ./tmp/
+  deploy:
+    name: Deploy Plugin
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: WordPress Plugin Deploy
-      id: deploy
-      uses: 10up/action-wordpress-plugin-deploy@stable
-      with:
-        generate-zip: true
-      env:
-        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-        SLUG: axeptio-sdk-integration
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'yarn'
 
-    - name: Create GitHub release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: ${{github.workspace}}/${{ github.event.repository.name }}.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install Node dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build assets
+        run: yarn build:production
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.37.0
+        with:
+          php-version: '7.4'
+
+      - name: Install Composer dependencies (production)
+        run: composer install --no-dev --optimize-autoloader
+
+      # NOTE: .distignore controls what's excluded from WordPress.org via this CI workflow.
+      # exclusions.txt serves the same purpose for the manual `task release` Taskfile command.
+      # Keep both files in sync until one is retired.
+      - name: WordPress Plugin Deploy
+        id: deploy
+        uses: 10up/action-wordpress-plugin-deploy@2.3.0
+        if: ${{ startsWith(github.ref, 'refs/tags/') || inputs.dry_run }}
+        with:
+          generate-zip: true
+          dry-run: ${{ inputs.dry_run || false }}
+        env:
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SLUG: axeptio-sdk-integration
+          ASSETS_DIR: release-assets
+
+      - name: Create GitHub Release
+        if: ${{ !inputs.dry_run && github.event_name == 'push' }}
+        uses: softprops/action-gh-release@v2.2.1
+        with:
+          files: ${{ steps.deploy.outputs.zip-path }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
