@@ -81,6 +81,9 @@ jobs:
       - name: Install Composer dependencies (production)
         run: composer install --no-dev --optimize-autoloader
 
+      # NOTE: .distignore controls what's excluded from WordPress.org via this CI workflow.
+      # exclusions.txt serves the same purpose for the manual `task release` Taskfile command.
+      # Keep both files in sync until one is retired.
       - name: WordPress Plugin Deploy
         id: deploy
         uses: 10up/action-wordpress-plugin-deploy@2.3.0
