@@ -67,4 +67,4 @@ class Migration_2_6_0 implements \Axeptio\Plugin\Contracts\Migration_Interface {
 			"ALTER TABLE `{$table}` DROP COLUMN IF EXISTS `shortcode_placeholder_title`"
 		);
 	}
-} 
+}

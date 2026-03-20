@@ -115,7 +115,7 @@ class Hook_Modifier extends Module {
 	 * @return void
 	 */
 	public function on_template_redirect() {
-		if (count(Plugins::find_all()) === 0) {
+		if ( count( Plugins::find_all() ) === 0 ) {
 			return;
 		}
 
@@ -211,22 +211,25 @@ class Hook_Modifier extends Module {
 				$configuration = $this->maybe_apply_recommended_settings( $configuration, 'shortcode_tags' );
 
 				// Split shortcodes and their additional attributes
-				$shortcode_tags_data = array_map(function($tag) {
-					return $this->parseShortcodeTag(trim($tag));
-				}, explode("\n", $configuration['shortcode_tags_list']));
+				$shortcode_tags_data = array_map(
+					function ( $tag ) {
+						return $this->parseShortcodeTag( trim( $tag ) );
+					},
+					explode( "\n", $configuration['shortcode_tags_list'] )
+					);
 
 				// We store the whitelisted tags in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
 				// if the plugin should be intercepted AND if there are tags to avoid.
 				$intercepted_plugins[ $configuration['plugin'] ] = array(
-					'mode'         => $configuration['shortcode_tags_mode'],
-					'list'         => [
-						'shortcode_tags' => array_column($shortcode_tags_data, 'tag'),
-						'additionalAttributes' => array_filter(array_column($shortcode_tags_data, 'additionalAttributes'))
-					],
-					'placeholder'  => $configuration['shortcode_tags_placeholder'],
-					'vendor_title' => isset( $configuration['vendor_title'] ) && '' !== $configuration['vendor_title'] ? $configuration['vendor_title'] : $plugin_configuration['Name'],
-					'shortcode_placeholder_title' => $configuration['shortcode_placeholder_title'] ?? '',
+					'mode'                              => $configuration['shortcode_tags_mode'],
+					'list'                              => array(
+						'shortcode_tags'       => array_column( $shortcode_tags_data, 'tag' ),
+						'additionalAttributes' => array_filter( array_column( $shortcode_tags_data, 'additionalAttributes' ) ),
+					),
+					'placeholder'                       => $configuration['shortcode_tags_placeholder'],
+					'vendor_title'                      => isset( $configuration['vendor_title'] ) && '' !== $configuration['vendor_title'] ? $configuration['vendor_title'] : $plugin_configuration['Name'],
+					'shortcode_placeholder_title'       => $configuration['shortcode_placeholder_title'] ?? '',
 					'shortcode_placeholder_description' => $configuration['shortcode_placeholder_description'] ?? '',
 				);
 			}
@@ -256,22 +259,21 @@ class Hook_Modifier extends Module {
 	 * @param string $tag The tag to parse
 	 * @return array{tag: string, additionalAttributes: array|null}
 	 */
-	private function parseShortcodeTag(string $tag): array
-	{
-		$parts = explode(' --', $tag);
+	private function parseShortcodeTag( string $tag ): array {
+		$parts = explode( ' --', $tag );
 
 		// If no additional attributes, return only the tag
-		if (count($parts) === 1) {
-			return [
-				'tag' => $parts[0],
-				'additionalAttributes' => null
-			];
+		if ( count( $parts ) === 1 ) {
+			return array(
+				'tag'                  => $parts[0],
+				'additionalAttributes' => null,
+			);
 		}
 
-		return [
-			'tag' => array_shift($parts),
-			'additionalAttributes' => !empty($parts) ? $parts : null
-		];
+		return array(
+			'tag'                  => array_shift( $parts ),
+			'additionalAttributes' => ! empty( $parts ) ? $parts : null,
+		);
 	}
 
 	/**
@@ -289,7 +291,6 @@ class Hook_Modifier extends Module {
 		if ( 'none' === $intercepted_plugin['mode'] ) {
 			return true;
 		}
-
 
 		if ( 'whitelist' === $intercepted_plugin['mode'] &&
 			in_array( $name, $intercepted_plugin['list']['shortcode_tags'], true ) ) {
@@ -354,7 +355,7 @@ class Hook_Modifier extends Module {
 			'priority' => null,
 		);
 
-		if ($hook === 'seopress_compatibility_woocommerce') {
+		if ( $hook === 'seopress_compatibility_woocommerce' ) {
 			return false;
 		}
 
@@ -560,25 +561,24 @@ class Hook_Modifier extends Module {
 	 *
 	 * @return Closure
 	 */
-	private function wrap_tag($callback_function, $plugin, $plugin_settings, $tag) 
-	{
-		return function () use ($callback_function, $plugin, $plugin_settings, $tag) {
-			$args   = func_get_args();
-			$return = call_user_func_array($callback_function, $args);
+	private function wrap_tag( $callback_function, $plugin, $plugin_settings, $tag ) {
+		return function () use ( $callback_function, $plugin, $plugin_settings, $tag ) {
+			$args    = func_get_args();
+			$return  = call_user_func_array( $callback_function, $args );
 			$pattern = '/<!--(.*?)-->/s';
-			$return = preg_replace($pattern, '', $return);
+			$return  = preg_replace( $pattern, '', $return );
 
 			$additional_attributes = '';
-			$shortcode_tags = $plugin_settings['list']['shortcode_tags'] ?? [];
-			$attributes_list = $plugin_settings['list']['additionalAttributes'] ?? [];
-			
-			if ($shortcode_tags && $attributes_list) {
-				$tag_position = array_search($tag, $shortcode_tags, true);
-				
-				if ($tag_position !== false && isset($attributes_list[$tag_position])) {
+			$shortcode_tags        = $plugin_settings['list']['shortcode_tags'] ?? array();
+			$attributes_list       = $plugin_settings['list']['additionalAttributes'] ?? array();
+
+			if ( $shortcode_tags && $attributes_list ) {
+				$tag_position = array_search( $tag, $shortcode_tags, true );
+
+				if ( $tag_position !== false && isset( $attributes_list[ $tag_position ] ) ) {
 					$additional_attributes = sprintf(
 						' data-axeptio-attributes="%s"',
-						implode(',', (array) $attributes_list[$tag_position])
+						implode( ',', (array) $attributes_list[ $tag_position ] )
 					);
 				}
 			}

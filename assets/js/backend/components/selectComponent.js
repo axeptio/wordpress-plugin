@@ -20,7 +20,7 @@ export default function SelectComponent() {
         init(config = {}) {
             // Transformer les langues en options si elles existent
             if (config.languages) {
-                this.state.options = Object.entries(config.languages).map(([code, lang]) => ({
+                this.state.options = Object.entries(config.languages).map(([, lang]) => ({
                     value: lang.language_code,
                     label: lang.native_name,
                     flag_url: lang.country_flag_url
@@ -48,7 +48,7 @@ export default function SelectComponent() {
 
         getSelectedLabel() {
             const option = this.selectedOption;
-            if (!option) return '';
+            if (!option) {return '';}
 
             return `<img src="${option.flag_url}" alt="${option.label}" class="inline-block w-5 h-4 rounded" />${option.label}`;
         },
@@ -65,7 +65,7 @@ export default function SelectComponent() {
                 return;
             }
 
-            if (this.state.focusedOptionIndex + 1 >= this.state.options.length) return;
+            if (this.state.focusedOptionIndex + 1 >= this.state.options.length) {return;}
 
             this.state.focusedOptionIndex++;
             this.scrollOptionIntoView();
@@ -77,14 +77,14 @@ export default function SelectComponent() {
                 return;
             }
 
-            if (this.state.focusedOptionIndex <= 0) return;
+            if (this.state.focusedOptionIndex <= 0) {return;}
 
             this.state.focusedOptionIndex--;
             this.scrollOptionIntoView();
         },
 
         selectOption(index) {
-            if (index === undefined || index === null) return;
+            if (index === undefined || index === null) {return;}
             const previousValue = this.state.value;
             this.state.value = this.state.options[index].value;
 
@@ -96,7 +96,7 @@ export default function SelectComponent() {
         },
 
         dispatchLanguageEvent() {
-            if (!this.state.value) return;
+            if (!this.state.value) {return;}
 
             const selectedOption = this.selectedOption;
 
@@ -119,7 +119,7 @@ export default function SelectComponent() {
 
             const currentUrl = new URL(window.location.href);
             currentUrl.searchParams.set('lang', this.state.value);
-            history.replaceState({}, '', currentUrl.toString());
+            window.history.replaceState({}, '', currentUrl.toString());
         },
 
         toggleListbox() {

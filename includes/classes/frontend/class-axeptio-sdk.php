@@ -73,7 +73,7 @@ class Axeptio_Sdk extends Module {
 
 						$configuration = 'all' !== $cookies_version && isset( $plugin_configuration['Metas']['Merged'] ) ? $plugin_configuration['Metas']['Merged'] : $plugin_configuration['Metas'];
 
-						if ( (! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled']) || $plugin_configuration['WPConsentAPI']['is_compliant'] === true ) {
+						if ( ( ! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled'] ) || $plugin_configuration['WPConsentAPI']['is_compliant'] === true ) {
 							return false;
 						}
 
@@ -87,7 +87,7 @@ class Axeptio_Sdk extends Module {
 							'image'            => '' === $configuration['vendor_image'] && isset( $configuration['Merged']['vendor_image'] ) ? $configuration['Merged']['vendor_image'] : $configuration['vendor_image'],
 							'type'             => 'wordpress plugin',
 							'step'             => $configuration['cookie_widget_step'] ?? 'wordpress',
-							'WPConsentAPI' 	   => $plugin_configuration['WPConsentAPI'],
+							'WPConsentAPI'     => $plugin_configuration['WPConsentAPI'],
 						);
 					},
 					Plugins::all( $cookies_version )
@@ -132,17 +132,20 @@ class Axeptio_Sdk extends Module {
 	 */
 	private function get_widget_fields(): array {
 		$current_language = i18n::get_current_language();
-		$suffix = $current_language ? "_{$current_language}" : '';
+		$suffix           = $current_language ? "_{$current_language}" : '';
 
-		$fields = [
-			'widget_title'       => Settings::get_option("widget_title{$suffix}", ''),
-			'widget_subtitle'    => Settings::get_option("widget_subtitle{$suffix}", ''),
-			'widget_description' => Settings::get_option("widget_description{$suffix}", ''),
-		];
+		$fields = array(
+			'widget_title'       => Settings::get_option( "widget_title{$suffix}", '' ),
+			'widget_subtitle'    => Settings::get_option( "widget_subtitle{$suffix}", '' ),
+			'widget_description' => Settings::get_option( "widget_description{$suffix}", '' ),
+		);
 
-		return array_filter($fields, function($value) {
-			return !empty($value);
-		});
+		return array_filter(
+			$fields,
+			function ( $value ) {
+				return ! empty( $value );
+			}
+			);
 	}
 
 	/**
@@ -209,7 +212,7 @@ class Axeptio_Sdk extends Module {
 			),
 		);
 
-		$sdk_settings = array_merge($sdk_settings, $this->get_widget_fields());
+		$sdk_settings = array_merge( $sdk_settings, $this->get_widget_fields() );
 
 		if ( '' !== $cookies_version ) {
 			$sdk_settings['cookiesVersion'] = $cookies_version;

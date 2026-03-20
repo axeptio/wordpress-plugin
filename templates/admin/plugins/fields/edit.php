@@ -254,9 +254,9 @@
 					</label>
 					<div class="mt-2">
 						<?php
-						$default_placeholder_text = sprintf( 
-							__( 'This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it\'s very simple: go to our cookie consent widget, give your approval for the "%s" extension. And voila, you\'re all set!', 'axeptio-wordpress-plugin' ), 
-							'{plugin_name}' 
+						$default_placeholder_text = sprintf(
+							__( 'This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it\'s very simple: go to our cookie consent widget, give your approval for the "%s" extension. And voila, you\'re all set!', 'axeptio-wordpress-plugin' ),
+							'{plugin_name}'
 						);
 						?>
 						<textarea

@@ -45,11 +45,11 @@ class Settings extends Module {
 	 * @return array The sanitized settings value.
 	 */
 	public function sanitize_domain( $new_value, $old_value ) {
-		if (!isset($new_value['cookie_domain'] ) ) {
+		if ( ! isset( $new_value['cookie_domain'] ) ) {
 			return $new_value;
 		}
 
-		$new_value['cookie_domain'] = str_replace(['https://', 'http://', '//'], '', $new_value['cookie_domain']);
+		$new_value['cookie_domain'] = str_replace( array( 'https://', 'http://', '//' ), '', $new_value['cookie_domain'] );
 
 		return $new_value;
 	}

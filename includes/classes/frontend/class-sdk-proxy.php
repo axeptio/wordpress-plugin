@@ -15,9 +15,9 @@ class Sdk_Proxy extends Module {
 	/**
 	 * Constants for cache time and transient name
 	 */
-	const CACHE_TIME = DAY_IN_SECONDS;
-	const TRANSIENT_KEY = 'axeptio_sdk_content';
-	private const ALLOWED_MIME_TYPES = ['application/javascript', 'text/javascript'];
+	const CACHE_TIME                 = DAY_IN_SECONDS;
+	const TRANSIENT_KEY              = 'axeptio_sdk_content';
+	private const ALLOWED_MIME_TYPES = array( 'application/javascript', 'text/javascript' );
 
 	/**
 	 * Check if the module can be registered.
@@ -61,7 +61,7 @@ class Sdk_Proxy extends Module {
 	 */
 	private function fetch_sdk_content() {
 		$external_url = 'https://static.axept.io/sdk.js';
-		$response = wp_remote_get( $external_url );
+		$response     = wp_remote_get( $external_url );
 
 		if ( is_wp_error( $response ) ) {
 			return false;
@@ -74,7 +74,7 @@ class Sdk_Proxy extends Module {
 		}
 
 		// Nettoyer et normaliser le contenu JavaScript
-		$content = str_replace(["\r\n", "\r"], "\n", $content);
+		$content = str_replace( array( "\r\n", "\r" ), "\n", $content );
 
 		// Stocker le contenu dans un transient
 		set_transient( self::TRANSIENT_KEY, $content, self::CACHE_TIME );
@@ -92,7 +92,6 @@ class Sdk_Proxy extends Module {
 
 		// Récupérer le contenu du cache
 		$sdk_content = get_transient( self::TRANSIENT_KEY );
-
 
 		// Si le cache est vide ou expiré, récupérer le contenu distant
 		if ( false === $sdk_content ) {
@@ -113,8 +112,8 @@ class Sdk_Proxy extends Module {
 		header( 'X-XSS-Protection: 1; mode=block' );
 
 		// S'assurer que le contenu est bien encodé avant de l'envoyer
-		$sdk_content = wp_check_invalid_utf8($sdk_content);
-		header('Content-Length: ' . strlen($sdk_content));
+		$sdk_content = wp_check_invalid_utf8( $sdk_content );
+		header( 'Content-Length: ' . strlen( $sdk_content ) );
 
 		echo $sdk_content;
 		exit;

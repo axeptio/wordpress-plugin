@@ -15,14 +15,14 @@ class Axeptio_Steps {
 	 * @param string $field Field name
 	 * @return string Default value
 	 */
-	private static function get_default_value(string $field): string {
-		switch ($field) {
+	private static function get_default_value( string $field ): string {
+		switch ( $field ) {
 			case 'widget_title':
-				return esc_html__('WordPress Cookies', 'axeptio-wordpress-plugin');
+				return esc_html__( 'WordPress Cookies', 'axeptio-wordpress-plugin' );
 			case 'widget_subtitle':
-				return esc_html__('Here you will find all WordPress extensions using cookies.', 'axeptio-wordpress-plugin');
+				return esc_html__( 'Here you will find all WordPress extensions using cookies.', 'axeptio-wordpress-plugin' );
 			case 'widget_description':
-				return esc_html__('Below is the list of extensions used on this site that utilize cookies. Please activate or deactivate the ones for which you consent to sharing your data.', 'axeptio-wordpress-plugin');
+				return esc_html__( 'Below is the list of extensions used on this site that utilize cookies. Please activate or deactivate the ones for which you consent to sharing your data.', 'axeptio-wordpress-plugin' );
 			default:
 				return '';
 		}
@@ -35,21 +35,21 @@ class Axeptio_Steps {
 	 * @param string $language Language code
 	 * @return string Field value
 	 */
-	private static function get_widget_field(string $field_name, string $language = ''): string {
-		$default = self::get_default_value($field_name);
+	private static function get_widget_field( string $field_name, string $language = '' ): string {
+		$default = self::get_default_value( $field_name );
 
-		if ($language) {
+		if ( $language ) {
 			$option_name = $field_name . '_' . $language;
-			$value = Settings::get_option($option_name, null);
+			$value       = Settings::get_option( $option_name, null );
 
 			// If the value exists, return it
-			if ($value !== null) {
+			if ( $value !== null ) {
 				return $value;
 			}
 		}
 
 		// Fallback to the legacy method (non-language specific)
-		return Settings::get_option($field_name, $default) ?? $default;
+		return Settings::get_option( $field_name, $default ) ?? $default;
 	}
 
 	/**
@@ -58,8 +58,8 @@ class Axeptio_Steps {
 	 * @param string $language Language code
 	 * @return string
 	 */
-	public static function get_title(string $language = ''): string {
-		return self::get_widget_field('widget_title', $language);
+	public static function get_title( string $language = '' ): string {
+		return self::get_widget_field( 'widget_title', $language );
 	}
 
 	/**
@@ -68,8 +68,8 @@ class Axeptio_Steps {
 	 * @param string $language Language code
 	 * @return string
 	 */
-	public static function get_sub_title(string $language = ''): string {
-		return self::get_widget_field('widget_subtitle', $language);
+	public static function get_sub_title( string $language = '' ): string {
+		return self::get_widget_field( 'widget_subtitle', $language );
 	}
 
 	/**
@@ -78,8 +78,8 @@ class Axeptio_Steps {
 	 * @param string $language Language code
 	 * @return string
 	 */
-	public static function get_description(string $language = ''): string {
-		return self::get_widget_field('widget_description', $language);
+	public static function get_description( string $language = '' ): string {
+		return self::get_widget_field( 'widget_description', $language );
 	}
 
 	/**

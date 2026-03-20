@@ -184,22 +184,22 @@ function get_sdk_url() {
  * @return int The memory limit in bytes.
  */
 function wp_memory_limit_in_bytes(): int {
-    $memoryLimit = defined('WP_MEMORY_LIMIT') ? WP_MEMORY_LIMIT : ini_get('memory_limit');
+	$memory_limit = defined( 'WP_MEMORY_LIMIT' ) ? WP_MEMORY_LIMIT : ini_get( 'memory_limit' );
 
-    $unit = strtolower(substr($memoryLimit, -1));
-    $bytes = (int) $memoryLimit;
-    switch ($unit) {
-        case 'g':
-            $bytes *= 1024 ** 3; // Gigabytes to bytes
-            break;
-        case 'm':
-            $bytes *= 1024 ** 2; // Megabytes to bytes
-            break;
-        case 'k':
-            $bytes *= 1024; // Kilobytes to bytes
-            break;
-    }
-    return $bytes;
+	$unit  = strtolower( substr( $memory_limit, -1 ) );
+	$bytes = (int) $memory_limit;
+	switch ( $unit ) {
+		case 'g':
+			$bytes *= 1024 ** 3; // Gigabytes to bytes.
+			break;
+		case 'm':
+			$bytes *= 1024 ** 2; // Megabytes to bytes.
+			break;
+		case 'k':
+			$bytes *= 1024; // Kilobytes to bytes.
+			break;
+	}
+	return $bytes;
 }
 
 /**
@@ -214,31 +214,32 @@ function wp_memory_limit_in_bytes(): int {
  * @return bool True if the request is a REST API request, false otherwise.
  */
 function is_rest(): bool {
-	// Check if the REST_REQUEST constant is defined and true (#1)
-	if (defined('REST_REQUEST') && REST_REQUEST) {
+	// Check if the REST_REQUEST constant is defined and true.
+	if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
 		return true;
 	}
 
-	// Check if the `rest_route` parameter exists and starts with a forward slash (#2)
-	if (isset($_GET['rest_route']) && is_string($_GET['rest_route']) && strpos($_GET['rest_route'], '/') === 0) {
+	// Check if the `rest_route` parameter exists and starts with a forward slash.
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- This is a read-only check for REST API detection.
+	if ( isset( $_GET['rest_route'] ) && is_string( $_GET['rest_route'] ) && 0 === strpos( sanitize_text_field( wp_unslash( $_GET['rest_route'] ) ), '/' ) ) {
 		return true;
 	}
 
-	// Initialize WP_Rewrite if not already initialized (#3)
+	// Initialize WP_Rewrite if not already initialized.
 	global $wp_rewrite;
-	if ($wp_rewrite === null) {
+	if ( null === $wp_rewrite ) {
+		// phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- Required for REST detection before WP_Rewrite is initialized.
 		$wp_rewrite = new WP_Rewrite();
 	}
 
-	// Compare the current URL path with the REST API base path (#4)
-	$rest_url = wp_parse_url(trailingslashit(rest_url()));
-	$current_url = wp_parse_url(add_query_arg([]));
+	// Compare the current URL path with the REST API base path.
+	$rest_url    = wp_parse_url( trailingslashit( rest_url() ) );
+	$current_url = wp_parse_url( add_query_arg( array() ) );
 
-	// Ensure both paths are available before comparing
-	if (isset($rest_url['path'], $current_url['path'])) {
-		return strpos($current_url['path'], $rest_url['path']) === 0;
+	// Ensure both paths are available before comparing.
+	if ( isset( $rest_url['path'], $current_url['path'] ) ) {
+		return 0 === strpos( $current_url['path'], $rest_url['path'] );
 	}
 
 	return false;
 }
-

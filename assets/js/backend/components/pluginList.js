@@ -154,7 +154,7 @@ const instance = function( args ) {
 				body: JSON.stringify( plugin.Metas ),
 			} )
 				.then( ( response ) => response.json() )
-				.then( ( data ) => {
+				.then( () => {
 					this.refreshRepeaterFields();
 					this.isSaving = false;
 					this.editedPluginHasChanged = false;
