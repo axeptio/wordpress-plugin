@@ -27,7 +27,9 @@ class WP_Consent_API_Settings {
 		$plugin_basename = plugin_basename( $plugin_key );
 
 		return array(
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Standard WP Consent API hook.
 			'is_compliant' => (bool) apply_filters( "wp_consent_api_registered_{$plugin_basename}", false ),
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Standard WP Consent API hook.
 			'consent_type' => apply_filters( 'wp_get_consent_type', false ),
 			'categories'   => self::get_consent_categories(),
 		);

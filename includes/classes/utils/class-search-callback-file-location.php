@@ -67,11 +67,12 @@ class Search_Callback_File_Location {
 	 * Find the filename where a callback function is defined.
 	 *
 	 * @param mixed       $callback_function The callback function to analyze.
-	 * @param string|null $name The name of the callback (optional).
-	 * @param string|null $filter The filter name (optional).
-	 * @param int|null    $priority The priority of the hook (optional).
+	 * @param string|null $name The name of the callback (optional, reserved for future use).
+	 * @param string|null $filter The filter name (optional, reserved for future use).
+	 * @param int|null    $priority The priority of the hook (optional, reserved for future use).
 	 * @return string|null The filename or null if not found.
 	 */
+	// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed -- Parameters reserved for future extensibility.
 	private static function find_filename( $callback_function, ?string $name = null, ?string $filter = null, ?int $priority = null ): ?string {
 		try {
 			if ( is_string( $callback_function ) ) {

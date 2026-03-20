@@ -73,7 +73,7 @@ class Axeptio_Sdk extends Module {
 
 						$configuration = 'all' !== $cookies_version && isset( $plugin_configuration['Metas']['Merged'] ) ? $plugin_configuration['Metas']['Merged'] : $plugin_configuration['Metas'];
 
-						if ( ( ! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled'] ) || $plugin_configuration['WPConsentAPI']['is_compliant'] === true ) {
+						if ( ( ! isset( $configuration['enabled'] ) || ! (bool) $configuration['enabled'] ) || true === $plugin_configuration['WPConsentAPI']['is_compliant'] ) {
 							return false;
 						}
 

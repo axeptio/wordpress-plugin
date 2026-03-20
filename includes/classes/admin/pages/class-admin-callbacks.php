@@ -178,7 +178,7 @@ class Admin_Callbacks {
 	private static function get_widget_value( string $base_name, string $language ): string {
 		if ( $language ) {
 			$value = Settings::get_option( $base_name . '_' . $language, null );
-			if ( $value !== null ) {
+			if ( null !== $value ) {
 				return $value;
 			}
 		}

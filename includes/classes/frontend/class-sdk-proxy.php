@@ -115,6 +115,7 @@ class Sdk_Proxy extends Module {
 		$sdk_content = wp_check_invalid_utf8( $sdk_content );
 		header( 'Content-Length: ' . strlen( $sdk_content ) );
 
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SDK JavaScript content validated by wp_check_invalid_utf8.
 		echo $sdk_content;
 		exit;
 	}

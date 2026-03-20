@@ -1,6 +1,6 @@
 <div
 	x-data="SelectComponent()"
-	x-init="init(<?php echo htmlspecialchars( json_encode( $data ), ENT_QUOTES, 'UTF-8', true ); ?>)"
+	x-init="init(<?php echo esc_attr( wp_json_encode( $data ) ); ?>)"
 	class="relative"
 	x-cloak
 >

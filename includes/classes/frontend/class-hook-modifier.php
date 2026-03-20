@@ -355,7 +355,7 @@ class Hook_Modifier extends Module {
 			'priority' => null,
 		);
 
-		if ( $hook === 'seopress_compatibility_woocommerce' ) {
+		if ( 'seopress_compatibility_woocommerce' === $hook ) {
 			return false;
 		}
 
@@ -575,7 +575,7 @@ class Hook_Modifier extends Module {
 			if ( $shortcode_tags && $attributes_list ) {
 				$tag_position = array_search( $tag, $shortcode_tags, true );
 
-				if ( $tag_position !== false && isset( $attributes_list[ $tag_position ] ) ) {
+				if ( false !== $tag_position && isset( $attributes_list[ $tag_position ] ) ) {
 					$additional_attributes = sprintf(
 						' data-axeptio-attributes="%s"',
 						implode( ',', (array) $attributes_list[ $tag_position ] )

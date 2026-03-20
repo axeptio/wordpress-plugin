@@ -42,8 +42,8 @@ class Axeptio_Steps {
 			$option_name = $field_name . '_' . $language;
 			$value       = Settings::get_option( $option_name, null );
 
-			// If the value exists, return it
-			if ( $value !== null ) {
+			// If the value exists, return it.
+			if ( null !== $value ) {
 				return $value;
 			}
 		}

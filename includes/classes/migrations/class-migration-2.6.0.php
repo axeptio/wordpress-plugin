@@ -33,18 +33,16 @@ class Migration_2_6_0 implements \Axeptio\Plugin\Contracts\Migration_Interface {
 			)
 		);
 
-		// Add shortcode_placeholder_title column if it doesn't exist
+		// Add shortcode_placeholder_title column if it doesn't exist.
 		if ( empty( $shortcode_placeholder_title_exists ) ) {
-			$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-				"ALTER TABLE `{$table}` ADD COLUMN `shortcode_placeholder_title` TEXT NULL AFTER `shortcode_tags_placeholder`"
-			);
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+			$wpdb->query( "ALTER TABLE `{$table}` ADD COLUMN `shortcode_placeholder_title` TEXT NULL AFTER `shortcode_tags_placeholder`" );
 		}
 
-		// Add shortcode_placeholder_description column if it doesn't exist
+		// Add shortcode_placeholder_description column if it doesn't exist.
 		if ( empty( $shortcode_placeholder_description_exists ) ) {
-			$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-				"ALTER TABLE `{$table}` ADD COLUMN `shortcode_placeholder_description` TEXT NULL AFTER `shortcode_placeholder_title`"
-			);
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+			$wpdb->query( "ALTER TABLE `{$table}` ADD COLUMN `shortcode_placeholder_description` TEXT NULL AFTER `shortcode_placeholder_title`" );
 		}
 	}
 
@@ -58,13 +56,11 @@ class Migration_2_6_0 implements \Axeptio\Plugin\Contracts\Migration_Interface {
 
 		$table = $wpdb->prefix . Plugins::$table_name;
 
-		// Remove the columns if they exist
-		$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			"ALTER TABLE `{$table}` DROP COLUMN IF EXISTS `shortcode_placeholder_description`"
-		);
+		// Remove the columns if they exist.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+		$wpdb->query( "ALTER TABLE `{$table}` DROP COLUMN IF EXISTS `shortcode_placeholder_description`" );
 
-		$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-			"ALTER TABLE `{$table}` DROP COLUMN IF EXISTS `shortcode_placeholder_title`"
-		);
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name cannot be prepared.
+		$wpdb->query( "ALTER TABLE `{$table}` DROP COLUMN IF EXISTS `shortcode_placeholder_title`" );
 	}
 }

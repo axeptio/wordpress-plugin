@@ -80,16 +80,6 @@
 		<exclude name="Squiz.Commenting.FunctionComment.Missing"/>
 	</rule>
 
-	<!-- Temporarily relaxed rules - TODO: fix and remove these exclusions -->
-	<rule ref="WordPress">
-		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
-		<exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped"/>
-		<exclude name="WordPress.WP.GlobalVariablesOverride.Prohibited"/>
-		<exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound"/>
-		<exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound"/>
-		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter"/>
-	</rule>
-
 	<!-- Rules: WordPress Coding Standards - see
 		https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards
 		WordPress-Extra includes WordPress-Core -->
