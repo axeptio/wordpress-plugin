@@ -33,6 +33,7 @@
     "npm": ">= 8.3.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8",
     "@tailwindcss/aspect-ratio": "^0.4.2",

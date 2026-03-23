@@ -67,6 +67,19 @@ class Sdk_Proxy extends Module {
 			return false;
 		}
 
+		// Validate Content-Type against allowed MIME types.
+		$content_type  = wp_remote_retrieve_header( $response, 'content-type' );
+		$is_valid_mime = false;
+		foreach ( self::ALLOWED_MIME_TYPES as $allowed_type ) {
+			if ( strpos( $content_type, $allowed_type ) !== false ) {
+				$is_valid_mime = true;
+				break;
+			}
+		}
+		if ( ! $is_valid_mime ) {
+			return false;
+		}
+
 		$content = wp_remote_retrieve_body( $response );
 
 		if ( empty( $content ) ) {

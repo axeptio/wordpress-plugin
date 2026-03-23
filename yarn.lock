@@ -391,7 +391,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-object-rest-spread@npm:^7.15.6":
+"@babel/plugin-proposal-object-rest-spread@npm:^7.15.6, @babel/plugin-proposal-object-rest-spread@npm:^7.20.7":
   version: 7.20.7
   resolution: "@babel/plugin-proposal-object-rest-spread@npm:7.20.7"
   dependencies:
@@ -3935,6 +3935,7 @@ __metadata:
   resolution: "axeptio-wordpress-plugin@workspace:."
   dependencies:
     "@alpinejs/persist": "npm:^3.14.9"
+    "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@commitlint/cli": "npm:^19.8.0"
     "@commitlint/config-conventional": "npm:^19.8"
     "@tailwindcss/aspect-ratio": "npm:^0.4.2"

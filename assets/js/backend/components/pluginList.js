@@ -165,8 +165,8 @@ const instance = function( args ) {
 			this.setForceEditOpen( true );
 			const self = this;
 			const customUploader = wp.media( {
-				title: 'Sélectionner un média',
-				button: { text: 'Utiliser ce média' },
+				title: wp.i18n.__( 'Select a media', 'axeptio-wordpress-plugin' ),
+				button: { text: wp.i18n.__( 'Use this media', 'axeptio-wordpress-plugin' ) },
 				multiple: false,
 			} ).on( 'select', function() {
 				const attachment = customUploader.state().get( 'selection' ).first().toJSON();

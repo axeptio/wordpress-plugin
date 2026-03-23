@@ -415,7 +415,13 @@ class Hook_Modifier extends Module {
 	 * @return bool
 	 */
 	private function is_cookie_authorized( string $plugin ) {
-		$cookie = isset( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ) ? json_decode( wp_unslash( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ), JSON_OBJECT_AS_ARRAY ) : array();  // PHPCS:Ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		/*
+		 * Cookie value is JSON-encoded, so sanitization must happen after decoding.
+		 * wp_unslash() removes magic quotes, then json_decode() parses the JSON.
+		 * The resulting $plugin key used below comes from DB config, not user input.
+		 */
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- JSON must be decoded before sanitization; see comment above.
+		$cookie = isset( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ) ? json_decode( wp_unslash( $_COOKIE[ Axeptio_Sdk::OPTION_JSON_COOKIE_NAME ] ), JSON_OBJECT_AS_ARRAY ) : array();
 		return isset( $cookie[ "wp_{$plugin}" ] ) && true === $cookie[ "wp_{$plugin}" ];
 	}
 
@@ -631,19 +637,5 @@ class Hook_Modifier extends Module {
 		}
 
 		return $plugin;
-	}
-
-
-	/**
-	 * Fetch the client configuration and determines which cookies version
-	 * will be selected by the SDK (reimplements the SDK algorithm)
-	 *
-	 * @note Maybe take cookies in consideration?
-	 * @see https://github.com/axeptio/caas-styleguide/blob/staging/src/sdk/SDK.js#L653-L701
-	 * @todo implement
-	 * @return string
-	 */
-	private function getCookiesVersion() {
-		return 'not implemented';
 	}
 }

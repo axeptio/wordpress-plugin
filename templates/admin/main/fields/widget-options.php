@@ -19,7 +19,7 @@ if ( $axeptio_is_multilingual ) {
 }
 ?>
 
-<div class="widgetOptions lg:w-4/6 2xl:w-3/4" <?php echo $axeptio_is_multilingual ? 'x-data="{ selectedLang: \'' . esc_attr( $axeptio_default_lang ) . '\' }"' : ''; ?>>
+<div class="widgetOptions lg:w-4/6 2xl:w-3/4" <?php echo $axeptio_is_multilingual ? 'x-data="{ selectedLang: ' . wp_json_encode( $axeptio_default_lang ) . ' }"' : ''; ?>>
 	<?php if ( $axeptio_is_multilingual ) : ?>
 		<div class="mb-6">
 			<?php
@@ -50,7 +50,7 @@ if ( $axeptio_is_multilingual ) {
 	<?php endif; ?>
 
 	<?php foreach ( $axeptio_languages as $axeptio_lang ) : ?>
-		<div class="space-y-6" <?php echo $axeptio_is_multilingual ? 'x-show="selectedLang === \'' . esc_attr( $axeptio_lang['language_code'] ) . '\'"' : ''; ?>>
+		<div class="space-y-6" <?php echo $axeptio_is_multilingual ? 'x-show="selectedLang === ' . wp_json_encode( $axeptio_lang['language_code'] ) . '"' : ''; ?>>
 			<?php Admin_Callbacks::render_widget_fields( $axeptio_lang['language_code'] ); ?>
 		</div>
 	<?php endforeach; ?>

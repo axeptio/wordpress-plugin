@@ -189,10 +189,11 @@ function admin_scripts() {
 	wp_enqueue_script(
 		'axeptio/main',
 		script_url( 'backend/app', 'admin' ),
-		get_asset_info( 'admin', 'dependencies' ),
+		array_merge( get_asset_info( 'admin', 'dependencies' ), array( 'wp-i18n' ) ),
 		get_asset_info( 'admin', 'version' ),
 		true
 	);
+	wp_set_script_translations( 'axeptio/main', 'axeptio-wordpress-plugin' );
 
 	wp_localize_script(
 		'axeptio/main',
