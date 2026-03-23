@@ -186,10 +186,11 @@ function admin_scripts() {
 	}
 
 	wp_enqueue_media();
+	$dependencies = get_asset_info( 'admin', 'dependencies' ) ?? array();
 	wp_enqueue_script(
 		'axeptio/main',
 		script_url( 'backend/app', 'admin' ),
-		array_merge( get_asset_info( 'admin', 'dependencies' ), array( 'wp-i18n' ) ),
+		array_merge( $dependencies, array( 'wp-i18n' ) ),
 		get_asset_info( 'admin', 'version' ),
 		true
 	);
