@@ -1,6 +1,7 @@
 {
   "name": "axeptio-wordpress-plugin",
   "version": "2.3",
+  "packageManager": "yarn@4.9.2",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "build": "TAILWIND_MODE=build mix",

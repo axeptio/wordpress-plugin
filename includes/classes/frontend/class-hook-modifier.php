@@ -216,7 +216,7 @@ class Hook_Modifier extends Module {
 						return $this->parseShortcodeTag( trim( $tag ) );
 					},
 					explode( "\n", $configuration['shortcode_tags_list'] )
-					);
+				);
 
 				// We store the whitelisted tags in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
@@ -530,7 +530,7 @@ class Hook_Modifier extends Module {
 			}
 
 			foreach ( $configs as $config ) {
-				list($filter, $priority, $name, $function) = array_values( $config );
+				list( $filter, $priority, $name, $function ) = array_values( $config );
 
 				if ( $this->should_load_hook( $intercepted_plugins[ $plugin ], $filter, $function, $priority ) ) {
 					continue;

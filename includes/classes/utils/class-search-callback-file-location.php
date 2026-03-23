@@ -111,8 +111,8 @@ class Search_Callback_File_Location {
 			$reflection = new \ReflectionFunction( $callback_function );
 			return $reflection->getFileName();
 		} elseif ( strpos( $callback_function, '::' ) !== false ) {
-			list($class, $method) = explode( '::', $callback_function );
-			$reflection           = new \ReflectionMethod( $class, $method );
+			list( $class, $method ) = explode( '::', $callback_function );
+			$reflection             = new \ReflectionMethod( $class, $method );
 			return $reflection->getFileName();
 		}
 		return null;
@@ -126,7 +126,7 @@ class Search_Callback_File_Location {
 	 * @throws \ReflectionException
 	 */
 	private static function get_filename_from_array( array $callback_function ): ?string {
-		list($object_or_class, $method) = $callback_function;
+		list( $object_or_class, $method ) = $callback_function;
 
 		if ( is_object( $object_or_class ) ) {
 			$reflection = new \ReflectionMethod( get_class( $object_or_class ), $method );

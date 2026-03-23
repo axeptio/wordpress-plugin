@@ -6,13 +6,13 @@ window.Axeptio_SDK = window.Axeptio_SDK || [];
 window._axcb = window._axcb || [];
 
 window.wp_consent_type = 'optin';
-if (typeof window.wp_set_consent === 'function') {
-	Object.entries(window.axeptioSettings.googleConsentMode.default).forEach(([key]) => {
-		window.wp_set_consent(key, 'deny');
-	});
+if ( typeof window.wp_set_consent === 'function' ) {
+	Object.entries( window.axeptioSettings.googleConsentMode.default ).forEach( ( [ key ] ) => {
+		window.wp_set_consent( key, 'deny' );
+	} );
 }
-const consentTypeEvent = new CustomEvent('wp_consent_type_defined');
-document.dispatchEvent(consentTypeEvent);
+const consentTypeEvent = new CustomEvent( 'wp_consent_type_defined' );
+document.dispatchEvent( consentTypeEvent );
 
 function generateKeyFromTrueValues( obj ) {
 	return Object.keys( obj )
@@ -43,7 +43,7 @@ function setCookie( name, value, days ) {
 window._axcb.push( function( sdk ) {
 	sdk.on( 'ready', function() {
 		const selectedCookieConfigId = sdk.getCookiesConfig().identifier;
-		const selectedConfig = sdk.config.cookies.find(config => config.identifier === selectedCookieConfigId);
+		const selectedConfig = sdk.config.cookies.find( ( config ) => config.identifier === selectedCookieConfigId );
 		const currentLanguage = selectedConfig?.language || 'en';
 
 		sdk.config.cookies.forEach( function( cookieConfig ) {
@@ -92,9 +92,15 @@ window._axcb.push( function( sdk ) {
 							const subTitle = window.Axeptio_SDK[`widget_subtitle_${currentLanguage}`] || window.Axeptio_SDK.widget_subtitle;
 							const message = window.Axeptio_SDK[`widget_description_${currentLanguage}`] || window.Axeptio_SDK.widget_description;
 
-							if (title) {step.title = title;}
-							if (subTitle) {step.subTitle = subTitle;}
-							if (message) {step.message = message;}
+							if ( title ) {
+								step.title = title;
+							}
+							if ( subTitle ) {
+								step.subTitle = subTitle;
+							}
+							if ( message ) {
+								step.message = message;
+							}
 
 							step.image = window.Axeptio_SDK.image ?? 'cookie-bienvenue';
 							step.disablePaint = window.Axeptio_SDK.disablePaint ?? false;
@@ -157,44 +163,44 @@ window._axcb.push( function( sdk ) {
 		} );
 
 		// WP_Consent_Api
-		if (typeof window.wp_set_consent === 'function' && window.Axeptio_SDK.enableGoogleConsentMode === '1'
-			&& choices.$$googleConsentMode) {
+		if ( typeof window.wp_set_consent === 'function' && window.Axeptio_SDK.enableGoogleConsentMode === '1'
+			&& choices.$$googleConsentMode ) {
 
 			const consentMapping = {
-				'ad_storage': 'marketing',
-				'ad_user_data': 'marketing',
-				'ad_personalization': 'marketing',
-				'analytics_storage': 'statistics',
-				'functionality_storage': 'functional',
-				'personalization_storage': 'preferences',
-				'security_storage': 'functional'
+				ad_storage: 'marketing',
+				ad_user_data: 'marketing',
+				ad_personalization: 'marketing',
+				analytics_storage: 'statistics',
+				functionality_storage: 'functional',
+				personalization_storage: 'preferences',
+				security_storage: 'functional',
 			};
 
 			const gcmConsents = choices.$$googleConsentMode;
 			const wpConsents = {};
 
-			Object.keys(gcmConsents).forEach(gcmKey => {
-				if (consentMapping[gcmKey]) {
-					const wpCategory = consentMapping[gcmKey];
-					const gcmValue = gcmConsents[gcmKey];
+			Object.keys( gcmConsents ).forEach( ( gcmKey ) => {
+				if ( consentMapping[ gcmKey ] ) {
+					const wpCategory = consentMapping[ gcmKey ];
+					const gcmValue = gcmConsents[ gcmKey ];
 					const wpValue = gcmValue === 'granted' ? 'allow' : 'deny';
 
 					// Only update if the value is more permissive than the one already set
 					// For marketing, just one property being allowed is enough
-					if (!wpConsents[wpCategory] || (wpValue === 'allow' && wpConsents[wpCategory] !== 'allow')) {
-						wpConsents[wpCategory] = wpValue;
+					if ( ! wpConsents[ wpCategory ] || ( wpValue === 'allow' && wpConsents[ wpCategory ] !== 'allow' ) ) {
+						wpConsents[ wpCategory ] = wpValue;
 					}
 				}
-			});
+			} );
 
-			Object.keys(wpConsents).forEach(wpCategory => {
-				window.wp_set_consent(wpCategory, wpConsents[wpCategory]);
-			});
+			Object.keys( wpConsents ).forEach( ( wpCategory ) => {
+				window.wp_set_consent( wpCategory, wpConsents[ wpCategory ] );
+			} );
 
-			const consentChangeEvent = new CustomEvent('wp_consent_change', {
-				detail: wpConsents
-			});
-			document.dispatchEvent(consentChangeEvent);
+			const consentChangeEvent = new CustomEvent( 'wp_consent_change', {
+				detail: wpConsents,
+			} );
+			document.dispatchEvent( consentChangeEvent );
 		}
 
 		getAllComments( document.body ).forEach( function( comment ) {
@@ -215,9 +221,9 @@ window._axcb.push( function( sdk ) {
 				const elem = document.createElement( 'div' );
 				elem.innerHTML = value;
 
-				if (attributes && attributes[1]) {
-					const attributesList = attributes[1].split(',');
-					if (attributesList.includes('forceReload')) {
+				if ( attributes && attributes[ 1 ] ) {
+					const attributesList = attributes[ 1 ].split( ',' );
+					if ( attributesList.includes( 'forceReload' ) ) {
 						window.location.reload();
 						return;
 					}
