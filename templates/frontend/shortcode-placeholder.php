@@ -12,9 +12,9 @@
 		<div class="axeptio-shortcode-content">
 			<?php
 			if ( ! empty( $data->plugin_settings['shortcode_placeholder_description'] ) ) {
-				$description = $data->plugin_settings['shortcode_placeholder_description'];
-				$description = str_replace( '{plugin_name}', esc_html( $data->plugin_settings['vendor_title'] ), $description );
-				echo esc_html( $description );
+				$axeptio_description = $data->plugin_settings['shortcode_placeholder_description'];
+				$axeptio_description = str_replace( '{plugin_name}', esc_html( $data->plugin_settings['vendor_title'] ), $axeptio_description );
+				echo esc_html( $axeptio_description );
 			} else {
 				/* translators: $s: Name of the plugin */
 				printf( esc_html__( "This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it's very simple: go to our cookie consent widget, give your approval for the \"%s\" extension. And voila, you're all set!", 'axeptio-wordpress-plugin' ), esc_html( $data->plugin_settings['vendor_title'] ) );

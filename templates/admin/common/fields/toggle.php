@@ -7,7 +7,7 @@
 	<label for="<?php echo esc_attr( $data->id ); ?>" class="ml-4 flex flex-col min-w-0 flex-1 gap-1">
 		<span class="truncate font-medium">
 			<?php echo esc_html( $data->label ); ?>
-			<?php if ( isset($data->help_url) ): ?>
+			<?php if ( isset( $data->help_url ) ) : ?>
 				<a href="<?php echo esc_url( $data->help_url ); ?>" target="_blank">
 				<span class="dashicons dashicons-info-outline"></span>
 			</a>

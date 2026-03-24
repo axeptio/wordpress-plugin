@@ -11,7 +11,7 @@
 				<p class="text-sm text-gray-900 font-semibold">
 					<?php esc_html_e( 'WP Consent API plugin is not active. WP Consent API features are disabled.', 'axeptio-wordpress-plugin' ); ?>
 					<a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wp-consent-api' ) ); ?>"
-					   class="font-medium underline text-yellow-700 hover:text-yellow-600 transition-colors">
+						class="font-medium underline text-yellow-700 hover:text-yellow-600 transition-colors">
 						<?php esc_html_e( 'Install and activate WP Consent API plugin to enable these features.', 'axeptio-wordpress-plugin' ); ?>
 					</a>
 				</p>

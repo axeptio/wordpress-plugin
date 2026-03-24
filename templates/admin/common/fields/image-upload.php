@@ -5,7 +5,7 @@
 })">
 	<label :for="fieldId" class="block text-sm font-medium leading-6 text-gray-900">
 		<?php echo esc_html( $data->label ); ?>
-		<?php if ( isset($data->help_url) ): ?>
+		<?php if ( isset( $data->help_url ) ) : ?>
 			<a href="<?php echo esc_url( $data->help_url ); ?>" target="_blank">
 				<span class="dashicons dashicons-info-outline"></span>
 			</a>
