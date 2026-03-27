@@ -29,10 +29,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'yarn'
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install Node dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Run JS lint
         run: yarn eslint
@@ -65,10 +67,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'yarn'
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install Node dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Build assets
         run: yarn build:production
