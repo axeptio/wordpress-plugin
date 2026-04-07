@@ -13,6 +13,10 @@ on:
         required: false
         default: true
         type: boolean
+      version:
+        description: 'Version to deploy (required for manual runs, e.g. 2.6.1)'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -99,6 +103,7 @@ jobs:
           SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
           SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
           SLUG: axeptio-sdk-integration
+          VERSION: ${{ inputs.version || '' }}
           ASSETS_DIR: release-assets
 
       - name: Create GitHub Release
