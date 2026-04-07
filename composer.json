@@ -10,8 +10,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
-    "php": "^7.4 || ^8.0",
-    "axeptio/sdk": "dev-master"
+    "php": "^7.4 || ^8.0"
   },
   "scripts": {
     "run-stan": "vendor/bin/phpstan analyze --memory-limit=2G --no-progress",
