@@ -49,12 +49,20 @@
 	</rule>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="axeptio-wordpress-plugin" />
+			<property name="text_domain" type="array">
+				<element value="axeptio-wordpress-plugin" />
+			</property>
 		</properties>
 	</rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<property name="prefixes" type="array" value="axeptio,AXEPTIO,Axeptio,XPWP,xpwp" />
+			<property name="prefixes" type="array">
+				<element value="axeptio" />
+				<element value="AXEPTIO" />
+				<element value="Axeptio" />
+				<element value="XPWP" />
+				<element value="xpwp" />
+			</property>
 		</properties>
 	</rule>
 	<rule ref="WordPress.Files.FileName">

@@ -543,7 +543,7 @@ class Hook_Modifier extends Module {
 				}
 
 				// We decide to prevent admin hooks to be intercepted.
-				if ( str_contains( $filter, 'admin' ) ) {
+				if ( false !== strpos( $filter, 'admin' ) ) {
 					continue;
 				}
 
@@ -630,7 +630,7 @@ class Hook_Modifier extends Module {
 	 * @param int    $priority          The priority of the callback.
 	 * @return array|null Information about the callback or null if analysis fails.
 	 */
-	private function process_function( $callback_function, string $name = null, string $filter = null, $priority = null ) {
+	private function process_function( $callback_function, ?string $name = null, ?string $filter = null, $priority = null ) {
 		$plugin = Search_Callback_File_Location::get_plugin( $callback_function, $name, $filter, $priority ? (int) $priority : 10 );
 		if ( ! $plugin ) {
 			return null;
