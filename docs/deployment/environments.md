@@ -5,17 +5,17 @@ The WordPress plugin has no cloud infrastructure. The two environments are **loc
 
 ## Environment Matrix
 
-| Property          | Local (Dev)                        | WordPress.org (Production)                        |
-| :---------------- | :--------------------------------- | :------------------------------------------------ |
-| Branch            | Any (local)                        | Git tag pushed to GitHub                          |
-| Trigger           | Manual (`task start` / `yarn watch`) | Automated on git tag via `deploy.yml`           |
-| PHP version       | 7.4 (Docker)                       | 7.4 (CI — see [Improvements #3](improvements.md)) |
-| Node version      | 18 (volta pin)                     | 16 (CI — see [Improvements #2](improvements.md))  |
-| JS build          | `yarn start` (watch) / `yarn build` | `yarn build:production`                          |
-| Composer          | `composer install` (with dev)      | `composer install --no-dev --optimize-autoloader` |
-| Distribution      | Local filesystem                   | WordPress.org SVN + GitHub release `.zip`         |
-| SVN path          | -                                  | `trunk/` (latest) + `tags/<version>/`             |
-| Store assets      | -                                  | `release-assets/` → SVN `assets/`                |
+| Property          | Local (Dev)                          | WordPress.org (Production)                                 |
+| :---------------- | :----------------------------------- | :--------------------------------------------------------- |
+| Branch            | Any (local)                          | Git tag pushed to GitHub                                   |
+| Trigger           | Manual (`task start` / `yarn watch`) | Git tag push (automated) or `workflow_dispatch` (manual)   |
+| PHP version       | 7.4 (Docker)                         | 7.4 (CI — see [Improvements #3](improvements.md))          |
+| Node version      | 18 (Volta pin)                       | 18 (CI)                                                    |
+| JS build          | `yarn start` (watch) / `yarn build`  | `yarn build:production`                                    |
+| Composer          | `composer install` (with dev)        | `composer install --no-dev --optimize-autoloader`          |
+| Distribution      | Local filesystem                     | WordPress.org SVN + GitHub release `.zip`                  |
+| SVN path          | -                                    | `trunk/` (latest) + `tags/<version>/`                      |
+| Store assets      | -                                    | `release-assets/` → SVN `assets/`                          |
 
 ## Local Development Setup
 
@@ -58,36 +58,44 @@ It is **not** used in GitHub Actions CI.
 sequenceDiagram
     participant Dev as Developer
     participant GH as GitHub
-    participant CI as GitHub Actions
+    participant LA as lint-and-test job
+    participant DJ as deploy job
     participant WPSVN as WordPress.org SVN
     participant GHR as GitHub Releases
 
-    Dev->>GH: git tag vX.Y.Z && git push --tags
-    GH->>CI: Trigger deploy.yml
-    CI->>CI: Lint (ESLint + PHPCS)
-    CI->>CI: Test (Pest)
-    CI->>CI: Build (JS prod + Composer no-dev)
-    CI->>CI: rsync → ./tmp/ (using exclusions.txt)
-    CI->>WPSVN: Deploy trunk/ + tags/X.Y.Z/ + assets/
-    CI->>CI: Generate axeptio-wordpress-plugin.zip
-    CI->>GHR: Create release with .zip attached
+    Dev->>GH: git tag X.Y.Z && git push --tags
+    GH->>LA: Trigger deploy.yml (lint-and-test job)
+    LA->>LA: Lint (ESLint + PHPCS)
+    LA->>LA: Test (composer test)
+    LA->>DJ: passed (needs:)
+    DJ->>DJ: Build (yarn build:production + composer install --no-dev)
+    DJ->>WPSVN: 10up action: deploy trunk/ + tags/X.Y.Z/ + assets/ (via .distignore)
+    DJ->>DJ: Generate .zip artifact
+    DJ->>GHR: Create release with .zip attached
 ```
 
 ### What gets deployed to SVN
 
-The `exclusions.txt` file controls which files are **excluded** from the release package.
-Key excluded paths:
+Two files control which paths are excluded from the release package, depending on how the release is triggered:
 
-| Excluded path      | Reason                                |
-| :----------------- | :------------------------------------ |
-| `assets/`          | Raw source assets (compiled to `public/`) |
-| `node_modules/`    | JS dependencies                       |
-| `docs/`            | Internal engineering documentation    |
-| `release-assets/`  | Moved to SVN `assets/` separately     |
-| `releases/`        | Temporary SVN checkout directory      |
-| `tmp/`             | Temporary build output                |
-| `.git/`, `.github/` | VCS and CI config                    |
-| Dev config files   | `phpcs.xml`, `phpstan.neon.dist`, etc. |
+| File              | Used by                        | Has inline comments |
+| :---------------- | :----------------------------- | :------------------ |
+| `.distignore`     | CI pipeline (`deploy.yml`)     | Yes                 |
+| `exclusions.txt`  | Manual `task release` command  | No                  |
+
+Both files must be kept in sync. See [Improvements](improvements.md) for known gaps.
+
+Key paths excluded from the release package:
+
+| Excluded path       | Reason                                          |
+| :------------------ | :---------------------------------------------- |
+| `assets/`           | Raw source assets (compiled output is in `dist/`) |
+| `node_modules/`     | JS dependencies                                 |
+| `release-assets/`   | Moved to SVN `assets/` separately               |
+| `releases/`         | Temporary SVN checkout directory                |
+| `tmp/`              | Temporary build output                          |
+| `.git/`, `.github/` | VCS and CI config                               |
+| Dev config files    | `phpcs.xml`, `phpstan.neon.dist`, etc.          |
 
 ### SVN Structure on WordPress.org
 
