@@ -6,8 +6,10 @@ window.Axeptio_SDK = window.Axeptio_SDK || [];
 window._axcb = window._axcb || [];
 
 window.wp_consent_type = 'optin';
-if ( typeof window.wp_set_consent === 'function' ) {
-	Object.entries( window.axeptioSettings.googleConsentMode.default ).forEach( ( [ key ] ) => {
+// eslint-disable-next-line camelcase
+if ( typeof window.wp_set_consent === 'function' && window.Axeptio_SDK?.googleConsentMode?.default ) {
+	Object.entries( window.Axeptio_SDK.googleConsentMode.default ).forEach( ( [ key ] ) => {
+		// eslint-disable-next-line camelcase
 		window.wp_set_consent( key, 'deny' );
 	} );
 }
@@ -162,11 +164,13 @@ window._axcb.push( function( sdk ) {
 			setCookie( 'axeptio_cache_identifier', hash, 7 );
 		} );
 
-		if ( typeof wp_set_consent === 'function' ) {
+		// eslint-disable-next-line camelcase
+		if ( typeof window.wp_set_consent === 'function' ) {
 			window.axeptioWpConsentCategories.forEach( ( category ) => {
 				const vendorName = 'wp_consent_' + category.replace( /-/g, '_' );
 				if ( choices[ vendorName ] !== undefined ) {
-					wp_set_consent( category, choices[ vendorName ] ? 'allow' : 'deny' );
+					// eslint-disable-next-line camelcase
+					window.wp_set_consent( category, choices[ vendorName ] ? 'allow' : 'deny' );
 				}
 			} );
 		}

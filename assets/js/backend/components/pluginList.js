@@ -248,10 +248,10 @@ const instance = function( args ) {
 					return parsed[ lang ] || '';
 				}
 			} catch ( e ) {
-				return value;
+				return lang === 'default' ? value : '';
 			}
 
-			return value;
+			return lang === 'default' ? value : '';
 		},
 
 		setLocalizedMeta( field, lang, value ) {
