@@ -49,12 +49,20 @@
 	</rule>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="axeptio-wordpress-plugin" />
+			<property name="text_domain" type="array">
+				<element value="axeptio-wordpress-plugin" />
+			</property>
 		</properties>
 	</rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<property name="prefixes" type="array" value="axeptio,AXEPTIO,Axeptio,XPWP,xpwp" />
+			<property name="prefixes" type="array">
+				<element value="axeptio" />
+				<element value="AXEPTIO" />
+				<element value="Axeptio" />
+				<element value="XPWP" />
+				<element value="xpwp" />
+			</property>
 		</properties>
 	</rule>
 	<rule ref="WordPress.Files.FileName">
@@ -72,6 +80,12 @@
 	<rule ref="WordPress-Docs">
 		<exclude name="Squiz.Commenting.FileComment.Missing"/>
 		<exclude name="Squiz.Commenting.ClassComment.Missing"/>
+		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"/>
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
+		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
+		<exclude name="Squiz.Commenting.FunctionComment.EmptyThrows"/>
+		<exclude name="Squiz.Commenting.VariableComment.MissingVar"/>
+		<exclude name="Squiz.Commenting.FunctionComment.Missing"/>
 	</rule>
 
 	<!-- Rules: WordPress Coding Standards - see

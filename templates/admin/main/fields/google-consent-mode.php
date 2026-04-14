@@ -1,20 +1,20 @@
 <?php if ( ! \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ) : ?>
 <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
-    <div class="flex">
-        <div class="flex-shrink-0">
-            <svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-            </svg>
-        </div>
-        <div class="ml-3">
-            <p class="text-sm text-yellow-700">
-                <?php esc_html_e( 'Google Consent Mode requires the WP Consent API plugin to be active.', 'axeptio-wordpress-plugin' ); ?>
-                <a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wp-consent-api' ) ); ?>" class="font-medium underline text-yellow-700 hover:text-yellow-600">
-                    <?php esc_html_e( 'Install and activate WP Consent API plugin to enable these features.', 'axeptio-wordpress-plugin' ); ?>
-                </a>
-            </p>
-        </div>
-    </div>
+	<div class="flex">
+		<div class="flex-shrink-0">
+			<svg class="h-5 w-5 text-yellow-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+				<path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+			</svg>
+		</div>
+		<div class="ml-3">
+			<p class="text-sm text-yellow-700">
+				<?php esc_html_e( 'Google Consent Mode requires the WP Consent API plugin to be active.', 'axeptio-wordpress-plugin' ); ?>
+				<a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wp-consent-api' ) ); ?>" class="font-medium underline text-yellow-700 hover:text-yellow-600">
+					<?php esc_html_e( 'Install and activate WP Consent API plugin to enable these features.', 'axeptio-wordpress-plugin' ); ?>
+				</a>
+			</p>
+		</div>
+	</div>
 </div>
 <?php endif; ?>
 

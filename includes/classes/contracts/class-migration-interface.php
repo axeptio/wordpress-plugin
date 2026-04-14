@@ -1,4 +1,10 @@
 <?php
+/**
+ * Migration interface.
+ *
+ * @package Axeptio
+ */
+
 namespace Axeptio\Plugin\Contracts;
 
 interface Migration_Interface {

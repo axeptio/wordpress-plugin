@@ -26,11 +26,13 @@ class WP_Consent_API_Settings {
 	public static function find( string $plugin_key ): array {
 		$plugin_basename = plugin_basename( $plugin_key );
 
-		return [
-			'is_compliant'  => (bool) apply_filters( "wp_consent_api_registered_{$plugin_basename}", false ),
-			'consent_type'  => apply_filters( 'wp_get_consent_type', false ),
-			'categories'    => self::get_consent_categories(),
-		];
+		return array(
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Standard WP Consent API hook.
+			'is_compliant' => (bool) apply_filters( "wp_consent_api_registered_{$plugin_basename}", false ),
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Standard WP Consent API hook.
+			'consent_type' => apply_filters( 'wp_get_consent_type', false ),
+			'categories'   => self::get_consent_categories(),
+		);
 	}
 
 	/**

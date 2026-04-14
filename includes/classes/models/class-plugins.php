@@ -82,7 +82,7 @@ class Plugins {
 				foreach ( $plugins as $key => $plugin ) {
 					$plugin_key = self::get_plugin_id( $key );
 
-					if ( isset($plugin['TextDomain']) && 'axeptio-wordpress-plugin' === $plugin['TextDomain'] ) {
+					if ( isset( $plugin['TextDomain'] ) && 'axeptio-wordpress-plugin' === $plugin['TextDomain'] ) {
 						continue;
 					}
 
@@ -266,7 +266,7 @@ class Plugins {
 	 * @return string Plugin ID.
 	 */
 	protected static function get_plugin_id( $key ): string {
-		if ( str_contains( $key, '/' ) ) {
+		if ( false !== strpos( $key, '/' ) ) {
 			$key = explode( '/', $key )[0];
 		}
 		return sanitize_title( str_replace( '.php', '', $key ) );

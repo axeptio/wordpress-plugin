@@ -126,10 +126,10 @@ class Admin_Callbacks {
 	 *
 	 * @param string $language_code Language code
 	 */
-	public static function render_widget_fields(string $language_code): void {
-		self::widget_title(['language' => $language_code]);
-		self::widget_subtitle(['language' => $language_code]);
-		self::widget_description(['language' => $language_code]);
+	public static function render_widget_fields( string $language_code ): void {
+		self::widget_title( array( 'language' => $language_code ) );
+		self::widget_subtitle( array( 'language' => $language_code ) );
+		self::widget_description( array( 'language' => $language_code ) );
 	}
 
 	/**
@@ -138,7 +138,7 @@ class Admin_Callbacks {
 	 * @param array $args Arguments
 	 * @return string Language code or empty string
 	 */
-	private static function get_language_from_args(array $args): string {
+	private static function get_language_from_args( array $args ): string {
 		return $args['language'] ?? '';
 	}
 
@@ -149,8 +149,8 @@ class Admin_Callbacks {
 	 * @param string $language Language code
 	 * @return string Formatted label
 	 */
-	private static function format_label_with_language(string $label, string $language): string {
-		return $language ? sprintf('%s (%s)', $label, $language) : $label;
+	private static function format_label_with_language( string $label, string $language ): string {
+		return $language ? sprintf( '%s (%s)', $label, $language ) : $label;
 	}
 
 	/**
@@ -160,12 +160,12 @@ class Admin_Callbacks {
 	 * @param string $language Language code
 	 * @return array Field attributes with name and id
 	 */
-	private static function get_field_attributes(string $base_name, string $language): array {
+	private static function get_field_attributes( string $base_name, string $language ): array {
 		$suffix = $language ? "_{$language}" : '';
-		return [
+		return array(
 			'name' => $base_name . $suffix,
 			'id'   => 'xpwp_' . $base_name . $suffix,
-		];
+		);
 	}
 
 	/**
@@ -175,15 +175,15 @@ class Admin_Callbacks {
 	 * @param string $language Language code
 	 * @return string Option value
 	 */
-	private static function get_widget_value(string $base_name, string $language): string {
-		if ($language) {
-			$value = Settings::get_option($base_name . '_' . $language, null);
-			if ($value !== null) {
+	private static function get_widget_value( string $base_name, string $language ): string {
+		if ( $language ) {
+			$value = Settings::get_option( $base_name . '_' . $language, null );
+			if ( null !== $value ) {
 				return $value;
 			}
 		}
 
-		return Settings::get_option($base_name, '');
+		return Settings::get_option( $base_name, '' );
 	}
 
 	/**
@@ -192,24 +192,24 @@ class Admin_Callbacks {
 	 * @param array $args Field configuration
 	 * @return void
 	 */
-	private static function render_widget_field(array $args): void {
-		$language = $args['language'] ?? '';
+	private static function render_widget_field( array $args ): void {
+		$language   = $args['language'] ?? '';
 		$field_name = $args['field_name'];
-		$label = $args['label'];
-		$template = $args['template'] ?? 'admin/common/fields/text';
+		$label      = $args['label'];
+		$template   = $args['template'] ?? 'admin/common/fields/text';
 
-		$field_attrs = self::get_field_attributes($field_name, $language);
-		$value = self::get_widget_value($field_name, $language);
+		$field_attrs = self::get_field_attributes( $field_name, $language );
+		$value       = self::get_widget_value( $field_name, $language );
 
 		\Axeptio\Plugin\get_template_part(
 			$template,
 			array_merge(
-				[
-					'label'    => self::format_label_with_language($label, $language),
+				array(
+					'label'    => self::format_label_with_language( $label, $language ),
 					'group'    => 'axeptio_settings',
 					'value'    => $value,
 					'language' => $language,
-				],
+				),
 				$field_attrs
 			)
 		);
@@ -221,12 +221,14 @@ class Admin_Callbacks {
 	 * @param array $args Arguments passed to the function.
 	 * @return void
 	 */
-	public static function widget_title(array $args = []): void {
-		self::render_widget_field([
-			'field_name' => 'widget_title',
-			'label'      => __('Widget title', 'axeptio-wordpress-plugin'),
-			'language'   => self::get_language_from_args($args),
-		]);
+	public static function widget_title( array $args = array() ): void {
+		self::render_widget_field(
+			array(
+				'field_name' => 'widget_title',
+				'label'      => __( 'Widget title', 'axeptio-wordpress-plugin' ),
+				'language'   => self::get_language_from_args( $args ),
+			)
+			);
 	}
 
 	/**
@@ -235,12 +237,14 @@ class Admin_Callbacks {
 	 * @param array $args Arguments passed to the function.
 	 * @return void
 	 */
-	public static function widget_subtitle(array $args = []): void {
-		self::render_widget_field([
-			'field_name' => 'widget_subtitle',
-			'label'      => __('Widget sub-title', 'axeptio-wordpress-plugin'),
-			'language'   => self::get_language_from_args($args),
-		]);
+	public static function widget_subtitle( array $args = array() ): void {
+		self::render_widget_field(
+			array(
+				'field_name' => 'widget_subtitle',
+				'label'      => __( 'Widget sub-title', 'axeptio-wordpress-plugin' ),
+				'language'   => self::get_language_from_args( $args ),
+			)
+			);
 	}
 
 	/**
@@ -295,7 +299,7 @@ class Admin_Callbacks {
 				'id'          => 'xpwp_cookie_domain',
 				'value'       => Settings::get_option( 'cookie_domain', '' ),
 				'instruction' => __( 'If specified, domain name on which the cookie containing user choices will be available. This allows to request one consent for various subdomains', 'axeptio-wordpress-plugin' ),
-				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274095-comment-parametrer-le-widget-pour-un-sous-domaine' : 'https://support.axeptio.eu/en/articles/274095-how-to-set-the-widget-for-a-sub-domain',
+				'help_url'    => strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274095-comment-parametrer-le-widget-pour-un-sous-domaine' : 'https://support.axeptio.eu/en/articles/274095-how-to-set-the-widget-for-a-sub-domain',
 			)
 		);
 	}
@@ -317,7 +321,7 @@ class Admin_Callbacks {
 				'id'          => 'xpwp_api_url',
 				'value'       => Settings::get_option( 'api_url', '' ),
 				'instruction' => __( 'URL to which the widget will send POST requests after user consent.', 'axeptio-wordpress-plugin' ),
-				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274016-mise-en-place-du-server-side-tracking' : 'https://support.axeptio.eu/hc/en-gb/articles/28447238691345-Passing-Consent-in-Your-GTM-Server-side-Container',
+				'help_url'    => strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274016-mise-en-place-du-server-side-tracking' : 'https://support.axeptio.eu/hc/en-gb/articles/28447238691345-Passing-Consent-in-Your-GTM-Server-side-Container',
 				'placeholder' => 'https://yourdomain.clouds',
 			)
 		);
@@ -348,13 +352,15 @@ class Admin_Callbacks {
 	 * @param array $args Arguments passed to the function.
 	 * @return void
 	 */
-	public static function widget_description(array $args = []): void {
-		self::render_widget_field([
-			'field_name' => 'widget_description',
-			'label'      => __('Widget description', 'axeptio-wordpress-plugin'),
-			'language'   => self::get_language_from_args($args),
-			'template'   => 'admin/common/fields/textarea',
-		]);
+	public static function widget_description( array $args = array() ): void {
+		self::render_widget_field(
+			array(
+				'field_name' => 'widget_description',
+				'label'      => __( 'Widget description', 'axeptio-wordpress-plugin' ),
+				'language'   => self::get_language_from_args( $args ),
+				'template'   => 'admin/common/fields/textarea',
+			)
+			);
 	}
 
 	/**
@@ -401,7 +407,7 @@ class Admin_Callbacks {
 				'name'        => 'gtm_events',
 				'id'          => 'xpwp_gtm_events',
 				'value'       => \Axeptio\Plugin\Models\Settings::get_option( 'gtm_events', 'true' ),
-				'help_url'    =>  strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274038-gestion-des-evenements-personnalises-google-tag-manager' : 'https://support.axeptio.eu/hc/en-gb/articles/27662718518929-Management-of-Custom-Events-in-Google-Tag-Manager',
+				'help_url'    => strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274038-gestion-des-evenements-personnalises-google-tag-manager' : 'https://support.axeptio.eu/hc/en-gb/articles/27662718518929-Management-of-Custom-Events-in-Google-Tag-Manager',
 			)
 		);
 	}

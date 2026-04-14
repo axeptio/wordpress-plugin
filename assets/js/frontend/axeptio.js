@@ -6,12 +6,13 @@ window.Axeptio_SDK = window.Axeptio_SDK || [];
 window._axcb = window._axcb || [];
 
 window.wp_consent_type = 'optin';
-if ( typeof wp_set_consent === 'function' ) {
-	window.axeptioWpConsentCategories.forEach( ( category ) => {
-		wp_set_consent( category, 'deny' );
+if ( typeof window.wp_set_consent === 'function' ) {
+	Object.entries( window.axeptioSettings.googleConsentMode.default ).forEach( ( [ key ] ) => {
+		window.wp_set_consent( key, 'deny' );
 	} );
 }
-document.dispatchEvent( new CustomEvent( 'wp_consent_type_defined' ) );
+const consentTypeEvent = new CustomEvent( 'wp_consent_type_defined' );
+document.dispatchEvent( consentTypeEvent );
 
 function generateKeyFromTrueValues( obj ) {
 	return Object.keys( obj )
@@ -42,7 +43,7 @@ function setCookie( name, value, days ) {
 window._axcb.push( function( sdk ) {
 	sdk.on( 'ready', function() {
 		const selectedCookieConfigId = sdk.getCookiesConfig().identifier;
-		const selectedConfig = sdk.config.cookies.find(config => config.identifier === selectedCookieConfigId);
+		const selectedConfig = sdk.config.cookies.find( ( config ) => config.identifier === selectedCookieConfigId );
 		const currentLanguage = selectedConfig?.language || 'en';
 
 		sdk.config.cookies.forEach( function( cookieConfig ) {
@@ -91,9 +92,15 @@ window._axcb.push( function( sdk ) {
 							const subTitle = window.Axeptio_SDK[`widget_subtitle_${currentLanguage}`] || window.Axeptio_SDK.widget_subtitle;
 							const message = window.Axeptio_SDK[`widget_description_${currentLanguage}`] || window.Axeptio_SDK.widget_description;
 
-							if (title) step.title = title;
-							if (subTitle) step.subTitle = subTitle;
-							if (message) step.message = message;
+							if ( title ) {
+								step.title = title;
+							}
+							if ( subTitle ) {
+								step.subTitle = subTitle;
+							}
+							if ( message ) {
+								step.message = message;
+							}
 
 							step.image = window.Axeptio_SDK.image ?? 'cookie-bienvenue';
 							step.disablePaint = window.Axeptio_SDK.disablePaint ?? false;
@@ -182,9 +189,9 @@ window._axcb.push( function( sdk ) {
 				const elem = document.createElement( 'div' );
 				elem.innerHTML = value;
 
-				if (attributes && attributes[1]) {
-					const attributesList = attributes[1].split(',');
-					if (attributesList.includes('forceReload')) {
+				if ( attributes && attributes[ 1 ] ) {
+					const attributesList = attributes[ 1 ].split( ',' );
+					if ( attributesList.includes( 'forceReload' ) ) {
 						window.location.reload();
 						return;
 					}

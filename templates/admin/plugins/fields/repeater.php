@@ -2,15 +2,15 @@
 	<template x-for="(field, index) in getFields('<?php echo esc_attr( $data->name ); ?>')" :key="index">
 		<div class="flex items-center mb-3">
 			<input @keyup="updateRepeaterField('<?php echo esc_attr( $data->name ); ?>')"
-				   x-init="storeRef('<?php echo esc_attr( $data->name ); ?>', $el, index)"
-				   @keydown.enter.prevent="addField('<?php echo esc_attr( $data->name ); ?>', index + 1)"
-				   @keydown.backspace="removeFieldAndFocusPrevious('<?php echo esc_attr( $data->name ); ?>', index)"
-				   x-model="fields['<?php echo esc_attr( $data->name ); ?>'][index]"
-				   type="text"
-				   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
-				   			ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+					x-init="storeRef('<?php echo esc_attr( $data->name ); ?>', $el, index)"
+					@keydown.enter.prevent="addField('<?php echo esc_attr( $data->name ); ?>', index + 1)"
+					@keydown.backspace="removeFieldAndFocusPrevious('<?php echo esc_attr( $data->name ); ?>', index)"
+					x-model="fields['<?php echo esc_attr( $data->name ); ?>'][index]"
+					type="text"
+					class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
+								ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
 							focus:ring-amber-600 sm:text-sm sm:leading-6"
-				   placeholder="<?php echo esc_attr( $data->placeholder ?? '' ); ?>"
+					placeholder="<?php echo esc_attr( $data->placeholder ?? '' ); ?>"
 			>
 			<button @click="removeField('<?php echo esc_attr( $data->name ); ?>', index)" type="button" class="mx-1 text-red-500" spellcheck="false">
 				<span class="sr-only"><?php echo esc_html( $data->delete_item ); ?></span>

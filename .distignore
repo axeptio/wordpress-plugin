@@ -1,0 +1,90 @@
+# WordPress.org Distribution Ignore File
+# Files and directories to exclude from the WordPress.org SVN deployment
+
+# Git
+/.git
+/.github
+/.gitignore
+/.gitattributes
+
+# GitHub Actions reference (not needed in distribution)
+/action-wordpress-plugin-deploy
+
+# Development dependencies (vendor is INCLUDED - required for autoload)
+/node_modules
+
+# Source assets (dist/ contains compiled versions)
+/assets
+
+# Build tools and configs (composer.json is INCLUDED - required for plugin init)
+/.yarn
+.nvmrc
+package.json
+yarn.lock
+composer.lock
+webpack.mix.js
+postcss.config.js
+tailwind.config.js
+
+# Code quality tools
+.editorconfig
+.eslintignore
+.eslintrc.json
+.prettierrc
+.prettierignore
+phpcs.xml
+phpstan.neon.dist
+rector.php
+
+# Testing
+/tests
+phpunit.xml
+.phpunit.result.cache
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# CI/CD
+/.gitlab-ci.yml
+Taskfile.yml
+
+# IDE
+/.idea
+/.vscode
+
+# Husky (git hooks)
+/.husky
+commitlint.config.js
+
+# Development scripts
+/bin
+
+# Release artifacts
+/releases
+/release-assets
+/tmp
+exclusions.txt
+
+# Claude Code
+/.claude
+CLAUDE.md
+.mcp.json
+
+# Misc
+.DS_Store
+Thumbs.db
+*.log
+*.diff
+*.err
+*.orig
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+.env
+
+# Development README (readme.txt is for WordPress.org)
+README.md
