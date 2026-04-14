@@ -62,7 +62,8 @@
     "cross-env": "^7.0.3"
   },
   "resolutions": {
-    "webpack-dev-server": "^5.2.1"
+    "webpack-dev-server": "^5.2.1",
+    "webpackbar": "^7.0.0"
   },
   "lint-staged": {
     "**/*.{js,md,yml,mjs}": "prettier --write"
