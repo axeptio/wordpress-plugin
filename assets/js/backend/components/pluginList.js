@@ -248,9 +248,11 @@ const instance = function( args ) {
 					return parsed[ lang ] || '';
 				}
 			} catch ( e ) {
+				// Plain string (legacy non-JSON format): treat as default language value.
 				return lang === 'default' ? value : '';
 			}
 
+			// JSON.parse succeeded but result is not an object (e.g. a plain string was valid JSON).
 			return lang === 'default' ? value : '';
 		},
 
@@ -273,9 +275,13 @@ const instance = function( args ) {
 					const temp = JSON.parse( currentValue );
 					if ( typeof temp === 'object' && temp !== null ) {
 						parsed = temp;
+					} else {
+						// Valid JSON but not an object: preserve as default value.
+						parsed = { default: currentValue };
 					}
 				} catch ( e ) {
-					// Not JSON
+					// Plain string (legacy format): preserve as default language value.
+					parsed = { default: currentValue };
 				}
 			}
 
