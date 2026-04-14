@@ -540,8 +540,6 @@ msgstr ""
 "Hilfe zu konsultieren.</a>"
 
 #: templates/admin/main/fields/non-existing-account.php:15
-#, fuzzy
-#| msgid "https://support.axeptio.eu/hc/en-gb"
 msgid "https://support.axeptio.eu/en"
 msgstr "https://support.axeptio.eu/hc/de"
 

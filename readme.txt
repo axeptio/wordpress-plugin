@@ -18,7 +18,7 @@ Axeptio is a deeply customizable Consent Banner that makes your site compliant w
 
 **Axeptio is a powerful Consent Management Platform (CMP) that keeps your website compliant with global privacy laws.** From **GDPR, ePrivacy,** and **TCF v2.2** in Europe, to **Google Consent Mode v2, PIPEDA** and **Law 25** in Canada, the **CCPA** in the U.S. and even more.
 
-[Axeptio](https://www.axept.io/) ensures your business meets every standard. By managing cookie consent in a clear and customizable way, it helps you build trust while staying fully compliant.Join 80.000 websites that trust Axeptio worldwide. 4.5/5 TrustPilot score.
+[Axeptio](https://www.axept.io/) ensures your business meets every standard. By managing cookie consent in a clear and customizable way, it helps you build trust while staying fully compliant. Join 80.000 websites that trust Axeptio worldwide. 4.5/5 TrustPilot score.
 
 == Key Features ==
 
@@ -35,7 +35,10 @@ Make the banner truly yours:
 - Embed images or videos for a more engaging experience
 
 **Track and Understand Consent Behavior**
-Gain full visibility with a real-time dashboard and connect with your analytics stack, including GA4, Matomo, Piano, and more. **Optimization Tools That Drive Results**
+Gain full visibility with a real-time dashboard and connect with your analytics stack, including GA4, Matomo, Piano, and more.
+
+**Optimization Tools That Drive Results**
+
 Boost performance with advanced controls: A/B testing, consent walls, and fine-tuned timing or shadow effects.
 
 [Efficiency by Design](https://www.axept.io/cookie-banner)
