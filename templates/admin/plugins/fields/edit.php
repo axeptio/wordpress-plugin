@@ -1,16 +1,16 @@
 <?php
 use Axeptio\Plugin\Models\I18n;
 
-$is_multilingual     = I18n::has_multilangual();
-$axeptio_languages   = array();
-$default_lang        = '';
+$axeptio_is_multilingual = I18n::has_multilangual();
+$axeptio_languages       = array();
+$axeptio_default_lang    = '';
 
-if ( $is_multilingual ) {
-	$axeptio_languages = I18n::get_languages();
-	$default_lang      = array_key_first( $axeptio_languages );
+if ( $axeptio_is_multilingual ) {
+	$axeptio_languages    = I18n::get_languages();
+	$axeptio_default_lang = array_key_first( $axeptio_languages );
 } else {
-	$default_lang      = 'default';
-	$axeptio_languages = array(
+	$axeptio_default_lang = 'default';
+	$axeptio_languages    = array(
 		'default' => array(
 			'language_code' => 'default',
 			'native_name'   => __( 'Default', 'axeptio-wordpress-plugin' ),
@@ -275,14 +275,14 @@ if ( $is_multilingual ) {
 
 				<div
 					class="border-t border-gray-200 pt-6 mt-6"
-					x-data="{ selectedPlaceholderLang: '<?php echo esc_attr( $default_lang ); ?>' }"
+					x-data="{ selectedPlaceholderLang: '<?php echo esc_attr( $axeptio_default_lang ); ?>' }"
 					@language-changed.window="selectedPlaceholderLang = $event.detail.language || $event.detail.value"
 				>
 					<h3 class="text-sm font-semibold leading-6 text-gray-900 mb-4">
 						<?php esc_html_e( 'Consent Banner', 'axeptio-wordpress-plugin' ); ?>
 					</h3>
 
-					<?php if ( $is_multilingual ) : ?>
+					<?php if ( $axeptio_is_multilingual ) : ?>
 					<div class="mb-4">
 						<?php
 						\Axeptio\Plugin\get_template_part(
@@ -293,25 +293,25 @@ if ( $is_multilingual ) {
 								'name'      => 'placeholder_lang',
 								'id'        => 'xpwp_placeholder_lang',
 								'languages' => $axeptio_languages,
-								'value'     => $default_lang,
+								'value'     => $axeptio_default_lang,
 							)
 						);
 						?>
 					</div>
 					<?php endif; ?>
 
-					<?php foreach ( $axeptio_languages as $lang_code => $lang ) : ?>
-					<div class="space-y-4" x-show="selectedPlaceholderLang === '<?php echo esc_attr( $lang['language_code'] ); ?>'">
+					<?php foreach ( $axeptio_languages as $axeptio_lang_code => $axeptio_lang ) : ?>
+					<div class="space-y-4" x-show="selectedPlaceholderLang === '<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>'">
 						<div>
-							<label for="shortcode-placeholder-title-<?php echo esc_attr( $lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
+							<label for="shortcode-placeholder-title-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
 								<?php esc_html_e( 'Shortcode placeholder title', 'axeptio-wordpress-plugin' ); ?>
 							</label>
 							<div class="mt-2">
 								<input
-									:value="getLocalizedMeta('shortcode_placeholder_title', '<?php echo esc_attr( $lang['language_code'] ); ?>')"
-									@input="setLocalizedMeta('shortcode_placeholder_title', '<?php echo esc_attr( $lang['language_code'] ); ?>', $event.target.value)"
+									:value="getLocalizedMeta('shortcode_placeholder_title', '<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>')"
+									@input="setLocalizedMeta('shortcode_placeholder_title', '<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>', $event.target.value)"
 									type="text"
-									id="shortcode-placeholder-title-<?php echo esc_attr( $lang['language_code'] ); ?>"
+									id="shortcode-placeholder-title-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>"
 									class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
 									placeholder="<?php echo esc_attr__( 'Oops, content not available at the moment!', 'axeptio-wordpress-plugin' ); ?>"
 								>
@@ -322,7 +322,7 @@ if ( $is_multilingual ) {
 						</div>
 
 						<div>
-							<label for="shortcode-placeholder-description-<?php echo esc_attr( $lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
+							<label for="shortcode-placeholder-description-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
 								<?php esc_html_e( 'Shortcode placeholder description', 'axeptio-wordpress-plugin' ); ?>
 							</label>
 							<div class="mt-2">
@@ -333,10 +333,10 @@ if ( $is_multilingual ) {
 								);
 								?>
 								<textarea
-									:value="getLocalizedMeta('shortcode_placeholder_description', '<?php echo esc_attr( $lang['language_code'] ); ?>')"
-									@input="setLocalizedMeta('shortcode_placeholder_description', '<?php echo esc_attr( $lang['language_code'] ); ?>', $event.target.value)"
+									:value="getLocalizedMeta('shortcode_placeholder_description', '<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>')"
+									@input="setLocalizedMeta('shortcode_placeholder_description', '<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>', $event.target.value)"
 									rows="5"
-									id="shortcode-placeholder-description-<?php echo esc_attr( $lang['language_code'] ); ?>"
+									id="shortcode-placeholder-description-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>"
 									class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
 									placeholder="<?php echo esc_attr( $axeptio_default_placeholder_text ); ?>"
 								></textarea>
@@ -347,15 +347,15 @@ if ( $is_multilingual ) {
 						</div>
 
 						<div>
-							<label for="shortcode-placeholder-button-text-<?php echo esc_attr( $lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
+							<label for="shortcode-placeholder-button-text-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
 								<?php esc_html_e( 'Shortcode placeholder button text', 'axeptio-wordpress-plugin' ); ?>
 							</label>
 							<div class="mt-2">
 								<input
-									:value="getLocalizedMeta('shortcode_placeholder_button_text', '<?php echo esc_attr( $lang['language_code'] ); ?>')"
-									@input="setLocalizedMeta('shortcode_placeholder_button_text', '<?php echo esc_attr( $lang['language_code'] ); ?>', $event.target.value)"
+									:value="getLocalizedMeta('shortcode_placeholder_button_text', '<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>')"
+									@input="setLocalizedMeta('shortcode_placeholder_button_text', '<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>', $event.target.value)"
 									type="text"
-									id="shortcode-placeholder-button-text-<?php echo esc_attr( $lang['language_code'] ); ?>"
+									id="shortcode-placeholder-button-text-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>"
 									class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
 									placeholder="<?php echo esc_attr__( 'I accept this service', 'axeptio-wordpress-plugin' ); ?>"
 								>

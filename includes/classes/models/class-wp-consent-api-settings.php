@@ -49,36 +49,38 @@ class WP_Consent_API_Settings {
 
 	/**
 	 * Get categories data with titles and descriptions.
+	 *
 	 * @since 2.6.2
 	 * @return array Categories data.
 	 */
 	private static function get_categories_data(): array {
-		return [
-			'functional'          => [
+		return array(
+			'functional'           => array(
 				'title'       => __( 'Functional', 'axeptio-wordpress-plugin' ),
 				'description' => __( 'The cookie or any other form of local storage is used for the sole purpose of carrying out the transmission of a communication over an electronic communications network.', 'axeptio-wordpress-plugin' ),
-			],
-			'preferences'         => [
+			),
+			'preferences'          => array(
 				'title'       => __( 'Preferences', 'axeptio-wordpress-plugin' ),
 				'description' => __( 'Cookies or any other form of local storage that can not be seen as statistics, statistics-anonymous, marketing or functional, and where the technical storage or access is necessary for the legitimate purpose of storing preferences.', 'axeptio-wordpress-plugin' ),
-			],
-			'statistics'          => [
+			),
+			'statistics'           => array(
 				'title'       => __( 'Statistics', 'axeptio-wordpress-plugin' ),
 				'description' => __( 'Cookies or any other form of local storage that are used exclusively for statistical purposes (Analytics Cookies).', 'axeptio-wordpress-plugin' ),
-			],
-			'statistics-anonymous' => [
+			),
+			'statistics-anonymous' => array(
 				'title'       => __( 'Anonymous Statistics', 'axeptio-wordpress-plugin' ),
 				'description' => __( 'Cookies or any other form of local storage that are used exclusively for anonymous statistical purposes.', 'axeptio-wordpress-plugin' ),
-			],
-			'marketing'           => [
+			),
+			'marketing'            => array(
 				'title'       => __( 'Marketing', 'axeptio-wordpress-plugin' ),
 				'description' => __( 'Cookies or any other form of local storage required to create user profiles to send advertising or to track the user on a website or across websites for similar marketing purposes.', 'axeptio-wordpress-plugin' ),
-			],
-		];
+			),
+		);
 	}
 
 	/**
 	 * Get available consent categories.
+	 *
 	 * @since 1.0.0
 	 * @return array Consent categories.
 	 */
@@ -88,15 +90,16 @@ class WP_Consent_API_Settings {
 
 	/**
 	 * Get WP Consent API categories as virtual vendors for the Axeptio widget.
+	 *
 	 * @since 2.6.2
 	 * @return array Array of category vendors.
 	 */
 	public static function get_category_vendors(): array {
 		$categories_data = self::get_categories_data();
 
-		$vendors = [];
+		$vendors = array();
 		foreach ( $categories_data as $category => $data ) {
-			$vendors[] = [
+			$vendors[] = array(
 				'name'                => 'wp_consent_' . str_replace( '-', '_', $category ),
 				'title'               => $data['title'],
 				'shortDescription'    => $data['description'],
@@ -108,7 +111,7 @@ class WP_Consent_API_Settings {
 				'step'                => 'wordpress',
 				'isWpConsentCategory' => true,
 				'wpConsentCategory'   => $category,
-			];
+			);
 		}
 
 		return $vendors;

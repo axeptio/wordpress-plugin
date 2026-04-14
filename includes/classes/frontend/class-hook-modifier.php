@@ -572,7 +572,7 @@ class Hook_Modifier extends Module {
 	 *
 	 * @return Closure
 	 */
-	private function wrap_tag($callback_function, $plugin, $plugin_settings, $tag){
+	private function wrap_tag( $callback_function, $plugin, $plugin_settings, $tag ) {
 		return function () use ( $callback_function, $plugin, $plugin_settings, $tag ) {
 			$args    = func_get_args();
 			$return  = call_user_func_array( $callback_function, $args );
