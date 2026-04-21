@@ -54,12 +54,16 @@
     "tailwindcss": "^3.3.1",
     "webpack": "^5.94.0",
     "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.13.3"
+    "webpack-dev-server": "^5.2"
   },
   "dependencies": {
     "@alpinejs/persist": "^3.14.9",
     "alpinejs": "^3.14.9",
     "cross-env": "^7.0.3"
+  },
+  "resolutions": {
+    "webpack-dev-server": "^5.2.1",
+    "webpackbar": "^7.0.0"
   },
   "lint-staged": {
     "**/*.{js,md,yml,mjs}": "prettier --write"

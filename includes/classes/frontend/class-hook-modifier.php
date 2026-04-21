@@ -7,6 +7,7 @@
 
 namespace Axeptio\Plugin\Frontend;
 
+use Axeptio\Plugin\Models\I18n;
 use Axeptio\Plugin\Models\Plugins;
 use Axeptio\Plugin\Models\Recommended_Plugin_Settings;
 use Axeptio\Plugin\Models\Sdk;
@@ -218,6 +219,8 @@ class Hook_Modifier extends Module {
 					explode( "\n", $configuration['shortcode_tags_list'] )
 				);
 
+				$current_lang = I18n::has_multilangual() ? I18n::get_current_language() : 'default';
+
 				// We store the whitelisted tags in the intercepted_plugins array
 				// and use the plugin name as key. By doing so, we're able to determine
 				// if the plugin should be intercepted AND if there are tags to avoid.
@@ -229,8 +232,10 @@ class Hook_Modifier extends Module {
 					),
 					'placeholder'                       => $configuration['shortcode_tags_placeholder'],
 					'vendor_title'                      => isset( $configuration['vendor_title'] ) && '' !== $configuration['vendor_title'] ? $configuration['vendor_title'] : $plugin_configuration['Name'],
-					'shortcode_placeholder_title'       => $configuration['shortcode_placeholder_title'] ?? '',
-					'shortcode_placeholder_description' => $configuration['shortcode_placeholder_description'] ?? '',
+					'shortcode_placeholder_title'       => Plugins::get_localized_meta( $configuration, 'shortcode_placeholder_title', $current_lang ),
+					'shortcode_placeholder_description' => Plugins::get_localized_meta( $configuration, 'shortcode_placeholder_description', $current_lang ),
+					'shortcode_placeholder_button_text' => Plugins::get_localized_meta( $configuration, 'shortcode_placeholder_button_text', $current_lang ),
+					'shortcode_placeholder_hide_decoration' => $configuration['shortcode_placeholder_hide_decoration'] ?? 0,
 				);
 			}
 		}
