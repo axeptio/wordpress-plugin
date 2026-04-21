@@ -154,7 +154,7 @@ const instance = function( args ) {
 				body: JSON.stringify( plugin.Metas ),
 			} )
 				.then( ( response ) => response.json() )
-				.then( ( data ) => {
+				.then( () => {
 					this.refreshRepeaterFields();
 					this.isSaving = false;
 					this.editedPluginHasChanged = false;
@@ -165,8 +165,8 @@ const instance = function( args ) {
 			this.setForceEditOpen( true );
 			const self = this;
 			const customUploader = wp.media( {
-				title: 'Sélectionner un média',
-				button: { text: 'Utiliser ce média' },
+				title: wp.i18n.__( 'Select a media', 'axeptio-wordpress-plugin' ),
+				button: { text: wp.i18n.__( 'Use this media', 'axeptio-wordpress-plugin' ) },
 				multiple: false,
 			} ).on( 'select', function() {
 				const attachment = customUploader.state().get( 'selection' ).first().toJSON();
@@ -230,10 +230,74 @@ const instance = function( args ) {
 		},
 	};
 
+	const localizedMetaMethods = {
+		getLocalizedMeta( field, lang ) {
+			if ( ! this.editedPlugin || ! this.editedPlugin.Metas ) {
+				return '';
+			}
+
+			const value = this.editedPlugin.Metas[ field ];
+
+			if ( ! value || value === '' ) {
+				return '';
+			}
+
+			try {
+				const parsed = JSON.parse( value );
+				if ( typeof parsed === 'object' && parsed !== null ) {
+					return parsed[ lang ] || '';
+				}
+			} catch ( e ) {
+				// Plain string (legacy non-JSON format): treat as default language value.
+				return lang === 'default' ? value : '';
+			}
+
+			// JSON.parse succeeded but result is not an object (e.g. a plain string was valid JSON).
+			return lang === 'default' ? value : '';
+		},
+
+		setLocalizedMeta( field, lang, value ) {
+			if ( ! this.editedPlugin || ! this.editedPlugin.Metas ) {
+				return;
+			}
+
+			if ( lang === 'default' ) {
+				this.editedPlugin.Metas[ field ] = value;
+				this.setHasChanged();
+				return;
+			}
+
+			const currentValue = this.editedPlugin.Metas[ field ] || '';
+			let parsed = {};
+
+			if ( currentValue ) {
+				try {
+					const temp = JSON.parse( currentValue );
+					if ( typeof temp === 'object' && temp !== null ) {
+						parsed = temp;
+					} else {
+						// Valid JSON but not an object: preserve as default value.
+						parsed = { default: currentValue };
+					}
+				} catch ( e ) {
+					// Plain string (legacy format): preserve as default language value.
+					parsed = { default: currentValue };
+				}
+			}
+
+			parsed[ lang ] = value;
+
+			const hasNonEmptyValue = Object.values( parsed ).some( ( v ) => v && v.trim() !== '' );
+			this.editedPlugin.Metas[ field ] = hasNonEmptyValue ? JSON.stringify( parsed ) : '';
+			this.setHasChanged();
+		},
+	};
+
 	return {
 		...repeaterMethods,
 		...deleteModal,
 		...pluginMethods,
+		...localizedMetaMethods,
 		plugins: [],
 		editedPlugin: null,
 		editedPluginHasChanged: false,

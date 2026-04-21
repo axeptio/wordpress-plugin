@@ -52,4 +52,4 @@ dwsync.xml
 .internal
 bin/act
 .env
-
+.yarn/

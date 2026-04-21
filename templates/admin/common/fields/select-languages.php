@@ -1,13 +1,13 @@
 <div
 	x-data="SelectComponent()"
-	x-init="init(<?php echo htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8', true); ?>)"
+	x-init="init(<?php echo esc_attr( wp_json_encode( $data ) ); ?>)"
 	class="relative"
 	x-cloak
 >
 	<label :for="state.name" class="block text-sm font-medium leading-6 text-gray-900">
-		<?php echo esc_html($data->label ?? ''); ?>
-		<?php if (isset($data->help_url)): ?>
-			<a href="<?php echo esc_url($data->help_url); ?>" target="_blank">
+		<?php echo esc_html( $data->label ?? '' ); ?>
+		<?php if ( isset( $data->help_url ) ) : ?>
+			<a href="<?php echo esc_url( $data->help_url ); ?>" target="_blank">
 				<span class="dashicons dashicons-info-outline"></span>
 			</a>
 		<?php endif ?>

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2025-06-03 14:59+0200\n"
+"POT-Creation-Date: 2025-12-18 15:15+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #: axeptio-wordpress-plugin.php:34
 msgid "Unable to activate Axeptio"
@@ -200,16 +200,16 @@ msgstr "Google Consent Mode V2"
 msgid "Collect of data and errors by Axeptio"
 msgstr "Recogida de datos y errores por Axeptio"
 
-#: includes/classes/models/class-axeptio-steps.php:20
+#: includes/classes/models/class-axeptio-steps.php:21
 msgid "WordPress Cookies"
 msgstr "WordPress cookies"
 
-#: includes/classes/models/class-axeptio-steps.php:21
+#: includes/classes/models/class-axeptio-steps.php:23
 msgid "Here you will find all WordPress extensions using cookies."
 msgstr ""
 "Aquí encontrará todas las extensiones de WordPress que utilizan cookies."
 
-#: includes/classes/models/class-axeptio-steps.php:22
+#: includes/classes/models/class-axeptio-steps.php:25
 msgid ""
 "Below is the list of extensions used on this site that utilize cookies. "
 "Please activate or deactivate the ones for which you consent to sharing your "
@@ -251,6 +251,75 @@ msgstr "Recomendado por Axeptio"
 #: includes/classes/models/class-shortcode-tags-modes.php:26
 msgid "All shortcode tags"
 msgstr "Todas las etiquetas shortcode"
+
+#: includes/classes/models/class-wp-consent-api-settings.php:56
+msgid "Functional"
+msgstr "Funcional"
+
+#: includes/classes/models/class-wp-consent-api-settings.php:57
+msgid ""
+"The cookie or any other form of local storage is used for the sole purpose "
+"of carrying out the transmission of a communication over an electronic "
+"communications network."
+msgstr ""
+"Las cookies o cualquier otra forma de almacenamiento local se utilizan con "
+"el único fin de llevar a cabo la transmisión de una comunicación a través de "
+"una red de comunicaciones electrónicas."
+
+#: includes/classes/models/class-wp-consent-api-settings.php:60
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: includes/classes/models/class-wp-consent-api-settings.php:61
+msgid ""
+"Cookies or any other form of local storage that can not be seen as "
+"statistics, statistics-anonymous, marketing or functional, and where the "
+"technical storage or access is necessary for the legitimate purpose of "
+"storing preferences."
+msgstr ""
+"Cookies o cualquier otra forma de almacenamiento local que no pueda "
+"considerarse estadística, estadística anónima, de marketing o funcional, y "
+"en la que el almacenamiento técnico o el acceso sean necesarios para el fin "
+"legítimo de almacenar preferencias."
+
+#: includes/classes/models/class-wp-consent-api-settings.php:64
+msgid "Statistics"
+msgstr "Estadísticas"
+
+#: includes/classes/models/class-wp-consent-api-settings.php:65
+msgid ""
+"Cookies or any other form of local storage that are used exclusively for "
+"statistical purposes (Analytics Cookies)."
+msgstr ""
+"Cookies o cualquier otra forma de almacenamiento local que se utilicen "
+"exclusivamente con fines estadísticos (cookies analíticas)."
+
+#: includes/classes/models/class-wp-consent-api-settings.php:68
+msgid "Anonymous Statistics"
+msgstr "Estadísticas anónimas"
+
+#: includes/classes/models/class-wp-consent-api-settings.php:69
+msgid ""
+"Cookies or any other form of local storage that are used exclusively for "
+"anonymous statistical purposes."
+msgstr ""
+"Cookies o cualquier otra forma de almacenamiento local que se utilicen "
+"exclusivamente con fines estadísticos anónimos."
+
+#: includes/classes/models/class-wp-consent-api-settings.php:72
+msgid "Marketing"
+msgstr "Marketing"
+
+#: includes/classes/models/class-wp-consent-api-settings.php:73
+msgid ""
+"Cookies or any other form of local storage required to create user profiles "
+"to send advertising or to track the user on a website or across websites for "
+"similar marketing purposes."
+msgstr ""
+"Cookies o cualquier otra forma de almacenamiento local necesaria para crear "
+"perfiles de usuario con el fin de enviar publicidad o realizar un "
+"seguimiento del usuario en un sitio web o en varios sitios web con fines de "
+"marketing similares."
 
 #. translators: %s: the path to the plugin
 #: includes/core.php:84
@@ -464,7 +533,7 @@ msgstr ""
 "class=\"underline hover:no-underline\" href=\"%s\">nuestra guía de ayuda.</a>"
 
 #: templates/admin/main/fields/non-existing-account.php:15
-msgid "https://support.axeptio.eu/hc/en-gb"
+msgid "https://support.axeptio.eu/en"
 msgstr "https://support.axeptio.eu/hc/es"
 
 #: templates/admin/main/fields/sdk-active.php:21

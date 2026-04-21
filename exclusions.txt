@@ -5,6 +5,7 @@ node_modules/
 release-assets/
 releases/
 tmp/
+docs/
 composer.lock
 .dockerignore
 Dockerfile

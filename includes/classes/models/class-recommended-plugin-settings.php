@@ -92,6 +92,9 @@ class Recommended_Plugin_Settings {
 			if ( self::has_hooks( $plugin_item ) ) {
 				$plugin_name = $plugin_item['data']['name'];
 				foreach ( $plugin_item['data']['hooks'] as $hook ) {
+					if ( empty( $hook['consentRequirements'] ) ) {
+						continue;
+					}
 					self::process_hook( $results, $plugin_name, $hook );
 				}
 			}

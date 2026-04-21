@@ -5,7 +5,7 @@
 })">
 	<label :for="fieldId" class="block text-sm font-medium leading-6 text-gray-900">
 		<?php echo esc_html( $data->label ); ?>
-		<?php if ( isset($data->help_url) ): ?>
+		<?php if ( isset( $data->help_url ) ) : ?>
 			<a href="<?php echo esc_url( $data->help_url ); ?>" target="_blank">
 				<span class="dashicons dashicons-info-outline"></span>
 			</a>
@@ -25,7 +25,7 @@
 			<input type="hidden" :name="fieldName" :id="fieldId" :value="getValue()">
 			<button type="button"
 					@click="openMediaUploader"
-					class="bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+					class="bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
 				<?php echo esc_html__( 'Choose Image', 'axeptio-wordpress-plugin' ); ?>
 			</button>
 			<div class="preview-image ml-3" x-show="imageUrl">

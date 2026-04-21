@@ -82,7 +82,7 @@ class Plugins {
 				foreach ( $plugins as $key => $plugin ) {
 					$plugin_key = self::get_plugin_id( $key );
 
-					if ( isset($plugin['TextDomain']) && 'axeptio-wordpress-plugin' === $plugin['TextDomain'] ) {
+					if ( isset( $plugin['TextDomain'] ) && 'axeptio-wordpress-plugin' === $plugin['TextDomain'] ) {
 						continue;
 					}
 
@@ -176,6 +176,9 @@ class Plugins {
 	public function update( array $meta_datas ) {
 		global $wpdb;
 
+		// Normalize data types before saving.
+		$meta_datas = self::fix_metadata_format( $meta_datas );
+
 		// If it does not exist, create it.
 		// ...
 		if ( null === $this->plugin || false === $this->plugin['Metas']['enabled'] ) {
@@ -224,6 +227,7 @@ class Plugins {
 
 		$defaults   = $this->get_default_metadatas();
 		$meta_datas = wp_parse_args( $meta_datas, $defaults );
+		$meta_datas = self::fix_metadata_format( $meta_datas );
 		return $wpdb->insert( $wpdb->axeptio_plugin_configuration, $meta_datas ); // @codingStandardsIgnoreLine
 	}
 
@@ -234,22 +238,24 @@ class Plugins {
 	 */
 	public function get_default_metadatas(): array {
 		return array(
-			'wp_filter_mode'                      => 'none',
-			'wp_filter_list'                      => '',
-			'wp_filter_store_output'              => 0,
-			'wp_filter_reload_page_after_consent' => 'no',
-			'shortcode_tags_mode'                 => 'none',
-			'shortcode_tags_list'                 => '',
-			'shortcode_tags_placeholder'          => '',
-			'shortcode_placeholder_title'         => '',
-			'shortcode_placeholder_description'   => '',
-			'vendor_id'                           => 0,
-			'vendor_title'                        => '',
-			'vendor_shortDescription'             => '',
-			'vendor_longDescription'              => '',
-			'vendor_policyUrl'                    => '',
-			'vendor_image'                        => '',
-			'cookie_widget_step'                  => 0,
+			'wp_filter_mode'                        => 'none',
+			'wp_filter_list'                        => '',
+			'wp_filter_store_output'                => 0,
+			'wp_filter_reload_page_after_consent'   => 'no',
+			'shortcode_tags_mode'                   => 'none',
+			'shortcode_tags_list'                   => '',
+			'shortcode_tags_placeholder'            => '',
+			'shortcode_placeholder_title'           => '',
+			'shortcode_placeholder_description'     => '',
+			'shortcode_placeholder_button_text'     => '',
+			'shortcode_placeholder_hide_decoration' => 0,
+			'vendor_id'                             => 0,
+			'vendor_title'                          => '',
+			'vendor_shortDescription'               => '',
+			'vendor_longDescription'                => '',
+			'vendor_policyUrl'                      => '',
+			'vendor_image'                          => '',
+			'cookie_widget_step'                    => 0,
 		);
 	}
 
@@ -260,7 +266,7 @@ class Plugins {
 	 * @return string Plugin ID.
 	 */
 	protected static function get_plugin_id( $key ): string {
-		if ( str_contains( $key, '/' ) ) {
+		if ( false !== strpos( $key, '/' ) ) {
 			$key = explode( '/', $key )[0];
 		}
 		return sanitize_title( str_replace( '.php', '', $key ) );
@@ -278,6 +284,9 @@ class Plugins {
 		}
 		if ( isset( $metas['enabled'] ) ) {
 			$metas['enabled'] = intval( $metas['enabled'] );
+		}
+		if ( isset( $metas['shortcode_placeholder_hide_decoration'] ) ) {
+			$metas['shortcode_placeholder_hide_decoration'] = intval( $metas['shortcode_placeholder_hide_decoration'] );
 		}
 		return $metas;
 	}
@@ -398,5 +407,42 @@ class Plugins {
 		}
 
 		return $plugins;
+	}
+
+	/**
+	 * Get localized meta value.
+	 *
+	 * Supports both JSON format ({"default": "...", "fr": "...", "en": "..."})
+	 * and plain string for backwards compatibility.
+	 *
+	 * Returns value for specific language, or empty string to use template default.
+	 *
+	 * @param array  $metas Plugin metas array.
+	 * @param string $field Field name to retrieve.
+	 * @param string $lang  Language code (e.g., 'fr', 'en').
+	 * @return string Localized value or empty string.
+	 */
+	public static function get_localized_meta( array $metas, string $field, string $lang = '' ): string {
+		if ( ! isset( $metas[ $field ] ) || empty( $metas[ $field ] ) ) {
+			return '';
+		}
+
+		$value = $metas[ $field ];
+
+		if ( ! is_string( $value ) ) {
+			return '';
+		}
+
+		$decoded = json_decode( $value, true );
+
+		if ( null === $decoded || ! is_array( $decoded ) ) {
+			return $value;
+		}
+
+		if ( ! empty( $lang ) && ! empty( $decoded[ $lang ] ) ) {
+			return $decoded[ $lang ];
+		}
+
+		return '';
 	}
 }

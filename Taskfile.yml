@@ -16,7 +16,6 @@ tasks:
       - task: composer-build
       - rsync -av --exclude='tmp' --exclude-from='exclusions.txt' ./ ./tmp/
 
-
   release:
     desc: Create a release
     cmds:
