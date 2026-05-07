@@ -2,7 +2,7 @@ name: Deploy Demo WordPress
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, ci/deploy-demo]
   workflow_dispatch:
 
 permissions:
