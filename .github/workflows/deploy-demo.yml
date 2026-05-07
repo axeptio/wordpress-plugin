@@ -10,6 +10,7 @@ permissions:
 
 env:
   DEMO_DOMAIN: wordpress-qa.axept.io
+  DEMO_IP: 63.34.106.0
   PLUGIN_SLUG: axeptio-sdk-integration
 
 jobs:
@@ -69,15 +70,14 @@ jobs:
 
       - name: Upload plugin zip to server
         run: |
-          # Upload the zip via a simple HTTP PUT to the webhook endpoint
-          ARTIFACT_URL="https://${{ env.DEMO_DOMAIN }}/deploy-artifact.php"
           SIGNATURE="sha256=$(echo -n "@/tmp/plugin.zip" | openssl dgst -sha256 -hmac "${{ secrets.DEMO_WEBHOOK_SECRET }}" | awk '{print $2}')"
 
           curl -sk --fail \
             -X PUT \
+            -H "Host: ${{ env.DEMO_DOMAIN }}" \
             -H "X-Webhook-Signature: ${SIGNATURE}" \
             --data-binary @/tmp/plugin.zip \
-            "${ARTIFACT_URL}"
+            "https://${{ env.DEMO_IP }}/deploy-artifact.php"
 
       - name: Trigger deployment
         run: |
@@ -86,10 +86,11 @@ jobs:
 
           HTTP_STATUS=$(curl -sk -o /tmp/webhook-response.txt -w "%{http_code}" \
             -X POST \
+            -H "Host: ${{ env.DEMO_DOMAIN }}" \
             -H "Content-Type: application/json" \
             -H "X-Webhook-Signature: ${SIGNATURE}" \
             -d "${PAYLOAD}" \
-            "https://${{ env.DEMO_DOMAIN }}/deploy-webhook.php")
+            "https://${{ env.DEMO_IP }}/deploy-webhook.php")
 
           cat /tmp/webhook-response.txt
           if [ "$HTTP_STATUS" -ne 200 ]; then
