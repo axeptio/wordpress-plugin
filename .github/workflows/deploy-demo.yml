@@ -1,0 +1,241 @@
+name: Deploy Demo WordPress
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  DEMO_HOST: 63.34.106.0
+  DEMO_USER: ubuntu
+  DEMO_DOMAIN: wordpress-qa.axept.io
+  WP_PATH: /var/www/html
+  PLUGIN_SLUG: axeptio-sdk-integration
+  PLUGIN_FILE: axeptio-wordpress-plugin.php
+
+jobs:
+  build:
+    name: Build Plugin
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install Node dependencies
+        run: yarn install --immutable
+
+      - name: Build production assets
+        run: yarn build:production
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.37.0
+        with:
+          php-version: '8.3'
+
+      - name: Install Composer dependencies (production)
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Create plugin archive
+        run: |
+          mkdir -p /tmp/plugin-build
+          rsync -av --exclude-from=.distignore ./ /tmp/plugin-build/${{ env.PLUGIN_SLUG }}/
+          cd /tmp/plugin-build
+          tar czf plugin.tar.gz ${{ env.PLUGIN_SLUG }}/
+
+      - name: Upload plugin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-build
+          path: /tmp/plugin-build/plugin.tar.gz
+          retention-days: 1
+
+  deploy:
+    name: Deploy to Demo Server
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code (for deploy scripts)
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            .github/scripts
+
+      - name: Download plugin artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: plugin-build
+          path: /tmp
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEMO_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ env.DEMO_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Upload plugin to server
+        run: |
+          scp /tmp/plugin.tar.gz ${{ env.DEMO_USER }}@${{ env.DEMO_HOST }}:/tmp/plugin.tar.gz
+
+      - name: Deploy WordPress & Plugin
+        env:
+          WP_ADMIN_USER: ${{ secrets.DEMO_WP_ADMIN_USER }}
+          WP_ADMIN_PASSWORD: ${{ secrets.DEMO_WP_ADMIN_PASSWORD }}
+          WP_ADMIN_EMAIL: ${{ secrets.DEMO_WP_ADMIN_EMAIL }}
+          AXEPTIO_CLIENT_ID: ${{ secrets.DEMO_AXEPTIO_CLIENT_ID }}
+          AXEPTIO_VERSION: ${{ secrets.DEMO_AXEPTIO_VERSION }}
+          MYSQL_DB: wordpress
+          MYSQL_USER: ${{ secrets.DEMO_MYSQL_USER }}
+          MYSQL_PASS: ${{ secrets.DEMO_MYSQL_PASS }}
+        run: |
+          ssh ${{ env.DEMO_USER }}@${{ env.DEMO_HOST }} bash -s << 'DEPLOY_SCRIPT'
+            set -euo pipefail
+
+            WP_PATH="${{ env.WP_PATH }}"
+            DOMAIN="${{ env.DEMO_DOMAIN }}"
+            PLUGIN_SLUG="${{ env.PLUGIN_SLUG }}"
+            PLUGIN_FILE="${{ env.PLUGIN_FILE }}"
+
+            # --- Install WP-CLI if missing ----------------------------------------
+            if ! command -v wp &> /dev/null; then
+              curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+              chmod +x wp-cli.phar
+              sudo mv wp-cli.phar /usr/local/bin/wp
+            fi
+
+            # --- Ensure MySQL database exists -------------------------------------
+            sudo mysql -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DB} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+            sudo mysql -e "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASS}';"
+            sudo mysql -e "GRANT ALL PRIVILEGES ON ${MYSQL_DB}.* TO '${MYSQL_USER}'@'localhost'; FLUSH PRIVILEGES;"
+
+            # --- Prepare document root --------------------------------------------
+            sudo mkdir -p "$WP_PATH"
+            sudo chown -R www-data:www-data "$WP_PATH"
+
+            # --- Download WordPress if not present --------------------------------
+            if [ ! -f "$WP_PATH/wp-load.php" ]; then
+              sudo -u www-data wp core download --path="$WP_PATH" --locale=fr_FR
+            else
+              sudo -u www-data wp core update --path="$WP_PATH" --locale=fr_FR
+            fi
+
+            # --- Create or update wp-config.php -----------------------------------
+            if [ ! -f "$WP_PATH/wp-config.php" ]; then
+              sudo -u www-data wp config create \
+                --path="$WP_PATH" \
+                --dbname="${MYSQL_DB}" \
+                --dbuser="${MYSQL_USER}" \
+                --dbpass="${MYSQL_PASS}" \
+                --dbhost="localhost" \
+                --dbcharset="utf8mb4" \
+                --dbcollate="utf8mb4_unicode_ci"
+            fi
+
+            # --- Security constants -----------------------------------------------
+            sudo -u www-data wp config set WP_DEBUG false --raw --path="$WP_PATH"
+            sudo -u www-data wp config set DISALLOW_FILE_EDIT true --raw --path="$WP_PATH"
+            sudo -u www-data wp config set DISABLE_WP_CRON true --raw --path="$WP_PATH"
+
+            # --- Install WordPress if not already installed -----------------------
+            if ! sudo -u www-data wp core is-installed --path="$WP_PATH" 2>/dev/null; then
+              sudo -u www-data wp core install \
+                --path="$WP_PATH" \
+                --url="https://${DOMAIN}" \
+                --title="Axeptio WordPress Demo" \
+                --admin_user="${WP_ADMIN_USER}" \
+                --admin_password="${WP_ADMIN_PASSWORD}" \
+                --admin_email="${WP_ADMIN_EMAIL}" \
+                --locale=fr_FR
+
+              # --- Import demo content (WordPress Theme Unit Test) ----------------
+              sudo -u www-data wp plugin install wordpress-importer --activate --path="$WP_PATH"
+              curl -sL https://raw.githubusercontent.com/WPTT/theme-unit-test/master/themeunittestdata.wordpress.xml \
+                -o /tmp/demo-content.xml
+              sudo -u www-data wp import /tmp/demo-content.xml \
+                --path="$WP_PATH" \
+                --authors=create \
+                --skip=image_resize || true
+              rm -f /tmp/demo-content.xml
+
+              # --- Configure theme ------------------------------------------------
+              sudo -u www-data wp theme activate twentytwentyfive --path="$WP_PATH"
+
+              # --- Permalink structure --------------------------------------------
+              sudo -u www-data wp rewrite structure '/%postname%/' --path="$WP_PATH"
+              sudo -u www-data wp rewrite flush --path="$WP_PATH"
+            else
+              # WordPress already installed — just update
+              sudo -u www-data wp core update-db --path="$WP_PATH" 2>/dev/null || true
+            fi
+
+            # --- Deploy plugin ----------------------------------------------------
+            sudo rm -rf "$WP_PATH/wp-content/plugins/${PLUGIN_SLUG}"
+            cd /tmp
+            tar xzf plugin.tar.gz
+            sudo mv "${PLUGIN_SLUG}" "$WP_PATH/wp-content/plugins/"
+            sudo chown -R www-data:www-data "$WP_PATH/wp-content/plugins/${PLUGIN_SLUG}"
+            rm -f /tmp/plugin.tar.gz
+
+            # --- Activate plugin --------------------------------------------------
+            sudo -u www-data wp plugin activate "${PLUGIN_SLUG}" --path="$WP_PATH"
+
+            # --- Configure Axeptio settings ---------------------------------------
+            sudo -u www-data wp option update axeptio_settings --format=json --path="$WP_PATH" '{
+              "sdk_active": "1",
+              "client_id": "'"${AXEPTIO_CLIENT_ID}"'",
+              "version": "'"${AXEPTIO_VERSION}"'",
+              "google_consent_mode": "1",
+              "google_consent_params": {
+                "analytics_storage": "1",
+                "ad_storage": "1",
+                "ad_user_data": "1",
+                "ad_personalization": "1",
+                "functionality_storage": "1",
+                "personalization_storage": "1",
+                "security_storage": "1"
+              },
+              "disable_send_datas": "1",
+              "cookie_domain": "",
+              "api_url": "",
+              "gtm_events": "true"
+            }'
+
+            # --- Install WP Consent API (companion plugin) ------------------------
+            sudo -u www-data wp plugin install wp-consent-api --activate --path="$WP_PATH" || true
+
+            # --- File permissions -------------------------------------------------
+            sudo find "$WP_PATH" -type d -exec chmod 755 {} \;
+            sudo find "$WP_PATH" -type f -exec chmod 644 {} \;
+            sudo chmod 640 "$WP_PATH/wp-config.php"
+            sudo chown -R www-data:www-data "$WP_PATH"
+
+            # --- Restart Apache ---------------------------------------------------
+            sudo systemctl reload apache2
+
+            echo "✅ Demo deployed: https://${DOMAIN}"
+          DEPLOY_SCRIPT
+
+      - name: Verify deployment
+        run: |
+          HTTP_STATUS=$(curl -sk -o /dev/null -w "%{http_code}" "https://${{ env.DEMO_DOMAIN }}")
+          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
+            echo "✅ Demo site responding with HTTP $HTTP_STATUS"
+          else
+            echo "❌ Demo site returned HTTP $HTTP_STATUS"
+            exit 1
+          fi
+
+      - name: Cleanup SSH key
+        if: always()
+        run: rm -f ~/.ssh/id_rsa
