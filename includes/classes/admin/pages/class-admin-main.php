@@ -7,6 +7,8 @@
 
 namespace Axeptio\Plugin\Admin\Pages;
 
+defined( 'ABSPATH' ) || exit;
+
 use Axeptio\Plugin\Admin\Settings\Setting_Api;
 use Axeptio\Plugin\Module;
 

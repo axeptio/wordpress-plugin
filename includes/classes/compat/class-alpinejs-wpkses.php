@@ -7,6 +7,8 @@
 
 namespace Axeptio\Plugin\Compat;
 
+defined( 'ABSPATH' ) || exit;
+
 use Axeptio\Plugin\Module;
 
 class AlpineJS_Wpkses extends Module {

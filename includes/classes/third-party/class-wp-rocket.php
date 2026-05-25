@@ -1,6 +1,8 @@
 <?php
 namespace Axeptio\Plugin\Third_Party;
 
+defined( 'ABSPATH' ) || exit;
+
 use Axeptio\Plugin\Module;
 
 class Wp_Rocket extends Module {

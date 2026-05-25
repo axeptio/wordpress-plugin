@@ -12,6 +12,8 @@
 	Requires Plugins: wp-consent-api
  **/
 
+defined( 'ABSPATH' ) || exit;
+
 define( 'XPWP_VERSION', '2.6.2' );
 define( 'XPWP_URL', plugin_dir_url( __FILE__ ) );
 define( 'XPWP_PATH', plugin_dir_path( __FILE__ ) );
