@@ -7,7 +7,7 @@
 	Author: axeptio
 	License: GPLv3
 	License URI: https://www.gnu.org/licenses/gpl-3.0.html
-	Text Domain: axeptio-wordpress-plugin
+	Text Domain: axeptio-sdk-integration
 	Domain Path: /languages
 	Requires Plugins: wp-consent-api
  **/
@@ -33,15 +33,15 @@ if ( version_compare( PHP_VERSION, XPWP_MIN_PHP_VERSION, '<' ) ) {
 
 	deactivate_plugins( XPWP_BASENAME );
 
-	$axeptio_error_message = '<h1>' . esc_attr__( 'Unable to activate Axeptio', 'axeptio-wordpress-plugin' ) . '</h1>';
+	$axeptio_error_message = '<h1>' . esc_attr__( 'Unable to activate Axeptio', 'axeptio-sdk-integration' ) . '</h1>';
 
 	$axeptio_error_message .= '<p>' . sprintf(
 			/* translators: %1$s: current php version min and %2$s version of php required */
-			esc_attr__( 'Your server is currently running PHP %1$s. The Axeptio plugin requires at least PHP %2$s. Please upgrade your PHP version to use this plugin.', 'axeptio-wordpress-plugin' ),
+			esc_attr__( 'Your server is currently running PHP %1$s. The Axeptio plugin requires at least PHP %2$s. Please upgrade your PHP version to use this plugin.', 'axeptio-sdk-integration' ),
 		PHP_VERSION,
 		'7.4'
 	) . '</p>';
-	$axeptio_error_message .= sprintf( '<p><a class="button button-large" href="%1$s">%2$s</a></p>', esc_url( get_admin_url( null, 'plugins.php' ) ), __( 'Return to plugins pages', 'axeptio-wordpress-plugin' ) );
+	$axeptio_error_message .= sprintf( '<p><a class="button button-large" href="%1$s">%2$s</a></p>', esc_url( get_admin_url( null, 'plugins.php' ) ), __( 'Return to plugins pages', 'axeptio-sdk-integration' ) );
 
 	wp_die( ( $axeptio_error_message ) ); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 

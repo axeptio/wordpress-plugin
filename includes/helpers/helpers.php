@@ -111,11 +111,11 @@ function get_template_part( $slug, $datas = array(), $display = true ) {
  */
 function get_main_admin_tabs() {
 	$tab_items = array(
-		'main-settings'     => __( 'Main settings', 'axeptio-wordpress-plugin' ),
-		'consent-mode'      => __( 'Google Consent Mode', 'axeptio-wordpress-plugin' ),
-		'customization'     => __( 'Customization', 'axeptio-wordpress-plugin' ),
-		'data-sending'      => __( 'Data sending', 'axeptio-wordpress-plugin' ),
-		'advanced-settings' => __( 'Advanced', 'axeptio-wordpress-plugin' ),
+		'main-settings'     => __( 'Main settings', 'axeptio-sdk-integration' ),
+		'consent-mode'      => __( 'Google Consent Mode', 'axeptio-sdk-integration' ),
+		'customization'     => __( 'Customization', 'axeptio-sdk-integration' ),
+		'data-sending'      => __( 'Data sending', 'axeptio-sdk-integration' ),
+		'advanced-settings' => __( 'Advanced', 'axeptio-sdk-integration' ),
 	);
 	return \Axeptio\Plugin\get_template_part( 'admin/main/tabs', array( 'tab_items' => $tab_items ), false );
 }

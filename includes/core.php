@@ -52,9 +52,9 @@ function setup() {
  * @return void
  */
 function i18n() {
-	$locale = apply_filters( 'axeptio/plugin_locale', get_locale(), 'axeptio-wordpress-plugin' );
-	load_textdomain( 'axeptio-wordpress-plugin', WP_LANG_DIR . '/axeptio-wordpress-plugin/axeptio-wordpress-plugin-' . $locale . '.mo' );
-	load_plugin_textdomain( 'axeptio-wordpress-plugin', false, plugin_basename( XPWP_PATH ) . '/languages/' );
+	$locale = apply_filters( 'axeptio/plugin_locale', get_locale(), 'axeptio-sdk-integration' );
+	load_textdomain( 'axeptio-sdk-integration', XPWP_PATH . 'languages/axeptio-sdk-integration-' . $locale . '.mo' );
+	load_plugin_textdomain( 'axeptio-sdk-integration', false, plugin_basename( XPWP_PATH ) . '/languages/' );
 }
 
 /**
@@ -83,7 +83,7 @@ function init() {
 			function () {
 				$class = 'notice notice-error';
 				/* translators: %s: the path to the plugin */
-				$message = sprintf( __( 'The composer.json file was not found within %s. No classes will be loaded.', 'axeptio-wordpress-plugin' ), XPWP_PATH );
+				$message = sprintf( __( 'The composer.json file was not found within %s. No classes will be loaded.', 'axeptio-sdk-integration' ), XPWP_PATH );
 
 				printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
 			}
@@ -196,7 +196,7 @@ function admin_scripts() {
 		get_asset_info( 'admin', 'version' ),
 		true
 	);
-	wp_set_script_translations( 'axeptio/main', 'axeptio-wordpress-plugin' );
+	wp_set_script_translations( 'axeptio/main', 'axeptio-sdk-integration' );
 
 	wp_localize_script(
 		'axeptio/main',
@@ -206,7 +206,7 @@ function admin_scripts() {
 				'non_existing_account_id' => \Axeptio\Plugin\get_template_part(
 					'admin/main/fields/validation-error',
 					array(
-						'title'   => __( 'We were unable to find your project, or it appears that it has not yet been published.', 'axeptio-wordpress-plugin' ),
+						'title'   => __( 'We were unable to find your project, or it appears that it has not yet been published.', 'axeptio-sdk-integration' ),
 						'message' => \Axeptio\Plugin\get_template_part( 'admin/main/fields/non-existing-account', array(), false ),
 					),
 					false
@@ -214,14 +214,14 @@ function admin_scripts() {
 				'verification_error'      => \Axeptio\Plugin\get_template_part(
 					'admin/main/fields/validation-error',
 					array(
-						'title' => __( 'Error verifying account ID. Try Again.', 'axeptio-wordpress-plugin' ),
+						'title' => __( 'Error verifying account ID. Try Again.', 'axeptio-sdk-integration' ),
 					),
 					false
 					),
 				'empty_account_id'        => \Axeptio\Plugin\get_template_part(
 					'admin/main/fields/validation-error',
 					array(
-						'title' => __( 'Please enter an account ID', 'axeptio-wordpress-plugin' ),
+						'title' => __( 'Please enter an account ID', 'axeptio-sdk-integration' ),
 					),
 					false
 					),
