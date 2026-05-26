@@ -13,7 +13,9 @@
 			</a>
 			<?php endif ?>
 		</span>
-		<span class="text-gray-500 text-xs"><?php echo esc_html( $data->description ); ?></span>
+		<?php if ( ! empty( $data->description ) ) : ?>
+			<span class="text-gray-500 text-xs"><?php echo esc_html( $data->description ); ?></span>
+		<?php endif; ?>
 	</label>
 	<input type="checkbox" @change="<?php echo esc_attr( $data->alpine_state ); ?> = !<?php echo esc_attr( $data->alpine_state ); ?>"
 			class="sr-only"
