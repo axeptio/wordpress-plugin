@@ -15,7 +15,7 @@ class Axeptio_Steps {
 	 * @param string $field Field name
 	 * @return string Default value
 	 */
-	private static function get_default_value( string $field ): string {
+	public static function get_default_value( string $field ): string {
 		switch ( $field ) {
 			case 'widget_title':
 				return esc_html__( 'WordPress Cookies', 'axeptio-wordpress-plugin' );
@@ -38,18 +38,13 @@ class Axeptio_Steps {
 	private static function get_widget_field( string $field_name, string $language = '' ): string {
 		$default = self::get_default_value( $field_name );
 
-		if ( $language ) {
-			$option_name = $field_name . '_' . $language;
-			$value       = Settings::get_option( $option_name, null );
-
-			// If the value exists, return it.
-			if ( null !== $value ) {
-				return $value;
-			}
+		if ( ! $language ) {
+			return $default;
 		}
 
-		// Fallback to the legacy method (non-language specific)
-		return Settings::get_option( $field_name, $default ) ?? $default;
+		$saved_value = Settings::get_option( $field_name . '_' . $language, '' );
+
+		return ! empty( $saved_value ) ? $saved_value : $default;
 	}
 
 	/**
@@ -88,12 +83,14 @@ class Axeptio_Steps {
 	 * @return array[]
 	 */
 	public static function all() {
+		$language = I18n::get_current_language();
+
 		return array(
 			array(
-				'title'           => self::get_title(),
-				'subTitle'        => self::get_sub_title(),
+				'title'           => self::get_title( $language ),
+				'subTitle'        => self::get_sub_title( $language ),
 				'topTitle'        => false,
-				'message'         => self::get_description(),
+				'message'         => self::get_description( $language ),
 				'image'           => false,
 				'imageWidth'      => 0,
 				'imageHeight'     => 0,

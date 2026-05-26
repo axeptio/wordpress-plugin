@@ -169,21 +169,16 @@ class Admin_Callbacks {
 	}
 
 	/**
-	 * Get option value with language support and fallback
+	 * Get the saved value for a widget field in a given language.
 	 *
 	 * @param string $base_name Base option name
 	 * @param string $language Language code
 	 * @return string Option value
 	 */
 	private static function get_widget_value( string $base_name, string $language ): string {
-		if ( $language ) {
-			$value = Settings::get_option( $base_name . '_' . $language, null );
-			if ( null !== $value ) {
-				return $value;
-			}
-		}
+		$option_name = $language ? $base_name . '_' . $language : $base_name;
 
-		return Settings::get_option( $base_name, '' );
+		return (string) Settings::get_option( $option_name, '' );
 	}
 
 	/**
@@ -205,10 +200,11 @@ class Admin_Callbacks {
 			$template,
 			array_merge(
 				array(
-					'label'    => self::format_label_with_language( $label, $language ),
-					'group'    => 'axeptio_settings',
-					'value'    => $value,
-					'language' => $language,
+					'label'       => self::format_label_with_language( $label, $language ),
+					'group'       => 'axeptio_settings',
+					'value'       => $value,
+					'language'    => $language,
+					'placeholder' => Axeptio_Steps::get_default_value( $field_name ),
 				),
 				$field_attrs
 			)
