@@ -53,8 +53,10 @@ function setup() {
  */
 function i18n() {
 	$locale = apply_filters( 'axeptio/plugin_locale', get_locale(), 'axeptio-sdk-integration' );
-	load_textdomain( 'axeptio-sdk-integration', XPWP_PATH . 'languages/axeptio-sdk-integration-' . $locale . '.mo' );
 	load_plugin_textdomain( 'axeptio-sdk-integration', false, plugin_basename( XPWP_PATH ) . '/languages/' );
+	if ( ! is_textdomain_loaded( 'axeptio-sdk-integration' ) ) {
+		load_textdomain( 'axeptio-sdk-integration', XPWP_PATH . 'languages/axeptio-sdk-integration-' . $locale . '.mo' );
+	}
 }
 
 /**
