@@ -5,6 +5,8 @@
  * @package Axeptio
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Retrieve the file for the given class.
  *

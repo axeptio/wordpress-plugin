@@ -7,6 +7,8 @@
 
 namespace Axeptio\Plugin\Frontend;
 
+defined( 'ABSPATH' ) || exit;
+
 use Axeptio\Plugin\Admin;
 use Axeptio\Plugin\Models\Axeptio_Steps;
 use Axeptio\Plugin\Models\Plugins;

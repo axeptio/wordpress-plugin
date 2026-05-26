@@ -2,7 +2,7 @@
 Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent
 Requires at least: 5.0
-Tested up to: 6.9
+Tested up to: 7.0
 Stable tag: 2.6.2
 Requires PHP: 7.4
 License: GPLv3

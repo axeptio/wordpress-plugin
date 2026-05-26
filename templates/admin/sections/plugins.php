@@ -9,10 +9,10 @@
 			</div>
 			<div class="ml-3">
 				<p class="text-sm text-gray-900 font-semibold">
-					<?php esc_html_e( 'WP Consent API plugin is not active. WP Consent API features are disabled.', 'axeptio-wordpress-plugin' ); ?>
+					<?php esc_html_e( 'WP Consent API plugin is not active. WP Consent API features are disabled.', 'axeptio-sdk-integration' ); ?>
 					<a href="<?php echo esc_url( admin_url( 'plugin-install.php?tab=plugin-information&plugin=wp-consent-api' ) ); ?>"
 						class="font-medium underline text-yellow-700 hover:text-yellow-600 transition-colors">
-						<?php esc_html_e( 'Install and activate WP Consent API plugin to enable these features.', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Install and activate WP Consent API plugin to enable these features.', 'axeptio-sdk-integration' ); ?>
 					</a>
 				</p>
 			</div>
@@ -57,7 +57,7 @@
 									x-show="activePlugins.includes(index)"
 									class="rounded-md whitespace-nowrap mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset text-green-700 bg-green-50 ring-green-600/20"
 								>
-									<?php echo esc_html__( 'Active', 'axeptio-wordpress-plugin' ); ?>
+									<?php echo esc_html__( 'Active', 'axeptio-sdk-integration' ); ?>
 								</p>
 								<div
 									class="rounded-md inline-flex mt-0.5 px-1.5 py-0.5 text-xs font-medium ring-1 ring-inset whitespace-nowrap items-center"
@@ -65,7 +65,7 @@
 									x-show="plugin.AxeptioRecommendedSettings"
 								>
 									<svg class="-my-1 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960"><path d="M420.118 498Q446 498 464 479.882q18-18.117 18-44Q482 410 463.882 392q-18.117-18-44-18Q394 374 376 392.118q-18 18.117-18 44Q358 462 376.118 480q18.117 18 44 18Zm-80 200Q366 698 384 679.882q18-18.117 18-44Q402 610 383.882 592q-18.117-18-44-18Q314 574 296 592.118q-18 18.117-18 44Q278 662 296.118 680q18.117 18 44 18ZM600 736q17 0 28.5-11.5T640 696q0-17-11.5-28.5T600 656q-17 0-28.5 11.5T560 696q0 17 11.5 28.5T600 736ZM480.234 976Q398 976 325 944.5q-73-31.5-127.5-86t-86-127.5Q80 658 80 576q0-92 39-172t104.5-135.5q65.5-55.5 151-80T552 182q-6 45 8 85t42.5 68q28.5 28 68.5 41t84 6q-20 61 22 109.5T879 545q8 87-20.5 165T775 847q-55 59-130.794 94-75.794 35-163.972 35ZM480 916q142 0 236-93.5T821 592q-54-20-87.5-59.5T692 442q-81-11-136.5-70T492 235q-74-3-138.5 24t-112 74Q194 380 167 443.5T140 576q0 142 99 241t241 99Zm1-345Z"></path></svg>
-									<div class="ml-1"><?php esc_attr_e( 'This extension is subject to consent', 'axeptio-wordpress-plugin' ); ?></div>
+									<div class="ml-1"><?php esc_html_e( 'This extension is subject to consent', 'axeptio-sdk-integration' ); ?></div>
 								</div>
 
 								<?php if ( \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ) : ?>
@@ -74,7 +74,7 @@
 									x-show="plugin.WPConsentAPI && plugin.WPConsentAPI.is_compliant"
 								>
 									<svg class="-my-1 h-4 w-4 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>
-									<div class="ml-1"><?php esc_attr_e( 'This extension is managed through WP Consent API', 'axeptio-wordpress-plugin' ); ?></div>
+									<div class="ml-1"><?php esc_html_e( 'This extension is managed through WP Consent API', 'axeptio-sdk-integration' ); ?></div>
 								</div>
 								<?php endif; ?>
 							</div>
@@ -98,7 +98,7 @@
 						<svg class="-ml-1 mr-1 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
 						</svg>
-						<?php echo esc_html__( 'Edit', 'axeptio-wordpress-plugin' ); ?>
+						<?php echo esc_html__( 'Edit', 'axeptio-sdk-integration' ); ?>
 					</button>
 				</div>
 			</li>

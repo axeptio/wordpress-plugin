@@ -13,6 +13,8 @@
 
 namespace Axeptio\Plugin\Utility;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Get asset info from extracted asset files
  *
