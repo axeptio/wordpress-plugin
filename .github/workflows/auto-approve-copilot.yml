@@ -1,0 +1,45 @@
+name: Auto-approve (Copilot)
+
+on:
+  pull_request:
+    types: [opened, ready_for_review, synchronize, reopened, review_requested]
+    branches: [develop, staging, main, master]
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  pull-requests: write
+  contents: read
+  checks: read
+
+jobs:
+  auto-approve:
+    # Skip fork PRs: org/repo secrets (BOT_GITHUB_TOKEN) are not exposed to
+    # workflows triggered from forks, so the approval call would always fail.
+    # This if: condition applies to both pull_request and pull_request_review events.
+    # Keep the base.ref list aligned with base_branch below.
+    if: >-
+      github.event.pull_request != null &&
+      (github.event.pull_request.base.ref == 'develop' ||
+       github.event.pull_request.base.ref == 'staging' ||
+       github.event.pull_request.base.ref == 'main' ||
+       github.event.pull_request.base.ref == 'master') &&
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      (github.event_name != 'pull_request_review' ||
+       github.event.review.user.login != 'axeptio-bot')
+    # Pin to a released tag once auto-approve-copilot-v1.0.0 ships; @master for now.
+    # When pinning to a tag, also pass `with: tech_scripts_ref: <same tag>` so
+    # decide.js is version-locked (otherwise it loads from master by default).
+    uses: axeptio/tech-scripts/.github/workflows/auto-approve-copilot.yml@master
+    with:
+      # Comma-separated list of base branches eligible for auto-approval.
+      # Must match the branches listed in the if: condition above.
+      # Default covers all common branch names — restrict to a single branch
+      # (e.g. base_branch: develop) if this repo only uses one.
+      base_branch: develop,staging,main,master
+    secrets:
+      BOT_GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+      # Optional — reuses the org SLACK_BOT_TOKEN (same app as script-runner).
+      # Remove this line to disable Slack notifications for this repo.
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
