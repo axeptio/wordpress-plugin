@@ -1,8 +1,13 @@
 name: Auto-approve (Copilot)
 
+# Standalone (non-reusable) copy for public repos — public repos cannot call
+# reusable workflows from internal/private repositories. This file mirrors the
+# logic of axeptio/tech-scripts/.github/workflows/auto-approve-copilot.yml.
+# Keep in sync with the canonical template when the reusable workflow is updated.
+
 on:
   pull_request:
-    types: [opened, ready_for_review, synchronize, reopened, review_requested]
+    types: [opened, ready_for_review, synchronize, reopened]
     branches: [develop, staging, main, master]
   pull_request_review:
     types: [submitted]
@@ -12,12 +17,18 @@ permissions:
   contents: read
   checks: read
 
+concurrency:
+  group: >-
+    auto-approve-copilot-${{ github.repository }}-${{
+      github.event.pull_request.number ||
+      github.run_id
+    }}
+  cancel-in-progress: true
+
 jobs:
   auto-approve:
-    # Skip fork PRs: org/repo secrets (BOT_GITHUB_TOKEN) are not exposed to
-    # workflows triggered from forks, so the approval call would always fail.
-    # This if: condition applies to both pull_request and pull_request_review events.
-    # Keep the base.ref list aligned with base_branch below.
+    name: Auto-approve if Copilot conditions met
+    runs-on: ubuntu-latest
     if: >-
       github.event.pull_request != null &&
       (github.event.pull_request.base.ref == 'develop' ||
@@ -26,20 +37,144 @@ jobs:
        github.event.pull_request.base.ref == 'master') &&
       github.event.pull_request.draft == false &&
       github.event.pull_request.head.repo.full_name == github.repository &&
-      (github.event_name != 'pull_request_review' ||
-       github.event.review.user.login != 'axeptio-bot')
-    # Pin to a released tag once auto-approve-copilot-v1.0.0 ships; @master for now.
-    # When pinning to a tag, also pass `with: tech_scripts_ref: <same tag>` so
-    # decide.js is version-locked (otherwise it loads from master by default).
-    uses: axeptio/tech-scripts/.github/workflows/auto-approve-copilot.yml@master
-    with:
-      # Comma-separated list of base branches eligible for auto-approval.
-      # Must match the branches listed in the if: condition above.
-      # Default covers all common branch names — restrict to a single branch
-      # (e.g. base_branch: develop) if this repo only uses one.
-      base_branch: develop,staging,main,master
-    secrets:
-      BOT_GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
-      # Optional — reuses the org SLACK_BOT_TOKEN (same app as script-runner).
-      # Remove this line to disable Slack notifications for this repo.
+      github.actor != 'axeptio-bot'
+    env:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_CHANNEL: alert-pr-notifications
+    steps:
+      - name: Checkout tech-scripts (for decide.js)
+        uses: actions/checkout@v4
+        with:
+          repository: axeptio/tech-scripts
+          ref: master
+          path: .tech-scripts
+          persist-credentials: false
+          token: ${{ secrets.BOT_GITHUB_TOKEN }}
+
+      - name: Request axeptio-bot review
+        if: >-
+          github.event_name == 'pull_request' &&
+          (github.event.action == 'opened' || github.event.action == 'ready_for_review' || github.event.action == 'reopened')
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
+          script: |
+            const botLogin = 'axeptio-bot';
+            const { owner, repo } = context.repo;
+            const prNumber = context.payload.pull_request.number;
+            const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: prNumber });
+            if (pr.user.login === botLogin) return;
+            const alreadyRequested = pr.requested_reviewers.some(r => r.login === botLogin);
+            if (!alreadyRequested) {
+              await github.rest.pulls.requestReviewers({
+                owner, repo, pull_number: prNumber,
+                reviewers: [botLogin],
+              });
+            }
+
+      - name: Evaluate and approve
+        id: evaluate
+        uses: actions/github-script@v7
+        env:
+          AUTO_APPROVE_BASE_BRANCH: develop,staging,main,master
+        with:
+          github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
+          script: |
+            const decide = require('./.tech-scripts/scripts/auto-approve-copilot/decide.js');
+            await decide({ github, context, core });
+
+      - name: Notify Slack (approved)
+        if: steps.evaluate.outputs.decision == 'approved' && env.SLACK_BOT_TOKEN != ''
+        continue-on-error: true
+        env:
+          REPO: ${{ github.repository }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          REASON: ${{ steps.evaluate.outputs.reason }}
+        run: |
+          payload=$(jq -nc \
+            --arg channel "$SLACK_CHANNEL" \
+            --arg repo "$REPO" \
+            --arg url "$PR_URL" \
+            --arg num "$PR_NUMBER" \
+            --arg title "$PR_TITLE" \
+            --arg author "$PR_AUTHOR" \
+            --arg reason "$REASON" \
+            'def s: gsub("&";"&amp;")|gsub("<";"&lt;")|gsub(">";"&gt;")|gsub("\\|";"｜");
+             def test_flag: if ($repo | test("test-only-repo|tech-scripts")) then "[TEST] " else "" end;
+             {channel: $channel,
+              attachments: [{
+                color: "#36a64f",
+                text: (test_flag + "<" + $url + "|" + ($repo | split("/")[-1]) + "#" + $num + ">  @" + $author + " — " + ($title|s) + "\n" + ($reason|s))
+              }]}')
+          curl -sS -X POST \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H 'Content-type: application/json; charset=utf-8' \
+            --data "$payload" \
+            https://slack.com/api/chat.postMessage
+
+      - name: Notify Slack (skipped)
+        if: steps.evaluate.outputs.decision == 'skip' && env.SLACK_BOT_TOKEN != ''
+        continue-on-error: true
+        env:
+          REPO: ${{ github.repository }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          REASON: ${{ steps.evaluate.outputs.reason }}
+        run: |
+          payload=$(jq -nc \
+            --arg channel "$SLACK_CHANNEL" \
+            --arg repo "$REPO" \
+            --arg url "$PR_URL" \
+            --arg num "$PR_NUMBER" \
+            --arg title "$PR_TITLE" \
+            --arg author "$PR_AUTHOR" \
+            --arg reason "$REASON" \
+            'def s: gsub("&";"&amp;")|gsub("<";"&lt;")|gsub(">";"&gt;")|gsub("\\|";"｜");
+             def test_flag: if ($repo | test("test-only-repo|tech-scripts")) then "[TEST] " else "" end;
+             {channel: $channel,
+              attachments: [{
+                color: "#e8912d",
+                text: (test_flag + "<" + $url + "|" + ($repo | split("/")[-1]) + "#" + $num + ">  @" + $author + " — " + ($title|s) + "\nskipped: " + ($reason|s))
+              }]}')
+          curl -sS -X POST \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H 'Content-type: application/json; charset=utf-8' \
+            --data "$payload" \
+            https://slack.com/api/chat.postMessage
+
+      - name: Notify Slack (error)
+        if: failure() && env.SLACK_BOT_TOKEN != ''
+        continue-on-error: true
+        env:
+          REPO: ${{ github.repository }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          payload=$(jq -nc \
+            --arg channel "$SLACK_CHANNEL" \
+            --arg repo "$REPO" \
+            --arg url "$PR_URL" \
+            --arg num "$PR_NUMBER" \
+            --arg title "$PR_TITLE" \
+            --arg author "$PR_AUTHOR" \
+            --arg runUrl "$RUN_URL" \
+            'def s: gsub("&";"&amp;")|gsub("<";"&lt;")|gsub(">";"&gt;")|gsub("\\|";"｜");
+             def test_flag: if ($repo | test("test-only-repo|tech-scripts")) then "[TEST] " else "" end;
+             {channel: $channel,
+              attachments: [{
+                color: "#ff0000",
+                text: (test_flag + "<" + $url + "|" + ($repo | split("/")[-1]) + "#" + $num + ">  @" + $author + " — " + ($title|s) + "\nerror — <" + $runUrl + "|run log>")
+              }]}')
+          curl -sS -X POST \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H 'Content-type: application/json; charset=utf-8' \
+            --data "$payload" \
+            https://slack.com/api/chat.postMessage
