@@ -7,6 +7,8 @@
 
 namespace Axeptio\Plugin\Admin\Pages;
 
+defined( 'ABSPATH' ) || exit;
+
 use Axeptio\Plugin\Admin\Settings\Setting_Api;
 use Axeptio\Plugin\Module;
 
@@ -90,7 +92,7 @@ class Admin_Main extends Module {
 			return;
 		}
 
-		$submenu['axeptio-wordpress-plugin'][0][0] = __( 'Settings', 'axeptio-wordpress-plugin' ); // PHPCS:Ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+		$submenu['axeptio-wordpress-plugin'][0][0] = __( 'Settings', 'axeptio-sdk-integration' ); // PHPCS:Ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 	}
 
 	/**
@@ -101,8 +103,8 @@ class Admin_Main extends Module {
 	public function set_pages() {
 		$this->pages = array(
 			array(
-				'page_title' => __( 'Axeptio Widget Integration', 'axeptio-wordpress-plugin' ),
-				'menu_title' => __( 'Axeptio', 'axeptio-wordpress-plugin' ),
+				'page_title' => __( 'Axeptio Widget Integration', 'axeptio-sdk-integration' ),
+				'menu_title' => __( 'Axeptio', 'axeptio-sdk-integration' ),
 				'capability' => 'manage_options',
 				'menu_slug'  => 'axeptio-wordpress-plugin',
 				'callback'   => array( $this->callbacks, 'admin_dashboard' ),
@@ -113,8 +115,8 @@ class Admin_Main extends Module {
 
 		$this->subpages = array(
 			array(
-				'page_title'  => __( 'Plugin manager', 'axeptio-wordpress-plugin' ),
-				'menu_title'  => __( 'Plugin manager', 'axeptio-wordpress-plugin' ),
+				'page_title'  => __( 'Plugin manager', 'axeptio-sdk-integration' ),
+				'menu_title'  => __( 'Plugin manager', 'axeptio-sdk-integration' ),
 				'capability'  => 'manage_options',
 				'parent_slug' => 'axeptio-wordpress-plugin',
 				'menu_slug'   => 'axeptio-plugin-manager',
@@ -154,8 +156,8 @@ class Admin_Main extends Module {
 		$main_settings_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(
-				'title'       => __( 'Widget main settings', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'Configure the information related to the integration of your Axeptio project here.', 'axeptio-wordpress-plugin' ),
+				'title'       => __( 'Widget main settings', 'axeptio-sdk-integration' ),
+				'description' => __( 'Configure the information related to the integration of your Axeptio project here.', 'axeptio-sdk-integration' ),
 			),
 			false
 			);
@@ -163,8 +165,8 @@ class Admin_Main extends Module {
 		$customize_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(
-				'title'       => __( 'Widget customization', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'In this section, you can customize the header texts of the WordPress section in the Axeptio widget.', 'axeptio-wordpress-plugin' ),
+				'title'       => __( 'Widget customization', 'axeptio-sdk-integration' ),
+				'description' => __( 'In this section, you can customize the header texts of the WordPress section in the Axeptio widget.', 'axeptio-sdk-integration' ),
 			),
 			false
 			);
@@ -172,8 +174,8 @@ class Admin_Main extends Module {
 		$consent_mode_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(
-				'title'       => __( 'Google Consent Mode', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'In this section, you can set the settings relative to the Google Consent Mode', 'axeptio-wordpress-plugin' ),
+				'title'       => __( 'Google Consent Mode', 'axeptio-sdk-integration' ),
+				'description' => __( 'In this section, you can set the settings relative to the Google Consent Mode', 'axeptio-sdk-integration' ),
 			),
 			false
 		);
@@ -181,8 +183,8 @@ class Admin_Main extends Module {
 		$data_sending_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(
-				'title'       => __( 'Data sending', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'In this section, you can set whether or not you want to let Axeptio collect technical datas', 'axeptio-wordpress-plugin' ),
+				'title'       => __( 'Data sending', 'axeptio-sdk-integration' ),
+				'description' => __( 'In this section, you can set whether or not you want to let Axeptio collect technical datas', 'axeptio-sdk-integration' ),
 			),
 			false
 		);
@@ -190,8 +192,8 @@ class Admin_Main extends Module {
 		$advanced_settings_title = \Axeptio\Plugin\get_template_part(
 			'admin/common/fields/title',
 			array(
-				'title'       => __( 'Advanced Settings', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'In this section, you will have the opportunity to manage advanced Axeptio settings.', 'axeptio-wordpress-plugin' ),
+				'title'       => __( 'Advanced Settings', 'axeptio-sdk-integration' ),
+				'description' => __( 'In this section, you will have the opportunity to manage advanced Axeptio settings.', 'axeptio-sdk-integration' ),
 			),
 			false
 		);
@@ -263,7 +265,7 @@ class Admin_Main extends Module {
 		$args = array(
 			array(
 				'id'       => 'xpwp_sdk_active',
-				'title'    => __( 'Do you want to enable the widget?', 'axeptio-wordpress-plugin' ),
+				'title'    => __( 'Do you want to enable the widget?', 'axeptio-sdk-integration' ),
 				'callback' => array( $this->callbacks, 'sdk_active_set' ),
 				'page'     => 'axeptio-wordpress-plugin',
 				'section'  => 'xpwp_admin_index',
@@ -274,7 +276,7 @@ class Admin_Main extends Module {
 			),
 			array(
 				'id'       => 'xpwp_client_id',
-				'title'    => __( 'Project ID', 'axeptio-wordpress-plugin' ),
+				'title'    => __( 'Project ID', 'axeptio-sdk-integration' ),
 				'callback' => array( $this->callbacks, 'client_id_set' ),
 				'page'     => 'axeptio-wordpress-plugin',
 				'section'  => 'xpwp_admin_index',
@@ -285,7 +287,7 @@ class Admin_Main extends Module {
 			),
 			array(
 				'id'       => 'xpwp_version_options',
-				'title'    => __( 'Options', 'axeptio-wordpress-plugin' ),
+				'title'    => __( 'Options', 'axeptio-sdk-integration' ),
 				'callback' => array( $this->callbacks, 'version_set_options' ),
 				'page'     => 'axeptio-wordpress-plugin',
 				'section'  => 'xpwp_admin_index',
@@ -296,7 +298,7 @@ class Admin_Main extends Module {
 			),
 			array(
 				'id'       => 'xpwp_version',
-				'title'    => __( 'Project Version', 'axeptio-wordpress-plugin' ),
+				'title'    => __( 'Project Version', 'axeptio-sdk-integration' ),
 				'callback' => array( $this->callbacks, 'version_set' ),
 				'page'     => 'axeptio-wordpress-plugin',
 				'section'  => 'xpwp_admin_version',
@@ -307,7 +309,7 @@ class Admin_Main extends Module {
 			),
 			array(
 				'id'       => 'xpwp_google_consent_mode',
-				'title'    => __( 'Google Consent Mode V2', 'axeptio-wordpress-plugin' ),
+				'title'    => __( 'Google Consent Mode V2', 'axeptio-sdk-integration' ),
 				'callback' => array( $this->callbacks, 'google_consent_mode_set' ),
 				'page'     => 'axeptio-wordpress-plugin',
 				'section'  => 'xpwp_admin_consent_mode',
@@ -353,7 +355,7 @@ class Admin_Main extends Module {
 
 			array(
 				'id'       => 'xpwp_disable_send_datas',
-				'title'    => __( 'Collect of data and errors by Axeptio', 'axeptio-wordpress-plugin' ),
+				'title'    => __( 'Collect of data and errors by Axeptio', 'axeptio-sdk-integration' ),
 				'callback' => array( $this->callbacks, 'send_datas_set' ),
 				'page'     => 'axeptio-wordpress-plugin',
 				'section'  => 'xpwp_admin_disable_send_datas',

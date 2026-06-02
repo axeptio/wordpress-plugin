@@ -6,7 +6,7 @@ $axeptio_is_checked = '1' === $data->value;
 
 <div x-data="{ <?php echo esc_attr( $axeptio_field_name ); ?>: <?php echo wp_json_encode( $axeptio_is_checked ); ?> }">
 	<label for="<?php echo esc_attr( $axeptio_field_id ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
-		<?php echo esc_html__( 'Widget Background Image', 'axeptio-wordpress-plugin' ); ?>
+		<?php echo esc_html__( 'Widget Background Image', 'axeptio-sdk-integration' ); ?>
 	</label>
 	<div class="inline-flex items-center w-full relative my-2">
 		<?php

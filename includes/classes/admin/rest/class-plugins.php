@@ -7,6 +7,8 @@
 
 namespace Axeptio\Plugin\Admin\Rest;
 
+defined( 'ABSPATH' ) || exit;
+
 use Axeptio\Plugin\Models\Notice;
 use Axeptio\Plugin\Models\Plugins as PluginModel;
 use Axeptio\Plugin\Module;

@@ -19,19 +19,19 @@ class Shortcode_Tags_Modes {
 		$common = array(
 			array(
 				'value' => 'none',
-				'text'  => __( 'None', 'axeptio-wordpress-plugin' ),
+				'text'  => __( 'None', 'axeptio-sdk-integration' ),
 			),
 			array(
 				'value' => 'all',
-				'text'  => __( 'All shortcode tags', 'axeptio-wordpress-plugin' ),
+				'text'  => __( 'All shortcode tags', 'axeptio-sdk-integration' ),
 			),
 			array(
 				'value' => 'blacklist',
-				'text'  => __( 'Only the following', 'axeptio-wordpress-plugin' ),
+				'text'  => __( 'Only the following', 'axeptio-sdk-integration' ),
 			),
 			array(
 				'value' => 'whitelist',
-				'text'  => __( 'Only those other than', 'axeptio-wordpress-plugin' ),
+				'text'  => __( 'Only those other than', 'axeptio-sdk-integration' ),
 			),
 		);
 		if ( 'all' !== $configuration_id ) {
@@ -39,7 +39,7 @@ class Shortcode_Tags_Modes {
 				$common,
 				array(
 					'value' => 'inherit',
-					'text'  => __( 'Inherited from defaults', 'axeptio-wordpress-plugin' ),
+					'text'  => __( 'Inherited from defaults', 'axeptio-sdk-integration' ),
 				)
 			);
 		}
@@ -51,7 +51,7 @@ class Shortcode_Tags_Modes {
 				$common,
 				array(
 					'value' => 'recommended',
-					'text'  => __( 'Recommended by Axeptio', 'axeptio-wordpress-plugin' ),
+					'text'  => __( 'Recommended by Axeptio', 'axeptio-sdk-integration' ),
 				)
 			);
 		}

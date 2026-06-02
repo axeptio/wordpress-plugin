@@ -13,10 +13,10 @@
 		<div class="grow flex flex-col gap-6 justify-center">
 			<div class="flex flex-col">
 				<h3 class="text-lg font-semibold leading-7 text-gray-900">
-					<?php esc_html_e( 'Axeptio aims for the moon, you look after the stars?', 'axeptio-wordpress-plugin' ); ?>&nbsp;⭐⭐⭐⭐⭐
+					<?php esc_html_e( 'Axeptio aims for the moon, you look after the stars?', 'axeptio-sdk-integration' ); ?>&nbsp;⭐⭐⭐⭐⭐
 				</h3>
 				<p>
-					<?php esc_html_e( 'If you like Axeptio, give us a rating to make us shine!', 'axeptio-wordpress-plugin' ); ?>
+					<?php esc_html_e( 'If you like Axeptio, give us a rating to make us shine!', 'axeptio-sdk-integration' ); ?>
 				</p>
 			</div>
 			<div>
@@ -24,12 +24,12 @@
 					<li>
 						<a href="https://fr.wordpress.org/plugins/axeptio-sdk-integration/#reviews" target="_blank"
 							class="rounded-full bg-amber-400 px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-900 hover:text-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-							<?php esc_html_e( 'Review Axeptio plugin', 'axeptio-wordpress-plugin' ); ?>
+							<?php esc_html_e( 'Review Axeptio plugin', 'axeptio-sdk-integration' ); ?>
 						</a>
 					</li>
 					<li>
 						<button class="p-0 hover:underline focus:underline" id="axeptio-disable-button">
-							<?php echo esc_html__( 'Don\'t ask me anymore', 'axeptio-wordpress-plugin' ); ?>
+							<?php echo esc_html__( 'Don\'t ask me anymore', 'axeptio-sdk-integration' ); ?>
 						</button>
 					</li>
 				</ul>

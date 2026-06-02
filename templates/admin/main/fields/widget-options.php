@@ -13,7 +13,7 @@ if ( $axeptio_is_multilingual ) {
 	// For monolingual sites, we use the current language.
 	$axeptio_current_lang = array(
 		'language_code' => get_locale(),
-		'native_name'   => __( 'Default', 'axeptio-wordpress-plugin' ),
+		'native_name'   => __( 'Default', 'axeptio-sdk-integration' ),
 	);
 	$axeptio_languages    = array( $axeptio_current_lang );
 }

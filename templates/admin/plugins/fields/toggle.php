@@ -24,7 +24,7 @@
 		</span>
 	</label>
 	<div class="ml-5 sr-only">
-		<label :for="plugin.Metas.plugin"><?php echo esc_html__( 'Enable', 'axeptio-wordpress-plugin' ); ?></label>
+		<label :for="plugin.Metas.plugin"><?php echo esc_html__( 'Enable', 'axeptio-sdk-integration' ); ?></label>
 	</div>
 	<input type="checkbox" @change="enableControl(plugin)" class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0" :id="'enable_' + plugin.Metas.plugin" :name="'axeptio_plugins[\'' + index + '\']'" value="1" placeholder="">
 </div>

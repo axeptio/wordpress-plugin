@@ -1,7 +1,7 @@
 <div class="mb-6">
 	<div class="sm:hidden">
 		<label for="tabs" class="sr-only">
-			<?php esc_html_e( 'Select a tab', 'axeptio-wordpress-plugin' ); ?>
+			<?php esc_html_e( 'Select a tab', 'axeptio-sdk-integration' ); ?>
 		</label>
 		<select x-model="currentTab" class="block w-full rounded-md border-gray-300 focus:border-amber-500 focus:ring-amber-500">
 			<?php foreach ( $data->tab_items as $axeptio_tab_item_key => $axeptio_tab_item ) : ?>

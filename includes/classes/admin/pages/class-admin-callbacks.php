@@ -221,7 +221,7 @@ class Admin_Callbacks {
 		self::render_widget_field(
 			array(
 				'field_name' => 'widget_title',
-				'label'      => __( 'Widget title', 'axeptio-wordpress-plugin' ),
+				'label'      => __( 'Widget title', 'axeptio-sdk-integration' ),
 				'language'   => self::get_language_from_args( $args ),
 			)
 			);
@@ -237,7 +237,7 @@ class Admin_Callbacks {
 		self::render_widget_field(
 			array(
 				'field_name' => 'widget_subtitle',
-				'label'      => __( 'Widget sub-title', 'axeptio-wordpress-plugin' ),
+				'label'      => __( 'Widget sub-title', 'axeptio-sdk-integration' ),
 				'language'   => self::get_language_from_args( $args ),
 			)
 			);
@@ -252,7 +252,7 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/image-upload',
 			array(
-				'label' => __( 'Widget Image', 'axeptio-wordpress-plugin' ),
+				'label' => __( 'Widget Image', 'axeptio-sdk-integration' ),
 				'group' => 'axeptio_settings',
 				'name'  => 'widget_image',
 				'id'    => 'xpwp_widget_image',
@@ -270,8 +270,8 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/main/fields/background-image',
 			array(
-				'label'       => __( 'Disable the background Image', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'By checking this box, you will deactivate the painted background.', 'axeptio-wordpress-plugin' ),
+				'label'       => __( 'Disable the background Image', 'axeptio-sdk-integration' ),
+				'description' => __( 'By checking this box, you will deactivate the painted background.', 'axeptio-sdk-integration' ),
 				'group'       => 'axeptio_settings',
 				'name'        => 'widget_disable_paint',
 				'id'          => 'xpwp_widget_disable_paint',
@@ -289,12 +289,12 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
-				'label'       => __( 'Cookie domain', 'axeptio-wordpress-plugin' ) . ' (userCookieDomain)',
+				'label'       => __( 'Cookie domain', 'axeptio-sdk-integration' ) . ' (userCookieDomain)',
 				'group'       => 'axeptio_settings',
 				'name'        => 'cookie_domain',
 				'id'          => 'xpwp_cookie_domain',
 				'value'       => Settings::get_option( 'cookie_domain', '' ),
-				'instruction' => __( 'If specified, domain name on which the cookie containing user choices will be available. This allows to request one consent for various subdomains', 'axeptio-wordpress-plugin' ),
+				'instruction' => __( 'If specified, domain name on which the cookie containing user choices will be available. This allows to request one consent for various subdomains', 'axeptio-sdk-integration' ),
 				'help_url'    => strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274095-comment-parametrer-le-widget-pour-un-sous-domaine' : 'https://support.axeptio.eu/en/articles/274095-how-to-set-the-widget-for-a-sub-domain',
 			)
 		);
@@ -310,13 +310,13 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/text',
 			array(
-				'label'       => __( 'URL for server-side usage', 'axeptio-wordpress-plugin' ) . ' (postConsentUrl)',
+				'label'       => __( 'URL for server-side usage', 'axeptio-sdk-integration' ) . ' (postConsentUrl)',
 				'group'       => 'axeptio_settings',
 				'type'        => 'url',
 				'name'        => 'api_url',
 				'id'          => 'xpwp_api_url',
 				'value'       => Settings::get_option( 'api_url', '' ),
-				'instruction' => __( 'URL to which the widget will send POST requests after user consent.', 'axeptio-wordpress-plugin' ),
+				'instruction' => __( 'URL to which the widget will send POST requests after user consent.', 'axeptio-sdk-integration' ),
 				'help_url'    => strpos( get_user_locale(), 'fr' ) === 0 ? 'https://support.axeptio.eu/fr/articles/274016-mise-en-place-du-server-side-tracking' : 'https://support.axeptio.eu/hc/en-gb/articles/28447238691345-Passing-Consent-in-Your-GTM-Server-side-Container',
 				'placeholder' => 'https://yourdomain.clouds',
 			)
@@ -332,12 +332,12 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/main/fields/proxy-sdk',
 			array(
-				'label'       => __( 'Enable sdk proxy', 'axeptio-wordpress-plugin' ),
+				'label'       => __( 'Enable sdk proxy', 'axeptio-sdk-integration' ),
 				'group'       => 'axeptio_settings',
 				'name'        => 'sdk_proxy',
 				'id'          => 'xpwp_sdk_proxy',
 				'value'       => Settings::get_option( 'sdk_proxy', '0' ),
-				'instruction' => __( 'Load the Axeptio SDK from your website domain.', 'axeptio-wordpress-plugin' ),
+				'instruction' => __( 'Load the Axeptio SDK from your website domain.', 'axeptio-sdk-integration' ),
 			)
 		);
 	}
@@ -352,7 +352,7 @@ class Admin_Callbacks {
 		self::render_widget_field(
 			array(
 				'field_name' => 'widget_description',
-				'label'      => __( 'Widget description', 'axeptio-wordpress-plugin' ),
+				'label'      => __( 'Widget description', 'axeptio-sdk-integration' ),
 				'language'   => self::get_language_from_args( $args ),
 				'template'   => 'admin/common/fields/textarea',
 			)
@@ -383,7 +383,7 @@ class Admin_Callbacks {
 		?>
 		<input type="text" name="axeptio_settings[api_url]" value="<?php echo esc_attr( $api_url ); ?>" class="regular-text">
 		<p class="description">
-			<?php esc_html_e( 'URL to which the widget will send POST requests after user consent.', 'axeptio-wordpress-plugin' ); ?>
+			<?php esc_html_e( 'URL to which the widget will send POST requests after user consent.', 'axeptio-sdk-integration' ); ?>
 		</p>
 		<?php
 	}
@@ -397,8 +397,8 @@ class Admin_Callbacks {
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/gtm-events',
 			array(
-				'label'       => __( 'Google Tag Manager Events', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'Configure how events are sent to Google Tag Manager', 'axeptio-wordpress-plugin' ),
+				'label'       => __( 'Google Tag Manager Events', 'axeptio-sdk-integration' ),
+				'description' => __( 'Configure how events are sent to Google Tag Manager', 'axeptio-sdk-integration' ),
 				'group'       => 'axeptio_settings',
 				'name'        => 'gtm_events',
 				'id'          => 'xpwp_gtm_events',
