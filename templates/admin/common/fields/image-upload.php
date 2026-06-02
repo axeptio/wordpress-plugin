@@ -16,7 +16,7 @@
 		\Axeptio\Plugin\get_template_part(
 			'admin/common/fields/toggle',
 			array(
-				'label'        => __( 'Disable this image', 'axeptio-wordpress-plugin' ),
+				'label'        => __( 'Disable this image', 'axeptio-sdk-integration' ),
 				'name'         => '',
 				'description'  => '',
 				'id'           => 'disable_' . $data->id,

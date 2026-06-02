@@ -32,7 +32,7 @@ if ( $axeptio_is_multilingual ) {
 			\Axeptio\Plugin\get_template_part(
 				'admin/common/fields/select-languages',
 				array(
-					'label'     => __( 'Widget language', 'axeptio-wordpress-plugin' ),
+					'label'     => __( 'Widget language', 'axeptio-sdk-integration' ),
 					'group'     => '',
 					'name'      => 'widget_lang',
 					'id'        => 'xpwp_widget_lang',
