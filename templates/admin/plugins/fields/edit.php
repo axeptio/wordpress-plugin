@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 use Axeptio\Plugin\Models\I18n;
 
 $axeptio_is_multilingual = I18n::has_multilangual();

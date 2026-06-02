@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div
 	x-data="SelectComponent()"
 	x-init="init(<?php echo esc_attr( wp_json_encode( $data ) ); ?>)"

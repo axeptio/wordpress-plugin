@@ -1,4 +1,6 @@
-<?php if ( ! \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ) : ?>
+<?php
+defined( 'ABSPATH' ) || exit;
+if ( ! \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ) : ?>
 <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
 	<div class="flex">
 		<div class="flex-shrink-0">

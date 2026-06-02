@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 use Axeptio\Plugin\Admin\Pages\Admin_Callbacks;
 use Axeptio\Plugin\Models\Axeptio_Steps;

@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="mx-auto max-w-7xl relative">
 	<?php if ( ! \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ) : ?>
 	<div class="bg-yellow-50 p-4 my-4 rounded-lg ring-1 ring-yellow-600/50 ring-inset">

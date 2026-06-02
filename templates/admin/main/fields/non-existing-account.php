@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="mt-2 text-sm text-red-700">
 	<p><?php esc_html_e( 'If you are certain that your project exists, please follow these steps:', 'axeptio-sdk-integration' ); ?></p>
 </div>

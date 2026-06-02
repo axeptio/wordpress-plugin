@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div x-data="imageUploadComponent({
 	initialValue: '<?php echo esc_js( $data->value ); ?>',
 	fieldName: '<?php echo esc_js( $data->group . '[' . $data->name . ']' ); ?>',

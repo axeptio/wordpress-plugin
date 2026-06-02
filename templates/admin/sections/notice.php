@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="bg-amber-100/60 rounded-lg overflow-hidden mt-6 shadow-md max-w-7xl mx-auto p-4 px-6 relative"
 	x-data="noticeComponent(
 			<?php echo esc_attr( wp_json_encode( array( 'nonce' => wp_create_nonce( 'wp_rest' ) ) ) ); ?>,

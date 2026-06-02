@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="mb-6">
 	<div class="sm:hidden">
 		<label for="tabs" class="sr-only">
