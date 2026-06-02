@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <input type="hidden" name="axeptio_settings[client_id]" x-model="accountID" value="<?php echo esc_attr( get_option( 'xpwp_client_id' ) ); ?>">
 <div class="container relative">
 	<div

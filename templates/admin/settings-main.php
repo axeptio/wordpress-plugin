@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="wrap">
 	<h1 class="screen-reader-text">
 		<?php esc_html_e( 'Axeptio', 'axeptio-sdk-integration' ); ?>

@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 use Axeptio\Plugin\Models\Project_Versions;
 use Axeptio\Plugin\Models\Settings;

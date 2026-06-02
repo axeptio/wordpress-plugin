@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="mt-4 relative overflow-hidden bg-white px-6 pt-5 pb-14 shadow-xl rounded-lg sm:px-10 sm:py-10 md:px-12 lg:px-20 max-w-7xl mx-auto">
 	<svg class="absolute -top-28 -right-4 md:-top-14 md:-right-14 w-1/2 min-w-[300px] lg:w-96 h-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 200 142"><path fill="#FFEDCC" fill-rule="evenodd" d="M13 0C-2.212 26.075-22.77 115.4 75.466 137.861c33.103 7.568 77.626 4.162 124.535-5.394V16c0-8.837-7.164-16-16-16H13Z" clip-rule="evenodd"></path></svg>
 	<div class="flex flex-col md:flex-row items-center justify-between">

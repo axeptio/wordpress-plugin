@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div x-data="imageUploadComponent({
 	initialValue: '<?php echo esc_js( $data->value ); ?>',
 	fieldName: '<?php echo esc_js( $data->group . '[' . $data->name . ']' ); ?>',
@@ -11,13 +12,20 @@
 			</a>
 		<?php endif ?>
 	</label>
-	<div class="flex items-center my-2">
-		<input type="checkbox" id="disable_<?php echo esc_attr( $data->id ); ?>"
-				x-model="disableImage"
-				class="mr-2">
-		<label for="disable_<?php echo esc_attr( $data->id ); ?>" class="text-sm font-medium text-gray-700">
-			<?php echo esc_html__( 'Disable this image', 'axeptio-sdk-integration' ); ?>
-		</label>
+	<div class="inline-flex items-center w-full relative my-2">
+		<?php
+		\Axeptio\Plugin\get_template_part(
+			'admin/common/fields/toggle',
+			array(
+				'label'        => __( 'Disable this image', 'axeptio-sdk-integration' ),
+				'name'         => '',
+				'description'  => '',
+				'id'           => 'disable_' . $data->id,
+				'alpine_state' => 'disableImage',
+				'checked'      => 'disabled' === $data->value,
+			)
+		);
+		?>
 	</div>
 
 	<div x-show="!disableImage">

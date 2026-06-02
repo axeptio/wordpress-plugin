@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="relative isolate overflow-hidden bg-amber-400/20">
 	<svg class="w-full md:-mt-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="fill-white" d="M808,64.1c-205,11.1-205,11.1-410,6.5C195.4,66,193,66-5,74.9v-85.8h1215V67C1012.9,53,1010.3,53.1,808,64.1z"></path></svg>
 	<img class="buddy-cookie hidden md:block" src="<?php echo esc_attr( \Axeptio\Plugin\get_img( 'buddy-cookie.svg' ) ); ?>" alt="" />

@@ -1,4 +1,6 @@
-<?php $axeptio_hide_decoration = ! empty( $data->plugin_settings['shortcode_placeholder_hide_decoration'] ); ?>
+<?php
+defined( 'ABSPATH' ) || exit;
+$axeptio_hide_decoration = ! empty( $data->plugin_settings['shortcode_placeholder_hide_decoration'] ); ?>
 <div class="axeptio-shortcode-placeholder">
 	<div class="axeptio-shortcode-content">
 		<div class="axeptio-shortcode-title">

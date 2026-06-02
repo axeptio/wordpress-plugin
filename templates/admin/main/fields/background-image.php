@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 $axeptio_field_name = esc_attr( $data->name );
 $axeptio_field_id   = 'xpwp_' . $axeptio_field_name;
 $axeptio_is_checked = '1' === $data->value;

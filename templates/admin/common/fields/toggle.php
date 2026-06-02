@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="flex flex-1 items-center">
 	<label for="<?php echo esc_attr( $data->id ); ?>" class="group relative inline-flex h-5 w-10 flex-shrink-0 cursor-pointer items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 <?php echo isset( $data->disabled ) && $data->disabled ? 'opacity-50 cursor-not-allowed' : ''; ?>" role="switch" aria-checked="false" :aria-checked="(<?php echo esc_attr( $data->alpine_state ); ?> ?? '0').toString()">
 		<span aria-hidden="true" class="pointer-events-none absolute h-full w-full rounded-md bg-white"></span>
@@ -13,7 +14,9 @@
 			</a>
 			<?php endif ?>
 		</span>
-		<span class="text-gray-500 text-xs"><?php echo esc_html( $data->description ); ?></span>
+		<?php if ( ! empty( $data->description ) ) : ?>
+			<span class="text-gray-500 text-xs"><?php echo esc_html( $data->description ); ?></span>
+		<?php endif; ?>
 	</label>
 	<input type="checkbox" @change="<?php echo esc_attr( $data->alpine_state ); ?> = !<?php echo esc_attr( $data->alpine_state ); ?>"
 			class="sr-only"
