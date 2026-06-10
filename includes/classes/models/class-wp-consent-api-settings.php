@@ -56,24 +56,24 @@ class WP_Consent_API_Settings {
 	private static function get_categories_data(): array {
 		return array(
 			'functional'           => array(
-				'title'       => __( 'Functional', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'The cookie or any other form of local storage is used for the sole purpose of carrying out the transmission of a communication over an electronic communications network.', 'axeptio-wordpress-plugin' ),
+				'title'       => __( 'Functional', 'axeptio-sdk-integration' ),
+				'description' => __( 'The cookie or any other form of local storage is used for the sole purpose of carrying out the transmission of a communication over an electronic communications network.', 'axeptio-sdk-integration' ),
 			),
 			'preferences'          => array(
-				'title'       => __( 'Preferences', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'Cookies or any other form of local storage that can not be seen as statistics, statistics-anonymous, marketing or functional, and where the technical storage or access is necessary for the legitimate purpose of storing preferences.', 'axeptio-wordpress-plugin' ),
+				'title'       => __( 'Preferences', 'axeptio-sdk-integration' ),
+				'description' => __( 'Cookies or any other form of local storage that can not be seen as statistics, statistics-anonymous, marketing or functional, and where the technical storage or access is necessary for the legitimate purpose of storing preferences.', 'axeptio-sdk-integration' ),
 			),
 			'statistics'           => array(
-				'title'       => __( 'Statistics', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'Cookies or any other form of local storage that are used exclusively for statistical purposes (Analytics Cookies).', 'axeptio-wordpress-plugin' ),
+				'title'       => __( 'Statistics', 'axeptio-sdk-integration' ),
+				'description' => __( 'Cookies or any other form of local storage that are used exclusively for statistical purposes (Analytics Cookies).', 'axeptio-sdk-integration' ),
 			),
 			'statistics-anonymous' => array(
-				'title'       => __( 'Anonymous Statistics', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'Cookies or any other form of local storage that are used exclusively for anonymous statistical purposes.', 'axeptio-wordpress-plugin' ),
+				'title'       => __( 'Anonymous Statistics', 'axeptio-sdk-integration' ),
+				'description' => __( 'Cookies or any other form of local storage that are used exclusively for anonymous statistical purposes.', 'axeptio-sdk-integration' ),
 			),
 			'marketing'            => array(
-				'title'       => __( 'Marketing', 'axeptio-wordpress-plugin' ),
-				'description' => __( 'Cookies or any other form of local storage required to create user profiles to send advertising or to track the user on a website or across websites for similar marketing purposes.', 'axeptio-wordpress-plugin' ),
+				'title'       => __( 'Marketing', 'axeptio-sdk-integration' ),
+				'description' => __( 'Cookies or any other form of local storage required to create user profiles to send advertising or to track the user on a website or across websites for similar marketing purposes.', 'axeptio-sdk-integration' ),
 			),
 		);
 	}

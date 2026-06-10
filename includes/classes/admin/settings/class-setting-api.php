@@ -7,6 +7,8 @@
 
 namespace Axeptio\Plugin\Admin\Settings;
 
+defined( 'ABSPATH' ) || exit;
+
 class Setting_Api {
 
 	/**

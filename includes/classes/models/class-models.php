@@ -7,6 +7,8 @@
 
 namespace Axeptio\Plugin\Models;
 
+defined( 'ABSPATH' ) || exit;
+
 use Axeptio\Plugin\Module;
 
 class Models extends Module {

@@ -1,4 +1,6 @@
-<?php $axeptio_hide_decoration = ! empty( $data->plugin_settings['shortcode_placeholder_hide_decoration'] ); ?>
+<?php
+defined( 'ABSPATH' ) || exit;
+$axeptio_hide_decoration = ! empty( $data->plugin_settings['shortcode_placeholder_hide_decoration'] ); ?>
 <div class="axeptio-shortcode-placeholder">
 	<div class="axeptio-shortcode-content">
 		<div class="axeptio-shortcode-title">
@@ -6,7 +8,7 @@
 			if ( ! empty( $data->plugin_settings['shortcode_placeholder_title'] ) ) {
 				echo esc_html( $data->plugin_settings['shortcode_placeholder_title'] );
 			} else {
-				esc_html_e( 'Oops, content not available at the moment!', 'axeptio-wordpress-plugin' );
+				esc_html_e( 'Oops, content not available at the moment!', 'axeptio-sdk-integration' );
 			}
 			?>
 		</div>
@@ -18,7 +20,7 @@
 				echo esc_html( $axeptio_description );
 			} else {
 				/* translators: $s: Name of the plugin */
-				printf( esc_html__( "This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it's very simple: go to our cookie consent widget, give your approval for the \"%s\" extension. And voila, you're all set!", 'axeptio-wordpress-plugin' ), esc_html( $data->plugin_settings['vendor_title'] ) );
+				printf( esc_html__( "This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it's very simple: go to our cookie consent widget, give your approval for the \"%s\" extension. And voila, you're all set!", 'axeptio-sdk-integration' ), esc_html( $data->plugin_settings['vendor_title'] ) );
 			}
 			?>
 		</div>
@@ -28,7 +30,7 @@
 				if ( ! empty( $data->plugin_settings['shortcode_placeholder_button_text'] ) ) {
 					echo esc_html( $data->plugin_settings['shortcode_placeholder_button_text'] );
 				} else {
-					esc_html_e( 'I accept this service', 'axeptio-wordpress-plugin' );
+					esc_html_e( 'I accept this service', 'axeptio-sdk-integration' );
 				}
 				?>
 			</span>

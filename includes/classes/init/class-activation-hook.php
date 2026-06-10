@@ -7,6 +7,8 @@
 
 namespace Axeptio\Plugin\Init;
 
+defined( 'ABSPATH' ) || exit;
+
 use Axeptio\Plugin\Models\Settings;
 use Axeptio\Plugin\Module;
 use Axeptio\Plugin\Utils\Flash_Vars;

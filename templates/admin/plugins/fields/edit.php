@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 use Axeptio\Plugin\Models\I18n;
 
 $axeptio_is_multilingual = I18n::has_multilangual();
@@ -13,7 +14,7 @@ if ( $axeptio_is_multilingual ) {
 	$axeptio_languages    = array(
 		'default' => array(
 			'language_code' => 'default',
-			'native_name'   => __( 'Default', 'axeptio-wordpress-plugin' ),
+			'native_name'   => __( 'Default', 'axeptio-sdk-integration' ),
 		),
 	);
 }
@@ -41,7 +42,7 @@ if ( $axeptio_is_multilingual ) {
 				<div class="ml-3 flex h-7 items-center">
 					<button type="button" class="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:ring-2 focus:ring-amber-400" @click="closePanel()">
 						<span class="sr-only">
-							<?php esc_html_e( 'Close', 'axeptio-wordpress-plugin' ); ?>
+							<?php esc_html_e( 'Close', 'axeptio-sdk-integration' ); ?>
 						</span>
 						<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
 							<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
@@ -57,14 +58,14 @@ if ( $axeptio_is_multilingual ) {
 						:class="isActive(1) ? 'border-amber-400 text-amber-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
 						class="w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
 					>
-						<?php esc_html_e( 'Informations', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Informations', 'axeptio-sdk-integration' ); ?>
 					</button>
 					<button
 						@click="setActive(2)"
 						:class="isActive(2) ? 'border-amber-400 text-amber-600': 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'"
 						class="w-1/2 border-b-2 py-4 px-1 text-center text-sm font-medium"
 					>
-						<?php esc_html_e( 'Hooks and shortcodes', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Hooks and shortcodes', 'axeptio-sdk-integration' ); ?>
 					</button>
 				</nav>
 			</div>
@@ -82,7 +83,7 @@ if ( $axeptio_is_multilingual ) {
 
 				<div>
 					<label for="vendor-title" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Title', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Title', 'axeptio-sdk-integration' ); ?>
 					</label>
 					<div class="mt-2">
 						<input
@@ -98,7 +99,7 @@ if ( $axeptio_is_multilingual ) {
 
 				<div>
 					<label for="vendor-short-description" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Short description', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Short description', 'axeptio-sdk-integration' ); ?>
 					</label>
 					<div class="mt-2">
 						<textarea
@@ -113,7 +114,7 @@ if ( $axeptio_is_multilingual ) {
 
 				<div>
 					<label for="vendor-long-description" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Long description', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Long description', 'axeptio-sdk-integration' ); ?>
 					</label>
 					<div class="mt-2">
 						<textarea
@@ -127,7 +128,7 @@ if ( $axeptio_is_multilingual ) {
 
 				<div>
 					<label for="vendor-policy-url" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Policy URL', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Policy URL', 'axeptio-sdk-integration' ); ?>
 					</label>
 					<div class="mt-2">
 						<input
@@ -143,7 +144,7 @@ if ( $axeptio_is_multilingual ) {
 
 				<div>
 					<label for="photo" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Icon', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Icon', 'axeptio-sdk-integration' ); ?>
 					</label>
 					<input type="hidden" x-model="editedPlugin.Metas.vendor_image" readonly>
 					<div class="mt-2 flex items-center gap-x-3">
@@ -152,12 +153,12 @@ if ( $axeptio_is_multilingual ) {
 								<path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd"></path>
 							</svg>
 						</div>
-						<img x-show="editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image" class="h-12 w-12 aspect-[1/1]" :src=" editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image" alt="<?php esc_attr_e( 'Image preview', 'axeptio-wordpress-plugin' ); ?>">
+						<img x-show="editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image" class="h-12 w-12 aspect-[1/1]" :src=" editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image" alt="<?php esc_attr_e( 'Image preview', 'axeptio-sdk-integration' ); ?>">
 						<button
 							@click="openMediaSelector"
 							type="button"
 							class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-							x-text="editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image ? '<?php esc_attr_e( 'Edit', 'axeptio-wordpress-plugin' ); ?>' : '<?php esc_attr_e( 'Select', 'axeptio-wordpress-plugin' ); ?>'"
+							x-text="editedPlugin.Metas.vendor_image || editedPlugin?.Metas?.Merged?.vendor_image ? '<?php esc_attr_e( 'Edit', 'axeptio-sdk-integration' ); ?>' : '<?php esc_attr_e( 'Select', 'axeptio-sdk-integration' ); ?>'"
 						>
 						</button>
 					</div>
@@ -176,7 +177,7 @@ if ( $axeptio_is_multilingual ) {
 			>
 				<div>
 					<label for="wp-filter-mode" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Hook to be filtered', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Hook to be filtered', 'axeptio-sdk-integration' ); ?>
 					</label>
 					<select x-model="editedPlugin.Metas.wp_filter_mode" id="wp-filter-mode" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-amber-400 sm:text-sm sm:leading-6">
 						<template x-for="hookMode in hookModes" :key="hookMode.value">
@@ -191,7 +192,7 @@ if ( $axeptio_is_multilingual ) {
 
 				<div x-show="editedPlugin.Metas.wp_filter_mode == 'blacklist' || editedPlugin.Metas.wp_filter_mode == 'whitelist'">
 					<label for="about" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'List of hooks (action or filter)', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'List of hooks (action or filter)', 'axeptio-sdk-integration' ); ?>
 					</label>
 					<div class="mt-2">
 						<?php
@@ -199,8 +200,8 @@ if ( $axeptio_is_multilingual ) {
 							'admin/plugins/fields/repeater',
 							array(
 								'name'        => 'wp_filter_list',
-								'add_item'    => __( 'Add a hook', 'axeptio-wordpress-plugin' ),
-								'delete_item' => __( 'Delete', 'axeptio-wordpress-plugin' ),
+								'add_item'    => __( 'Add a hook', 'axeptio-sdk-integration' ),
+								'delete_item' => __( 'Delete', 'axeptio-sdk-integration' ),
 							)
 							);
 						?>
@@ -213,7 +214,7 @@ if ( $axeptio_is_multilingual ) {
 									that have been added by the selected Plugin. Hooks are very common within 3rd party plugins
 									as they are used to interacting with the page code, like adding script or stylesheet tags, edit the
 									content of a section of the template, etc.',
-									'axeptio-wordpress-plugin'
+									'axeptio-sdk-integration'
 								),
 								array(
 									'code' => array(),
@@ -225,7 +226,7 @@ if ( $axeptio_is_multilingual ) {
 
 				<div>
 					<label for="shortcode-tags-mode" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'Shortcodes to be filtered', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Shortcodes to be filtered', 'axeptio-sdk-integration' ); ?>
 					</label>
 					<select x-model="editedPlugin.Metas.shortcode_tags_mode" id="shortcodes-tags-mode" class="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-amber-400 sm:text-sm sm:leading-6">
 						<template x-for="shortcodeTagsMode in shortcodeTagsModes" :key="shortcodeTagsMode.value">
@@ -240,7 +241,7 @@ if ( $axeptio_is_multilingual ) {
 
 				<div x-show="editedPlugin.Metas.shortcode_tags_mode == 'blacklist' || editedPlugin.Metas.shortcode_tags_mode == 'whitelist'">
 					<label for="shortcode-tags-list" class="block text-sm font-medium leading-6 text-gray-900">
-						<?php esc_html_e( 'List of shortcode Tags', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'List of shortcode Tags', 'axeptio-sdk-integration' ); ?>
 					</label>
 					<div class="mt-2">
 						<?php
@@ -248,9 +249,9 @@ if ( $axeptio_is_multilingual ) {
 							'admin/plugins/fields/repeater',
 							array(
 								'name'        => 'shortcode_tags_list',
-								'add_item'    => __( 'Add a shortcode', 'axeptio-wordpress-plugin' ),
-								'delete_item' => __( 'Delete', 'axeptio-wordpress-plugin' ),
-								'placeholder' => __( 'Example tag : axeptio --forceReload', 'axeptio-wordpress-plugin' ),
+								'add_item'    => __( 'Add a shortcode', 'axeptio-sdk-integration' ),
+								'delete_item' => __( 'Delete', 'axeptio-sdk-integration' ),
+								'placeholder' => __( 'Example tag : axeptio --forceReload', 'axeptio-sdk-integration' ),
 							)
 							);
 						?>
@@ -263,7 +264,7 @@ if ( $axeptio_is_multilingual ) {
 									These shortcodes are commonly used to embed 3rd party content, like videos or maps. If you
 									think the shortcodes provided by the selected plugin are going to load a resource from another
 									website, you should probably block them preemptively.',
-									'axeptio-wordpress-plugin'
+									'axeptio-sdk-integration'
 								),
 								array(
 									'code' => array(),
@@ -279,7 +280,7 @@ if ( $axeptio_is_multilingual ) {
 					@language-changed.window="selectedPlaceholderLang = $event.detail.language || $event.detail.value"
 				>
 					<h3 class="text-sm font-semibold leading-6 text-gray-900 mb-4">
-						<?php esc_html_e( 'Consent Banner', 'axeptio-wordpress-plugin' ); ?>
+						<?php esc_html_e( 'Consent Banner', 'axeptio-sdk-integration' ); ?>
 					</h3>
 
 					<?php if ( $axeptio_is_multilingual ) : ?>
@@ -288,7 +289,7 @@ if ( $axeptio_is_multilingual ) {
 						\Axeptio\Plugin\get_template_part(
 							'admin/common/fields/select-languages',
 							array(
-								'label'     => __( 'Language', 'axeptio-wordpress-plugin' ),
+								'label'     => __( 'Language', 'axeptio-sdk-integration' ),
 								'group'     => '',
 								'name'      => 'placeholder_lang',
 								'id'        => 'xpwp_placeholder_lang',
@@ -304,7 +305,7 @@ if ( $axeptio_is_multilingual ) {
 					<div class="space-y-4" x-show="selectedPlaceholderLang === '<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>'">
 						<div>
 							<label for="shortcode-placeholder-title-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
-								<?php esc_html_e( 'Shortcode placeholder title', 'axeptio-wordpress-plugin' ); ?>
+								<?php esc_html_e( 'Shortcode placeholder title', 'axeptio-sdk-integration' ); ?>
 							</label>
 							<div class="mt-2">
 								<input
@@ -313,22 +314,22 @@ if ( $axeptio_is_multilingual ) {
 									type="text"
 									id="shortcode-placeholder-title-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>"
 									class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
-									placeholder="<?php echo esc_attr__( 'Oops, content not available at the moment!', 'axeptio-wordpress-plugin' ); ?>"
+									placeholder="<?php echo esc_attr__( 'Oops, content not available at the moment!', 'axeptio-sdk-integration' ); ?>"
 								>
 							</div>
 							<p class="mt-2 text-xs leading-4 text-gray-600">
-								<?php esc_html_e( 'Custom title displayed when shortcode content is blocked. If left empty, the default title will be used.', 'axeptio-wordpress-plugin' ); ?>
+								<?php esc_html_e( 'Custom title displayed when shortcode content is blocked. If left empty, the default title will be used.', 'axeptio-sdk-integration' ); ?>
 							</p>
 						</div>
 
 						<div>
 							<label for="shortcode-placeholder-description-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
-								<?php esc_html_e( 'Shortcode placeholder description', 'axeptio-wordpress-plugin' ); ?>
+								<?php esc_html_e( 'Shortcode placeholder description', 'axeptio-sdk-integration' ); ?>
 							</label>
 							<div class="mt-2">
 								<?php
 								$axeptio_default_placeholder_text = sprintf(
-									/* translators: %s: Name of the plugin */__( 'This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it\'s very simple: go to our cookie consent widget, give your approval for the "%s" extension. And voila, you\'re all set!', 'axeptio-wordpress-plugin' ),
+									/* translators: %s: Name of the plugin */__( 'This content is blocked because we take the protection of your data very seriously. If you wish to unblock it, it\'s very simple: go to our cookie consent widget, give your approval for the "%s" extension. And voila, you\'re all set!', 'axeptio-sdk-integration' ),
 									'{plugin_name}'
 								);
 								?>
@@ -342,13 +343,13 @@ if ( $axeptio_is_multilingual ) {
 								></textarea>
 							</div>
 							<p class="mt-2 text-xs leading-4 text-gray-600">
-								<?php esc_html_e( 'Custom description displayed when shortcode content is blocked. If left empty, the default description will be used. You can use {plugin_name} as a placeholder for the plugin title.', 'axeptio-wordpress-plugin' ); ?>
+								<?php esc_html_e( 'Custom description displayed when shortcode content is blocked. If left empty, the default description will be used. You can use {plugin_name} as a placeholder for the plugin title.', 'axeptio-sdk-integration' ); ?>
 							</p>
 						</div>
 
 						<div>
 							<label for="shortcode-placeholder-button-text-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
-								<?php esc_html_e( 'Shortcode placeholder button text', 'axeptio-wordpress-plugin' ); ?>
+								<?php esc_html_e( 'Shortcode placeholder button text', 'axeptio-sdk-integration' ); ?>
 							</label>
 							<div class="mt-2">
 								<input
@@ -357,11 +358,11 @@ if ( $axeptio_is_multilingual ) {
 									type="text"
 									id="shortcode-placeholder-button-text-<?php echo esc_attr( $axeptio_lang['language_code'] ); ?>"
 									class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:text-sm sm:leading-6"
-									placeholder="<?php echo esc_attr__( 'I accept this service', 'axeptio-wordpress-plugin' ); ?>"
+									placeholder="<?php echo esc_attr__( 'I accept this service', 'axeptio-sdk-integration' ); ?>"
 								>
 							</div>
 							<p class="mt-2 text-xs leading-4 text-gray-600">
-								<?php esc_html_e( 'Custom button text displayed on the placeholder. If left empty, the default text will be used.', 'axeptio-wordpress-plugin' ); ?>
+								<?php esc_html_e( 'Custom button text displayed on the placeholder. If left empty, the default text will be used.', 'axeptio-sdk-integration' ); ?>
 							</p>
 						</div>
 					</div>
@@ -375,8 +376,8 @@ if ( $axeptio_is_multilingual ) {
 								'id'           => 'xpwp_shortcode_placeholder_hide_decoration',
 								'name'         => 'shortcode_placeholder_hide_decoration',
 								'alpine_state' => 'editedPlugin.Metas.shortcode_placeholder_hide_decoration',
-								'label'        => __( 'Hide decoration', 'axeptio-wordpress-plugin' ),
-								'description'  => __( 'Hide the cookie icon and background shape on the placeholder.', 'axeptio-wordpress-plugin' ),
+								'label'        => __( 'Hide decoration', 'axeptio-sdk-integration' ),
+								'description'  => __( 'Hide the cookie icon and background shape on the placeholder.', 'axeptio-sdk-integration' ),
 								'checked'      => false,
 							)
 						);
@@ -406,18 +407,18 @@ if ( $axeptio_is_multilingual ) {
 								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
 							</svg>
-							<?php esc_attr_e( 'Saving...', 'axeptio-wordpress-plugin' ); ?>
+							<?php esc_attr_e( 'Saving...', 'axeptio-sdk-integration' ); ?>
 						</span>
 						<span
 							class="inline-flex"
 							x-show="!isSaving"
 						>
-							<?php esc_attr_e( 'Save settings', 'axeptio-wordpress-plugin' ); ?>
+							<?php esc_attr_e( 'Save settings', 'axeptio-sdk-integration' ); ?>
 						</span>
 					</button>
 				</div>
 				<div class="flex justify-center mt-4" x-show="configurationId !== 'all'">
-					<button @click="openDeleteModal()" class="text-sm font-semibold text-rose-600 hover:text-rose-500"><?php esc_attr_e( 'Delete these settings', 'axeptio-wordpress-plugin' ); ?></button>
+					<button @click="openDeleteModal()" class="text-sm font-semibold text-rose-600 hover:text-rose-500"><?php esc_attr_e( 'Delete these settings', 'axeptio-sdk-integration' ); ?></button>
 				</div>
 			</div>
 		</div>
