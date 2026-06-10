@@ -76,16 +76,17 @@ jobs:
         run: |
           SIGNATURE="sha256=$(openssl dgst -sha256 -hmac "${{ secrets.DEMO_WEBHOOK_SECRET }}" /tmp/plugin.zip | awk '{print $2}')"
 
-          HTTP_STATUS=$(curl -s -o /tmp/upload-response.txt -w "%{http_code}" \
+          HTTP_STATUS=$(curl -sS --connect-timeout 10 --max-time 120 \
+            -o /tmp/upload-response.txt -w "%{http_code}" \
             -X PUT \
             --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
             -H "X-Webhook-Signature: ${SIGNATURE}" \
             --data-binary @/tmp/plugin.zip \
             "https://${{ env.DEMO_DOMAIN }}/deploy-artifact.php")
 
-          cat /tmp/upload-response.txt
           if [ "$HTTP_STATUS" -ne 200 ]; then
             echo "❌ Upload failed with HTTP $HTTP_STATUS"
+            cat /tmp/upload-response.txt
             exit 1
           fi
           echo "✅ Plugin uploaded"
@@ -95,7 +96,8 @@ jobs:
           PAYLOAD='{"artifact_url":"local:///opt/deploy/plugin.zip","github_token":""}'
           SIGNATURE="sha256=$(echo -n "${PAYLOAD}" | openssl dgst -sha256 -hmac "${{ secrets.DEMO_WEBHOOK_SECRET }}" | awk '{print $2}')"
 
-          HTTP_STATUS=$(curl -s -o /tmp/webhook-response.txt -w "%{http_code}" \
+          HTTP_STATUS=$(curl -sS --connect-timeout 10 --max-time 60 \
+            -o /tmp/webhook-response.txt -w "%{http_code}" \
             -X POST \
             --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
             -H "Content-Type: application/json" \
@@ -103,9 +105,9 @@ jobs:
             -d "${PAYLOAD}" \
             "https://${{ env.DEMO_DOMAIN }}/deploy-webhook.php")
 
-          cat /tmp/webhook-response.txt
           if [ "$HTTP_STATUS" -ne 200 ]; then
             echo "❌ Webhook returned HTTP $HTTP_STATUS"
+            cat /tmp/webhook-response.txt
             exit 1
           fi
           echo "✅ Deployment triggered"
@@ -113,7 +115,8 @@ jobs:
       - name: Verify deployment
         run: |
           for i in $(seq 1 12); do
-            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            HTTP_STATUS=$(curl -sS --connect-timeout 5 --max-time 10 \
+              -o /dev/null -w "%{http_code}" \
               --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
               "https://${{ env.DEMO_DOMAIN }}")
             if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
