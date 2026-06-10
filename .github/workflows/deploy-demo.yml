@@ -5,6 +5,10 @@ on:
     branches: [develop]
   workflow_dispatch:
 
+concurrency:
+  group: deploy-demo
+  cancel-in-progress: true
+
 permissions:
   contents: read
 
@@ -72,12 +76,19 @@ jobs:
         run: |
           SIGNATURE="sha256=$(openssl dgst -sha256 -hmac "${{ secrets.DEMO_WEBHOOK_SECRET }}" /tmp/plugin.zip | awk '{print $2}')"
 
-          curl -s --fail \
+          HTTP_STATUS=$(curl -s -o /tmp/upload-response.txt -w "%{http_code}" \
             -X PUT \
             --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
             -H "X-Webhook-Signature: ${SIGNATURE}" \
             --data-binary @/tmp/plugin.zip \
-            "https://${{ env.DEMO_DOMAIN }}/deploy-artifact.php"
+            "https://${{ env.DEMO_DOMAIN }}/deploy-artifact.php")
+
+          cat /tmp/upload-response.txt
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "❌ Upload failed with HTTP $HTTP_STATUS"
+            exit 1
+          fi
+          echo "✅ Plugin uploaded"
 
       - name: Trigger deployment
         run: |
