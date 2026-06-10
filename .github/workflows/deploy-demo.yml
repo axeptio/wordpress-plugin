@@ -70,27 +70,27 @@ jobs:
 
       - name: Upload plugin zip to server
         run: |
-          SIGNATURE="sha256=$(echo -n "@/tmp/plugin.zip" | openssl dgst -sha256 -hmac "${{ secrets.DEMO_WEBHOOK_SECRET }}" | awk '{print $2}')"
+          SIGNATURE="sha256=$(openssl dgst -sha256 -hmac "${{ secrets.DEMO_WEBHOOK_SECRET }}" /tmp/plugin.zip | awk '{print $2}')"
 
-          curl -sk --fail \
+          curl -s --fail \
             -X PUT \
-            -H "Host: ${{ env.DEMO_DOMAIN }}" \
+            --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
             -H "X-Webhook-Signature: ${SIGNATURE}" \
             --data-binary @/tmp/plugin.zip \
-            "https://${{ env.DEMO_IP }}/deploy-artifact.php"
+            "https://${{ env.DEMO_DOMAIN }}/deploy-artifact.php"
 
       - name: Trigger deployment
         run: |
           PAYLOAD='{"artifact_url":"local:///opt/deploy/plugin.zip","github_token":""}'
           SIGNATURE="sha256=$(echo -n "${PAYLOAD}" | openssl dgst -sha256 -hmac "${{ secrets.DEMO_WEBHOOK_SECRET }}" | awk '{print $2}')"
 
-          HTTP_STATUS=$(curl -sk -o /tmp/webhook-response.txt -w "%{http_code}" \
+          HTTP_STATUS=$(curl -s -o /tmp/webhook-response.txt -w "%{http_code}" \
             -X POST \
-            -H "Host: ${{ env.DEMO_DOMAIN }}" \
+            --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
             -H "Content-Type: application/json" \
             -H "X-Webhook-Signature: ${SIGNATURE}" \
             -d "${PAYLOAD}" \
-            "https://${{ env.DEMO_IP }}/deploy-webhook.php")
+            "https://${{ env.DEMO_DOMAIN }}/deploy-webhook.php")
 
           cat /tmp/webhook-response.txt
           if [ "$HTTP_STATUS" -ne 200 ]; then
@@ -99,15 +99,18 @@ jobs:
           fi
           echo "✅ Deployment triggered"
 
-      - name: Wait for deployment
-        run: sleep 30
-
       - name: Verify deployment
         run: |
-          HTTP_STATUS=$(curl -sk -o /dev/null -w "%{http_code}" "https://${{ env.DEMO_DOMAIN }}")
-          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
-            echo "✅ Demo site responding with HTTP $HTTP_STATUS"
-          else
-            echo "❌ Demo site returned HTTP $HTTP_STATUS"
-            exit 1
-          fi
+          for i in $(seq 1 12); do
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
+              "https://${{ env.DEMO_DOMAIN }}")
+            if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
+              echo "✅ Demo site responding with HTTP $HTTP_STATUS"
+              exit 0
+            fi
+            echo "⏳ Attempt $i/12 — HTTP $HTTP_STATUS, retrying in 5s..."
+            sleep 5
+          done
+          echo "❌ Demo site not responding after 60s"
+          exit 1
