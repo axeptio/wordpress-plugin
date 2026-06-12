@@ -1,0 +1,21 @@
+name: Create Release PR
+
+on:
+  schedule:
+    - cron: '0 8 * * 1'  # Every Monday at 08:00 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: create-release-pr-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  create-release-pr:
+    uses: axeptio/tech-scripts/.github/workflows/create-release-pr.yml@create-release-pr-v0.0.1
+    with:
+      source_branch: develop
+      target_branch: master
+    secrets:
+      BOT_GITHUB_TOKEN: ${{ secrets.BOT_GITHUB_TOKEN }}
+      BOT_GPG_PRIVATE_KEY: ${{ secrets.BOT_GPG_PRIVATE_KEY }}
+      BOT_EMAIL: ${{ secrets.BOT_EMAIL }}
