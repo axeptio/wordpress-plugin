@@ -14,7 +14,7 @@ permissions:
 
 env:
   DEMO_DOMAIN: wordpress-qa.axept.io
-  DEMO_IP: 63.34.106.0
+  DEMO_IP: ${{ vars.DEMO_IP }}
   PLUGIN_SLUG: axeptio-sdk-integration
 
 jobs:
