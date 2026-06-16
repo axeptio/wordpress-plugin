@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div class="max-h-64 overflow-y-auto overflow-x-hidden -mr-3 scroll-smooth" x-ref="scrollContainer">
 	<template x-for="(field, index) in getFields('<?php echo esc_attr( $data->name ); ?>')" :key="index">
 		<div class="flex items-center mb-3">

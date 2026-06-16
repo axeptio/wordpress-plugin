@@ -6,8 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 WordPress plugin integrating the Axeptio CMP (Consent Management Platform) SDK for GDPR-compliant cookie consent management. Published on WordPress.org SVN. Supports WPML/PolyLang for multilingual sites.
 
-- **Plugin slug**: `axeptio-wordpress-plugin`
-- **Text domain**: `axeptio-wordpress-plugin`
+- **WordPress.org slug**: `axeptio-sdk-integration` (SVN repo, plugin folder, dist package)
+- **Text domain**: `axeptio-sdk-integration` (the 2nd arg of every i18n call: `__()`, `esc_html__()`, …)
+- **Admin page slug**: `axeptio-wordpress-plugin` — DISTINCT from the text domain. Used in `menu_slug`, `parent_slug`, `'page' => …`, `toplevel_page_…`, `do_settings_sections()`. Do NOT "fix" these to `axeptio-sdk-integration`; renaming would break the admin menu and option saving.
+- **Entry point file**: `axeptio-wordpress-plugin.php` (legacy filename, unrelated to the text domain)
 - **Min PHP**: 7.4 | **Min WP**: 5.6
 - **Constant prefix**: `XPWP_`
 - **Global prefixes** (PHPCS enforced): `axeptio`, `AXEPTIO`, `Axeptio`, `XPWP`, `xpwp`
@@ -56,6 +58,7 @@ Conventional commits enforced by Husky + commitlint. Allowed types: `build`, `ch
 All features extend the abstract `Module` class (`includes/classes/class-module.php`) which requires `can_register()` and `register()` methods. `Module_Initialization` (singleton) auto-discovers and initializes modules sorted by `$load_order`.
 
 Registered modules (in `class-module-initialization.php`):
+
 - `Models` — data layer
 - `Activation_Hook` — plugin activation logic
 - `AlpineJS_Wpkses` — wp_kses compatibility for Alpine.js attributes
@@ -105,3 +108,5 @@ dist/                          # Built assets (generated, not committed)
 - **PHP**: WordPress Coding Standards (WPCS) via PHPCS. Short array syntax `[]` enforced. PHP 7.4+ features allowed.
 - **JS**: WordPress ESLint plugin
 - **Static analysis**: PHPStan at max level with WordPress extensions
+- **Direct-access guard**: every file under `templates/` must start with `defined( 'ABSPATH' ) || exit;` (Plugin Check `missing_direct_file_access_protection`). For HTML-first templates, prepend `<?php defined( 'ABSPATH' ) || exit; ?>`. Class files under `includes/` that only declare a namespaced class are not flagged. `rector.php` and `tests/` are flagged locally but excluded from the dist package via `.distignore`, so leave them alone.
+- **Plugin Check**: `ddev wp plugin check axeptio-sdk-integration` (the WordPress.org review tool). The dist package is produced from `.distignore` (CI/CD deploy); note `exclusions.txt` used by `task release` does NOT currently exclude `tests/`.

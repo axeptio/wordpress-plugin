@@ -9,6 +9,8 @@
 
 namespace Axeptio\Plugin\Backend;
 
+defined( 'ABSPATH' ) || exit;
+
 use Axeptio\Plugin\Models\Project_Versions;
 use Axeptio\Plugin\Module;
 

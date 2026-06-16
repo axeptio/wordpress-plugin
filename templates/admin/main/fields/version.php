@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 use Axeptio\Plugin\Models\Project_Versions;
 use Axeptio\Plugin\Models\Settings;
@@ -14,7 +15,7 @@ use Axeptio\Plugin\Models\Settings;
 			$axeptio_localized_versions = Project_Versions::get_localized_versions();
 		?>
 		<p class="block text-sm font-medium leading-6 text-gray-900">
-			<?php esc_html_e( 'Configured languages', 'axeptio-wordpress-plugin' ); ?>
+			<?php esc_html_e( 'Configured languages', 'axeptio-sdk-integration' ); ?>
 		</p>
 		<div role="list" class="-mt-2 divide-y divide-gray-300 col-span-3 border border-grey-100 px-2">
 			<?php foreach ( $axeptio_languages as $axeptio_language_key => $axeptio_language ) : ?>
@@ -35,7 +36,7 @@ use Axeptio\Plugin\Models\Settings;
 							name="axeptio_settings[<?php echo esc_attr( $axeptio_localized_versions[ $axeptio_language_key ] ); ?>]"
 							class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:max-w-xs sm:text-sm sm:leading-6"
 						>
-							<option value=""><?php esc_html_e( 'Dynamic (Axeptio based)', 'axeptio-wordpress-plugin' ); ?></option>
+							<option value=""><?php esc_html_e( 'Dynamic (Axeptio based)', 'axeptio-sdk-integration' ); ?></option>
 							<template x-for="option in options" :key="option.value">
 								<option
 									:value="option.value"
@@ -57,7 +58,7 @@ use Axeptio\Plugin\Models\Settings;
 						name="axeptio_settings[<?php echo esc_attr( $axeptio_key ); ?>]"
 						class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-amber-400 sm:max-w-xs sm:text-sm sm:leading-6"
 					>
-						<option value=""><?php esc_html_e( 'Dynamic (Axeptio based)', 'axeptio-wordpress-plugin' ); ?></option>
+						<option value=""><?php esc_html_e( 'Dynamic (Axeptio based)', 'axeptio-sdk-integration' ); ?></option>
 						<template x-for="option in options" :key="option.value">
 							<option
 								:value="option.value"
@@ -79,18 +80,18 @@ use Axeptio\Plugin\Models\Settings;
 			</div>
 			<div class="ml-3">
 				<h3 class="text-sm font-medium text-amber-800">
-					<?php esc_html_e( 'Existing project version backup', 'axeptio-wordpress-plugin' ); ?>
+					<?php esc_html_e( 'Existing project version backup', 'axeptio-sdk-integration' ); ?>
 				</h3>
 				<div class="mt-2 text-sm text-amber-700">
-					<p><?php esc_html_e( 'A backup of the version configuration exists for this project, do you want to restore it?', 'axeptio-wordpress-plugin' ); ?></p>
+					<p><?php esc_html_e( 'A backup of the version configuration exists for this project, do you want to restore it?', 'axeptio-sdk-integration' ); ?></p>
 				</div>
 				<div class="mt-4">
 					<div class="-mx-2 -my-1.5 flex">
 						<button type="button" @click="restoreHistorizedVersion()" class="rounded-md bg-amber-50 px-2 py-1.5 text-sm font-medium text-amber-800 hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2 focus:ring-offset-amber-50">
-							<?php esc_html_e( 'Yes, restore it', 'axeptio-wordpress-plugin' ); ?>
+							<?php esc_html_e( 'Yes, restore it', 'axeptio-sdk-integration' ); ?>
 						</button>
 						<button type="button" @click="isHistorizedVersion = false" class="ml-3 rounded-md bg-amber-50 px-2 py-1.5 text-sm font-medium text-amber-800 hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-amber-600 focus:ring-offset-2 focus:ring-offset-amber-50">
-							<?php esc_html_e( 'Dismiss', 'axeptio-wordpress-plugin' ); ?>
+							<?php esc_html_e( 'Dismiss', 'axeptio-sdk-integration' ); ?>
 						</button>
 					</div>
 				</div>

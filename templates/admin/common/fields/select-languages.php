@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div
 	x-data="SelectComponent()"
 	x-init="init(<?php echo esc_attr( wp_json_encode( $data ) ); ?>)"
@@ -13,7 +14,7 @@
 		<?php endif ?>
 	</label>
 
-	<input type="hidden" :name="state.name" x-model="state.value">
+	<input type="hidden" :name="state.name || null" x-model="state.value">
 
 	<button
 		type="button"

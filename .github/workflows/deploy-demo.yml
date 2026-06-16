@@ -1,0 +1,130 @@
+name: Deploy Demo WordPress
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-demo
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  DEMO_DOMAIN: wordpress-qa.axept.io
+  DEMO_IP: ${{ vars.DEMO_IP }}
+  PLUGIN_SLUG: axeptio-sdk-integration
+
+jobs:
+  build:
+    name: Build Plugin
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install Node dependencies
+        run: yarn install --immutable
+
+      - name: Build production assets
+        run: yarn build:production
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.37.0
+        with:
+          php-version: '8.3'
+
+      - name: Install Composer dependencies (production)
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: Create plugin zip
+        run: |
+          mkdir -p /tmp/plugin-build/${{ env.PLUGIN_SLUG }}
+          rsync -av --exclude-from=.distignore ./ /tmp/plugin-build/${{ env.PLUGIN_SLUG }}/
+          cd /tmp/plugin-build
+          zip -qr /tmp/plugin.zip ${{ env.PLUGIN_SLUG }}/
+
+      - name: Upload plugin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin-build
+          path: /tmp/plugin.zip
+          retention-days: 1
+
+  deploy:
+    name: Trigger Deploy via Webhook
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download plugin artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: plugin-build
+          path: /tmp
+
+      - name: Upload plugin zip to server
+        run: |
+          SIGNATURE="sha256=$(openssl dgst -sha256 -hmac "${{ secrets.DEMO_WEBHOOK_SECRET }}" /tmp/plugin.zip | awk '{print $2}')"
+
+          HTTP_STATUS=$(curl -sS --connect-timeout 10 --max-time 120 \
+            -o /tmp/upload-response.txt -w "%{http_code}" \
+            -X PUT \
+            --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
+            -H "X-Webhook-Signature: ${SIGNATURE}" \
+            --data-binary @/tmp/plugin.zip \
+            "https://${{ env.DEMO_DOMAIN }}/deploy-artifact.php")
+
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "❌ Upload failed with HTTP $HTTP_STATUS"
+            cat /tmp/upload-response.txt
+            exit 1
+          fi
+          echo "✅ Plugin uploaded"
+
+      - name: Trigger deployment
+        run: |
+          PAYLOAD='{"artifact_url":"local:///opt/deploy/plugin.zip","github_token":""}'
+          SIGNATURE="sha256=$(echo -n "${PAYLOAD}" | openssl dgst -sha256 -hmac "${{ secrets.DEMO_WEBHOOK_SECRET }}" | awk '{print $2}')"
+
+          HTTP_STATUS=$(curl -sS --connect-timeout 10 --max-time 60 \
+            -o /tmp/webhook-response.txt -w "%{http_code}" \
+            -X POST \
+            --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
+            -H "Content-Type: application/json" \
+            -H "X-Webhook-Signature: ${SIGNATURE}" \
+            -d "${PAYLOAD}" \
+            "https://${{ env.DEMO_DOMAIN }}/deploy-webhook.php")
+
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "❌ Webhook returned HTTP $HTTP_STATUS"
+            cat /tmp/webhook-response.txt
+            exit 1
+          fi
+          echo "✅ Deployment triggered"
+
+      - name: Verify deployment
+        run: |
+          for i in $(seq 1 12); do
+            HTTP_STATUS=$(curl -sS --connect-timeout 5 --max-time 10 \
+              -o /dev/null -w "%{http_code}" \
+              --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
+              "https://${{ env.DEMO_DOMAIN }}")
+            if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
+              echo "✅ Demo site responding with HTTP $HTTP_STATUS"
+              exit 0
+            fi
+            echo "⏳ Attempt $i/12 — HTTP $HTTP_STATUS, retrying in 5s..."
+            sleep 5
+          done
+          echo "❌ Demo site not responding after 60s"
+          exit 1

@@ -1,3 +1,4 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
 <div @keydown.window.escape="showDeleteModal = false" x-show="showDeleteModal" class="relative z-10" aria-labelledby="modal-title" x-ref="dialog" aria-modal="true" x-cloak>
 
 	<div x-show="showDeleteModal" x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" x-description="Background backdrop, show/hide based on modal state." class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
@@ -21,17 +22,17 @@
 						</svg>
 					</div>
 					<div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-						<h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title"><?php echo esc_html__( 'Deleting plugin settings', 'axeptio-wordpress-plugin' ); ?></h3>
+						<h3 class="text-base font-semibold leading-6 text-gray-900" id="modal-title"><?php echo esc_html__( 'Deleting plugin settings', 'axeptio-sdk-integration' ); ?></h3>
 						<div class="mt-2">
 							<p class="text-sm text-gray-500">
-								<?php echo esc_html__( 'Are you sure you want to delete the configuration for this plugin? This action cannot be undone.', 'axeptio-wordpress-plugin' ); ?>
+								<?php echo esc_html__( 'Are you sure you want to delete the configuration for this plugin? This action cannot be undone.', 'axeptio-sdk-integration' ); ?>
 							</p>
 						</div>
 					</div>
 				</div>
 				<div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-					<button type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" @click="confirmDelete(editedPlugin)"><?php echo esc_html__( 'Delete', 'axeptio-wordpress-plugin' ); ?></button>
-					<button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" @click="showDeleteModal = false"><?php echo esc_html__( 'Cancel', 'axeptio-wordpress-plugin' ); ?></button>
+					<button type="button" class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" @click="confirmDelete(editedPlugin)"><?php echo esc_html__( 'Delete', 'axeptio-sdk-integration' ); ?></button>
+					<button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto" @click="showDeleteModal = false"><?php echo esc_html__( 'Cancel', 'axeptio-sdk-integration' ); ?></button>
 				</div>
 			</div>
 
