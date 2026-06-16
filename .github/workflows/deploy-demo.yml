@@ -2,7 +2,7 @@ name: Deploy Demo WordPress
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, ci/deploy-demo]
   workflow_dispatch:
 
 concurrency:
@@ -14,7 +14,6 @@ permissions:
 
 env:
   DEMO_DOMAIN: wordpress-qa.axept.io
-  DEMO_IP: ${{ vars.DEMO_IP }}
   PLUGIN_SLUG: axeptio-sdk-integration
 
 jobs:
@@ -79,7 +78,6 @@ jobs:
           HTTP_STATUS=$(curl -sS --connect-timeout 10 --max-time 120 \
             -o /tmp/upload-response.txt -w "%{http_code}" \
             -X PUT \
-            --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
             -H "X-Webhook-Signature: ${SIGNATURE}" \
             --data-binary @/tmp/plugin.zip \
             "https://${{ env.DEMO_DOMAIN }}/deploy-artifact.php")
@@ -99,7 +97,6 @@ jobs:
           HTTP_STATUS=$(curl -sS --connect-timeout 10 --max-time 60 \
             -o /tmp/webhook-response.txt -w "%{http_code}" \
             -X POST \
-            --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
             -H "Content-Type: application/json" \
             -H "X-Webhook-Signature: ${SIGNATURE}" \
             -d "${PAYLOAD}" \
@@ -117,7 +114,6 @@ jobs:
           for i in $(seq 1 12); do
             HTTP_STATUS=$(curl -sS --connect-timeout 5 --max-time 10 \
               -o /dev/null -w "%{http_code}" \
-              --resolve "${{ env.DEMO_DOMAIN }}:443:${{ env.DEMO_IP }}" \
               "https://${{ env.DEMO_DOMAIN }}")
             if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 400 ]; then
               echo "✅ Demo site responding with HTTP $HTTP_STATUS"
