@@ -111,6 +111,17 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/en/ar
 
 == Changelog ==
 
+### 🛠️ 2.6.3 🛠️ ###
+
+**Compatibility, translations, and fixes:**
+
+- 🆕 **WordPress 7.0 Compatibility:** Tested and validated against WordPress 7.0.
+- 🌐 **Translation Loading Fix:** Corrected the plugin text domain so official WordPress.org language packs load correctly. Translations from WordPress.org now take precedence over the bundled translation files.
+- 🎨 **Customization Tab Fixes:** The language selector now correctly filters fields per language, empty fields fall back to their default text instead of showing a language code, and the widget respects the site's current language on the frontend.
+- 🖼️ **Widget Image Field Improvements:** The "Disable this image" control now uses the same toggle component as the other options for a consistent experience, widget default values are no longer double-escaped, and empty field names can no longer be submitted by mistake.
+- 🔒 **Security Hardening:** Added direct file access protection to plugin class and template files.
+- 💅 **Minor Admin UI Fixes:** Corrected the logo display ratio and fixed label rendering in the admin interface.
+
 ### ✨ 2.6.2 ✨ ###
 
 **Enhancements and Fixes:**
