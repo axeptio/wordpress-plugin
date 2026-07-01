@@ -1,5 +1,6 @@
 import Alpine from 'alpinejs';
 import persist from '@alpinejs/persist';
+import collapse from '@alpinejs/collapse';
 import accountIDComponent from './components/accountIDComponent';
 import imageUploadComponent from './components/imageUploadComponent';
 import selectLang from './components/selectLang';
@@ -18,5 +19,6 @@ window.selectLang = selectLang.instance;
 Alpine.data('SelectComponent', selectComponent);
 
 Alpine.plugin( persist );
+Alpine.plugin( collapse );
 
 Alpine.start();

@@ -32,8 +32,16 @@ class AlpineJS_Wpkses extends Module {
 			static function ( $tags ) {
 				$alpinized_tags    = array( 'div', 'section', 'template' );
 				$alpine_directives = array(
-					'x-if'   => true,
-					'x-show' => true,
+					'x-if'                     => true,
+					'x-show'                   => true,
+					'x-cloak'                  => true,
+					'x-collapse'               => true,
+					'x-transition:enter'       => true,
+					'x-transition:enter-start' => true,
+					'x-transition:enter-end'   => true,
+					'x-transition:leave'       => true,
+					'x-transition:leave-start' => true,
+					'x-transition:leave-end'   => true,
 				);
 
 				foreach ( $alpinized_tags as $alpinized_tag ) {

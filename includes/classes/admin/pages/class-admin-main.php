@@ -212,7 +212,7 @@ class Admin_Main extends Module {
 				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
 				'args'  => array(
-					'before_section' => '<div x-show="validAccountID" class="-mt-2">',
+					'before_section' => '<div x-show="validAccountID" x-collapse x-cloak class="-mt-2">',
 					'after_section'  => '</div>',
 				),
 			),

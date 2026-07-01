@@ -20,7 +20,7 @@
 			type="button"
 			@click="showID ? editAccountID : validateAccountID"
 			class="rounded-md bg-white px-3 py-2 text-sm font-semibold ml-2 inline-flex items-center transition ease-out duration-300"
-			:class="{ 'hover:bg-gray-50 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300': !showID, 'ring-0 shadow-none text-teal-600': showID }"
+			:class="{ 'hover:bg-gray-50 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300': !showID, 'ring-0 shadow-none text-black': showID }"
 		>
 			<svg :class="{ 'hidden': showID, 'block': !showID }" class="-ml-1 mr-0.5 fill-gray-900 h-4 hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
 				<path d="M9,16.17L4.83,12l-1.42,1.41L9,19L21,7l-1.41-1.41L9,16.17z"></path>
@@ -38,9 +38,9 @@
 		x-html="errorMessage"
 		x-transition:enter="transition ease-out duration-200"
 		x-transition:enter-start="opacity-0"
-		x-transition:enter-end="opacity-1"
-		x-transition:leave="transition ease-in duration-300"
-		x-transition:leave-start="opacity-1"
+		x-transition:enter-end="opacity-100"
+		x-transition:leave="transition ease-out duration-150"
+		x-transition:leave-start="opacity-100"
 		x-transition:leave-end="opacity-0" class="text-red-500 mt-2"
 	></p>
 </div>
