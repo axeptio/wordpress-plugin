@@ -17,7 +17,7 @@ msgstr "Sélectionner une image"
 
 #: assets/js/backend/components/pluginList.js:169
 msgid "Use this media"
-msgstr "Désactiver cette image"
+msgstr "Utiliser cette image"
 
 #: axeptio-wordpress-plugin.php:36
 msgid "Unable to activate Axeptio"

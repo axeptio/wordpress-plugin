@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-30 17:47+0200\n"
-"PO-Revision-Date: 2026-07-01 08:25+0200\n"
+"PO-Revision-Date: 2026-07-01 09:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -26,10 +26,8 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-4: ../node_modules\n"
 
 #: assets/js/backend/components/pluginList.js:168
-#, fuzzy
-#| msgid "Select a tab"
 msgid "Select a media"
-msgstr "Select a tab"
+msgstr ""
 
 #: assets/js/backend/components/pluginList.js:169
 msgid "Use this media"
@@ -544,7 +542,7 @@ msgstr ""
 
 #: templates/admin/main/fields/version.php:18
 msgid "Configured languages"
-msgstr "Data sending"
+msgstr ""
 
 #: templates/admin/main/fields/version.php:39
 #: templates/admin/main/fields/version.php:61
