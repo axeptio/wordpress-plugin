@@ -11,9 +11,20 @@
 		</select>
 	</div>
 	<div class="hidden sm:block">
-		<nav class="flex space-x-4" aria-label="Tabs">
+		<nav
+			class="relative flex gap-4"
+			aria-label="Tabs"
+			x-data="tabsPill"
+			@resize.window.debounce.150ms="move(false)"
+		>
+			<div
+				class="axeptio-tab-pill absolute inset-0 bg-amber-400"
+				aria-hidden="true"
+				x-cloak
+				:style="'clip-path: ' + clip"
+			></div>
 			<?php foreach ( $data->tab_items as $axeptio_tab_item_key => $axeptio_tab_item ) : ?>
-				<button type="button" @click="currentTab = '<?php echo esc_attr( $axeptio_tab_item_key ); ?>'" class="text-gray-900 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium" :class="{ 'bg-amber-400/20': currentTab === '<?php echo esc_attr( $axeptio_tab_item_key ); ?>' }">
+				<button type="button" data-tab="<?php echo esc_attr( $axeptio_tab_item_key ); ?>" @click="currentTab = '<?php echo esc_attr( $axeptio_tab_item_key ); ?>'" class="relative z-10 rounded-full px-3.5 py-2.5 text-sm font-semibold text-gray-900 transition-colors hover:text-gray-700 <?php echo $axeptio_tab_item_key === array_key_first( $data->tab_items ) ? 'axeptio-tab--initial' : ''; ?>">
 					<?php echo esc_html( $axeptio_tab_item ); ?>
 				</button>
 			<?php endforeach; ?>
