@@ -11,7 +11,9 @@
 				<?php echo esc_html( $data->title ); ?>
 			</h3>
 			<?php if ( isset( $data->message ) ) : ?>
-				<?php echo wp_kses_post( $data->message ); ?>
+				<div class="mt-2 text-sm text-red-700">
+					<p><?php echo esc_html( $data->message ); ?></p>
+				</div>
 			<?php endif; ?>
 		</div>
 	</div>

@@ -12,6 +12,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@alpinejs/collapse@npm:^3.14.9":
+  version: 3.15.12
+  resolution: "@alpinejs/collapse@npm:3.15.12"
+  checksum: 10c0/72228157cae6a682f35fbc7fe1ad4651e12d561cfcc8ebdc6e4837a2dcdde00974269d1bc881f0de3e08f4730e8124e8ceb52852590e457c674e614a968e1225
+  languageName: node
+  linkType: hard
+
 "@alpinejs/persist@npm:^3.14.9":
   version: 3.15.8
   resolution: "@alpinejs/persist@npm:3.15.8"
@@ -4335,6 +4342,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "axeptio-wordpress-plugin@workspace:."
   dependencies:
+    "@alpinejs/collapse": "npm:^3.14.9"
     "@alpinejs/persist": "npm:^3.14.9"
     "@babel/plugin-proposal-object-rest-spread": "npm:^7.20.7"
     "@commitlint/cli": "npm:^19.8.0"

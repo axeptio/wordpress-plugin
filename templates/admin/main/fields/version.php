@@ -71,7 +71,7 @@ use Axeptio\Plugin\Models\Settings;
 			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
-	<div class="rounded-md bg-amber-50 p-4 col-span-3" x-show="isHistorizedVersion">
+	<div class="rounded-md bg-amber-50 p-4 col-span-3" x-show="isHistorizedVersion" x-collapse>
 		<div class="flex">
 			<div class="flex-shrink-0">
 				<svg class="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">

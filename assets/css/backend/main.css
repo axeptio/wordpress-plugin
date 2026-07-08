@@ -7,6 +7,7 @@
 @import "base/fonts.css";
 @import "base/typography.css";
 @import "ui/button.css";
+@import "ui/tabs.css";
 @import "ui/forms.css";
 @import "ui/notice.css";
 @import "layout/account-box.css";
