@@ -913,7 +913,7 @@ msgstr "Evalúa el plugin de Axeptio"
 
 #: templates/admin/sections/notice.php:33
 msgid "Don't ask me anymore"
-msgstr "Non chiedermelo più"
+msgstr "No me lo vuelvas a preguntar"
 
 #: templates/admin/sections/plugins.php:13
 msgid ""
