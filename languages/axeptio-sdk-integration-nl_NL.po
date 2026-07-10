@@ -764,7 +764,7 @@ msgstr "Een shortcode toevoegen"
 
 #: templates/admin/plugins/fields/edit.php:254
 msgid "Example tag : axeptio --forceReload"
-msgstr "Voorbeeld tag: axeptio —forceReload"
+msgstr "Voorbeeld tag: axeptio --forceReload"
 
 #: templates/admin/plugins/fields/edit.php:263
 msgid ""
