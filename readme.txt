@@ -3,7 +3,7 @@ Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 2.6.3
+Stable tag: 2.6.4
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -110,6 +110,13 @@ The idea is to customize the appearance of your widget so that it matches the de
 All informations here : [Axeptio customization](https://support.axeptio.eu/en/articles/273978-3-widget-customisation)
 
 == Changelog ==
+
+### 🛠️ 2.6.4 🛠️ ###
+
+**Account ID validation fixes and settings tab UI refinements:**
+
+- 🐛 **Account ID Validation Error Handling:** Replaced a single generic error message with three distinct, accurate messages depending on the situation: an unpublished or non-existent project, a published project with no cookie banner configured yet, or a connection failure. Translations completed in English, French, German, Italian, Spanish, and Dutch.
+- 🎨 **Settings Tab Refinements:** Smoother transitions when messages or sections appear/disappear, more responsive button hover/click feedback, and a redesigned settings tab with a sliding highlight on the active tab.
 
 ### 🛠️ 2.6.3 🛠️ ###
 
