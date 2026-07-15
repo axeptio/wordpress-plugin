@@ -1,11 +1,13 @@
 import Alpine from 'alpinejs';
 import persist from '@alpinejs/persist';
+import collapse from '@alpinejs/collapse';
 import accountIDComponent from './components/accountIDComponent';
 import imageUploadComponent from './components/imageUploadComponent';
 import selectLang from './components/selectLang';
 import pluginList from './components/pluginList';
 import selectComponent from './components/selectComponent';
 import noticeComponent from './components/noticeComponent';
+import tabsPill from './components/tabsPill';
 
 window.Alpine = Alpine;
 
@@ -16,7 +18,9 @@ window.noticeComponent = noticeComponent.instance;
 window.selectLang = selectLang.instance;
 
 Alpine.data('SelectComponent', selectComponent);
+Alpine.data('tabsPill', tabsPill);
 
 Alpine.plugin( persist );
+Alpine.plugin( collapse );
 
 Alpine.start();

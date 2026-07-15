@@ -208,15 +208,24 @@ function admin_scripts() {
 				'non_existing_account_id' => \Axeptio\Plugin\get_template_part(
 					'admin/main/fields/validation-error',
 					array(
-						'title'   => __( 'We were unable to find your project, or it appears that it has not yet been published.', 'axeptio-sdk-integration' ),
-						'message' => \Axeptio\Plugin\get_template_part( 'admin/main/fields/non-existing-account', array(), false ),
+						'title'   => __( "We couldn't find a published project matching this ID.", 'axeptio-sdk-integration' ),
+						'message' => __( 'Please check that your project ID is correct and that your project has been published in the Axeptio dashboard. You can find your project ID in your project settings.', 'axeptio-sdk-integration' ),
+					),
+					false
+					),
+				'empty_cookies'           => \Axeptio\Plugin\get_template_part(
+					'admin/main/fields/validation-error',
+					array(
+						'title'   => __( "Your project was found, but it doesn't have a cookie banner configured yet.", 'axeptio-sdk-integration' ),
+						'message' => __( 'Please create at least one cookie consent configuration in the Axeptio dashboard, then come back here and try again.', 'axeptio-sdk-integration' ),
 					),
 					false
 					),
 				'verification_error'      => \Axeptio\Plugin\get_template_part(
 					'admin/main/fields/validation-error',
 					array(
-						'title' => __( 'Error verifying account ID. Try Again.', 'axeptio-sdk-integration' ),
+						'title'   => __( 'Unable to connect to Axeptio.', 'axeptio-sdk-integration' ),
+						'message' => __( 'Please check your internet connection and try again. If the problem persists, the Axeptio service may be temporarily unavailable.', 'axeptio-sdk-integration' ),
 					),
 					false
 					),
