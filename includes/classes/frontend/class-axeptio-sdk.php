@@ -64,7 +64,7 @@ class Axeptio_Sdk extends Module {
 	public function render_google_consent_mode() {
 		$settings = $this->get_sdk_settings();
 
-		if ( ! $settings ) {
+		if ( ! $settings || empty( $settings['enableGoogleConsentMode'] ) ) {
 			return;
 		}
 
