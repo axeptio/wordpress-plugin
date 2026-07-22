@@ -3,7 +3,7 @@ Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 2.6.4
+Stable tag: 2.6.5
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -112,6 +112,14 @@ The idea is to customize the appearance of your widget so that it matches the de
 All informations here : [Axeptio customization](https://support.axeptio.eu/en/articles/273978-3-widget-customisation)
 
 == Changelog ==
+
+### 🛠️ 2.6.5 🛠️ ###
+
+**Google Consent Mode timing fix, marketing refresh, and dependency updates:**
+
+- 🐛 **Google Consent Mode Default Timing:** The Consent Mode default signal (denied by default) is now rendered synchronously and hooked at the earliest priority in `<head>`, guaranteeing it fires before any Google tag (GTM/gtag.js) hardcoded in the theme or added by another plugin.
+- 🎨 **Marketing Assets Refresh:** Updated the WordPress.org banner, screenshots, and readme copy to reflect the current Axeptio brand and product numbers (TCF v2.3, 200.000+ websites).
+- 🔒 **Dependency Updates:** Bumped websocket-driver, shell-quote, brace-expansion, path-to-regexp, and fast-uri to their latest patched versions, resolving 5 Dependabot security alerts.
 
 ### 🛠️ 2.6.4 🛠️ ###
 
