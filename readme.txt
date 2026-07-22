@@ -14,7 +14,7 @@ Axeptio | GDPR Cookie Banner - An Immersive Compliance Experience
 
 == Description ==
 
-Axeptio is a deeply customizable Consent Banner that makes your site compliant with GDPR, TCF v2.3, Google Consent Mode v2, and more —while providing users with a branded and premium cookie consent experience
+Axeptio is a deeply customizable Consent Banner that makes your site compliant with GDPR, TCF v2.3, Google Consent Mode v2, and more — while providing users with a branded and premium cookie consent experience.
 
 **Axeptio is a powerful Consent Management Platform (CMP) that keeps your website compliant with global privacy laws.** From **GDPR, ePrivacy,** and **TCF v2.3** in Europe, to **Google Consent Mode v2, PIPEDA** and **Law 25** in Canada, the **CCPA** in the U.S. and even more.
 
