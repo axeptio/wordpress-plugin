@@ -14,11 +14,11 @@ Axeptio | GDPR Cookie Banner - An Immersive Compliance Experience
 
 == Description ==
 
-Axeptio is a deeply customizable Consent Banner that makes your site compliant with GDPR, TCF v2.2, Google Consent Mode v2, and more —while providing users with a branded and premium cookie consent experience
+Axeptio is a deeply customizable Consent Banner that makes your site compliant with GDPR, TCF v2.3, Google Consent Mode v2, and more — while providing users with a branded and premium cookie consent experience.
 
-**Axeptio is a powerful Consent Management Platform (CMP) that keeps your website compliant with global privacy laws.** From **GDPR, ePrivacy,** and **TCF v2.2** in Europe, to **Google Consent Mode v2, PIPEDA** and **Law 25** in Canada, the **CCPA** in the U.S. and even more.
+**Axeptio is a powerful Consent Management Platform (CMP) that keeps your website compliant with global privacy laws.** From **GDPR, ePrivacy,** and **TCF v2.3** in Europe, to **Google Consent Mode v2, PIPEDA** and **Law 25** in Canada, the **CCPA** in the U.S. and even more.
 
-[Axeptio](https://www.axept.io/) ensures your business meets every standard. By managing cookie consent in a clear and customizable way, it helps you build trust while staying fully compliant. Join 80.000 websites that trust Axeptio worldwide. 4.5/5 TrustPilot score.
+[Axeptio](https://www.axept.io/) ensures your business meets every standard. By managing cookie consent in a clear and customizable way, it helps you build trust while staying fully compliant. Join 200.000 websites that trust Axeptio worldwide. 4.5/5 TrustPilot score.
 
 == Key Features ==
 
@@ -69,11 +69,13 @@ Please follow our documentation to configure and test your settings for Axeptio 
 
 == Screenshots ==
 
-1. Axeptio widget Presentation
-2. Integration sample on your website
-3. Setup your project ID
-4. Select your plugin connected with the vendorDB
-5. Axeptio Back Office for color customization
+1. Axeptio presentation
+2. Build trust with customizable consent banners
+3. Google Gold CMP Partner
+4. Multilingual banner
+5. Effortlessly manage and export your consent
+6. 100% mobile compatible
+7. Audit your setup with Shake and schedule automated reports
 
 == Installation ==
 
