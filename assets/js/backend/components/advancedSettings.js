@@ -91,7 +91,11 @@ const advancedSettings = function( config ) {
 
 		keyLabel( row ) {
 			const option = this.findOption( row.property );
-			return option ? option.name : '';
+			return option ? option.name : row.property;
+		},
+
+		isUnknownSetting( row ) {
+			return !! row.property && ! this.findOption( row.property );
 		},
 
 		descriptionOf( row ) {

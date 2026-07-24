@@ -93,6 +93,9 @@
 					</div>
 
 					<p class="text-xs leading-snug text-gray-500" x-show="row.property && descriptionOf(row)" x-cloak x-text="descriptionOf(row)"></p>
+					<p class="text-xs leading-snug text-amber-600" x-show="isUnknownSetting(row)" x-cloak>
+						<?php esc_html_e( 'This setting is no longer listed by Axeptio. You can keep it or remove it.', 'axeptio-sdk-integration' ); ?>
+					</p>
 
 					<div class="min-w-0" x-show="row.property" x-cloak>
 						<template x-if="row.type === TYPE_BOOLEAN">
