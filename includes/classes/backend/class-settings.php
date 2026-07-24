@@ -11,6 +11,7 @@ namespace Axeptio\Plugin\Backend;
 
 defined( 'ABSPATH' ) || exit;
 
+use Axeptio\Plugin\Models\Advanced_Settings;
 use Axeptio\Plugin\Models\Project_Versions;
 use Axeptio\Plugin\Module;
 
@@ -54,6 +55,10 @@ class Settings extends Module {
 		// Sanitize api_url if provided.
 		if ( isset( $new_value['api_url'] ) && ! empty( $new_value['api_url'] ) ) {
 			$new_value['api_url'] = esc_url_raw( $new_value['api_url'] );
+		}
+
+		if ( isset( $new_value[ Advanced_Settings::OPTION_KEY ] ) ) {
+			$new_value[ Advanced_Settings::OPTION_KEY ] = Advanced_Settings::sanitize( $new_value[ Advanced_Settings::OPTION_KEY ] );
 		}
 
 		return $new_value;

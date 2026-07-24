@@ -10,6 +10,7 @@ namespace Axeptio\Plugin\Frontend;
 defined( 'ABSPATH' ) || exit;
 
 use Axeptio\Plugin\Admin;
+use Axeptio\Plugin\Models\Advanced_Settings;
 use Axeptio\Plugin\Models\Axeptio_Steps;
 use Axeptio\Plugin\Models\Plugins;
 use Axeptio\Plugin\Models\Project_Versions;
@@ -27,6 +28,16 @@ class Axeptio_Sdk extends Module {
 
 
 	const OPTION_JSON_COOKIE_NAME = 'axeptio_cookies';
+
+	/**
+	 * Merchant-configured advanced settings, typed and free of plugin conflicts.
+	 *
+	 * Kept aside so the inline SDK script can re-inject them with correct JS types
+	 * (wp_localize_script casts scalar values to strings).
+	 *
+	 * @var array<string, mixed>
+	 */
+	private array $advanced_overlay = array();
 
 	/**
 	 * Module can run within the current context.
@@ -118,7 +129,7 @@ class Axeptio_Sdk extends Module {
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWordpressSteps', Axeptio_Steps::all() );
 		wp_localize_script( 'axeptio/sdk-script', 'axeptioWpConsentCategories', WP_Consent_API_Settings::get_consent_categories() );
 
-		$sdk_script = \Axeptio\Plugin\get_template_part( 'frontend/sdk', array(), false );
+		$sdk_script = \Axeptio\Plugin\get_template_part( 'frontend/sdk', array( 'advanced_settings' => $this->advanced_overlay ), false );
 		preg_match( '/<script[^>]*>(.*?)<\/script>/is', $sdk_script, $matches );
 		wp_add_inline_script( 'axeptio/sdk-script', $matches[1] ?? '' );
 
@@ -244,6 +255,9 @@ class Axeptio_Sdk extends Module {
 		if ( $api_url && '' !== $api_url ) {
 			$sdk_settings['postConsentUrl'] = $api_url;
 		}
+
+		$this->advanced_overlay = array_diff_key( Advanced_Settings::get_typed(), $sdk_settings );
+		$sdk_settings           = array_merge( $this->advanced_overlay, $sdk_settings );
 
 		return apply_filters(
 			'axeptio/sdk_settings',
