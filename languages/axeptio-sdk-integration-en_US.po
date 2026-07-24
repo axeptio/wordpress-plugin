@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-24 11:07+0200\n"
-"PO-Revision-Date: 2026-07-24 11:18+0200\n"
+"POT-Creation-Date: 2026-07-24 11:37+0200\n"
+"PO-Revision-Date: 2026-07-24 14:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -495,17 +495,22 @@ msgstr "Save settings"
 msgid "No setting found"
 msgstr ""
 
-#: templates/admin/main/fields/advanced-settings.php:136
+#: templates/admin/main/fields/advanced-settings.php:97
+msgid ""
+"This setting is no longer listed by Axeptio. You can keep it or remove it."
+msgstr ""
+
+#: templates/admin/main/fields/advanced-settings.php:139
 msgid "Comma-separated domain names, e.g. .example.com, .example.fr"
 msgstr ""
 
-#: templates/admin/main/fields/advanced-settings.php:197
+#: templates/admin/main/fields/advanced-settings.php:200
 #, fuzzy
 #| msgid "Delete these settings"
 msgid "Remove this setting"
 msgstr "Delete these settings"
 
-#: templates/admin/main/fields/advanced-settings.php:211
+#: templates/admin/main/fields/advanced-settings.php:214
 #, fuzzy
 #| msgid "Main settings"
 msgid "Add a setting"

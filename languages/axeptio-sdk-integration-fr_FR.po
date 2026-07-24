@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2026-07-24 11:07+0200\n"
+"POT-Creation-Date: 2026-07-24 11:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -496,17 +496,24 @@ msgstr "Rechercher un paramètre…"
 msgid "No setting found"
 msgstr "Aucun paramètre trouvé"
 
-#: templates/admin/main/fields/advanced-settings.php:136
+#: templates/admin/main/fields/advanced-settings.php:97
+msgid ""
+"This setting is no longer listed by Axeptio. You can keep it or remove it."
+msgstr ""
+"Ce paramètre n'apparaît plus dans la liste d'Axeptio. Vous pouvez le "
+"conserver ou le supprimer."
+
+#: templates/admin/main/fields/advanced-settings.php:139
 msgid "Comma-separated domain names, e.g. .example.com, .example.fr"
 msgstr ""
 "Noms de domaine séparés par des virgules, par "
 "exemple .example.com, .example.fr"
 
-#: templates/admin/main/fields/advanced-settings.php:197
+#: templates/admin/main/fields/advanced-settings.php:200
 msgid "Remove this setting"
 msgstr "Supprimer ce paramètre"
 
-#: templates/admin/main/fields/advanced-settings.php:211
+#: templates/admin/main/fields/advanced-settings.php:214
 msgid "Add a setting"
 msgstr "Ajouter un paramètre"
 

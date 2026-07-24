@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2026-07-24 11:07+0200\n"
+"POT-Creation-Date: 2026-07-24 11:37+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -492,16 +492,23 @@ msgstr "Zoek een instelling…"
 msgid "No setting found"
 msgstr "Er is geen instelling gevonden"
 
-#: templates/admin/main/fields/advanced-settings.php:136
+#: templates/admin/main/fields/advanced-settings.php:97
+msgid ""
+"This setting is no longer listed by Axeptio. You can keep it or remove it."
+msgstr ""
+"Deze instelling wordt niet meer weergegeven door Axeptio. Je kunt deze "
+"behouden of verwijderen."
+
+#: templates/admin/main/fields/advanced-settings.php:139
 msgid "Comma-separated domain names, e.g. .example.com, .example.fr"
 msgstr ""
 "Door komma’s gescheiden domeinnamen, bijvoorbeeld .example.com, .example.fr"
 
-#: templates/admin/main/fields/advanced-settings.php:197
+#: templates/admin/main/fields/advanced-settings.php:200
 msgid "Remove this setting"
 msgstr "Deze instelling verwijderen"
 
-#: templates/admin/main/fields/advanced-settings.php:211
+#: templates/admin/main/fields/advanced-settings.php:214
 msgid "Add a setting"
 msgstr "Een instelling toevoegen"
 
