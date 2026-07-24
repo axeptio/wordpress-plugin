@@ -7,8 +7,10 @@
 
 namespace Axeptio\Plugin\Admin\Pages;
 
+use Axeptio\Plugin\Models\Advanced_Settings;
 use Axeptio\Plugin\Models\Axeptio_Steps;
 use Axeptio\Plugin\Models\Hook_Modes;
+use Axeptio\Plugin\Models\Settings_Reference;
 use Axeptio\Plugin\Models\Plugins;
 use Axeptio\Plugin\Models\Project_Versions;
 use Axeptio\Plugin\Models\Settings;
@@ -386,6 +388,58 @@ class Admin_Callbacks {
 			<?php esc_html_e( 'URL to which the widget will send POST requests after user consent.', 'axeptio-sdk-integration' ); ?>
 		</p>
 		<?php
+	}
+
+	/**
+	 * Advanced settings key/value pairs.
+	 *
+	 * @return void
+	 */
+	public function advanced_settings() {
+		\Axeptio\Plugin\get_template_part(
+			'admin/main/fields/advanced-settings',
+			array(
+				'config' => array(
+					'reference' => Settings_Reference::get_options(),
+					'pairs'     => Advanced_Settings::get_pairs(),
+					'i18n'      => array(
+						'bool'            => array(
+							'on'  => __( 'Enabled', 'axeptio-sdk-integration' ),
+							'off' => __( 'Disabled', 'axeptio-sdk-integration' ),
+						),
+						'list_placeholder' => __( '.example.com, .example.fr', 'axeptio-sdk-integration' ),
+						'gtm'      => array(
+							array(
+								'value' => 'true',
+								'label' => __( 'True', 'axeptio-sdk-integration' ),
+							),
+							array(
+								'value' => 'false',
+								'label' => __( 'False', 'axeptio-sdk-integration' ),
+							),
+							array(
+								'value' => 'update_only',
+								'label' => __( 'Update only', 'axeptio-sdk-integration' ),
+							),
+						),
+						'duration' => array(
+							array(
+								'value' => 'days',
+								'label' => __( 'Number of days', 'axeptio-sdk-integration' ),
+							),
+							array(
+								'value' => 'page',
+								'label' => __( 'Page navigation', 'axeptio-sdk-integration' ),
+							),
+							array(
+								'value' => 'session',
+								'label' => __( 'Browser session', 'axeptio-sdk-integration' ),
+							),
+						),
+					),
+				),
+			)
+		);
 	}
 
 	/**
