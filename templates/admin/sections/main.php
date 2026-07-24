@@ -35,7 +35,7 @@
 					)'
 	>
 		<?php echo \Axeptio\Plugin\get_main_admin_tabs(); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<div class="max-w-2xl">
+		<div>
 			<?php
 			settings_fields( 'xpwp_settings_group' );
 			do_settings_sections( 'axeptio-wordpress-plugin' );

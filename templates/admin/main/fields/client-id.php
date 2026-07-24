@@ -2,8 +2,8 @@
 <input type="hidden" name="axeptio_settings[client_id]" x-model="accountID" value="<?php echo esc_attr( get_option( 'xpwp_client_id' ) ); ?>">
 <div class="container relative">
 	<div
-		class="-translate-x-2 ring-0 transition ease-out duration-300 w-full flex items-center justify-between sm:mt-0 sm:flex-auto max-w-sm"
-		:class="{ 'translate-x-0': !showID, '-translate-x-2': showID }"
+		class="ring-0 transition ease-out duration-300 w-full flex items-center justify-between sm:mt-0 sm:flex-auto max-w-sm"
+		:class="{ 'translate-x-2': !showID }"
 	>
 		<input
 			name="axeptio_settings[client_id]"
