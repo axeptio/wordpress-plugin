@@ -45,10 +45,10 @@ class Admin_Main extends Module {
 	/**
 	 * Module can run within the current context.
 	 *
-	 * @return true
+	 * @return bool
 	 */
 	public function can_register() {
-		return true;
+		return is_admin();
 	}
 
 	/**
