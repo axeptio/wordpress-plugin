@@ -51,6 +51,7 @@ class Settings_Reference {
 		'postConsentUrl',
 		'enableGoogleConsentMode',
 		'triggerGTMEvents',
+		'sendDatas',
 	);
 
 	/**
