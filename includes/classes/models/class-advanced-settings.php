@@ -49,7 +49,7 @@ class Advanced_Settings {
 				continue;
 			}
 
-			$type                        = $pair['type'] ?? Settings_Reference::get_type( $pair['property'] ) ?? 'string';
+			$type                        = $pair['type'] ?? 'string';
 			$typed[ $pair['property'] ] = self::cast( $pair['value'] ?? '', (string) $type );
 		}
 

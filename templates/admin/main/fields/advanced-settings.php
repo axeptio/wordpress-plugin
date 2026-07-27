@@ -10,7 +10,7 @@
 	</h4>
 	<p class="mt-1 text-sm text-gray-500">
 		<?php esc_html_e( 'Add extra Axeptio SDK options as key/value pairs — they extend your configuration without touching any code.', 'axeptio-sdk-integration' ); ?>
-		<a href="https://support.axeptio.eu/en/articles/274040-advanced-options-and-mode-axeptiosettings" target="_blank" class="font-medium text-amber-600 hover:text-amber-500">
+		<a href="https://support.axeptio.eu/en/articles/274040-advanced-options-and-mode-axeptiosettings" target="_blank" rel="noopener noreferrer" class="font-medium text-amber-600 hover:text-amber-500">
 			<?php esc_html_e( 'Learn more', 'axeptio-sdk-integration' ); ?>
 		</a>
 	</p>
