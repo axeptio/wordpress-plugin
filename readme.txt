@@ -114,14 +114,15 @@ All informations here : [Axeptio customization](https://support.axeptio.eu/en/ar
 == Changelog ==
 
 ### 🛠️ 2.6.5 🛠️ ###
-
-**Google Consent Mode timing fix, marketing refresh, and dependency updates:**
-
-- 🐛 **Google Consent Mode Default Timing:** The Consent Mode default signal (denied by default) is now rendered synchronously and hooked at the earliest priority in `<head>`, guaranteeing it fires before any Google tag (GTM/gtag.js) hardcoded in the theme or added by another plugin.
-- 🎨 **Marketing Assets Refresh:** Updated the WordPress.org banner, screenshots, and readme copy to reflect the current Axeptio brand and product numbers (TCF v2.3, 200.000+ websites).
-- 🔒 **Dependency Updates:** Bumped websocket-driver, shell-quote, brace-expansion, path-to-regexp, and fast-uri to their latest patched versions, resolving 5 Dependabot security alerts.
-
-### 🛠️ 2.6.4 🛠️ ###
+ 
+ **Google Consent Mode timing fix, marketing refresh, and dependency updates:**
+ 
+ - 🐛 **Google Consent Mode Default Timing:** The Consent Mode default signal (denied by default) is now rendered synchronously and hooked at the earliest priority in `<head>`, guaranteeing it fires before any Google tag (GTM/gtag.js) hardcoded in the theme or added by another plugin.
++- ✨ **Advanced axeptioSettings Configuration:** Merchants can now define custom key/value pairs from the plugin admin, merged into `window.axeptioSettings` before the SDK loads (advanced use cases only, no code required).
+ - 🎨 **Marketing Assets Refresh:** Updated the WordPress.org banner, screenshots, and readme copy to reflect the current Axeptio brand and product numbers (TCF v2.3, 200.000+ websites).
+ - 🔒 **Dependency Updates:** Bumped websocket-driver, shell-quote, brace-expansion, path-to-regexp, and fast-uri to their latest patched versions, resolving 5 Dependabot security alerts.
+ 
+ ### 🛠️ 2.6.4 🛠️ ###
 
 **Account ID validation fixes and settings tab UI refinements:**
 
