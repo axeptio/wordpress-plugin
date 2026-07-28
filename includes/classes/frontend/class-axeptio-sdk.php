@@ -287,12 +287,14 @@ class Axeptio_Sdk extends Module {
 			$sdk_settings['postConsentUrl'] = $api_url;
 		}
 
-		$this->advanced_overlay = array_diff_key( Advanced_Settings::get_typed(), $sdk_settings );
-		$sdk_settings           = array_merge( $this->advanced_overlay, $sdk_settings );
-
-		return apply_filters(
+		$advanced     = array_diff_key( Advanced_Settings::get_typed(), $sdk_settings );
+		$sdk_settings = apply_filters(
 			'axeptio/sdk_settings',
-			$sdk_settings
+			array_merge( $advanced, $sdk_settings )
 		);
+
+		$this->advanced_overlay = array_intersect_key( $sdk_settings, $advanced );
+
+		return $sdk_settings;
 	}
 }
