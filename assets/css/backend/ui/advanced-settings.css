@@ -1,0 +1,44 @@
+.xpwp-icon {
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-size: contain;
+	mask-size: contain;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+}
+
+.xpwp-icon-plus {
+	-webkit-mask-image: url("../../img/icons/plus.svg");
+	mask-image: url("../../img/icons/plus.svg");
+}
+
+.xpwp-icon-remove {
+	-webkit-mask-image: url("../../img/icons/remove.svg");
+	mask-image: url("../../img/icons/remove.svg");
+}
+
+@media (min-width: 1024px) {
+	.axeptio-advanced-panel .form-table > tbody {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.5rem;
+	}
+
+	.axeptio-advanced-panel .form-table > tbody > tr {
+		display: block;
+		flex: 1 1 40%;
+	}
+
+	.axeptio-advanced-panel .form-table > tbody > tr.xpwp-advanced-full-row {
+		flex-basis: 100%;
+	}
+
+	.axeptio-advanced-panel .form-table > tbody > tr > th {
+		display: none;
+	}
+
+	.axeptio-advanced-panel .form-table > tbody > tr > td {
+		display: block;
+		padding: 0;
+	}
+}

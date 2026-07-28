@@ -8,6 +8,7 @@ import pluginList from './components/pluginList';
 import selectComponent from './components/selectComponent';
 import noticeComponent from './components/noticeComponent';
 import tabsPill from './components/tabsPill';
+import advancedSettings from './components/advancedSettings';
 
 window.Alpine = Alpine;
 
@@ -19,6 +20,7 @@ window.selectLang = selectLang.instance;
 
 Alpine.data('SelectComponent', selectComponent);
 Alpine.data('tabsPill', tabsPill);
+Alpine.data('advancedSettings', advancedSettings);
 
 Alpine.plugin( persist );
 Alpine.plugin( collapse );
