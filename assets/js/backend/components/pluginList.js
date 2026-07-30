@@ -348,10 +348,8 @@ const instance = function( args ) {
 		editedPluginHasChanged: false,
 		configurationId: 'all',
 		activeTab: 1,
-		currentPage: 1,
 		forceEditOpen: false,
 		activePlugins: args.active_plugins,
-		totalPages: 1,
 		nonce: args.nonce,
 		restRoot: args.rest_root,
 
@@ -362,7 +360,6 @@ const instance = function( args ) {
 		shortcodeTagsModes: [],
 		editOpen: false,
 		showDeleteModal: false,
-		pluginToDelete: null,
 		inputRefs: [],
 		fields: [],
 
