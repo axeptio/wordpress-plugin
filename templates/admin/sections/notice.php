@@ -1,7 +1,16 @@
 <?php defined( 'ABSPATH' ) || exit; ?>
 <div class="bg-amber-100/60 rounded-lg overflow-hidden mt-6 shadow-md max-w-7xl mx-auto p-4 px-6 relative"
 	x-data="noticeComponent(
-			<?php echo esc_attr( wp_json_encode( array( 'nonce' => wp_create_nonce( 'wp_rest' ) ) ) ); ?>,
+			<?php
+			echo esc_attr(
+				wp_json_encode(
+					array(
+						'rest_root' => \Axeptio\Plugin\get_rest_root(),
+						'nonce'     => wp_create_nonce( 'wp_rest' ),
+					)
+				)
+			);
+			?>
 		)">
 	<div class="flex gap-6">
 		<button class="w-4 h-4 absolute top-4 right-4 p-0" id="axeptio-timeout-button">

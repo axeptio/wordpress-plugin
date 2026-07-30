@@ -7,7 +7,7 @@
 		<?php do_action( 'axeptio/before_plugin_manager_container' ); ?>
 		<div class="axeptio-settings bg-white rounded-lg mt-6 shadow-md max-w-7xl mx-auto z-10">
 			<?php do_action( 'axeptio/before_plugin_manager' ); ?>
-			<div class="px-6 py-4 lg:pb-0">
+			<div class="px-6 py-4">
 				<div class="mt-6 mb-0  md:flex md:justify-between">
 					<div class="md:inline-flex md:items-end">
 						<img class="aspect-[14/3] w-40" src="<?php echo esc_attr( \Axeptio\Plugin\get_logo() ); ?>" alt="<?php esc_attr_e( 'Axeptio', 'axeptio-sdk-integration' ); ?>">
@@ -74,5 +74,6 @@
 		<?php do_action( 'axeptio/after_plugin_manager_container' ); ?>
 		<?php \Axeptio\Plugin\get_template_part( 'admin/plugins/fields/edit' ); ?>
 		<?php \Axeptio\Plugin\get_template_part( 'admin/plugins/fields/modal-delete' ); ?>
+		<?php \Axeptio\Plugin\get_template_part( 'admin/sections/toast' ); ?>
 	</div>
 </div>

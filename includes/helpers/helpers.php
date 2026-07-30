@@ -177,6 +177,16 @@ function get_sdk_url() {
 }
 
 /**
+ * Get the plugin REST API root, site relative, for callers to append a route to.
+ *
+ * @param string $namespace REST namespace.
+ * @return string The REST root, with a trailing slash.
+ */
+function get_rest_root( string $namespace = 'axeptio/v1' ): string {
+	return esc_url_raw( wp_make_link_relative( trailingslashit( rest_url( $namespace ) ) ) );
+}
+
+/**
  * Get the current WordPress memory limit in bytes.
  *
  * This function retrieves the memory limit set in WordPress and converts it to bytes.
