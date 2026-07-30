@@ -13,36 +13,6 @@ use Axeptio\Plugin\Models\Settings;
 use Axeptio\Plugin\Utils\Template;
 
 /**
- * Get an initialized class by its full class name, including namespace.
- *
- * @param string $class_name The class name including the namespace.
- *
- * @return false|Module
- */
-function get_module( $class_name ) {
-	return \Axeptio\Plugin\ModuleInitialization::instance()->get_class( $class_name );
-}
-
-/**
- * Get the base URL of the current admin page, with query params.
- *
- * @return string
- */
-function get_current_admin_url(): string {
-	$home_url   = wp_parse_url( home_url() );
-	$query_args = add_query_arg( null, null );
-
-	if (
-		is_array( $home_url )
-		&& isset( $home_url['path'] )
-	) {
-		$query_args = str_replace( $home_url['path'], '', $query_args );
-	}
-
-	return home_url( $query_args );
-}
-
-/**
  * Get the logo.
  *
  * @return string
@@ -121,49 +91,6 @@ function get_main_admin_tabs() {
 }
 
 /**
- * Get the relative path between two paths.
- *
- * @param string $from The source path.
- * @param string $to   The destination path.
- * @return string The relative path.
- */
-function get_relative_path( $from, $to ) {
-	// Some compatibility fixes for Windows paths.
-	$from = is_dir( $from ) ? rtrim( $from, '\/' ) . '/' : $from;
-	$to   = is_dir( $to ) ? rtrim( $to, '\/' ) . '/' : $to;
-	$from = str_replace( array( ABSPATH, '\\' ), array( '', '/' ), $from );
-	$to   = str_replace( array( ABSPATH, '\\' ), array( '', '/' ), $to );
-
-	$from     = explode( '/', $from );
-	$to       = explode( '/', $to );
-	$rel_path = $to;
-
-	// Remove all empty values.
-	$filtered_empty_value = array_filter( $from );
-	$from                 = array_values( $filtered_empty_value );
-
-	foreach ( $from as $depth => $dir ) {
-		// Find first non-matching dir.
-		if ( $dir === $to[ $depth ] ) {
-			// Ignore this directory.
-			array_shift( $rel_path );
-		} else {
-			// Get number of remaining dirs to $from.
-			$remaining = count( $from ) - $depth;
-			if ( $remaining > 1 ) {
-				// Add traversals up to first matching dir.
-				$pad_length = ( count( $rel_path ) + $remaining - 1 ) * -1;
-				$rel_path   = array_pad( $rel_path, $pad_length, '..' );
-				break;
-			} else {
-				$rel_path[0] = './' . $rel_path[0];
-			}
-		}
-	}
-	return implode( '/', $rel_path );
-}
-
-/**
  * Get the SDK URL.
  *
  * @return string The SDK URL.
@@ -177,31 +104,13 @@ function get_sdk_url() {
 }
 
 /**
- * Get the current WordPress memory limit in bytes.
+ * Get the plugin REST API root, site relative, for callers to append a route to.
  *
- * This function retrieves the memory limit set in WordPress and converts it to bytes.
- * If the WP_MEMORY_LIMIT constant is defined, it is used. Otherwise, the memory_limit
- * value from the PHP configuration is used.
- *
- * @return int The memory limit in bytes.
+ * @param string $namespace REST namespace.
+ * @return string The REST root, with a trailing slash.
  */
-function wp_memory_limit_in_bytes(): int {
-	$memory_limit = defined( 'WP_MEMORY_LIMIT' ) ? WP_MEMORY_LIMIT : ini_get( 'memory_limit' );
-
-	$unit  = strtolower( substr( $memory_limit, -1 ) );
-	$bytes = (int) $memory_limit;
-	switch ( $unit ) {
-		case 'g':
-			$bytes *= 1024 ** 3; // Gigabytes to bytes.
-			break;
-		case 'm':
-			$bytes *= 1024 ** 2; // Megabytes to bytes.
-			break;
-		case 'k':
-			$bytes *= 1024; // Kilobytes to bytes.
-			break;
-	}
-	return $bytes;
+function get_rest_root( string $namespace = 'axeptio/v1' ): string {
+	return esc_url_raw( wp_make_link_relative( trailingslashit( rest_url( $namespace ) ) ) );
 }
 
 /**

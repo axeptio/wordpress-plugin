@@ -388,7 +388,7 @@ if ( $axeptio_is_multilingual ) {
 
 			<div class="mt-6">
 				<div>
-					<button @click.prevent="updatePlugin(editedPlugin)"
+					<button @click.prevent="saveEditedPlugin()"
 							type="button"
 							class="flex w-full justify-center rounded-md bg-amber-400 px-3.5 py-2.5 text-sm border-0
 									font-semibold text-gray-900 shadow-sm hover:bg-gray-900 hover:text-amber-400

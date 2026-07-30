@@ -3,6 +3,7 @@ const instance = function( args ) {
 		timeoutButton: null,
 		disableButton: null,
 		nonce: args.nonce,
+		restRoot: args.rest_root,
 
 		init() {
 			this.timeoutButton = this.$el.querySelector( '#axeptio-timeout-button' );
@@ -32,7 +33,7 @@ const instance = function( args ) {
 		},
 
 		fetchAPI( route ) {
-			const apiUrl = `/wp-json/axeptio/v1/${ route }`;
+			const apiUrl = `${ this.restRoot }${ route }/`;
 
 			fetch( apiUrl, {
 				method: 'POST',
@@ -40,7 +41,7 @@ const instance = function( args ) {
 					'Content-Type': 'application/json',
 					'X-WP-Nonce': this.nonce,
 				},
-			} ).then( ( response ) => response.json() );
+			} ).catch( () => {} );
 		},
 	};
 };

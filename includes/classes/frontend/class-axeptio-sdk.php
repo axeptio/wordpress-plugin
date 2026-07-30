@@ -22,7 +22,6 @@ use Axeptio\Plugin\Module;
 use function Axeptio\Plugin\get_sdk_settings;
 use function Axeptio\Plugin\script_url;
 use function Axeptio\Plugin\style_url;
-use function Axeptio\Plugin\Utility\get_asset_info;
 
 class Axeptio_Sdk extends Module {
 
@@ -104,7 +103,7 @@ class Axeptio_Sdk extends Module {
 			'axeptio/main',
 			style_url( 'frontend/main', 'frontend' ),
 			array(),
-			get_asset_info( 'shared', 'version' ),
+			XPWP_VERSION,
 		);
 
 		$cookies_version = Settings::get_option( 'version', false );
