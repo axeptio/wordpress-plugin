@@ -888,3 +888,7 @@ msgstr ""
 #: includes/classes/admin/pages/class-admin-callbacks.php:426
 msgid "Enter a full URL including a domain name, for example https://api.example.com."
 msgstr ""
+
+#: templates/admin/sections/main.php:47
+msgid "Unsaved changes"
+msgstr ""

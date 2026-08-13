@@ -1025,6 +1025,10 @@ msgstr "axeptio"
 msgid "Enter a full URL including a domain name, for example https://api.example.com."
 msgstr "Enter a full URL including a domain name, for example https://api.example.com."
 
+#: templates/admin/sections/main.php:47
+msgid "Unsaved changes"
+msgstr "Unsaved changes"
+
 #~ msgid "True"
 #~ msgstr "True"
 

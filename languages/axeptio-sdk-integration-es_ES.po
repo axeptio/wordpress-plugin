@@ -1071,6 +1071,10 @@ msgstr "axeptio"
 msgid "Enter a full URL including a domain name, for example https://api.example.com."
 msgstr "Introduce una URL completa con un nombre de dominio, por ejemplo https://api.example.com."
 
+#: templates/admin/sections/main.php:47
+msgid "Unsaved changes"
+msgstr "Cambios sin guardar"
+
 #~ msgid "True"
 #~ msgstr "Cierto"
 

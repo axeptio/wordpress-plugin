@@ -1071,6 +1071,10 @@ msgstr "axeptio"
 msgid "Enter a full URL including a domain name, for example https://api.example.com."
 msgstr "Voer een volledige URL met een domeinnaam in, bijvoorbeeld https://api.example.com."
 
+#: templates/admin/sections/main.php:47
+msgid "Unsaved changes"
+msgstr "Niet-opgeslagen wijzigingen"
+
 #~ msgid "True"
 #~ msgstr "Klopt"
 
