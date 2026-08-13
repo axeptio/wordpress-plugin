@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-24 11:37+0200\n"
+"POT-Creation-Date: 2026-08-13 11:16+0200\n"
 "PO-Revision-Date: 2026-07-28 16:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -104,47 +104,63 @@ msgstr "Load the Axeptio SDK from your website domain."
 msgid "Widget description"
 msgstr "Widget description"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:407
+#: includes/classes/admin/pages/class-admin-callbacks.php:408
 msgid "Enabled"
 msgstr "Enabled"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:408
+#: includes/classes/admin/pages/class-admin-callbacks.php:409
 msgid "Disabled"
 msgstr "Disabled"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:410
+#: includes/classes/admin/pages/class-admin-callbacks.php:411
 msgid ".example.com, .example.fr"
 msgstr ".example.com, .example.fr"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:414
-msgid "True"
-msgstr "True"
+#: includes/classes/admin/pages/class-admin-callbacks.php:412
+msgid "Numeric value"
+msgstr "Numeric value"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:418
-msgid "False"
-msgstr "False"
-
-#: includes/classes/admin/pages/class-admin-callbacks.php:422
-msgid "Update only"
-msgstr "Update only"
-
-#: includes/classes/admin/pages/class-admin-callbacks.php:428
+#: includes/classes/admin/pages/class-admin-callbacks.php:415
 msgid "Number of days"
 msgstr "Number of days"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:432
+#: includes/classes/admin/pages/class-admin-callbacks.php:418
 msgid "Page navigation"
 msgstr "Page navigation"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:436
+#: includes/classes/admin/pages/class-admin-callbacks.php:419
 msgid "Browser session"
 msgstr "Browser session"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:454
+#: includes/classes/admin/pages/class-admin-callbacks.php:420
+msgid "Forced"
+msgstr "Forced"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:423
+msgid "Select a setting, or remove this row."
+msgstr "Select a setting, or remove this row."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:424
+msgid "Enter a value for this setting."
+msgstr "Enter a value for this setting."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:425
+msgid "This value does not match the format expected for this setting."
+msgstr "This value does not match the format expected for this setting."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:426
+msgid "Complete the setting above before adding another one."
+msgstr "Complete the setting above before adding another one."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:427
+msgid "All available settings are already configured."
+msgstr "All available settings are already configured."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:444
 msgid "Google Tag Manager Events"
 msgstr "Google Tag Manager Events"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:455
+#: includes/classes/admin/pages/class-admin-callbacks.php:445
 msgid "Configure how events are sent to Google Tag Manager"
 msgstr "Configure how events are sent to Google Tag Manager"
 
@@ -253,6 +269,15 @@ msgstr "Google Consent Mode V2"
 #: includes/classes/admin/pages/class-admin-main.php:358
 msgid "Collect of data and errors by Axeptio"
 msgstr "Collect of data and errors by Axeptio"
+
+#: includes/classes/backend/class-settings.php:89
+#, php-format
+msgid ""
+"Settings saved. The following custom SDK settings were ignored because their "
+"value is empty or invalid: %s."
+msgstr ""
+"Settings saved. The following custom SDK settings were ignored because their "
+"value is empty or invalid: %s."
 
 #: includes/classes/models/class-axeptio-steps.php:21
 msgid "WordPress Cookies"
@@ -480,15 +505,15 @@ msgid ""
 "This setting is no longer listed by Axeptio. You can keep it or remove it."
 msgstr ""
 
-#: templates/admin/main/fields/advanced-settings.php:139
+#: templates/admin/main/fields/advanced-settings.php:169
 msgid "Comma-separated domain names, e.g. .example.com, .example.fr"
 msgstr ""
 
-#: templates/admin/main/fields/advanced-settings.php:200
+#: templates/admin/main/fields/advanced-settings.php:184
 msgid "Remove this setting"
 msgstr ""
 
-#: templates/admin/main/fields/advanced-settings.php:214
+#: templates/admin/main/fields/advanced-settings.php:199
 msgid "Add a setting"
 msgstr ""
 
@@ -995,6 +1020,19 @@ msgstr "Axeptio allows you to make your website compliant with GDPR."
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr "axeptio"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:426
+msgid "Enter a full URL including a domain name, for example https://api.example.com."
+msgstr "Enter a full URL including a domain name, for example https://api.example.com."
+
+#~ msgid "True"
+#~ msgstr "True"
+
+#~ msgid "False"
+#~ msgstr "False"
+
+#~ msgid "Update only"
+#~ msgstr "Update only"
 
 #~ msgid ""
 #~ "We were unable to find your project, or it appears that it has not yet "
