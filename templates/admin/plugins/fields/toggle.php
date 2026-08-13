@@ -25,7 +25,7 @@
 		</span>
 	</label>
 	<div class="ml-5 sr-only">
-		<label :for="plugin.Metas.plugin"><?php echo esc_html__( 'Enable', 'axeptio-sdk-integration' ); ?></label>
+		<label :for="'enable_' + plugin.Metas.plugin"><?php echo esc_html__( 'Enable', 'axeptio-sdk-integration' ); ?></label>
 	</div>
 	<input type="checkbox" @change="enableControl(plugin)" class="sr-only" :id="'enable_' + plugin.Metas.plugin" :name="'axeptio_plugins[\'' + index + '\']'" value="1" placeholder="">
 </div>

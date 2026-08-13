@@ -89,9 +89,9 @@ class Advanced_Settings {
 			return array();
 		}
 
-		$type_map       = Settings_Reference::get_type_map();
-		$sanitized      = array();
-		self::$rejected = array();
+		$type_map  = Settings_Reference::get_type_map();
+		$sanitized = array();
+		$rejected  = array();
 
 		foreach ( $pairs as $pair ) {
 			if ( ! self::is_storable( $pair ) ) {
@@ -103,7 +103,7 @@ class Advanced_Settings {
 			$value    = self::sanitize_value( $pair['value'] ?? '' );
 
 			if ( ! self::is_valid_value( $property, $type, $value ) ) {
-				self::$rejected[] = $property;
+				$rejected[] = $property;
 				continue;
 			}
 
@@ -113,6 +113,8 @@ class Advanced_Settings {
 				'value'    => Setting_Type::normalize( $type, $value ),
 			);
 		}
+
+		self::$rejected = array_values( array_diff( array_unique( $rejected ), array_keys( $sanitized ) ) );
 
 		return array_values( $sanitized );
 	}

@@ -224,6 +224,22 @@ it(
 );
 
 it(
+	'never reports a property another row managed to save',
+	function () {
+		$valid   = array( 'property' => 'apiUrl', 'type' => 'string', 'value' => 'https://api.axept.io/v1' );
+		$invalid = array( 'property' => 'apiUrl', 'type' => 'string', 'value' => '#test' );
+
+		foreach ( array( array( $invalid, $valid ), array( $valid, $invalid ) ) as $pairs ) {
+			$sanitized = Advanced_Settings::sanitize( $pairs );
+
+			expect( $sanitized )->toHaveCount( 1 );
+			expect( $sanitized[0]['value'] )->toBe( 'https://api.axept.io/v1' );
+			expect( Advanced_Settings::get_rejected() )->toBe( array() );
+		}
+	}
+);
+
+it(
 	'keeps valid rows on save and unifies their boolean notation',
 	function () {
 		$sanitized = Advanced_Settings::sanitize(
