@@ -1,0 +1,61 @@
+{
+  "_comment": "Shared cases for the two type resolvers: includes/classes/models/class-setting-type.php and assets/js/backend/utils/settingType.js. Add a case here when the reference introduces a new type, then make both implementations satisfy it.",
+  "parse": [
+    { "type": "boolean", "primitive": "boolean", "literals": [] },
+    { "type": "boolean | 'forced'", "primitive": "boolean", "literals": [ "forced" ] },
+    { "type": "boolean | 'update_only'", "primitive": "boolean", "literals": [ "update_only" ] },
+    { "type": "number | 'page' | 'session'", "primitive": "number", "literals": [ "page", "session" ] },
+    { "type": "string[]", "primitive": "string[]", "literals": [] },
+    { "type": "string", "primitive": "string", "literals": [] },
+    { "type": "Token", "primitive": null, "literals": [] },
+    { "type": "", "primitive": null, "literals": [] }
+  ],
+  "validate": [
+    { "type": "boolean", "value": "1", "valid": true },
+    { "type": "boolean", "value": "0", "valid": true },
+    { "type": "boolean", "value": "true", "valid": true },
+    { "type": "boolean", "value": "", "valid": false },
+    { "type": "boolean", "value": "maybe", "valid": false },
+    { "type": "boolean | 'forced'", "value": "forced", "valid": true },
+    { "type": "boolean | 'forced'", "value": "0", "valid": true },
+    { "type": "boolean | 'forced'", "value": "", "valid": false },
+    { "type": "boolean | 'forced'", "value": "whatever", "valid": false },
+    { "type": "number | 'page' | 'session'", "value": "365", "valid": true },
+    { "type": "number | 'page' | 'session'", "value": "session", "valid": true },
+    { "type": "number | 'page' | 'session'", "value": "", "valid": false },
+    { "type": "number | 'page' | 'session'", "value": "abc", "valid": false },
+    { "type": "string[]", "value": ".example.com, .example.fr", "valid": true },
+    { "type": "string[]", "value": " , ", "valid": false },
+    { "type": "string[]", "value": "", "valid": false },
+    { "type": "string", "value": "my_cookie", "valid": true },
+    { "type": "string", "value": "", "valid": false },
+    { "type": "Token", "value": "anything", "valid": true },
+    { "type": "Token", "value": "", "valid": false }
+  ],
+  "normalize": [
+    { "type": "boolean", "value": "true", "expected": "1" },
+    { "type": "boolean", "value": "on", "expected": "1" },
+    { "type": "boolean", "value": "false", "expected": "0" },
+    { "type": "boolean", "value": "0", "expected": "0" },
+    { "type": "boolean", "value": "", "expected": "" },
+    { "type": "boolean | 'forced'", "value": "forced", "expected": "forced" },
+    { "type": "boolean | 'forced'", "value": "true", "expected": "1" },
+    { "type": "number | 'page' | 'session'", "value": "365", "expected": "365" },
+    { "type": "number | 'page' | 'session'", "value": "page", "expected": "page" },
+    { "type": "string", "value": "my_cookie", "expected": "my_cookie" }
+  ],
+  "cast": [
+    { "type": "boolean", "value": "1", "expected": true },
+    { "type": "boolean", "value": "0", "expected": false },
+    { "type": "boolean | 'forced'", "value": "forced", "expected": "forced" },
+    { "type": "boolean | 'forced'", "value": "1", "expected": true },
+    { "type": "boolean | 'forced'", "value": "0", "expected": false },
+    { "type": "boolean | 'update_only'", "value": "update_only", "expected": "update_only" },
+    { "type": "number | 'page' | 'session'", "value": "365", "expected": 365 },
+    { "type": "number | 'page' | 'session'", "value": "session", "expected": "session" },
+    { "type": "number", "value": "12.5", "expected": 12.5 },
+    { "type": "string[]", "value": ".example.com, .example.fr", "expected": [ ".example.com", ".example.fr" ] },
+    { "type": "string", "value": "my_cookie", "expected": "my_cookie" },
+    { "type": "Token", "value": "abc", "expected": "abc" }
+  ]
+}

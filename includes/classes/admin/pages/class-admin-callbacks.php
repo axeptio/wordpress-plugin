@@ -402,39 +402,30 @@ class Admin_Callbacks {
 				'config' => array(
 					'reference' => Settings_Reference::get_options(),
 					'pairs'     => Advanced_Settings::get_pairs(),
+					'tab'       => 'advanced-settings',
 					'i18n'      => array(
-						'bool'            => array(
+						'bool'             => array(
 							'on'  => __( 'Enabled', 'axeptio-sdk-integration' ),
 							'off' => __( 'Disabled', 'axeptio-sdk-integration' ),
 						),
 						'list_placeholder' => __( '.example.com, .example.fr', 'axeptio-sdk-integration' ),
-						'gtm'      => array(
-							array(
-								'value' => 'true',
-								'label' => __( 'True', 'axeptio-sdk-integration' ),
-							),
-							array(
-								'value' => 'false',
-								'label' => __( 'False', 'axeptio-sdk-integration' ),
-							),
-							array(
-								'value' => 'update_only',
-								'label' => __( 'Update only', 'axeptio-sdk-integration' ),
-							),
+						'number_mode'      => __( 'Numeric value', 'axeptio-sdk-integration' ),
+						// The reference declares a numeric type but not its unit.
+						'number_modes'     => array(
+							'userCookiesDuration' => __( 'Number of days', 'axeptio-sdk-integration' ),
 						),
-						'duration' => array(
-							array(
-								'value' => 'days',
-								'label' => __( 'Number of days', 'axeptio-sdk-integration' ),
-							),
-							array(
-								'value' => 'page',
-								'label' => __( 'Page navigation', 'axeptio-sdk-integration' ),
-							),
-							array(
-								'value' => 'session',
-								'label' => __( 'Browser session', 'axeptio-sdk-integration' ),
-							),
+						'literals'         => array(
+							'page'    => __( 'Page navigation', 'axeptio-sdk-integration' ),
+							'session' => __( 'Browser session', 'axeptio-sdk-integration' ),
+							'forced'  => __( 'Forced', 'axeptio-sdk-integration' ),
+						),
+						'errors'           => array(
+							'property'    => __( 'Select a setting, or remove this row.', 'axeptio-sdk-integration' ),
+							'value'       => __( 'Enter a value for this setting.', 'axeptio-sdk-integration' ),
+							'invalid'     => __( 'This value does not match the format expected for this setting.', 'axeptio-sdk-integration' ),
+							'url'         => __( 'Enter a full URL including a domain name, for example https://api.example.com.', 'axeptio-sdk-integration' ),
+							'pending_row' => __( 'Complete the setting above before adding another one.', 'axeptio-sdk-integration' ),
+							'all_used'    => __( 'All available settings are already configured.', 'axeptio-sdk-integration' ),
 						),
 					),
 				),

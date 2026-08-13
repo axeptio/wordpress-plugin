@@ -71,3 +71,187 @@ it(
 		expect( Advanced_Settings::get_typed() )->toBe( array() );
 	}
 );
+
+it(
+	'keeps a union literal and a disabled boolean out of each other\'s way',
+	function () {
+		\Mockery::mock( 'alias:Axeptio\Plugin\Models\Settings' )
+			->shouldReceive( 'get_option' )
+			->with( 'advanced_settings', array() )
+			->andReturn(
+				array(
+					array(
+						'property' => 'compressUserCookie',
+						'type'     => "boolean | 'forced'",
+						'value'    => 'forced',
+					),
+					array(
+						'property' => 'signalEssential',
+						'type'     => 'boolean',
+						'value'    => '0',
+					),
+				)
+			);
+
+		$typed = Advanced_Settings::get_typed();
+
+		expect( $typed['compressUserCookie'] )->toBe( 'forced' );
+		expect( $typed )->toHaveKey( 'signalEssential' );
+		expect( $typed['signalEssential'] )->toBeFalse();
+	}
+);
+
+it(
+	'never injects a pair whose stored value is empty',
+	function () {
+		\Mockery::mock( 'alias:Axeptio\Plugin\Models\Settings' )
+			->shouldReceive( 'get_option' )
+			->with( 'advanced_settings', array() )
+			->andReturn(
+				array(
+					array(
+						'property' => 'jsonCookieName',
+						'type'     => 'string',
+						'value'    => '',
+					),
+					array(
+						'property' => 'userCookiesDuration',
+						'type'     => "number | 'page' | 'session'",
+						'value'    => '',
+					),
+					array(
+						'property' => 'compressUserCookie',
+						'type'     => "boolean | 'forced'",
+						'value'    => '',
+					),
+					array(
+						'property' => 'mountClassName',
+						'type'     => 'string',
+						'value'    => 'my-class',
+					),
+				)
+			);
+
+		expect( Advanced_Settings::get_typed() )->toBe( array( 'mountClassName' => 'my-class' ) );
+	}
+);
+
+it(
+	'drops rows with an empty or mistyped value on save',
+	function () {
+		$sanitized = Advanced_Settings::sanitize(
+			array(
+				array(
+					'property' => 'jsonCookieName',
+					'type'     => 'string',
+					'value'    => '',
+				),
+				array(
+					'property' => 'userCookiesDuration',
+					'type'     => "number | 'page' | 'session'",
+					'value'    => 'not-a-number',
+				),
+				array(
+					'property' => 'signalEssential',
+					'type'     => 'boolean',
+					'value'    => 'maybe',
+				),
+				array(
+					'property' => 'clientId',
+					'type'     => 'string',
+					'value'    => 'plugin-managed',
+				),
+				array(
+					'property' => '',
+					'type'     => '',
+					'value'    => '',
+				),
+			)
+		);
+
+		expect( $sanitized )->toBe( array() );
+	}
+);
+
+it(
+	'requires an absolute http(s) URL from a property named after one',
+	function () {
+		$rejected = Advanced_Settings::sanitize(
+			array(
+				array(
+					'property' => 'apiUrl',
+					'type'     => 'string',
+					'value'    => '#test',
+				),
+				array(
+					'property' => 'configUrl',
+					'type'     => 'string',
+					'value'    => 'javascript:alert(1)',
+				),
+				array(
+					'property' => 'proxyBaseUrl',
+					'type'     => 'string',
+					'value'    => 'client.axept.io',
+				),
+				// Syntactically valid, but a dotless host is no public endpoint.
+				array(
+					'property' => 'postConsentUrl',
+					'type'     => 'string',
+					'value'    => 'https://test',
+				),
+			)
+		);
+
+		expect( $rejected )->toBe( array() );
+
+		$accepted = Advanced_Settings::sanitize(
+			array(
+				array(
+					'property' => 'apiUrl',
+					'type'     => 'string',
+					'value'    => 'https://api.axept.io/v1',
+				),
+				array(
+					'property' => 'mountClassName',
+					'type'     => 'string',
+					'value'    => 'not-a-url',
+				),
+			)
+		);
+
+		expect( $accepted )->toHaveCount( 2 );
+	}
+);
+
+it(
+	'keeps valid rows on save and unifies their boolean notation',
+	function () {
+		$sanitized = Advanced_Settings::sanitize(
+			array(
+				array(
+					'property' => 'compressUserCookie',
+					'type'     => 'boolean',
+					'value'    => 'forced',
+				),
+				array(
+					'property' => 'signalEssential',
+					'type'     => 'boolean',
+					'value'    => 'true',
+				),
+				array(
+					'property' => 'userCookiesDuration',
+					'type'     => "number | 'page' | 'session'",
+					'value'    => 'session',
+				),
+			)
+		);
+
+		expect( $sanitized )->toHaveCount( 3 );
+
+		// The type is re-read from the reference, so the stale `boolean` is corrected.
+		expect( $sanitized[0]['type'] )->toBe( "boolean | 'forced'" );
+		expect( $sanitized[0]['value'] )->toBe( 'forced' );
+		expect( $sanitized[1]['value'] )->toBe( '1' );
+		expect( $sanitized[2]['value'] )->toBe( 'session' );
+	}
+);
