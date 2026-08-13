@@ -195,7 +195,7 @@ function admin_scripts() {
 		'axeptio/main',
 		script_url( 'backend/app', 'admin' ),
 		array_merge( $dependencies, array( 'wp-i18n' ) ),
-		get_asset_info( 'admin', 'version' ),
+		XPWP_VERSION,
 		true
 	);
 	wp_set_script_translations( 'axeptio/main', 'axeptio-sdk-integration' );
@@ -251,7 +251,7 @@ function admin_styles() {
 		'axeptio/main',
 		style_url( 'backend/main', 'admin' ),
 		array(),
-		Utility\get_asset_info( 'shared', 'version' ),
+		XPWP_VERSION,
 	);
 }
 
