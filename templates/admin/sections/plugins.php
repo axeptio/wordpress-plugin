@@ -87,7 +87,7 @@
 				</div>
 				<div
 					class="flex flex-none items-center gap-x-4"
-					x-show="plugin.Metas.enabled !== false && !plugin.WPConsentAPI?.is_compliant"
+					x-show="localOrGlobalEnabled(plugin) && !plugin.WPConsentAPI?.is_compliant"
 					x-transition:enter="transition ease-out duration-200"
 					x-transition:enter-start="opacity-0"
 					x-transition:enter-end="opacity-1"

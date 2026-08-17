@@ -33,9 +33,16 @@ class Admin_Callbacks {
 	 */
 	public function plugin_manager() {
 		$settings = array(
+			'rest_root'        => \Axeptio\Plugin\get_rest_root(),
 			'nonce'            => wp_create_nonce( 'wp_rest' ),
 			'active_plugins'   => Plugins::get_active_plugins(),
 			'project_versions' => Project_Versions::all(),
+			'messages'         => array(
+				'load_error'   => __( 'The extension list could not be loaded. Please try again, and contact your host if the problem persists.', 'axeptio-sdk-integration' ),
+				'save_error'   => __( 'Your changes have not been saved. Please try again, and contact your host if the problem persists.', 'axeptio-sdk-integration' ),
+				'delete_error' => __( 'These settings have not been deleted. Please try again, and contact your host if the problem persists.', 'axeptio-sdk-integration' ),
+				'save_success' => __( 'Your changes have been saved.', 'axeptio-sdk-integration' ),
+			),
 		);
 		return require_once XPWP_PATH . 'templates' . DS . 'admin' . DS . 'plugin-manager.php';
 	}
