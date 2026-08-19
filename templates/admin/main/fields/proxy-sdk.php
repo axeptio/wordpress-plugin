@@ -23,6 +23,6 @@
 			</svg>
 		</span>
 		</label>
-		<input type="checkbox" @change="proxySdk = !proxySdk" class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0" id="<?php echo esc_attr( $data->id ); ?>" name="axeptio_settings[proxy_sdk]" value="1" <?php echo (bool) \Axeptio\Plugin\get_option( 'proxy_sdk', '0' ) ? 'checked' : ''; ?> placeholder="">
+		<input type="checkbox" @change="proxySdk = !proxySdk" class="sr-only" id="<?php echo esc_attr( $data->id ); ?>" name="axeptio_settings[proxy_sdk]" value="1" <?php echo (bool) \Axeptio\Plugin\get_option( 'proxy_sdk', '0' ) ? 'checked' : ''; ?> placeholder="">
 	</div>
 </div>

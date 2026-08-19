@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "generatedAt": "2026-07-21T15:33:27.755Z",
+  "generatedAt": "2026-08-11T13:54:51.729Z",
   "settings": [
     {
       "property": "clientId",
@@ -334,7 +334,7 @@
     },
     {
       "property": "compressUserCookie",
-      "type": "boolean",
+      "type": "boolean | 'forced'",
       "optional": false,
       "default": false,
       "name": {
@@ -346,12 +346,12 @@
         "nl": "Toestemmingscookie comprimeren"
       },
       "description": {
-        "en": "When true, compresses the main JSON consent cookie (lz-string) once it grows large, to stay under the browser's ~4 KB per-cookie limit. Enable only if your consent cookie is very large; third parties reading the raw cookie must then decode it via axeptioSDK.getUserCookieChoices() or axeptioSDK.decodeCookieValue().",
-        "fr": "Lorsque activé, compresse le cookie de consentement JSON principal (lz-string) lorsqu'il devient volumineux, pour rester sous la limite navigateur d'environ 4 Ko par cookie. N'activez que si votre cookie de consentement est très volumineux ; les tiers lisant le cookie brut doivent alors le décoder via axeptioSDK.getUserCookieChoices() ou axeptioSDK.decodeCookieValue().",
-        "pt-br": "Quando ativado, comprime o cookie de consentimento JSON principal (lz-string) quando ele cresce, para ficar abaixo do limite do navegador de ~4 KB por cookie. Ative apenas se o seu cookie de consentimento for muito grande; terceiros que leem o cookie bruto devem decodificá-lo via axeptioSDK.getUserCookieChoices() ou axeptioSDK.decodeCookieValue().",
-        "it": "Se attivo, comprime il cookie di consenso JSON principale (lz-string) quando diventa grande, per restare sotto il limite del browser di ~4 KB per cookie. Attivare solo se il cookie di consenso è molto grande; i terzi che leggono il cookie grezzo devono decodificarlo tramite axeptioSDK.getUserCookieChoices() o axeptioSDK.decodeCookieValue().",
-        "es": "Cuando está activo, comprime la cookie de consentimiento JSON principal (lz-string) cuando crece, para mantenerse por debajo del límite del navegador de ~4 KB por cookie. Actívelo solo si su cookie de consentimiento es muy grande; los terceros que leen la cookie sin procesar deben decodificarla mediante axeptioSDK.getUserCookieChoices() o axeptioSDK.decodeCookieValue().",
-        "nl": "Indien ingeschakeld, wordt de belangrijkste JSON-toestemmingscookie (lz-string) gecomprimeerd zodra deze groot wordt, om onder de browserlimiet van ~4 KB per cookie te blijven. Schakel dit alleen in als uw toestemmingscookie zeer groot is; derden die de ruwe cookie lezen, moeten deze dan decoderen via axeptioSDK.getUserCookieChoices() of axeptioSDK.decodeCookieValue()."
+        "en": "When true, compresses the main JSON consent cookie (lz-string) once it grows large, to stay under the browser's ~4 KB per-cookie limit. Set it to 'forced' to compress at any size, for servers with strict request-header limits; 'forced' always compresses, so on a very small cookie the result can end up marginally larger. Third parties reading the raw cookie must then decode it via axeptioSDK.getUserCookieChoices() or axeptioSDK.decodeCookieValue().",
+        "fr": "Lorsque activé, compresse le cookie de consentement JSON principal (lz-string) lorsqu'il devient volumineux, pour rester sous la limite navigateur d'environ 4 Ko par cookie. Utilisez 'forced' pour compresser quelle que soit la taille, pour les serveurs ayant des limites strictes d'en-têtes de requête ; 'forced' compresse toujours, le résultat peut donc être légèrement plus volumineux sur un très petit cookie. Les tiers lisant le cookie brut doivent alors le décoder via axeptioSDK.getUserCookieChoices() ou axeptioSDK.decodeCookieValue().",
+        "pt-br": "Quando ativado, comprime o cookie de consentimento JSON principal (lz-string) quando ele cresce, para ficar abaixo do limite do navegador de ~4 KB por cookie. Use 'forced' para comprimir em qualquer tamanho, para servidores com limites rígidos de cabeçalho de requisição; 'forced' comprime sempre, portanto em um cookie muito pequeno o resultado pode ficar ligeiramente maior. Terceiros que leem o cookie bruto devem decodificá-lo via axeptioSDK.getUserCookieChoices() ou axeptioSDK.decodeCookieValue().",
+        "it": "Se attivo, comprime il cookie di consenso JSON principale (lz-string) quando diventa grande, per restare sotto il limite del browser di ~4 KB per cookie. Usare 'forced' per comprimere a qualsiasi dimensione, per server con limiti rigidi sugli header di richiesta; 'forced' comprime sempre, quindi su un cookie molto piccolo il risultato può risultare leggermente più grande. I terzi che leggono il cookie grezzo devono decodificarlo tramite axeptioSDK.getUserCookieChoices() o axeptioSDK.decodeCookieValue().",
+        "es": "Cuando está activo, comprime la cookie de consentimiento JSON principal (lz-string) cuando crece, para mantenerse por debajo del límite del navegador de ~4 KB por cookie. Use 'forced' para comprimir en cualquier tamaño, para servidores con límites estrictos de encabezados de solicitud; 'forced' siempre comprime, por lo que en una cookie muy pequeña el resultado puede ser ligeramente mayor. Los terceros que leen la cookie sin procesar deben decodificarla mediante axeptioSDK.getUserCookieChoices() o axeptioSDK.decodeCookieValue().",
+        "nl": "Indien ingeschakeld, wordt de belangrijkste JSON-toestemmingscookie (lz-string) gecomprimeerd zodra deze groot wordt, om onder de browserlimiet van ~4 KB per cookie te blijven. Gebruik 'forced' om bij elke omvang te comprimeren, voor servers met strikte limieten op request-headers; 'forced' comprimeert altijd, dus bij een zeer kleine cookie kan het resultaat iets groter uitvallen. Derden die de ruwe cookie lezen, moeten deze dan decoderen via axeptioSDK.getUserCookieChoices() of axeptioSDK.decodeCookieValue()."
       }
     },
     {

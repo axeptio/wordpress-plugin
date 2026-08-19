@@ -1,29 +1,77 @@
-const TYPE_BOOLEAN = 'boolean';
-const TYPE_STRING = 'string';
-const TYPE_NUMBER = 'number';
-const TYPE_STRING_LIST = 'string[]';
-const TYPE_BOOLEAN_UPDATE = "boolean | 'update_only'";
-const TYPE_DURATION = "number | 'page' | 'session'";
+import settingType, {
+	BOOLEAN,
+	MODE_NUMBER,
+	NUMBER,
+	STRING,
+	WIDGET_LIST,
+	WIDGET_MODE,
+	WIDGET_NUMBER,
+	WIDGET_SELECT,
+	WIDGET_TEXT,
+	WIDGET_TOGGLE,
+} from '../utils/settingType';
+
+const ERROR_PROPERTY = 'property';
+const ERROR_VALUE = 'value';
+const ERROR_INVALID = 'invalid';
+const ERROR_URL = 'url';
+
+/**
+ * The reference declares no format, so the `…Url` suffix is the only signal.
+ *
+ * @param {string} property Property name.
+ * @return {boolean} True when the value has to be a URL.
+ */
+function expectsUrl( property ) {
+	return property.toLowerCase().endsWith( 'url' );
+}
+
+/**
+ * Only absolute http(s) URLs are accepted, mirroring Advanced_Settings::is_url().
+ *
+ * @param {string} value Value to check.
+ * @return {boolean} True when the value is an absolute http(s) URL.
+ */
+function isUrl( value ) {
+	try {
+		const { protocol, hostname } = new URL( value );
+
+		if ( protocol !== 'http:' && protocol !== 'https:' ) {
+			return false;
+		}
+
+		return hostname.includes( '.' );
+	} catch {
+		return false;
+	}
+}
 
 const advancedSettings = function( config ) {
 	return {
 		reference: config.reference || [],
 		i18n: config.i18n || {},
+		tab: config.tab,
 		rows: [],
 		nextUid: 0,
 		openSelect: null,
 		focusedProperty: null,
 		keySearch: '',
+		showErrors: false,
 
-		TYPE_BOOLEAN,
-		TYPE_STRING,
-		TYPE_NUMBER,
-		TYPE_STRING_LIST,
-		TYPE_BOOLEAN_UPDATE,
-		TYPE_DURATION,
+		WIDGET_TOGGLE,
+		WIDGET_SELECT,
+		WIDGET_MODE,
+		WIDGET_NUMBER,
+		WIDGET_LIST,
+		WIDGET_TEXT,
+		MODE_NUMBER,
 
 		init() {
 			this.rows = ( config.pairs || [] ).map( ( pair ) => this.makeRow( pair ) );
+
+			this.$el
+				.closest( 'form' )
+				?.addEventListener( 'submit', ( event ) => this.onSubmit( event ) );
 		},
 
 		makeRow( pair = {} ) {
@@ -39,7 +87,27 @@ const advancedSettings = function( config ) {
 			return `axeptio_settings[advanced_settings][${ index }][${ key }]`;
 		},
 
+		addRowHint() {
+			if ( this.rows.some( ( row ) => ! row.property ) ) {
+				return this.i18n.errors.pending_row;
+			}
+
+			if ( ! this.availableOptions().length ) {
+				return this.i18n.errors.all_used;
+			}
+
+			return '';
+		},
+
+		canAddRow() {
+			return ! this.addRowHint();
+		},
+
 		addRow() {
+			if ( ! this.canAddRow() ) {
+				return;
+			}
+
 			this.rows.push( this.makeRow() );
 			this.$nextTick( () => {
 				this.$refs.rows?.lastElementChild
@@ -103,8 +171,12 @@ const advancedSettings = function( config ) {
 			return option ? option.description : '';
 		},
 
+		widget( row ) {
+			return settingType( row.type ).widget;
+		},
+
 		placeholderFor( row ) {
-			if ( row.type === TYPE_STRING_LIST ) {
+			if ( this.widget( row ) === WIDGET_LIST ) {
 				return this.i18n.list_placeholder || '';
 			}
 
@@ -114,35 +186,52 @@ const advancedSettings = function( config ) {
 			return fallback === null || fallback === undefined ? '' : String( fallback );
 		},
 
-		onPropertyChange( row ) {
-			const option = this.findOption( row.property );
-			row.type = option ? option.type : TYPE_STRING;
-			row.value = this.defaultValueForType( row.type );
+		/**
+		 * Build the entries of a value select from the resolved type. A literal
+		 * with no translation shows as-is, so one added by Axeptio stays usable
+		 * without a plugin release.
+		 *
+		 * @param {Object} row Row being edited.
+		 * @return {Array<{value: string, label: string}>} Select entries.
+		 */
+		optionsFor( row ) {
+			const { primitive, literals } = settingType( row.type );
+			const options = [];
+
+			if ( primitive === BOOLEAN ) {
+				options.push( { value: '1', label: this.i18n.bool.on } );
+				options.push( { value: '0', label: this.i18n.bool.off } );
+			}
+
+			if ( primitive === NUMBER ) {
+				options.push( {
+					value: MODE_NUMBER,
+					label: this.i18n.number_modes?.[ row.property ] || this.i18n.number_mode,
+				} );
+			}
+
+			literals.forEach( ( literal ) => {
+				options.push( {
+					value: literal,
+					label: this.i18n.literals?.[ literal ] || literal,
+				} );
+			} );
+
+			return options;
 		},
 
-		defaultValueForType( type ) {
-			if ( type === TYPE_BOOLEAN ) {
-				return '0';
-			}
-			if ( type === TYPE_BOOLEAN_UPDATE ) {
-				return 'false';
-			}
-			return '';
+		onPropertyChange( row ) {
+			const option = this.findOption( row.property );
+			row.type = option ? option.type : STRING;
+			row.value = settingType( row.type ).defaultValue;
 		},
 
 		toggleBoolean( row ) {
 			row.value = row.value === '1' ? '0' : '1';
 		},
 
-		durationMode( row ) {
-			if ( row.value === 'page' || row.value === 'session' ) {
-				return row.value;
-			}
-			return 'days';
-		},
-
-		setDurationMode( row, mode ) {
-			row.value = mode === 'days' ? '' : mode;
+		modeOf( row ) {
+			return settingType( row.type ).isLiteral( row.value ) ? row.value : MODE_NUMBER;
 		},
 
 		toggleSelect( key ) {
@@ -171,14 +260,78 @@ const advancedSettings = function( config ) {
 			this.closeSelect();
 		},
 
-		selectDurationMode( row, mode ) {
-			this.setDurationMode( row, mode );
+		selectMode( row, mode ) {
+			row.value = mode === MODE_NUMBER ? '' : mode;
 			this.closeSelect();
 		},
 
 		labelFor( options, value ) {
 			const match = ( options || [] ).find( ( option ) => option.value === value );
 			return match ? match.label : '';
+		},
+
+		rowError( row ) {
+			if ( ! row.property ) {
+				return ERROR_PROPERTY;
+			}
+
+			if ( row.value === '' ) {
+				return ERROR_VALUE;
+			}
+
+			if ( ! settingType( row.type ).accepts( row.value ) ) {
+				return ERROR_INVALID;
+			}
+
+			if ( expectsUrl( row.property ) && ! isUrl( row.value ) ) {
+				return ERROR_URL;
+			}
+
+			return '';
+		},
+
+		errorFor( row ) {
+			const error = this.showErrors ? this.rowError( row ) : '';
+
+			return error ? this.i18n.errors[ error ] : '';
+		},
+
+		/**
+		 * Hold the save back while a row is incomplete. The tab is switched
+		 * first: the panel is hidden behind it, so from any other tab the save
+		 * button would just look inert.
+		 *
+		 * @param {SubmitEvent} event Form submission.
+		 */
+		onSubmit( event ) {
+			const index = this.rows.findIndex( ( row ) => this.rowError( row ) !== '' );
+
+			if ( index < 0 ) {
+				return;
+			}
+
+			event.preventDefault();
+			this.showErrors = true;
+			this.currentTab = this.tab;
+			this.$nextTick( () => this.focusRow( index ) );
+		},
+
+		focusRow( index ) {
+			// The x-for template sits in the same parent, so rows are read by
+			// element rather than by child index.
+			const element = this.$refs.rows?.querySelectorAll( ':scope > div' )[ index ];
+
+			if ( ! element ) {
+				return;
+			}
+
+			const target =
+				this.rowError( this.rows[ index ] ) === ERROR_PROPERTY
+					? null
+					: element.querySelector( '[data-value-input]' );
+
+			element.scrollIntoView( { block: 'center', behavior: 'smooth' } );
+			( target || element.querySelector( '[data-select-trigger]' ) )?.focus();
 		},
 	};
 };
