@@ -98,7 +98,7 @@
 					</p>
 
 					<div class="min-w-0" x-show="row.property" x-cloak>
-						<template x-if="row.type === TYPE_BOOLEAN">
+						<template x-if="widget(row) === WIDGET_TOGGLE">
 							<div class="flex h-10 items-center">
 								<button
 									type="button"
@@ -116,40 +116,15 @@
 							</div>
 						</template>
 
-						<template x-if="row.type === TYPE_NUMBER">
-							<input
-								type="number"
-								x-model="row.value"
-								:name="fieldName(index, 'value')"
-								:placeholder="placeholderFor(row)"
-								class="block w-full rounded-lg border-0 py-2.5 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-amber-500"
-							>
-						</template>
-
-						<template x-if="row.type === TYPE_STRING || row.type === TYPE_STRING_LIST">
-							<div>
-								<input
-									type="text"
-									x-model="row.value"
-									:name="fieldName(index, 'value')"
-									:placeholder="placeholderFor(row)"
-									class="block w-full rounded-lg border-0 py-2.5 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-amber-500"
-								>
-								<p class="mt-1.5 text-xs text-gray-500" x-show="row.type === TYPE_STRING_LIST">
-									<?php esc_html_e( 'Comma-separated domain names, e.g. .example.com, .example.fr', 'axeptio-sdk-integration' ); ?>
-								</p>
-							</div>
-						</template>
-
-						<template x-if="row.type === TYPE_BOOLEAN_UPDATE">
+						<template x-if="widget(row) === WIDGET_SELECT">
 							<?php
 							\Axeptio\Plugin\get_template_part(
 								'admin/main/fields/advanced-value-select',
 								array(
 									'icons'        => $xpwp_icons,
 									'open'         => "row._uid + ':val'",
-									'current'      => 'labelFor(i18n.gtm, row.value)',
-									'options'      => 'i18n.gtm',
+									'current'      => 'labelFor(optionsFor(row), row.value)',
+									'options'      => 'optionsFor(row)',
 									'on_select'    => 'selectValue(row, option.value)',
 									'selected'     => 'row.value === option.value',
 									'hidden_name'  => "fieldName(index, 'value')",
@@ -159,36 +134,45 @@
 							?>
 						</template>
 
-						<template x-if="row.type === TYPE_DURATION">
+						<template x-if="widget(row) === WIDGET_NUMBER">
+							<?php \Axeptio\Plugin\get_template_part( 'admin/main/fields/advanced-value-input', array( 'type' => 'number' ) ); ?>
+						</template>
+
+						<template x-if="widget(row) === WIDGET_MODE">
 							<div class="space-y-2">
 								<?php
 								\Axeptio\Plugin\get_template_part(
 									'admin/main/fields/advanced-value-select',
 									array(
 										'icons'     => $xpwp_icons,
-										'open'      => "row._uid + ':dur'",
-										'current'   => 'labelFor(i18n.duration, durationMode(row))',
-										'options'   => 'i18n.duration',
-										'on_select' => 'selectDurationMode(row, option.value)',
-										'selected'  => 'durationMode(row) === option.value',
+										'open'      => "row._uid + ':mode'",
+										'current'   => 'labelFor(optionsFor(row), modeOf(row))',
+										'options'   => 'optionsFor(row)',
+										'on_select' => 'selectMode(row, option.value)',
+										'selected'  => 'modeOf(row) === option.value',
 									)
 								);
 								?>
-								<template x-if="durationMode(row) === 'days'">
-									<input
-										type="number"
-										x-model="row.value"
-										:name="fieldName(index, 'value')"
-										:placeholder="placeholderFor(row)"
-										class="block w-full rounded-lg border-0 py-2.5 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-amber-500"
-									>
+								<template x-if="modeOf(row) === MODE_NUMBER">
+									<?php \Axeptio\Plugin\get_template_part( 'admin/main/fields/advanced-value-input', array( 'type' => 'number' ) ); ?>
 								</template>
-								<template x-if="durationMode(row) !== 'days'">
+								<template x-if="modeOf(row) !== MODE_NUMBER">
 									<input type="hidden" :name="fieldName(index, 'value')" :value="row.value">
 								</template>
 							</div>
 						</template>
+
+						<template x-if="widget(row) === WIDGET_LIST || widget(row) === WIDGET_TEXT">
+							<div>
+								<?php \Axeptio\Plugin\get_template_part( 'admin/main/fields/advanced-value-input', array( 'type' => 'text' ) ); ?>
+								<p class="mt-1.5 text-xs text-gray-500" x-show="widget(row) === WIDGET_LIST">
+									<?php esc_html_e( 'Comma-separated domain names, e.g. .example.com, .example.fr', 'axeptio-sdk-integration' ); ?>
+								</p>
+							</div>
+						</template>
 					</div>
+
+					<p class="text-xs leading-snug text-red-600" x-show="errorFor(row)" x-cloak x-text="errorFor(row)"></p>
 				</div>
 
 				<button
@@ -207,10 +191,12 @@
 	<button
 		type="button"
 		@click="addRow()"
-		class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-gray-300 py-2.5 text-sm font-medium text-gray-600 transition hover:border-amber-400 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400"
+		:disabled="! canAddRow()"
+		class="mt-4 flex w-full items-center justify-center gap-2 rounded-lg border border-dashed border-gray-300 py-2.5 text-sm font-medium text-gray-600 transition hover:border-amber-400 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-400 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:border-gray-300 disabled:hover:text-gray-600"
 		spellcheck="false"
 	>
 		<span class="size-4 bg-current xpwp-icon xpwp-icon-plus" aria-hidden="true"></span>
 		<?php esc_html_e( 'Add a setting', 'axeptio-sdk-integration' ); ?>
 	</button>
+	<p class="mt-2 text-center text-xs text-gray-500" x-show="addRowHint()" x-cloak x-text="addRowHint()"></p>
 </div>

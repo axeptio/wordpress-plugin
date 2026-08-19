@@ -23,6 +23,16 @@ class Advanced_Settings {
 	const OPTION_KEY = 'advanced_settings';
 
 	/**
+	 * Properties dropped by the last sanitize() run.
+	 *
+	 * Reporting them is left to the caller: sanitize() runs on every writer of the
+	 * option, and only the admin form save has a merchant to warn.
+	 *
+	 * @var array<int, string>
+	 */
+	private static array $rejected = array();
+
+	/**
 	 * Retrieve the raw stored pairs.
 	 *
 	 * @return array<int, array{property:string,type:string,value:mixed}>
@@ -36,8 +46,10 @@ class Advanced_Settings {
 	/**
 	 * Build the map of typed settings ready to be merged into the SDK settings.
 	 *
-	 * Each value is cast to its proper PHP type based on the setting's declared type,
-	 * so that it serializes to the correct JavaScript type on the frontend.
+	 * Pairs holding an empty or mistyped value are skipped rather than cast: they
+	 * would reach window.axeptioSettings as `0`, `false` or an empty string and
+	 * override a key the banner may need to render. This also covers pairs stored
+	 * before the value became mandatory.
 	 *
 	 * @return array<string, mixed> Property => typed value.
 	 */
@@ -49,8 +61,14 @@ class Advanced_Settings {
 				continue;
 			}
 
-			$type                        = $pair['type'] ?? 'string';
-			$typed[ $pair['property'] ] = self::cast( $pair['value'] ?? '', (string) $type );
+			$type  = (string) ( $pair['type'] ?? Setting_Type::STRING );
+			$value = $pair['value'] ?? '';
+
+			if ( ! self::is_valid_value( (string) $pair['property'], $type, $value ) ) {
+				continue;
+			}
+
+			$typed[ $pair['property'] ] = Setting_Type::cast( $type, $value );
 		}
 
 		return $typed;
@@ -59,9 +77,9 @@ class Advanced_Settings {
 	/**
 	 * Sanitize the pairs before they are persisted.
 	 *
-	 * Drops rows without a property, removes plugin-managed / non-selectable
-	 * properties, de-duplicates on the property (last wins), and keeps only the
-	 * `property`, `type` and `value` keys.
+	 * De-duplicates on the property, last one wins. The admin UI blocks invalid
+	 * rows before submission; this is the guard for anything reaching the option
+	 * another way.
 	 *
 	 * @param mixed $pairs Raw pairs coming from the settings form.
 	 * @return array<int, array{property:string,type:string,value:string}>
@@ -73,28 +91,119 @@ class Advanced_Settings {
 
 		$type_map  = Settings_Reference::get_type_map();
 		$sanitized = array();
+		$rejected  = array();
 
 		foreach ( $pairs as $pair ) {
-			if ( ! is_array( $pair ) || empty( $pair['property'] ) ) {
+			if ( ! self::is_storable( $pair ) ) {
 				continue;
 			}
 
 			$property = sanitize_text_field( $pair['property'] );
+			$type     = self::resolve_type( $property, $pair, $type_map );
+			$value    = self::sanitize_value( $pair['value'] ?? '' );
 
-			if ( in_array( $property, Settings_Reference::EXCLUDED_PROPERTIES, true ) ) {
+			if ( ! self::is_valid_value( $property, $type, $value ) ) {
+				$rejected[] = $property;
 				continue;
 			}
-
-			$type = $type_map[ $property ] ?? ( isset( $pair['type'] ) ? sanitize_text_field( $pair['type'] ) : 'string' );
 
 			$sanitized[ $property ] = array(
 				'property' => $property,
 				'type'     => $type,
-				'value'    => self::sanitize_value( $pair['value'] ?? '' ),
+				'value'    => Setting_Type::normalize( $type, $value ),
 			);
 		}
 
+		self::$rejected = array_values( array_diff( array_unique( $rejected ), array_keys( $sanitized ) ) );
+
 		return array_values( $sanitized );
+	}
+
+	/**
+	 * Properties dropped by the last sanitize() run.
+	 * @return array<int, string>
+	 */
+	public static function get_rejected(): array {
+		return self::$rejected;
+	}
+
+	/**
+	 * The reference declares a type but no format, so the `…Url` suffix of a
+	 * property name is the only signal that its value has to be a URL.
+	 *
+	 * @param string $property Property name.
+	 * @param string $type     Declared setting type.
+	 * @param mixed  $value    Value to check.
+	 * @return bool
+	 */
+	private static function is_valid_value( string $property, string $type, $value ): bool {
+		if ( ! Setting_Type::validate( $type, $value ) ) {
+			return false;
+		}
+
+		if ( 'url' === strtolower( substr( $property, -3 ) ) ) {
+			return self::is_url( (string) $value );
+		}
+
+		return true;
+	}
+
+	/**
+	 * The SDK calls these endpoints directly, so only an absolute http(s) URL on
+	 * a domain name is accepted. filter_var alone lets `javascript:` and a
+	 * dotless host such as `https://test` through.
+	 *
+	 * @param string $value Value to check.
+	 * @return bool
+	 */
+	private static function is_url( string $value ): bool {
+		if ( 1 !== preg_match( '#^https?://#i', $value ) ) {
+			return false;
+		}
+
+		if ( false === filter_var( $value, FILTER_VALIDATE_URL ) ) {
+			return false;
+		}
+
+		$host = wp_parse_url( $value, PHP_URL_HOST );
+
+		return is_string( $host ) && false !== strpos( $host, '.' );
+	}
+
+	/**
+	 * Determine whether a submitted row belongs in the option at all.
+	 *
+	 * @param mixed $pair Raw row.
+	 * @return bool
+	 */
+	private static function is_storable( $pair ): bool {
+		if ( ! is_array( $pair ) || empty( $pair['property'] ) ) {
+			return false;
+		}
+
+		$property = sanitize_text_field( $pair['property'] );
+
+		return ! in_array( $property, Settings_Reference::EXCLUDED_PROPERTIES, true );
+	}
+
+	/**
+	 * Resolve the type of a row, trusting the reference over what was submitted.
+	 *
+	 * @param string               $property Property name.
+	 * @param array<string, mixed> $pair     Raw row.
+	 * @param array<string, string> $type_map Property => type, from the reference.
+	 * @return string
+	 */
+	private static function resolve_type( string $property, array $pair, array $type_map ): string {
+		if ( isset( $type_map[ $property ] ) ) {
+			return $type_map[ $property ];
+		}
+
+		if ( isset( $pair['type'] ) ) {
+			return sanitize_text_field( $pair['type'] );
+		}
+
+		return Setting_Type::STRING;
 	}
 
 	/**
@@ -109,77 +218,5 @@ class Advanced_Settings {
 		}
 
 		return sanitize_text_field( (string) $value );
-	}
-
-	/**
-	 * Cast a stored string value to its proper PHP type.
-	 *
-	 * @param mixed  $value Stored value.
-	 * @param string $type  Declared setting type.
-	 * @return mixed
-	 */
-	private static function cast( $value, string $type ) {
-		switch ( $type ) {
-			case 'boolean':
-				return self::to_bool( $value );
-
-			case 'number':
-				return self::to_number( $value );
-
-			case 'string[]':
-				return self::to_string_list( $value );
-
-			case "boolean | 'update_only'":
-				return 'update_only' === $value ? 'update_only' : self::to_bool( $value );
-
-			case "number | 'page' | 'session'":
-				return is_numeric( $value ) ? self::to_number( $value ) : (string) $value;
-
-			case 'string':
-			default:
-				return (string) $value;
-		}
-	}
-
-	/**
-	 * Cast a value to a boolean.
-	 *
-	 * @param mixed $value Value to cast.
-	 * @return bool
-	 */
-	private static function to_bool( $value ): bool {
-		return filter_var( $value, FILTER_VALIDATE_BOOLEAN );
-	}
-
-	/**
-	 * Cast a numeric value to int or float.
-	 *
-	 * @param mixed $value Value to cast.
-	 * @return int|float
-	 */
-	private static function to_number( $value ) {
-		if ( ! is_numeric( $value ) ) {
-			return 0;
-		}
-
-		return ( (float) $value == (int) $value ) ? (int) $value : (float) $value; // phpcs:ignore Universal.Operators.StrictComparisons.LooseEqual
-	}
-
-	/**
-	 * Cast a comma-separated string to a list of trimmed, non-empty values.
-	 *
-	 * @param mixed $value Value to cast.
-	 * @return array<int, string>
-	 */
-	private static function to_string_list( $value ): array {
-		if ( is_array( $value ) ) {
-			$items = $value;
-		} else {
-			$items = explode( ',', (string) $value );
-		}
-
-		$items = array_map( 'trim', $items );
-
-		return array_values( array_filter( $items, static fn( $item ) => '' !== $item ) );
 	}
 }
