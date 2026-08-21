@@ -14,7 +14,6 @@ use Axeptio\Plugin\Init\Activation_Hook;
 use Axeptio\Plugin\Utils\Flash_Vars;
 use Axeptio\Plugin\Utils\WP_Migration_Manager;
 use WP_Error;
-use function Axeptio\Plugin\Utility\get_asset_info;
 
 /**
  * Default setup routine
@@ -190,11 +189,10 @@ function admin_scripts() {
 	}
 
 	wp_enqueue_media();
-	$dependencies = get_asset_info( 'admin', 'dependencies' ) ?? array();
 	wp_enqueue_script(
 		'axeptio/main',
 		script_url( 'backend/app', 'admin' ),
-		array_merge( $dependencies, array( 'wp-i18n' ) ),
+		array( 'wp-i18n' ),
 		XPWP_VERSION,
 		true
 	);

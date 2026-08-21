@@ -29,6 +29,13 @@ class Axeptio_Sdk extends Module {
 	const OPTION_JSON_COOKIE_NAME = 'axeptio_cookies';
 
 	/**
+	 * Memoized SDK settings for the current request (null until resolved).
+	 *
+	 * @var array|false|null
+	 */
+	private $sdk_settings = null;
+
+	/**
 	 * Merchant-configured advanced settings, typed and free of plugin conflicts.
 	 *
 	 * Kept aside so the inline SDK script can re-inject them with correct JS types
@@ -54,6 +61,30 @@ class Axeptio_Sdk extends Module {
 	 */
 	public function register() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
+		// Negative priority so the Consent Mode default fires before any other wp_head tag.
+		add_action( 'wp_head', array( $this, 'render_google_consent_mode' ), -1 );
+	}
+
+	/**
+	 * Render the Google Consent Mode default snippet in <head>.
+	 *
+	 * @return void
+	 */
+	public function render_google_consent_mode() {
+		$settings = $this->get_sdk_settings();
+
+		if ( ! $settings || empty( $settings['enableGoogleConsentMode'] ) ) {
+			return;
+		}
+
+		\Axeptio\Plugin\get_template_part(
+			'frontend/google-consent-mode',
+			array(
+				'active_google_consent_mode' => (bool) $settings['enableGoogleConsentMode'],
+				'google_consent_mode_params' => $settings['googleConsentMode']['default'],
+			)
+		);
 	}
 
 	/**
@@ -131,19 +162,6 @@ class Axeptio_Sdk extends Module {
 		$sdk_script = \Axeptio\Plugin\get_template_part( 'frontend/sdk', array( 'advanced_settings' => $this->advanced_overlay ), false );
 		preg_match( '/<script[^>]*>(.*?)<\/script>/is', $sdk_script, $matches );
 		wp_add_inline_script( 'axeptio/sdk-script', $matches[1] ?? '' );
-
-		add_action(
-			'wp_head',
-			function () use ( $settings ) {
-				\Axeptio\Plugin\get_template_part(
-					'frontend/google-consent-mode',
-					array(
-						'active_google_consent_mode' => (bool) $settings['enableGoogleConsentMode'],
-						'google_consent_mode_params' => $settings['googleConsentMode'],
-					)
-				);
-			}
-		);
 	}
 
 	/**
@@ -175,6 +193,19 @@ class Axeptio_Sdk extends Module {
 	 * @return array|false Settings of the SDK.
 	 */
 	private function get_sdk_settings() {
+		if ( null === $this->sdk_settings ) {
+			$this->sdk_settings = $this->resolve_sdk_settings();
+		}
+
+		return $this->sdk_settings;
+	}
+
+	/**
+	 * Resolve the SDK settings from the stored options.
+	 *
+	 * @return array|false Settings of the SDK.
+	 */
+	private function resolve_sdk_settings() {
 		$sdk_active         = Sdk::is_active();
 		$disable_send_datas = (bool) Settings::get_option( 'disable_send_datas', false );
 
