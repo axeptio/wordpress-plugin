@@ -63,6 +63,9 @@ const instance = function( args ) {
 			// failed validation still reads as pending. Target check: other forms.
 			window.addEventListener( 'submit', ( event ) => {
 				if ( event.target === this.$el && ! event.defaultPrevented ) {
+					// The submitted data becomes the reference: $nextTick defers to a
+					// timer, so the save click recomputes isDirty after this runs.
+					savedState = serializeForm( this.$el );
 					this.isDirty = false;
 				}
 			} );
