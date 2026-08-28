@@ -1075,6 +1075,38 @@ msgstr "Introduce una URL completa con un nombre de dominio, por ejemplo https:/
 msgid "Unsaved changes"
 msgstr "Cambios sin guardar"
 
+#: templates/admin/sections/toast.php:6
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:41
+msgid ""
+"The extension list could not be loaded. Please try again, and contact "
+"your host if the problem persists."
+msgstr ""
+"No se ha podido cargar la lista de extensiones. Inténtalo de nuevo y "
+"contacta con tu proveedor de alojamiento si el problema persiste."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:42
+msgid ""
+"Your changes have not been saved. Please try again, and contact your host "
+"if the problem persists."
+msgstr ""
+"Tus cambios no se han guardado. Inténtalo de nuevo y contacta con tu "
+"proveedor de alojamiento si el problema persiste."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:43
+msgid ""
+"These settings have not been deleted. Please try again, and contact your "
+"host if the problem persists."
+msgstr ""
+"Estos ajustes no se han eliminado. Inténtalo de nuevo y contacta con tu "
+"proveedor de alojamiento si el problema persiste."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:44
+msgid "Your changes have been saved."
+msgstr "Tus cambios se han guardado."
+
 #~ msgid "True"
 #~ msgstr "Cierto"
 
