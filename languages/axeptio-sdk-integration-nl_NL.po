@@ -1075,6 +1075,39 @@ msgstr "Voer een volledige URL met een domeinnaam in, bijvoorbeeld https://api.e
 msgid "Unsaved changes"
 msgstr "Niet-opgeslagen wijzigingen"
 
+#: templates/admin/sections/toast.php:6
+msgid "Notifications"
+msgstr "Meldingen"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:41
+msgid ""
+"The extension list could not be loaded. Please try again, and contact "
+"your host if the problem persists."
+msgstr ""
+"De lijst met extensies kon niet worden geladen. Probeer het opnieuw en "
+"neem contact op met uw hostingprovider als het probleem zich blijft "
+"voordoen."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:42
+msgid ""
+"Your changes have not been saved. Please try again, and contact your host "
+"if the problem persists."
+msgstr ""
+"Uw wijzigingen zijn niet opgeslagen. Probeer het opnieuw en neem contact "
+"op met uw hostingprovider als het probleem zich blijft voordoen."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:43
+msgid ""
+"These settings have not been deleted. Please try again, and contact your "
+"host if the problem persists."
+msgstr ""
+"Deze instellingen zijn niet verwijderd. Probeer het opnieuw en neem "
+"contact op met uw hostingprovider als het probleem zich blijft voordoen."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:44
+msgid "Your changes have been saved."
+msgstr "Uw wijzigingen zijn opgeslagen."
+
 #~ msgid "True"
 #~ msgstr "Klopt"
 
