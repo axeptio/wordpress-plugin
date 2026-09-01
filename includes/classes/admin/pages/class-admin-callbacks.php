@@ -7,8 +7,10 @@
 
 namespace Axeptio\Plugin\Admin\Pages;
 
+use Axeptio\Plugin\Models\Advanced_Settings;
 use Axeptio\Plugin\Models\Axeptio_Steps;
 use Axeptio\Plugin\Models\Hook_Modes;
+use Axeptio\Plugin\Models\Settings_Reference;
 use Axeptio\Plugin\Models\Plugins;
 use Axeptio\Plugin\Models\Project_Versions;
 use Axeptio\Plugin\Models\Settings;
@@ -31,9 +33,16 @@ class Admin_Callbacks {
 	 */
 	public function plugin_manager() {
 		$settings = array(
+			'rest_root'        => \Axeptio\Plugin\get_rest_root(),
 			'nonce'            => wp_create_nonce( 'wp_rest' ),
 			'active_plugins'   => Plugins::get_active_plugins(),
 			'project_versions' => Project_Versions::all(),
+			'messages'         => array(
+				'load_error'   => __( 'The extension list could not be loaded. Please try again, and contact your host if the problem persists.', 'axeptio-sdk-integration' ),
+				'save_error'   => __( 'Your changes have not been saved. Please try again, and contact your host if the problem persists.', 'axeptio-sdk-integration' ),
+				'delete_error' => __( 'These settings have not been deleted. Please try again, and contact your host if the problem persists.', 'axeptio-sdk-integration' ),
+				'save_success' => __( 'Your changes have been saved.', 'axeptio-sdk-integration' ),
+			),
 		);
 		return require_once XPWP_PATH . 'templates' . DS . 'admin' . DS . 'plugin-manager.php';
 	}
@@ -386,6 +395,49 @@ class Admin_Callbacks {
 			<?php esc_html_e( 'URL to which the widget will send POST requests after user consent.', 'axeptio-sdk-integration' ); ?>
 		</p>
 		<?php
+	}
+
+	/**
+	 * Advanced settings key/value pairs.
+	 *
+	 * @return void
+	 */
+	public function advanced_settings() {
+		\Axeptio\Plugin\get_template_part(
+			'admin/main/fields/advanced-settings',
+			array(
+				'config' => array(
+					'reference' => Settings_Reference::get_options(),
+					'pairs'     => Advanced_Settings::get_pairs(),
+					'tab'       => 'advanced-settings',
+					'i18n'      => array(
+						'bool'             => array(
+							'on'  => __( 'Enabled', 'axeptio-sdk-integration' ),
+							'off' => __( 'Disabled', 'axeptio-sdk-integration' ),
+						),
+						'list_placeholder' => __( '.example.com, .example.fr', 'axeptio-sdk-integration' ),
+						'number_mode'      => __( 'Numeric value', 'axeptio-sdk-integration' ),
+						// The reference declares a numeric type but not its unit.
+						'number_modes'     => array(
+							'userCookiesDuration' => __( 'Number of days', 'axeptio-sdk-integration' ),
+						),
+						'literals'         => array(
+							'page'    => __( 'Page navigation', 'axeptio-sdk-integration' ),
+							'session' => __( 'Browser session', 'axeptio-sdk-integration' ),
+							'forced'  => __( 'Forced', 'axeptio-sdk-integration' ),
+						),
+						'errors'           => array(
+							'property'    => __( 'Select a setting, or remove this row.', 'axeptio-sdk-integration' ),
+							'value'       => __( 'Enter a value for this setting.', 'axeptio-sdk-integration' ),
+							'invalid'     => __( 'This value does not match the format expected for this setting.', 'axeptio-sdk-integration' ),
+							'url'         => __( 'Enter a full URL including a domain name, for example https://api.example.com.', 'axeptio-sdk-integration' ),
+							'pending_row' => __( 'Complete the setting above before adding another one.', 'axeptio-sdk-integration' ),
+							'all_used'    => __( 'All available settings are already configured.', 'axeptio-sdk-integration' ),
+						),
+					),
+				),
+			)
+		);
 	}
 
 	/**

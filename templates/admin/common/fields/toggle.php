@@ -6,11 +6,11 @@
 		<span aria-hidden="true" class="translate-x-0 pointer-events-none absolute left-0 inline-block h-5 w-5 transform rounded-full border border-gray-200 bg-white shadow ring-0 transition-transform duration-200 ease-in-out" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'translate-x-5': <?php echo esc_attr( $data->alpine_state ); ?>, 'translate-x-0': !(<?php echo esc_attr( $data->alpine_state ); ?>) }"></span>
 	</label>
 	<label for="<?php echo esc_attr( $data->id ); ?>" class="ml-4 flex flex-col min-w-0 flex-1 gap-1">
-		<span class="truncate font-medium">
+		<span class="inline-flex items-center gap-1 font-medium">
 			<?php echo esc_html( $data->label ); ?>
 			<?php if ( isset( $data->help_url ) ) : ?>
-				<a href="<?php echo esc_url( $data->help_url ); ?>" target="_blank">
-				<span class="dashicons dashicons-info-outline"></span>
+				<a href="<?php echo esc_url( $data->help_url ); ?>" target="_blank" rel="noopener noreferrer">
+				<img src="<?php echo esc_url( XPWP_URL . 'dist/img/icons/info.svg' ); ?>" class="size-4" alt="<?php esc_attr_e( 'More information', 'axeptio-sdk-integration' ); ?>">
 			</a>
 			<?php endif ?>
 		</span>

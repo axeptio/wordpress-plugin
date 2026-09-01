@@ -1,5 +1,5 @@
 <?php defined( 'ABSPATH' ) || exit; ?>
-<div class="mt-6 lg:bg-[url('../../img/settings.svg')] bg-[length:40%_auto] bg-no-repeat bg-right-top">
+<div class="mt-6 lg:bg-[url('../../img/settings.svg')] bg-[length:50%_auto] bg-no-repeat bg-right-top">
 	<form method="post"
 			action="options.php"
 			class="bg-[rgba(255,255,255,0.4)]  min-h-[500px]"
@@ -35,12 +35,18 @@
 					)'
 	>
 		<?php echo \Axeptio\Plugin\get_main_admin_tabs(); // PHPCS:Ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-		<div class="max-w-2xl">
+		<div>
 			<?php
 			settings_fields( 'xpwp_settings_group' );
 			do_settings_sections( 'axeptio-wordpress-plugin' );
-			submit_button();
 			?>
+			<div class="flex items-center gap-3 py-4">
+				<?php submit_button( null, 'primary', 'submit', false ); ?>
+				<span x-show="isDirty" x-cloak class="inline-flex items-center gap-2 text-sm font-medium text-amber-700">
+					<span class="size-2 shrink-0 rounded-full bg-amber-500" aria-hidden="true"></span>
+					<?php esc_html_e( 'Unsaved changes', 'axeptio-sdk-integration' ); ?>
+				</span>
+			</div>
 		</div>
 	</form>
 </div>

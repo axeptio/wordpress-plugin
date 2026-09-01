@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio SDK Integration\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-30 17:47+0200\n"
-"PO-Revision-Date: 2026-07-01 09:03+0200\n"
+"POT-Creation-Date: 2026-08-13 11:16+0200\n"
+"PO-Revision-Date: 2026-07-28 16:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -51,31 +51,31 @@ msgstr ""
 msgid "Return to plugins pages"
 msgstr "Return to plugins page"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:224
+#: includes/classes/admin/pages/class-admin-callbacks.php:226
 msgid "Widget title"
 msgstr "Widget title"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:240
+#: includes/classes/admin/pages/class-admin-callbacks.php:242
 msgid "Widget sub-title"
 msgstr "Widget sub-title"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:255
+#: includes/classes/admin/pages/class-admin-callbacks.php:257
 msgid "Widget Image"
 msgstr "Widget Image"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:273
+#: includes/classes/admin/pages/class-admin-callbacks.php:275
 msgid "Disable the background Image"
-msgstr ""
+msgstr "Disable the background Image"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:274
+#: includes/classes/admin/pages/class-admin-callbacks.php:276
 msgid "By checking this box, you will deactivate the painted background."
-msgstr ""
+msgstr "By checking this box, you will deactivate the painted background."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:292
+#: includes/classes/admin/pages/class-admin-callbacks.php:294
 msgid "Cookie domain"
 msgstr "Cookie domain"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:297
+#: includes/classes/admin/pages/class-admin-callbacks.php:299
 msgid ""
 "If specified, domain name on which the cookie containing user choices will "
 "be available. This allows to request one consent for various subdomains"
@@ -83,32 +83,84 @@ msgstr ""
 "If specified, domain name on which the cookie containing user choices will "
 "be available. This allows to request one consent for various subdomains"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:313
+#: includes/classes/admin/pages/class-admin-callbacks.php:315
 msgid "URL for server-side usage"
-msgstr ""
+msgstr "URL for server-side usage"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:319
-#: includes/classes/admin/pages/class-admin-callbacks.php:386
+#: includes/classes/admin/pages/class-admin-callbacks.php:321
+#: includes/classes/admin/pages/class-admin-callbacks.php:388
 msgid "URL to which the widget will send POST requests after user consent."
 msgstr "URL to which the widget will send POST requests after user consent."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:335
+#: includes/classes/admin/pages/class-admin-callbacks.php:337
 msgid "Enable sdk proxy"
-msgstr ""
+msgstr "Enable sdk proxy"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:340
+#: includes/classes/admin/pages/class-admin-callbacks.php:342
 msgid "Load the Axeptio SDK from your website domain."
-msgstr ""
+msgstr "Load the Axeptio SDK from your website domain."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:355
+#: includes/classes/admin/pages/class-admin-callbacks.php:357
 msgid "Widget description"
 msgstr "Widget description"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:400
+#: includes/classes/admin/pages/class-admin-callbacks.php:408
+msgid "Enabled"
+msgstr "Enabled"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:409
+msgid "Disabled"
+msgstr "Disabled"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:411
+msgid ".example.com, .example.fr"
+msgstr ".example.com, .example.fr"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:412
+msgid "Numeric value"
+msgstr "Numeric value"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:415
+msgid "Number of days"
+msgstr "Number of days"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:418
+msgid "Page navigation"
+msgstr "Page navigation"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:419
+msgid "Browser session"
+msgstr "Browser session"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:420
+msgid "Forced"
+msgstr "Forced"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:423
+msgid "Select a setting, or remove this row."
+msgstr "Select a setting, or remove this row."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:424
+msgid "Enter a value for this setting."
+msgstr "Enter a value for this setting."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:425
+msgid "This value does not match the format expected for this setting."
+msgstr "This value does not match the format expected for this setting."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:426
+msgid "Complete the setting above before adding another one."
+msgstr "Complete the setting above before adding another one."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:427
+msgid "All available settings are already configured."
+msgstr "All available settings are already configured."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:444
 msgid "Google Tag Manager Events"
 msgstr "Google Tag Manager Events"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:401
+#: includes/classes/admin/pages/class-admin-callbacks.php:445
 msgid "Configure how events are sent to Google Tag Manager"
 msgstr "Configure how events are sent to Google Tag Manager"
 
@@ -218,6 +270,15 @@ msgstr "Google Consent Mode V2"
 msgid "Collect of data and errors by Axeptio"
 msgstr "Collect of data and errors by Axeptio"
 
+#: includes/classes/backend/class-settings.php:89
+#, php-format
+msgid ""
+"Settings saved. The following custom SDK settings were ignored because their "
+"value is empty or invalid: %s."
+msgstr ""
+"Settings saved. The following custom SDK settings were ignored because their "
+"value is empty or invalid: %s."
+
 #: includes/classes/models/class-axeptio-steps.php:21
 msgid "WordPress Cookies"
 msgstr "WordPress Cookies"
@@ -270,10 +331,8 @@ msgid "All shortcode tags"
 msgstr "All shortcode tags"
 
 #: includes/classes/models/class-wp-consent-api-settings.php:59
-#, fuzzy
-#| msgid "Functionality storage"
 msgid "Functional"
-msgstr "Functionality storage"
+msgstr "Functional"
 
 #: includes/classes/models/class-wp-consent-api-settings.php:60
 msgid ""
@@ -315,10 +374,8 @@ msgid ""
 msgstr ""
 
 #: includes/classes/models/class-wp-consent-api-settings.php:75
-#, fuzzy
-#| msgid "Main settings"
 msgid "Marketing"
-msgstr "Main settings"
+msgstr "Marketing"
 
 #: includes/classes/models/class-wp-consent-api-settings.php:76
 msgid ""
@@ -358,10 +415,8 @@ msgid ""
 msgstr ""
 
 #: includes/core.php:227
-#, fuzzy
-#| msgid "Unable to activate Axeptio"
 msgid "Unable to connect to Axeptio."
-msgstr "Unable to activate Axeptio"
+msgstr "Unable to connect to Axeptio."
 
 #: includes/core.php:228
 msgid ""
@@ -385,6 +440,15 @@ msgstr "Customization"
 msgid "Advanced"
 msgstr "Advanced"
 
+#: templates/admin/common/fields/gtm-events.php:7
+#: templates/admin/common/fields/image-upload.php:11
+#: templates/admin/common/fields/select-languages.php:12
+#: templates/admin/common/fields/text.php:7
+#: templates/admin/common/fields/textarea.php:7
+#: templates/admin/common/fields/toggle.php:13
+msgid "More information"
+msgstr "More information"
+
 #: templates/admin/common/fields/gtm-events.php:18
 msgid "Send all events to dataLayer"
 msgstr "Send all events to dataLayer"
@@ -407,6 +471,50 @@ msgstr ""
 
 #: templates/admin/common/fields/image-upload.php:46
 msgid "Remove"
+msgstr ""
+
+#: templates/admin/main/fields/advanced-settings.php:9
+msgid "Custom SDK settings"
+msgstr ""
+
+#: templates/admin/main/fields/advanced-settings.php:12
+msgid ""
+"Add extra Axeptio SDK options as key/value pairs — they extend your "
+"configuration without touching any code."
+msgstr ""
+
+#: templates/admin/main/fields/advanced-settings.php:14
+#: templates/admin/onboarding/account.php:18
+msgid "Learn more"
+msgstr "Learn more"
+
+#: templates/admin/main/fields/advanced-settings.php:33
+msgid "Select a setting…"
+msgstr ""
+
+#: templates/admin/main/fields/advanced-settings.php:65
+msgid "Search a setting…"
+msgstr ""
+
+#: templates/admin/main/fields/advanced-settings.php:89
+msgid "No setting found"
+msgstr ""
+
+#: templates/admin/main/fields/advanced-settings.php:97
+msgid ""
+"This setting is no longer listed by Axeptio. You can keep it or remove it."
+msgstr ""
+
+#: templates/admin/main/fields/advanced-settings.php:169
+msgid "Comma-separated domain names, e.g. .example.com, .example.fr"
+msgstr ""
+
+#: templates/admin/main/fields/advanced-settings.php:184
+msgid "Remove this setting"
+msgstr ""
+
+#: templates/admin/main/fields/advanced-settings.php:199
+msgid "Add a setting"
 msgstr ""
 
 #: templates/admin/main/fields/background-image.php:10
@@ -595,10 +703,6 @@ msgstr ""
 msgid "I create an account now"
 msgstr "I create an account now"
 
-#: templates/admin/onboarding/account.php:18
-msgid "Learn more"
-msgstr "Learn more"
-
 #: templates/admin/onboarding/account.php:24
 msgid "You have already a Axeptio account?"
 msgstr "Already have an Axeptio account?"
@@ -768,16 +872,12 @@ msgid "Consent Banner"
 msgstr ""
 
 #: templates/admin/plugins/fields/edit.php:292
-#, fuzzy
-#| msgid "Widget language"
 msgid "Language"
-msgstr "Widget language"
+msgstr ""
 
 #: templates/admin/plugins/fields/edit.php:308
-#, fuzzy
-#| msgid "Shortcodes to be filtered"
 msgid "Shortcode placeholder title"
-msgstr "Shortcodes to be filtered"
+msgstr ""
 
 #: templates/admin/plugins/fields/edit.php:317
 #: templates/frontend/shortcode-placeholder.php:11
@@ -791,10 +891,8 @@ msgid ""
 msgstr ""
 
 #: templates/admin/plugins/fields/edit.php:327
-#, fuzzy
-#| msgid "Short description"
 msgid "Shortcode placeholder description"
-msgstr "Short description"
+msgstr ""
 
 #. translators: %s: Name of the plugin
 #. translators: $s: Name of the plugin
@@ -820,10 +918,8 @@ msgid ""
 msgstr ""
 
 #: templates/admin/plugins/fields/edit.php:352
-#, fuzzy
-#| msgid "Shortcodes to be filtered"
 msgid "Shortcode placeholder button text"
-msgstr "Shortcodes to be filtered"
+msgstr ""
 
 #: templates/admin/plugins/fields/edit.php:361
 #: templates/frontend/shortcode-placeholder.php:33
@@ -837,10 +933,8 @@ msgid ""
 msgstr ""
 
 #: templates/admin/plugins/fields/edit.php:379
-#, fuzzy
-#| msgid "Widget description"
 msgid "Hide decoration"
-msgstr "Widget description"
+msgstr ""
 
 #: templates/admin/plugins/fields/edit.php:380
 msgid "Hide the cookie icon and background shape on the placeholder."
@@ -908,10 +1002,8 @@ msgid "This extension is subject to consent"
 msgstr "This extension is subject to consent"
 
 #: templates/admin/sections/plugins.php:78
-#, fuzzy
-#| msgid "This extension is subject to consent"
 msgid "This extension is managed through WP Consent API"
-msgstr "This extension is subject to consent"
+msgstr ""
 
 #: templates/admin/settings-main.php:14
 msgid "Your Axeptio Settings"
@@ -928,6 +1020,49 @@ msgstr "Axeptio allows you to make your website compliant with GDPR."
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr "axeptio"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:426
+msgid "Enter a full URL including a domain name, for example https://api.example.com."
+msgstr "Enter a full URL including a domain name, for example https://api.example.com."
+
+#: templates/admin/sections/main.php:47
+msgid "Unsaved changes"
+msgstr "Unsaved changes"
+
+#: templates/admin/sections/toast.php:6
+msgid "Notifications"
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:41
+msgid ""
+"The extension list could not be loaded. Please try again, and contact "
+"your host if the problem persists."
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:42
+msgid ""
+"Your changes have not been saved. Please try again, and contact your host "
+"if the problem persists."
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:43
+msgid ""
+"These settings have not been deleted. Please try again, and contact your "
+"host if the problem persists."
+msgstr ""
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:44
+msgid "Your changes have been saved."
+msgstr ""
+
+#~ msgid "True"
+#~ msgstr "True"
+
+#~ msgid "False"
+#~ msgstr "False"
+
+#~ msgid "Update only"
+#~ msgstr "Update only"
 
 #~ msgid ""
 #~ "We were unable to find your project, or it appears that it has not yet "

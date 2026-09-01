@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Axeptio\n"
-"POT-Creation-Date: 2026-06-30 17:47+0200\n"
+"POT-Creation-Date: 2026-08-13 11:16+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -38,31 +38,31 @@ msgstr ""
 msgid "Return to plugins pages"
 msgstr "Retour à la page des plugins"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:224
+#: includes/classes/admin/pages/class-admin-callbacks.php:226
 msgid "Widget title"
 msgstr "Titre du Widget"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:240
+#: includes/classes/admin/pages/class-admin-callbacks.php:242
 msgid "Widget sub-title"
 msgstr "Sous-titre du widget"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:255
+#: includes/classes/admin/pages/class-admin-callbacks.php:257
 msgid "Widget Image"
 msgstr "Image du widget"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:273
+#: includes/classes/admin/pages/class-admin-callbacks.php:275
 msgid "Disable the background Image"
 msgstr "Désactiver l'image de fond"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:274
+#: includes/classes/admin/pages/class-admin-callbacks.php:276
 msgid "By checking this box, you will deactivate the painted background."
 msgstr "En cochant cette case, vous désactivez l'arrière-plan peint."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:292
+#: includes/classes/admin/pages/class-admin-callbacks.php:294
 msgid "Cookie domain"
 msgstr "Domaine du cookie"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:297
+#: includes/classes/admin/pages/class-admin-callbacks.php:299
 msgid ""
 "If specified, domain name on which the cookie containing user choices will "
 "be available. This allows to request one consent for various subdomains"
@@ -71,34 +71,86 @@ msgstr ""
 "l'utilisateur sera disponible. Cela permet de demander un seul consentement "
 "pour divers sous-domaines"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:313
+#: includes/classes/admin/pages/class-admin-callbacks.php:315
 msgid "URL for server-side usage"
 msgstr "URL pour une utilisation server side"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:319
-#: includes/classes/admin/pages/class-admin-callbacks.php:386
+#: includes/classes/admin/pages/class-admin-callbacks.php:321
+#: includes/classes/admin/pages/class-admin-callbacks.php:388
 msgid "URL to which the widget will send POST requests after user consent."
 msgstr ""
 "URL vers laquelle le widget enverra des requêtes POST après le consentement "
 "de l'utilisateur."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:335
+#: includes/classes/admin/pages/class-admin-callbacks.php:337
 msgid "Enable sdk proxy"
 msgstr "Activer le proxy SDK"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:340
+#: includes/classes/admin/pages/class-admin-callbacks.php:342
 msgid "Load the Axeptio SDK from your website domain."
 msgstr "Charger le SDK Axeptio depuis votre domaine."
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:355
+#: includes/classes/admin/pages/class-admin-callbacks.php:357
 msgid "Widget description"
 msgstr "Description du widget"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:400
+#: includes/classes/admin/pages/class-admin-callbacks.php:408
+msgid "Enabled"
+msgstr "Activé"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:409
+msgid "Disabled"
+msgstr "Désactivé"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:411
+msgid ".example.com, .example.fr"
+msgstr ".exemple.com, .exemple.fr"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:412
+msgid "Numeric value"
+msgstr "Valeur numérique"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:415
+msgid "Number of days"
+msgstr "Nombre de jours"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:418
+msgid "Page navigation"
+msgstr "Navigation entre les pages"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:419
+msgid "Browser session"
+msgstr "Session du navigateur"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:420
+msgid "Forced"
+msgstr "Forcé"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:423
+msgid "Select a setting, or remove this row."
+msgstr "Sélectionnez un paramètre ou supprimez cette ligne."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:424
+msgid "Enter a value for this setting."
+msgstr "Saisissez une valeur pour ce paramètre."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:425
+msgid "This value does not match the format expected for this setting."
+msgstr "Cette valeur ne correspond pas au format attendu pour ce paramètre."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:426
+msgid "Complete the setting above before adding another one."
+msgstr "Complétez le paramètre ci-dessus avant d'en ajouter un autre."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:427
+msgid "All available settings are already configured."
+msgstr "Tous les paramètres disponibles sont déjà configurés."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:444
 msgid "Google Tag Manager Events"
 msgstr "Événements Google Tag Manager"
 
-#: includes/classes/admin/pages/class-admin-callbacks.php:401
+#: includes/classes/admin/pages/class-admin-callbacks.php:445
 msgid "Configure how events are sent to Google Tag Manager"
 msgstr "Configurer comment les événements sont envoyés à Google Tag Manager"
 
@@ -208,6 +260,15 @@ msgstr "Google Consent Mode V2"
 #: includes/classes/admin/pages/class-admin-main.php:358
 msgid "Collect of data and errors by Axeptio"
 msgstr "Collecte de données et d'erreurs par Axeptio"
+
+#: includes/classes/backend/class-settings.php:89
+#, php-format
+msgid ""
+"Settings saved. The following custom SDK settings were ignored because their "
+"value is empty or invalid: %s."
+msgstr ""
+"Réglages enregistrés. Les paramètres SDK personnalisés suivants ont été "
+"ignorés car leur valeur est vide ou invalide : %s."
 
 #: includes/classes/models/class-axeptio-steps.php:21
 msgid "WordPress Cookies"
@@ -397,6 +458,15 @@ msgstr "Personnalisation"
 msgid "Advanced"
 msgstr "Avancé"
 
+#: templates/admin/common/fields/gtm-events.php:7
+#: templates/admin/common/fields/image-upload.php:11
+#: templates/admin/common/fields/select-languages.php:12
+#: templates/admin/common/fields/text.php:7
+#: templates/admin/common/fields/textarea.php:7
+#: templates/admin/common/fields/toggle.php:13
+msgid "More information"
+msgstr "Plus d'informations"
+
 #: templates/admin/common/fields/gtm-events.php:18
 msgid "Send all events to dataLayer"
 msgstr "Envoyer tous les événements au dataLayer"
@@ -420,6 +490,57 @@ msgstr "Choisir une image"
 #: templates/admin/common/fields/image-upload.php:46
 msgid "Remove"
 msgstr "Supprimer"
+
+#: templates/admin/main/fields/advanced-settings.php:9
+msgid "Custom SDK settings"
+msgstr "Paramètres personnalisés du SDK"
+
+#: templates/admin/main/fields/advanced-settings.php:12
+msgid ""
+"Add extra Axeptio SDK options as key/value pairs — they extend your "
+"configuration without touching any code."
+msgstr ""
+"Ajoutez des options supplémentaires du SDK Axeptio sous forme de paires clé/"
+"valeur : elles permettent d'étendre votre configuration sans modifier le "
+"code."
+
+#: templates/admin/main/fields/advanced-settings.php:14
+#: templates/admin/onboarding/account.php:18
+msgid "Learn more"
+msgstr "En savoir plus"
+
+#: templates/admin/main/fields/advanced-settings.php:33
+msgid "Select a setting…"
+msgstr "Sélectionnez un paramètre…"
+
+#: templates/admin/main/fields/advanced-settings.php:65
+msgid "Search a setting…"
+msgstr "Rechercher un paramètre…"
+
+#: templates/admin/main/fields/advanced-settings.php:89
+msgid "No setting found"
+msgstr "Aucun paramètre trouvé"
+
+#: templates/admin/main/fields/advanced-settings.php:97
+msgid ""
+"This setting is no longer listed by Axeptio. You can keep it or remove it."
+msgstr ""
+"Ce paramètre n'apparaît plus dans la liste d'Axeptio. Vous pouvez le "
+"conserver ou le supprimer."
+
+#: templates/admin/main/fields/advanced-settings.php:169
+msgid "Comma-separated domain names, e.g. .example.com, .example.fr"
+msgstr ""
+"Noms de domaine séparés par des virgules, par "
+"exemple .example.com, .example.fr"
+
+#: templates/admin/main/fields/advanced-settings.php:184
+msgid "Remove this setting"
+msgstr "Supprimer ce paramètre"
+
+#: templates/admin/main/fields/advanced-settings.php:199
+msgid "Add a setting"
+msgstr "Ajouter un paramètre"
 
 #: templates/admin/main/fields/background-image.php:10
 msgid "Widget Background Image"
@@ -615,10 +736,6 @@ msgstr ""
 #: templates/admin/onboarding/account.php:15
 msgid "I create an account now"
 msgstr "Je crée un compte maintenant"
-
-#: templates/admin/onboarding/account.php:18
-msgid "Learn more"
-msgstr "En savoir plus"
 
 #: templates/admin/onboarding/account.php:24
 msgid "You have already a Axeptio account?"
@@ -953,6 +1070,55 @@ msgstr ""
 #. Author of the plugin/theme
 msgid "axeptio"
 msgstr "axeptio"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:426
+msgid "Enter a full URL including a domain name, for example https://api.example.com."
+msgstr "Saisissez une URL complète avec un nom de domaine, par exemple https://api.example.com."
+
+#: templates/admin/sections/main.php:47
+msgid "Unsaved changes"
+msgstr "Modifications non enregistrées"
+
+#: templates/admin/sections/toast.php:6
+msgid "Notifications"
+msgstr "Notifications"
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:41
+msgid ""
+"The extension list could not be loaded. Please try again, and contact "
+"your host if the problem persists."
+msgstr ""
+"La liste des extensions n'a pas pu être chargée. Veuillez réessayer et "
+"contacter votre hébergeur si le problème persiste."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:42
+msgid ""
+"Your changes have not been saved. Please try again, and contact your host "
+"if the problem persists."
+msgstr ""
+"Vos modifications n'ont pas été enregistrées. Veuillez réessayer et "
+"contacter votre hébergeur si le problème persiste."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:43
+msgid ""
+"These settings have not been deleted. Please try again, and contact your "
+"host if the problem persists."
+msgstr ""
+"Ces paramètres n'ont pas été supprimés. Veuillez réessayer et contacter "
+"votre hébergeur si le problème persiste."
+
+#: includes/classes/admin/pages/class-admin-callbacks.php:44
+msgid "Your changes have been saved."
+msgstr "Vos modifications ont été enregistrées."
+
+#~ msgid "True"
+#~ msgstr "Vrai"
+
+#~ msgid "False"
+#~ msgstr "Faux"
+
+#~ msgid "Update only"
+#~ msgstr "Mise à jour uniquement"
 
 #~ msgid ""
 #~ "We were unable to find your project, or it appears that it has not yet "

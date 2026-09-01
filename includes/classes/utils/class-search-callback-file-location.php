@@ -2,8 +2,6 @@
 
 namespace Axeptio\Plugin\Utils;
 
-use function Axeptio\Plugin\wp_memory_limit_in_bytes;
-
 class Search_Callback_File_Location {
 	/**
 	 * Cache expiration time in seconds (1 week)

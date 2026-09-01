@@ -5,11 +5,11 @@
 	class="relative"
 	x-cloak
 >
-	<label :for="state.name" class="block text-sm font-medium leading-6 text-gray-900">
+	<label :for="state.name" class="flex items-center gap-1 text-sm font-medium leading-6 text-gray-900">
 		<?php echo esc_html( $data->label ?? '' ); ?>
 		<?php if ( isset( $data->help_url ) ) : ?>
-			<a href="<?php echo esc_url( $data->help_url ); ?>" target="_blank">
-				<span class="dashicons dashicons-info-outline"></span>
+			<a href="<?php echo esc_url( $data->help_url ); ?>" target="_blank" rel="noopener noreferrer">
+				<img src="<?php echo esc_url( XPWP_URL . 'dist/img/icons/info.svg' ); ?>" class="size-4" alt="<?php esc_attr_e( 'More information', 'axeptio-sdk-integration' ); ?>">
 			</a>
 		<?php endif ?>
 	</label>

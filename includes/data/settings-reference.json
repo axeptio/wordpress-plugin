@@ -1,0 +1,534 @@
+{
+  "version": "1",
+  "generatedAt": "2026-08-11T13:54:51.729Z",
+  "settings": [
+    {
+      "property": "clientId",
+      "type": "string",
+      "optional": true,
+      "default": null,
+      "name": {
+        "en": "Client ID",
+        "fr": "Identifiant client",
+        "pt-br": "ID do cliente",
+        "it": "ID cliente",
+        "es": "ID de cliente",
+        "nl": "Client-ID"
+      },
+      "description": {
+        "en": "Your Axeptio project ObjectID. Required to load the correct cookie configuration for your project.",
+        "fr": "L'ObjectID de votre projet Axeptio. Requis pour charger la bonne configuration de cookies.",
+        "pt-br": "O ObjectID do seu projeto Axeptio. Necessário para carregar a configuração correta de cookies.",
+        "it": "L'ObjectID del tuo progetto Axeptio. Necessario per caricare la configurazione corretta dei cookie.",
+        "es": "El ObjectID de tu proyecto Axeptio. Necesario para cargar la configuración de cookies correcta.",
+        "nl": "De ObjectID van uw Axeptio-project. Vereist om de juiste cookieconfiguratie te laden."
+      }
+    },
+    {
+      "property": "tokenInstance",
+      "type": "Token",
+      "optional": false,
+      "default": null,
+      "name": {
+        "en": "User token",
+        "fr": "Jeton utilisateur",
+        "pt-br": "Token do usuário",
+        "it": "Token utente",
+        "es": "Token de usuario",
+        "nl": "Gebruikerstoken"
+      },
+      "description": {
+        "en": "Consent token identifying the visitor, used to link consents to a logged-in user. Set it via the token setting in window.axeptioSettings or the data-token attribute on the SDK script tag.",
+        "fr": "Jeton de consentement identifiant le visiteur, utilisé pour lier les consentements à un utilisateur connecté. Défini via le paramètre token dans window.axeptioSettings ou l'attribut data-token de la balise script du SDK.",
+        "pt-br": "Token de consentimento que identifica o visitante, usado para vincular consentimentos a um usuário logado. Defina pelo parâmetro token em window.axeptioSettings ou pelo atributo data-token na tag script do SDK.",
+        "it": "Token di consenso che identifica il visitatore, usato per collegare i consensi a un utente connesso. Impostato tramite il parametro token in window.axeptioSettings o l'attributo data-token del tag script dell'SDK.",
+        "es": "Token de consentimiento que identifica al visitante, usado para vincular los consentimientos a un usuario conectado. Se define mediante el parámetro token en window.axeptioSettings o el atributo data-token de la etiqueta script del SDK.",
+        "nl": "Toestemmingstoken dat de bezoeker identificeert, gebruikt om toestemmingen aan een ingelogde gebruiker te koppelen. Ingesteld via de token-instelling in window.axeptioSettings of het data-token-attribuut op de scripttag van de SDK."
+      }
+    },
+    {
+      "property": "cookiesVersion",
+      "type": "string",
+      "optional": true,
+      "default": null,
+      "name": {
+        "en": "Cookies version",
+        "fr": "Version des cookies",
+        "pt-br": "Versão dos cookies",
+        "it": "Versione dei cookie",
+        "es": "Versión de cookies",
+        "nl": "Cookieversie"
+      },
+      "description": {
+        "en": "Identifier for the cookie configuration to load. Use this when you have multiple configurations (e.g. per language or country) and want to target a specific one.",
+        "fr": "Identifiant de la configuration de cookies à charger. Utilisez ce paramètre si vous avez plusieurs configurations.",
+        "pt-br": "Identificador da configuração de cookies a carregar. Use quando há múltiplas configurações.",
+        "it": "Identificatore della configurazione cookie da caricare. Usarlo quando si hanno più configurazioni.",
+        "es": "Identificador de la configuración de cookies a cargar. Úselo cuando tenga múltiples configuraciones.",
+        "nl": "Identifier voor de te laden cookieconfiguratie. Gebruik dit als u meerdere configuraties heeft."
+      }
+    },
+    {
+      "property": "dataLayerName",
+      "type": "string",
+      "optional": false,
+      "default": "dataLayer",
+      "name": {
+        "en": "Data layer name",
+        "fr": "Nom du data layer",
+        "pt-br": "Nome do data layer",
+        "it": "Nome del data layer",
+        "es": "Nombre del data layer",
+        "nl": "Data layer naam"
+      },
+      "description": {
+        "en": "Custom name for the GTM dataLayer variable. Change this if your GTM container uses a non-standard dataLayer name.",
+        "fr": "Nom personnalisé pour la variable dataLayer GTM. Modifiez-le si votre conteneur GTM utilise un nom non standard.",
+        "pt-br": "Nome personalizado para a variável dataLayer do GTM. Altere se o seu contêiner GTM usar um nome não padrão.",
+        "it": "Nome personalizzato per la variabile dataLayer di GTM. Modificarlo se il contenitore GTM usa un nome non standard.",
+        "es": "Nombre personalizado para la variable dataLayer de GTM. Cámbielo si su contenedor GTM usa un nombre no estándar.",
+        "nl": "Aangepaste naam voor de GTM dataLayer-variabele. Wijzig dit als uw GTM-container een niet-standaard naam gebruikt."
+      }
+    },
+    {
+      "property": "triggerGTMEvents",
+      "type": "boolean | 'update_only'",
+      "optional": false,
+      "default": true,
+      "name": {
+        "en": "Trigger GTM events",
+        "fr": "Déclencher les événements GTM",
+        "pt-br": "Disparar eventos GTM",
+        "it": "Attiva eventi GTM",
+        "es": "Disparar eventos GTM",
+        "nl": "GTM-evenementen activeren"
+      },
+      "description": {
+        "en": "Whether Axeptio pushes consent events to the GTM dataLayer. Set to false to disable GTM integration, or 'update_only' to push only when consent changes.",
+        "fr": "Indique si Axeptio envoie des événements de consentement au dataLayer GTM. Mettre à false pour désactiver l'intégration GTM, ou 'update_only' pour n'envoyer que lors d'un changement.",
+        "pt-br": "Se o Axeptio envia eventos de consentimento ao dataLayer do GTM. Defina como false para desativar a integração GTM, ou 'update_only' para enviar apenas quando o consentimento muda.",
+        "it": "Se Axeptio invia eventi di consenso al dataLayer GTM. Impostare su false per disabilitare l'integrazione GTM, o 'update_only' per inviare solo quando il consenso cambia.",
+        "es": "Si Axeptio envía eventos de consentimiento al dataLayer de GTM. Establezca en false para deshabilitar la integración GTM, o 'update_only' para enviar solo cuando cambia el consentimiento.",
+        "nl": "Of Axeptio toestemmingsgebeurtenissen naar de GTM dataLayer pusht. Stel in op false om GTM-integratie uit te schakelen, of 'update_only' om alleen te pushen wanneer toestemming verandert."
+      }
+    },
+    {
+      "property": "signalEssential",
+      "type": "boolean",
+      "optional": false,
+      "default": false,
+      "name": {
+        "en": "Signal essential vendors",
+        "fr": "Signaler les vendeurs essentiels",
+        "pt-br": "Sinalizar fornecedores essenciais",
+        "it": "Segnala i vendor essenziali",
+        "es": "Señalar proveedores esenciales",
+        "nl": "Essentiële vendors signaleren"
+      },
+      "description": {
+        "en": "When true, vendors in read-only steps (strictly necessary / essential) are always reported as authorized and activated in the GTM dataLayer, even before the user interacts with the widget.",
+        "fr": "Lorsque vrai, les vendeurs des étapes en lecture seule (strictement nécessaires) sont toujours signalés comme autorisés et activés dans le dataLayer GTM, même avant toute interaction de l'utilisateur.",
+        "pt-br": "Quando verdadeiro, os fornecedores em etapas somente leitura (estritamente necessários) são sempre relatados como autorizados e ativados no dataLayer do GTM, mesmo antes de qualquer interação do usuário.",
+        "it": "Quando true, i vendor nelle fasi di sola lettura (strettamente necessari) sono sempre riportati come autorizzati e attivati nel dataLayer GTM, anche prima dell'interazione dell'utente.",
+        "es": "Cuando es verdadero, los proveedores en pasos de solo lectura (estrictamente necesarios) siempre se reportan como autorizados y activados en el dataLayer de GTM, incluso antes de cualquier interacción del usuario.",
+        "nl": "Wanneer true worden vendors in alleen-lezen stappen (strikt noodzakelijk) altijd gerapporteerd als geautoriseerd en geactiveerd in de GTM dataLayer, zelfs vóór gebruikersinteractie."
+      }
+    },
+    {
+      "property": "jsonCookieName",
+      "type": "string",
+      "optional": false,
+      "default": "axeptio_cookies",
+      "name": {
+        "en": "JSON cookie name",
+        "fr": "Nom du cookie JSON",
+        "pt-br": "Nome do cookie JSON",
+        "it": "Nome del cookie JSON",
+        "es": "Nombre de la cookie JSON",
+        "nl": "Naam JSON-cookie"
+      },
+      "description": {
+        "en": "Name of the browser cookie that stores user consent choices as JSON. Override this if you need to avoid a name conflict with another cookie on your domain.",
+        "fr": "Nom du cookie navigateur qui stocke les choix de consentement en JSON. Remplacez-le si vous devez éviter un conflit de nom avec un autre cookie.",
+        "pt-br": "Nome do cookie do navegador que armazena as escolhas de consentimento em JSON. Substitua se precisar evitar conflito de nomes.",
+        "it": "Nome del cookie del browser che memorizza le scelte di consenso come JSON. Sovrascrivere se è necessario evitare conflitti di nome.",
+        "es": "Nombre de la cookie del navegador que almacena las opciones de consentimiento como JSON. Anule esto si necesita evitar un conflicto de nombres.",
+        "nl": "Naam van de browsercookie die toestemmingskeuzes als JSON opslaat. Overschrijf dit als u een naamconflict wilt vermijden."
+      }
+    },
+    {
+      "property": "authorizedVendorsCookieName",
+      "type": "string",
+      "optional": false,
+      "default": "axeptio_authorized_vendors",
+      "name": {
+        "en": "Authorized vendors cookie name",
+        "fr": "Nom du cookie des vendeurs autorisés",
+        "pt-br": "Nome do cookie de fornecedores autorizados",
+        "it": "Nome del cookie vendor autorizzati",
+        "es": "Nombre de la cookie de proveedores autorizados",
+        "nl": "Naam cookie geautoriseerde vendors"
+      },
+      "description": {
+        "en": "Name of the cookie that stores the comma-separated list of authorized vendor names. Used by tag managers and custom scripts to check which vendors are consented.",
+        "fr": "Nom du cookie stockant la liste des vendeurs autorisés séparés par des virgules. Utilisé par les gestionnaires de balises pour vérifier le consentement.",
+        "pt-br": "Nome do cookie que armazena a lista de fornecedores autorizados separados por vírgula.",
+        "it": "Nome del cookie che memorizza l'elenco dei vendor autorizzati separati da virgola.",
+        "es": "Nombre de la cookie que almacena la lista de proveedores autorizados separados por comas.",
+        "nl": "Naam van de cookie die de door komma's gescheiden lijst van geautoriseerde vendors opslaat."
+      }
+    },
+    {
+      "property": "allVendorsCookieName",
+      "type": "string",
+      "optional": false,
+      "default": "axeptio_all_vendors",
+      "name": {
+        "en": "All vendors cookie name",
+        "fr": "Nom du cookie de tous les vendeurs",
+        "pt-br": "Nome do cookie de todos os fornecedores",
+        "it": "Nome del cookie di tutti i vendor",
+        "es": "Nombre de la cookie de todos los proveedores",
+        "nl": "Naam cookie alle vendors"
+      },
+      "description": {
+        "en": "Name of the cookie that stores all vendor names regardless of consent status. Useful for scripts that need to know the full vendor list before user interaction.",
+        "fr": "Nom du cookie stockant tous les noms de vendeurs quelle que soit leur statut de consentement.",
+        "pt-br": "Nome do cookie que armazena todos os nomes de fornecedores independentemente do status de consentimento.",
+        "it": "Nome del cookie che memorizza tutti i vendor indipendentemente dallo stato del consenso.",
+        "es": "Nombre de la cookie que almacena todos los nombres de proveedores independientemente del estado de consentimiento.",
+        "nl": "Naam van de cookie die alle vendornamen opslaat, ongeacht de toestemmingsstatus."
+      }
+    },
+    {
+      "property": "gppCookieName",
+      "type": "string",
+      "optional": false,
+      "default": "axeptio_gpp_string",
+      "name": {
+        "en": "GPP cookie name",
+        "fr": "Nom du cookie GPP",
+        "pt-br": "Nome do cookie GPP",
+        "it": "Nome del cookie GPP",
+        "es": "Nombre de la cookie GPP",
+        "nl": "GPP cookie naam"
+      },
+      "description": {
+        "en": "Name of the cookie storing the IAB Global Privacy Platform (GPP) string for CCPA / US privacy regulations. Only relevant if you serve US visitors subject to CCPA or GPP.",
+        "fr": "Nom du cookie stockant la chaîne GPP (Global Privacy Platform) de l'IAB pour les réglementations CCPA / US.",
+        "pt-br": "Nome do cookie que armazena a string GPP do IAB para regulamentações de privacidade dos EUA (CCPA / GPP).",
+        "it": "Nome del cookie che memorizza la stringa GPP IAB per le normative sulla privacy statunitensi.",
+        "es": "Nombre de la cookie que almacena la cadena GPP de IAB para las regulaciones de privacidad de EE. UU.",
+        "nl": "Naam van de cookie die de IAB GPP-string opslaat voor privacyregelgeving in de VS."
+      }
+    },
+    {
+      "property": "userCookiesDuration",
+      "type": "number | 'page' | 'session'",
+      "optional": false,
+      "default": 190,
+      "name": {
+        "en": "Cookie duration",
+        "fr": "Durée du cookie",
+        "pt-br": "Duração do cookie",
+        "it": "Durata del cookie",
+        "es": "Duración de la cookie",
+        "nl": "Cookieduur"
+      },
+      "description": {
+        "en": "How long the consent cookie is kept. Use a positive integer for days, 'page' to expire on navigation, or 'session' to expire when the browser closes.",
+        "fr": "Durée de conservation du cookie de consentement. Utilisez un entier positif pour des jours, 'page' pour expirer à la navigation, ou 'session' pour expirer à la fermeture du navigateur.",
+        "pt-br": "Por quanto tempo o cookie de consentimento é mantido. Use um inteiro positivo para dias, 'page' para expirar na navegação, ou 'session' para expirar ao fechar o navegador.",
+        "it": "Per quanto tempo il cookie di consenso viene conservato. Usare un intero positivo per i giorni, 'page' per scadere alla navigazione, o 'session' per scadere alla chiusura del browser.",
+        "es": "Durante cuánto tiempo se conserva la cookie de consentimiento. Use un entero positivo para días, 'page' para expirar en la navegación, o 'session' para expirar al cerrar el navegador.",
+        "nl": "Hoe lang de toestemmingscookie bewaard blijft. Gebruik een positief geheel getal voor dagen, 'page' om te verlopen bij navigatie, of 'session' om te verlopen bij sluiten van de browser."
+      }
+    },
+    {
+      "property": "userCookiesDomain",
+      "type": "string",
+      "optional": true,
+      "default": null,
+      "name": {
+        "en": "User cookies domain",
+        "fr": "Domaine du cookie utilisateur",
+        "pt-br": "Domínio do cookie do usuário",
+        "it": "Dominio del cookie utente",
+        "es": "Dominio de la cookie de usuario",
+        "nl": "Domein gebruikerscookie"
+      },
+      "description": {
+        "en": "Domain on which the consent cookie is set. Use this to share a single consent across subdomains (e.g. '.example.com').",
+        "fr": "Domaine sur lequel le cookie de consentement est posé. Utilisez-le pour partager un consentement sur plusieurs sous-domaines.",
+        "pt-br": "Domínio no qual o cookie de consentimento é definido. Use para compartilhar o consentimento entre subdomínios.",
+        "it": "Dominio su cui viene impostato il cookie di consenso. Usare per condividere un consenso tra sottodomini.",
+        "es": "Dominio en el que se establece la cookie de consentimiento. Úselo para compartir el consentimiento entre subdominios.",
+        "nl": "Domein waarop de toestemmingscookie wordt ingesteld. Gebruik dit om toestemming te delen tussen subdomeinen."
+      }
+    },
+    {
+      "property": "userCrossCookiesDomain",
+      "type": "string[]",
+      "optional": true,
+      "default": null,
+      "name": {
+        "en": "Cross-domain cookies",
+        "fr": "Cookies multi-domaines",
+        "pt-br": "Cookies entre domínios",
+        "it": "Cookie cross-domain",
+        "es": "Cookies entre dominios",
+        "nl": "Cross-domein cookies"
+      },
+      "description": {
+        "en": "List of domains on which the consent cookie is set. Use to share consent across multiple domains (requires userCookiesSameSite: 'None' on each).",
+        "fr": "Liste de domaines sur lesquels le cookie de consentement est posé. Utilisez-le pour partager le consentement sur plusieurs domaines (nécessite userCookiesSameSite: 'None' sur chacun).",
+        "pt-br": "Lista de domínios nos quais o cookie de consentimento é definido. Use para compartilhar o consentimento entre múltiplos domínios.",
+        "it": "Elenco di domini su cui viene impostato il cookie di consenso. Usare per condividere il consenso tra più domini.",
+        "es": "Lista de dominios en los que se establece la cookie de consentimiento. Úselo para compartir el consentimiento entre múltiples dominios.",
+        "nl": "Lijst van domeinen waarop de toestemmingscookie wordt ingesteld. Gebruik dit om toestemming te delen tussen meerdere domeinen."
+      }
+    },
+    {
+      "property": "userCookiesSameSite",
+      "type": "string",
+      "optional": true,
+      "default": null,
+      "name": {
+        "en": "Cookie SameSite",
+        "fr": "Cookie SameSite",
+        "pt-br": "Cookie SameSite",
+        "it": "Cookie SameSite",
+        "es": "Cookie SameSite",
+        "nl": "Cookie SameSite"
+      },
+      "description": {
+        "en": "SameSite attribute for the consent cookie. Set to 'None' (with Secure) when using cross-domain consent sharing.",
+        "fr": "Attribut SameSite du cookie de consentement. Définir à 'None' (avec Secure) pour le partage de consentement inter-domaines.",
+        "pt-br": "Atributo SameSite do cookie de consentimento. Defina como 'None' (com Secure) ao usar compartilhamento de consentimento entre domínios.",
+        "it": "Attributo SameSite del cookie di consenso. Impostare su 'None' (con Secure) per la condivisione del consenso tra domini.",
+        "es": "Atributo SameSite de la cookie de consentimiento. Establezca en 'None' (con Secure) cuando use compartición de consentimiento entre dominios.",
+        "nl": "SameSite-attribuut voor de toestemmingscookie. Stel in op 'None' (met Secure) bij gebruik van cross-domein toestemmingsdeling."
+      }
+    },
+    {
+      "property": "userCookiesSecure",
+      "type": "boolean",
+      "optional": false,
+      "default": true,
+      "name": {
+        "en": "Secure cookie",
+        "fr": "Cookie sécurisé",
+        "pt-br": "Cookie seguro",
+        "it": "Cookie sicuro",
+        "es": "Cookie segura",
+        "nl": "Beveiligde cookie"
+      },
+      "description": {
+        "en": "When true, the consent cookie is only sent over HTTPS. Disable only on HTTP-only environments (e.g. local dev).",
+        "fr": "Lorsque vrai, le cookie de consentement n'est envoyé que via HTTPS. Désactivez uniquement sur les environnements HTTP uniquement.",
+        "pt-br": "Quando verdadeiro, o cookie de consentimento é enviado apenas via HTTPS. Desative somente em ambientes apenas HTTP.",
+        "it": "Quando true, il cookie di consenso viene inviato solo via HTTPS. Disabilitare solo in ambienti HTTP puro.",
+        "es": "Cuando es verdadero, la cookie de consentimiento solo se envía por HTTPS. Deshabilite solo en entornos HTTP puro.",
+        "nl": "Wanneer true wordt de toestemmingscookie alleen via HTTPS verzonden. Schakel alleen uit in HTTP-only omgevingen."
+      }
+    },
+    {
+      "property": "compressUserCookie",
+      "type": "boolean | 'forced'",
+      "optional": false,
+      "default": false,
+      "name": {
+        "en": "Compress consent cookie",
+        "fr": "Compresser le cookie de consentement",
+        "pt-br": "Comprimir cookie de consentimento",
+        "it": "Comprimi cookie di consenso",
+        "es": "Comprimir cookie de consentimiento",
+        "nl": "Toestemmingscookie comprimeren"
+      },
+      "description": {
+        "en": "When true, compresses the main JSON consent cookie (lz-string) once it grows large, to stay under the browser's ~4 KB per-cookie limit. Set it to 'forced' to compress at any size, for servers with strict request-header limits; 'forced' always compresses, so on a very small cookie the result can end up marginally larger. Third parties reading the raw cookie must then decode it via axeptioSDK.getUserCookieChoices() or axeptioSDK.decodeCookieValue().",
+        "fr": "Lorsque activé, compresse le cookie de consentement JSON principal (lz-string) lorsqu'il devient volumineux, pour rester sous la limite navigateur d'environ 4 Ko par cookie. Utilisez 'forced' pour compresser quelle que soit la taille, pour les serveurs ayant des limites strictes d'en-têtes de requête ; 'forced' compresse toujours, le résultat peut donc être légèrement plus volumineux sur un très petit cookie. Les tiers lisant le cookie brut doivent alors le décoder via axeptioSDK.getUserCookieChoices() ou axeptioSDK.decodeCookieValue().",
+        "pt-br": "Quando ativado, comprime o cookie de consentimento JSON principal (lz-string) quando ele cresce, para ficar abaixo do limite do navegador de ~4 KB por cookie. Use 'forced' para comprimir em qualquer tamanho, para servidores com limites rígidos de cabeçalho de requisição; 'forced' comprime sempre, portanto em um cookie muito pequeno o resultado pode ficar ligeiramente maior. Terceiros que leem o cookie bruto devem decodificá-lo via axeptioSDK.getUserCookieChoices() ou axeptioSDK.decodeCookieValue().",
+        "it": "Se attivo, comprime il cookie di consenso JSON principale (lz-string) quando diventa grande, per restare sotto il limite del browser di ~4 KB per cookie. Usare 'forced' per comprimere a qualsiasi dimensione, per server con limiti rigidi sugli header di richiesta; 'forced' comprime sempre, quindi su un cookie molto piccolo il risultato può risultare leggermente più grande. I terzi che leggono il cookie grezzo devono decodificarlo tramite axeptioSDK.getUserCookieChoices() o axeptioSDK.decodeCookieValue().",
+        "es": "Cuando está activo, comprime la cookie de consentimiento JSON principal (lz-string) cuando crece, para mantenerse por debajo del límite del navegador de ~4 KB por cookie. Use 'forced' para comprimir en cualquier tamaño, para servidores con límites estrictos de encabezados de solicitud; 'forced' siempre comprime, por lo que en una cookie muy pequeña el resultado puede ser ligeramente mayor. Los terceros que leen la cookie sin procesar deben decodificarla mediante axeptioSDK.getUserCookieChoices() o axeptioSDK.decodeCookieValue().",
+        "nl": "Indien ingeschakeld, wordt de belangrijkste JSON-toestemmingscookie (lz-string) gecomprimeerd zodra deze groot wordt, om onder de browserlimiet van ~4 KB per cookie te blijven. Gebruik 'forced' om bij elke omvang te comprimeren, voor servers met strikte limieten op request-headers; 'forced' comprimeert altijd, dus bij een zeer kleine cookie kan het resultaat iets groter uitvallen. Derden die de ruwe cookie lezen, moeten deze dan decoderen via axeptioSDK.getUserCookieChoices() of axeptioSDK.decodeCookieValue()."
+      }
+    },
+    {
+      "property": "openCookiesWidgetIfVendorsMismatch",
+      "type": "boolean",
+      "optional": false,
+      "default": false,
+      "name": {
+        "en": "Open widget on vendors mismatch",
+        "fr": "Ouvrir le widget si vendeurs modifiés",
+        "pt-br": "Abrir widget se fornecedores mudaram",
+        "it": "Apri widget se vendor non corrispondono",
+        "es": "Abrir widget si proveedores no coinciden",
+        "nl": "Widget openen bij vendors mismatch"
+      },
+      "description": {
+        "en": "When true, the cookie widget reopens automatically if the vendor list in the current config no longer matches what the visitor previously consented to.",
+        "fr": "Lorsque vrai, le widget de cookies se rouvre automatiquement si la liste des vendeurs a changé depuis le dernier consentement du visiteur.",
+        "pt-br": "Quando verdadeiro, o widget de cookies reabre automaticamente se a lista de fornecedores mudou desde o último consentimento do visitante.",
+        "it": "Quando true, il widget dei cookie si riapre automaticamente se l'elenco dei vendor è cambiato dall'ultimo consenso del visitatore.",
+        "es": "Cuando es verdadero, el widget de cookies se vuelve a abrir automáticamente si la lista de proveedores ha cambiado desde el último consentimiento del visitante.",
+        "nl": "Wanneer true heropent de cookie-widget automatisch als de vendorlijst is gewijzigd sinds de laatste toestemming van de bezoeker."
+      }
+    },
+    {
+      "property": "mountClassName",
+      "type": "string",
+      "optional": false,
+      "default": "axeptio_mount",
+      "name": {
+        "en": "Mount class name",
+        "fr": "Classe du point de montage",
+        "pt-br": "Nome da classe de montagem",
+        "it": "Nome classe di mount",
+        "es": "Nombre de clase de montaje",
+        "nl": "Mount class naam"
+      },
+      "description": {
+        "en": "CSS class of the div element where the Axeptio widget is mounted. Override if the default class conflicts with your page styles.",
+        "fr": "Classe CSS de l'élément div où le widget Axeptio est monté. Remplacez si la classe par défaut entre en conflit avec les styles de votre page.",
+        "pt-br": "Classe CSS do elemento div onde o widget Axeptio é montado. Substitua se a classe padrão conflitar com os estilos da sua página.",
+        "it": "Classe CSS dell'elemento div dove il widget Axeptio è montato. Sovrascrivere se la classe predefinita entra in conflitto con gli stili della pagina.",
+        "es": "Clase CSS del elemento div donde se monta el widget Axeptio. Anule si la clase predeterminada entra en conflicto con los estilos de su página.",
+        "nl": "CSS-klasse van het div-element waar de Axeptio-widget wordt gemount. Overschrijf als de standaardklasse conflicteert met uw paginastijlen."
+      }
+    },
+    {
+      "property": "apiUrl",
+      "type": "string",
+      "optional": false,
+      "default": "https://api.axept.io/v1",
+      "name": {
+        "en": "API URL",
+        "fr": "URL de l'API",
+        "pt-br": "URL da API",
+        "it": "URL API",
+        "es": "URL de la API",
+        "nl": "API URL"
+      },
+      "description": {
+        "en": "Base URL for Axeptio API requests. Override when routing through a first-party proxy (see proxyBaseUrl for the recommended approach).",
+        "fr": "URL de base pour les requêtes API Axeptio. Remplacez lors du routage via un proxy first-party (voir proxyBaseUrl pour l'approche recommandée).",
+        "pt-br": "URL base para requisições da API Axeptio. Substitua ao rotear através de um proxy próprio.",
+        "it": "URL base per le richieste API di Axeptio. Sovrascrivere quando si instrada tramite un proxy first-party.",
+        "es": "URL base para las solicitudes de la API de Axeptio. Anule cuando enrute a través de un proxy de primera parte.",
+        "nl": "Basis-URL voor Axeptio API-verzoeken. Overschrijf bij routing via een first-party proxy."
+      }
+    },
+    {
+      "property": "postConsentUrl",
+      "type": "string",
+      "optional": false,
+      "default": "https://api.axept.io/v1/app",
+      "name": {
+        "en": "Post consent URL",
+        "fr": "URL d'envoi du consentement",
+        "pt-br": "URL de envio do consentimento",
+        "it": "URL post consenso",
+        "es": "URL de envío del consentimiento",
+        "nl": "Post consent URL"
+      },
+      "description": {
+        "en": "URL where consent proof POST requests are sent. Override when routing through a first-party proxy.",
+        "fr": "URL vers laquelle les requêtes POST de preuve de consentement sont envoyées. Remplacez lors du routage via un proxy first-party.",
+        "pt-br": "URL para onde as requisições POST de prova de consentimento são enviadas. Substitua ao rotear via proxy próprio.",
+        "it": "URL a cui vengono inviate le richieste POST di prova del consenso. Sovrascrivere quando si usa un proxy first-party.",
+        "es": "URL donde se envían las solicitudes POST de prueba de consentimiento. Anule cuando enrute a través de un proxy de primera parte.",
+        "nl": "URL waarnaar POST-verzoeken voor toestemmingsbewijs worden verzonden. Overschrijf bij routing via een first-party proxy."
+      }
+    },
+    {
+      "property": "configUrl",
+      "type": "string",
+      "optional": false,
+      "default": "https://client.axept.io/projectconfigurations/brands",
+      "name": {
+        "en": "Config URL",
+        "fr": "URL de configuration",
+        "pt-br": "URL de configuração",
+        "it": "URL di configurazione",
+        "es": "URL de configuración",
+        "nl": "Configuratie-URL"
+      },
+      "description": {
+        "en": "URL from which the widget fetches the project configuration. Override when using a first-party proxy (see proxyBaseUrl).",
+        "fr": "URL depuis laquelle le widget récupère la configuration du projet. À remplacer lors de l'utilisation d'un proxy first-party (voir proxyBaseUrl).",
+        "pt-br": "URL a partir da qual o widget busca a configuração do projeto. Substitua ao usar um proxy próprio (veja proxyBaseUrl).",
+        "it": "URL da cui il widget recupera la configurazione del progetto. Sovrascrivere quando si utilizza un proxy first-party (vedi proxyBaseUrl).",
+        "es": "URL desde la cual el widget obtiene la configuración del proyecto. Sobrescriba cuando use un proxy de primera parte (ver proxyBaseUrl).",
+        "nl": "URL waarvan de widget de projectconfiguratie ophaalt. Overschrijven bij gebruik van een first-party proxy (zie proxyBaseUrl)."
+      }
+    },
+    {
+      "property": "proxyBaseUrl",
+      "type": "string",
+      "optional": true,
+      "default": null,
+      "name": {
+        "en": "Proxy base URL",
+        "fr": "URL de base du proxy",
+        "pt-br": "URL base do proxy",
+        "it": "URL base proxy",
+        "es": "URL base del proxy",
+        "nl": "Proxy basis-URL"
+      },
+      "description": {
+        "en": "Single first-party URL to proxy all Axeptio requests (e.g. via Addingwell). When set, all Axeptio hostnames are rewritten to path namespaces under this URL.",
+        "fr": "URL first-party unique pour proxifier toutes les requêtes Axeptio (ex. via Addingwell). Lorsque défini, tous les hôtes Axeptio sont réécrits en namespaces de chemin sous cette URL.",
+        "pt-br": "URL própria única para fazer proxy de todas as requisições Axeptio. Quando definida, todos os hosts Axeptio são reescritos como namespaces de caminho sob esta URL.",
+        "it": "URL first-party unico per proxare tutte le richieste Axeptio. Quando impostato, tutti gli host Axeptio vengono riscritti come namespace di percorso sotto questo URL.",
+        "es": "URL de primera parte única para hacer proxy de todas las solicitudes de Axeptio. Cuando se establece, todos los hosts de Axeptio se reescriben como namespaces de ruta bajo esta URL.",
+        "nl": "Enkele first-party URL om alle Axeptio-verzoeken te proxyen. Wanneer ingesteld, worden alle Axeptio-hostnamen herschreven als padnaamruimten onder deze URL."
+      }
+    },
+    {
+      "property": "useDocumentLang",
+      "type": "boolean",
+      "optional": true,
+      "default": null,
+      "name": {
+        "en": "Use document language",
+        "fr": "Utiliser la langue du document",
+        "pt-br": "Usar idioma do documento",
+        "it": "Usa la lingua del documento",
+        "es": "Usar el idioma del documento",
+        "nl": "Documenttaal gebruiken"
+      },
+      "description": {
+        "en": "When resolving a localized cookies version (browser_locale), use the document's <html lang> attribute instead of the browser language (navigator.language).",
+        "fr": "Lors de la résolution d'une version de cookies localisée (browser_locale), utilise l'attribut <html lang> du document au lieu de la langue du navigateur (navigator.language).",
+        "pt-br": "Ao resolver uma versão de cookies localizada (browser_locale), usa o atributo <html lang> do documento em vez do idioma do navegador (navigator.language).",
+        "it": "Durante la risoluzione di una versione dei cookie localizzata (browser_locale), usa l'attributo <html lang> del documento invece della lingua del browser (navigator.language).",
+        "es": "Al resolver una versión de cookies localizada (browser_locale), usa el atributo <html lang> del documento en lugar del idioma del navegador (navigator.language).",
+        "nl": "Bij het bepalen van een gelokaliseerde cookieversie (browser_locale) wordt het <html lang>-attribuut van het document gebruikt in plaats van de browsertaal (navigator.language)."
+      }
+    },
+    {
+      "property": "metadataPrefix",
+      "type": "string",
+      "optional": false,
+      "default": "$$",
+      "name": {
+        "en": "Metadata prefix",
+        "fr": "Préfixe de métadonnées",
+        "pt-br": "Prefixo de metadados",
+        "it": "Prefisso metadati",
+        "es": "Prefijo de metadatos",
+        "nl": "Metadata prefix"
+      },
+      "description": {
+        "en": "Prefix for internal metadata keys stored in the consent JSON cookie. Change from the default '$$' if CloudFlare or another WAF strips double-dollar keys.",
+        "fr": "Préfixe pour les clés de métadonnées internes stockées dans le cookie JSON de consentement. Changez le '$$' par défaut si CloudFlare ou un autre WAF supprime les clés double-dollar.",
+        "pt-br": "Prefixo para chaves de metadados internos armazenadas no cookie JSON de consentimento. Altere o '$$' padrão se o CloudFlare ou outro WAF remover chaves com cifrão duplo.",
+        "it": "Prefisso per le chiavi di metadati interni nel cookie JSON del consenso. Cambiare il '$$' predefinito se CloudFlare o un altro WAF rimuove le chiavi doppio-dollaro.",
+        "es": "Prefijo para claves de metadatos internos en la cookie JSON de consentimiento. Cambie el '$$' predeterminado si CloudFlare u otro WAF elimina claves de doble dólar.",
+        "nl": "Prefix voor interne metadatasleutels in de toestemmings-JSON-cookie. Wijzig het standaard '$$' als CloudFlare of een andere WAF dubbel-dollar sleutels verwijdert."
+      }
+    }
+  ]
+}

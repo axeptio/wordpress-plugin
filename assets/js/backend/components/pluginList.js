@@ -78,26 +78,40 @@ const instance = function( args ) {
 	};
 
 	const pluginMethods = {
+		readResponse( response ) {
+			if ( ! response.ok ) {
+				throw new Error( `Unexpected response status: ${ response.status }` );
+			}
+			return response.json();
+		},
+
 		fetchPlugins() {
 			this.isGetting = true;
-			const apiUrl = `/wp-json/axeptio/v1/plugins/${ this.configurationId }`;
+
+			const apiUrl = `${ this.restRoot }plugins/${ this.configurationId }/`;
 			fetch( apiUrl, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					'X-WP-Nonce': args.nonce,
+					'X-WP-Nonce': this.nonce,
 				},
 			} )
-				.then( ( response ) => response.json() )
+				.then( this.readResponse )
 				.then( ( data ) => {
 					this.plugins = data;
 					this.isGetting = false;
+				} )
+				.catch( () => {
+					this.plugins = [];
+					this.isGetting = false;
+					window.Alpine.store( 'notifications' ).push( args.messages.load_error );
 				} );
 		},
 
 		deletePlugin( plugin ) {
 			this.isSaving = true;
-			const apiUrl = `/wp-json/axeptio/v1/plugins/${ this.configurationId }/${ plugin.Metas.plugin }`;
+
+			const apiUrl = `${ this.restRoot }plugins/${ this.configurationId }/${ plugin.Metas.plugin }/`;
 			fetch( apiUrl, {
 				method: 'DELETE',
 				headers: {
@@ -106,7 +120,7 @@ const instance = function( args ) {
 				},
 				body: JSON.stringify( plugin.Metas ),
 			} )
-				.then( ( response ) => response.json() )
+				.then( this.readResponse )
 				.then( () => {
 					this.isSaving = false;
 					this.editOpen = false;
@@ -114,6 +128,11 @@ const instance = function( args ) {
 					this.fetchPlugins();
 					this.editedPlugin.Metas.enabled = false;
 					this.setForceEditOpen( false );
+				} )
+				.catch( () => {
+					this.isSaving = false;
+					this.closeDeleteModal();
+					window.Alpine.store( 'notifications' ).push( args.messages.delete_error );
 				} );
 		},
 
@@ -141,24 +160,39 @@ const instance = function( args ) {
 			this.refreshRepeaterFields();
 		},
 
-		updatePlugin( plugin ) {
+		updatePlugin( plugin, metas = plugin.Metas ) {
 			this.isSaving = true;
 
-			const apiUrl = `/wp-json/axeptio/v1/plugins/${ this.configurationId }/${ plugin.Metas.plugin }`;
-			fetch( apiUrl, {
+			const apiUrl = `${ this.restRoot }plugins/${ this.configurationId }/${ plugin.Metas.plugin }/`;
+			return fetch( apiUrl, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',
 					'X-WP-Nonce': this.nonce,
 				},
-				body: JSON.stringify( plugin.Metas ),
+				body: JSON.stringify( metas ),
 			} )
-				.then( ( response ) => response.json() )
+				.then( this.readResponse )
 				.then( () => {
 					this.refreshRepeaterFields();
 					this.isSaving = false;
 					this.editedPluginHasChanged = false;
+					return true;
+				} )
+				.catch( () => {
+					this.isSaving = false;
+					window.Alpine.store( 'notifications' ).push( args.messages.save_error );
+					return false;
 				} );
+		},
+
+		saveEditedPlugin() {
+			this.updatePlugin( this.editedPlugin ).then( ( saved ) => {
+				if ( saved ) {
+					window.Alpine.store( 'notifications' ).push( args.messages.save_success, 'success' );
+					this.editOpen = false;
+				}
+			} );
 		},
 
 		openMediaSelector() {
@@ -192,12 +226,23 @@ const instance = function( args ) {
 		},
 
 		enableControl( plugin ) {
+			if ( this.isSaving ) {
+				return;
+			}
+
 			const { Metas } = plugin;
+			const metas = {
+				...Metas,
+				enabled: ! Boolean( Metas.enabled ) ? 1 : 0,
+				cookie_widget_step: 'wordpress',
+			};
 
 			this.editedPlugin = plugin;
-			Metas.enabled = ! Boolean( Metas.enabled ) ? 1 : 0;
-			Metas.cookie_widget_step = 'wordpress';
-			this.updatePlugin( plugin );
+			this.updatePlugin( plugin, metas ).then( ( saved ) => {
+				if ( saved ) {
+					Object.assign( Metas, metas );
+				}
+			} );
 		},
 
 		initEditedPlugin() {
@@ -303,11 +348,11 @@ const instance = function( args ) {
 		editedPluginHasChanged: false,
 		configurationId: 'all',
 		activeTab: 1,
-		currentPage: 1,
 		forceEditOpen: false,
 		activePlugins: args.active_plugins,
-		totalPages: 1,
 		nonce: args.nonce,
+		restRoot: args.rest_root,
+
 		isSaving: false,
 		isGetting: false,
 		hookModes: [],
@@ -315,7 +360,6 @@ const instance = function( args ) {
 		shortcodeTagsModes: [],
 		editOpen: false,
 		showDeleteModal: false,
-		pluginToDelete: null,
 		inputRefs: [],
 		fields: [],
 

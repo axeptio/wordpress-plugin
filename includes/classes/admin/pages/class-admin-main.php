@@ -45,10 +45,10 @@ class Admin_Main extends Module {
 	/**
 	 * Module can run within the current context.
 	 *
-	 * @return true
+	 * @return bool
 	 */
 	public function can_register() {
-		return true;
+		return is_admin();
 	}
 
 	/**
@@ -204,7 +204,7 @@ class Admin_Main extends Module {
 				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
 				'args'  => array(
-					'before_section' => '<div x-show="currentTab === \'main-settings\'" x-cloak="false">' . $main_settings_title,
+					'before_section' => '<div x-show="currentTab === \'main-settings\'" x-cloak="false" class="max-w-2xl">' . $main_settings_title,
 				),
 			),
 			array(
@@ -221,7 +221,7 @@ class Admin_Main extends Module {
 				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
 				'args'  => array(
-					'before_section' => '</div><div x-show="currentTab === \'consent-mode\'" x-cloak>' . $consent_mode_title,
+					'before_section' => '</div><div x-show="currentTab === \'consent-mode\'" x-cloak class="max-w-2xl">' . $consent_mode_title,
 					'after_section'  => '</div>',
 				),
 			),
@@ -230,7 +230,7 @@ class Admin_Main extends Module {
 				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
 				'args'  => array(
-					'before_section' => '<div x-show="currentTab === \'customization\'" x-cloak>' . $customize_title,
+					'before_section' => '<div x-show="currentTab === \'customization\'" x-cloak class="max-w-2xl">' . $customize_title,
 					'after_section'  => '</div>',
 				),
 			),
@@ -239,7 +239,7 @@ class Admin_Main extends Module {
 				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
 				'args'  => array(
-					'before_section' => '<div x-show="currentTab === \'data-sending\'" x-cloak>' . $data_sending_title,
+					'before_section' => '<div x-show="currentTab === \'data-sending\'" x-cloak class="max-w-2xl">' . $data_sending_title,
 					'after_section'  => '</div>',
 				),
 			),
@@ -248,7 +248,7 @@ class Admin_Main extends Module {
 				'title' => false,
 				'page'  => 'axeptio-wordpress-plugin',
 				'args'  => array(
-					'before_section' => '<div x-show="currentTab === \'advanced-settings\'" x-cloak>' . $advanced_settings_title,
+					'before_section' => '<div x-show="currentTab === \'advanced-settings\'" x-cloak class="axeptio-advanced-panel bg-white">' . $advanced_settings_title,
 					'after_section'  => '</div>',
 				),
 			),
@@ -406,6 +406,17 @@ class Admin_Main extends Module {
 				'args'     => array(
 					'label_for' => 'xpwp_proxy_sdk',
 					'class'     => 'inline-table-row label-right',
+				),
+			),
+			array(
+				'id'       => 'xpwp_advanced_settings',
+				'title'    => false,
+				'callback' => array( $this->callbacks, 'advanced_settings' ),
+				'page'     => 'axeptio-wordpress-plugin',
+				'section'  => 'xpwp_admin_advanced_settings',
+				'args'     => array(
+					'label_for' => 'xpwp_advanced_settings',
+					'class'     => 'xpwp-advanced-full-row',
 				),
 			),
 		);

@@ -18,7 +18,7 @@
     "phpcs": "phpcs --basepath=.",
     "phpcs-changed": "./bin/phpcs-changed.sh",
     "phpcs:fix": "phpcbf",
-    "test": "pest"
+    "test": "php -d auto_prepend_file=tests/constants.php vendor/bin/pest"
   },
   "autoload": {
     "psr-4": {

@@ -1,6 +1,11 @@
 import Alpine from 'alpinejs';
 
+const serializeForm = ( form ) =>
+	new URLSearchParams( new FormData( form ) ).toString();
+
 const instance = function( args ) {
+	let savedState = '';
+
 	return {
 		axeptioSettings: {},
 		accountID: args.accountID,
@@ -15,6 +20,7 @@ const instance = function( args ) {
 		sendDatas: args.sendDatas,
 		proxySdk: args.proxySdk,
 		currentTab: Alpine.$persist( 'main-settings' ),
+		isDirty: false,
 		selectedOption: args.selectedOption,
 		options: ( () => {
 			try {
@@ -26,6 +32,7 @@ const instance = function( args ) {
 		optionsJson: args.optionsJson,
 		init() {
 			this.axeptioSettings = window.Axeptio;
+			this.watchChanges();
 
 			// Récupération de la valeur du champ caché et affectation à accountID
 			if ( this.accountID === '' ) {
@@ -39,6 +46,40 @@ const instance = function( args ) {
 				this.validateAccountID();
 			}
 		},
+		watchChanges() {
+			this.$nextTick( () => {
+				savedState = serializeForm( this.$el );
+			} );
+
+			[ 'input', 'change', 'click', 'keydown' ].forEach( ( event ) =>
+				this.$el.addEventListener( event, () =>
+					this.$nextTick( () => {
+						this.isDirty = serializeForm( this.$el ) !== savedState;
+					} )
+				)
+			);
+
+			// On window: the form runs its handlers first, so a save cancelled by a
+			// failed validation still reads as pending. Target check: other forms.
+			window.addEventListener( 'submit', ( event ) => {
+				if ( event.target === this.$el && ! event.defaultPrevented ) {
+					// The submitted data becomes the reference: $nextTick defers to a
+					// timer, so the save click recomputes isDirty after this runs.
+					savedState = serializeForm( this.$el );
+					this.isDirty = false;
+				}
+			} );
+
+			window.addEventListener( 'beforeunload', ( event ) => {
+				if ( ! this.isDirty ) {
+					return;
+				}
+
+				event.preventDefault();
+				event.returnValue = '';
+			} );
+		},
+
 		restoreHistorizedVersion() {
 			this.selectedOption = this.historizedVersions[ this.accountID ];
 			this.isHistorizedVersion = false;

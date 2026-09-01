@@ -53,7 +53,7 @@ if ( ! \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ) : ?>
 			for="xpwp_google_consent_mode"><?php echo esc_html__( 'Enable Google Consent Mode V2?', 'axeptio-sdk-integration' ); ?></label>
 	</div>
 	<input type="checkbox" @change="activeGoogleConsentMode = !activeGoogleConsentMode"
-			class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0"
+			class="sr-only"
 			id="xpwp_google_consent_mode" name="axeptio_settings[google_consent_mode]"
 			value="1" <?php echo (bool) \Axeptio\Plugin\get_option( 'google_consent_mode', '0' ) ? 'checked' : ''; ?>
 			<?php echo ! \Axeptio\Plugin\Models\WP_Consent_API_Settings::is_active() ? 'disabled' : ''; ?>

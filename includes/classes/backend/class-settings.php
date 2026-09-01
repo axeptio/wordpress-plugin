@@ -11,6 +11,7 @@ namespace Axeptio\Plugin\Backend;
 
 defined( 'ABSPATH' ) || exit;
 
+use Axeptio\Plugin\Models\Advanced_Settings;
 use Axeptio\Plugin\Models\Project_Versions;
 use Axeptio\Plugin\Module;
 
@@ -56,7 +57,55 @@ class Settings extends Module {
 			$new_value['api_url'] = esc_url_raw( $new_value['api_url'] );
 		}
 
+		if ( isset( $new_value[ Advanced_Settings::OPTION_KEY ] ) ) {
+			$new_value[ Advanced_Settings::OPTION_KEY ] = Advanced_Settings::sanitize( $new_value[ Advanced_Settings::OPTION_KEY ] );
+			$this->warn_about_rejected_settings();
+		}
+
 		return $new_value;
+	}
+
+	/**
+	 * Warn the merchant about the custom SDK settings dropped on save.
+	 *
+	 * Registering a settings error suppresses the native "Settings saved."
+	 * notice, hence the message carrying both pieces of information.
+	 *
+	 * @return void
+	 */
+	private function warn_about_rejected_settings() {
+		$rejected = Advanced_Settings::get_rejected();
+
+		if ( empty( $rejected ) || ! $this->is_settings_form_post() ) {
+			return;
+		}
+
+		add_settings_error(
+			'axeptio_settings',
+			'xpwp_advanced_settings_rejected',
+			sprintf(
+				/* translators: %s: comma-separated list of setting keys. */
+				__(
+					'Settings saved. The following custom SDK settings were ignored because their value is empty or invalid: %s.',
+					'axeptio-sdk-integration'
+				),
+				implode( ', ', $rejected )
+			),
+			'warning'
+		);
+	}
+
+	/**
+	 * Determine whether the current request is the settings form submission.
+	 *
+	 * The sanitizing hook runs for every writer of the option, but only a form
+	 * submission has a merchant waiting for an answer.
+	 *
+	 * @return bool
+	 */
+	private function is_settings_form_post(): bool {
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- options.php verifies the nonce before this hook runs.
+		return isset( $_POST['option_page'] ) && 'xpwp_settings_group' === $_POST['option_page'];
 	}
 
 	/**

@@ -14,7 +14,6 @@ use Axeptio\Plugin\Init\Activation_Hook;
 use Axeptio\Plugin\Utils\Flash_Vars;
 use Axeptio\Plugin\Utils\WP_Migration_Manager;
 use WP_Error;
-use function Axeptio\Plugin\Utility\get_asset_info;
 
 /**
  * Default setup routine
@@ -190,12 +189,11 @@ function admin_scripts() {
 	}
 
 	wp_enqueue_media();
-	$dependencies = get_asset_info( 'admin', 'dependencies' ) ?? array();
 	wp_enqueue_script(
 		'axeptio/main',
 		script_url( 'backend/app', 'admin' ),
-		array_merge( $dependencies, array( 'wp-i18n' ) ),
-		get_asset_info( 'admin', 'version' ),
+		array( 'wp-i18n' ),
+		XPWP_VERSION,
 		true
 	);
 	wp_set_script_translations( 'axeptio/main', 'axeptio-sdk-integration' );
@@ -251,7 +249,7 @@ function admin_styles() {
 		'axeptio/main',
 		style_url( 'backend/main', 'admin' ),
 		array(),
-		Utility\get_asset_info( 'shared', 'version' ),
+		XPWP_VERSION,
 	);
 }
 

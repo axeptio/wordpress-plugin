@@ -3,7 +3,7 @@ Contributors: Axeptio
 Tags: Axeptio, GDPR, RGPD, Cookies, Consent
 Requires at least: 5.0
 Tested up to: 7.0
-Stable tag: 2.6.4
+Stable tag: 2.6.5
 Requires PHP: 7.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -14,11 +14,11 @@ Axeptio | GDPR Cookie Banner - An Immersive Compliance Experience
 
 == Description ==
 
-Axeptio is a deeply customizable Consent Banner that makes your site compliant with GDPR, TCF v2.2, Google Consent Mode v2, and more —while providing users with a branded and premium cookie consent experience
+Axeptio is a deeply customizable Consent Banner that makes your site compliant with GDPR, TCF v2.3, Google Consent Mode v2, and more — while providing users with a branded and premium cookie consent experience.
 
-**Axeptio is a powerful Consent Management Platform (CMP) that keeps your website compliant with global privacy laws.** From **GDPR, ePrivacy,** and **TCF v2.2** in Europe, to **Google Consent Mode v2, PIPEDA** and **Law 25** in Canada, the **CCPA** in the U.S. and even more.
+**Axeptio is a powerful Consent Management Platform (CMP) that keeps your website compliant with global privacy laws.** From **GDPR, ePrivacy,** and **TCF v2.3** in Europe, to **Google Consent Mode v2, PIPEDA** and **Law 25** in Canada, the **CCPA** in the U.S. and even more.
 
-[Axeptio](https://www.axept.io/) ensures your business meets every standard. By managing cookie consent in a clear and customizable way, it helps you build trust while staying fully compliant. Join 80.000 websites that trust Axeptio worldwide. 4.5/5 TrustPilot score.
+[Axeptio](https://www.axept.io/) ensures your business meets every standard. By managing cookie consent in a clear and customizable way, it helps you build trust while staying fully compliant. Join 200.000 websites that trust Axeptio worldwide. 4.5/5 TrustPilot score.
 
 == Key Features ==
 
@@ -69,11 +69,13 @@ Please follow our documentation to configure and test your settings for Axeptio 
 
 == Screenshots ==
 
-1. Axeptio widget Presentation
-2. Integration sample on your website
-3. Setup your project ID
-4. Select your plugin connected with the vendorDB
-5. Axeptio Back Office for color customization
+1. Axeptio presentation
+2. Build trust with customizable consent banners
+3. Google Gold CMP Partner
+4. Multilingual banner
+5. Effortlessly manage and export your consent
+6. 100% mobile compatible
+7. Audit your setup with Shake and schedule automated reports
 
 == Installation ==
 
@@ -110,6 +112,17 @@ The idea is to customize the appearance of your widget so that it matches the de
 All informations here : [Axeptio customization](https://support.axeptio.eu/en/articles/273978-3-widget-customisation)
 
 == Changelog ==
+
+### 🛠️ 2.6.5 🛠️ ###
+
+**Advanced axeptioSettings configuration, Google Consent Mode timing fix, and dependency updates:**
+
+- ✨ **Advanced axeptioSettings Configuration:** Merchants can now define custom key/value pairs from the plugin admin, merged into `window.axeptioSettings` before the SDK loads (advanced use cases only, no code required).
+- 🐛 **Google Consent Mode Default Timing:** The Consent Mode default signal (denied by default) is now rendered synchronously and hooked at the earliest priority in `<head>`, guaranteeing it fires before any Google tag (GTM/gtag.js) hardcoded in the theme or added by another plugin.
+- 🐛 **Extension List Loading:** Fixed the admin REST URLs used by the plugin manager, which could prevent the extension list from loading on some site configurations.
+- 💅 **Plugin Manager Refinements:** The edit button is no longer displayed for disabled extensions, and plugin assets are now cache-busted on each update so the admin interface is never served from a stale browser cache.
+- 🎨 **Marketing Assets Refresh:** Updated the WordPress.org banner, screenshots, and readme copy to reflect the current Axeptio brand and product numbers (TCF v2.3, 200.000+ websites).
+- 🔒 **Dependency Updates:** Bumped websocket-driver, shell-quote, brace-expansion, path-to-regexp, and fast-uri to their latest patched versions, resolving 5 Dependabot security alerts.
 
 ### 🛠️ 2.6.4 🛠️ ###
 

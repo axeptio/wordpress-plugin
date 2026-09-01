@@ -3,7 +3,8 @@
 	<label for="<?php echo esc_attr( $data->id ); ?>" class="block text-sm font-medium leading-6 text-gray-900">
 		<?php echo esc_html( $data->label ); ?>
 	</label>
-	<div class="inline-flex items-center w-full relative">
+	<p class="mt-1 text-sm text-gray-500"><?php echo esc_html( $data->instruction ); ?></p>
+	<div class="inline-flex items-center w-full relative mt-2">
 		<label for="<?php echo esc_attr( $data->id ); ?>" class="relative inline-flex h-7 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 bg-gray-400"  role="switch" aria-checked="true" :aria-checked="proxySdk.toString()" x-state:on="Enabled" x-state:off="Not Enabled" :class="{ 'bg-amber-400': proxySdk, 'bg-gray-400': !(proxySdk) }">
 		<span
 			aria-hidden="true"
@@ -22,11 +23,6 @@
 			</svg>
 		</span>
 		</label>
-		<div class="ml-5">
-			<label for="<?php echo esc_attr( $data->id ); ?>">
-				<?php echo esc_attr( $data->instruction ); ?>
-			</label>
-		</div>
-		<input type="checkbox" @change="proxySdk = !proxySdk" class="appearance-none w-full h-full active:outline-none focus:outline-none opacity-0 absolute -left-full top-0" id="<?php echo esc_attr( $data->id ); ?>" name="axeptio_settings[proxy_sdk]" value="1" <?php echo (bool) \Axeptio\Plugin\get_option( 'proxy_sdk', '0' ) ? 'checked' : ''; ?> placeholder="">
+		<input type="checkbox" @change="proxySdk = !proxySdk" class="sr-only" id="<?php echo esc_attr( $data->id ); ?>" name="axeptio_settings[proxy_sdk]" value="1" <?php echo (bool) \Axeptio\Plugin\get_option( 'proxy_sdk', '0' ) ? 'checked' : ''; ?> placeholder="">
 	</div>
 </div>

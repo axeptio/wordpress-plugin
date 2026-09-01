@@ -15,7 +15,6 @@
 			class="relative flex gap-4"
 			aria-label="Tabs"
 			x-data="tabsPill"
-			@resize.window.debounce.150ms="move(false)"
 		>
 			<div
 				class="axeptio-tab-pill absolute inset-0 bg-amber-400"
