@@ -36,11 +36,11 @@ docker-compose run --rm web composer test        # Run all tests
 docker-compose run --rm web vendor/bin/pest      # Run all tests directly
 docker-compose run --rm web vendor/bin/pest tests/GtmEventsTest.php  # Single test file
 
-# JavaScript / CSS (run on host, uses Volta node 18)
+# JavaScript / CSS (run on host, uses Volta node 24)
 yarn install
-yarn build              # One-time dev build (Laravel Mix + Tailwind)
+yarn build              # One-time build (Vite + Tailwind)
 yarn build:production   # Production build
-yarn start              # Watch mode with BrowserSync
+yarn start              # Watch mode (rebuilds dist/ on change)
 yarn eslint assets/js/  # ESLint
 
 # Release to WordPress.org SVN
@@ -101,7 +101,7 @@ dist/                          # Built assets (generated, not committed)
 
 - **JS**: Alpine.js with `@alpinejs/persist`
 - **CSS**: Tailwind CSS (admin only, scoped to `#axeptio-app` via `important`), PostCSS with nesting
-- **Build**: Laravel Mix (Webpack), outputs to `dist/`
+- **Build**: Vite, outputs to `dist/` (see `vite.config.mjs`)
 
 ### Coding Standards
 

@@ -27,6 +27,6 @@ README.md
 rector.php
 tailwind.config.js
 Taskfile.yml
-webpack.mix.js
+vite.config.mjs
 yarn.lock
 .env

@@ -22,7 +22,7 @@
 package.json
 yarn.lock
 composer.lock
-webpack.mix.js
+vite.config.mjs
 postcss.config.js
 tailwind.config.js
 
