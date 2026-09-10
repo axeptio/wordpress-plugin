@@ -4,11 +4,15 @@ import { defineConfig } from 'vite';
 // WordPress enqueues these bundles from fixed paths (see script_url() and
 // style_url() in includes/core.php), so they keep their names and stay unhashed.
 
+const staticAssets = ['assets/img', 'assets/fonts'];
+
 const copyStaticAssets = {
 	name: 'axeptio-copy-static-assets',
-	closeBundle() {
-		cpSync('assets/img', 'dist/img', { recursive: true });
-		cpSync('assets/fonts', 'dist/fonts', { recursive: true });
+	// Runs on every write, so a watch build refreshes these too. Rollup only
+	// watches the module graph, which these are not part of, so editing one
+	// is picked up on the next rebuild rather than on save.
+	writeBundle() {
+		staticAssets.forEach(dir => cpSync(dir, dir.replace('assets/', 'dist/'), { recursive: true }));
 	}
 };
 
