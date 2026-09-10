@@ -5,17 +5,17 @@ The WordPress plugin has no cloud infrastructure. The two environments are **loc
 
 ## Environment Matrix
 
-| Property          | Local (Dev)                          | WordPress.org (Production)                                 |
-| :---------------- | :----------------------------------- | :--------------------------------------------------------- |
-| Branch            | Any (local)                          | Git tag pushed to GitHub                                   |
-| Trigger           | Manual (`task start` / `yarn watch`) | Git tag push (automated) or `workflow_dispatch` (manual)   |
-| PHP version       | 7.4 (Docker)                         | 7.4 (CI — see [Improvements #3](improvements.md))          |
-| Node version      | 18 (Volta pin)                       | 18 (CI)                                                    |
-| JS build          | `yarn start` (watch) / `yarn build`  | `yarn build:production`                                    |
-| Composer          | `composer install` (with dev)        | `composer install --no-dev --optimize-autoloader`          |
-| Distribution      | Local filesystem                     | WordPress.org SVN + GitHub release `.zip`                  |
-| SVN path          | -                                    | `trunk/` (latest) + `tags/<version>/`                      |
-| Store assets      | -                                    | `release-assets/` → SVN `assets/`                          |
+| Property     | Local (Dev)                          | WordPress.org (Production)                               |
+| :----------- | :----------------------------------- | :------------------------------------------------------- |
+| Branch       | Any (local)                          | Git tag pushed to GitHub                                 |
+| Trigger      | Manual (`task start` / `yarn watch`) | Git tag push (automated) or `workflow_dispatch` (manual) |
+| PHP version  | 7.4 (Docker)                         | 7.4 (CI — see [Improvements #3](improvements.md))        |
+| Node version | 24 (Volta pin)                       | 24 (CI)                                                  |
+| JS build     | `yarn start` (watch) / `yarn build`  | `yarn build:production`                                  |
+| Composer     | `composer install` (with dev)        | `composer install --no-dev --optimize-autoloader`        |
+| Distribution | Local filesystem                     | WordPress.org SVN + GitHub release `.zip`                |
+| SVN path     | -                                    | `trunk/` (latest) + `tags/<version>/`                    |
+| Store assets | -                                    | `release-assets/` → SVN `assets/`                        |
 
 ## Local Development Setup
 
@@ -25,7 +25,7 @@ graph LR
     B --> C[Docker up — PHP 7.4 Alpine]
     C --> D[task composer-install]
     D --> E[yarn install]
-    E --> F[yarn start — webpack watch]
+    E --> F[yarn start — Vite watch]
 ```
 
 ### Docker Environment
@@ -33,24 +33,24 @@ graph LR
 The Docker setup is **for local PHP tooling only** (Composer, PHPCS, PHPStan, Pest).
 It is **not** used in GitHub Actions CI.
 
-| Setting              | Value                          |
-| :------------------- | :----------------------------- |
-| Base image           | `php:7.4-alpine`               |
-| PHP extensions       | `bcmath`, `calendar`, `sockets` |
-| Composer             | v2 (installed at image build)  |
-| Working directory    | `/var/www/html/`               |
-| Volume               | `.:/var/www/html` (live mount) |
+| Setting           | Value                           |
+| :---------------- | :------------------------------ |
+| Base image        | `php:7.4-alpine`                |
+| PHP extensions    | `bcmath`, `calendar`, `sockets` |
+| Composer          | v2 (installed at image build)   |
+| Working directory | `/var/www/html/`                |
+| Volume            | `.:/var/www/html` (live mount)  |
 
 **Common local commands (via Taskfile):**
 
-| Task                    | Command                  | Description                              |
-| :---------------------- | :----------------------- | :--------------------------------------- |
-| `task build`            | docker-compose up        | Build and start containers               |
-| `task composer-install` | composer install         | Install PHP dependencies in container   |
-| `task lint-php`         | composer run phpcs       | Run PHPCS in container                   |
-| `task php-stan`         | composer run run-stan    | Run PHPStan static analysis              |
-| `task ssh`              | docker-compose run       | Open shell in container                  |
-| `task stop`             | docker-compose down      | Stop containers                          |
+| Task                    | Command               | Description                           |
+| :---------------------- | :-------------------- | :------------------------------------ |
+| `task build`            | docker-compose up     | Build and start containers            |
+| `task composer-install` | composer install      | Install PHP dependencies in container |
+| `task lint-php`         | composer run phpcs    | Run PHPCS in container                |
+| `task php-stan`         | composer run run-stan | Run PHPStan static analysis           |
+| `task ssh`              | docker-compose run    | Open shell in container               |
+| `task stop`             | docker-compose down   | Stop containers                       |
 
 ## WordPress.org Release Process
 
@@ -78,24 +78,24 @@ sequenceDiagram
 
 Two files control which paths are excluded from the release package, depending on how the release is triggered:
 
-| File              | Used by                        | Has inline comments |
-| :---------------- | :----------------------------- | :------------------ |
-| `.distignore`     | CI pipeline (`deploy.yml`)     | Yes                 |
-| `exclusions.txt`  | Manual `task release` command  | No                  |
+| File             | Used by                       | Has inline comments |
+| :--------------- | :---------------------------- | :------------------ |
+| `.distignore`    | CI pipeline (`deploy.yml`)    | Yes                 |
+| `exclusions.txt` | Manual `task release` command | No                  |
 
 Both files must be kept in sync. See [Improvements](improvements.md) for known gaps.
 
 Key paths excluded from the release package:
 
-| Excluded path       | Reason                                          |
-| :------------------ | :---------------------------------------------- |
+| Excluded path       | Reason                                            |
+| :------------------ | :------------------------------------------------ |
 | `assets/`           | Raw source assets (compiled output is in `dist/`) |
-| `node_modules/`     | JS dependencies                                 |
-| `release-assets/`   | Moved to SVN `assets/` separately               |
-| `releases/`         | Temporary SVN checkout directory                |
-| `tmp/`              | Temporary build output                          |
-| `.git/`, `.github/` | VCS and CI config                               |
-| Dev config files    | `phpcs.xml`, `phpstan.neon.dist`, etc.          |
+| `node_modules/`     | JS dependencies                                   |
+| `release-assets/`   | Moved to SVN `assets/` separately                 |
+| `releases/`         | Temporary SVN checkout directory                  |
+| `tmp/`              | Temporary build output                            |
+| `.git/`, `.github/` | VCS and CI config                                 |
+| Dev config files    | `phpcs.xml`, `phpstan.neon.dist`, etc.            |
 
 ### SVN Structure on WordPress.org
 
