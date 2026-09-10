@@ -44,7 +44,7 @@ jobs:
         run: yarn eslint
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.0
+        uses: shivammathur/setup-php@2.37.2
         with:
           php-version: '7.4'
 
@@ -82,7 +82,7 @@ jobs:
         run: yarn build:production
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.37.0
+        uses: shivammathur/setup-php@2.37.2
         with:
           php-version: '7.4'
 
