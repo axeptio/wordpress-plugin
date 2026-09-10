@@ -8,9 +8,6 @@ const staticAssets = ['assets/img', 'assets/fonts'];
 
 const copyStaticAssets = {
 	name: 'axeptio-copy-static-assets',
-	// Runs on every write, so a watch build refreshes these too. Rollup only
-	// watches the module graph, which these are not part of, so editing one
-	// is picked up on the next rebuild rather than on save.
 	writeBundle() {
 		staticAssets.forEach(dir => cpSync(dir, dir.replace('assets/', 'dist/'), { recursive: true }));
 	}
@@ -33,10 +30,8 @@ export default defineConfig({
 			output: {
 				entryFileNames: '[name].js',
 				assetFileNames: '[name][extname]',
-				// WordPress loads these as classic scripts, where top-level
-				// declarations would land on window and clobber globals such
-				// as Underscore's `_`. Rollup only wraps entry points in an
-				// IIFE for single-entry builds, so the scope is closed here.
+				// Classic scripts share the global scope, so the bundle is
+				// wrapped: a minified `_` would clobber Underscore.
 				banner: '(function(){',
 				footer: '})();'
 			}
