@@ -177,14 +177,24 @@ function style_url( $stylesheet, $context ) {
 
 
 /**
+ * Whether a hook suffix belongs to one of the plugin's own admin pages.
+ *
+ * @param string $hook_suffix Current admin page, as passed to admin_enqueue_scripts.
+ * @return bool
+ */
+function is_plugin_admin_screen( $hook_suffix ) {
+	return in_array( $hook_suffix, array( 'toplevel_page_axeptio-wordpress-plugin', 'axeptio_page_axeptio-plugin-manager' ), true );
+}
+
+/**
  * Enqueue scripts for admin.
  *
+ * @param string $hook_suffix Current admin page.
  * @return void
  */
-function admin_scripts() {
-	$screen = get_current_screen();
+function admin_scripts( $hook_suffix ) {
 
-	if ( ! in_array( $screen->id, array( 'toplevel_page_axeptio-wordpress-plugin', 'axeptio_page_axeptio-plugin-manager' ), true ) ) {
+	if ( ! is_plugin_admin_screen( $hook_suffix ) ) {
 		return;
 	}
 
@@ -242,9 +252,15 @@ function admin_scripts() {
 /**
  * Enqueue styles for admin.
  *
+ * @param string $hook_suffix Current admin page.
  * @return void
  */
-function admin_styles() {
+function admin_styles( $hook_suffix ) {
+
+	if ( ! is_plugin_admin_screen( $hook_suffix ) ) {
+		return;
+	}
+
 	wp_enqueue_style(
 		'axeptio/main',
 		style_url( 'backend/main', 'admin' ),
