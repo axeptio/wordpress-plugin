@@ -1,0 +1,18 @@
+# Dependabot for wordpress-plugin: keeps the commit-SHA pins on GitHub Actions
+# current. Only the github-actions ecosystem is configured on purpose: npm and
+# composer dependencies are not managed here. Updates are grouped into one PR a
+# week, and a 7-day cooldown means a newly published action release is not
+# proposed until it has aged.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: ci
