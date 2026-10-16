@@ -43,7 +43,7 @@ jobs:
       SLACK_CHANNEL: alert-pr-notifications
     steps:
       - name: Checkout tech-scripts (for decide.js)
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           repository: axeptio/tech-scripts
           ref: master
@@ -55,7 +55,7 @@ jobs:
         if: >-
           github.event_name == 'pull_request' &&
           (github.event.action == 'opened' || github.event.action == 'ready_for_review' || github.event.action == 'reopened')
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           github-token: ${{ secrets.BOT_GITHUB_TOKEN }}
           script: |
@@ -74,7 +74,7 @@ jobs:
 
       - name: Evaluate and approve
         id: evaluate
-        uses: actions/github-script@v7
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         env:
           AUTO_APPROVE_BASE_BRANCH: develop,staging,main,master
         with:
